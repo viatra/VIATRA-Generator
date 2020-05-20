@@ -91,7 +91,7 @@ class SolverLoader {
 					val stringValue = config.get("numeric-solver-at-end")
 					if(stringValue.equals("true")) {
 						println("numeric-solver-at-end")
-						c.runIntermediateNumericalConsistencyChecks= false
+						c.runIntermediateNumericalConsistencyChecks = false
 					}
 				}
 				if(config.containsKey("fitness-punishSize")) {

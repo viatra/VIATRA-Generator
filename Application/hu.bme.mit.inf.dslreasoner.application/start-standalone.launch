@@ -7,5 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor"/>
+<stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="hu.bme.mit.inf.dslreasoner.application"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="hu.bme.mit.inf.dslreasoner.application"/>
 </launchConfiguration>

@@ -142,7 +142,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			}
 		};
 		
-		this.numericSolver = new NumericSolver(context, method, false,this.configuration.runIntermediateNumericalConsistencyChecks);
+		this.numericSolver = new NumericSolver(context, method, this.configuration.runIntermediateNumericalConsistencyChecks, false);
 
 		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 	}

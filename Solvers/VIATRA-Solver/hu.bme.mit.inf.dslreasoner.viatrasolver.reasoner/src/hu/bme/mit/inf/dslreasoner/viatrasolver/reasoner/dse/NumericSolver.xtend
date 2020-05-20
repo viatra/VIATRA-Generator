@@ -50,8 +50,7 @@ class NumericSolver {
 			val matcher = querySpec.getMatcher(engine);
 			constraint2CurrentUnitPropagationPrecondition.put(constraint,matcher)
 		}
-		this.intermediateConsistencyCheck = true
-		println()
+		this.intermediateConsistencyCheck = intermediateConsistencyCheck
 		this.caching = caching
 	}
 	

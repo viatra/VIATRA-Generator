@@ -1,6 +1,5 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
-import com.google.common.collect.ImmutableMap
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
