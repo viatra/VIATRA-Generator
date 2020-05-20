@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
+import com.google.common.collect.ImmutableMap
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ConstantDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
@@ -153,14 +154,70 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 	}
 	
 	override getAllIntegersInStructure() {
-		new TreeSet(this.integerForwardTrace.keySet)
+		new TreeSet(allIntegersWithInterpretation.values)
+	}
+	
+	override getAllIntegersWithInterpretation() {
+		val builder = new HashMap
+		for (entry : integerForwardTrace.entrySet) {
+			builder.put(entry.value, entry.key)
+		}
+		for (element : partialInterpretation.newElements) {
+			if (element instanceof IntegerElement) {
+				builder.put(element, element.value)
+			}
+		}
+		builder
 	}
 	
 	override getAllRealsInStructure() {
-		new TreeSet(this.realForwardTrace.keySet)
+		new TreeSet(allRealsWithInterpretation.values)
+	}
+	
+	override getAllRealsWithInterpretation() {
+		val builder = new HashMap
+		for (entry : realForwardTrace.entrySet) {
+			builder.put(entry.value, entry.key)
+		}
+		for (element : partialInterpretation.newElements) {
+			if (element instanceof RealElement) {
+				builder.put(element, element.value)
+			}
+		}
+		builder
 	}
 	
 	override getAllStringsInStructure() {
-		new TreeSet(this.stringForwardTrace.keySet)
+		new TreeSet(allStringsWithInterpretation.values)
+	}
+	
+	override getAllStringsWithInterpretation() {
+		val builder = new HashMap
+		for (entry : stringForwardTrace.entrySet) {
+			builder.put(entry.value, entry.key)
+		}
+		for (element : partialInterpretation.newElements) {
+			if (element instanceof StringElement) {
+				builder.put(element, element.value)
+			}
+		}
+		builder
+	}
+	
+	override getAllBooleansInStructure() {
+		new TreeSet(allBooleansWithInterpretation.values)
+	}
+	
+	override getAllBooleansWithInterpretation() {
+		val builder = new HashMap
+		for (entry : booleanForwardTrace.entrySet) {
+			builder.put(entry.value, entry.key)
+		}
+		for (element : partialInterpretation.newElements) {
+			if (element instanceof BooleanElement) {
+				builder.put(element, element.value)
+			}
+		}
+		builder
 	}
 }

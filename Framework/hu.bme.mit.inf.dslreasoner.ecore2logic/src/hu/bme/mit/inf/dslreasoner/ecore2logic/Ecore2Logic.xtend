@@ -1,7 +1,13 @@
 package hu.bme.mit.inf.dslreasoner.ecore2logic
 
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription
+import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EEnum
@@ -9,10 +15,6 @@ import org.eclipse.emf.ecore.EEnumLiteral
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.Delegate
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
-import java.util.Set
-import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.ContainmentHierarchy
 
 @Data class EcoreMetamodelDescriptor {
 	val List<EClass> classes;
