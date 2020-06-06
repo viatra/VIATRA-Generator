@@ -42,7 +42,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class VampireTest {
   @Extension
-  private final static LogicProblemBuilder builder = new LogicProblemBuilder();
+  private static final LogicProblemBuilder builder = new LogicProblemBuilder();
   
   public static void main(final String[] args) {
     try {

@@ -75,8 +75,18 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
     
     @Override
     public Object get(final String parameterName) {
-      if ("term".equals(parameterName)) return this.fTerm;
-      return null;
+      switch(parameterName) {
+          case "term": return this.fTerm;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fTerm;
+          default: return null;
+      }
     }
     
     public VLSFunctionAsTerm getTerm() {
@@ -261,9 +271,9 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
       return new Matcher();
     }
     
-    private final static int POSITION_TERM = 0;
+    private static final int POSITION_TERM = 0;
     
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(VLSFunctionFof.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(VLSFunctionFof.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -462,15 +472,15 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries.VLSFunctionFof (visibility: PUBLIC, simpleName: VLSFunctionFof, identifier: ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries.VLSFunctionFof, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link VLSFunctionFof} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries.VLSFunctionFof (visibility: PUBLIC, simpleName: VLSFunctionFof, identifier: ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries.VLSFunctionFof, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: ca.mcgill.ecse.dslreasoner.vampire.reasoner.queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link VLSFunctionFof#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private final static VLSFunctionFof INSTANCE = new VLSFunctionFof();
+    private static final VLSFunctionFof INSTANCE = new VLSFunctionFof();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -479,7 +489,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
      * <p> The static initializer is defined using a helper field to work around limitations of the code generator.
      * 
      */
-    private final static Object STATIC_INITIALIZER = ensureInitialized();
+    private static final Object STATIC_INITIALIZER = ensureInitialized();
     
     public static Object ensureInitialized() {
       INSTANCE.ensureInitializedInternal();
@@ -488,7 +498,7 @@ public final class VLSFunctionFof extends BaseGeneratedEMFQuerySpecification<VLS
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static VLSFunctionFof.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final VLSFunctionFof.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     private final PParameter parameter_term = new PParameter("term", "ca.mcgill.ecse.dslreasoner.vampireLanguage.VLSFunctionAsTerm", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage", "VLSFunctionAsTerm")), PParameterDirection.INOUT);
     
