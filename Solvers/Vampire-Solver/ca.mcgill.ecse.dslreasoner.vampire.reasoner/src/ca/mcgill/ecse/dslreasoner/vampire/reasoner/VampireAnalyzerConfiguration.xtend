@@ -8,7 +8,7 @@ class VampireSolverConfiguration
 	public var int contCycleLevel = 0
 	public var boolean uniquenessDuplicates = false
 	public var int iteration = -1
-	public var BackendSolver solver = BackendSolver::VAMPIRE
+	public var BackendSolver solver = BackendSolver::LOCVAMP
 	public var genModel = true
 	public var server = false
 	//choose needed backend solver

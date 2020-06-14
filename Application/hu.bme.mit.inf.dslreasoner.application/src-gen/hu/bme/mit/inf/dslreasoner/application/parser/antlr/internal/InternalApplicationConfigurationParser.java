@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalApplicationConfigurationParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "','", "'}'", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'constraints'", "'config'", "'log-level'", "'runtime'", "'memory'", "'#'", "'+='", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'*'", "'..'", "'scope'", "'generate'", "'partial-model'", "'number'", "'runs'", "'solver'", "'debug'", "'log'", "'statistics'", "'output'", "'none'", "'normal'", "'full'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "'-'", "'import'", "'epackage'", "'viatra'", "'file'", "'='", "'{'", "','", "'}'", "'package'", "'excluding'", "'::'", "'metamodel'", "'folder'", "'models'", "'constraints'", "'config'", "'log-level'", "'runtime'", "'memory'", "'#'", "'+='", "'<'", "'>'", "'node'", "'int'", "'real'", "'string'", "'*'", "'..'", "'scope'", "'generate'", "'partial-model'", "'number'", "'runs'", "'solver'", "'debug'", "'log'", "'statistics'", "'output'", "'none'", "'normal'", "'full'", "'SMTSolver'", "'AlloySolver'", "'ViatraSolver'", "'TPTPSolver'"
     };
     public static final int T__50=50;
     public static final int T__19=19;
@@ -37,6 +37,7 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
     public static final int T__13=13;
     public static final int T__57=57;
     public static final int T__14=14;
+    public static final int T__58=58;
     public static final int T__51=51;
     public static final int T__52=52;
     public static final int T__53=53;
@@ -11403,23 +11404,24 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleSolver"
-    // InternalApplicationConfiguration.g:4257:1: ruleSolver returns [Enumerator current=null] : ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) ) ;
+    // InternalApplicationConfiguration.g:4257:1: ruleSolver returns [Enumerator current=null] : ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) | (enumLiteral_3= 'TPTPSolver' ) ) ;
     public final Enumerator ruleSolver() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
+        Token enumLiteral_3=null;
 
 
         	enterRule();
 
         try {
-            // InternalApplicationConfiguration.g:4263:2: ( ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) ) )
-            // InternalApplicationConfiguration.g:4264:2: ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) )
+            // InternalApplicationConfiguration.g:4263:2: ( ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) | (enumLiteral_3= 'TPTPSolver' ) ) )
+            // InternalApplicationConfiguration.g:4264:2: ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) | (enumLiteral_3= 'TPTPSolver' ) )
             {
-            // InternalApplicationConfiguration.g:4264:2: ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) )
-            int alt56=3;
+            // InternalApplicationConfiguration.g:4264:2: ( (enumLiteral_0= 'SMTSolver' ) | (enumLiteral_1= 'AlloySolver' ) | (enumLiteral_2= 'ViatraSolver' ) | (enumLiteral_3= 'TPTPSolver' ) )
+            int alt56=4;
             switch ( input.LA(1) ) {
             case 55:
                 {
@@ -11434,6 +11436,11 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
             case 57:
                 {
                 alt56=3;
+                }
+                break;
+            case 58:
+                {
+                alt56=4;
                 }
                 break;
             default:
@@ -11488,6 +11495,23 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
 
                     				current = grammarAccess.getSolverAccess().getViatraSolverEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                     				newLeafNode(enumLiteral_2, grammarAccess.getSolverAccess().getViatraSolverEnumLiteralDeclaration_2());
+                    			
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // InternalApplicationConfiguration.g:4289:3: (enumLiteral_3= 'TPTPSolver' )
+                    {
+                    // InternalApplicationConfiguration.g:4289:3: (enumLiteral_3= 'TPTPSolver' )
+                    // InternalApplicationConfiguration.g:4290:4: enumLiteral_3= 'TPTPSolver'
+                    {
+                    enumLiteral_3=(Token)match(input,58,FOLLOW_2); 
+
+                    				current = grammarAccess.getSolverAccess().getTPTPSolverEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_3, grammarAccess.getSolverAccess().getTPTPSolverEnumLiteralDeclaration_3());
                     			
 
                     }
@@ -11655,6 +11679,6 @@ public class InternalApplicationConfigurationParser extends AbstractInternalAntl
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000100040L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x000FF40019100000L});
     public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000040010L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0380000000000000L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0780000000000000L});
 
 }

@@ -83,26 +83,27 @@ class VampireSolver extends LogicReasoner {
 				var done = false
 				print(" ")
 				while (!done) {
-					print("(x)")
+//					print("(x)")
 					done = false
 					response = support.sendPost(form)
 
 					var responseFound = false
 					ind = 0
-					while (!responseFound) {
+					while (!responseFound && ind<response.length) {
 						var line = response.get(ind)
 //						println(line)
 						if (line.length >= 5 && line.substring(0, 5) == "ERROR") {
 							done = false
 							responseFound = true
 						} else {
-							if (line == "</PRE>") {
+							if (line == "</PRE>" && response.get(ind-1) != "<PRE>") {
 								done = true
 								responseFound = true
 							}
 						}
 						ind++
 					}
+					if (!done) println("(Server call failed. Trying again...)")
 				}
 				val satRaw = response.get(ind - 3)
 				val modRaw = response.get(ind - 2)
@@ -118,10 +119,35 @@ class VampireSolver extends LogicReasoner {
 				println()
 				println(sat)
 				println(mod)
+				
+				return createUndecidableResult => [
+					it.statistics = createStatistics => [
+						it.transformationTime = transformationTime as int
+						it.entries += createStringStatisticEntry => [
+							it.name = "satOut"
+							it.value = satOut
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "satTime"
+							it.value = satTime
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "modOut"
+							it.value = modOut
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "modTime"
+							it.value = modTime
+						]
 
+					]
+				]
+					
+				/*
+				 * TODO
 				return createModelResult => [
 					it.problem = null
-					it.representation += createVampireModel => []
+					it.representation += createVampireModel => []//TODO Add something here
 					it.trace = trace
 					it.statistics = createStatistics => [
 						it.transformationTime = transformationTime as int
@@ -144,6 +170,7 @@ class VampireSolver extends LogicReasoner {
 
 					]
 				]
+				*/
 
 //				return newArrayList(line1, line2)
 			} else {
@@ -172,8 +199,31 @@ class VampireSolver extends LogicReasoner {
 				}
 				
 				val realModOut=modOut
- 
 				
+				return createUndecidableResult => [
+					it.statistics = createStatistics => [
+						it.transformationTime = transformationTime as int
+						it.entries += createStringStatisticEntry => [
+							it.name = "satOut"
+							it.value = "-"
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "satTime"
+							it.value = "-"
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "modOut"
+							it.value = realModOut
+						]
+						it.entries += createStringStatisticEntry => [
+							it.name = "modTime"
+							it.value = (vampSol.solverTime/1000.0).toString
+						]
+
+					]
+				]
+				
+				/*
 				return createModelResult => [
 					it.problem = null
 					it.representation += createVampireModel => []
@@ -199,6 +249,7 @@ class VampireSolver extends LogicReasoner {
 
 					]
 				]
+				*/
 			}
 		}
 //		return backwardMapper.transformOutput(problem, vampireConfig.solutionScope.numberOfRequiredSolution,

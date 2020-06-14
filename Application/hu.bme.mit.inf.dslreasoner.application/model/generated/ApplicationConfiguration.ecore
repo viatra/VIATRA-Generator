@@ -130,6 +130,7 @@
     <eLiterals name="SMTSolver" literal="SMTSolver"/>
     <eLiterals name="AlloySolver" value="1" literal="AlloySolver"/>
     <eLiterals name="ViatraSolver" value="2" literal="ViatraSolver"/>
+    <eLiterals name="TPTPSolver" value="3" literal="TPTPSolver"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopeSpecification" eSuperTypes="#//Scope">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"

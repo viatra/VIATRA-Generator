@@ -1,0 +1,26 @@
+import epackage	"../../../Tests/ca.mcgill.ecse.dslreasoner.vampire.test/initialModels/yakindu/yakindu_simplified.ecore"
+import viatra	"../../../Tests/ca.mcgill.ecse.dslreasoner.vampire.test/initialModels/yakindu/yakinduPatterns.vql"
+
+generate {
+	metamodel = { package yakindumm }
+	constraints = { package ca.mcgill.ecse.dslreasoner.yakindu.queries}
+	partial-model = { "../../../Tests/ca.mcgill.ecse.dslreasoner.vampire.test/initialModels/yakindu/Yakindu.xmi" }
+	solver = TPTPSolver
+	scope = {
+		#node += 20..*
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal,
+		"solver" = "vampire-local"
+	}
+	
+	runs = 1
+	number = 10
+	
+	debug =			"output/debug/"
+	log =			"output/debug/log.txt"
+	output =		"output/models"
+	statistics =	"output/debug/statistics.csv"
+}

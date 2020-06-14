@@ -107,7 +107,7 @@ CustomEntry: key = STRING "=" value = STRING;
 ConfigReference: config = [ConfigDeclaration];
 Config: ConfigSpecification | ConfigReference;
 
-enum Solver: SMTSolver | AlloySolver | ViatraSolver;
+enum Solver: SMTSolver | AlloySolver | ViatraSolver | TPTPSolver;
 
 ScopeSpecification: {ScopeSpecification} '{' 
 		(scopes += TypeScope (',' scopes += TypeScope)*)?

@@ -2,7 +2,7 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
-		<package 
+		<package
 			uri = "http://www.bme.hu/mit/inf/dslreasoner/application/ApplicationConfiguration"
 			class = "hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage"
 			genModel = "model/generated/ApplicationConfiguration.genmodel" />

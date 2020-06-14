@@ -299,23 +299,23 @@ class Logic2VampireLanguageMapper_Support {
 	def getSolverSpecs(BackendSolver solver) {
 		switch (solver) {
 			case BackendSolver::CVC4:
-				return newArrayList("CVC4---SAT-1.7", "do_CVC4 %s %d SAT")
+				return newArrayList("CVC4---SAT-1.7", "do_CVC4 %s %d SAT")//TODO Update
 			case BackendSolver::DARWINFM:
-				return newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s")
+				return newArrayList("DarwinFM---1.4.5", "darwin -fd true -ppp true -pl 0 -to %d -pmtptp true %s")//TODO Update
 			case BackendSolver::EDARWIN:
 				return newArrayList("E-Darwin---1.5",
-					"e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s")
+					"e-darwin -pev \"TPTP\" -pmd true -if tptp -pl 2 -pc false -ps false %s")//TODO Update
 			case BackendSolver::GEOIII:
 				return newArrayList("Geo-III---2018C",
-					"geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s")
+					"geo -tptp_input -nonempty -include /home/tptp/TPTP -inputfile %s")//TODO Update
 			case BackendSolver::IPROVER:
-				return newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s")
+				return newArrayList("iProver---SAT-3.0", "iproveropt_run_sat.sh %d %s")//TODO Update
 			case BackendSolver::PARADOX:
-				return newArrayList("Paradox---4.0", "paradox --no-progress --time %d --tstp --model %s")
+				return newArrayList("Paradox---4.0", "paradox --no-progress --time %d --tstp --model %s")//TODO Update
 			case BackendSolver::VAMPIRE:
-				return newArrayList("Vampire---SAT-4.4", "vampire --mode casc_sat -t %d %s")
+				return newArrayList("Vampire---SAT-4.5", "vampire --mode casc_sat -t %d %s")
 			case BackendSolver::Z3:
-				return newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:%d -file:%s")
+				return newArrayList("Z3---4.4.1", "run_z3_tptp -proof -model -t:%d -file:%s")//TODO Update
 		}
 	}
 
