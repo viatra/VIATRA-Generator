@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fam:FunctionalInterface xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fam="FamMetamodel">
+  <data xsi:type="fam:FunctionalOutput">
+    <outgoingLinks to="//@data.1"/>
+  </data>
+  <data xsi:type="fam:FunctionalInput" IncomingLinks="//@data.0/@outgoingLinks.0">
+    <terminator/>
+  </data>
+  <data xsi:type="fam:FunctionalOutput"/>
+  <data xsi:type="fam:FunctionalInput"/>
+</fam:FunctionalInterface>

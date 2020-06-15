@@ -1,0 +1,25 @@
+import epackage "FileSystemMetamodel"
+import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.FileSystemPatterns"
+
+generate {
+	metamodel = { package filesystem }
+	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries}
+	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/filesystemInstance.xmi"}
+	solver = ViatraSolver
+	scope = {
+		# node = 10
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	number = 5
+	runs = 1
+	
+	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/debug"
+	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/log.txt"
+	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/models"
+	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fileSystem/statistics.csv"
+}

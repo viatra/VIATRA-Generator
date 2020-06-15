@@ -1,0 +1,24 @@
+package ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries
+
+import epackage "FileSystemMetamodel"
+
+pattern patternContent(o1: FSObject, o2: FSObject) {
+	Dir.contents(o1,o2);
+}
+
+@QueryBasedFeature
+pattern live(this: FileSystem, l: FSObject) {
+	FileSystem.root(this,l);
+} or {
+	FileSystem.root(this,root);
+	find patternContent+(root,l);
+}
+
+@Constraint(key={child}, severity="error", message="error")
+pattern contentInNotLive(parent : Dir, child: FSObject) {
+	Dir.contents(parent,child);
+	neg find live(_,parent);
+} or {
+	Dir.contents(parent,child);
+	neg find live(_,child);
+}

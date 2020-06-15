@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link functionalarchitecture.FunctionalData#getTerminator <em>Terminator</em>}</li>
  *   <li>{@link functionalarchitecture.FunctionalData#getInterface <em>Interface</em>}</li>
+ *   <li>{@link functionalarchitecture.FunctionalData#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @see functionalarchitecture.FunctionalarchitecturePackage#getFunctionalData()
@@ -60,13 +61,13 @@ public interface FunctionalData extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Interface</em>' container reference.
-	 * @see #setInterface(FunctionalInterface)
+	 * @see #setInterface(functionalarchitecture.FunctionalInterface)
 	 * @see functionalarchitecture.FunctionalarchitecturePackage#getFunctionalData_Interface()
 	 * @see functionalarchitecture.FunctionalInterface#getData
 	 * @model opposite="data" transient="false"
 	 * @generated
 	 */
-	FunctionalInterface getInterface();
+	functionalarchitecture.FunctionalInterface getInterface();
 
 	/**
 	 * Sets the value of the '{@link functionalarchitecture.FunctionalData#getInterface <em>Interface</em>}' container reference.
@@ -76,6 +77,32 @@ public interface FunctionalData extends EObject {
 	 * @see #getInterface()
 	 * @generated
 	 */
-	void setInterface(FunctionalInterface value);
+	void setInterface(functionalarchitecture.FunctionalInterface value);
+
+	/**
+	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(int)
+	 * @see functionalarchitecture.FunctionalarchitecturePackage#getFunctionalData_Value()
+	 * @model required="true"
+	 * @generated
+	 */
+	int getValue();
+
+	/**
+	 * Sets the value of the '{@link functionalarchitecture.FunctionalData#getValue <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(int value);
 
 } // FunctionalData

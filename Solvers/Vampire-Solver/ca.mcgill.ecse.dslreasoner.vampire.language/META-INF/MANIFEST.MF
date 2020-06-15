@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ca.mcgill.ecse.dslreasoner.vampire.language
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: ca.mcgill.ecse.dslreasoner.vampire.language; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.antlr.runtime,
+ org.eclipse.xtext.util,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.eclipse.emf.common
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: ca.mcgill.ecse.dslreasoner.generator,
+ ca.mcgill.ecse.dslreasoner.parser.antlr,
+ ca.mcgill.ecse.dslreasoner.services,
+ ca.mcgill.ecse.dslreasoner.parser.antlr.internal,
+ ca.mcgill.ecse.dslreasoner,
+ ca.mcgill.ecse.dslreasoner.vampireLanguage,
+ ca.mcgill.ecse.dslreasoner.vampireLanguage.impl,
+ ca.mcgill.ecse.dslreasoner.serializer,
+ ca.mcgill.ecse.dslreasoner.validation,
+ ca.mcgill.ecse.dslreasoner.vampireLanguage.util,
+ ca.mcgill.ecse.dslreasoner.scoping,
+ ca.mcgill.ecse.dslreasoner.formatting2
+Import-Package: org.apache.log4j

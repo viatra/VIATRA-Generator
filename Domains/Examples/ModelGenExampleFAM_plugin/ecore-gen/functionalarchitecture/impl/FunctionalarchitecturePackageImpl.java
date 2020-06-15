@@ -9,7 +9,6 @@ import functionalarchitecture.FunctionalArchitectureModel;
 import functionalarchitecture.FunctionalData;
 import functionalarchitecture.FunctionalElement;
 import functionalarchitecture.FunctionalInput;
-import functionalarchitecture.FunctionalInterface;
 import functionalarchitecture.FunctionalOutput;
 import functionalarchitecture.FunctionalarchitectureFactory;
 import functionalarchitecture.FunctionalarchitecturePackage;
@@ -128,7 +127,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FunctionalarchitecturePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -142,7 +141,8 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		if (isInited) return (FunctionalarchitecturePackage)EPackage.Registry.INSTANCE.getEPackage(FunctionalarchitecturePackage.eNS_URI);
 
 		// Obtain or create and register package
-		FunctionalarchitecturePackageImpl theFunctionalarchitecturePackage = (FunctionalarchitecturePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FunctionalarchitecturePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FunctionalarchitecturePackageImpl());
+		Object registeredFunctionalarchitecturePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FunctionalarchitecturePackageImpl theFunctionalarchitecturePackage = registeredFunctionalarchitecturePackage instanceof FunctionalarchitecturePackageImpl ? (FunctionalarchitecturePackageImpl)registeredFunctionalarchitecturePackage : new FunctionalarchitecturePackageImpl();
 
 		isInited = true;
 
@@ -155,7 +155,6 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		// Mark meta-data to indicate it can't be changed
 		theFunctionalarchitecturePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FunctionalarchitecturePackage.eNS_URI, theFunctionalarchitecturePackage);
 		return theFunctionalarchitecturePackage;
@@ -382,6 +381,15 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFunctionalData_Value() {
+		return (EAttribute)functionalDataEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getFunctionType() {
 		return functionTypeEEnum;
 	}
@@ -446,6 +454,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		functionalDataEClass = createEClass(FUNCTIONAL_DATA);
 		createEReference(functionalDataEClass, FUNCTIONAL_DATA__TERMINATOR);
 		createEReference(functionalDataEClass, FUNCTIONAL_DATA__INTERFACE);
+		createEAttribute(functionalDataEClass, FUNCTIONAL_DATA__VALUE);
 
 		// Create enums
 		functionTypeEEnum = createEEnum(FUNCTION_TYPE);
@@ -486,7 +495,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		// Initialize classes, features, and operations; add parameters
 		initEClass(functionalElementEClass, FunctionalElement.class, "FunctionalElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionalElement_Interface(), this.getFunctionalInterface(), this.getFunctionalInterface_Element(), "interface", null, 0, 1, FunctionalElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionalElement_Model(), this.getFunctionalArchitectureModel(), null, "model", null, 1, 1, FunctionalElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionalElement_Model(), this.getFunctionalArchitectureModel(), null, "model", null, 1, 1, FunctionalElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionalElement_Parent(), this.getFunction(), this.getFunction_SubElements(), "parent", null, 0, 1, FunctionalElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionalArchitectureModelEClass, FunctionalArchitectureModel.class, "FunctionalArchitectureModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -494,7 +503,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunction_SubElements(), this.getFunctionalElement(), this.getFunctionalElement_Parent(), "subElements", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFunction_Type(), this.getFunctionType(), "type", null, 1, 1, Function.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFunction_Type(), this.getFunctionType(), "type", null, 1, 1, Function.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(famTerminatorEClass, FAMTerminator.class, "FAMTerminator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFAMTerminator_Data(), this.getFunctionalData(), this.getFunctionalData_Terminator(), "data", null, 0, 1, FAMTerminator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -503,9 +512,9 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		initEReference(getInformationLink_From(), this.getFunctionalOutput(), this.getFunctionalOutput_OutgoingLinks(), "from", null, 0, 1, InformationLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInformationLink_To(), this.getFunctionalInput(), this.getFunctionalInput_IncomingLinks(), "to", null, 1, 1, InformationLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(functionalInterfaceEClass, FunctionalInterface.class, "FunctionalInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionalInterface_Data(), this.getFunctionalData(), this.getFunctionalData_Interface(), "data", null, 0, -1, FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionalInterface_Element(), this.getFunctionalElement(), this.getFunctionalElement_Interface(), "element", null, 0, 1, FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(functionalInterfaceEClass, functionalarchitecture.FunctionalInterface.class, "FunctionalInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionalInterface_Data(), this.getFunctionalData(), this.getFunctionalData_Interface(), "data", null, 0, -1, functionalarchitecture.FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionalInterface_Element(), this.getFunctionalElement(), this.getFunctionalElement_Interface(), "element", null, 0, 1, functionalarchitecture.FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionalInputEClass, FunctionalInput.class, "FunctionalInput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionalInput_IncomingLinks(), this.getInformationLink(), this.getInformationLink_To(), "IncomingLinks", null, 0, -1, FunctionalInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -516,6 +525,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		initEClass(functionalDataEClass, FunctionalData.class, "FunctionalData", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionalData_Terminator(), this.getFAMTerminator(), this.getFAMTerminator_Data(), "terminator", null, 0, 1, FunctionalData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionalData_Interface(), this.getFunctionalInterface(), this.getFunctionalInterface_Data(), "interface", null, 0, 1, FunctionalData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFunctionalData_Value(), ecorePackage.getEInt(), "value", null, 1, 1, FunctionalData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(functionTypeEEnum, FunctionType.class, "FunctionType");
@@ -540,12 +550,12 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
+			   "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
 		   });
 	}
 
@@ -556,18 +566,18 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * @generated
 	 */
 	protected void createOrgAnnotations() {
-		String source = "org.eclipse.viatra.query.querybasedfeature";	
+		String source = "org.eclipse.viatra.query.querybasedfeature";
 		addAnnotation
-		  (getFunctionalElement_Model(), 
-		   source, 
+		  (getFunctionalElement_Model(),
+		   source,
 		   new String[] {
-			 "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.model"
-		   });	
+			   "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.model"
+		   });
 		addAnnotation
-		  (getFunction_Type(), 
-		   source, 
+		  (getFunction_Type(),
+		   source,
 		   new String[] {
-			 "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.type"
+			   "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.type"
 		   });
 	}
 

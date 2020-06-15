@@ -1,0 +1,20 @@
+package ca.mcgill.ecse.dslreasoner.vampire.queries
+
+import epackage "http://www.inf.mit.bme.hu/viatrasolver/example/fam"
+
+@Constraint(message="terminatorAndInformation", severity="error", key={T})
+pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
+	FunctionalOutput.outgoingLinks(Out,I);
+	FunctionalOutput.terminator(Out,T); 
+} or {
+	InformationLink.to(I,In);
+	FunctionalInput.terminator(In,T);
+}
+
+pattern rootElements(Model: FunctionalArchitectureModel, Root : Function) = {
+	FunctionalArchitectureModel.rootElements(Model, Root);
+}
+
+pattern parent(Func : Function, Par : Function) = {
+	Function.parent(Func, Par);
+}

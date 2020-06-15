@@ -45,4 +45,15 @@
       <query-specification fqn="queries.parentTooYoung"/>
     </group>
   </extension>
+  <extension id="queries.FamilyTreeConstraintsQual" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.FamilyTreeConstraintsQual" id="queries.FamilyTreeConstraintsQual">
+      <query-specification fqn="queries.memberIsRecursiveParent"/>
+      <query-specification fqn="queries.isParent"/>
+      <query-specification fqn="queries.memberIsItsOwnParent"/>
+      <query-specification fqn="queries.twoMembersHaveNoParent"/>
+      <query-specification fqn="queries.memberHasParent"/>
+      <query-specification fqn="queries.negativeAge"/>
+      <query-specification fqn="queries.parentTooYoung"/>
+    </group>
+  </extension>
 </plugin>

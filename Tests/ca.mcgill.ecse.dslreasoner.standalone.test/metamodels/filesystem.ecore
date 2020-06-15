@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="filesystem" nsURI="FileSystemMetamodel" nsPrefix="filesystem">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="org.eclipse.viatra.query.querybasedfeature"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FileSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Dir"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="live" upperBound="-1" eType="#//FSObject"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.viatra.query.querybasedfeature">
+        <details key="patternFQN" value="ca.mcgill.ecse.dslreasoner.standalone.test.filesystem.queries.live"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FSObject" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Dir"
+        eOpposite="#//Dir/contents"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dir" eSuperTypes="#//FSObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//FSObject" containment="true" eOpposite="#//FSObject/parent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//FSObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filesystems" lowerBound="1"
+        eType="#//FileSystem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherFSObjects" upperBound="-1"
+        eType="#//FSObject" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

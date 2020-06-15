@@ -51,11 +51,23 @@ public interface Function extends FunctionalElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see functionalarchitecture.FunctionType
+	 * @see #setType(FunctionType)
 	 * @see functionalarchitecture.FunctionalarchitecturePackage#getFunction_Type()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model required="true" transient="true" volatile="true"
 	 *        annotation="org.eclipse.viatra.query.querybasedfeature patternFQN='hu.bme.mit.inf.dslreasoner.domains.transima.fam.type'"
 	 * @generated
 	 */
 	FunctionType getType();
+
+	/**
+	 * Sets the value of the '{@link functionalarchitecture.Function#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see functionalarchitecture.FunctionType
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(FunctionType value);
 
 } // Function

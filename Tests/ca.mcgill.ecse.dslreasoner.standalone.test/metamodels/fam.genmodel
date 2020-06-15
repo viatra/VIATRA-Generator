@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/ca.mcgill.ecse.dslreasoner.standalone.test/src"
+    modelPluginID="ca.mcgill.ecse.dslreasoner.standalone.test" modelName="Fam" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>fam.ecore</foreignModel>
+  <genPackages prefix="fam" basePackage="ca.mcgill.ecse.dslreasoner.standalone.test"
+      disposableProviderFactory="true" ecorePackage="fam.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="fam.ecore#//FunctionType">
+      <genEnumLiterals ecoreEnumLiteral="fam.ecore#//FunctionType/Root"/>
+      <genEnumLiterals ecoreEnumLiteral="fam.ecore#//FunctionType/Intermediate"/>
+      <genEnumLiterals ecoreEnumLiteral="fam.ecore#//FunctionType/Leaf"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="fam.ecore#//FunctionalElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalElement/interface"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalElement/model"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fam.ecore#//FunctionalElement/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//FunctionalArchitectureModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalArchitectureModel/rootElements"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//Function">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fam.ecore#//Function/subElements"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute fam.ecore#//Function/type"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//FAMTerminator">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fam.ecore#//FAMTerminator/data"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//InformationLink">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fam.ecore#//InformationLink/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fam.ecore#//InformationLink/to"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//FunctionalInterface">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalInterface/data"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fam.ecore#//FunctionalInterface/element"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//FunctionalInput">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalInput/IncomingLinks"/>
+    </genClasses>
+    <genClasses ecoreClass="fam.ecore#//FunctionalOutput">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalOutput/outgoingLinks"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="fam.ecore#//FunctionalData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fam.ecore#//FunctionalData/terminator"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference fam.ecore#//FunctionalData/interface"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

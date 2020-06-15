@@ -88,67 +88,67 @@ pattern choiceHasNoIncoming(c: Choice) {
 	neg find transition(_, _, c);
 }
 
-/////////
-// Synchronization
-/////////
-
-@Constraint(severity="error", message="error", key = {s})
-pattern synchHasNoOutgoing(s : Synchronization) {
-	neg find transition(_, s, _);
-}
-
-@Constraint(severity="error", message="error", key = {s})
-pattern synchHasNoIncoming(s : Synchronization) {
-	neg find transition(_, _, s);
-}
-
-@Constraint(severity="error", message="error", key = {s})
-pattern SynchronizedIncomingInSameRegion(s : Synchronization, v1 : Vertex, v2 : Vertex) {
-	find transition(t1, v1, s);
-	find transition(t2, v2, s);
-	t1!=t2;
-	Region.vertices(r, v1);
-	Region.vertices(r, v2);
-} or {
-	find transition(t1, s, v1);
-	find transition(t2, s, v2);
-	t1!=t2;
-	Region.vertices(r, v1);
-	Region.vertices(r, v2);
-}
-
-@Constraint(severity="error", message="error", key = {s})
-pattern notSynchronizingStates(s : Synchronization) {
-	neg find hasMultipleOutgoingTrainsition(s);
-	neg find hasMultipleIncomingTrainsition(s);
-}
-
-pattern hasMultipleOutgoingTrainsition(v : Synchronization) {
-	find transition(_, v, trg1);
-	find transition(_, v, trg2);
-	trg1 != trg2;
-}
-
-pattern hasMultipleIncomingTrainsition(v : Synchronization) {
-	find transition(_, src1, v);
-	find transition(_, src2, v);
-	src1 != src2;
-}
-
-@Constraint(severity="error", message="error", key = {s})
-pattern SynchronizedRegionsAreNotSiblings(s : Synchronization, v1 : Vertex, v2 : Vertex) {
-	find transition(_, v1, s);
-	find transition(_, v2, s);
-	CompositeElement.regions.vertices(r1, v1);
-	CompositeElement.regions.vertices(r2, v2);
-	r1 != r2;
-} or {
-	find transition(_, s, v1);
-	find transition(_, s, v2);
-	CompositeElement.regions.vertices(r1, v1);
-	CompositeElement.regions.vertices(r2, v2);
-	r1 != r2;
-}
+///////////
+//// Synchronization
+///////////
+//
+//@Constraint(severity="error", message="error", key = {s})
+//pattern synchHasNoOutgoing(s : Synchronization) {
+//	neg find transition(_, s, _);
+//}
+//
+//@Constraint(severity="error", message="error", key = {s})
+//pattern synchHasNoIncoming(s : Synchronization) {
+//	neg find transition(_, _, s);
+//}
+//
+//@Constraint(severity="error", message="error", key = {s})
+//pattern SynchronizedIncomingInSameRegion(s : Synchronization, v1 : Vertex, v2 : Vertex) {
+//	find transition(t1, v1, s);
+//	find transition(t2, v2, s);
+//	t1!=t2;
+//	Region.vertices(r, v1);
+//	Region.vertices(r, v2);
+//} or {
+//	find transition(t1, s, v1);
+//	find transition(t2, s, v2);
+//	t1!=t2;
+//	Region.vertices(r, v1);
+//	Region.vertices(r, v2);
+//}
+//
+//@Constraint(severity="error", message="error", key = {s})
+//pattern notSynchronizingStates(s : Synchronization) {
+//	neg find hasMultipleOutgoingTrainsition(s);
+//	neg find hasMultipleIncomingTrainsition(s);
+//}
+//
+//pattern hasMultipleOutgoingTrainsition(v : Synchronization) {
+//	find transition(_, v, trg1);
+//	find transition(_, v, trg2);
+//	trg1 != trg2;
+//}
+//
+//pattern hasMultipleIncomingTrainsition(v : Synchronization) {
+//	find transition(_, src1, v);
+//	find transition(_, src2, v);
+//	src1 != src2;
+//}
+//
+//@Constraint(severity="error", message="error", key = {s})
+//pattern SynchronizedRegionsAreNotSiblings(s : Synchronization, v1 : Vertex, v2 : Vertex) {
+//	find transition(_, v1, s);
+//	find transition(_, v2, s);
+//	CompositeElement.regions.vertices(r1, v1);
+//	CompositeElement.regions.vertices(r2, v2);
+//	r1 != r2;
+//} or {
+//	find transition(_, s, v1);
+//	find transition(_, s, v2);
+//	CompositeElement.regions.vertices(r1, v1);
+//	CompositeElement.regions.vertices(r2, v2);
+//	r1 != r2;
+//}
 
 ///////////////////////////////
 // Extra

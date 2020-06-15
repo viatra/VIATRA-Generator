@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<language:LogicProblem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem" xmlns:language_1="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language">
+  <types xsi:type="language_1:TypeDefinition" name="oldRPS" elements="//@elements.0 //@elements.1 //@elements.2"/>
+  <assertions name="assertion1">
+    <value xsi:type="language_1:Forall">
+      <quantifiedVariables name="x">
+        <range xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+      </quantifiedVariables>
+      <expression xsi:type="language_1:Exists">
+        <quantifiedVariables name="y">
+          <range xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+        </quantifiedVariables>
+        <expression xsi:type="language_1:And">
+          <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.0">
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@quantifiedVariables.0"/>
+            <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@expression/@quantifiedVariables.0"/>
+          </operands>
+          <operands xsi:type="language_1:Distinct">
+            <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@quantifiedVariables.0"/>
+            <operands xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@expression/@quantifiedVariables.0"/>
+          </operands>
+          <operands xsi:type="language_1:Not">
+            <operand xsi:type="language_1:SymbolicValue" symbolicReference="//@relations.0">
+              <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@expression/@quantifiedVariables.0"/>
+              <parameterSubstitutions xsi:type="language_1:SymbolicValue" symbolicReference="//@assertions.0/@value/@quantifiedVariables.0"/>
+            </operand>
+          </operands>
+        </expression>
+      </expression>
+    </value>
+  </assertions>
+  <relations xsi:type="language_1:RelationDeclaration" name="beats2">
+    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+    <parameters xsi:type="language_1:ComplexTypeReference" referred="//@types.0"/>
+  </relations>
+  <elements name="Rock" definedInType="//@types.0"/>
+  <elements name="Paper" definedInType="//@types.0"/>
+  <elements name="Scissor" definedInType="//@types.0"/>
+</language:LogicProblem>

@@ -39,17 +39,17 @@ pattern model(This:FunctionalElement, Target: FunctionalArchitectureModel) {
 	FunctionalArchitectureModel(Target);
 }
 
-pattern hasRoot(F : Function) {
-	find rootElements(_Model, F);
-}
-pattern hasInt(F : Function) {
-	neg find parent(_Child, F);
-	neg find rootElements(_Model, F);
-}
-pattern hasLeaf(F : Function) {
-	find parent(F, _Par);
-	find parent(_Child, F);
-}
+//pattern hasRoot(F : Function) {
+//	find rootElements(_Model, F);
+//}
+//pattern hasInt(F : Function) {
+//	neg find parent(_Child, F);
+//	neg find rootElements(_Model, F);
+//}
+//pattern hasLeaf(F : Function) {
+//	find parent(F, _Par);
+//	find parent(_Child, F);
+//}
 /*
 @Constraint(message="noRoot", severity="error", key={fam})
 pattern noRoot(fam: FunctionalArchitectureModel) {

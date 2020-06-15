@@ -1,0 +1,34 @@
+import epackage "http://www.eclipse.org/emf/2002/Ecore"
+import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries.EcorePatterns"
+
+metamodel allSupported { package ecore excluding {
+		EClassifier.instanceClass,EClassifier.defaultValue,EEnumLiteral.instance,EStructuralFeature.defaultValue,
+		EJavaClass,	EJavaObject, EJavaObject,
+		EPackage.eFactoryInstance, EFactory, EFactory.ePackage
+	}
+}
+
+generate {
+	metamodel = allSupported
+	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.ecore.queries}
+	partial-model = { "platform:/resource/Ecore-Plugin/InitialPackage.ecore" }
+	solver = ViatraSolver
+	scope = {
+		#node += 5,
+		#string += { "A", "B" },
+		#int += {0,1,-1}
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	number = 3
+	runs = 1
+	
+	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/debug"
+	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/log.txt"
+	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/models"
+	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/ecore/statistics.csv"
+}

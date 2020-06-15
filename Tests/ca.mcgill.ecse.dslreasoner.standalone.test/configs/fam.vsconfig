@@ -1,0 +1,25 @@
+import epackage "FamMetamodel"
+//import viatra "ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries.FamPatterns"
+
+generate {
+	metamodel = { package fam }
+//	constraints = { package ca.mcgill.ecse.dslreasoner.standalone.test.fam.queries}
+//	partial-model = { "platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/instanceModels/famInstance.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node = 10
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	number = 5
+	runs = 1
+	
+	debug =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/debug"
+	log =			"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/log.txt"
+	output =		"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/models"
+	statistics =	"platform:/resource/ca.mcgill.ecse.dslreasoner.standalone.test/outputs/fam/statistics.csv"
+}

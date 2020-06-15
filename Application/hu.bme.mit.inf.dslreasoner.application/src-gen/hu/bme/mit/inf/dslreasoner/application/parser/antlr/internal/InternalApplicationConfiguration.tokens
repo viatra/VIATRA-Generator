@@ -11,6 +11,7 @@
 '>'=35
 'AlloySolver'=56
 'SMTSolver'=55
+'TPTPSolver'=58
 'ViatraSolver'=57
 'config'=28
 'constraints'=27
@@ -99,3 +100,4 @@ T__54=54
 T__55=55
 T__56=56
 T__57=57
+T__58=58

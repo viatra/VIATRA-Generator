@@ -1,0 +1,355 @@
+grammar ca.mcgill.ecse.dslreasoner.VampireLanguage with org.eclipse.xtext.common.Terminals hidden (WS)
+
+generate vampireLanguage "http://www.mcgill.ca/ecse/dslreasoner/VampireLanguage"
+
+//@@@@@@@@@@@
+//2 things TODO:
+//1. fix anotations (ln77)
+//2. can only use declared variables in formula (ln 158)
+
+//@@@@@@@@@@@
+
+VampireModel:	
+	(
+//		includes += VLSInclude |
+		comments += VLSComment | 
+		confirmations += VLSConfirmations|
+		formulas += VLSFofFormula |
+		tfformulas += VLSTffFormula
+		
+	)*	
+;
+
+//////////////////////////////////
+// VLS terminals
+//////////////////////////////////
+
+terminal ALPHA_NUMERIC:	( 'a'..'z' | 'A'..'Z' | '0'..'9' | '_'); 
+terminal UPPER_WORD_ID: ('A'..'Z') (ALPHA_NUMERIC)*;
+terminal LOWER_WORD_ID: ('a'..'z') (ALPHA_NUMERIC)*;
+
+
+//TODO MIGHT NEED TO IMPLEMENT SOME WAY TO ONLY CONSIDER WHAT IS INSIDE QUOTES AS NAME
+//incorporate quotes in the line of calling. ex. "'" name=SINGLEQUOTE "'"
+terminal DOUBLE_QUOTE: '"' ( '\\' ('"'|'\\') | !('\\'|'"') )* '"';//from terminal STRING rule, positive about this
+terminal SINGLE_QUOTE: "'" ( '\\' ("'"|'\\') | !('\\'|"'") )+ "'";//from terminal STRING rule, positive about this
+
+terminal SIGN: ('+' | '-');
+
+terminal DOLLAR_ID: ('$') (LOWER_WORD_ID);
+terminal DOUBLE_DOLLAR_ID: ('$$') (LOWER_WORD_ID);
+
+terminal LITERAL: '0' | ('1'..'9') (INT)?;
+terminal SIGNED_LITERAL: (SIGN)* (LITERAL);
+
+//terminal UNSIGNED_REAL_FRAC_ID: (LITERAL) ('.') (INT);
+//terminal UNSIGNED_REAL_EXP_ID: (LITERAL | UNSIGNED_REAL_FRAC_ID) ('Ee') (SIGN)* (INT) ;
+//terminal SIGNED_REAL_ID: (SIGN)* (UNSIGNED_REAL_FRAC_ID | UNSIGNED_REAL_EXP_ID);
+//
+//terminal UNSIGNED_RAT_ID:  (LITERAL) ('/') ('1'..'9') (INT)? ;
+//terminal SIGNED_RAT_ID: (SIGN)* (UNSIGNED_RAT_ID);
+
+//Overwriting is necessary
+//terminal ID: (!('\n'|'\r'))* ('\r'? '\n')?;
+//terminal ANY_OTHER: ;
+terminal SINGLE_COMMENT: '%' (!('\n'|'\r'))* ('\r'? '\n')?;
+//terminal ID:  ( !('('|')'|'\r'|'\n') )+ ;
+
+
+//////////////////////////////////
+// VLS types
+//////////////////////////////////
+
+// <includes>
+//VLSInclude:
+//	'include(' fileName = SINGLE_QUOTE ( ',[' names += VLSName (','  names += VLSName)* ']' )?
+//;
+
+//VLSName:
+//	name = (LOWER_WORD_ID | SINGLE_QUOTE | LITERAL | SIGNED_LITERAL)
+//;
+
+// <comments>
+VLSComment:
+	comment = SINGLE_COMMENT
+	//need to add a new line at the end of the file for the case where the last line is a comment
+;
+
+//VLSConstantDeclaration: name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID );
+
+VLSConfirmations:
+	  {VLSSatisfiable} 'Satisfiable!' | 
+	  {VLSWarning} "WARNING!" "Could" "not" "set" "resource" "limit:" "Virtual" "memory." |
+	  {VLSTrying} 'TRYING' '[' name = LITERAL ']' |
+	  {VLSFiniteModel} 'Finite' 'Model' 'Found!'
+;
+
+// <FOF formulas>
+VLSFofFormula:
+	'fof' '(' name = (LOWER_WORD_ID | SIGNED_LITERAL | SINGLE_QUOTE) ',' fofRole = VLSRole ',' fofFormula = VLSTerm (',' annotations = VLSAnnotation)? ')' '.'
+;
+
+
+VLSTffFormula:
+	'tff' '(' name = VLSTffName ',' tffRole = VLSRole ',' fofFormula = VLSTffTerm (',' annotations = VLSAnnotation)? ')' '.'
+;
+
+VLSTffName:
+	VLSTffDeclPred | VLSTffFinite | VLSTffDistinct
+;
+
+VLSTffDistinct:
+	'distinct_domain'
+;
+
+VLSTffFinite:
+	'finite_domain'
+;
+
+VLSTffDeclPred:
+	'declare_' DOLLAR_ID | LOWER_WORD_ID
+;
+
+
+/*
+//NAME
+VLSName:
+	//(atomic_Word = Atomic_Word | integer = Integer | single_quote_word = Single_Quote_Word)
+	name = (LOWER_WORD_ID | SIGNED_INT_ID | SINGLE_QUOTE)
+;
+*/
+//<ROLE>
+VLSRole:
+	"axiom" | "conjecture" | "hypothesis" | "definition" | "assumption" | "lemma"
+	| "theorem" |	"corollary" | "negated_conjecture" | "plain" | "type" |
+	"fi_domain" | "fi_functors" | "fi_predicates" | "unknown"
+;
+
+/*
+//VLSRole:
+//	VLSAxiom | VLSConjecture | VLSHypothesis | VLSDefinition |
+//	VLSAssumption | VLSLemma | VLSTheorem | VLSCorollary | VLSNegated_Conjecture |
+//	VLSPlain | VLSType |VLSFi_Domain | VLSFi_Functors | VLSFi_Predicates | VLSUnknown
+//;
+//
+//VLSAxiom:
+//	"axiom"
+//;
+//
+//VLSConjecture:
+//	"conjecture"
+//;
+//
+//VLSHypothesis:
+//	"hypothesis"
+//;
+//	
+//VLSDefinition:
+//	"definition"
+//;
+//
+//VLSAssumption:
+//	"assumption"
+//;
+//		
+//VLSLemma:
+//	"lemma"
+//;
+//			
+//VLSTheorem:
+//	"theorem"
+//;
+//				
+//VLSCorollary:
+//	"corollary"
+//;
+//			
+//VLSNegated_Conjecture:
+//	"negated_conjecture"	
+//;
+//
+//VLSPlain:
+//	"plain"
+//;
+//
+//VLSType:
+//	"type"
+//;
+//
+//VLSFi_Domain:
+//	"fi_domain"
+//;
+//
+//VLSFi_Functors:
+//	"fi_functors"
+//;
+//
+//VLSFi_Predicates:
+//	"fi_predicates"
+//;
+//
+//VLSUnknown:
+//	"unknown"
+//;
+*/
+
+// <ANNOTATION>
+// Not at all based on the website. based on what we think the output will be like 
+VLSAnnotation:
+	('[')? (name = (LOWER_WORD_ID  | SINGLE_QUOTE | VLSRole))? ( '('  followup = VLSAnnotationTerms ')' )? (']')?
+;
+
+VLSAnnotationTerms returns VLSAnnotation:
+	terms += VLSAnnotation (',' terms += VLSAnnotation )*
+;
+
+//////////////////////////////////
+// VLS Terms
+//////////////////////////////////
+VLSTffTerm:
+	VLSTerm |
+	VLSDeclaration |
+	VLSCommentTerm
+;
+
+VLSCommentTerm returns VLSTerm:
+	comment = SINGLE_COMMENT
+;
+
+/////////////////
+//TFF Specific
+VLSDeclaration:
+	VLSVariableDeclaration |
+	VLSOtherDeclaration
+	
+;
+
+VLSOtherDeclaration:
+	name = VLSAtomicConstant ':' type = VLSTypeDef
+;
+
+VLSVariableDeclaration:
+	name = VLSVariable ':' type = VLSTypeDef
+;
+
+VLSTypeDef:
+	typeSig = VLSUnitaryTerm ('>' mapsTo = VLSAtomicConstant)? //might need to make VLSAtomic to include VLSVariable
+;
+
+VLSUnitaryTerm returns VLSTypeDef:
+	initType = VLSAtomic ('*' nextType = VLSAtomicConstant)* //might need to make VLSAtomic to include VLSVariable
+;
+//TFF Specific
+/////////////////
+
+VLSTerm: 
+	//( VLSLogic | VLSSequent)
+	VLSBinary
+;
+//*
+//VLSBinaryFormula
+VLSBinary returns VLSTerm:
+	VLSUnitaryFormula
+	(
+		(({VLSEquivalent.left = current} "<=>" |
+			{VLSImplies.left = current} "=>" |
+			{VLSRevImplies.left = current} "<=" |
+			{VLSXnor.left = current} "<~>" |
+			{VLSNor.left = current} "~|" |
+			{VLSNand.left = current} "~&")	right = VLSUnitaryFormula) 
+		| 
+		({VLSAnd.left = current} '&' right = VLSUnitaryFormula)+
+		|
+		({VLSOr.left = current} '|' right = VLSUnitaryFormula)+
+	)?
+;
+
+//VLSUnitaryFormula
+VLSUnitaryFormula returns VLSTerm:
+	VLSUniversalQuantifier  | VLSExistentialQuantifier | VLSUnaryNegation | VLSUnaryInfix 
+	//| VLSEquality 
+	|  '(' VLSTerm ')'
+;
+
+VLSUniversalQuantifier  returns VLSTerm:
+	{VLSUniversalQuantifier} (("!") '[' variables += (VLSVariable | VLSVariableDeclaration) 
+		(','  variables += (VLSVariable | VLSVariableDeclaration))* ']' ':'
+	) operand = VLSUnitaryFormula
+;
+
+VLSExistentialQuantifier  returns VLSTerm:
+	{VLSExistentialQuantifier} (("?") '[' variables += (VLSVariable | VLSVariableDeclaration) 
+		(','  variables += (VLSVariable | VLSVariableDeclaration))* ']' ':'
+	) operand = VLSUnitaryFormula
+;
+
+VLSUnaryNegation   returns VLSTerm:
+	{VLSUnaryNegation} ('~') operand = VLSUnitaryFormula
+;
+
+VLSUnaryInfix returns VLSTerm:
+	VLSAtomic (({VLSInequality.left = current} "!=" |
+		{VLSEquality.left = current} "=" |	
+		{VLSAssignment.left = current} ":=")
+		right = VLSAtomic)? 
+;
+
+//NOT SUREEEE
+//VLSEquality returns VLSTerm:
+//	VLSFofTerm ({VLSEquality.left = current} "=" right = VLSFofTerm)?
+//	
+//;
+
+/*
+enum VLSDefinedFunctor:
+		UMINUS='$uminus' | SUM='$sum' | DIFFERENCE='$difference' | PRODUCT='$product' | QUOTIENT='$quotient' | 
+		QUOTIENT_E='$quotient_e' | QUOTIENT_T='$quotient_t' | QUOTIENT_F='$quotient_f' | REMAINDER_E='$remainder_e' |
+		 REMAINDER_T='$remainder_t' | REMAINDER_F='$remainder_f' | FLOOR='$floor' | CEILING='$ceiling' |
+		 TRUNCATE='$truncate' | ROUND='$round' | TO_INT='$to_int' | TO_RAT='$to_rat' | TO_REAL='$to_real'
+    ;
+*/
+
+VLSAtomic returns VLSTerm:
+	VLSAtomicConstant | VLSAtomicFunction | VLSVariable 
+	| VLSDefinedTerm //temporary solution. this is only valid for equality, not for != or :=
+	//| VLSEquality
+;
+
+VLSAtomicConstant returns VLSTerm:
+	//{VLSConstant} name = VLSConstantDeclaration |
+	{VLSConstant} name = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole) |
+	{VLSTrue} '$true' |
+	{VLSFalse} '$false'
+;
+
+VLSAtomicFunction returns VLSTerm:
+	//? on next line causes warning
+	//TODO might need replace DOLLAR_ID with enum rule 
+	//{VLSFunction} name = VLSConstantDeclaration ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')' ) |
+	{VLSFunction} constant = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID | VLSRole ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')') |
+	{VLSLess} name = '$less' '(' terms += VLSFofTerm ',' terms += VLSFofTerm ')' 
+;
+
+VLSVariable :
+	
+	name = UPPER_WORD_ID
+;
+
+VLSFofTerm returns VLSTerm:
+	//(VLSVariable | VLSFunction | VLSTffConditional | VLSTffLet | VLSTffTuple)
+	(VLSVariable | VLSFunctionAsTerm | VLSDefinedTerm )
+;
+
+VLSFunctionAsTerm:
+	//? on next line causes warning
+	//TODO might need replace DOLLAR_ID with enum rule 
+	functor = (LOWER_WORD_ID | SINGLE_QUOTE | DOLLAR_ID | DOUBLE_DOLLAR_ID ) ( '(' terms += VLSFofTerm (',' terms += VLSFofTerm)* ')')?
+;
+
+VLSDefinedTerm:
+	{VLSInt} value = SIGNED_LITERAL |
+//	{VLSReal} value = SIGNED_REAL_ID |
+//	{VLSRational} value = SIGNED_RAT_ID |
+	{VLSDoubleQuote} value = DOUBLE_QUOTE
+;
+

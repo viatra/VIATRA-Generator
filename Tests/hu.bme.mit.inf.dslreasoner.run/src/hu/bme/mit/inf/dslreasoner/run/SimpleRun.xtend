@@ -72,10 +72,10 @@ class SimpleRun {
 			it.typeScopes.maxNewElements = 40
 			it.typeScopes.minNewElements = 40
 			it.solutionScope.numberOfRequiredSolution = 1
-			it.existingQueries = queries.patterns.map[it.internalQueryRepresentation]
+//			it.existingQueries = queries.patterns.map[it.internalQueryRepresentation]
 			it.debugCongiguration.logging = false
 			it.debugCongiguration.partalInterpretationVisualisationFrequency = 1
-			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
+//			it.debugCongiguration.partialInterpretatioVisualiser = new GraphvizVisualisation
 		]
 		solution = reasoner.solve(logicProblem,viatraConfig,workspace)
 		/*/
