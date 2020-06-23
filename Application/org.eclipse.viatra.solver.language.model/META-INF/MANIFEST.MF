@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.viatra.solver.language.model;singleton:=true
+Automatic-Module-Name: org.eclipse.viatra.solver.language.model
+Bundle-Version: 0.1.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.viatra.solver.language.solverLanguage,
+ org.eclipse.viatra.solver.language.solverLanguage.impl,
+ org.eclipse.viatra.solver.language.solverLanguage.util
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy

@@ -11,6 +11,8 @@ package org.eclipse.viatra.solver.language.ide.contentassist.antlr.lexer;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 }
 
+Containment : 'containment';
+
 Functional : 'functional';
 
 Abstract : 'abstract';
@@ -25,19 +27,21 @@ Minimize : 'minimize';
 
 Opposite : 'opposite';
 
-Current : 'current';
-
 Default : 'default';
 
 Extends : 'extends';
 
-Unknown : 'unknown';
+Problem : 'problem';
 
-Exists : 'exists';
+Unknown : 'unknown';
 
 Extern : 'extern';
 
-Forall : 'forall';
+Import : 'import';
+
+Object : 'object';
+
+Refers : 'refers';
 
 Class : 'class';
 
@@ -53,7 +57,9 @@ Scope : 'scope';
 
 Else : 'else';
 
-Must : 'must';
+Enum : 'enum';
+
+Root : 'root';
 
 Then : 'then';
 
@@ -65,15 +71,15 @@ Inf : 'inf';
 
 Let : 'let';
 
-May : 'may';
-
 ExclamationMarkEqualsSign : '!=';
 
 HyphenMinusGreaterThanSign : '->';
 
-FullStopFullStop : '..';
-
 ColonHyphenMinus : ':-';
+
+ColonColon : '::';
+
+ColonEqualsSign : ':=';
 
 LessThanSignEqualsSign : '<=';
 
@@ -117,6 +123,8 @@ EqualsSign : '=';
 
 GreaterThanSign : '>';
 
+QuestionMark : '?';
+
 LeftSquareBracket : '[';
 
 RightSquareBracket : ']';
@@ -128,6 +136,8 @@ LeftCurlyBracket : '{';
 VerticalLine : '|';
 
 RightCurlyBracket : '}';
+
+Tilde : '~';
 
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 
