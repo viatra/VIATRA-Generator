@@ -32,6 +32,7 @@ import org.eclipse.viatra.dse.base.ThreadContext;
 import org.eclipse.viatra.dse.objectives.Fitness;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
+import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
@@ -94,6 +95,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private int numberOfStatecoderFail = 0;
 	private int numberOfPrintedModel = 0;
 	private int numberOfSolverCalls = 0;
+	public long globalConstraintEvaluationTime = 0;
+	public long fitnessCalculationTime = 0;
 	
 	public long explorationStarted = 0;
 
@@ -116,6 +119,12 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
 	}
+	public long getForwardTime() {
+		return context.getDesignSpaceManager().getForwardTime();
+	}
+	public long getBacktrackingTime() {
+		return context.getDesignSpaceManager().getBacktrackingTime();
+	}
 	//LinkedList<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	@Override
 	public void initStrategy(ThreadContext context) {
@@ -130,10 +139,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
 //			matchers.add(matcher);
 //		}
-		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
-
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		this.comparator = new Comparator<TrajectoryWithFitness>() {
 			@Override
@@ -155,9 +162,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //		} catch (IOException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
-//		}  
+//		}
 		this.explorationStarted=System.nanoTime();
-		if (!context.checkGlobalConstraints()) {
+		if (!checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
 			return;
 		} else if(!numericSolver.maySatisfiable()) {
@@ -169,7 +176,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			return;
 		}
 		
-		final Fitness firstFittness = context.calculateFitness();
+		final Fitness firstFittness = calculateFitness();
 		checkForSolution(firstFittness);
 		
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
@@ -237,14 +244,14 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				if (context.isCurrentStateAlreadyTraversed()) {
 					logger.info("The new state is already visited.");
 					context.backtrack();
-				} else if (!context.checkGlobalConstraints()) {
+				} else if (!checkGlobalConstraints()) {
 					logger.debug("Global contraint is not satisifed.");
 					context.backtrack();
 				} else if (!numericSolver.maySatisfiable()) {
 					logger.debug("Numeric constraints are not satisifed.");
 					context.backtrack();
 				} else {
-					final Fitness nextFitness = context.calculateFitness();
+					final Fitness nextFitness = calculateFitness();
 					checkForSolution(nextFitness);
 					if (context.getDepth() > configuration.searchSpaceConstraints.maxDepth) {
 						logger.debug("Reached max depth.");
@@ -282,6 +289,20 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		logger.info("Interrupted.");
 	}
 
+	private boolean checkGlobalConstraints() {
+		long start = System.nanoTime();
+		boolean result = context.checkGlobalConstraints();
+		globalConstraintEvaluationTime += System.nanoTime() - start;
+		return result;
+	}
+	
+	private Fitness calculateFitness() {
+		long start = System.nanoTime();
+		Fitness fitness = context.calculateFitness(); 
+		fitnessCalculationTime += System.nanoTime() - start;
+		return fitness;
+	}
+	
 	private List<Object> selectActivation() {
 		List<Object> activationIds;
 		try {
@@ -311,6 +332,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public List<String> times = new LinkedList<String>();
 	private void saveTimes() {
 		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
+		long forwardTime = context.getDesignSpaceManager().getForwardTime()/1000000;
+		long backtrackingTime = context.getDesignSpaceManager().getBacktrackingTime()/1000000;
 		long solutionCopy = solutionStoreWithCopy.getSumRuntime()/1000000;
 		long activationSelection = this.activationSelector.getRuntime()/1000000;
 		long numericalSolverSumTime = this.numericSolver.getRuntime()/1000000;
@@ -320,6 +343,10 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.times.add(
 			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+ 
 			"|StateCoderTime:"+statecoderTime+
+			"|ForwardTime:"+forwardTime+
+			"|Backtrackingtime:"+backtrackingTime+
+			"|GlobalConstraintEvaluationTime:"+(globalConstraintEvaluationTime/1000000)+
+			"|FitnessCalculationTime:"+(fitnessCalculationTime/1000000)+
 			"|SolutionCopyTime:"+solutionCopy+
 			"|ActivationSelectionTime:"+activationSelection+
 			"|NumericalSolverSumTime:"+numericalSolverSumTime+
@@ -355,7 +382,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		} else {
 			return trajectoiresToExplore.element();
 		}
-	}	
+	}
 
 	public void visualiseCurrentState() {
 		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;

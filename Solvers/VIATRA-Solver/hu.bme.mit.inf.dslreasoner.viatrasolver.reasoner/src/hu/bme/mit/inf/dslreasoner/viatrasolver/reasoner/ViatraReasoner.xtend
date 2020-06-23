@@ -31,8 +31,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SolutionStoreWithDiversityDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityGranularity
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -163,6 +161,18 @@ class ViatraReasoner extends LogicReasoner{
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "StateCoderFailCount" it.value = strategy.numberOfStatecoderFail
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "ForwardTime" it.value = (strategy.forwardTime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "BacktrackingTime" it.value = (strategy.backtrackingTime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "GlobalConstraintEvaluationTime" it.value = (strategy.globalConstraintEvaluationTime/1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
+				it.name = "FitnessCalculationTime" it.value = (strategy.fitnessCalculationTime/1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "SolutionCopyTime" it.value = (strategy.solutionStoreWithCopy.sumRuntime/1000000) as int
