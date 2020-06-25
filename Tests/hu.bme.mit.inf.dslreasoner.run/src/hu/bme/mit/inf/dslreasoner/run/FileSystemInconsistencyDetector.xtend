@@ -35,11 +35,11 @@ class FileSystemInconsistencyDetector extends ModelGenerationMethodBasedGlobalCo
 	
 	override checkGlobalConstraint(ThreadContext context) {
 		var requiredNewObjects = 
-				filesystem.countMatches*2 +
-				root.countMatches
+				root.countMatches*2 +
+				filesystem.countMatches
 		val availableNewObjects = partialInterpretation.maxNewElements
 		val res = availableNewObjects >= requiredNewObjects
-		//println('''[«availableNewObjects» >= «requiredNewObjects»] = «res»''')
+		println('''[«availableNewObjects» >= «requiredNewObjects»] = «res»''')
 		return res
 	}
 	

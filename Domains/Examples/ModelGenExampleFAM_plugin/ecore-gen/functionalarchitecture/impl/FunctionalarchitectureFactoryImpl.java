@@ -2,9 +2,15 @@
  */
 package functionalarchitecture.impl;
 
-import functionalarchitecture.*;
-import functionalarchitecture.FunctionalInterface;
-
+import functionalarchitecture.FAMTerminator;
+import functionalarchitecture.Function;
+import functionalarchitecture.FunctionType;
+import functionalarchitecture.FunctionalArchitectureModel;
+import functionalarchitecture.FunctionalInput;
+import functionalarchitecture.FunctionalOutput;
+import functionalarchitecture.FunctionalarchitectureFactory;
+import functionalarchitecture.FunctionalarchitecturePackage;
+import functionalarchitecture.InformationLink;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -105,6 +111,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalArchitectureModel createFunctionalArchitectureModel() {
 		FunctionalArchitectureModelImpl functionalArchitectureModel = new FunctionalArchitectureModelImpl();
 		return functionalArchitectureModel;
@@ -115,6 +122,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Function createFunction() {
 		FunctionImpl function = new FunctionImpl();
 		return function;
@@ -125,6 +133,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FAMTerminator createFAMTerminator() {
 		FAMTerminatorImpl famTerminator = new FAMTerminatorImpl();
 		return famTerminator;
@@ -135,6 +144,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InformationLink createInformationLink() {
 		InformationLinkImpl informationLink = new InformationLinkImpl();
 		return informationLink;
@@ -145,7 +155,8 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionalInterface createFunctionalInterface() {
+	@Override
+	public functionalarchitecture.FunctionalInterface createFunctionalInterface() {
 		FunctionalInterfaceImpl functionalInterface = new FunctionalInterfaceImpl();
 		return functionalInterface;
 	}
@@ -155,6 +166,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalInput createFunctionalInput() {
 		FunctionalInputImpl functionalInput = new FunctionalInputImpl();
 		return functionalInput;
@@ -165,6 +177,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalOutput createFunctionalOutput() {
 		FunctionalOutputImpl functionalOutput = new FunctionalOutputImpl();
 		return functionalOutput;
@@ -195,6 +208,7 @@ public class FunctionalarchitectureFactoryImpl extends EFactoryImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalarchitecturePackage getFunctionalarchitecturePackage() {
 		return (FunctionalarchitecturePackage)getEPackage();
 	}

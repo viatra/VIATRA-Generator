@@ -83,6 +83,7 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getIndex() {
 		return index;
 	}
@@ -92,6 +93,7 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIndex(int newIndex) {
 		int oldIndex = index;
 		index = newIndex;
@@ -104,6 +106,7 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinedElement getParam() {
 		if (param != null && param.eIsProxy()) {
 			InternalEObject oldParam = (InternalEObject)param;
@@ -130,6 +133,7 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam(DefinedElement newParam) {
 		DefinedElement oldParam = param;
 		param = newParam;
@@ -215,7 +219,7 @@ public class NaryRelationLinkElementImpl extends MinimalEObjectImpl.Container im
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (index: ");
 		result.append(index);
 		result.append(')');

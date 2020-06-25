@@ -73,6 +73,7 @@ public class BinaryElementRelationLinkImpl extends RelationLinkImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinedElement getParam1() {
 		if (param1 != null && param1.eIsProxy()) {
 			InternalEObject oldParam1 = (InternalEObject)param1;
@@ -99,6 +100,7 @@ public class BinaryElementRelationLinkImpl extends RelationLinkImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam1(DefinedElement newParam1) {
 		DefinedElement oldParam1 = param1;
 		param1 = newParam1;
@@ -111,6 +113,7 @@ public class BinaryElementRelationLinkImpl extends RelationLinkImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinedElement getParam2() {
 		if (param2 != null && param2.eIsProxy()) {
 			InternalEObject oldParam2 = (InternalEObject)param2;
@@ -137,6 +140,7 @@ public class BinaryElementRelationLinkImpl extends RelationLinkImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam2(DefinedElement newParam2) {
 		DefinedElement oldParam2 = param2;
 		param2 = newParam2;

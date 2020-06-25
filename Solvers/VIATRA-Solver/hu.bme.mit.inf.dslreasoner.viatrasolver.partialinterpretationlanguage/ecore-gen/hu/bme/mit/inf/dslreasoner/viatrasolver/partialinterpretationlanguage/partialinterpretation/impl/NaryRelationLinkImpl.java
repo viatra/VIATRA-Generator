@@ -66,6 +66,7 @@ public class NaryRelationLinkImpl extends RelationLinkImpl implements NaryRelati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<NaryRelationLinkElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectContainmentEList<NaryRelationLinkElement>(NaryRelationLinkElement.class, this, PartialinterpretationPackage.NARY_RELATION_LINK__ELEMENTS);

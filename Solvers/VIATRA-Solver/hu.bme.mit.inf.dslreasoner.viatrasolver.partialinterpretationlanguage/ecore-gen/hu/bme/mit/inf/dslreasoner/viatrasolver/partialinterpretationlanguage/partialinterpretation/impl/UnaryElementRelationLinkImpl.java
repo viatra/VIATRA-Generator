@@ -62,6 +62,7 @@ public class UnaryElementRelationLinkImpl extends RelationLinkImpl implements Un
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinedElement getParam1() {
 		if (param1 != null && param1.eIsProxy()) {
 			InternalEObject oldParam1 = (InternalEObject)param1;
@@ -88,6 +89,7 @@ public class UnaryElementRelationLinkImpl extends RelationLinkImpl implements Un
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam1(DefinedElement newParam1) {
 		DefinedElement oldParam1 = param1;
 		param1 = newParam1;

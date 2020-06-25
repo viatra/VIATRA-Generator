@@ -7,10 +7,10 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import java.util.Map
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.BinaryTransitiveClosure
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PDisjunction
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PDisjunction
 
 class RelationDefinitionIndexer {
 	public val PatternGenerator base;
@@ -60,7 +60,7 @@ class RelationDefinitionIndexer {
 		]
 	}
 	
-	private def relationDefinitionName(RelationDefinition relation, Modality modality)
+	def String relationDefinitionName(RelationDefinition relation, Modality modality)
 		'''«modality.name.toLowerCase»InRelation_«base.canonizeName(relation.name)»'''
 	
 	def canonizeName(PVariable v) {
@@ -102,6 +102,4 @@ class RelationDefinitionIndexer {
 	def referPattern(PQuery p, String[] variables, Modality modality, boolean positive, boolean transitive) '''
 		«IF !positive»neg «ENDIF»find «IF transitive»twoParam_«ENDIF»«modality.name.toLowerCase»InRelation_pattern_«p.fullyQualifiedName.replace('.','_')»«IF transitive»+«ENDIF»(«IF !transitive»problem,interpretation,«ENDIF»«variables.join(',')»);
 	'''
-	
-	
 }

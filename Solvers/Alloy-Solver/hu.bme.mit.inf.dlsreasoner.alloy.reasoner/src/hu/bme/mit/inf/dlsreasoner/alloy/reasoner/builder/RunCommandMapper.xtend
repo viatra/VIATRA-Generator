@@ -9,7 +9,11 @@ import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSString
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.ALSTerm
 import hu.bme.mit.inf.dslreasoner.alloyLanguage.AlloyLanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import java.util.List
+
+import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class RunCommandMapper {
 	val extension AlloyLanguageFactory factory = AlloyLanguageFactory.eINSTANCE
@@ -89,21 +93,28 @@ class RunCommandMapper {
 		]
 		
 		for(upperLimit : config.typeScopes.maxNewElementsByType.entrySet) {
-			val limit = upperLimit.value
+			val type = upperLimit.key
+			val limit = upperLimit.value + getExistingCount(type)
 			if(limit != LogicSolverConfiguration::Unlimited) {
-				this.typeScopeMapping.addUpperMultiplicity(specification,upperLimit.key,limit,mapper,trace)
+				this.typeScopeMapping.addUpperMultiplicity(specification,type,limit,mapper,trace)
 			}
 		}
 		
 		for(lowerLimit : config.typeScopes.minNewElementsByType.entrySet) {
-			val limit = lowerLimit.value
+			val type = lowerLimit.key
+			val limit = lowerLimit.value + getExistingCount(type)
 			if(limit != 0) {
-				this.typeScopeMapping.addLowerMultiplicity(specification,lowerLimit.key,limit,mapper,trace)
+				this.typeScopeMapping.addLowerMultiplicity(specification,type,limit,mapper,trace)
 			}
 		}
 		
 		setIntegerScope(specification,config,specification.runCommand)
 		setStringScope(specification,config,specification.runCommand)
+	}
+	
+	private def getExistingCount(Type type) {
+		val existing = type.transitiveClosureStar[it.subtypes].filter(TypeDefinition).map[elements].flatten.toSet
+		existing.size
 	}
 	
 	protected def Boolean setStringScope(ALSDocument specification, AlloySolverConfiguration config, ALSRunCommand it) {

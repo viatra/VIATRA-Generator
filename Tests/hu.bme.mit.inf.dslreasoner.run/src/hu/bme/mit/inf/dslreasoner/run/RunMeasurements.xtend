@@ -25,10 +25,12 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.StateCoderStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -37,9 +39,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.junit.Test
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationSizePrinter
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
 
 enum UseSolver{Viatra, Smt, ViatraWithSmt, Alloy}
 enum Domain{FAM, Yakindu, FileSystem,Ecore}
@@ -129,7 +128,7 @@ class RunMeasurements {
 			val smtConfig = new SmtSolverConfiguration() => [
 				it.typeScopes.maxNewElements = size
 				it.typeScopes.minNewElements = size
-				it.solutionScope.numberOfRequiredSolution = number
+				it.solutionScope.numberOfRequiredSolutions = number
 				it.solverPath = '''"D:/Programs/Z3/4.3/z3.exe"'''
 			]
 			val solution = this.smtSolver.solve(
@@ -142,9 +141,8 @@ class RunMeasurements {
 			val alloyConfig = new AlloySolverConfiguration => [
 				it.typeScopes.maxNewElements = size
 				it.typeScopes.minNewElements = size
-				it.solutionScope.numberOfRequiredSolution = number
+				it.solutionScope.numberOfRequiredSolutions = number
 				it.typeScopes.maxNewIntegers = 0
-				it.writeToFile = true
 			]
 			val solution = this.alloyReasoner.solve(
 				problem,
@@ -157,13 +155,12 @@ class RunMeasurements {
 				it.runtimeLimit = 400
 				it.typeScopes.maxNewElements = size
 				it.typeScopes.minNewElements = size
-				it.solutionScope.numberOfRequiredSolution = number
-				it.existingQueries = vq.patterns.map[it.internalQueryRepresentation]
+				it.solutionScope.numberOfRequiredSolutions = number
 				it.nameNewElements = false
 				it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
 				it.searchSpaceConstraints.additionalGlobalConstraints += loader.additionalConstraints
 				it.stateCoderStrategy = StateCoderStrategy::Neighbourhood
-				it.debugCongiguration.partalInterpretationVisualisationFrequency = 100
+				it.debugConfiguration.partalInterpretationVisualisationFrequency = 100
 				//it.debugCongiguration.partialInterpretatioVisualiser =
 					//new GraphvizVisualisation
 					//new PartialInterpretationSizePrinter
@@ -267,7 +264,7 @@ class RunMeasurements {
 					val gml = partialInterpretation2GML.transform(representation)
 					r.workspace.writeText('''solution«representationNumber».gml''',gml)
 					if(representation.newElements.size <160) {
-						val visualiser = new GraphvizVisualisation
+						val visualiser = new GraphvizVisualiser
 						val visualisation = visualiser.visualiseConcretization(representation)
 						visualisation.writeToFile(r.workspace,'''solution«representationNumber»''')
 					}

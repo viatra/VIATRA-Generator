@@ -79,6 +79,7 @@ public class PartialComplexTypeInterpretationImpl extends PartialTypeInterpratat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PartialComplexTypeInterpretation> getSupertypeInterpretation() {
 		if (supertypeInterpretation == null) {
 			supertypeInterpretation = new EObjectResolvingEList<PartialComplexTypeInterpretation>(PartialComplexTypeInterpretation.class, this, PartialinterpretationPackage.PARTIAL_COMPLEX_TYPE_INTERPRETATION__SUPERTYPE_INTERPRETATION);
@@ -91,6 +92,7 @@ public class PartialComplexTypeInterpretationImpl extends PartialTypeInterpratat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeDeclaration getInterpretationOf() {
 		if (interpretationOf != null && interpretationOf.eIsProxy()) {
 			InternalEObject oldInterpretationOf = (InternalEObject)interpretationOf;
@@ -117,6 +119,7 @@ public class PartialComplexTypeInterpretationImpl extends PartialTypeInterpratat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInterpretationOf(TypeDeclaration newInterpretationOf) {
 		TypeDeclaration oldInterpretationOf = interpretationOf;
 		interpretationOf = newInterpretationOf;

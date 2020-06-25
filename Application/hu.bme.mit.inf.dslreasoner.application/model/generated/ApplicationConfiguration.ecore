@@ -95,6 +95,49 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//GraphPatternDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GraphPattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectiveSpecification" eSuperTypes="#//Objective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//ObjectiveEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectiveEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//ObjectiveFunction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OptimizationDirection">
+    <eLiterals name="MINIMIZE" literal="minimize"/>
+    <eLiterals name="MAXIMIZE" value="1" literal="maximize"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OptimizationEntry" eSuperTypes="#//ObjectiveEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//OptimizationDirection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComparisonOperator">
+    <eLiterals name="LESS" literal="&lt;"/>
+    <eLiterals name="GREATER" value="1" literal=">"/>
+    <eLiterals name="LESS_EQUALS" value="2" literal="&lt;="/>
+    <eLiterals name="GREATER_EQUALS" value="3" literal=">="/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThresholdEntry" eSuperTypes="#//ObjectiveEntry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//ComparisonOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectiveFunction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CostObjectiveFunction" eSuperTypes="#//ObjectiveFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//CostEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CostEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patternElement" eType="#//PatternElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectiveDeclaration" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" eType="#//ObjectiveSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectiveReference" eSuperTypes="#//Objective">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//ObjectiveDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Objective"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConfigSpecification" eSuperTypes="#//Config">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
         eType="#//ConfigEntry" containment="true"/>
@@ -207,6 +250,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="partialModel" eType="#//PartialModel"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" eType="#//GraphPattern"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectives" eType="#//Objective"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="#//Scope"
         containment="true"/>

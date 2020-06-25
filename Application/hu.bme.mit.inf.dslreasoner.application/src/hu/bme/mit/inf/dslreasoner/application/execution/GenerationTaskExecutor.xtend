@@ -2,8 +2,6 @@ package hu.bme.mit.inf.dslreasoner.application.execution
 
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask
-import hu.bme.mit.inf.dslreasoner.application.validation.MetamodelValidator
-import hu.bme.mit.inf.dslreasoner.application.validation.QueryAndMetamodelValidator
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
@@ -35,12 +33,10 @@ class GenerationTaskExecutor {
 	val scopeLoader = new ScopeLoader
 	val statisticsUtil = new StatisticSections2CSV
 	
-	val metamodelValidator = new MetamodelValidator
-	val queryAndMetamodelValidator = new QueryAndMetamodelValidator
-	
 	def executeGenerationTask(
 		GenerationTask task,
 		ScriptExecutor scriptExecutor,
+		ScriptConsole.Factory scriptConsoleFactory,
 		IProgressMonitor monitor)
 	{		
 		monitor.subTask('''Collecting all resources''')
@@ -62,7 +58,7 @@ class GenerationTaskExecutor {
 		val memoryLimit = scriptExecutor.getMemoryLimit(configSpecification)
 		
 		// 2. create console
-		val console = new ScriptConsole(true,false,
+		val console = scriptConsoleFactory.createScriptConsole(false,
 			if(messageFile!==null) URI.createURI(messageFile.path) else null,
 			if(debugFolder!==null) URI.createURI('''«debugFolder.path»/errors.txt''') else null,
 			if(statisticsFile!==null) URI.createURI(statisticsFile.path) else null
@@ -132,11 +128,12 @@ class GenerationTaskExecutor {
 			// 5. create a solver and a configuration
 			// 5.1 initialize
 			val solver = solverLoader.loadSolver(task.solver,configurationMap)
-			
-			val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,console)
+			val objectiveSpecification = scriptExecutor.getObjectiveSpecification(task.objectives)
+			val objectiveEntries = objectiveSpecification?.entries ?: emptyList
+			val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,objectiveEntries,console)
 			// 5.2 set values that defined directly 
 			solverConfig.solutionScope = new SolutionScope => [
-				it.numberOfRequiredSolution = if(task.numberSpecified) {
+				it.numberOfRequiredSolutions = if(task.numberSpecified) {
 					task.number
 				} else {
 					1

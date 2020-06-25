@@ -67,6 +67,7 @@ public class InformationLinkImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalOutput getFrom() {
 		if (eContainerFeatureID() != FunctionalarchitecturePackage.INFORMATION_LINK__FROM) return null;
 		return (FunctionalOutput)eInternalContainer();
@@ -87,6 +88,7 @@ public class InformationLinkImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFrom(FunctionalOutput newFrom) {
 		if (newFrom != eInternalContainer() || (eContainerFeatureID() != FunctionalarchitecturePackage.INFORMATION_LINK__FROM && newFrom != null)) {
 			if (EcoreUtil.isAncestor(this, newFrom))
@@ -108,6 +110,7 @@ public class InformationLinkImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalInput getTo() {
 		if (to != null && to.eIsProxy()) {
 			InternalEObject oldTo = (InternalEObject)to;
@@ -149,6 +152,7 @@ public class InformationLinkImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTo(FunctionalInput newTo) {
 		if (newTo != to) {
 			NotificationChain msgs = null;

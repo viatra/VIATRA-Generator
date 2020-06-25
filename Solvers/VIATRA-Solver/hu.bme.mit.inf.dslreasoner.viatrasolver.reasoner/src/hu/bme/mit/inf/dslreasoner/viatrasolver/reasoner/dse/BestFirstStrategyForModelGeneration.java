@@ -9,34 +9,25 @@
  *******************************************************************************/
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.viatra.dse.api.SolutionTrajectory;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
 import org.eclipse.viatra.dse.base.ThreadContext;
 import org.eclipse.viatra.dse.objectives.Fitness;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
+import org.eclipse.viatra.dse.solutionstore.ISolutionFoundHandler;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
-import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine;
-import org.eclipse.viatra.query.runtime.api.IPatternMatch;
-import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
-import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
@@ -44,7 +35,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
-import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericProblemSolver;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
@@ -83,14 +73,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	// Running
 	private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
 	private SolutionStore solutionStore;
-	private SolutionStoreWithCopy solutionStoreWithCopy;
-	private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
 	//private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	public ActivationSelector activationSelector = new EvenActivationSelector(random);
-	public NumericSolver numericSolver = null;
+	public ViatraReasonerSolutionSaver solutionSaver;
+	public NumericSolver numericSolver;
 	// Statistics
 	private int numberOfStatecoderFail = 0;
 	private int numberOfPrintedModel = 0;
@@ -103,19 +92,17 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public BestFirstStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
 			ViatraReasonerConfiguration configuration,
-			ModelGenerationMethod method)
-	{
+			ModelGenerationMethod method,
+			ViatraReasonerSolutionSaver solutionSaver,
+			NumericSolver numericSolver) {
 		this.workspace = workspace;
 		this.configuration = configuration;
 		this.method = method;
+		this.solutionSaver = solutionSaver;
+		this.numericSolver = numericSolver;
+		//logger.setLevel(Level.DEBUG);
 	}
 	
-	public SolutionStoreWithCopy getSolutionStoreWithCopy() {
-		return solutionStoreWithCopy;
-	}
-	public SolutionStoreWithDiversityDescriptor getSolutionStoreWithDiversityDescriptor() {
-		return solutionStoreWithDiversityDescriptor;
-	}
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
 	}
@@ -125,22 +112,35 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	public long getBacktrackingTime() {
 		return context.getDesignSpaceManager().getBacktrackingTime();
 	}
-	//LinkedList<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
+
 	@Override
 	public void initStrategy(ThreadContext context) {
 		this.context = context;
 		this.solutionStore = context.getGlobalContext().getSolutionStore();
+		solutionStore.registerSolutionFoundHandler(new ISolutionFoundHandler() {
+			
+			@Override
+			public void solutionTriedToSave(ThreadContext context, SolutionTrajectory trajectory) {
+				// Ignore.
+			}
+			
+			@Override
+			public void solutionFound(ThreadContext context, SolutionTrajectory trajectory) {
+				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolutions);
+				saveTimes();
+				logger.debug("Found a solution.");
+			}
+		});
+		numericSolver.init(context);
 		
 //		ViatraQueryEngine engine = context.getQueryEngine();
-//		// TODO: visualisation
 //		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
 //		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
 //			//System.out.println(p.getSimpleName());
 //			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
 //			matchers.add(matcher);
 //		}
-		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
-		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
+		
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		this.comparator = new Comparator<TrajectoryWithFitness>() {
 			@Override
@@ -148,8 +148,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				return objectiveComparatorHelper.compare(o2.fitness, o1.fitness);
 			}
 		};
-		
-		this.numericSolver = new NumericSolver(context, method, this.configuration.runIntermediateNumericalConsistencyChecks, false);
 
 		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 	}
@@ -176,14 +174,13 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			return;
 		}
 		
-		final Fitness firstFittness = calculateFitness();
-		checkForSolution(firstFittness);
+		final Fitness firstFitness = calculateFitness();
+		checkForSolution(firstFitness);
 		
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		final Object[] firstTrajectory = context.getTrajectory().toArray(new Object[0]);
-		TrajectoryWithFitness currentTrajectoryWithFittness = new TrajectoryWithFitness(firstTrajectory, firstFittness);
-		trajectoiresToExplore.add(currentTrajectoryWithFittness);
-		
+		TrajectoryWithFitness currentTrajectoryWithFitness = new TrajectoryWithFitness(firstTrajectory, firstFitness);
+		trajectoiresToExplore.add(currentTrajectoryWithFitness);
 		//if(configuration)
 		visualiseCurrentState();
 //		for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
@@ -197,22 +194,22 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		
 		mainLoop: while (!isInterrupted && !configuration.progressMonitor.isCancelled()) {
 
-			if (currentTrajectoryWithFittness == null) {
+			if (currentTrajectoryWithFitness == null) {
 				if (trajectoiresToExplore.isEmpty()) {
 					logger.debug("State space is fully traversed.");
 					return;
 				} else {
-					currentTrajectoryWithFittness = selectState();
+					currentTrajectoryWithFitness = selectState();
 					if (logger.isDebugEnabled()) {
 						logger.debug("Current trajectory: " + Arrays.toString(context.getTrajectory().toArray()));
-						logger.debug("New trajectory is chosen: " + currentTrajectoryWithFittness);
+						logger.debug("New trajectory is chosen: " + currentTrajectoryWithFitness);
 					}
-					context.getDesignSpaceManager().executeTrajectoryWithMinimalBacktrackWithoutStateCoding(currentTrajectoryWithFittness.trajectory);
+					context.getDesignSpaceManager().executeTrajectoryWithMinimalBacktrackWithoutStateCoding(currentTrajectoryWithFitness.trajectory);
 				}
 			}
 			
 //			visualiseCurrentState();
-//			boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
+//			boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithfitness);
 //			if(consistencyCheckResult == true) {
 //				continue mainLoop;
 //			}
@@ -224,10 +221,11 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				final Object nextActivation = iterator.next();
 //				if (!iterator.hasNext()) {
 //					logger.debug("Last untraversed activation of the state.");
-//					trajectoiresToExplore.remove(currentTrajectoryWithFittness);
+//					trajectoiresToExplore.remove(currentTrajectoryWithfitness);
 //				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
+				method.getStatistics().incrementDecisionCount();
 
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
@@ -238,7 +236,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //					
 //				}
 				
-				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
+				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFitness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 
 				if (context.isCurrentStateAlreadyTraversed()) {
@@ -251,7 +249,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 					logger.debug("Numeric constraints are not satisifed.");
 					context.backtrack();
 				} else {
-					final Fitness nextFitness = calculateFitness();
+					final Fitness nextFitness = context.calculateFitness();
 					checkForSolution(nextFitness);
 					if (context.getDepth() > configuration.searchSpaceConstraints.maxDepth) {
 						logger.debug("Reached max depth.");
@@ -259,31 +257,31 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 						continue;
 					}
 
-					TrajectoryWithFitness nextTrajectoryWithFittness = new TrajectoryWithFitness(
+					TrajectoryWithFitness nextTrajectoryWithfitness = new TrajectoryWithFitness(
 							context.getTrajectory().toArray(), nextFitness);
-					trajectoiresToExplore.add(nextTrajectoryWithFittness);
+					trajectoiresToExplore.add(nextTrajectoryWithfitness);
 
-					int compare = objectiveComparatorHelper.compare(currentTrajectoryWithFittness.fitness,
-							nextTrajectoryWithFittness.fitness);
+					int compare = objectiveComparatorHelper.compare(currentTrajectoryWithFitness.fitness,
+							nextTrajectoryWithfitness.fitness);
 					if (compare < 0) {
 						logger.debug("Better fitness, moving on: " + nextFitness);
-						currentTrajectoryWithFittness = nextTrajectoryWithFittness;
+						currentTrajectoryWithFitness = nextTrajectoryWithfitness;
 						continue mainLoop;
 					} else if (compare == 0) {
 						logger.debug("Equally good fitness, moving on: " + nextFitness);
-						currentTrajectoryWithFittness = nextTrajectoryWithFittness;
+						currentTrajectoryWithFitness = nextTrajectoryWithfitness;
 						continue mainLoop;
 					} else {
 						logger.debug("Worse fitness.");
-						currentTrajectoryWithFittness = null;
+						currentTrajectoryWithFitness = null;
 						continue mainLoop;
 					}
 				}
 			}
 
 			logger.debug("State is fully traversed.");
-			trajectoiresToExplore.remove(currentTrajectoryWithFittness);
-			currentTrajectoryWithFittness = null;
+			trajectoiresToExplore.remove(currentTrajectoryWithFitness);
+			currentTrajectoryWithFitness = null;
 
 		}
 		logger.info("Interrupted.");
@@ -308,6 +306,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		try {
 			activationIds = this.activationSelector.randomizeActivationIDs(context.getUntraversedActivationIds());
 		} catch (NullPointerException e) {
+//			logger.warn("Unexpected state code: " + context.getDesignSpaceManager().getCurrentState());
 			numberOfStatecoderFail++;
 			activationIds = Collections.emptyList();
 		}
@@ -315,27 +314,16 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	}
 
 	private void checkForSolution(final Fitness fittness) {
-		if (fittness.isSatisifiesHardObjectives()) {
-			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				if(numericSolver.currentSatisfiable()) {
-					Map<EObject, EObject> trace = solutionStoreWithCopy.newSolution(context);
-					numericSolver.fillSolutionCopy(trace);
-					solutionStoreWithDiversityDescriptor.newSolution(context);
-					solutionStore.newSolution(context);
-					configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
-					saveTimes();
-					logger.debug("Found a solution.");
-				}
-			}
-		}
+		solutionStore.newSolution(context);
 	}
+	
 	public List<String> times = new LinkedList<String>();
 	private void saveTimes() {
-		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
+		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder<?, ?>)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
 		long forwardTime = context.getDesignSpaceManager().getForwardTime()/1000000;
 		long backtrackingTime = context.getDesignSpaceManager().getBacktrackingTime()/1000000;
-		long solutionCopy = solutionStoreWithCopy.getSumRuntime()/1000000;
 		long activationSelection = this.activationSelector.getRuntime()/1000000;
+		long solutionCopierTime = this.solutionSaver.getTotalCopierRuntime()/1000000;
 		long numericalSolverSumTime = this.numericSolver.getRuntime()/1000000;
 		long numericalSolverProblemForming = this.numericSolver.getSolverSolvingProblem()/1000000;
 		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
@@ -347,8 +335,8 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			"|Backtrackingtime:"+backtrackingTime+
 			"|GlobalConstraintEvaluationTime:"+(globalConstraintEvaluationTime/1000000)+
 			"|FitnessCalculationTime:"+(fitnessCalculationTime/1000000)+
-			"|SolutionCopyTime:"+solutionCopy+
 			"|ActivationSelectionTime:"+activationSelection+
+			"|SolutionCopyTime:"+solutionCopierTime+
 			"|NumericalSolverSumTime:"+numericalSolverSumTime+
 			"|NumericalSolverProblemFormingTime:"+numericalSolverProblemForming+
 			"|NumericalSolverSolvingTime:"+numericalSolverSolving+
@@ -385,13 +373,16 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	}
 
 	public void visualiseCurrentState() {
-		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
+		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugConfiguration.partialInterpretatioVisualiser;
 		if(partialInterpretatioVisualiser != null && this.configuration.documentationLevel == DocumentationLevel.FULL && workspace != null) {
 			PartialInterpretation p = (PartialInterpretation) (context.getModel());
 			int id = ++numberOfPrintedModel;
-			if (id % configuration.debugCongiguration.partalInterpretationVisualisationFrequency == 0) {
+			if (id % configuration.debugConfiguration.partalInterpretationVisualisationFrequency == 0) {
 				PartialInterpretationVisualisation visualisation = partialInterpretatioVisualiser.visualiseConcretization(p);
-				visualisation.writeToFile(workspace, String.format("state%09d.png", id));
+				logger.debug("Visualizing state: " + id + " (" + context.getDesignSpaceManager().getCurrentState() + ")");
+				String name = String.format("state%09d", id);
+				visualisation.writeToFile(workspace, name + ".png");
+				workspace.writeModel((EObject) context.getModel(), name + ".xmi");
 			}
 		}
 	}

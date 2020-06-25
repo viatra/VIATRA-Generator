@@ -62,7 +62,7 @@ class AlloySolver extends LogicReasoner{
 		val result2 = handler.callSolver(alloyProblem,workspace,alloyConfig,alloyCode)
 		alloyConfig.progressMonitor.workedSearchFinished
 		
-		val logicResult = backwardMapper.transformOutput(problem,configuration.solutionScope.numberOfRequiredSolution,result2,forwardTrace,transformationTime)
+		val logicResult = backwardMapper.transformOutput(problem,configuration.solutionScope.numberOfRequiredSolutions,result2,forwardTrace,transformationTime)
 		alloyConfig.progressMonitor.workedBackwardTransformationFinished
 		//val solverFinish = System.currentTimeMillis-solverStart
 		// Finish: Solving Alloy problem

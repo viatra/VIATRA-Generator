@@ -9,10 +9,7 @@ Bundle-Localization: plugin
 Export-Package: hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm,
  hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.impl,
  hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.util,
- hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu,
- hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.mutated,
- hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.mutated.util,
- hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.util
+ hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu
 Require-Bundle: org.eclipse.viatra.query.runtime,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,

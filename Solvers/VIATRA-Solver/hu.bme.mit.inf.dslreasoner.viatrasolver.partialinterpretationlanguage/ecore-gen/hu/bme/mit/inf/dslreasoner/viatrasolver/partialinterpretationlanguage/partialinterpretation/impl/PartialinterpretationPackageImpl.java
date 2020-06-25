@@ -227,7 +227,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link PartialinterpretationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -241,7 +241,8 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		if (isInited) return (PartialinterpretationPackage)EPackage.Registry.INSTANCE.getEPackage(PartialinterpretationPackage.eNS_URI);
 
 		// Obtain or create and register package
-		PartialinterpretationPackageImpl thePartialinterpretationPackage = (PartialinterpretationPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PartialinterpretationPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PartialinterpretationPackageImpl());
+		Object registeredPartialinterpretationPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		PartialinterpretationPackageImpl thePartialinterpretationPackage = registeredPartialinterpretationPackage instanceof PartialinterpretationPackageImpl ? (PartialinterpretationPackageImpl)registeredPartialinterpretationPackage : new PartialinterpretationPackageImpl();
 
 		isInited = true;
 
@@ -258,7 +259,6 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		// Mark meta-data to indicate it can't be changed
 		thePartialinterpretationPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(PartialinterpretationPackage.eNS_URI, thePartialinterpretationPackage);
 		return thePartialinterpretationPackage;
@@ -269,6 +269,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialInterpretation() {
 		return partialInterpretationEClass;
 	}
@@ -278,6 +279,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_Problem() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(0);
 	}
@@ -287,6 +289,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_Partialconstantinterpretation() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(1);
 	}
@@ -296,6 +299,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_Partialrelationinterpretation() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(2);
 	}
@@ -305,6 +309,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_Partialfunctioninterpretation() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(3);
 	}
@@ -314,6 +319,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_NewElements() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(4);
 	}
@@ -323,6 +329,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_Partialtypeinterpratation() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(5);
 	}
@@ -332,6 +339,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_OpenWorldElements() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(6);
 	}
@@ -341,6 +349,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_ProblemConainer() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(7);
 	}
@@ -350,6 +359,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialInterpretation_Scopes() {
 		return (EReference)partialInterpretationEClass.getEStructuralFeatures().get(8);
 	}
@@ -359,6 +369,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPartialInterpretation_MinNewElements() {
 		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(9);
 	}
@@ -368,6 +379,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPartialInterpretation_MaxNewElements() {
 		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(10);
 	}
@@ -377,6 +389,17 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getPartialInterpretation_MinNewElementsHeuristic() {
+		return (EAttribute)partialInterpretationEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPartialConstantInterpretation() {
 		return partialConstantInterpretationEClass;
 	}
@@ -386,6 +409,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialConstantInterpretation_InterpretationOf() {
 		return (EReference)partialConstantInterpretationEClass.getEStructuralFeatures().get(0);
 	}
@@ -395,6 +419,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialRelationInterpretation() {
 		return partialRelationInterpretationEClass;
 	}
@@ -404,6 +429,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialRelationInterpretation_InterpretationOf() {
 		return (EReference)partialRelationInterpretationEClass.getEStructuralFeatures().get(0);
 	}
@@ -413,6 +439,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialRelationInterpretation_Relationlinks() {
 		return (EReference)partialRelationInterpretationEClass.getEStructuralFeatures().get(1);
 	}
@@ -422,6 +449,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialRelationInterpretation_Param1() {
 		return (EReference)partialRelationInterpretationEClass.getEStructuralFeatures().get(2);
 	}
@@ -431,6 +459,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialRelationInterpretation_Param2() {
 		return (EReference)partialRelationInterpretationEClass.getEStructuralFeatures().get(3);
 	}
@@ -440,6 +469,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialFunctionInterpretation() {
 		return partialFunctionInterpretationEClass;
 	}
@@ -449,6 +479,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialFunctionInterpretation_InterpretationOf() {
 		return (EReference)partialFunctionInterpretationEClass.getEStructuralFeatures().get(0);
 	}
@@ -458,6 +489,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialTypeInterpratation() {
 		return partialTypeInterpratationEClass;
 	}
@@ -467,6 +499,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialTypeInterpratation_Elements() {
 		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(0);
 	}
@@ -476,6 +509,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialTypeInterpratation_Scopes() {
 		return (EReference)partialTypeInterpratationEClass.getEStructuralFeatures().get(1);
 	}
@@ -485,6 +519,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationLink() {
 		return relationLinkEClass;
 	}
@@ -494,6 +529,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUnaryElementRelationLink() {
 		return unaryElementRelationLinkEClass;
 	}
@@ -503,6 +539,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getUnaryElementRelationLink_Param1() {
 		return (EReference)unaryElementRelationLinkEClass.getEStructuralFeatures().get(0);
 	}
@@ -512,6 +549,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBinaryElementRelationLink() {
 		return binaryElementRelationLinkEClass;
 	}
@@ -521,6 +559,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBinaryElementRelationLink_Param1() {
 		return (EReference)binaryElementRelationLinkEClass.getEStructuralFeatures().get(0);
 	}
@@ -530,6 +569,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBinaryElementRelationLink_Param2() {
 		return (EReference)binaryElementRelationLinkEClass.getEStructuralFeatures().get(1);
 	}
@@ -539,6 +579,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNaryRelationLink() {
 		return naryRelationLinkEClass;
 	}
@@ -548,6 +589,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNaryRelationLink_Elements() {
 		return (EReference)naryRelationLinkEClass.getEStructuralFeatures().get(0);
 	}
@@ -557,6 +599,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNaryRelationLinkElement() {
 		return naryRelationLinkElementEClass;
 	}
@@ -566,6 +609,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getNaryRelationLinkElement_Index() {
 		return (EAttribute)naryRelationLinkElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -575,6 +619,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNaryRelationLinkElement_Param() {
 		return (EReference)naryRelationLinkElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -584,6 +629,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrimitiveElement() {
 		return primitiveElementEClass;
 	}
@@ -593,6 +639,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPrimitiveElement_ValueSet() {
 		return (EAttribute)primitiveElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -602,6 +649,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBooleanElement() {
 		return booleanElementEClass;
 	}
@@ -611,6 +659,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getBooleanElement_Value() {
 		return (EAttribute)booleanElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -620,6 +669,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getIntegerElement() {
 		return integerElementEClass;
 	}
@@ -629,6 +679,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getIntegerElement_Value() {
 		return (EAttribute)integerElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -638,6 +689,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRealElement() {
 		return realElementEClass;
 	}
@@ -647,6 +699,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRealElement_Value() {
 		return (EAttribute)realElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -656,6 +709,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStringElement() {
 		return stringElementEClass;
 	}
@@ -665,6 +719,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringElement_Value() {
 		return (EAttribute)stringElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -674,6 +729,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getScope() {
 		return scopeEClass;
 	}
@@ -683,6 +739,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getScope_MinNewElements() {
 		return (EAttribute)scopeEClass.getEStructuralFeatures().get(0);
 	}
@@ -692,6 +749,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getScope_MaxNewElements() {
 		return (EAttribute)scopeEClass.getEStructuralFeatures().get(1);
 	}
@@ -701,6 +759,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getScope_TargetTypeInterpretation() {
 		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
 	}
@@ -710,6 +769,17 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getScope_MinNewElementsHeuristic() {
+		return (EAttribute)scopeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getPartialPrimitiveInterpretation() {
 		return partialPrimitiveInterpretationEClass;
 	}
@@ -719,6 +789,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialBooleanInterpretation() {
 		return partialBooleanInterpretationEClass;
 	}
@@ -728,6 +799,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialIntegerInterpretation() {
 		return partialIntegerInterpretationEClass;
 	}
@@ -737,6 +809,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialRealInterpretation() {
 		return partialRealInterpretationEClass;
 	}
@@ -746,6 +819,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialStringInterpretation() {
 		return partialStringInterpretationEClass;
 	}
@@ -755,6 +829,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPartialComplexTypeInterpretation() {
 		return partialComplexTypeInterpretationEClass;
 	}
@@ -764,6 +839,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialComplexTypeInterpretation_SupertypeInterpretation() {
 		return (EReference)partialComplexTypeInterpretationEClass.getEStructuralFeatures().get(0);
 	}
@@ -773,6 +849,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPartialComplexTypeInterpretation_InterpretationOf() {
 		return (EReference)partialComplexTypeInterpretationEClass.getEStructuralFeatures().get(1);
 	}
@@ -782,6 +859,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialinterpretationFactory getPartialinterpretationFactory() {
 		return (PartialinterpretationFactory)getEFactoryInstance();
 	}
@@ -817,6 +895,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		createEReference(partialInterpretationEClass, PARTIAL_INTERPRETATION__SCOPES);
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS);
 		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS);
+		createEAttribute(partialInterpretationEClass, PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC);
 
 		partialConstantInterpretationEClass = createEClass(PARTIAL_CONSTANT_INTERPRETATION);
 		createEReference(partialConstantInterpretationEClass, PARTIAL_CONSTANT_INTERPRETATION__INTERPRETATION_OF);
@@ -869,6 +948,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		createEAttribute(scopeEClass, SCOPE__MIN_NEW_ELEMENTS);
 		createEAttribute(scopeEClass, SCOPE__MAX_NEW_ELEMENTS);
 		createEReference(scopeEClass, SCOPE__TARGET_TYPE_INTERPRETATION);
+		createEAttribute(scopeEClass, SCOPE__MIN_NEW_ELEMENTS_HEURISTIC);
 
 		partialPrimitiveInterpretationEClass = createEClass(PARTIAL_PRIMITIVE_INTERPRETATION);
 
@@ -945,6 +1025,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		initEReference(getPartialInterpretation_Scopes(), this.getScope(), null, "scopes", null, 0, -1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPartialInterpretation_MinNewElements(), ecorePackage.getEInt(), "minNewElements", "0", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPartialInterpretation_MaxNewElements(), ecorePackage.getEInt(), "maxNewElements", "-1", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPartialInterpretation_MinNewElementsHeuristic(), ecorePackage.getEInt(), "minNewElementsHeuristic", "0", 1, 1, PartialInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialConstantInterpretationEClass, PartialConstantInterpretation.class, "PartialConstantInterpretation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPartialConstantInterpretation_InterpretationOf(), theLogiclanguagePackage.getConstantDeclaration(), null, "interpretationOf", null, 1, 1, PartialConstantInterpretation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -997,6 +1078,7 @@ public class PartialinterpretationPackageImpl extends EPackageImpl implements Pa
 		initEAttribute(getScope_MinNewElements(), ecorePackage.getEInt(), "minNewElements", "0", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getScope_MaxNewElements(), ecorePackage.getEInt(), "maxNewElements", "-1", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_TargetTypeInterpretation(), this.getPartialTypeInterpratation(), this.getPartialTypeInterpratation_Scopes(), "targetTypeInterpretation", null, 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScope_MinNewElementsHeuristic(), ecorePackage.getEInt(), "minNewElementsHeuristic", "0", 1, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(partialPrimitiveInterpretationEClass, PartialPrimitiveInterpretation.class, "PartialPrimitiveInterpretation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

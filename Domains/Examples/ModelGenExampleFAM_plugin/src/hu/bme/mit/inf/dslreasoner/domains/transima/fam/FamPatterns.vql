@@ -10,7 +10,7 @@ pattern terminatorAndInformation(T : FAMTerminator, I : InformationLink) = {
 	InformationLink.to(I,In);
 	FunctionalInput.terminator(In,T);
 }
-
+/*
 @QueryBasedFeature 
 pattern type(This : Function, Target : FunctionType) = {
 	find rootElements(_Model, This);

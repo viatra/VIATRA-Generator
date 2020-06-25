@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getScopes <em>Scopes</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMinNewElements <em>Min New Elements</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMaxNewElements <em>Max New Elements</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMinNewElementsHeuristic <em>Min New Elements Heuristic</em>}</li>
  * </ul>
  *
  * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation()
@@ -254,5 +255,28 @@ public interface PartialInterpretation extends EObject {
 	 * @generated
 	 */
 	void setMaxNewElements(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Min New Elements Heuristic</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Min New Elements Heuristic</em>' attribute.
+	 * @see #setMinNewElementsHeuristic(int)
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getPartialInterpretation_MinNewElementsHeuristic()
+	 * @model default="0" required="true"
+	 * @generated
+	 */
+	int getMinNewElementsHeuristic();
+
+	/**
+	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMinNewElementsHeuristic <em>Min New Elements Heuristic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Min New Elements Heuristic</em>' attribute.
+	 * @see #getMinNewElementsHeuristic()
+	 * @generated
+	 */
+	void setMinNewElementsHeuristic(int value);
 
 } // PartialInterpretation

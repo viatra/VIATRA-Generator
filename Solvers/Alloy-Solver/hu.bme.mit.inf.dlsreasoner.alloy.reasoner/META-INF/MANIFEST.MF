@@ -20,7 +20,8 @@ Require-Bundle: com.google.guava,
  org.eclipse.viatra.query.runtime.base.itc;bundle-version="1.3.0",
  hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
  org.eclipse.viatra.query.runtime;bundle-version="2.0.0"
-Import-Package: org.apache.log4j;version="1.2.15"
-Automatic-Module-Name: hu.bme.mit.inf.dlsreasoner.alloy.reasoner
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-NativeCode: libminisat.so;osname=Linux;processor=x86_64
+Automatic-Module-Name: hu.bme.mit.inf.dlsreasoner.alloy.reasoner
+Import-Package: org.apache.log4j;version="1.2.15"

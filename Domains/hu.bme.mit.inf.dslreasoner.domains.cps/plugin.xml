@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated cps -->
+    <package class="hu.bme.mit.inf.dslreasoner.domains.cps.CpsPackage" genModel="model/cps.genmodel" uri="http://www.example.org/cps"/>
+  </extension>
+  <extension id="hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsQueries" id="hu.bme.mit.inf.dslreasoner.domains.cps.queries.CpsQueries">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.resourceRequirement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.allocationWithoutResourceRequirement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.notEnoughAvailableMemory"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.notEnoughAvailableHdd"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.instanceDoesNotSatisfyRequirement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.requirementNotSatisfied"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.redundantInstancesOnSameHost"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.averageFreeMemoryMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.averageFreeHddMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.costMetric"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.cpsCost"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.allocate"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.unallocateAppInstance"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.createHostInstance"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.removeHostInstance"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.cps.queries.guidanceObjective"/>
+    </group>
+  </extension>
+</plugin>

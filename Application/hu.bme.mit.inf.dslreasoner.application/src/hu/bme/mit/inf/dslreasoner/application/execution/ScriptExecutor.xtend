@@ -14,6 +14,8 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GraphPatt
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MemoryEntry
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelReference
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.MetamodelSpecification
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectiveReference
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ObjectiveSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelReference
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PartialModelSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.PatternSpecification
@@ -29,14 +31,18 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Status
 import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
+@FinalFieldsConstructor
 class ScriptExecutor {
 	val parser = new ApplicationConfigurationParser
+	
+	val ScriptConsole.Factory scriptConsoleFactory
 	
 	/**
 	 * Executes a script
 	 */
-	public def executeScript(URI uri) {
+	def executeScript(URI uri) {
 		val job = new Job('''Model Generation: «uri.lastSegment»''') {
 			override protected run(IProgressMonitor monitor) {
 				try{
@@ -53,10 +59,10 @@ class ScriptExecutor {
 		job.schedule();
 	}
 	
-	public def executeScript(ConfigurationScript script, IProgressMonitor monitor) {
+	def executeScript(ConfigurationScript script, IProgressMonitor monitor) {
 		script.activateAllEPackageReferences
 		val tasks = script.commands.filter(Task)
-		val intermediateScriptConsole = new ScriptConsole(true,false,null,null,null)
+		val intermediateScriptConsole = scriptConsoleFactory.createScriptConsole(false, null, null, null)
 		
 		for(taskIndex : 0..<tasks.size) {
 			if(taskIndex>0) {
@@ -94,12 +100,12 @@ class ScriptExecutor {
 //		}
 	}
 	
-	def public dispatch execute(GenerationTask task, IProgressMonitor monitor) {
+	def dispatch void execute(GenerationTask task, IProgressMonitor monitor) {
 		val generationTaskExecutor = new GenerationTaskExecutor
-		generationTaskExecutor.executeGenerationTask(task,this,monitor)
+		generationTaskExecutor.executeGenerationTask(task,this,scriptConsoleFactory,monitor)
 	}
 	
-	def public dispatch execute(Task task, IProgressMonitor monitor) {
+	def dispatch void execute(Task task, IProgressMonitor monitor) {
 		throw new IllegalArgumentException('''Unsupported task type: «task.class.simpleName»!''')
 	}
 	
@@ -174,6 +180,16 @@ class ScriptExecutor {
 		null
 	}
 	
+	def dispatch getObjectiveSpecification(ObjectiveSpecification config) {
+		config
+	}
+	def dispatch getObjectiveSpecification(ObjectiveReference config) {
+		config.referred.specification
+	}
+	def dispatch getObjectiveSpecification(Void config) {
+		null
+	}
+	
 	def dispatch getConfiguration(ConfigSpecification config) {
 		config
 	}
@@ -238,6 +254,7 @@ class ScriptExecutor {
 			}
 		}
 	}
+
 	static val boolean measuring = true
 	static def restForMeasurements(ScriptConsole console) {
 		if(measuring) {
@@ -249,3 +266,4 @@ class ScriptExecutor {
 		}
 	}
 }
+

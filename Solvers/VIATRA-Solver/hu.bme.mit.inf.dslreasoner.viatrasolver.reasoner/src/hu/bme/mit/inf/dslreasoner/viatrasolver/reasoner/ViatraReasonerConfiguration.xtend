@@ -6,19 +6,28 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorConstraints
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold
 import java.util.LinkedList
 import java.util.List
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 
-public enum StateCoderStrategy {
-	Neighbourhood, NeighbourhoodWithEquivalence, IDBased, DefinedByDiversity
+enum StateCoderStrategy {
+	Neighbourhood,
+	PairwiseNeighbourhood,
+	NeighbourhoodWithEquivalence,
+	IDBased,
+	DefinedByDiversity
 }
 
-class ViatraReasonerConfiguration extends LogicSolverConfiguration{
-	//public var Iterable<PQuery> existingQueries
-	
+class ViatraReasonerConfiguration extends LogicSolverConfiguration {
+	// public var Iterable<PQuery> existingQueries
 	public var nameNewElements = false
 	public var StateCoderStrategy stateCoderStrategy = StateCoderStrategy.Neighbourhood
 	public var TypeInferenceMethod typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
@@ -26,7 +35,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	 * Once per 1/randomBacktrackChance the search selects a random state.
 	 */
 	public var int randomBacktrackChance = 20;
-	
+
 	/**
 	 * Describes the required diversity between the solutions.
 	 * Null means that the solutions have to have different state codes only.
@@ -40,7 +49,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	/**
 	 * Configuration for debugging support.
 	 */
-	public var DebugConfiguration debugCongiguration = new DebugConfiguration
+	public var DebugConfiguration debugConfiguration = new DebugConfiguration
 	/**
 	 * Configuration for cutting search space.
 	 */
@@ -54,10 +63,15 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
 	
-	public var calculateObjectCreationCosts = false
+	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
+		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
+	
+	public var List<LinearTypeConstraintHint> hints = newArrayList
+
+	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
 }
 
-public class DiversityDescriptor {
+class DiversityDescriptor {
 	public var ensureDiversity = false
 	public static val FixPointRange = -1
 	public var int range = FixPointRange
@@ -67,20 +81,31 @@ public class DiversityDescriptor {
 	public var Set<RelationDeclaration> relevantRelations = null
 }
 
-public class DebugConfiguration {
-	public var logging = false
-	public var PartialInterpretationVisualiser partialInterpretatioVisualiser = null;
+class DebugConfiguration {
+	public var PartialInterpretationVisualiser partialInterpretatioVisualiser = null
 	public var partalInterpretationVisualisationFrequency = 1
 }
 
-public class InternalConsistencyCheckerConfiguration {
+class InternalConsistencyCheckerConfiguration {
 	public var LogicReasoner internalIncosnsitencyDetector = null
 	public var LogicSolverConfiguration internalInconsistencDetectorConfiguration = null
 	public var incternalConsistencyCheckingFrequency = 1
 }
 
-public class SearchSpaceConstraint {
+class SearchSpaceConstraint {
 	public static val UNLIMITED_MAXDEPTH = Integer.MAX_VALUE
 	public var int maxDepth = UNLIMITED_MAXDEPTH
 	public var List<Function1<ModelGenerationMethod, ModelGenerationMethodBasedGlobalConstraint>> additionalGlobalConstraints = new LinkedList
+}
+
+class CostObjectiveConfiguration {
+	public var List<CostObjectiveElementConfiguration> elements = newArrayList
+	public var ObjectiveKind kind
+	public var ObjectiveThreshold threshold
+	public var boolean findExtremum
+}
+
+class CostObjectiveElementConfiguration {
+	public var String patternQualifiedName
+	public var int weight
 }

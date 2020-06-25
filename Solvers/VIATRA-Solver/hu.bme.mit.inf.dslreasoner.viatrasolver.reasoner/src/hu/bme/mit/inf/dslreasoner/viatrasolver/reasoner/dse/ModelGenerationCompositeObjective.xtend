@@ -1,34 +1,20 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
+import com.google.common.collect.ImmutableList
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.IThreeValuedObjective
 import java.util.Comparator
 import java.util.List
 import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.dse.objectives.Comparators
 import org.eclipse.viatra.dse.objectives.IObjective
-import org.eclipse.viatra.dse.objectives.impl.BaseObjective
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 
-//class ViatraReasonerNumbers {
-//	public static val scopePriority = 2
-//	public static val unfinishedMultiplicityPriority = 2
-//	public static val unifinshedWFPriority = 2
-//	//public static val complexityPriority = 4
-//	
-//	public static val scopeWeigth = 1.0
-//	public static val unfinishedMultiplicityWeigth = 1.5
-//	public static val unfinishedWFWeigth = 1.5
-//	//public static val complexityWeigth = 0.1
-//	
-//	public static val useCompositeObjective = true
-//	public static val compositePriority = 2
-//}
-
-class ModelGenerationCompositeObjective implements IObjective{
-	val ScopeObjective scopeObjective
+class ModelGenerationCompositeObjective implements IThreeValuedObjective {
+	val IObjective scopeObjective
 	val List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives
 	val UnfinishedWFObjective unfinishedWFObjective
-	var PartialInterpretation model=null;
+	var PartialInterpretation model = null
 	val boolean punishSize
 	val int scopeWeight
 	val int conaintmentWeight
@@ -36,23 +22,20 @@ class ModelGenerationCompositeObjective implements IObjective{
 	val int unfinishedWFWeight
 	
 	new(
-		ScopeObjective scopeObjective,
+		IObjective scopeObjective,
 		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
 		UnfinishedWFObjective unfinishedWFObjective,
 		ViatraReasonerConfiguration configuration)
 	{
-		this.scopeObjective = scopeObjective
-		this.unfinishedMultiplicityObjectives = unfinishedMultiplicityObjectives
-		this.unfinishedWFObjective = unfinishedWFObjective
-		
-		this.punishSize = configuration.punishSize
-		this.scopeWeight = configuration.scopeWeight
-		this.conaintmentWeight = configuration.conaintmentWeight
-		this.nonContainmentWeight = configuration.nonContainmentWeight
-		this.unfinishedWFWeight = configuration.unfinishedWFWeight
+		this(
+			scopeObjective, unfinishedMultiplicityObjectives, unfinishedWFObjective, configuration.punishSize,
+			configuration.scopeWeight, configuration.conaintmentWeight, configuration.nonContainmentWeight,
+			configuration.unfinishedWFWeight
+		)
 	}
+
 	new(
-		ScopeObjective scopeObjective,
+		IObjective scopeObjective,
 		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
 		UnfinishedWFObjective unfinishedWFObjective,
 		boolean punishSize, int scopeWeight, int conaintmentWeight, int nonContainmentWeight, int unfinishedWFWeight)
@@ -74,18 +57,21 @@ class ModelGenerationCompositeObjective implements IObjective{
 		this.unfinishedMultiplicityObjectives.forEach[it.init(context)]
 		this.unfinishedWFObjective.init(context)
 	}
-	
+
 	override createNew() {
 		return new ModelGenerationCompositeObjective(
-			this.scopeObjective, this.unfinishedMultiplicityObjectives, this.unfinishedWFObjective,
-			this.punishSize, this.scopeWeight, this.conaintmentWeight, this.nonContainmentWeight, this.unfinishedWFWeight)
+			scopeObjective.createNew,
+			ImmutableList.copyOf(unfinishedMultiplicityObjectives.map[createNew as UnfinishedMultiplicityObjective]),
+			unfinishedWFObjective.createNew as UnfinishedWFObjective,
+			punishSize, scopeWeight, conaintmentWeight, nonContainmentWeight, unfinishedWFWeight
+		)
 	}
-	
+
 	override getComparator() { Comparators.LOWER_IS_BETTER }
+
 	override getFitness(ThreadContext context) {
 		
 		val scopeFitnes = scopeObjective.getFitness(context)
-		//val unfinishedMultiplicitiesFitneses = unfinishedMultiplicityObjectives.map[x|x.getFitness(context)]
 		val unfinishedWFsFitness = unfinishedWFObjective.getFitness(context)
 		
 		var containmentMultiplicity = 0.0
@@ -109,24 +95,30 @@ class ModelGenerationCompositeObjective implements IObjective{
 		sum += nonContainmentMultiplicity*nonContainmentWeight
 		sum += unfinishedWFsFitness*unfinishedWFWeight
 		sum+=size
-		
-		//println('''Sum=«sum»|Scope=«scopeFitnes»|ContainmentMultiplicity=«containmentMultiplicity»|NonContainmentMultiplicity=«nonContainmentMultiplicity»|WFs=«unfinishedWFsFitness»''')
-		
 		return sum
 	}
 	
+	override getWorstPossibleFitness(ThreadContext threadContext) {
+		Double.POSITIVE_INFINITY
+	}
+	
+	override getBestPossibleFitness(ThreadContext threadContext) {
+		0.0
+	}
+
 	override getLevel() { 2 }
-	override getName() { "CompositeUnfinishednessObjective"}
-	
+
+	override getName() { "CompositeUnfinishednessObjective" }
+
 	override isHardObjective() { true }
-	override satisifiesHardObjective(Double fitness) { fitness < 0.95 }
-	
-	
+
+	override satisifiesHardObjective(Double fitness) { fitness <= 0.001 }
+
 	override setComparator(Comparator<Double> comparator) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException("Model generation objective comparator cannot be set.")
 	}
+
 	override setLevel(int level) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		throw new UnsupportedOperationException("Model generation objective level cannot be set.")
 	}
-	
 }

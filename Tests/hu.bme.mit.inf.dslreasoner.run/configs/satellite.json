@@ -1,0 +1,17 @@
+{
+	"inputPath": "initialModels",
+	"outputPath": "outputModels",
+	"timeout": 300,
+	"saveModels": true,
+	"saveTemporaryFiles": false,
+	"warmupIterations": 0,
+	"iterations": 30,
+	"domain": "satelliteUnsat",
+	"scope": "none",
+	"sizes": [10],
+	"solver": "ViatraSolver",
+	"scopePropagator": "polyhedral",
+	"propagatedConstraints": "hints",
+	"polyhedronSolver": "Clp",
+	"scopeHeuristic": "polyhedral"
+}
