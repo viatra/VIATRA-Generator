@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -76,7 +77,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
-	//private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
+//	private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	public ActivationSelector activationSelector = new EvenActivationSelector(random);
 	public ViatraReasonerSolutionSaver solutionSaver;
 	public NumericSolver numericSolver;
@@ -100,7 +101,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		this.method = method;
 		this.solutionSaver = solutionSaver;
 		this.numericSolver = numericSolver;
-		//logger.setLevel(Level.DEBUG);
+//		logger.setLevel(Level.DEBUG);
 	}
 	
 	public int getNumberOfStatecoderFail() {
@@ -136,7 +137,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //		ViatraQueryEngine engine = context.getQueryEngine();
 //		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
 //		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
-//			//System.out.println(p.getSimpleName());
 //			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
 //			matchers.add(matcher);
 //		}
@@ -154,13 +154,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 	@Override
 	public void explore() {
-//		System.out.println("press enter");
-//		try {
-//			new BufferedReader(new InputStreamReader(System.in)).readLine();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		this.explorationStarted=System.nanoTime();
 		if (!checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
@@ -219,10 +212,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 
 			while (!isInterrupted && !configuration.progressMonitor.isCancelled() && iterator.hasNext()) {
 				final Object nextActivation = iterator.next();
-//				if (!iterator.hasNext()) {
-//					logger.debug("Last untraversed activation of the state.");
-//					trajectoiresToExplore.remove(currentTrajectoryWithfitness);
-//				}
 				logger.debug("Executing new activation: " + nextActivation);
 				context.executeAcitvationId(nextActivation);
 				method.getStatistics().incrementDecisionCount();
@@ -230,10 +219,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 				visualiseCurrentState();
 //				for(ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
 //					int c = matcher.countMatches();
-//					if(c>=100) {
+//					if(c>=1) {
 //						System.out.println(c+ " " +matcher.getPatternName());
-//					}
-//					
+//					}	
 //				}
 				
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFitness);

@@ -112,7 +112,7 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 
 	override isHardObjective() { true }
 
-	override satisifiesHardObjective(Double fitness) { fitness <= 0.001 }
+	override satisifiesHardObjective(Double fitness) { fitness <= 0.9 }
 
 	override setComparator(Comparator<Double> comparator) {
 		throw new UnsupportedOperationException("Model generation objective comparator cannot be set.")

@@ -88,6 +88,7 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 				val result = operator.saturate()
 				if (result == PolyhedronSaturationResult.EMPTY) {
 					cache.put(signature, PolyhedronSignature.EMPTY)
+//					println("INVALID")
 					setScopesInvalid()
 				} else {
 					val resultSignature = polyhedron.createSignature
@@ -110,11 +111,8 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 		}
 	}
 
-	override propagateAdditionToRelation(Relation r) {
-		super.propagateAdditionToRelation(r)
-		if (relevantRelations.contains(r)) {
-			propagateAllScopeConstraints()
-		}
+	override isPropagationNeededAfterAdditionToRelation(Relation r) {
+		relevantRelations.contains(r) || super.isPropagationNeededAfterAdditionToRelation(r)
 	}
 
 	def resetBounds() {

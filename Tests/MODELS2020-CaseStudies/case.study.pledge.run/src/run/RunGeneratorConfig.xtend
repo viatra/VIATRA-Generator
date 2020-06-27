@@ -12,7 +12,9 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEn
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor
+import hu.bme.mit.inf.dslreasoner.application.execution.StandardOutputBasedScriptConsole
 import java.io.File
+import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.Date
 import org.apache.commons.cli.BasicParser
@@ -23,8 +25,6 @@ import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 import org.apache.commons.cli.ParseException
 import org.eclipse.core.runtime.NullProgressMonitor
-import com.google.common.io.Files
-import java.io.PrintWriter
 
 class RunGeneratorConfig {
 	static var SIZE_LB = 20
@@ -102,7 +102,7 @@ class RunGeneratorConfig {
 		val SimpleDateFormat format = new SimpleDateFormat("dd-HHmm")
 		val formattedDate = format.format(date)
 
-		val executor = new ScriptExecutor
+		val executor = new ScriptExecutor(StandardOutputBasedScriptConsole.FACTORY)
 		val path = "config//generic" + DOMAIN + ".vsconfig"
 		var ConfigurationScript config = StandaloneScriptExecutor.loadScript(path)
 

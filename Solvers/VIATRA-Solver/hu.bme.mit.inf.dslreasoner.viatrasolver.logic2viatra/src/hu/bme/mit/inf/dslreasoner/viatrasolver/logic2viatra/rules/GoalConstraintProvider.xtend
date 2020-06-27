@@ -15,9 +15,8 @@ class GoalConstraintProvider {
 				val queries = entry.value
 				val targetRelationName = constraint.relation.name
 				val query = queries.unfinishedMultiplicityQuery
-				val minValue = constraint.lowerBound
 				val containment = constraint.containment
-				res += new MultiplicityGoalConstraintCalculator(targetRelationName, query, minValue, containment, 1)
+				res += new MultiplicityGoalConstraintCalculator(targetRelationName, query, containment, 1)
 			}
 		}
 		return res

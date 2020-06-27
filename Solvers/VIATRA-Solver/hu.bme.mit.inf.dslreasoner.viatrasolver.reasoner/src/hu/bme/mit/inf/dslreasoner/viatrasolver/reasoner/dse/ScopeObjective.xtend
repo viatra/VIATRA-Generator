@@ -25,7 +25,7 @@ class ScopeObjective implements IObjective{
 		val interpretation = context.model as PartialInterpretation
 		var res = interpretation.minNewElementsHeuristic.doubleValue
 		for(scope : interpretation.scopes) {
-			res += scope.minNewElementsHeuristic*2
+			res += scope.minNewElementsHeuristic
 		}
 		return res
 	}

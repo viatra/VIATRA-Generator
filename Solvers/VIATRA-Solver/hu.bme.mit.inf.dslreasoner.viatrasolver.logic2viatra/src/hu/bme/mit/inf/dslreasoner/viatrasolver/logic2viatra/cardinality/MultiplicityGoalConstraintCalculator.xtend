@@ -10,15 +10,13 @@ class MultiplicityGoalConstraintCalculator {
 	val String targetRelationName
 	val IQuerySpecification<?> querySpecification
 	var ViatraQueryMatcher<?> matcher
-	val int minValue
 	val boolean containment
 	val int cost
 		
-	public new(String targetRelationName, IQuerySpecification<?> querySpecification, int minValue, boolean containment, int cost) {
+	public new(String targetRelationName, IQuerySpecification<?> querySpecification, boolean containment, int cost) {
 		this.targetRelationName = targetRelationName
 		this.querySpecification = querySpecification
 		this.matcher = null
-		this.minValue = minValue
 		this.containment = containment
 		this.cost = cost
 	}
@@ -27,7 +25,6 @@ class MultiplicityGoalConstraintCalculator {
 		this.targetRelationName = other.targetRelationName
 		this.querySpecification = other.querySpecification
 		this.matcher = null
-		this.minValue = other.minValue
 		this.containment = other.containment
 		this.cost = other.cost
 	}
@@ -49,14 +46,8 @@ class MultiplicityGoalConstraintCalculator {
 		var res = 0
 		val allMatches = this.matcher.allMatches
 		for(match : allMatches) {
-			val existingMultiplicity = match.get(4) as Integer
-			if(existingMultiplicity < this.minValue) {
-				val missingMultiplicity = this.minValue-existingMultiplicity
-				res += missingMultiplicity
-			}
-//			if(missingMultiplicity!=0) {
-//				println(targetRelationName+ " missing multiplicity: "+missingMultiplicity)
-//			}
+			val missingMultiplicity = match.get(2) as Integer
+			res += missingMultiplicity
 		}
 //		if(res>0)
 //		println(targetRelationName+ " all missing multiplicities: "+res + "*"+cost+"="+res*cost)

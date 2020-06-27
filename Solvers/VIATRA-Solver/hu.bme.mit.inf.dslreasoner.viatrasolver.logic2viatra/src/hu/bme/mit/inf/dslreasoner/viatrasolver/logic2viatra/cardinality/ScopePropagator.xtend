@@ -114,21 +114,21 @@ class ScopePropagator {
 		}
 	}
 
-	def void propagateAdditionToRelation(Relation r) {
-		// Nothing to propagate.
+	def isPropagationNeededAfterAdditionToRelation(Relation r) {
+		false
 	}
 
 	private def removeOne(Scope scope) {
-		if (scope.maxNewElements === 0) {
-			throw new IllegalArgumentException('''Inconsistent object creation: «scope.targetTypeInterpretation»''')
-		} else if (scope.maxNewElements > 0) {
-			scope.maxNewElements = scope.maxNewElements - 1
-		}
 		if (scope.minNewElements > 0) {
 			scope.minNewElements = scope.minNewElements - 1
 		}
 		if (scope.minNewElementsHeuristic > 0) {
 			scope.minNewElementsHeuristic = scope.minNewElementsHeuristic - 1
+		}
+		if (scope.maxNewElements > 0) {
+			scope.maxNewElements = scope.maxNewElements - 1
+		} else if (scope.maxNewElements === 0) {
+			setScopesInvalid()
 		}
 	}
 }

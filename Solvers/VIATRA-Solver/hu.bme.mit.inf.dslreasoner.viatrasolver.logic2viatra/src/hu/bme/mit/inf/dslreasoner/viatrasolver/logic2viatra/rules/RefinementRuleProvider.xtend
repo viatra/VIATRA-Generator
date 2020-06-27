@@ -32,9 +32,12 @@ import java.util.LinkedHashMap
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.GenericPatternMatch
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRuleFactory
 import org.eclipse.xtend.lib.annotations.Data
@@ -44,6 +47,8 @@ class RefinementRuleProvider {
 	val extension BatchTransformationRuleFactory factory = new BatchTransformationRuleFactory
 	val extension PartialinterpretationFactory factory2 = PartialinterpretationFactory.eINSTANCE
 	val extension LogiclanguageFactory factory3 = LogiclanguageFactory.eINSTANCE
+	
+	var AdvancedViatraQueryEngine queryEngine
 	
 	def canonizeName(String name) {
 		return name.replace(' ','_')
@@ -60,6 +65,7 @@ class RefinementRuleProvider {
 	{
 		val res = new LinkedHashMap
 		val recursiveObjectCreation = recursiveObjectCreation(p,i)
+		queryEngine = ViatraQueryEngine.on(new EMFScope(i)) as AdvancedViatraQueryEngine
 		for(LHSEntry: patterns.refineObjectQueries.entrySet) {
 			val containmentRelation = LHSEntry.key.containmentRelation
 			val inverseRelation = LHSEntry.key.inverseContainment
@@ -90,8 +96,7 @@ class RefinementRuleProvider {
 			if(inverseRelation!== null) {
 				ruleBuilder.action[match |
 					statistics.incrementTransformationCount
-//					println(name)
-					val startTime = System.nanoTime
+//					println(name)						
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
 					val relationInterpretation = match.get(2) as PartialRelationInterpretation
@@ -99,79 +104,89 @@ class RefinementRuleProvider {
 					val typeInterpretation = match.get(4) as PartialComplexTypeInterpretation
 					val container = match.get(5) as DefinedElement
 					
-					createObjectActionWithContainmentAndInverse(
-						nameNewElement,
-						interpretation,
-						typeInterpretation,
-						container,
-						relationInterpretation,
-						inverseRelationInterpretation,
-						[createDefinedElement],
-						recursiceObjectCreations,
-						scopePropagator
-					)
-					
-					val propagatorStartTime = System.nanoTime
-					statistics.addExecutionTime(propagatorStartTime-startTime)
+					queryEngine.delayUpdatePropagation [
+						val startTime = System.nanoTime
+						createObjectActionWithContainmentAndInverse(
+							nameNewElement,
+							interpretation,
+							typeInterpretation,
+							container,
+							relationInterpretation,
+							inverseRelationInterpretation,
+							[createDefinedElement],
+							recursiceObjectCreations,
+							scopePropagator
+						)
+						statistics.addExecutionTime(System.nanoTime-startTime)
+					]
 					
 					// Scope propagation
-					scopePropagator.propagateAllScopeConstraints()
-					statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					queryEngine.delayUpdatePropagation [
+						val propagatorStartTime = System.nanoTime
+						scopePropagator.propagateAllScopeConstraints()
+						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					]
 				]
 			} else {
 				ruleBuilder.action[match |
 					statistics.incrementTransformationCount
 //					println(name)
-					val startTime = System.nanoTime
 					//val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
 					val relationInterpretation = match.get(2) as PartialRelationInterpretation
 					val typeInterpretation = match.get(3) as PartialComplexTypeInterpretation
 					val container = match.get(4) as DefinedElement
 					
-					createObjectActionWithContainment(
-						nameNewElement,
-						interpretation,
-						typeInterpretation,
-						container,
-						relationInterpretation,
-						[createDefinedElement],
-						recursiceObjectCreations,
-						scopePropagator
-					)
-					
-					val propagatorStartTime = System.nanoTime
-					statistics.addExecutionTime(propagatorStartTime-startTime)
+					queryEngine.delayUpdatePropagation [
+						val startTime = System.nanoTime
+						createObjectActionWithContainment(
+							nameNewElement,
+							interpretation,
+							typeInterpretation,
+							container,
+							relationInterpretation,
+							[createDefinedElement],
+							recursiceObjectCreations,
+							scopePropagator
+						)
+						statistics.addExecutionTime(System.nanoTime-startTime)
+					]
 					
 					// Scope propagation
-					scopePropagator.propagateAllScopeConstraints()
-					statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					queryEngine.delayUpdatePropagation [
+						val propagatorStartTime = System.nanoTime
+						scopePropagator.propagateAllScopeConstraints()
+						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					]
 				]
 			}
 		} else {
 			ruleBuilder.action[match |
 				statistics.incrementTransformationCount
 //				println(name)
-				val startTime = System.nanoTime
 				//val problem = match.get(0) as LogicProblem
 				val interpretation = match.get(1) as PartialInterpretation
 				val typeInterpretation = match.get(2) as PartialComplexTypeInterpretation
 
-				createObjectAction(
-					nameNewElement,
-					interpretation,
-					typeInterpretation,
-					[createDefinedElement],
-					recursiceObjectCreations,
-					scopePropagator
-				)
-				
-				val propagatorStartTime = System.nanoTime
-				statistics.addExecutionTime(propagatorStartTime-startTime)
+				queryEngine.delayUpdatePropagation [
+					val startTime = System.nanoTime
+					createObjectAction(
+						nameNewElement,
+						interpretation,
+						typeInterpretation,
+						[createDefinedElement],
+						recursiceObjectCreations,
+						scopePropagator
+					)
+					statistics.addExecutionTime(System.nanoTime-startTime)
+				]
 				
 				// Scope propagation
-				scopePropagator.propagateAllScopeConstraints()
-				statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+				queryEngine.delayUpdatePropagation [
+					val propagatorStartTime = System.nanoTime
+					scopePropagator.propagateAllScopeConstraints()
+					statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+				]
 			]
 		}
 		return ruleBuilder.build
@@ -342,7 +357,7 @@ class RefinementRuleProvider {
 		if (inverseRelation === null) {
 			ruleBuilder.action [ match |
 				statistics.incrementTransformationCount
-			    val startTime = System.nanoTime
+			    
 //				println(name)
 				// val problem = match.get(0) as LogicProblem
 				// val interpretation = match.get(1) as PartialInterpretation
@@ -350,19 +365,24 @@ class RefinementRuleProvider {
 				val src = match.get(3) as DefinedElement
 				val trg = match.get(4) as DefinedElement
 				
-				createRelationLinkAction(src, trg, relationInterpretation)
-				
-				val propagatorStartTime = System.nanoTime
-				statistics.addExecutionTime(propagatorStartTime-startTime)
+				queryEngine.delayUpdatePropagation [
+					val startTime = System.nanoTime
+					createRelationLinkAction(src, trg, relationInterpretation)
+					statistics.addExecutionTime(System.nanoTime-startTime)
+				]
 				
 				// Scope propagation
-				scopePropagator.propagateAdditionToRelation(declaration)
-				statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+				if (scopePropagator.isPropagationNeededAfterAdditionToRelation(declaration)) {
+					queryEngine.delayUpdatePropagation [
+						val propagatorStartTime = System.nanoTime
+						scopePropagator.propagateAllScopeConstraints()
+						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					]
+				}
 			]
 		} else {
 			ruleBuilder.action [ match |
 				statistics.incrementTransformationCount
-			    val startTime = System.nanoTime
 //				println(name)
 				// val problem = match.get(0) as LogicProblem
 				// val interpretation = match.get(1) as PartialInterpretation
@@ -371,14 +391,20 @@ class RefinementRuleProvider {
 				val src = match.get(4) as DefinedElement
 				val trg = match.get(5) as DefinedElement
 
-				createRelationLinkWithInverse(src, trg, relationInterpretation, inverseInterpretation)
-				
-				val propagatorStartTime = System.nanoTime
-				statistics.addExecutionTime(propagatorStartTime-startTime)
+				queryEngine.delayUpdatePropagation [
+					val startTime = System.nanoTime
+					createRelationLinkWithInverse(src, trg, relationInterpretation, inverseInterpretation)
+					statistics.addExecutionTime(System.nanoTime-startTime)
+				]
 				
 				// Scope propagation
-				scopePropagator.propagateAdditionToRelation(declaration)
-				statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+				if (scopePropagator.isPropagationNeededAfterAdditionToRelation(declaration)) {
+					queryEngine.delayUpdatePropagation [
+						val propagatorStartTime = System.nanoTime
+						scopePropagator.propagateAllScopeConstraints()
+						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					]
+				}
 			]
 		}
 
