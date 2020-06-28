@@ -53,10 +53,8 @@ class ModalPatternQueries {
 
 @Data
 class UnifinishedMultiplicityQueries {
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> unfinishedMultiplicityQuery
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> unrepairableMultiplicityQuery
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> remainingInverseMultiplicityQuery
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> remainingContentsQuery
+	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> existingMultiplicityQuery
+	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> existingInverseMultiplicityQuery
 }
 
 class PatternProvider {
@@ -108,9 +106,8 @@ class PatternProvider {
 			
 		val unfinishedMultiplicities = patternGenerator.unfinishedIndexer.getUnfinishedMultiplicityQueries(relationConstraints.multiplicityConstraints)
 		val multiplicityConstraintQueries = unfinishedMultiplicities.mapValues [
-			new UnifinishedMultiplicityQueries(unfinishedMultiplicityQueryName?.lookup(queries),
-				unrepairableMultiplicityQueryName?.lookup(queries),
-				remainingInverseMultiplicityQueryName?.lookup(queries), remainingContentsQueryName?.lookup(queries))
+			new UnifinishedMultiplicityQueries(existingMultiplicityQueryName?.lookup(queries),
+				existingInverseMultiplicityQueryName?.lookup(queries))
 		]
 		val hasElementInContainmentQuery = patternGenerator.typeRefinementGenerator.hasElementInContainmentName.lookup(
 			queries)

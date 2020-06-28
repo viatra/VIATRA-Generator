@@ -26,6 +26,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityChecker
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.InconsistentScopeGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundHandler
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.NumericSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ScopeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SurelyViolatedObjectiveGlobalConstraint
@@ -42,7 +43,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.NumericSolver
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()

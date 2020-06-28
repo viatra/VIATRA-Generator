@@ -14,10 +14,8 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 @Data
 class UnifinishedMultiplicityQueryNames {
-	val String unfinishedMultiplicityQueryName
-	val String unrepairableMultiplicityQueryName
-	val String remainingInverseMultiplicityQueryName
-	val String remainingContentsQueryName
+	val String existingMultiplicityQueryName
+	val String existingInverseMultiplicityQueryName
 }
 
 class UnfinishedIndexer {
@@ -58,147 +56,94 @@ class UnfinishedIndexer {
 	def generateUnfinishedMultiplicityQueries(List<RelationMultiplicityConstraint> constraints,
 		Map<String, PQuery> fqn2PQuery) '''
 		«FOR constraint : constraints»
-			«IF constraint.constrainsUnfinished»
-				private pattern «unfinishedMultiplicityName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, missingMultiplicity:java Integer) {
+			«IF constraint.shouldIndexExistingMultiplicites(indexUpperMultiplicities)»
+				private pattern «existingMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, numberOfExistingReferences:java Integer«IF constraint.shouldIndexRepairMultiplcities(indexUpperMultiplicities)», numberOfRepairMatches: java Integer«ENDIF») {
 					find interpretation(problem,interpretation);
 					find mustExist(problem,interpretation,object);
 					«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"object")»
 					numberOfExistingReferences == count «base.referRelation(constraint.relation,"object","_",Modality.MUST,fqn2PQuery)»
-					check(numberOfExistingReferences < «constraint.lowerBound»);
-					missingMultiplicity == eval(«constraint.lowerBound»-numberOfExistingReferences);
-				}
-				
-				pattern «unfinishedMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, missingMultiplicity:java Integer) {
-					find interpretation(problem,interpretation);
-					missingMultiplicity == sum find «unfinishedMultiplicityName(constraint)»_helper(problem, interpretation, _, #_);
+					«IF constraint.shouldIndexRepairMultiplcities(indexUpperMultiplicities)»
+						numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, object, _);
+					«ENDIF»
 				}
 			«ENDIF»
 			
-			«IF indexUpperMultiplicities»
-				«IF constraint.constrainsUnrepairable || constraint.constrainsRemainingInverse»
-					private pattern «repairMatchName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, source:DefinedElement, target:DefinedElement) {
-						«IF base.isRepresentative(constraint.relation, constraint.inverseRelation) && constraint.relation instanceof RelationDeclaration»
-							«base.relationRefinementGenerator.referRefinementQuery(constraint.relation as RelationDeclaration, constraint.inverseRelation, "_", "_", "source", "target")»
-						«ELSE»
-							«IF base.isRepresentative(constraint.inverseRelation, constraint.relation) && constraint.inverseRelation instanceof RelationDeclaration»
-								«base.relationRefinementGenerator.referRefinementQuery(constraint.inverseRelation as RelationDeclaration, constraint.relation, "_", "_", "target", "source")»
-							«ELSE»
-								find interpretation(problem,interpretation);
-								find mustExist(problem,interpretation,source);
-								«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"source")»
-								find mustExist(problem,interpretation,target);
-								«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"target")»
-								neg «base.referRelation(constraint.relation,"source","target",Modality.MUST,fqn2PQuery)»
-								«base.referRelation(constraint.relation,"source","target",Modality.MAY,fqn2PQuery)»
-							«ENDIF»
-						«ENDIF»
-					}
-				«ENDIF»
-				
-				«IF constraint.constrainsUnrepairable»
-					private pattern «unrepairableMultiplicityName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, unrepairableMultiplicity:java Integer) {
-						find «unfinishedMultiplicityName(constraint)»_helper(problem, interpretation, object, missingMultiplicity);
-						numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, object, _);
-						check(numberOfRepairMatches < missingMultiplicity);
-						unrepairableMultiplicity == eval(missingMultiplicity-numberOfRepairMatches);
-					}
-					
-					private pattern «unrepairableMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, unrepairableMultiplicity:java Integer) {
-						find interpretation(problem,interpretation);
-						unrepairableMultiplicity == max find «unrepairableMultiplicityName(constraint)»_helper(problem, interpretation, _, #_);
-					} or {
-						find interpretation(problem,interpretation);
-						neg find «unrepairableMultiplicityName(constraint)»_helper(problem, interpretation, _, _);
-						unrepairableMultiplicity == 0;
-					}
-				«ENDIF»
-				
-				«IF constraint.constrainsRemainingInverse»
-					private pattern «remainingMultiplicityName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, remainingMultiplicity:java Integer) {
-						find interpretation(problem,interpretation);
-						find mustExist(problem,interpretation,object);
-						«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"object")»
-						numberOfExistingReferences == count «base.referRelation(constraint.relation,"_","object",Modality.MUST,fqn2PQuery)»
-						check(numberOfExistingReferences < «constraint.inverseUpperBound»);
-						numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, _, object);
-						remainingMultiplicity == eval(Math.min(«constraint.inverseUpperBound»-numberOfExistingReferences, numberOfRepairMatches));
-					}
-					
-					pattern «remainingMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, remainingMultiplicity:java Integer) {
-						find interpretation(problem,interpretation);
-						remainingMultiplicity == sum find «remainingMultiplicityName(constraint)»_helper(problem, interpretation, _, #_);
-					}
-				«ENDIF»
-				
-				«IF constraint.constrainsRemainingContents»
-					«IF constraint.upperBoundFinite»
-						private pattern «remainingContentsName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, remainingMultiplicity:java Integer) {
-							find interpretation(problem,interpretation);
-							find mustExist(problem,interpretation,object);
-							«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"object")»
-							numberOfExistingReferences == count «base.referRelation(constraint.relation,"object","_",Modality.MUST,fqn2PQuery)»
-							check(numberOfExistingReferences < «constraint.upperBound»);
-							remainingMultiplicity == eval(«constraint.upperBound»-numberOfExistingReferences);
-						}
-						
-						pattern «remainingContentsName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, remainingMultiplicity:java Integer) {
-							find interpretation(problem,interpretation);
-							remainingMultiplicity == sum find «remainingContentsName(constraint)»_helper(problem, interpretation, _, #_);
-						}
+			«IF constraint.shouldIndexRepairMatches(indexUpperMultiplicities)»
+				private pattern «repairMatchName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, source:DefinedElement, target:DefinedElement) {
+					«IF constraint.containment || constraint.container»
+						«repairMatchFallback(constraint, fqn2PQuery)»
+					«ELSEIF base.isRepresentative(constraint.relation, constraint.inverseRelation) && constraint.relation instanceof RelationDeclaration»
+						«base.relationRefinementGenerator.referRefinementQuery(constraint.relation as RelationDeclaration, constraint.inverseRelation, "_", "_", "source", "target")»
+					«ELSEIF base.isRepresentative(constraint.inverseRelation, constraint.relation) && constraint.inverseRelation instanceof RelationDeclaration»
+						«base.relationRefinementGenerator.referRefinementQuery(constraint.inverseRelation as RelationDeclaration, constraint.relation, "_", "_", "target", "source")»
 					«ELSE»
-						pattern «remainingContentsName(constraint)»_helper(problem:LogicProblem, interpretation:PartialInterpretation) {
-							find interpretation(problem,interpretation);
-							find mustExist(problem,interpretation,object);
-							«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"object")»
-						}
-						
-						pattern «remainingContentsName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, remainingMultiplicity:java Integer) {
-							find interpretation(problem,interpretation);
-							find «remainingContentsName(constraint)»_helper(problem, interpretation);
-							remainingMultiplicity == -1;
-						} or {
-							find interpretation(problem,interpretation);
-							neg find «remainingContentsName(constraint)»_helper(problem, interpretation);
-							remainingMultiplicity == 0;
-						}
+						«repairMatchFallback(constraint, fqn2PQuery)»
 					«ENDIF»
-				«ENDIF»
+				}
+			«ENDIF»
+			
+			«IF constraint.shouldIndexInverseMultiplicites(indexUpperMultiplicities)»
+				private pattern «existingInverseMultiplicityName(constraint)»(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, numberOfExistingReferences:java Integer, numberOfRepairMatches: java Integer) {
+					find interpretation(problem,interpretation);
+					find mustExist(problem,interpretation,object);
+					«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"object")»
+					numberOfExistingReferences == count «base.referRelation(constraint.relation,"_","object",Modality.MUST,fqn2PQuery)»
+					numberOfRepairMatches == count find «repairMatchName(constraint)»(problem, interpretation, _, object);
+				}
 			«ENDIF»
 		«ENDFOR»
 	'''
 
-	def String unfinishedMultiplicityName(
-		RelationMultiplicityConstraint constraint) '''unfinishedLowerMultiplicity_«base.canonizeName(constraint.relation.name)»'''
+	private def repairMatchFallback(RelationMultiplicityConstraint constraint, Map<String, PQuery> fqn2PQuery) '''
+		find interpretation(problem,interpretation);
+		find mustExist(problem,interpretation,source);
+		«base.typeIndexer.referInstanceOf(constraint.sourceType,Modality::MUST,"source")»
+		find mustExist(problem,interpretation,target);
+		«base.typeIndexer.referInstanceOf(constraint.targetType,Modality::MUST,"target")»
+		neg «base.referRelation(constraint.relation,"source","target",Modality.MUST,fqn2PQuery)»
+		«base.referRelation(constraint.relation,"source","target",Modality.MAY,fqn2PQuery)»
+	'''
 
-	def String unrepairableMultiplicityName(
-		RelationMultiplicityConstraint constraint) '''unrepairableLowerMultiplicity_«base.canonizeName(constraint.relation.name)»'''
+	def String existingMultiplicityName(
+		RelationMultiplicityConstraint constraint) '''existingMultiplicity_«base.canonizeName(constraint.relation.name)»'''
+
+	def String existingInverseMultiplicityName(
+		RelationMultiplicityConstraint constraint) '''existingInverseMultiplicity_«base.canonizeName(constraint.relation.name)»'''
 
 	private def String repairMatchName(
 		RelationMultiplicityConstraint constraint) '''repair_«base.canonizeName(constraint.relation.name)»'''
 
-	def String remainingMultiplicityName(
-		RelationMultiplicityConstraint constraint) '''remainingInverseUpperMultiplicity_«base.canonizeName(constraint.relation.name)»'''
-
-	def String remainingContentsName(
-		RelationMultiplicityConstraint constraint) '''remainingContents_«base.canonizeName(constraint.relation.name)»'''
-
 	def getUnfinishedMultiplicityQueries(List<RelationMultiplicityConstraint> constraints) {
 		constraints.toInvertedMap [ constraint |
 			new UnifinishedMultiplicityQueryNames(
-				if(constraint.constrainsUnfinished) unfinishedMultiplicityName(constraint) else null,
-				if (indexUpperMultiplicities && constraint.constrainsUnrepairable)
-					unrepairableMultiplicityName(constraint)
-				else
-					null,
-				if (indexUpperMultiplicities && constraint.constrainsRemainingInverse)
-					remainingMultiplicityName(constraint)
-				else
-					null,
-				if (indexUpperMultiplicities && constraint.constrainsRemainingContents)
-					remainingContentsName(constraint)
-				else
+				if (constraint.shouldIndexExistingMultiplicites(indexUpperMultiplicities)) {
+					existingMultiplicityName(constraint)
+				} else {
 					null
+				},
+				if (constraint.shouldIndexInverseMultiplicites(indexUpperMultiplicities)) {
+					existingInverseMultiplicityName(constraint)
+				} else {
+					null
+				}
 			)
 		]
+	}
+
+	static def shouldIndexExistingMultiplicites(RelationMultiplicityConstraint it, boolean indexUpperMultiplicities) {
+		constrainsUnfinished || (indexUpperMultiplicities && constrainsRemainingContents)
+	}
+
+	static def shouldIndexRepairMultiplcities(RelationMultiplicityConstraint it, boolean indexUpperMultiplicities) {
+		shouldIndexExistingMultiplicites(indexUpperMultiplicities) && constrainsUnrepairable
+	}
+
+	static def shouldIndexInverseMultiplicites(RelationMultiplicityConstraint it, boolean indexUpperMultiplicities) {
+		indexUpperMultiplicities && constrainsRemainingInverse
+	}
+
+	static def shouldIndexRepairMatches(RelationMultiplicityConstraint it, boolean indexUpperMultiplicities) {
+		shouldIndexRepairMultiplcities(indexUpperMultiplicities) ||
+			shouldIndexInverseMultiplicites(indexUpperMultiplicities)
 	}
 }

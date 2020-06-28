@@ -4,6 +4,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationStatistics
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.Scope
 import java.util.HashMap
@@ -80,6 +81,10 @@ class ScopePropagator {
 	}
 
 	def decrementTypeScope(PartialTypeInterpratation t) {
+		val isPrimitive = t instanceof PartialPrimitiveInterpretation || t === null
+		if (isPrimitive) {
+			return
+		}
 //		println('''Adding to «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
 		val targetScope = type2Scope.get(t)
 		if (targetScope !== null) {

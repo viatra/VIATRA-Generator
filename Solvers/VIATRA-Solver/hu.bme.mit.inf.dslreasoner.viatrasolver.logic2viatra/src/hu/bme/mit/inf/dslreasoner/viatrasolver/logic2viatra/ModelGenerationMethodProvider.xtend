@@ -24,9 +24,12 @@ import java.util.Collection
 import java.util.List
 import java.util.Map
 import java.util.Set
+import org.eclipse.viatra.query.runtime.api.GenericQueryGroup
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
@@ -122,6 +125,9 @@ class ModelGenerationMethodProvider {
 		val relationConstraints = relationConstraintCalculator.calculateRelationConstraints(logicProblem)
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
 			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, hints, writeFiles)
+		val queryEngine = ViatraQueryEngine.on(new EMFScope(emptySolution))
+		GenericQueryGroup.of(queries.allQueries).prepare(queryEngine)
+		
 		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, hints, queries, statistics)
 		scopePropagator.propagateAllScopeConstraints
 		val objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(logicProblem, emptySolution,

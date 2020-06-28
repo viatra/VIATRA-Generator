@@ -46,11 +46,11 @@ class RelationMultiplicityConstraint {
 	def constrainsUnrepairable() {
 		// TODO Optimize the unrepairable matches computation,
 		// or come up with a heuristic when does computing unrepairables worth the overhead.
-		constrainsUnfinished && canHaveMultipleSourcesPerTarget && false
+		constrainsUnfinished && canHaveMultipleSourcesPerTarget && reference
 	}
 
 	def constrainsRemainingInverse() {
-		lowerBound >= 1 && !containment && inverseUpperBoundFinite
+		lowerBound >= 1 && !containment && !container && inverseUpperBoundFinite && reference
 	}
 
 	def constrainsRemainingContents() {
@@ -61,6 +61,18 @@ class RelationMultiplicityConstraint {
 		constrainsUnfinished || constrainsUnrepairable || constrainsRemainingInverse || constrainsRemainingContents
 	}
 
+	def isSourceTypeComplex() {
+		getParamTypeReference(0) instanceof ComplexTypeReference
+	}
+	
+	def isTargetTypeComplex() {
+		getParamTypeReference(1) instanceof ComplexTypeReference
+	}
+	
+	def isReference() {
+		sourceTypeComplex && targetTypeComplex
+	}
+
 	def getSourceType() {
 		getParamType(0)
 	}
@@ -69,15 +81,20 @@ class RelationMultiplicityConstraint {
 		getParamType(1)
 	}
 
-	private def getParamType(int i) {
+	private def getParamTypeReference(int i) {
 		val parameters = relation.parameters
 		if (i < parameters.size) {
-			val firstParam = parameters.get(i)
-			if (firstParam instanceof ComplexTypeReference) {
-				return firstParam.referred
-			}
+			return parameters.get(i)
 		}
-		throw new IllegalArgumentException("Constraint with unknown source type")
+		throw new IllegalArgumentException("Argument index out of range")
+	}
+	
+	private def getParamType(int i) {
+		val reference = getParamTypeReference(i)
+		if (reference instanceof ComplexTypeReference) {
+			return reference.referred
+		}
+		throw new IllegalArgumentException("Constraint with primitive type")
 	}
 }
 
