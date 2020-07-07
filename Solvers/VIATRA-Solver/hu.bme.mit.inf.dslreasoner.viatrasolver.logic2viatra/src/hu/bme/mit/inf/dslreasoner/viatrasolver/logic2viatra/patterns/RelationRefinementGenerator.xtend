@@ -5,12 +5,11 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import java.util.LinkedList
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 
 class RelationRefinementGenerator {
 	PatternGenerator base;
 
-	public new(PatternGenerator base) {
+	new(PatternGenerator base) {
 		this.base = base
 	}
 

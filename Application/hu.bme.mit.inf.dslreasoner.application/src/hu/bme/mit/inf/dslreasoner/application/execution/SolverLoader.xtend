@@ -10,6 +10,9 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Threshold
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.smt.reasoner.SMTSolver
 import hu.bme.mit.inf.dslreasoner.smt.reasoner.SmtSolverConfiguration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorConstraints
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveElementConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
@@ -98,42 +101,47 @@ class SolverLoader {
 						console.writeError('''Malformed number format: «e.message»''')
 					}
 				}
-				if(config.containsKey("numeric-solver-at-end")) {
+				if (config.containsKey("numeric-solver-at-end")) {
 					val stringValue = config.get("numeric-solver-at-end")
-					if(stringValue.equals("true")) {
+					if (stringValue.equals("true")) {
 						println("numeric-solver-at-end")
 						c.runIntermediateNumericalConsistencyChecks = false
 					}
 				}
-				if(config.containsKey("fitness-punishSize")) {
+				if (config.containsKey("fitness-punishSize")) {
 					val stringValue = config.get("fitness-punishSize")
-					try {
-						c.punishSize = Boolean.parseBoolean(stringValue)
-					} catch(Exception e) {}
+					c.punishSize = Boolean.parseBoolean(stringValue)
 				}
-				if(config.containsKey("fitness-scope")) {
+				if (config.containsKey("fitness-scope")) {
 					val stringValue = config.get("fitness-scope")
-					try {
-						c.scopeWeight = Integer.parseInt(stringValue)
-					} catch(Exception e) {}
+					c.scopeWeight = Integer.parseInt(stringValue)
 				}
-				if(config.containsKey("fitness-missing-containent")) {
-					val stringValue = config.get("fitness-missing-containent")
-					try {
-						c.conaintmentWeight = Integer.parseInt(stringValue)
-					} catch(Exception e) {}
+				if (config.containsKey("fitness-missing-containment")) {
+					val stringValue = config.get("fitness-missing-containment")
+					c.conaintmentWeight = Integer.parseInt(stringValue)
 				}
-				if(config.containsKey("fitness-missing-noncontainent")) {
-					val stringValue = config.get("fitness-missing-noncontainent")
-					try {
-						c.nonContainmentWeight = Integer.parseInt(stringValue)
-					} catch(Exception e) {}
+				if (config.containsKey("fitness-missing-noncontainment")) {
+					val stringValue = config.get("fitness-missing-noncontainment")
+					c.nonContainmentWeight = Integer.parseInt(stringValue)
 				}
-				if(config.containsKey("fitness-missing-wf")) {
+				if (config.containsKey("fitness-missing-wf")) {
 					val stringValue = config.get("fitness-missing-wf")
-					try {
-						c.unfinishedWFWeight = Integer.parseInt(stringValue)
-					} catch(Exception e) {}
+					c.unfinishedWFWeight = Integer.parseInt(stringValue)
+				}
+				if (config.containsKey("fitness-objectCreationCosts")) {
+					val stringValue = config.get("fitness-objectCreationCosts")
+					c.calculateObjectCreationCosts = Boolean.parseBoolean(stringValue)
+				}
+				if (config.containsKey("scopePropagator")) {
+					val stringValue = config.get("scopePropagator")
+					c.scopePropagatorStrategy = switch (stringValue) {
+						case "polyhedral": new ScopePropagatorStrategy.Polyhedral(
+							PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp, true)
+						case "hybrid": new ScopePropagatorStrategy.Polyhedral(
+							PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp, false)
+						case "typeHierarchy": ScopePropagatorStrategy.BasicTypeHierarchy
+						default: throw new IllegalArgumentException("Unknown scope propagator: " + stringValue)
+					}
 				}
 				for (objectiveEntry : objectiveEntries) {
 					val costObjectiveConfig = new CostObjectiveConfiguration

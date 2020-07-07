@@ -57,11 +57,12 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	 
 	public var runIntermediateNumericalConsistencyChecks = true
 	
-	public var punishSize = true
-	public var scopeWeight = 2
-	public var conaintmentWeight = 1
+	public var punishSize = false
+	public var scopeWeight = 1
+	public var conaintmentWeight = 2
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
+	public var calculateObjectCreationCosts = false
 	
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)

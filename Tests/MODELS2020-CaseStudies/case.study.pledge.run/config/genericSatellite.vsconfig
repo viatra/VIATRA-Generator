@@ -23,7 +23,7 @@ generate {
 generate {
 	metamodel = { package satellite }
 	constraints = { package hu.bme.mit.inf.dslreasoner.domains.satellite.queries }
-	partial-model = { "inputs/SatelliteInstance.xmi"}
+	partial-model = { "inputs/SatelliteInstance.xmi" }
 	solver = ViatraSolver
 	scope = {
 		#node += 64..*
@@ -33,7 +33,10 @@ generate {
 		runtime = 10000,
 		log-level = normal,
 		"fitness-scope" = "3",
-		"fitness-objectCreationCosts" = "true"
+		"fitness-punishSize" = "true",
+		"fitness-objectCreationCosts" = "true",
+		"scopePropagator" = "typeHierarchy",
+		"fitness-missing-containment" = "2"
 	}
 
 	runs = 1

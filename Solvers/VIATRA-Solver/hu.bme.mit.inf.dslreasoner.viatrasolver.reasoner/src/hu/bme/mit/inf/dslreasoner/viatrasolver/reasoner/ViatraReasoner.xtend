@@ -43,6 +43,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PunishSizeObjective
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -86,17 +87,24 @@ class ViatraReasoner extends LogicReasoner {
 			workspace,
 			viatraConfig.nameNewElements,
 			viatraConfig.typeInferenceMethod,
+			viatraConfig.calculateObjectCreationCosts,
 			viatraConfig.scopePropagatorStrategy,
 			viatraConfig.hints,
 			viatraConfig.documentationLevel
 		)
 
-		dse.addObjective(new ModelGenerationCompositeObjective(
+		val compositeObjective = new ModelGenerationCompositeObjective(
 			basicScopeGlobalConstraint ?: new ScopeObjective,
 			method.unfinishedMultiplicities.map[new UnfinishedMultiplicityObjective(it)],
 			wf2ObjectiveConverter.createCompletenessObjective(method.unfinishedWF),
 			viatraConfig
-		))
+		)
+		dse.addObjective(compositeObjective)
+		if (viatraConfig.punishSize) {
+			val punishObjective = new PunishSizeObjective
+			punishObjective.level = compositeObjective.level + 1
+			dse.addObjective(punishObjective)
+		}
 
 		val extremalObjectives = Lists.newArrayListWithExpectedSize(viatraConfig.costObjectives.size)
 		for (entry : viatraConfig.costObjectives.indexed) {

@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -29,6 +28,8 @@ import org.eclipse.viatra.dse.objectives.Fitness;
 import org.eclipse.viatra.dse.objectives.ObjectiveComparatorHelper;
 import org.eclipse.viatra.dse.solutionstore.ISolutionFoundHandler;
 import org.eclipse.viatra.dse.solutionstore.SolutionStore;
+import org.eclipse.viatra.query.runtime.api.IPatternMatch;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner;
@@ -137,10 +138,9 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //		ViatraQueryEngine engine = context.getQueryEngine();
 //		matchers = new LinkedList<ViatraQueryMatcher<? extends IPatternMatch>>();
 //		for(IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> p : this.method.getAllPatterns()) {
-//			ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
-//			matchers.add(matcher);
+//				ViatraQueryMatcher<? extends IPatternMatch> matcher = p.getMatcher(engine);
 //		}
-		
+//		
 		final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		this.comparator = new Comparator<TrajectoryWithFitness>() {
 			@Override

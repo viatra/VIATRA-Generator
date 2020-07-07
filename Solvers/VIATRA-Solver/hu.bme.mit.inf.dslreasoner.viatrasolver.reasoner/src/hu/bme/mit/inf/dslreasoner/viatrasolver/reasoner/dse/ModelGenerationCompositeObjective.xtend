@@ -9,13 +9,13 @@ import java.util.List
 import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.dse.objectives.Comparators
 import org.eclipse.viatra.dse.objectives.IObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
 
 class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 	val IObjective scopeObjective
 	val List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives
 	val UnfinishedWFObjective unfinishedWFObjective
 	var PartialInterpretation model = null
-	val boolean punishSize
 	val int scopeWeight
 	val int conaintmentWeight
 	val int nonContainmentWeight
@@ -28,7 +28,7 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 		ViatraReasonerConfiguration configuration)
 	{
 		this(
-			scopeObjective, unfinishedMultiplicityObjectives, unfinishedWFObjective, configuration.punishSize,
+			scopeObjective, unfinishedMultiplicityObjectives, unfinishedWFObjective,
 			configuration.scopeWeight, configuration.conaintmentWeight, configuration.nonContainmentWeight,
 			configuration.unfinishedWFWeight
 		)
@@ -38,13 +38,12 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 		IObjective scopeObjective,
 		List<UnfinishedMultiplicityObjective> unfinishedMultiplicityObjectives,
 		UnfinishedWFObjective unfinishedWFObjective,
-		boolean punishSize, int scopeWeight, int conaintmentWeight, int nonContainmentWeight, int unfinishedWFWeight)
+		int scopeWeight, int conaintmentWeight, int nonContainmentWeight, int unfinishedWFWeight)
 	{
 		this.scopeObjective = scopeObjective
 		this.unfinishedMultiplicityObjectives = unfinishedMultiplicityObjectives
 		this.unfinishedWFObjective = unfinishedWFObjective
 		
-		this.punishSize = punishSize
 		this.scopeWeight = scopeWeight
 		this.conaintmentWeight = conaintmentWeight
 		this.nonContainmentWeight = nonContainmentWeight
@@ -63,7 +62,7 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 			scopeObjective.createNew,
 			ImmutableList.copyOf(unfinishedMultiplicityObjectives.map[createNew as UnfinishedMultiplicityObjective]),
 			unfinishedWFObjective.createNew as UnfinishedWFObjective,
-			punishSize, scopeWeight, conaintmentWeight, nonContainmentWeight, unfinishedWFWeight
+			scopeWeight, conaintmentWeight, nonContainmentWeight, unfinishedWFWeight
 		)
 	}
 
@@ -77,16 +76,14 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 		var containmentMultiplicity = 0.0
 		var nonContainmentMultiplicity = 0.0
 		for(multiplicityObjective : unfinishedMultiplicityObjectives) {
+			val multiplicity = multiplicityObjective.getFitness(context)
+//			println(multiplicityObjective.name + "=" + multiplicity)
 			if(multiplicityObjective.containment) {
-				containmentMultiplicity+=multiplicityObjective.getFitness(context)
+				containmentMultiplicity+=multiplicity
 			} else {
-				nonContainmentMultiplicity+=multiplicityObjective.getFitness(context)
+				nonContainmentMultiplicity+=multiplicity
 			}
-		}
-		val size = if(punishSize) {
-			0.9/model.newElements.size
-		} else {
-			0
+			
 		}
 		
 		var sum = 0.0
@@ -94,7 +91,9 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 		sum += containmentMultiplicity*conaintmentWeight
 		sum += nonContainmentMultiplicity*nonContainmentWeight
 		sum += unfinishedWFsFitness*unfinishedWFWeight
-		sum+=size
+		
+//		println('''scope=«scopeFitnes», containment=«containmentMultiplicity», nonContainment=«nonContainmentMultiplicity», wf=«unfinishedWFsFitness», sum=«sum»''')
+		
 		return sum
 	}
 	
@@ -112,7 +111,7 @@ class ModelGenerationCompositeObjective implements IThreeValuedObjective {
 
 	override isHardObjective() { true }
 
-	override satisifiesHardObjective(Double fitness) { fitness <= 0.9 }
+	override satisifiesHardObjective(Double fitness) { fitness < 0.01 }
 
 	override setComparator(Comparator<Double> comparator) {
 		throw new UnsupportedOperationException("Model generation objective comparator cannot be set.")

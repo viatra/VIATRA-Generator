@@ -14,6 +14,9 @@ class MultiplicityGoalConstraintCalculator {
 	val int cost
 		
 	new(String targetRelationName, IQuerySpecification<?> querySpecification, boolean containment, int lowerBound, int cost) {
+		if (lowerBound <= 0) {
+			throw new IllegalArgumentException("Invalid lower bound: " + lowerBound)
+		}
 		this.targetRelationName = targetRelationName
 		this.querySpecification = querySpecification
 		this.calculator = null

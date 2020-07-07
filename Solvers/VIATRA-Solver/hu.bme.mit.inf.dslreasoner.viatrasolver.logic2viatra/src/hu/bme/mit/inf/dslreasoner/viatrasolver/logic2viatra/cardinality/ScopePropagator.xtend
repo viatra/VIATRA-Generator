@@ -60,15 +60,23 @@ class ScopePropagator {
 				}
 			}
 		} while (changed)
-		
+
 		copyScopeBoundsToHeuristic()
 	}
 
 	def propagateAllScopeConstraints() {
+		if (!valid) {
+			return
+		}
 		statistics.incrementScopePropagationCount()
 		doPropagateAllScopeConstraints()
 	}
-	
+
+	def isValid() {
+		partialInterpretation.maxNewElements == -1 ||
+			partialInterpretation.minNewElements <= partialInterpretation.maxNewElements
+	}
+
 	protected def copyScopeBoundsToHeuristic() {
 		partialInterpretation.minNewElementsHeuristic = partialInterpretation.minNewElements
 		for (scope : partialInterpretation.scopes) {
@@ -109,7 +117,7 @@ class ScopePropagator {
 //		this.partialInterpretation.scopes.forEach[println(''' «(it.targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.name»: «it.minNewElements»-«it.maxNewElements»''')]
 //		println('''All constraints are propagated upon increasing «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
 	}
-	
+
 	protected def setScopesInvalid() {
 		partialInterpretation.minNewElements = Integer.MAX_VALUE
 		partialInterpretation.maxNewElements = 0

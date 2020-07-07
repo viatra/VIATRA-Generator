@@ -19,7 +19,7 @@ class RelationDeclarationIndexer {
 		this.base = base
 	}
 	
-	public def generateRelationIndexers(LogicProblem problem, Iterable<RelationDeclaration> relations, Map<String,PQuery> fqn2PQuery) {
+	def generateRelationIndexers(LogicProblem problem, Iterable<RelationDeclaration> relations, Map<String,PQuery> fqn2PQuery) {
 		val upperMultiplicities = new HashMap
 		problem.annotations.filter(UpperMultiplicityAssertion).forEach[
 			upperMultiplicities.put(it.relation,it.upper)
@@ -42,7 +42,7 @@ class RelationDeclarationIndexer {
 		'''«modality.name.toLowerCase»InRelation«base.canonizeName(r.name)»'''
 	}
 	
-	public def referRelation(
+	def referRelation(
 		RelationDeclaration referred,
 		String sourceVariable,
 		String targetVariable,

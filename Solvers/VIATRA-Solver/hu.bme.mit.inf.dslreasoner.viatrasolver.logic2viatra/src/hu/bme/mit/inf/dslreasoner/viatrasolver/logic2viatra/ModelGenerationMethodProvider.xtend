@@ -112,6 +112,7 @@ class ModelGenerationMethodProvider {
 		ReasonerWorkspace workspace,
 		boolean nameNewElements,
 		TypeInferenceMethod typeInferenceMethod,
+		boolean calculateObjectCreationCosts,
 		ScopePropagatorStrategy scopePropagatorStrategy,
 		Collection<LinearTypeConstraintHint> hints,
 		DocumentationLevel debugLevel
@@ -135,7 +136,7 @@ class ModelGenerationMethodProvider {
 		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries, scopePropagator,
 			statistics)
 
-		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem,queries)
+		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem,queries,calculateObjectCreationCosts)
 
 		val unfinishedWF = queries.getUnfinishedWFQueries.values
 

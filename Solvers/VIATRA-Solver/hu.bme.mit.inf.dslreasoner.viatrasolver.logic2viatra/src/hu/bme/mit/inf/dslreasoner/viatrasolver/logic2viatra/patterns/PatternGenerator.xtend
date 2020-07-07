@@ -51,7 +51,7 @@ class PatternGenerator {
 	@Accessors(PUBLIC_GETTER) val RelationRefinementGenerator relationRefinementGenerator = new RelationRefinementGenerator(this)
 	@Accessors(PUBLIC_GETTER) val UnitPropagationPreconditionGenerator unitPropagationPreconditionGenerator = new UnitPropagationPreconditionGenerator(this)
 	
-	public new(TypeInferenceMethod typeInferenceMethod, ScopePropagatorStrategy scopePropagatorStrategy) {
+	new(TypeInferenceMethod typeInferenceMethod, ScopePropagatorStrategy scopePropagatorStrategy) {
 		if(typeInferenceMethod == TypeInferenceMethod.Generic) {
 			this.typeIndexer = new GenericTypeIndexer(this)
 			this.typeRefinementGenerator = new GenericTypeRefinementGenerator(this)
