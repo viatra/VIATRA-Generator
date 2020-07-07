@@ -26,6 +26,12 @@ enum StateCoderStrategy {
 	DefinedByDiversity
 }
 
+enum PunishSizeStrategy {
+	NONE,
+	SMALLER_IS_BETTER,
+	LARGER_IS_BETTER
+}
+
 class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	// public var Iterable<PQuery> existingQueries
 	public var nameNewElements = false
@@ -57,7 +63,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	 
 	public var runIntermediateNumericalConsistencyChecks = true
 	
-	public var punishSize = false
+	public var punishSize = PunishSizeStrategy.NONE
 	public var scopeWeight = 1
 	public var conaintmentWeight = 2
 	public var nonContainmentWeight = 1

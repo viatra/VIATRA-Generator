@@ -16,6 +16,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePro
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveElementConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.PunishSizeStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
@@ -110,7 +111,12 @@ class SolverLoader {
 				}
 				if (config.containsKey("fitness-punishSize")) {
 					val stringValue = config.get("fitness-punishSize")
-					c.punishSize = Boolean.parseBoolean(stringValue)
+					c.punishSize = switch (stringValue) {
+						case "false": PunishSizeStrategy.NONE
+						case "true": PunishSizeStrategy.SMALLER_IS_BETTER
+						case "inverse": PunishSizeStrategy.LARGER_IS_BETTER
+						default: throw new IllegalArgumentException("Unknown punish size strategy: " + stringValue)
+					}
 				}
 				if (config.containsKey("fitness-scope")) {
 					val stringValue = config.get("fitness-scope")

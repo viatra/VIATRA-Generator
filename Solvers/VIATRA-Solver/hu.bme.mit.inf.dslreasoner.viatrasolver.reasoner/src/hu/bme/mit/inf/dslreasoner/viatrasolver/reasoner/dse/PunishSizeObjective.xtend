@@ -2,28 +2,27 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.IThreeValuedObjective
-import java.util.Comparator
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.AbstractThreeValuedObjective
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold
 import org.eclipse.viatra.dse.base.ThreadContext
-import org.eclipse.viatra.dse.objectives.Comparators
-import org.eclipse.xtend.lib.annotations.Accessors
 
-class PunishSizeObjective implements IThreeValuedObjective {
-	@Accessors int level = 3
+class PunishSizeObjective extends AbstractThreeValuedObjective {
+	static val NAME = typeof(PunishSizeObjective).name
+	
+	new(ObjectiveKind kind, int level) {
+		super(NAME, kind, ObjectiveThreshold.NO_THRESHOLD, level)
+	}
 	
 	override createNew() {
-		this
+		new PunishSizeObjective(kind, level)
 	}
 	
 	override init(ThreadContext context) {
 		// Nothing to initialize.
 	}
 	
-	override getComparator() {
-		Comparators.LOWER_IS_BETTER
-	}
-	
-	override getFitness(ThreadContext threadContext) {
+	override getRawFitness(ThreadContext threadContext) {
 		val model = threadContext.model
 		if (model instanceof PartialInterpretation) {
 			val size = model.newObjectCount
@@ -34,11 +33,11 @@ class PunishSizeObjective implements IThreeValuedObjective {
 		}
 	}
 	
-	override getBestPossibleFitness(ThreadContext threadContext) {
-		getFitness(threadContext)
+	override getLowestPossibleFitness(ThreadContext threadContext) {
+		getRawFitness(threadContext)
 	}
 	
-	override getWorstPossibleFitness(ThreadContext threadContext) {
+	override getHighestPossibleFitness(ThreadContext threadContext) {
 		val model = threadContext.model
 		if (model instanceof PartialInterpretation) {
 			(model.newObjectCount + model.maxNewElements) as double
@@ -50,21 +49,4 @@ class PunishSizeObjective implements IThreeValuedObjective {
 	private def getNewObjectCount(PartialInterpretation interpretation) {
 		interpretation.newElements.reject[it instanceof PrimitiveElement].size
 	}
-	
-	override getName() {
-		typeof(PunishSizeObjective).name
-	}
-	
-	override isHardObjective() {
-		false
-	}
-	
-	override satisifiesHardObjective(Double fitness) {
-		true
-	}
-	
-	override setComparator(Comparator<Double> comparator) {
-		throw new UnsupportedOperationException("Model generation objective comparator cannot be set.")
-	}
-	
 }

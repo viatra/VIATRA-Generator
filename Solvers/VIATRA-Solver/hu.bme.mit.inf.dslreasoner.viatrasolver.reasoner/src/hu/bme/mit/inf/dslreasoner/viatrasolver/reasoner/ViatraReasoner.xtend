@@ -28,11 +28,13 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundH
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.NumericSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PunishSizeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ScopeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SurelyViolatedObjectiveGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedMultiplicityObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ViatraReasonerSolutionSaver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.WF2ObjectiveConverter
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ThreeValuedCostElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ThreeValuedCostObjective
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
@@ -43,7 +45,6 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PunishSizeObjective
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -100,9 +101,13 @@ class ViatraReasoner extends LogicReasoner {
 			viatraConfig
 		)
 		dse.addObjective(compositeObjective)
-		if (viatraConfig.punishSize) {
-			val punishObjective = new PunishSizeObjective
-			punishObjective.level = compositeObjective.level + 1
+		if (viatraConfig.punishSize != PunishSizeStrategy.NONE) {
+			val punishSizeStrategy = switch (viatraConfig.punishSize) {
+				case SMALLER_IS_BETTER: ObjectiveKind.LOWER_IS_BETTER
+				case LARGER_IS_BETTER: ObjectiveKind.HIGHER_IS_BETTER
+				default: throw new IllegalArgumentException("Unknown PunishSizeStrategy: " + viatraConfig.punishSize)
+			}
+			val punishObjective = new PunishSizeObjective(punishSizeStrategy, compositeObjective.level + 1)
 			dse.addObjective(punishObjective)
 		}
 
