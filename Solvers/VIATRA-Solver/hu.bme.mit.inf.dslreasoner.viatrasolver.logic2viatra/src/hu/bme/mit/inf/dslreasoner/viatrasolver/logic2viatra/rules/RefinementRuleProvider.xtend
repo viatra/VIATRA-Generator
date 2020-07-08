@@ -27,6 +27,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialStringInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
+import java.lang.reflect.Field
 import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.LinkedList
@@ -38,6 +39,7 @@ import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.emf.EMFScope
+import org.eclipse.viatra.query.runtime.rete.matcher.ReteBackendFactory
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRule
 import org.eclipse.viatra.transformation.runtime.emf.rules.batch.BatchTransformationRuleFactory
 import org.eclipse.xtend.lib.annotations.Data
@@ -47,186 +49,180 @@ class RefinementRuleProvider {
 	val extension BatchTransformationRuleFactory factory = new BatchTransformationRuleFactory
 	val extension PartialinterpretationFactory factory2 = PartialinterpretationFactory.eINSTANCE
 	val extension LogiclanguageFactory factory3 = LogiclanguageFactory.eINSTANCE
-	
+
 	var AdvancedViatraQueryEngine queryEngine
-	
+	var Field delayMessageDelivery
+
 	def canonizeName(String name) {
-		return name.replace(' ','_')
+		return name.replace(' ', '_')
 	}
-	
+
 	def LinkedHashMap<ObjectCreationPrecondition, BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>> createObjectRefinementRules(
-			LogicProblem p,
-			PartialInterpretation i,
-			GeneratedPatterns patterns,
-			ScopePropagator scopePropagator,
-			boolean nameNewElement,
-			ModelGenerationStatistics statistics
-		)
-	{
+		LogicProblem p,
+		PartialInterpretation i,
+		GeneratedPatterns patterns,
+		ScopePropagator scopePropagator,
+		boolean nameNewElement,
+		ModelGenerationStatistics statistics
+	) {
 		val res = new LinkedHashMap
-		val recursiveObjectCreation = recursiveObjectCreation(p,i)
+		val recursiveObjectCreation = recursiveObjectCreation(p, i)
 		queryEngine = ViatraQueryEngine.on(new EMFScope(i)) as AdvancedViatraQueryEngine
-		for(LHSEntry: patterns.refineObjectQueries.entrySet) {
+		delayMessageDelivery = queryEngine.class.getDeclaredField("delayMessageDelivery")
+		delayMessageDelivery.accessible = true
+		for (LHSEntry : patterns.refineObjectQueries.entrySet) {
 			val containmentRelation = LHSEntry.key.containmentRelation
 			val inverseRelation = LHSEntry.key.inverseContainment
 			val type = LHSEntry.key.newType
 			val lhs = LHSEntry.value as IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>>
-			val rule = createObjectCreationRule(p,containmentRelation,inverseRelation,type,recursiveObjectCreation.get(type),lhs,nameNewElement,scopePropagator,statistics)
-			res.put(LHSEntry.key,rule)
+			val rule = createObjectCreationRule(p, containmentRelation, inverseRelation, type,
+				recursiveObjectCreation.get(type), lhs, nameNewElement, scopePropagator, statistics)
+			res.put(LHSEntry.key, rule)
 		}
 		return res
 	}
-	
-	def private createObjectCreationRule(
-		LogicProblem p,
-		Relation containmentRelation,
-		Relation inverseRelation,
-		Type type,
-		List<ObjectCreationInterpretationData> recursiceObjectCreations,
-		IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs,
-		boolean nameNewElement,
-		ScopePropagator scopePropagator,
-		ModelGenerationStatistics statistics)
-	{
-		val name = '''addObject_«type.name.canonizeName»«
-					IF containmentRelation!==null»_by_«containmentRelation.name.canonizeName»«ENDIF»'''
-		val ruleBuilder = factory.createRule(lhs)
-				.name(name)
-		if(containmentRelation !== null) {
-			if(inverseRelation!== null) {
-				ruleBuilder.action[match |
+
+	def private createObjectCreationRule(LogicProblem p, Relation containmentRelation, Relation inverseRelation,
+		Type type, List<ObjectCreationInterpretationData> recursiceObjectCreations,
+		IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs, boolean nameNewElement,
+		ScopePropagator scopePropagator, ModelGenerationStatistics statistics) {
+		val name = '''addObject_«type.name.canonizeName»«IF containmentRelation!==null»_by_«containmentRelation.name.canonizeName»«ENDIF»'''
+		val ruleBuilder = factory.createRule(lhs).name(name)
+		if (containmentRelation !== null) {
+			if (inverseRelation !== null) {
+				ruleBuilder.action [ match |
 					statistics.incrementTransformationCount
 //					println(name)						
-					//val problem = match.get(0) as LogicProblem
+					// val problem = match.get(0) as LogicProblem
 					val interpretation = match.get(1) as PartialInterpretation
 					val relationInterpretation = match.get(2) as PartialRelationInterpretation
 					val inverseRelationInterpretation = match.get(3) as PartialRelationInterpretation
 					val typeInterpretation = match.get(4) as PartialComplexTypeInterpretation
 					val container = match.get(5) as DefinedElement
-					
-					queryEngine.delayUpdatePropagation [
-						val startTime = System.nanoTime
-						createObjectActionWithContainmentAndInverse(
-							nameNewElement,
-							interpretation,
-							typeInterpretation,
-							container,
-							relationInterpretation,
-							inverseRelationInterpretation,
-							[createDefinedElement],
-							recursiceObjectCreations,
-							scopePropagator
-						)
-						statistics.addExecutionTime(System.nanoTime-startTime)
-					]
-					
-					// Scope propagation
-					queryEngine.delayUpdatePropagation [
-						val propagatorStartTime = System.nanoTime
-						scopePropagator.propagateAllScopeConstraints()
-						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
-					]
-				]
-			} else {
-				ruleBuilder.action[match |
-					statistics.incrementTransformationCount
-//					println(name)
-					//val problem = match.get(0) as LogicProblem
-					val interpretation = match.get(1) as PartialInterpretation
-					val relationInterpretation = match.get(2) as PartialRelationInterpretation
-					val typeInterpretation = match.get(3) as PartialComplexTypeInterpretation
-					val container = match.get(4) as DefinedElement
-					
-					queryEngine.delayUpdatePropagation [
-						val startTime = System.nanoTime
-						createObjectActionWithContainment(
-							nameNewElement,
-							interpretation,
-							typeInterpretation,
-							container,
-							relationInterpretation,
-							[createDefinedElement],
-							recursiceObjectCreations,
-							scopePropagator
-						)
-						statistics.addExecutionTime(System.nanoTime-startTime)
-					]
-					
-					// Scope propagation
-					queryEngine.delayUpdatePropagation [
-						val propagatorStartTime = System.nanoTime
-						scopePropagator.propagateAllScopeConstraints()
-						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
-					]
-				]
-			}
-		} else {
-			ruleBuilder.action[match |
-				statistics.incrementTransformationCount
-//				println(name)
-				//val problem = match.get(0) as LogicProblem
-				val interpretation = match.get(1) as PartialInterpretation
-				val typeInterpretation = match.get(2) as PartialComplexTypeInterpretation
 
-				queryEngine.delayUpdatePropagation [
 					val startTime = System.nanoTime
-					createObjectAction(
+					createObjectActionWithContainmentAndInverse(
 						nameNewElement,
 						interpretation,
 						typeInterpretation,
+						container,
+						relationInterpretation,
+						inverseRelationInterpretation,
 						[createDefinedElement],
 						recursiceObjectCreations,
 						scopePropagator
 					)
-					statistics.addExecutionTime(System.nanoTime-startTime)
-				]
-				
-				// Scope propagation
-				queryEngine.delayUpdatePropagation [
+					statistics.addExecutionTime(System.nanoTime - startTime)
+
+					flushQueryEngine
+
+					// Scope propagation
 					val propagatorStartTime = System.nanoTime
 					scopePropagator.propagateAllScopeConstraints()
-					statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+					statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
 				]
+			} else {
+				ruleBuilder.action [ match |
+					statistics.incrementTransformationCount
+//					println(name)
+					// val problem = match.get(0) as LogicProblem
+					val interpretation = match.get(1) as PartialInterpretation
+					val relationInterpretation = match.get(2) as PartialRelationInterpretation
+					val typeInterpretation = match.get(3) as PartialComplexTypeInterpretation
+					val container = match.get(4) as DefinedElement
+
+					val startTime = System.nanoTime
+					createObjectActionWithContainment(
+						nameNewElement,
+						interpretation,
+						typeInterpretation,
+						container,
+						relationInterpretation,
+						[createDefinedElement],
+						recursiceObjectCreations,
+						scopePropagator
+					)
+					statistics.addExecutionTime(System.nanoTime - startTime)
+
+					flushQueryEngine
+
+					// Scope propagation
+					val propagatorStartTime = System.nanoTime
+					scopePropagator.propagateAllScopeConstraints()
+					statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
+				]
+			}
+		} else {
+			ruleBuilder.action [ match |
+				statistics.incrementTransformationCount
+//				println(name)
+				// val problem = match.get(0) as LogicProblem
+				val interpretation = match.get(1) as PartialInterpretation
+				val typeInterpretation = match.get(2) as PartialComplexTypeInterpretation
+
+				val startTime = System.nanoTime
+				createObjectAction(
+					nameNewElement,
+					interpretation,
+					typeInterpretation,
+					[createDefinedElement],
+					recursiceObjectCreations,
+					scopePropagator
+				)
+				statistics.addExecutionTime(System.nanoTime - startTime)
+
+				flushQueryEngine
+
+				// Scope propagation
+				val propagatorStartTime = System.nanoTime
+				scopePropagator.propagateAllScopeConstraints()
+				statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
 			]
 		}
 		return ruleBuilder.build
 	}
-	
+
 	def private recursiveObjectCreation(LogicProblem p, PartialInterpretation i) {
-		val Map<Type,List<ObjectCreationInterpretationData>> recursiveObjectCreation = new HashMap
-		for(type : p.types) {
-			recursiveObjectCreation.put(type,new LinkedList)
+		val Map<Type, List<ObjectCreationInterpretationData>> recursiveObjectCreation = new HashMap
+		for (type : p.types) {
+			recursiveObjectCreation.put(type, new LinkedList)
 		}
-		
+
 		val containmentReferences = p.containmentHierarchies.head.containmentRelations
-		
-		for(relationInterpretation : i.partialrelationinterpretation) {
+
+		for (relationInterpretation : i.partialrelationinterpretation) {
 			val relation = relationInterpretation.interpretationOf
 			val lowermultiplicities = p.annotations.filter(LowerMultiplicityAssertion).filter[it.relation === relation]
-			if((!lowermultiplicities.empty)) {
+			if ((!lowermultiplicities.empty)) {
 				val number = lowermultiplicities.head.lower
-				if(number > 0) {
-					val sourceTypeInterpretation = getTypeInterpretation(i, relation, 0) as PartialComplexTypeInterpretation
-					val subtypeInterpretations = i.partialtypeinterpratation.filter(PartialComplexTypeInterpretation).filter[
-						it === sourceTypeInterpretation ||
-						it.supertypeInterpretation.contains(sourceTypeInterpretation)
-					]
-					
-					if(containmentReferences.contains(relation)) {
+				if (number > 0) {
+					val sourceTypeInterpretation = getTypeInterpretation(i, relation,
+						0) as PartialComplexTypeInterpretation
+					val subtypeInterpretations = i.partialtypeinterpratation.filter(PartialComplexTypeInterpretation).
+						filter [
+							it === sourceTypeInterpretation ||
+								it.supertypeInterpretation.contains(sourceTypeInterpretation)
+						]
+
+					if (containmentReferences.contains(relation)) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
 						val targetType = (targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf
-						if((!targetType.isIsAbstract) && (targetType.supertypes.empty)) {
-							val inverseAnnotation = p.annotations.filter(InverseRelationAssertion).filter[it.inverseA === relation || it.inverseB === relation]
-							if(!inverseAnnotation.empty) {
-								val onlyInverseAnnotation = if(inverseAnnotation.head.inverseA===relation) {
-									inverseAnnotation.head.inverseB
-								} else {
-									inverseAnnotation.head.inverseA
-								}
-								val inverseRelationInterpretation = i.partialrelationinterpretation.filter[it.interpretationOf === onlyInverseAnnotation].head
-								for(subTypeInterpretation : subtypeInterpretations) {
-									for(var times=0; times<number; times++) {
-										recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) += 
+						if ((!targetType.isIsAbstract) && (targetType.supertypes.empty)) {
+							val inverseAnnotation = p.annotations.filter(InverseRelationAssertion).filter [
+								it.inverseA === relation || it.inverseB === relation
+							]
+							if (!inverseAnnotation.empty) {
+								val onlyInverseAnnotation = if (inverseAnnotation.head.inverseA === relation) {
+										inverseAnnotation.head.inverseB
+									} else {
+										inverseAnnotation.head.inverseA
+									}
+								val inverseRelationInterpretation = i.partialrelationinterpretation.filter [
+									it.interpretationOf === onlyInverseAnnotation
+								].head
+								for (subTypeInterpretation : subtypeInterpretations) {
+									for (var times = 0; times < number; times++) {
+										recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) +=
 											new ObjectCreationInterpretationData(
 												i,
 												targetTypeInterpretation,
@@ -237,9 +233,9 @@ class RefinementRuleProvider {
 									}
 								}
 							} else {
-								for(subTypeInterpretation : subtypeInterpretations) {
-									for(var times=0; times<number; times++) {
-										recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) += 
+								for (subTypeInterpretation : subtypeInterpretations) {
+									for (var times = 0; times < number; times++) {
+										recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) +=
 											new ObjectCreationInterpretationData(
 												i,
 												targetTypeInterpretation,
@@ -251,11 +247,11 @@ class RefinementRuleProvider {
 								}
 							}
 						}
-					} else if(relation.parameters.get(1) instanceof PrimitiveTypeReference) {
+					} else if (relation.parameters.get(1) instanceof PrimitiveTypeReference) {
 						val targetTypeInterpretation = getTypeInterpretation(i, relation, 1)
-						for(subTypeInterpretation : subtypeInterpretations) {
-							for(var times=0; times<number; times++) {
-								recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) += 
+						for (subTypeInterpretation : subtypeInterpretations) {
+							for (var times = 0; times < number; times++) {
+								recursiveObjectCreation.get(subTypeInterpretation.interpretationOf) +=
 									new ObjectCreationInterpretationData(
 										i,
 										targetTypeInterpretation,
@@ -269,114 +265,125 @@ class RefinementRuleProvider {
 				}
 			}
 		}
-		
+
 		// Doing the recursion
 		var objectCreations = new LinkedList(recursiveObjectCreation.values.flatten.toList)
-		for(objectCreation : objectCreations) {
+		for (objectCreation : objectCreations) {
 			val newInterpretation = objectCreation.typeInterpretation
-			if(newInterpretation instanceof PartialComplexTypeInterpretation) {
+			if (newInterpretation instanceof PartialComplexTypeInterpretation) {
 				val newlyCreatedType = newInterpretation.interpretationOf
-				if(recursiveObjectCreation.containsKey(newlyCreatedType)) {
+				if (recursiveObjectCreation.containsKey(newlyCreatedType)) {
 					val actionsWhenTypeCreated = recursiveObjectCreation.get(newlyCreatedType)
-					objectCreation.recursiveConstructors+=actionsWhenTypeCreated
+					objectCreation.recursiveConstructors += actionsWhenTypeCreated
 				}
 			}
 		}
-		
+
 		// checking acyclicity
-		for(objectCreation : objectCreations) {
+		for (objectCreation : objectCreations) {
 			var reachable = objectCreation.recursiveConstructors
 			do {
-				if(reachable.contains(objectCreation)) {
+				if (reachable.contains(objectCreation)) {
 					throw new IllegalArgumentException('''Cicrle in the containment!''')
 				} else {
 					reachable = reachable.map[it.recursiveConstructors].flatten.toList
 				}
-			} while(!reachable.empty)
-		}	
-		
+			} while (!reachable.empty)
+		}
+
 		return recursiveObjectCreation
 	}
-	
+
 	private def getTypeInterpretation(PartialInterpretation i, RelationDeclaration relation, int index) {
 		val typeReference = relation.parameters.get(index)
-		return getTypeInterpretation(i,typeReference)
-		
+		return getTypeInterpretation(i, typeReference)
+
 	}
+
 	private dispatch def getTypeInterpretation(PartialInterpretation i, ComplexTypeReference reference) {
-		return i.partialtypeinterpratation
-				.filter(PartialComplexTypeInterpretation)
-				.filter[it.getInterpretationOf == reference.referred]
-				.head
+		return i.partialtypeinterpratation.filter(PartialComplexTypeInterpretation).filter [
+			it.getInterpretationOf == reference.referred
+		].head
 	}
+
 	private dispatch def getTypeInterpretation(PartialInterpretation i, BoolTypeReference reference) {
-		return i.partialtypeinterpratation
-				.filter(PartialBooleanInterpretation)
-				.head
+		return i.partialtypeinterpratation.filter(PartialBooleanInterpretation).head
 	}
+
 	private dispatch def getTypeInterpretation(PartialInterpretation i, IntTypeReference reference) {
-		return i.partialtypeinterpratation
-				.filter(PartialIntegerInterpretation)
-				.head
+		return i.partialtypeinterpratation.filter(PartialIntegerInterpretation).head
 	}
+
 	private dispatch def getTypeInterpretation(PartialInterpretation i, RealTypeReference reference) {
-		return i.partialtypeinterpratation
-				.filter(PartialRealInterpretation)
-				.head
+		return i.partialtypeinterpratation.filter(PartialRealInterpretation).head
 	}
+
 	private dispatch def getTypeInterpretation(PartialInterpretation i, StringTypeReference reference) {
-		return i.partialtypeinterpratation
-				.filter(PartialStringInterpretation)
-				.head
+		return i.partialtypeinterpratation.filter(PartialStringInterpretation).head
 	}
-	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialComplexTypeInterpretation reference) { [createDefinedElement] }
-	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialBooleanInterpretation reference) { [createBooleanElement] }
-	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialIntegerInterpretation reference) { [createIntegerElement] }
-	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialRealInterpretation reference) { [createRealElement] }
-	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialStringInterpretation reference) { [createStringElement] }
-	
-	
-	def createRelationRefinementRules(GeneratedPatterns patterns, ScopePropagator scopePropagator, ModelGenerationStatistics statistics) {
+
+	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialComplexTypeInterpretation reference) {
+		[createDefinedElement]
+	}
+
+	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialBooleanInterpretation reference) {
+		[createBooleanElement]
+	}
+
+	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialIntegerInterpretation reference) {
+		[createIntegerElement]
+	}
+
+	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialRealInterpretation reference) {
+		[createRealElement]
+	}
+
+	private dispatch def Function0<DefinedElement> getTypeConstructor(PartialStringInterpretation reference) {
+		[createStringElement]
+	}
+
+	def createRelationRefinementRules(GeneratedPatterns patterns, ScopePropagator scopePropagator,
+		ModelGenerationStatistics statistics) {
 		val res = new LinkedHashMap
-		for(LHSEntry: patterns.refinerelationQueries.entrySet) {
+		for (LHSEntry : patterns.refinerelationQueries.entrySet) {
 			val declaration = LHSEntry.key.key
 			val inverseReference = LHSEntry.key.value
 			val lhs = LHSEntry.value as IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>>
-			val rule = createRelationRefinementRule(declaration,inverseReference,lhs,scopePropagator,statistics)
-			res.put(LHSEntry.key,rule)
+			val rule = createRelationRefinementRule(declaration, inverseReference, lhs, scopePropagator, statistics)
+			res.put(LHSEntry.key, rule)
 		}
 		return res
 	}
-	
-	def private BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>>
-		createRelationRefinementRule(RelationDeclaration declaration, Relation inverseRelation, IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs, ScopePropagator scopePropagator, ModelGenerationStatistics statistics)
-	{
+
+	def private BatchTransformationRule<GenericPatternMatch, ViatraQueryMatcher<GenericPatternMatch>> createRelationRefinementRule(
+		RelationDeclaration declaration, Relation inverseRelation,
+		IQuerySpecification<ViatraQueryMatcher<GenericPatternMatch>> lhs, ScopePropagator scopePropagator,
+		ModelGenerationStatistics statistics) {
 		val name = '''addRelation_«declaration.name.canonizeName»«IF inverseRelation !== null»_and_«inverseRelation.name.canonizeName»«ENDIF»'''
-		val ruleBuilder = factory.createRule(lhs)
-			.name(name)
+		val ruleBuilder = factory.createRule(lhs).name(name)
 		if (inverseRelation === null) {
 			ruleBuilder.action [ match |
 				statistics.incrementTransformationCount
-			    
+
 //				println(name)
 				// val problem = match.get(0) as LogicProblem
 				// val interpretation = match.get(1) as PartialInterpretation
 				val relationInterpretation = match.get(2) as PartialRelationInterpretation
 				val src = match.get(3) as DefinedElement
 				val trg = match.get(4) as DefinedElement
-				
+
 				queryEngine.delayUpdatePropagation [
 					val startTime = System.nanoTime
 					createRelationLinkAction(src, trg, relationInterpretation)
-					statistics.addExecutionTime(System.nanoTime-startTime)
+					statistics.addExecutionTime(System.nanoTime - startTime)
 				]
-				
+
 				// Scope propagation
 				if (scopePropagator.isPropagationNeededAfterAdditionToRelation(declaration)) {
 					queryEngine.delayUpdatePropagation [
 						val propagatorStartTime = System.nanoTime
 						scopePropagator.propagateAllScopeConstraints()
-						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
+						statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
 					]
 				}
 			]
@@ -391,33 +398,31 @@ class RefinementRuleProvider {
 				val src = match.get(4) as DefinedElement
 				val trg = match.get(5) as DefinedElement
 
-				queryEngine.delayUpdatePropagation [
-					val startTime = System.nanoTime
-					createRelationLinkWithInverse(src, trg, relationInterpretation, inverseInterpretation)
-					statistics.addExecutionTime(System.nanoTime-startTime)
-				]
-				
+				val startTime = System.nanoTime
+				createRelationLinkWithInverse(src, trg, relationInterpretation, inverseInterpretation)
+				statistics.addExecutionTime(System.nanoTime - startTime)
+
 				// Scope propagation
 				if (scopePropagator.isPropagationNeededAfterAdditionToRelation(declaration)) {
-					queryEngine.delayUpdatePropagation [
-						val propagatorStartTime = System.nanoTime
-						scopePropagator.propagateAllScopeConstraints()
-						statistics.addScopePropagationTime(System.nanoTime-propagatorStartTime)
-					]
+					flushQueryEngine
+
+					val propagatorStartTime = System.nanoTime
+					scopePropagator.propagateAllScopeConstraints()
+					statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
 				}
 			]
 		}
 
 		return ruleBuilder.build
 	}
-	
-	/////////////////////////
+
+	// ///////////////////////
 	// Actions
-	/////////////////////////
-	
-	protected def void createObjectAction(boolean nameNewElement, ObjectCreationInterpretationData data, DefinedElement container, ScopePropagator scopePropagator) {
-		if(data.containerInterpretation !== null) {
-			if(data.containerInverseInterpretation !== null) {
+	// ///////////////////////
+	protected def void createObjectAction(boolean nameNewElement, ObjectCreationInterpretationData data,
+		DefinedElement container, ScopePropagator scopePropagator) {
+		if (data.containerInterpretation !== null) {
+			if (data.containerInverseInterpretation !== null) {
 				createObjectActionWithContainmentAndInverse(
 					nameNewElement,
 					data.interpretation,
@@ -451,9 +456,9 @@ class RefinementRuleProvider {
 				scopePropagator
 			)
 		}
-		
+
 	}
-	
+
 	protected def createObjectActionWithContainmentAndInverse(
 		boolean nameNewElement,
 		PartialInterpretation interpretation,
@@ -466,36 +471,36 @@ class RefinementRuleProvider {
 		ScopePropagator scopePropagator
 	) {
 		val newElement = constructor.apply
-		if(nameNewElement) {
+		if (nameNewElement) {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
-		
+
 		// Types
 		typeInterpretation.elements += newElement
-		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
+		if (typeInterpretation instanceof PartialComplexTypeInterpretation) {
 			typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
 		}
 		// ContainmentRelation
 		val newLink1 = factory2.createBinaryElementRelationLink => [it.param1 = container it.param2 = newElement]
-		relationInterpretation.relationlinks+=newLink1
+		relationInterpretation.relationlinks += newLink1
 		// Inverse Containment
 		val newLink2 = factory2.createBinaryElementRelationLink => [it.param1 = newElement it.param2 = container]
-		inverseRelationInterpretation.relationlinks+=newLink2
-		
+		inverseRelationInterpretation.relationlinks += newLink2
+
 		// Scope propagation
 		scopePropagator.decrementTypeScope(typeInterpretation)
-		
+
 		// Existence
-		interpretation.newElements+=newElement
-		
+		interpretation.newElements += newElement
+
 		// Do recursive object creation
-		for(newConstructor : recursiceObjectCreations) {
-			createObjectAction(nameNewElement,newConstructor,newElement,scopePropagator)
+		for (newConstructor : recursiceObjectCreations) {
+			createObjectAction(nameNewElement, newConstructor, newElement, scopePropagator)
 		}
-		
+
 		return newElement
 	}
-	
+
 	protected def createObjectActionWithContainment(
 		boolean nameNewElement,
 		PartialInterpretation interpretation,
@@ -507,76 +512,81 @@ class RefinementRuleProvider {
 		ScopePropagator scopePropagator
 	) {
 		val newElement = constructor.apply
-		if(nameNewElement) {
+		if (nameNewElement) {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
-		
+
 		// Types
 		typeInterpretation.elements += newElement
-		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
+		if (typeInterpretation instanceof PartialComplexTypeInterpretation) {
 			typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
 		}
 		// ContainmentRelation
 		val newLink = factory2.createBinaryElementRelationLink => [it.param1 = container it.param2 = newElement]
-		relationInterpretation.relationlinks+=newLink
-		
+		relationInterpretation.relationlinks += newLink
+
 		// Scope propagation
 		scopePropagator.decrementTypeScope(typeInterpretation)
-		
+
 		// Existence
-		interpretation.newElements+=newElement
-		
+		interpretation.newElements += newElement
+
 		// Do recursive object creation
-		for(newConstructor : recursiceObjectCreations) {
-			createObjectAction(nameNewElement,newConstructor,newElement,scopePropagator)
+		for (newConstructor : recursiceObjectCreations) {
+			createObjectAction(nameNewElement, newConstructor, newElement, scopePropagator)
 		}
-		
+
 		return newElement
 	}
-	
-	protected def createObjectAction(
-		boolean nameNewElement,
-		PartialInterpretation interpretation,
-		PartialTypeInterpratation typeInterpretation,
-		Function0<DefinedElement> constructor,
-		List<ObjectCreationInterpretationData> recursiceObjectCreations,
-		ScopePropagator scopePropagator)
-	{
+
+	protected def createObjectAction(boolean nameNewElement, PartialInterpretation interpretation,
+		PartialTypeInterpratation typeInterpretation, Function0<DefinedElement> constructor,
+		List<ObjectCreationInterpretationData> recursiceObjectCreations, ScopePropagator scopePropagator) {
 		val newElement = constructor.apply
-		if(nameNewElement) {
+		if (nameNewElement) {
 			newElement.name = '''new «interpretation.newElements.size»'''
 		}
-		
+
 		// Types
 		typeInterpretation.elements += newElement
-		if(typeInterpretation instanceof PartialComplexTypeInterpretation) {
+		if (typeInterpretation instanceof PartialComplexTypeInterpretation) {
 			typeInterpretation.supertypeInterpretation.forEach[it.elements += newElement]
 		}
-		
+
 		// Scope propagation
 		scopePropagator.decrementTypeScope(typeInterpretation)
-		
+
 		// Existence
-		interpretation.newElements+=newElement
-		
+		interpretation.newElements += newElement
+
 		// Do recursive object creation
-		for(newConstructor : recursiceObjectCreations) {
-			createObjectAction(nameNewElement,newConstructor,newElement,scopePropagator)
+		for (newConstructor : recursiceObjectCreations) {
+			createObjectAction(nameNewElement, newConstructor, newElement, scopePropagator)
 		}
-		
+
 		return newElement
 	}
-	
-	protected def boolean createRelationLinkAction(DefinedElement src, DefinedElement trg, PartialRelationInterpretation relationInterpretation) {
+
+	protected def boolean createRelationLinkAction(DefinedElement src, DefinedElement trg,
+		PartialRelationInterpretation relationInterpretation) {
 		val link = createBinaryElementRelationLink => [it.param1 = src it.param2 = trg]
 		relationInterpretation.relationlinks += link
 	}
-	
-	protected def boolean createRelationLinkWithInverse(DefinedElement src, DefinedElement trg, PartialRelationInterpretation relationInterpretation, PartialRelationInterpretation inverseInterpretation) {
+
+	protected def boolean createRelationLinkWithInverse(DefinedElement src, DefinedElement trg,
+		PartialRelationInterpretation relationInterpretation, PartialRelationInterpretation inverseInterpretation) {
 		val link = createBinaryElementRelationLink => [it.param1 = src it.param2 = trg]
 		relationInterpretation.relationlinks += link
 		val inverseLink = createBinaryElementRelationLink => [it.param1 = trg it.param2 = src]
 		inverseInterpretation.relationlinks += inverseLink
+	}
+
+	protected def flushQueryEngine() {
+		if (queryEngine.updatePropagationDelayed) {
+			delayMessageDelivery.setBoolean(queryEngine, false)
+			queryEngine.getQueryBackend(ReteBackendFactory.INSTANCE).flushUpdates
+			delayMessageDelivery.setBoolean(queryEngine, true)
+		}
 	}
 }
 

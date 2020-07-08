@@ -206,7 +206,14 @@ public class SolutionTrajectory {
 						}
 					};
 					long start = System.nanoTime();
-					editingDomain.getCommandStack().execute(cc);
+					try {
+						((AdvancedViatraQueryEngine) engine).delayUpdatePropagation(() -> {
+							editingDomain.getCommandStack().execute(cc);
+							return null;
+						});
+					} catch (InvocationTargetException e) {
+						throw new RuntimeException(e);
+					}
 					listener.forwardWorked(System.nanoTime() - start);
 				}
 

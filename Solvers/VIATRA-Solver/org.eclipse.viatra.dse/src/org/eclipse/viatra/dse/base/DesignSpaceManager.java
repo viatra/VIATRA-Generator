@@ -151,7 +151,14 @@ public class DesignSpaceManager implements IBacktrackListener {
 		Object previousState = trajectory.getCurrentStateId();
 
 		long start = System.nanoTime();
-		domain.getCommandStack().execute(rc);
+		try {
+			engine.delayUpdatePropagation(() -> {
+				domain.getCommandStack().execute(rc);
+				return null;
+			});
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		}
 		forwardTime += System.nanoTime() - start;
 
 		Object newStateId = stateCoder.createStateCode();
@@ -270,7 +277,14 @@ public class DesignSpaceManager implements IBacktrackListener {
 			};
 			
 			long start = System.nanoTime();
-			domain.getCommandStack().execute(rc);
+			try {
+				engine.delayUpdatePropagation(() -> {
+					domain.getCommandStack().execute(rc);
+					return null;
+				});
+			} catch (InvocationTargetException e) {
+				throw new RuntimeException(e);
+			}
 			forwardTime += System.nanoTime() - start;
 
 			Object newStateId = null;
