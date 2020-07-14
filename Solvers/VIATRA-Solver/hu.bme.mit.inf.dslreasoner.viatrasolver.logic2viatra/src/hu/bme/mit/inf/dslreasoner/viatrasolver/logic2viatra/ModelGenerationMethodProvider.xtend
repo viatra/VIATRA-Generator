@@ -1,6 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra
 
 import com.google.common.collect.ImmutableMap
+import com.google.common.collect.ImmutableSet
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery
@@ -57,7 +58,7 @@ class ModelGenerationStatistics {
 	}
 
 	public var int transformationInvocations
-	
+
 	synchronized def incrementTransformationCount() {
 		transformationInvocations++
 	}
@@ -67,7 +68,7 @@ class ModelGenerationStatistics {
 	synchronized def incrementScopePropagationCount() {
 		scopePropagatorInvocations++
 	}
-	
+
 	public var int scopePropagatorSolverInvocations
 
 	synchronized def incrementScopePropagationSolverCount() {
@@ -126,9 +127,7 @@ class ModelGenerationMethodProvider {
 		val relationConstraints = relationConstraintCalculator.calculateRelationConstraints(logicProblem)
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
 			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, hints, writeFiles)
-		val queryEngine = ViatraQueryEngine.on(new EMFScope(emptySolution))
-		GenericQueryGroup.of(queries.allQueries).prepare(queryEngine)
-		
+
 		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, hints, queries, statistics)
 		scopePropagator.propagateAllScopeConstraints
 		val objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(logicProblem, emptySolution,
@@ -136,7 +135,8 @@ class ModelGenerationMethodProvider {
 		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries, scopePropagator,
 			statistics)
 
-		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem,queries,calculateObjectCreationCosts)
+		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem, queries,
+			calculateObjectCreationCosts)
 
 		val unfinishedWF = queries.getUnfinishedWFQueries.values
 
@@ -150,9 +150,17 @@ class ModelGenerationMethodProvider {
 		val modalRelationQueries = modalRelationQueriesBuilder.build
 
 		val invalidWF = queries.getInvalidWFQueries.values
-		
+
 		val mustUnitPropagationPreconditions = queries.getMustUnitPropagationPreconditionPatterns
 		val currentUnitPropagationPreconditions = queries.getCurrentUnitPropagationPreconditionPatterns
+
+		val queriesToPrepare = ImmutableSet.builder.addAll(queries.refineObjectQueries.values).addAll(
+			queries.refineTypeQueries.values).addAll(queries.refinerelationQueries.values).addAll(queries.
+			multiplicityConstraintQueries.values.flatMap[allQueries]).addAll(queries.unfinishedWFQueries.values).addAll(
+			queries.invalidWFQueries.values).addAll(queries.mustUnitPropagationPreconditionPatterns.values).addAll(
+			queries.currentUnitPropagationPreconditionPatterns.values).add(queries.hasElementInContainmentQuery).build
+		val queryEngine = ViatraQueryEngine.on(new EMFScope(emptySolution))
+		GenericQueryGroup.of(queriesToPrepare).prepare(queryEngine)
 
 		return new ModelGenerationMethod(
 			statistics,

@@ -7,7 +7,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend2.lib.StringConcatenationClient
 
 @Data abstract class AbstractNodeDescriptor {
-	long dataHash
+	int dataHash
 
 	protected def StringConcatenationClient prettyPrint() {
 		'''(«dataHash»)[«class.simpleName»]'''
@@ -57,7 +57,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 	}
 
 	override hashCode() {
-		return this.dataHash.hashCode
+		return this.dataHash
 	}
 
 	override equals(Object other) {
@@ -119,7 +119,6 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 }
 
 @Data class FurtherNodeDescriptor<NodeRep> extends AbstractNodeDescriptor {
-
 	NodeRep previousRepresentation
 	Map<IncomingRelation<NodeRep>, Integer> incomingEdges
 	Map<OutgoingRelation<NodeRep>, Integer> outgoingEdges
@@ -128,8 +127,8 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 		Map<OutgoingRelation<NodeRep>, Integer> outgoingEdges) {
 		super(calculateDataHash(previousRepresentation, incomingEdges, outgoingEdges))
 		this.previousRepresentation = previousRepresentation
-		this.incomingEdges = new HashMap(incomingEdges)
-		this.outgoingEdges = new HashMap(outgoingEdges)
+		this.incomingEdges = incomingEdges
+		this.outgoingEdges = outgoingEdges
 	}
 
 	static def private <NodeRep> int calculateDataHash(NodeRep previousRepresentation,
@@ -137,14 +136,14 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 		val int prime = 31;
 		var int result = previousRepresentation.hashCode;
 		if (incomingEdges !== null)
-			result = prime * result + incomingEdges.hashCode();
+			result = prime * result + hashIncomingNeighborhood(incomingEdges)
 		if (outgoingEdges !== null)
-			result = prime * result + outgoingEdges.hashCode();
+			result = prime * result + hashOutgoingNeighborhood(outgoingEdges)
 		return result;
 	}
 
 	override hashCode() {
-		return this.dataHash.hashCode
+		return this.dataHash
 	}
 
 	override equals(Object other) {
@@ -179,80 +178,31 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 			'''«rep»'''
 		}
 	}
+	
+	private static def <NodeRep> hashIncomingNeighborhood(Map<IncomingRelation<NodeRep>, Integer> neighborhood) {
+		val int prime = 31
+		var int hash = 0
+		for (entry : neighborhood.entrySet) {
+			val relation = entry.key
+			hash += (prime * relation.from.hashCode + relation.type.hashCode).bitwiseXor(entry.value.hashCode)
+		}
+		hash
+	}
+	
+	private static def <NodeRep> hashOutgoingNeighborhood(Map<OutgoingRelation<NodeRep>, Integer> neighborhood) {
+		val int prime = 31
+		var int hash = 0
+		for (entry : neighborhood.entrySet) {
+			val relation = entry.key
+			hash += (prime * relation.to.hashCode + relation.type.hashCode).bitwiseXor(entry.value.hashCode)
+		}
+		hash
+	}
 
 	override toString() {
 		'''
 			«prettyPrint»
 		'''
 	}
-
-//	@Pure
-//	@Override
-//	override public boolean equals(Object obj) {
-//		if (this === obj)
-//			return true;
-//		if (obj === null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		val AbstractNodeDescriptor other = obj as AbstractNodeDescriptor;
-//		if (other.dataHash != this.dataHash)
-//			return false;
-//		return true;
-//	}
-//	@Pure
-//	override public boolean equals(Object obj) {
-//		if (this === obj)
-//			return true;
-//		if (obj === null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		if (!super.equals(obj))
-//			return false;
-//		val FurtherNodeDescriptor<?> other = obj as FurtherNodeDescriptor<?>;
-//		if (this.previousRepresentation === null) {
-//			if (other.previousRepresentation != null)
-//				return false;
-//			
-//		}
-////		} else if (!this.previousRepresentation.equals(other.previousRepresentation))
-////			return false;
-//		if (this.incomingEdges === null) {
-//			if (other.incomingEdges != null)
-//				return false;
-//		} else if (!this.incomingEdges.equals(other.incomingEdges))
-//			return false;
-//		if (this.outgoingEdges === null) {
-//			if (other.outgoingEdges != null)
-//				return false;
-//		} else if (!this.outgoingEdges.equals(other.outgoingEdges))
-//			return false;
-//		if (this.attributeValues === null) {
-//			if (other.attributeValues != null)
-//				return false;
-//		} else if (!this.attributeValues.equals(other.attributeValues))
-//			return false;
-//		return true;
-//	}
 }
-/*
- * @Data
- * class ModelDescriptor {
- * 	int dataHash
- * 	int unknownElements
- * 	Map<? extends AbstractNodeDescriptor,Integer> knownElements
- * 	
- * 	public new(Map<? extends AbstractNodeDescriptor,Integer> knownElements, int unknownElements) {
- * 		this.dataHash = calculateDataHash(knownElements,unknownElements)
- * 		this.unknownElements = unknownElements
- * 		this.knownElements = knownElements
- * 	}
- * 	
- * 	def private static calculateDataHash(Map<? extends AbstractNodeDescriptor,Integer> knownElements, int unknownElements)
- * 	{
- * 		val int prime = 31;
- * 		return knownElements.hashCode * prime + unknownElements.hashCode 
- * 	}
- * }
- */
+

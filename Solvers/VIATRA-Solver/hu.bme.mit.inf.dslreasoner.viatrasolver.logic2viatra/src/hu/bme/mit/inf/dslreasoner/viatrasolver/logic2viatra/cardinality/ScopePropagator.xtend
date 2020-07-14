@@ -130,6 +130,10 @@ class ScopePropagator {
 	def isPropagationNeededAfterAdditionToRelation(Relation r) {
 		false
 	}
+	
+	def isQueryEngineFlushRequiredBeforePropagation() {
+		false
+	}
 
 	private def removeOne(Scope scope) {
 		if (scope.minNewElements > 0) {

@@ -114,7 +114,7 @@ class RefinementRuleProvider {
 					)
 					statistics.addExecutionTime(System.nanoTime - startTime)
 
-					flushQueryEngine
+					flushQueryEngine(scopePropagator)
 
 					// Scope propagation
 					val propagatorStartTime = System.nanoTime
@@ -144,7 +144,7 @@ class RefinementRuleProvider {
 					)
 					statistics.addExecutionTime(System.nanoTime - startTime)
 
-					flushQueryEngine
+					flushQueryEngine(scopePropagator)
 
 					// Scope propagation
 					val propagatorStartTime = System.nanoTime
@@ -171,7 +171,7 @@ class RefinementRuleProvider {
 				)
 				statistics.addExecutionTime(System.nanoTime - startTime)
 
-				flushQueryEngine
+				flushQueryEngine(scopePropagator)
 
 				// Scope propagation
 				val propagatorStartTime = System.nanoTime
@@ -404,7 +404,7 @@ class RefinementRuleProvider {
 
 				// Scope propagation
 				if (scopePropagator.isPropagationNeededAfterAdditionToRelation(declaration)) {
-					flushQueryEngine
+					flushQueryEngine(scopePropagator)
 
 					val propagatorStartTime = System.nanoTime
 					scopePropagator.propagateAllScopeConstraints()
@@ -581,8 +581,8 @@ class RefinementRuleProvider {
 		inverseInterpretation.relationlinks += inverseLink
 	}
 
-	protected def flushQueryEngine() {
-		if (queryEngine.updatePropagationDelayed) {
+	protected def flushQueryEngine(ScopePropagator scopePropagator) {
+		if (scopePropagator.queryEngineFlushRequiredBeforePropagation && queryEngine.updatePropagationDelayed) {
 			delayMessageDelivery.setBoolean(queryEngine, false)
 			queryEngine.getQueryBackend(ReteBackendFactory.INSTANCE).flushUpdates
 			delayMessageDelivery.setBoolean(queryEngine, true)

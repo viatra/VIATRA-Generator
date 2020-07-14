@@ -35,7 +35,11 @@ generate {
 	config = {
 		runtime = 10000,
 		log-level = normal,
-		"fitness-objectCreationCosts" = "true"
+		"fitness-scope" = "1",
+		"fitness-punishSize" = "inverse",
+		"fitness-objectCreationCosts" = "true",
+		"scopePropagator" = "typeHierarchy",
+		"fitness-missing-containment" = "2"
 	}
 	
 	runs = 1

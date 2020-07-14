@@ -33,10 +33,8 @@ generate {
 		runtime = 10000,
 		log-level = normal,
 		"fitness-scope" = "3",
-		"fitness-punishSize" = "inverse",
-		"fitness-objectCreationCosts" = "true",
-		"scopePropagator" = "typeHierarchy",
-		"fitness-missing-containment" = "2"
+		"fitness-punishSize" = "true",
+		"scopePropagator" = "polyhedral"
 	}
 
 	runs = 1

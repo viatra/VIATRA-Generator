@@ -9,6 +9,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import java.util.ArrayList
 import java.util.Map
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
+import org.eclipse.viatra.query.runtime.api.IQuerySpecification
 
 class NeighbourhoodBasedStateCoderFactory extends AbstractNeighbourhoodBasedStateCoderFactory {
 	new() {
@@ -38,6 +39,7 @@ class NeighbourhoodBasedHashStateCoderFactory extends AbstractNeighbourhoodBased
 
 class NeighbourhoodBasedPartialInterpretationStateCoder<ModelRep, NodeRep> extends AbstractNeighbourhoodBasedPartialInterpretationStateCoder {
 	val PartialInterpretation2NeighbourhoodRepresentation<ModelRep, NodeRep> calculator
+	val Map<IQuerySpecification<?>, String> fullyQualifiedNames = newHashMap
 	var Map<DefinedElement, ? extends NodeRep> nodeRepresentations = null
 	var ModelRep modelRepresentation = null
 
@@ -55,27 +57,36 @@ class NeighbourhoodBasedPartialInterpretationStateCoder<ModelRep, NodeRep> exten
 		modelRepresentation = code.modelRepresentation
 		nodeRepresentations = code.nodeRepresentations
 	}
+	
+	private def getFullyQualifiedNameCached(IQuerySpecification<?> specification) {
+		fullyQualifiedNames.computeIfAbsent(specification, [fullyQualifiedName])
+	}
 
 	override doCreateActivationCode(IPatternMatch match) {
 		val size = match.specification.parameters.size
-		val res = new ArrayList(size)
-		var int equivalenceHash = 0
+		var int hash = 0
 		val prime = 31
 
 		for (var int index = 0; index < size; index++) {
 			val matchArgument = match.get(index)
-			res.add(getCode(matchArgument))
+			val code = getCode(matchArgument)
+			val codeNumber = if (code === null) {
+				0
+			} else {
+				code.hashCode
+			}
+			hash = prime * hash + codeNumber
 			for (var i = 0; i < index; i++) {
 				val number = if (matchArgument === match.get(i)) {
 						1
 					} else {
 						0
 					}
-				equivalenceHash = prime * equivalenceHash + number
+				hash = prime * hash + number
 			}
 		}
 
-		match.specification.fullyQualifiedName -> (res -> equivalenceHash).hashCode
+		match.specification.fullyQualifiedNameCached -> hash
 	}
 
 	def private getCode(Object o) {

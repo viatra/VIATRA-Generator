@@ -114,6 +114,10 @@ class PolyhedronScopePropagator extends TypeHierarchyScopePropagator {
 	override isPropagationNeededAfterAdditionToRelation(Relation r) {
 		relevantRelations.contains(r) || super.isPropagationNeededAfterAdditionToRelation(r)
 	}
+	
+	override isQueryEngineFlushRequiredBeforePropagation() {
+		true
+	}
 
 	def resetBounds() {
 		for (dimension : polyhedron.dimensions) {

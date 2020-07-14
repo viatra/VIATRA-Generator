@@ -206,7 +206,7 @@ class ViatraReasoner extends LogicReasoner {
 			it.transformationTime = (transformationTime / 1000000) as int
 			for (pair : solutionCopier.getAllCopierRuntimes(true).indexed) {
 				it.entries += createIntStatisticEntry => [
-					it.name = '''_Solution«pair.key»FoundAt'''
+					it.name = '''Solution«pair.key»FoundAt'''
 					it.value = (pair.value / 1000000) as int
 				]
 			}

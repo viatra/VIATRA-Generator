@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns
 
+import com.google.common.collect.ImmutableSet
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
@@ -55,6 +56,17 @@ class ModalPatternQueries {
 class UnifinishedMultiplicityQueries {
 	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> existingMultiplicityQuery
 	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> existingInverseMultiplicityQuery
+	
+	def Set<IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> getAllQueries() {
+		val builder = ImmutableSet.builder
+		if (existingMultiplicityQuery !== null) {
+			builder.add(existingMultiplicityQuery)
+		}
+		if (existingInverseMultiplicityQuery !== null) {
+			builder.add(existingInverseMultiplicityQuery)
+		}
+		builder.build
+	}
 }
 
 class PatternProvider {
