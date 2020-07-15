@@ -1,7 +1,7 @@
 import epackage	"../case.study.pledge.model/model/TaxationWithRoot.ecore"
-import viatra	"src/queries/case_study_A_withRoot.vql"
+import viatra	"queries/case_study_A_withRoot.vql"
 import epackage "../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore"
-import viatra "src/queries/SatelliteQueries.vql"
+import viatra "queries/SatelliteQueries.vql"
 
 generate {
 	metamodel = { package satellite }

@@ -1,5 +1,5 @@
 import epackage "../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore"
-import viatra "src/queries/SatelliteQueries.vql"
+import viatra "queries/SatelliteQueries.vql"
 
 generate {
 	metamodel = { package satellite }
