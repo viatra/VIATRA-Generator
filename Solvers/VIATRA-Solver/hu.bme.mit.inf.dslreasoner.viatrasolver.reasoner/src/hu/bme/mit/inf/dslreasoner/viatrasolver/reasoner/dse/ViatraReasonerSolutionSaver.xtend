@@ -20,6 +20,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class ViatraReasonerSolutionSaver implements ISolutionSaver {
 	@Accessors val SolutionCopier solutionCopier
+	val NumericSolver numericSolver
 	@Accessors val DiversityChecker diversityChecker
 	val boolean hasExtremalObjectives
 	val int numberOfRequiredSolutions
@@ -34,6 +35,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 		hasExtremalObjectives = leveledExtremalObjectives.exists[!empty]
 		this.numberOfRequiredSolutions = numberOfRequiredSolutions
 		this.solutionCopier = new SolutionCopier(numericSolver)
+		this.numericSolver = numericSolver
 	}
 
 	override saveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory) {
@@ -97,7 +99,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver {
 	}
 
 	private def shouldSaveSolution(Fitness fitness, ThreadContext context) {
-		return fitness.satisifiesHardObjectives
+		return fitness.satisifiesHardObjectives && numericSolver.currentSatisfiable
 	}
 
 	private def basicSaveSolution(ThreadContext context, Object id, SolutionTrajectory solutionTrajectory,
