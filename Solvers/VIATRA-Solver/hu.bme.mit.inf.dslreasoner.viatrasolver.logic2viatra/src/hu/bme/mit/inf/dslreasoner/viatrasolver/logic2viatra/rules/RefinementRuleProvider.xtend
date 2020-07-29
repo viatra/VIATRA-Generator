@@ -372,19 +372,17 @@ class RefinementRuleProvider {
 				val src = match.get(3) as DefinedElement
 				val trg = match.get(4) as DefinedElement
 
-				queryEngine.delayUpdatePropagation [
-					val startTime = System.nanoTime
-					createRelationLinkAction(src, trg, relationInterpretation)
-					statistics.addExecutionTime(System.nanoTime - startTime)
-				]
+				val startTime = System.nanoTime
+				createRelationLinkAction(src, trg, relationInterpretation)
+				statistics.addExecutionTime(System.nanoTime - startTime)
 
 				// Scope propagation
 				if (scopePropagator.isPropagationNeededAfterAdditionToRelation(declaration)) {
-					queryEngine.delayUpdatePropagation [
-						val propagatorStartTime = System.nanoTime
-						scopePropagator.propagateAllScopeConstraints()
-						statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
-					]
+					flushQueryEngine(scopePropagator)
+
+					val propagatorStartTime = System.nanoTime
+					scopePropagator.propagateAllScopeConstraints()
+					statistics.addScopePropagationTime(System.nanoTime - propagatorStartTime)
 				}
 			]
 		} else {

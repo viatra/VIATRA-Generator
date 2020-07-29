@@ -36,6 +36,9 @@ generate {
 		log-level = normal,
 		"fitness-punishSize" = "false",
 		"fitness-scope" = "3",
+		"fitness-objectCreationCosts" = "true",
+		"scopePropagator" = "typeHierarchy",
+		"fitness-missing-containment" = "2",
 		"numeric-solver-at-end" = "true"
 	}
 	

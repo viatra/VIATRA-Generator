@@ -369,6 +369,7 @@ public class DesignSpaceManager implements IBacktrackListener {
 		} catch (InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
+		backtrackingTime += System.nanoTime() - start;
 		updateActivationCodes();
 
 		Object lastActivationId = trajectory.getLastActivationId();
@@ -382,7 +383,6 @@ public class DesignSpaceManager implements IBacktrackListener {
 		}
 
 		logger.debug("Backtrack.");
-		backtrackingTime += System.nanoTime() - start;
 
 		return true;
 	}
