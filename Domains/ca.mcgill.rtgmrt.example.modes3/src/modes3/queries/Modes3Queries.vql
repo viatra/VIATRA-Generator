@@ -1,0 +1,112 @@
+package modes3.queries
+
+import "http://www.ece.mcgill.ca/wcet/modes3"
+
+@Constraint(message = "turnoutInSegments", severity = "error", key = { T })
+pattern turnoutInSegments(T : Turnout) {
+	Modes3ModelRoot.segments(_, T);
+}
+
+pattern connectedTo(S1 : Segment, S2 : Segment) {
+	Segment.connectedTo(S1, S2);
+}
+
+@Constraint(message = "connectedToNotSymmetric", severity = "error", key = { S1, S2 })
+pattern connectedToNotSymmetric(S1 : Segment, S2 : Segment) {
+	Segment.connectedTo(S1, S2);
+	neg find connectedTo(S2, S1);
+}
+
+@Constraint(message = "connectedToReflexive", severity = "error", key = { S })
+pattern connectedToReflexive(S : Segment) {
+	Segment.connectedTo(S, S);
+}
+
+pattern turnoutOutput(T : Turnout, S : Segment) {
+	Turnout.straight(T, S);
+} or {
+	Turnout.divergent(T, S);
+}
+
+@Constraint(message = "outputReflexive", severity = "error", key = { T })
+pattern outputReflexive(T : Turnout) {
+	find turnoutOutput(T, T);
+}
+
+@Constraint(message = "turnoutOutputsAreSame", severity = "error", key = { T })
+pattern turnoutOutputsAreSame(T : Turnout) {
+	Turnout.straight(T, S);
+	Turnout.divergent(T, S);
+}
+
+pattern turnout(T : Turnout) {
+	Turnout(T);
+}
+
+pattern output(S1 : Segment, S2 : Segment) {
+	Segment.connectedTo(S1, S2);
+} or {
+	find turnoutOutput(S1, S2);
+}
+
+//@Constraint(message = "noInputOfSegment", severity = "error", key = { S })
+//pattern noInputOfSegment(S : Segment) {
+//	neg find turnout(S);
+//	neg find output(_, S);
+//}
+
+@Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
+pattern tooManyInputsOfSegment(S : Segment) {
+	neg find turnout(S);
+	find output(I1, S);
+	find output(I2, S);
+	find output(I3, S);
+	I1 != I2;
+	I1 != I3;
+	I2 != I3;
+}
+
+@Constraint(message = "turnoutConnectedToBothOutputs", severity = "error", key = { T })
+pattern turnoutConnectedToBothOutputs(T : Turnout) {
+	Turnout.straight(T, Straight);
+	Turnout.divergent(T, Divergent);
+	Segment.connectedTo(T, Straight);
+	Segment.connectedTo(T, Divergent);
+}
+
+pattern extraInputOfTurnout(T : Turnout, S : Segment) {
+	Turnout.straight(T, Straight);
+	Turnout.divergent(T, Divergent);
+	find output(S, T);
+	S != Straight;
+	S != Divergent;
+}
+
+@Constraint(message = "noExtraInputOfTurnout", severity = "error", key = { T })
+pattern noExtraInputOfTurnout(T : Turnout) {
+	neg find extraInputOfTurnout(T, _);
+}
+
+@Constraint(message = "tooManyExtraInputsOfTurnout", severity = "error", key = { T })
+pattern tooManyExtraInputsOfTurnout(T : Turnout) {
+	find extraInputOfTurnout(T, I1);
+	find extraInputOfTurnout(T, I2);
+	I1 != I2;
+}
+
+pattern adjacent(S1 : Segment, S2 : Segment) {
+	find output(S1, S2);
+} or {
+	find turnoutOutput(S2, S1);
+}
+
+pattern reachable(S1 : Segment, S2 : Segment) {
+	S1 == S2;
+} or {
+	find adjacent+(S1, S2);
+}
+
+@Constraint(message = "unreachable", severity = "error", key = { S1, S2 })
+pattern unreachable(S1 : Segment, S2 : Segment) {
+	neg find reachable(S1, S2);
+}

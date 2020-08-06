@@ -17,6 +17,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Z3Polyhe
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.GeneratedPatterns
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.ModalPatternQueries
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternProvider
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.UnitPropagationPatternGenerator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules.GoalConstraintProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules.RefinementRuleProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
@@ -116,6 +117,7 @@ class ModelGenerationMethodProvider {
 		boolean calculateObjectCreationCosts,
 		ScopePropagatorStrategy scopePropagatorStrategy,
 		Collection<LinearTypeConstraintHint> hints,
+		Collection<UnitPropagationPatternGenerator> unitPropagationPatternGenerators,
 		DocumentationLevel debugLevel
 	) {
 		val statistics = new ModelGenerationStatistics
@@ -126,7 +128,8 @@ class ModelGenerationMethodProvider {
 
 		val relationConstraints = relationConstraintCalculator.calculateRelationConstraints(logicProblem)
 		val queries = patternProvider.generateQueries(logicProblem, emptySolution, statistics, existingQueries,
-			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, hints, writeFiles)
+			workspace, typeInferenceMethod, scopePropagatorStrategy, relationConstraints, hints,
+			unitPropagationPatternGenerators, writeFiles)
 
 		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, hints, queries, statistics)
 		scopePropagator.propagateAllScopeConstraints

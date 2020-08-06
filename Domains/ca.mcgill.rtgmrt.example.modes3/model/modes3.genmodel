@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/ca.mcgill.rtgmrt.example.modes3/ecore-gen" modelPluginID="ca.mcgill.rtgmrt.example.modes3"
+    modelName="Modes3" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>modes3.ecore</foreignModel>
+  <genPackages prefix="Modes3" disposableProviderFactory="true" ecorePackage="modes3.ecore#/">
+    <genClasses ecoreClass="modes3.ecore#//Segment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modes3.ecore#//Segment/connectedTo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modes3.ecore#//Segment/occupiedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modes3.ecore#//Segment/id"/>
+    </genClasses>
+    <genClasses ecoreClass="modes3.ecore#//Modes3ModelRoot">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modes3.ecore#//Modes3ModelRoot/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modes3.ecore#//Modes3ModelRoot/trains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modes3.ecore#//Modes3ModelRoot/segments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modes3.ecore#//Modes3ModelRoot/turnouts"/>
+    </genClasses>
+    <genClasses ecoreClass="modes3.ecore#//Turnout">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modes3.ecore#//Turnout/straight"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modes3.ecore#//Turnout/divergent"/>
+    </genClasses>
+    <genClasses ecoreClass="modes3.ecore#//Train">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modes3.ecore#//Train/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modes3.ecore#//Train/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modes3.ecore#//Train/speed"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

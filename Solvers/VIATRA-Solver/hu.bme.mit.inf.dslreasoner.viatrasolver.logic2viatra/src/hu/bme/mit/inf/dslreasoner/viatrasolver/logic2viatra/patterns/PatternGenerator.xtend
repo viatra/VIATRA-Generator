@@ -25,17 +25,26 @@ import java.util.HashMap
 import java.util.Map
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EReference
+import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend2.lib.StringConcatenationClient
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 
 @Data class PatternGeneratorResult {
 	CharSequence patternText
 	HashMap<PConstraint,String> constraint2MustPreconditionName
 	HashMap<PConstraint,String> constraint2CurrentPreconditionName
+}
+
+interface UnitPropagationPatternGenerator {
+	def Map<Relation, String> getMustPatterns()
+	
+	def Map<Relation, String> getMustNotPatterns()
+	
+	def StringConcatenationClient getAdditionalPatterns(PatternGenerator generator, Map<String, PQuery> fqn2PQuery)
 }
 
 class PatternGenerator {
@@ -157,7 +166,8 @@ class PatternGenerator {
 		Map<String, PQuery> fqn2PQuery,
 		TypeAnalysisResult typeAnalysisResult,
 		RelationConstraints constraints,
-		Collection<LinearTypeConstraintHint> hints
+		Collection<LinearTypeConstraintHint> hints,
+		Collection<UnitPropagationPatternGenerator> unitPropagationPatternGenerators
 	) {
 		val first = 
 		 '''
@@ -313,7 +323,7 @@ class PatternGenerator {
 			//////////
 			// 1.2 Relation Declaration Indexers
 			//////////
-			«relationDeclarationIndexer.generateRelationIndexers(problem,problem.relations.filter(RelationDeclaration),fqn2PQuery)»
+			«relationDeclarationIndexer.generateRelationIndexers(problem,problem.relations.filter(RelationDeclaration),unitPropagationPatternGenerators,fqn2PQuery)»
 			
 			//////////
 			// 1.3 Relation Definition Indexers
@@ -366,6 +376,9 @@ class PatternGenerator {
 			//////////
 			«FOR hint : hints»
 				«hint.getAdditionalPatterns(this)»
+			«ENDFOR»
+			«FOR generator : unitPropagationPatternGenerators»
+				«generator.getAdditionalPatterns(this, fqn2PQuery)»
 			«ENDFOR»
 			
 			//////////

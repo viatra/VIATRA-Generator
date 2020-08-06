@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="modes3" nsURI="http://www.ece.mcgill.ca/wcet/modes3" nsPrefix="modes3">
+  <eClassifiers xsi:type="ecore:EClass" name="Segment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectedTo" upperBound="2"
+        eType="#//Segment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="occupiedBy" eType="#//Train"
+        eOpposite="#//Train/location"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Modes3ModelRoot">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trains" upperBound="-1"
+        eType="#//Train" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="segments" upperBound="-1"
+        eType="#//Segment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="turnouts" upperBound="-1"
+        eType="#//Turnout" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Turnout" eSuperTypes="#//Segment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="straight" lowerBound="1"
+        eType="#//Segment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="divergent" lowerBound="1"
+        eType="#//Segment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Train">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
+        eType="#//Segment" eOpposite="#//Segment/occupiedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+</ecore:EPackage>

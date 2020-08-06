@@ -6,9 +6,11 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.TypeInferenceMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorConstraints
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.UnitPropagationPatternGenerator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold
@@ -16,7 +18,6 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeConstraintHint
 
 enum StateCoderStrategy {
 	Neighbourhood,
@@ -77,6 +78,8 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public var List<LinearTypeConstraintHint> hints = newArrayList
 
 	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
+	
+	public var List<UnitPropagationPatternGenerator> unitPropagationPatternGenerators = newArrayList
 }
 
 class DiversityDescriptor {

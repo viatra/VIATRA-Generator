@@ -91,6 +91,7 @@ class ViatraReasoner extends LogicReasoner {
 			viatraConfig.calculateObjectCreationCosts,
 			viatraConfig.scopePropagatorStrategy,
 			viatraConfig.hints,
+			viatraConfig.unitPropagationPatternGenerators,
 			viatraConfig.documentationLevel
 		)
 
