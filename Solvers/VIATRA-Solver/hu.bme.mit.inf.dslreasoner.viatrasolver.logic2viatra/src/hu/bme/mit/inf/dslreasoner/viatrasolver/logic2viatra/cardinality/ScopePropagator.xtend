@@ -19,6 +19,8 @@ class ScopePropagator {
 	val Map<PartialTypeInterpratation, Scope> type2Scope
 	@Accessors(PROTECTED_GETTER) val Map<Scope, Set<Scope>> superScopes
 	@Accessors(PROTECTED_GETTER) val Map<Scope, Set<Scope>> subScopes
+	
+	@Accessors(PUBLIC_GETTER) var scopePropagationNeeded = false
 
 	new(PartialInterpretation p, ModelGenerationStatistics statistics) {
 		partialInterpretation = p
@@ -64,7 +66,8 @@ class ScopePropagator {
 		copyScopeBoundsToHeuristic()
 	}
 
-	def propagateAllScopeConstraints() {
+	def void propagateAllScopeConstraints() {
+		scopePropagationNeeded = false
 		if (!valid) {
 			return
 		}
@@ -93,6 +96,7 @@ class ScopePropagator {
 		if (isPrimitive) {
 			return
 		}
+		scopePropagationNeeded = true
 //		println('''Adding to «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
 		val targetScope = type2Scope.get(t)
 		if (targetScope !== null) {
@@ -117,6 +121,12 @@ class ScopePropagator {
 //		this.partialInterpretation.scopes.forEach[println(''' «(it.targetTypeInterpretation as PartialComplexTypeInterpretation).interpretationOf.name»: «it.minNewElements»-«it.maxNewElements»''')]
 //		println('''All constraints are propagated upon increasing «(t as PartialComplexTypeInterpretation).interpretationOf.name»''')
 	}
+	
+	def addedToRelation(Relation r) {
+		if (isPropagationNeededAfterAdditionToRelation(r)) {
+			scopePropagationNeeded = true
+		}
+	}
 
 	protected def setScopesInvalid() {
 		partialInterpretation.minNewElements = Integer.MAX_VALUE
@@ -127,7 +137,7 @@ class ScopePropagator {
 		}
 	}
 
-	def isPropagationNeededAfterAdditionToRelation(Relation r) {
+	protected def isPropagationNeededAfterAdditionToRelation(Relation r) {
 		false
 	}
 	

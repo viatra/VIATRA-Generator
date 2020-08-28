@@ -369,13 +369,13 @@ class PatternGenerator {
 			//////////
 			// 4.3 Relation refinement
 			//////////
-			«relationRefinementGenerator.generateRefineReference(problem)»
+			«relationRefinementGenerator.generateRefineReference(problem, unitPropagationPatternGenerators)»
 			
 			//////////
 			// 5 Hints
 			//////////
 			«FOR hint : hints»
-				«hint.getAdditionalPatterns(this)»
+				«hint.getAdditionalPatterns(this, fqn2PQuery)»
 			«ENDFOR»
 			«FOR generator : unitPropagationPatternGenerators»
 				«generator.getAdditionalPatterns(this, fqn2PQuery)»

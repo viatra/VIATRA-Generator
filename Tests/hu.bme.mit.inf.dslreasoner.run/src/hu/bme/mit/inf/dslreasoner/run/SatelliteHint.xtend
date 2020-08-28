@@ -5,6 +5,8 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.Modality
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeExpressionBuilderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternGenerator
+import java.util.Map
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 class SatelliteHint extends Ecore2LogicTraceBasedHint {
 	static val INTERFEROMETY_PAYLOAD = "hint_interferometryPayload"
@@ -14,7 +16,7 @@ class SatelliteHint extends Ecore2LogicTraceBasedHint {
 		super(ecore2Logic, trace)
 	}
 
-	override getAdditionalPatterns(PatternGenerator it) '''
+	override getAdditionalPatterns(PatternGenerator it, Map<String, PQuery> fqnToPQuery) '''
 		pattern «INTERFEROMETY_PAYLOAD»(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement) {
 			find interpretation(problem, interpretation);
 			find mustExist(problem, interpretation, object);

@@ -49,6 +49,12 @@ class ModelGenerationStatistics {
 	synchronized def addScopePropagationTime(long amount) {
 		scopePropagationTime += amount
 	}
+	
+	public var long mustRelationPropagationTime = 0
+
+	synchronized def addMustRelationPropagationTime(long amount) {
+		mustRelationPropagationTime += amount
+	}
 
 	public var long preliminaryTypeAnalisisTime = 0
 
@@ -133,9 +139,11 @@ class ModelGenerationMethodProvider {
 
 		val scopePropagator = createScopePropagator(scopePropagatorStrategy, emptySolution, hints, queries, statistics)
 		scopePropagator.propagateAllScopeConstraints
+		val unitRulePropagator = refinementRuleProvider.createUnitPrulePropagator(logicProblem, emptySolution,
+			queries, scopePropagator, statistics)
 		val objectRefinementRules = refinementRuleProvider.createObjectRefinementRules(logicProblem, emptySolution,
-			queries, scopePropagator, nameNewElements, statistics)
-		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries, scopePropagator,
+			queries, unitRulePropagator, nameNewElements, statistics)
+		val relationRefinementRules = refinementRuleProvider.createRelationRefinementRules(queries, unitRulePropagator,
 			statistics)
 
 		val unfinishedMultiplicities = goalConstraintProvider.getUnfinishedMultiplicityQueries(logicProblem, queries,
@@ -158,7 +166,7 @@ class ModelGenerationMethodProvider {
 		val currentUnitPropagationPreconditions = queries.getCurrentUnitPropagationPreconditionPatterns
 
 		val queriesToPrepare = ImmutableSet.builder.addAll(queries.refineObjectQueries.values).addAll(
-			queries.refineTypeQueries.values).addAll(queries.refinerelationQueries.values).addAll(queries.
+			queries.refineTypeQueries.values).addAll(queries.refineRelationQueries.values).addAll(queries.
 			multiplicityConstraintQueries.values.flatMap[allQueries]).addAll(queries.unfinishedWFQueries.values).addAll(
 			queries.invalidWFQueries.values).addAll(queries.mustUnitPropagationPreconditionPatterns.values).addAll(
 			queries.currentUnitPropagationPreconditionPatterns.values).add(queries.hasElementInContainmentQuery).build

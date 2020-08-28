@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import modes3.Modes3ModelRoot;
 import modes3.Modes3Package;
-import modes3.Segment;
+import modes3.SimpleSegment;
 import modes3.Train;
 import modes3.Turnout;
 
@@ -79,7 +79,7 @@ public class Modes3ModelRootImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Segment> segments;
+	protected EList<SimpleSegment> segments;
 
 	/**
 	 * The cached value of the '{@link #getTurnouts() <em>Turnouts</em>}' containment reference list.
@@ -148,9 +148,9 @@ public class Modes3ModelRootImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Segment> getSegments() {
+	public EList<SimpleSegment> getSegments() {
 		if (segments == null) {
-			segments = new EObjectContainmentEList<Segment>(Segment.class, this, Modes3Package.MODES3_MODEL_ROOT__SEGMENTS);
+			segments = new EObjectContainmentEList<SimpleSegment>(SimpleSegment.class, this, Modes3Package.MODES3_MODEL_ROOT__SEGMENTS);
 		}
 		return segments;
 	}
@@ -223,7 +223,7 @@ public class Modes3ModelRootImpl extends MinimalEObjectImpl.Container implements
 				return;
 			case Modes3Package.MODES3_MODEL_ROOT__SEGMENTS:
 				getSegments().clear();
-				getSegments().addAll((Collection<? extends Segment>)newValue);
+				getSegments().addAll((Collection<? extends SimpleSegment>)newValue);
 				return;
 			case Modes3Package.MODES3_MODEL_ROOT__TURNOUTS:
 				getTurnouts().clear();

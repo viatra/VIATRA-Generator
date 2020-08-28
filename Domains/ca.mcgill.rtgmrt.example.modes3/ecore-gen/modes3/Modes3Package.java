@@ -305,6 +305,62 @@ public interface Modes3Package extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link modes3.impl.SimpleSegmentImpl <em>Simple Segment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see modes3.impl.SimpleSegmentImpl
+	 * @see modes3.impl.Modes3PackageImpl#getSimpleSegment()
+	 * @generated
+	 */
+	int SIMPLE_SEGMENT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Connected To</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SEGMENT__CONNECTED_TO = SEGMENT__CONNECTED_TO;
+
+	/**
+	 * The feature id for the '<em><b>Occupied By</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SEGMENT__OCCUPIED_BY = SEGMENT__OCCUPIED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SEGMENT__ID = SEGMENT__ID;
+
+	/**
+	 * The number of structural features of the '<em>Simple Segment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SEGMENT_FEATURE_COUNT = SEGMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Simple Segment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SEGMENT_OPERATION_COUNT = SEGMENT_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link modes3.Segment <em>Segment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -477,6 +533,16 @@ public interface Modes3Package extends EPackage {
 	EAttribute getTrain_Speed();
 
 	/**
+	 * Returns the meta object for class '{@link modes3.SimpleSegment <em>Simple Segment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Simple Segment</em>'.
+	 * @see modes3.SimpleSegment
+	 * @generated
+	 */
+	EClass getSimpleSegment();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -634,6 +700,16 @@ public interface Modes3Package extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRAIN__SPEED = eINSTANCE.getTrain_Speed();
+
+		/**
+		 * The meta object literal for the '{@link modes3.impl.SimpleSegmentImpl <em>Simple Segment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see modes3.impl.SimpleSegmentImpl
+		 * @see modes3.impl.Modes3PackageImpl#getSimpleSegment()
+		 * @generated
+		 */
+		EClass SIMPLE_SEGMENT = eINSTANCE.getSimpleSegment();
 
 	}
 

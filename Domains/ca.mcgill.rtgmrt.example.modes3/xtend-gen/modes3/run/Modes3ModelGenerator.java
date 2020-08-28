@@ -12,7 +12,9 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsFactory;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.SolutionScope;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.VariableContext;
@@ -48,6 +50,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DebugConfiguration;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.StateCoderStrategy;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
@@ -57,12 +60,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import modes3.Modes3Factory;
 import modes3.Modes3ModelRoot;
 import modes3.Modes3Package;
 import modes3.queries.Modes3Queries;
+import modes3.run.Modes3TypeScopeHint;
+import modes3.run.Modes3UnitPropagationGenerator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -175,29 +179,47 @@ public class Modes3ModelGenerator {
             it_1.minNewElements = this.modelSize;
             it_1.maxNewElements = this.modelSize;
             final Procedure1<Map<Type, Integer>> _function_4 = (Map<Type, Integer> it_2) -> {
-              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTurnout()), Integer.valueOf(1));
             };
             ObjectExtensions.<Map<Type, Integer>>operator_doubleArrow(
               it_1.minNewElementsByType, _function_4);
             final Procedure1<Map<Type, Integer>> _function_5 = (Map<Type, Integer> it_2) -> {
               it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTrain()), Integer.valueOf(5));
+              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTurnout()), Integer.valueOf(5));
             };
             ObjectExtensions.<Map<Type, Integer>>operator_doubleArrow(
               it_1.maxNewElementsByType, _function_5);
           };
           ObjectExtensions.<TypeScopes>operator_doubleArrow(
             it.typeScopes, _function_3);
-          it.solutionScope.numberOfRequiredSolutions = 1;
+          final Procedure1<SolutionScope> _function_4 = (SolutionScope it_1) -> {
+            it_1.numberOfRequiredSolutions = 1;
+          };
+          ObjectExtensions.<SolutionScope>operator_doubleArrow(
+            it.solutionScope, _function_4);
+          it.scopeWeight = 5;
           it.nameNewElements = false;
           it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis;
-          it.stateCoderStrategy = StateCoderStrategy.Neighbourhood;
+          it.stateCoderStrategy = StateCoderStrategy.PairwiseNeighbourhood;
           ScopePropagatorStrategy.Polyhedral _polyhedral = new ScopePropagatorStrategy.Polyhedral(
             PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp);
           it.scopePropagatorStrategy = _polyhedral;
-          it.debugConfiguration.partialInterpretatioVisualiser = null;
+          Ecore2Logic_Trace _trace = metamodelLogic.getTrace();
+          Modes3TypeScopeHint _modes3TypeScopeHint = new Modes3TypeScopeHint(this.ecore2Logic, _trace);
+          it.hints.add(_modes3TypeScopeHint);
+          Ecore2Logic_Trace _trace_1 = metamodelLogic.getTrace();
+          Modes3UnitPropagationGenerator _modes3UnitPropagationGenerator = new Modes3UnitPropagationGenerator(this.ecore2Logic, _trace_1);
+          it.unitPropagationPatternGenerators.add(_modes3UnitPropagationGenerator);
+          final Procedure1<DebugConfiguration> _function_5 = (DebugConfiguration it_1) -> {
+            GraphvizVisualiser _graphvizVisualiser = new GraphvizVisualiser();
+            it_1.partialInterpretatioVisualiser = _graphvizVisualiser;
+          };
+          ObjectExtensions.<DebugConfiguration>operator_doubleArrow(
+            it.debugConfiguration, _function_5);
+          it.documentationLevel = DocumentationLevel.NORMAL;
         };
         final ViatraReasonerConfiguration config = ObjectExtensions.<ViatraReasonerConfiguration>operator_doubleArrow(_viatraReasonerConfiguration, _function_2);
         final FileSystemWorkspace workspace = new FileSystemWorkspace("output/", "");
+        workspace.writeModel(logic.getOutput(), "problem.logicproblem");
         final LogicResult solution = this.solver.solve(logic.getOutput(), config, workspace);
         URI _xifexpression = null;
         if ((solution instanceof ModelResult)) {
@@ -226,27 +248,23 @@ public class Modes3ModelGenerator {
                 boolean _lessThan = (_size_1 < 160);
                 if (_lessThan) {
                   if ((representation instanceof PartialInterpretation)) {
-                    final Consumer<Type> _function_3 = (Type it) -> {
-                      InputOutput.<String>println(it.getName());
-                    };
-                    ((PartialInterpretation)representation).getProblem().getTypes().forEach(_function_3);
-                    final Function1<Type, Boolean> _function_4 = (Type it) -> {
+                    final Function1<Type, Boolean> _function_3 = (Type it) -> {
                       String _name_2 = it.getName();
                       return Boolean.valueOf(Objects.equal(_name_2, "Modes3ModelRoot class DefinedPart"));
                     };
-                    Type _findFirst = IterableExtensions.<Type>findFirst(((PartialInterpretation)representation).getProblem().getTypes(), _function_4);
+                    Type _findFirst = IterableExtensions.<Type>findFirst(((PartialInterpretation)representation).getProblem().getTypes(), _function_3);
                     final TypeDefinition rootType = ((TypeDefinition) _findFirst);
-                    final Function1<PartialComplexTypeInterpretation, Boolean> _function_5 = (PartialComplexTypeInterpretation it) -> {
+                    final Function1<PartialComplexTypeInterpretation, Boolean> _function_4 = (PartialComplexTypeInterpretation it) -> {
                       String _name_2 = it.getInterpretationOf().getName();
                       return Boolean.valueOf(Objects.equal(_name_2, "Modes3ModelRoot class"));
                     };
                     final PartialComplexTypeInterpretation rootIntepretation = IterableExtensions.<PartialComplexTypeInterpretation>findFirst(Iterables.<PartialComplexTypeInterpretation>filter(((PartialInterpretation)representation).getPartialtypeinterpratation(), 
-                      PartialComplexTypeInterpretation.class), _function_5);
+                      PartialComplexTypeInterpretation.class), _function_4);
                     rootIntepretation.getElements().removeAll(rootType.getElements());
                     ((PartialInterpretation)representation).getProblem().getElements().removeAll(rootType.getElements());
                     EList<PartialRelationInterpretation> _partialrelationinterpretation = ((PartialInterpretation)representation).getPartialrelationinterpretation();
                     for (final PartialRelationInterpretation relationInterpretation : _partialrelationinterpretation) {
-                      final Predicate<RelationLink> _function_6 = (RelationLink link) -> {
+                      final Predicate<RelationLink> _function_5 = (RelationLink link) -> {
                         boolean _xifexpression_1 = false;
                         if ((link instanceof BinaryElementRelationLink)) {
                           _xifexpression_1 = (rootType.getElements().contains(((BinaryElementRelationLink)link).getParam1()) || rootType.getElements().contains(((BinaryElementRelationLink)link).getParam2()));
@@ -255,7 +273,7 @@ public class Modes3ModelGenerator {
                         }
                         return _xifexpression_1;
                       };
-                      relationInterpretation.getRelationlinks().removeIf(_function_6);
+                      relationInterpretation.getRelationlinks().removeIf(_function_5);
                     }
                     rootType.getElements().clear();
                   }
@@ -349,13 +367,7 @@ public class Modes3ModelGenerator {
       Viatra2LogicAnnotationsPackage.eINSTANCE.getClass();
       Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
       XMIResourceFactoryImpl _xMIResourceFactoryImpl = new XMIResourceFactoryImpl();
-      _extensionToFactoryMap.put("ecore", _xMIResourceFactoryImpl);
-      Map<String, Object> _extensionToFactoryMap_1 = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-      XMIResourceFactoryImpl _xMIResourceFactoryImpl_1 = new XMIResourceFactoryImpl();
-      _extensionToFactoryMap_1.put("logicproblem", _xMIResourceFactoryImpl_1);
-      Map<String, Object> _extensionToFactoryMap_2 = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-      XMIResourceFactoryImpl _xMIResourceFactoryImpl_2 = new XMIResourceFactoryImpl();
-      _xblockexpression = _extensionToFactoryMap_2.put("partialinterpretation", _xMIResourceFactoryImpl_2);
+      _xblockexpression = _extensionToFactoryMap.put("*", _xMIResourceFactoryImpl);
     }
     return _xblockexpression;
   }

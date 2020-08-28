@@ -91,6 +91,13 @@ public class Modes3Switch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Modes3Package.SIMPLE_SEGMENT: {
+				SimpleSegment simpleSegment = (SimpleSegment)theEObject;
+				T result = caseSimpleSegment(simpleSegment);
+				if (result == null) result = caseSegment(simpleSegment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -152,6 +159,21 @@ public class Modes3Switch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTrain(Train object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Segment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Segment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleSegment(SimpleSegment object) {
 		return null;
 	}
 

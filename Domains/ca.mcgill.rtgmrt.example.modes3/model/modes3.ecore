@@ -13,7 +13,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="trains" upperBound="-1"
         eType="#//Train" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="segments" upperBound="-1"
-        eType="#//Segment" containment="true"/>
+        eType="#//SimpleSegment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="turnouts" upperBound="-1"
         eType="#//Turnout" containment="true"/>
   </eClassifiers>
@@ -29,4 +29,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleSegment" eSuperTypes="#//Segment"/>
 </ecore:EPackage>

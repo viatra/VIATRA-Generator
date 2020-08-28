@@ -113,7 +113,7 @@ class RelationDeclarationIndexer {
 					// 2. Circle in the containment hierarchy
 					neg «base.containmentIndexer.referTransitiveMustContains("source","target")»
 				«ENDIF»
-				«IF mustNotRelations.empty»
+				«IF !mustNotRelations.empty»
 					// ![] unit propagation relations
 					«FOR mustNotRelation : mustNotRelations»
 						neg find «mustNotRelation»(problem, interpretation, source, target);

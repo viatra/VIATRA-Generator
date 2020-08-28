@@ -2,11 +2,6 @@ package modes3.queries
 
 import "http://www.ece.mcgill.ca/wcet/modes3"
 
-@Constraint(message = "turnoutInSegments", severity = "error", key = { T })
-pattern turnoutInSegments(T : Turnout) {
-	Modes3ModelRoot.segments(_, T);
-}
-
 pattern connectedTo(S1 : Segment, S2 : Segment) {
 	Segment.connectedTo(S1, S2);
 }
@@ -39,10 +34,6 @@ pattern turnoutOutputsAreSame(T : Turnout) {
 	Turnout.divergent(T, S);
 }
 
-pattern turnout(T : Turnout) {
-	Turnout(T);
-}
-
 pattern output(S1 : Segment, S2 : Segment) {
 	Segment.connectedTo(S1, S2);
 } or {
@@ -56,8 +47,7 @@ pattern output(S1 : Segment, S2 : Segment) {
 //}
 
 @Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
-pattern tooManyInputsOfSegment(S : Segment) {
-	neg find turnout(S);
+pattern tooManyInputsOfSegment(S : SimpleSegment) {
 	find output(I1, S);
 	find output(I2, S);
 	find output(I3, S);
@@ -74,30 +64,38 @@ pattern turnoutConnectedToBothOutputs(T : Turnout) {
 	Segment.connectedTo(T, Divergent);
 }
 
-pattern extraInputOfTurnout(T : Turnout, S : Segment) {
-	Turnout.straight(T, Straight);
-	Turnout.divergent(T, Divergent);
-	find output(S, T);
-	S != Straight;
-	S != Divergent;
-}
-
-@Constraint(message = "noExtraInputOfTurnout", severity = "error", key = { T })
-pattern noExtraInputOfTurnout(T : Turnout) {
-	neg find extraInputOfTurnout(T, _);
-}
-
-@Constraint(message = "tooManyExtraInputsOfTurnout", severity = "error", key = { T })
-pattern tooManyExtraInputsOfTurnout(T : Turnout) {
-	find extraInputOfTurnout(T, I1);
-	find extraInputOfTurnout(T, I2);
-	I1 != I2;
-}
-
 pattern adjacent(S1 : Segment, S2 : Segment) {
 	find output(S1, S2);
 } or {
 	find turnoutOutput(S2, S1);
+}
+
+@Constraint(message = "turnoutConnectedToBothOutputs", severity = "error", key = { T })
+pattern tooManyInputsOfTurnout(T : Turnout) {
+	find adjacent(I1, T);
+	find adjacent(I2, T);
+	find adjacent(I3, T);
+	find adjacent(I4, T);
+	I1 != I2;
+	I1 != I3;
+	I1 != I4;
+	I2 != I3;
+	I2 != I4;
+	I3 != I4;
+}
+
+pattern inputsOfTurnout(T : Turnout) {
+	find adjacent(I1, T);
+	find adjacent(I2, T);
+	find adjacent(I3, T);
+	I1 != I2;
+	I1 != I3;
+	I2 != I3;
+}
+
+@Constraint(message = "tooFewInputsOfTurnout", severity = "error", key = { T })
+pattern tooFewInputsOfTurnout(T : Turnout) {
+	neg find inputsOfTurnout(T);
 }
 
 pattern reachable(S1 : Segment, S2 : Segment) {

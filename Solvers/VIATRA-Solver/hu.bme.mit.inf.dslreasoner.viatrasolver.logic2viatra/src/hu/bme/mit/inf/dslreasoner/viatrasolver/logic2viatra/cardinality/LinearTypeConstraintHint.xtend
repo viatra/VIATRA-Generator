@@ -3,8 +3,10 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternGenerator
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import java.util.Map
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 interface LinearTypeExpressionBuilderFactory {
 	def ViatraQueryMatcher<? extends IPatternMatch> createMatcher(String queryName)
@@ -24,7 +26,7 @@ interface RelationConstraintUpdater {
 }
 
 interface LinearTypeConstraintHint {
-	def CharSequence getAdditionalPatterns(PatternGenerator patternGenerator)
+	def CharSequence getAdditionalPatterns(PatternGenerator patternGenerator, Map<String, PQuery> fqnToPQuery)
 	
 	def RelationConstraintUpdater createConstraintUpdater(LinearTypeExpressionBuilderFactory builderFactory)
 }

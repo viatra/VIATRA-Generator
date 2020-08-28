@@ -4,13 +4,15 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.LinearTypeExpressionBuilderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns.PatternGenerator
+import java.util.Map
+import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 class SGraphHint extends Ecore2LogicTraceBasedHint {
 	new(Ecore2Logic ecore2Logic, Ecore2Logic_Trace trace) {
 		super(ecore2Logic, trace)
 	}
 
-	override getAdditionalPatterns(extension PatternGenerator patternGenerator) {
+	override getAdditionalPatterns(extension PatternGenerator patternGenerator, Map<String, PQuery> fqnToPQuery) {
 		""
 	}
 

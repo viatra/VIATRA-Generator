@@ -6,21 +6,19 @@
   </extension>
   <extension id="modes3.queries.Modes3Queries" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:modes3.queries.Modes3Queries" id="modes3.queries.Modes3Queries">
-      <query-specification fqn="modes3.queries.turnoutInSegments"/>
       <query-specification fqn="modes3.queries.connectedTo"/>
       <query-specification fqn="modes3.queries.connectedToNotSymmetric"/>
       <query-specification fqn="modes3.queries.connectedToReflexive"/>
       <query-specification fqn="modes3.queries.turnoutOutput"/>
       <query-specification fqn="modes3.queries.outputReflexive"/>
       <query-specification fqn="modes3.queries.turnoutOutputsAreSame"/>
-      <query-specification fqn="modes3.queries.turnout"/>
       <query-specification fqn="modes3.queries.output"/>
       <query-specification fqn="modes3.queries.tooManyInputsOfSegment"/>
       <query-specification fqn="modes3.queries.turnoutConnectedToBothOutputs"/>
-      <query-specification fqn="modes3.queries.extraInputOfTurnout"/>
-      <query-specification fqn="modes3.queries.noExtraInputOfTurnout"/>
-      <query-specification fqn="modes3.queries.tooManyExtraInputsOfTurnout"/>
       <query-specification fqn="modes3.queries.adjacent"/>
+      <query-specification fqn="modes3.queries.tooManyInputsOfTurnout"/>
+      <query-specification fqn="modes3.queries.inputsOfTurnout"/>
+      <query-specification fqn="modes3.queries.tooFewInputsOfTurnout"/>
       <query-specification fqn="modes3.queries.reachable"/>
       <query-specification fqn="modes3.queries.unreachable"/>
     </group>

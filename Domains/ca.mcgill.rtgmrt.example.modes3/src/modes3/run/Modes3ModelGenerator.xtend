@@ -8,6 +8,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsFactory
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
@@ -22,6 +23,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.Polyhedr
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.PolyhedralScopePropagatorSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
@@ -44,8 +46,6 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions
 import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchEMFBackendFactory
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteBackendFactory
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 
 @FinalFieldsConstructor
 class Modes3ModelGenerator {
@@ -92,22 +92,32 @@ class Modes3ModelGenerator {
 				minNewElements = modelSize
 				maxNewElements = modelSize
 				minNewElementsByType => [
-					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), 1)
+//					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), 5)
 				]
 				maxNewElementsByType => [
 					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.train), 5)
+					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), 5)
 				]
 			]
-			solutionScope.numberOfRequiredSolutions = 1
+			solutionScope => [
+				numberOfRequiredSolutions = 1
+			]
+			scopeWeight = 5
 			nameNewElements = false
 			typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
-			stateCoderStrategy = StateCoderStrategy::Neighbourhood
+			stateCoderStrategy = StateCoderStrategy.PairwiseNeighbourhood
 			scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 				PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
-//			unitPropagationPatternGenerators += new Modes3UnitPropagationGenerator(ecore2Logic, metamodelLogic.trace)
-			debugConfiguration.partialInterpretatioVisualiser = null
+			hints += new Modes3TypeScopeHint(ecore2Logic, metamodelLogic.trace)
+			unitPropagationPatternGenerators += new Modes3UnitPropagationGenerator(ecore2Logic, metamodelLogic.trace)
+			debugConfiguration => [
+				partialInterpretatioVisualiser = new GraphvizVisualiser
+//				partalInterpretationVisualisationFrequency = 50
+			]
+			documentationLevel = DocumentationLevel.NORMAL
 		]
 		val workspace = new FileSystemWorkspace("output/", "")
+		workspace.writeModel(logic.output, "problem.logicproblem")
 		val solution = solver.solve(logic.output, config, workspace)
 		if (solution instanceof ModelResult) {
 			println("Saving generated solutions")
@@ -122,7 +132,6 @@ class Modes3ModelGenerator {
 					workspace.writeText('''solution«representationNumber».gml''', gml)
 					if (representation.newElements.size < 160) {
 						if (representation instanceof PartialInterpretation) {
-							representation.problem.types.forEach[println(name)]
 							val rootType = (representation.problem.types.findFirst [
 								name == "Modes3ModelRoot class DefinedPart"
 							] as TypeDefinition)
@@ -198,10 +207,7 @@ class Modes3ModelGenerator {
 		PartialinterpretationPackage.eINSTANCE.class
 		Ecore2logicannotationsPackage.eINSTANCE.class
 		Viatra2LogicAnnotationsPackage.eINSTANCE.class
-		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("ecore", new XMIResourceFactoryImpl)
-		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("logicproblem", new XMIResourceFactoryImpl)
-		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("partialinterpretation",
-			new XMIResourceFactoryImpl)
+		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("*", new XMIResourceFactoryImpl)
 	}
 
 	def static void main(String[] args) {

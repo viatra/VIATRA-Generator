@@ -13,9 +13,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import modes3.Segment;
+import modes3.SimpleSegment;
 import modes3.queries.Output;
-import modes3.queries.Turnout;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
@@ -33,7 +32,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation
 import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -55,8 +53,7 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  *         //}
  *         
  *         {@literal @}Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
- *         pattern tooManyInputsOfSegment(S : Segment) {
- *         	neg find turnout(S);
+ *         pattern tooManyInputsOfSegment(S : SimpleSegment) {
  *         	find output(I1, S);
  *         	find output(I2, S);
  *         	find output(I3, S);
@@ -85,11 +82,11 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Segment fS;
+    private SimpleSegment fS;
     
     private static List<String> parameterNames = makeImmutableList("S");
     
-    private Match(final Segment pS) {
+    private Match(final SimpleSegment pS) {
       this.fS = pS;
     }
     
@@ -109,7 +106,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
       }
     }
     
-    public Segment getS() {
+    public SimpleSegment getS() {
       return this.fS;
     }
     
@@ -117,13 +114,13 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("S".equals(parameterName) ) {
-          this.fS = (Segment) newValue;
+          this.fS = (SimpleSegment) newValue;
           return true;
       }
       return false;
     }
     
-    public void setS(final Segment pS) {
+    public void setS(final SimpleSegment pS) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fS = pS;
     }
@@ -204,7 +201,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static TooManyInputsOfSegment.Match newMutableMatch(final Segment pS) {
+    public static TooManyInputsOfSegment.Match newMutableMatch(final SimpleSegment pS) {
       return new Mutable(pS);
     }
     
@@ -216,12 +213,12 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the (partial) match object.
      * 
      */
-    public static TooManyInputsOfSegment.Match newMatch(final Segment pS) {
+    public static TooManyInputsOfSegment.Match newMatch(final SimpleSegment pS) {
       return new Immutable(pS);
     }
     
     private static final class Mutable extends TooManyInputsOfSegment.Match {
-      Mutable(final Segment pS) {
+      Mutable(final SimpleSegment pS) {
         super(pS);
       }
       
@@ -232,7 +229,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
     }
     
     private static final class Immutable extends TooManyInputsOfSegment.Match {
-      Immutable(final Segment pS) {
+      Immutable(final SimpleSegment pS) {
         super(pS);
       }
       
@@ -261,8 +258,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
    * //}
    * 
    * {@literal @}Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
-   * pattern tooManyInputsOfSegment(S : Segment) {
-   * 	neg find turnout(S);
+   * pattern tooManyInputsOfSegment(S : SimpleSegment) {
    * 	find output(I1, S);
    * 	find output(I2, S);
    * 	find output(I3, S);
@@ -326,7 +322,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<TooManyInputsOfSegment.Match> getAllMatches(final Segment pS) {
+    public Collection<TooManyInputsOfSegment.Match> getAllMatches(final SimpleSegment pS) {
       return rawStreamAllMatches(new Object[]{pS}).collect(Collectors.toSet());
     }
     
@@ -340,7 +336,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<TooManyInputsOfSegment.Match> streamAllMatches(final Segment pS) {
+    public Stream<TooManyInputsOfSegment.Match> streamAllMatches(final SimpleSegment pS) {
       return rawStreamAllMatches(new Object[]{pS});
     }
     
@@ -351,7 +347,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<TooManyInputsOfSegment.Match> getOneArbitraryMatch(final Segment pS) {
+    public Optional<TooManyInputsOfSegment.Match> getOneArbitraryMatch(final SimpleSegment pS) {
       return rawGetOneArbitraryMatch(new Object[]{pS});
     }
     
@@ -362,7 +358,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Segment pS) {
+    public boolean hasMatch(final SimpleSegment pS) {
       return rawHasMatch(new Object[]{pS});
     }
     
@@ -372,7 +368,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Segment pS) {
+    public int countMatches(final SimpleSegment pS) {
       return rawCountMatches(new Object[]{pS});
     }
     
@@ -384,7 +380,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Segment pS, final Consumer<? super TooManyInputsOfSegment.Match> processor) {
+    public boolean forOneArbitraryMatch(final SimpleSegment pS, final Consumer<? super TooManyInputsOfSegment.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pS}, processor);
     }
     
@@ -396,7 +392,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the (partial) match object.
      * 
      */
-    public TooManyInputsOfSegment.Match newMatch(final Segment pS) {
+    public TooManyInputsOfSegment.Match newMatch(final SimpleSegment pS) {
       return TooManyInputsOfSegment.Match.newMatch(pS);
     }
     
@@ -405,8 +401,8 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Segment> rawStreamAllValuesOfS(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_S, parameters).map(Segment.class::cast);
+    protected Stream<SimpleSegment> rawStreamAllValuesOfS(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_S, parameters).map(SimpleSegment.class::cast);
     }
     
     /**
@@ -414,7 +410,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Segment> getAllValuesOfS() {
+    public Set<SimpleSegment> getAllValuesOfS() {
       return rawStreamAllValuesOfS(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -423,14 +419,14 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Segment> streamAllValuesOfS() {
+    public Stream<SimpleSegment> streamAllValuesOfS() {
       return rawStreamAllValuesOfS(emptyArray());
     }
     
     @Override
     protected TooManyInputsOfSegment.Match tupleToMatch(final Tuple t) {
       try {
-          return TooManyInputsOfSegment.Match.newMatch((Segment) t.get(POSITION_S));
+          return TooManyInputsOfSegment.Match.newMatch((SimpleSegment) t.get(POSITION_S));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -440,7 +436,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
     @Override
     protected TooManyInputsOfSegment.Match arrayToMatch(final Object[] match) {
       try {
-          return TooManyInputsOfSegment.Match.newMatch((Segment) match[POSITION_S]);
+          return TooManyInputsOfSegment.Match.newMatch((SimpleSegment) match[POSITION_S]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -450,7 +446,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
     @Override
     protected TooManyInputsOfSegment.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return TooManyInputsOfSegment.Match.newMutableMatch((Segment) match[POSITION_S]);
+          return TooManyInputsOfSegment.Match.newMutableMatch((SimpleSegment) match[POSITION_S]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -501,7 +497,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
   
   @Override
   public TooManyInputsOfSegment.Match newMatch(final Object... parameters) {
-    return TooManyInputsOfSegment.Match.newMatch((modes3.Segment) parameters[0]);
+    return TooManyInputsOfSegment.Match.newMatch((modes3.SimpleSegment) parameters[0]);
   }
   
   /**
@@ -533,7 +529,7 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
     private static final TooManyInputsOfSegment.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_S = new PParameter("S", "modes3.Segment", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.ece.mcgill.ca/wcet/modes3", "Segment")), PParameterDirection.INOUT);
+    private final PParameter parameter_S = new PParameter("S", "modes3.SimpleSegment", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.ece.mcgill.ca/wcet/modes3", "SimpleSegment")), PParameterDirection.INOUT);
     
     private final List<PParameter> parameters = Arrays.asList(parameter_S);
     
@@ -566,12 +562,10 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
           PVariable var_I1 = body.getOrCreateVariableByName("I1");
           PVariable var_I2 = body.getOrCreateVariableByName("I2");
           PVariable var_I3 = body.getOrCreateVariableByName("I3");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_S), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Segment")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_S), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "SimpleSegment")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_S, parameter_S)
           ));
-          // 	neg find turnout(S)
-          new NegativePatternCall(body, Tuples.flatTupleOf(var_S), Turnout.instance().getInternalQueryRepresentation());
           // 	find output(I1, S)
           new PositivePatternCall(body, Tuples.flatTupleOf(var_I1, var_S), Output.instance().getInternalQueryRepresentation());
           // 	find output(I2, S)

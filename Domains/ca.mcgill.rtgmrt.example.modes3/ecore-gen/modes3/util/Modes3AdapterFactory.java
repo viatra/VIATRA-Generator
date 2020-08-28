@@ -84,6 +84,10 @@ public class Modes3AdapterFactory extends AdapterFactoryImpl {
 				return createTrainAdapter();
 			}
 			@Override
+			public Adapter caseSimpleSegment(SimpleSegment object) {
+				return createSimpleSegmentAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -156,6 +160,20 @@ public class Modes3AdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTrainAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link modes3.SimpleSegment <em>Simple Segment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see modes3.SimpleSegment
+	 * @generated
+	 */
+	public Adapter createSimpleSegmentAdapter() {
 		return null;
 	}
 

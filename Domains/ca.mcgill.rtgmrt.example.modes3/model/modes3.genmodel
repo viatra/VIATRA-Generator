@@ -26,5 +26,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modes3.ecore#//Train/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modes3.ecore#//Train/speed"/>
     </genClasses>
+    <genClasses ecoreClass="modes3.ecore#//SimpleSegment"/>
   </genPackages>
 </genmodel:GenModel>

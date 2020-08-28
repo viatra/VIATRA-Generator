@@ -13,6 +13,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import modes3.Turnout;
+import modes3.queries.InputsOfTurnout;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
@@ -26,7 +28,10 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -40,8 +45,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern turnout(T : Turnout) {
- *         	Turnout(T);
+ *         {@literal @}Constraint(message = "tooFewInputsOfTurnout", severity = "error", key = { T })
+ *         pattern tooFewInputsOfTurnout(T : Turnout) {
+ *         	neg find inputsOfTurnout(T);
  *         }
  * </pre></code>
  * 
@@ -50,9 +56,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Matcher> {
+public final class TooFewInputsOfTurnout extends BaseGeneratedEMFQuerySpecification<TooFewInputsOfTurnout.Matcher> {
   /**
-   * Pattern-specific match representation of the modes3.queries.turnout pattern,
+   * Pattern-specific match representation of the modes3.queries.tooFewInputsOfTurnout pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -64,11 +70,11 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private modes3.Turnout fT;
+    private Turnout fT;
     
     private static List<String> parameterNames = makeImmutableList("T");
     
-    private Match(final modes3.Turnout pT) {
+    private Match(final Turnout pT) {
       this.fT = pT;
     }
     
@@ -88,7 +94,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
       }
     }
     
-    public modes3.Turnout getT() {
+    public Turnout getT() {
       return this.fT;
     }
     
@@ -96,25 +102,25 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("T".equals(parameterName) ) {
-          this.fT = (modes3.Turnout) newValue;
+          this.fT = (Turnout) newValue;
           return true;
       }
       return false;
     }
     
-    public void setT(final modes3.Turnout pT) {
+    public void setT(final Turnout pT) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       this.fT = pT;
     }
     
     @Override
     public String patternName() {
-      return "modes3.queries.turnout";
+      return "modes3.queries.tooFewInputsOfTurnout";
     }
     
     @Override
     public List<String> parameterNames() {
-      return Turnout.Match.parameterNames;
+      return TooFewInputsOfTurnout.Match.parameterNames;
     }
     
     @Override
@@ -123,7 +129,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
     }
     
     @Override
-    public Turnout.Match toImmutable() {
+    public TooFewInputsOfTurnout.Match toImmutable() {
       return isMutable() ? newMatch(fT) : this;
     }
     
@@ -146,8 +152,8 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof Turnout.Match)) {
-          Turnout.Match other = (Turnout.Match) obj;
+      if ((obj instanceof TooFewInputsOfTurnout.Match)) {
+          TooFewInputsOfTurnout.Match other = (TooFewInputsOfTurnout.Match) obj;
           return Objects.equals(fT, other.fT);
       } else {
           // this should be infrequent
@@ -160,8 +166,8 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
     }
     
     @Override
-    public Turnout specification() {
-      return Turnout.instance();
+    public TooFewInputsOfTurnout specification() {
+      return TooFewInputsOfTurnout.instance();
     }
     
     /**
@@ -171,7 +177,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the empty match.
      * 
      */
-    public static Turnout.Match newEmptyMatch() {
+    public static TooFewInputsOfTurnout.Match newEmptyMatch() {
       return new Mutable(null);
     }
     
@@ -183,7 +189,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static Turnout.Match newMutableMatch(final modes3.Turnout pT) {
+    public static TooFewInputsOfTurnout.Match newMutableMatch(final Turnout pT) {
       return new Mutable(pT);
     }
     
@@ -195,12 +201,12 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the (partial) match object.
      * 
      */
-    public static Turnout.Match newMatch(final modes3.Turnout pT) {
+    public static TooFewInputsOfTurnout.Match newMatch(final Turnout pT) {
       return new Immutable(pT);
     }
     
-    private static final class Mutable extends Turnout.Match {
-      Mutable(final modes3.Turnout pT) {
+    private static final class Mutable extends TooFewInputsOfTurnout.Match {
+      Mutable(final Turnout pT) {
         super(pT);
       }
       
@@ -210,8 +216,8 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
       }
     }
     
-    private static final class Immutable extends Turnout.Match {
-      Immutable(final modes3.Turnout pT) {
+    private static final class Immutable extends TooFewInputsOfTurnout.Match {
+      Immutable(final Turnout pT) {
         super(pT);
       }
       
@@ -223,7 +229,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
   }
   
   /**
-   * Generated pattern matcher API of the modes3.queries.turnout pattern,
+   * Generated pattern matcher API of the modes3.queries.tooFewInputsOfTurnout pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -233,16 +239,17 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern turnout(T : Turnout) {
-   * 	Turnout(T);
+   * {@literal @}Constraint(message = "tooFewInputsOfTurnout", severity = "error", key = { T })
+   * pattern tooFewInputsOfTurnout(T : Turnout) {
+   * 	neg find inputsOfTurnout(T);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see Turnout
+   * @see TooFewInputsOfTurnout
    * 
    */
-  public static class Matcher extends BaseMatcher<Turnout.Match> {
+  public static class Matcher extends BaseMatcher<TooFewInputsOfTurnout.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -251,7 +258,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static Turnout.Matcher on(final ViatraQueryEngine engine) {
+    public static TooFewInputsOfTurnout.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -266,13 +273,13 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static Turnout.Matcher create() {
+    public static TooFewInputsOfTurnout.Matcher create() {
       return new Matcher();
     }
     
     private static final int POSITION_T = 0;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(Turnout.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(TooFewInputsOfTurnout.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -292,7 +299,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<Turnout.Match> getAllMatches(final modes3.Turnout pT) {
+    public Collection<TooFewInputsOfTurnout.Match> getAllMatches(final Turnout pT) {
       return rawStreamAllMatches(new Object[]{pT}).collect(Collectors.toSet());
     }
     
@@ -306,7 +313,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<Turnout.Match> streamAllMatches(final modes3.Turnout pT) {
+    public Stream<TooFewInputsOfTurnout.Match> streamAllMatches(final Turnout pT) {
       return rawStreamAllMatches(new Object[]{pT});
     }
     
@@ -317,7 +324,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<Turnout.Match> getOneArbitraryMatch(final modes3.Turnout pT) {
+    public Optional<TooFewInputsOfTurnout.Match> getOneArbitraryMatch(final Turnout pT) {
       return rawGetOneArbitraryMatch(new Object[]{pT});
     }
     
@@ -328,7 +335,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final modes3.Turnout pT) {
+    public boolean hasMatch(final Turnout pT) {
       return rawHasMatch(new Object[]{pT});
     }
     
@@ -338,7 +345,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final modes3.Turnout pT) {
+    public int countMatches(final Turnout pT) {
       return rawCountMatches(new Object[]{pT});
     }
     
@@ -350,7 +357,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final modes3.Turnout pT, final Consumer<? super Turnout.Match> processor) {
+    public boolean forOneArbitraryMatch(final Turnout pT, final Consumer<? super TooFewInputsOfTurnout.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pT}, processor);
     }
     
@@ -362,8 +369,8 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the (partial) match object.
      * 
      */
-    public Turnout.Match newMatch(final modes3.Turnout pT) {
-      return Turnout.Match.newMatch(pT);
+    public TooFewInputsOfTurnout.Match newMatch(final Turnout pT) {
+      return TooFewInputsOfTurnout.Match.newMatch(pT);
     }
     
     /**
@@ -371,8 +378,8 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<modes3.Turnout> rawStreamAllValuesOfT(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_T, parameters).map(modes3.Turnout.class::cast);
+    protected Stream<Turnout> rawStreamAllValuesOfT(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_T, parameters).map(Turnout.class::cast);
     }
     
     /**
@@ -380,7 +387,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<modes3.Turnout> getAllValuesOfT() {
+    public Set<Turnout> getAllValuesOfT() {
       return rawStreamAllValuesOfT(emptyArray()).collect(Collectors.toSet());
     }
     
@@ -389,14 +396,14 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<modes3.Turnout> streamAllValuesOfT() {
+    public Stream<Turnout> streamAllValuesOfT() {
       return rawStreamAllValuesOfT(emptyArray());
     }
     
     @Override
-    protected Turnout.Match tupleToMatch(final Tuple t) {
+    protected TooFewInputsOfTurnout.Match tupleToMatch(final Tuple t) {
       try {
-          return Turnout.Match.newMatch((modes3.Turnout) t.get(POSITION_T));
+          return TooFewInputsOfTurnout.Match.newMatch((Turnout) t.get(POSITION_T));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -404,9 +411,9 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
     }
     
     @Override
-    protected Turnout.Match arrayToMatch(final Object[] match) {
+    protected TooFewInputsOfTurnout.Match arrayToMatch(final Object[] match) {
       try {
-          return Turnout.Match.newMatch((modes3.Turnout) match[POSITION_T]);
+          return TooFewInputsOfTurnout.Match.newMatch((Turnout) match[POSITION_T]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -414,9 +421,9 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
     }
     
     @Override
-    protected Turnout.Match arrayToMatchMutable(final Object[] match) {
+    protected TooFewInputsOfTurnout.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return Turnout.Match.newMutableMatch((modes3.Turnout) match[POSITION_T]);
+          return TooFewInputsOfTurnout.Match.newMutableMatch((Turnout) match[POSITION_T]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -428,12 +435,12 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<Turnout.Matcher> querySpecification() {
-      return Turnout.instance();
+    public static IQuerySpecification<TooFewInputsOfTurnout.Matcher> querySpecification() {
+      return TooFewInputsOfTurnout.instance();
     }
   }
   
-  private Turnout() {
+  private TooFewInputsOfTurnout() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -442,7 +449,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static Turnout instance() {
+  public static TooFewInputsOfTurnout instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -451,35 +458,35 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
   }
   
   @Override
-  protected Turnout.Matcher instantiate(final ViatraQueryEngine engine) {
-    return Turnout.Matcher.on(engine);
+  protected TooFewInputsOfTurnout.Matcher instantiate(final ViatraQueryEngine engine) {
+    return TooFewInputsOfTurnout.Matcher.on(engine);
   }
   
   @Override
-  public Turnout.Matcher instantiate() {
-    return Turnout.Matcher.create();
+  public TooFewInputsOfTurnout.Matcher instantiate() {
+    return TooFewInputsOfTurnout.Matcher.create();
   }
   
   @Override
-  public Turnout.Match newEmptyMatch() {
-    return Turnout.Match.newEmptyMatch();
+  public TooFewInputsOfTurnout.Match newEmptyMatch() {
+    return TooFewInputsOfTurnout.Match.newEmptyMatch();
   }
   
   @Override
-  public Turnout.Match newMatch(final Object... parameters) {
-    return Turnout.Match.newMatch((modes3.Turnout) parameters[0]);
+  public TooFewInputsOfTurnout.Match newMatch(final Object... parameters) {
+    return TooFewInputsOfTurnout.Match.newMatch((modes3.Turnout) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link Turnout} to be created 
+   * Inner class allowing the singleton instance of {@link TooFewInputsOfTurnout} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link Turnout#instance()}.
+   *     but rather at the first call to {@link TooFewInputsOfTurnout#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final Turnout INSTANCE = new Turnout();
+    private static final TooFewInputsOfTurnout INSTANCE = new TooFewInputsOfTurnout();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -497,7 +504,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final Turnout.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final TooFewInputsOfTurnout.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     private final PParameter parameter_T = new PParameter("T", "modes3.Turnout", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")), PParameterDirection.INOUT);
     
@@ -509,7 +516,7 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
     
     @Override
     public String getFullyQualifiedName() {
-      return "modes3.queries.turnout";
+      return "modes3.queries.tooFewInputsOfTurnout";
     }
     
     @Override
@@ -533,9 +540,18 @@ public final class Turnout extends BaseGeneratedEMFQuerySpecification<Turnout.Ma
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_T, parameter_T)
           ));
-          // 	Turnout(T)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_T), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")));
+          // 	neg find inputsOfTurnout(T)
+          new NegativePatternCall(body, Tuples.flatTupleOf(var_T), InputsOfTurnout.instance().getInternalQueryRepresentation());
           bodies.add(body);
+      }
+      {
+          PAnnotation annotation = new PAnnotation("Constraint");
+          annotation.addAttribute("message", "tooFewInputsOfTurnout");
+          annotation.addAttribute("severity", "error");
+          annotation.addAttribute("key", Arrays.asList(new Object[] {
+                              new ParameterReference("T")
+                              }));
+          addAnnotation(annotation);
       }
       return bodies;
     }

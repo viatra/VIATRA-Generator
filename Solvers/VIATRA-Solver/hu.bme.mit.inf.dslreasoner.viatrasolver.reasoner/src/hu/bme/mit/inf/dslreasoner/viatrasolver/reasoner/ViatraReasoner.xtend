@@ -229,6 +229,10 @@ class ViatraReasoner extends LogicReasoner {
 				it.value = (method.statistics.scopePropagationTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
+				it.name = "MustRelationPropagationTime"
+				it.value = (method.statistics.mustRelationPropagationTime / 1000000) as int
+			]
+			it.entries += createIntStatisticEntry => [
 				it.name = "TypeAnalysisTime"
 				it.value = (method.statistics.preliminaryTypeAnalisisTime / 1000000) as int
 			]

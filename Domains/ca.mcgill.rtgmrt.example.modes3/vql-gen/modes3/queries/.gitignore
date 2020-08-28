@@ -24,3 +24,10 @@
 /.ExtraInputOfTurnout.java._trace
 /.NoExtraInputOfTurnout.java._trace
 /.TooManyExtraInputsOfTurnout.java._trace
+/.TooManyInputsOfTurnout.java._trace
+/.NonDivergentInputOfTurnout.java._trace
+/.NonStraightInputOfTurnout.java._trace
+/.TooManyNonDivergentInputsOfTurnout.java._trace
+/.TooManyNonStraightInputsOfTurnout.java._trace
+/.InputsOfTurnout.java._trace
+/.TooFewInputsOfTurnout.java._trace

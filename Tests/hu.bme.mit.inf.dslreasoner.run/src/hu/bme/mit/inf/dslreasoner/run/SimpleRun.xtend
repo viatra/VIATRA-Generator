@@ -1,9 +1,8 @@
 package hu.bme.mit.inf.dslreasoner.run
 
 import functionalarchitecture.FunctionalarchitecturePackage
+import hu.bme.mit.inf.dslreasoner.domains.alloyexamples.Filesystem.Model
 import hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.Model
-import hu.bme.mit.inf.dslreasoner.domains.transima.fam.Type
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
@@ -15,7 +14,6 @@ import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
@@ -121,8 +119,6 @@ class SimpleRun {
 		val patterns = i.specifications.toList
 		val wfPatterns = patterns.filter[it.allAnnotations.exists[it.name== "Constraint"]].toSet
 		val derivedFeatures = new LinkedHashMap
-		derivedFeatures.put(Type.instance,metamodel.attributes.filter[it.name == "type"].head)
-		derivedFeatures.put(Model.instance,metamodel.references.filter[it.name == "model"].head)
 		val res = new ViatraQuerySetDescriptor(
 			patterns,
 			wfPatterns,

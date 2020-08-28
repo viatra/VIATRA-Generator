@@ -7,16 +7,14 @@ import modes3.queries.Adjacent;
 import modes3.queries.ConnectedTo;
 import modes3.queries.ConnectedToNotSymmetric;
 import modes3.queries.ConnectedToReflexive;
-import modes3.queries.ExtraInputOfTurnout;
-import modes3.queries.NoExtraInputOfTurnout;
+import modes3.queries.InputsOfTurnout;
 import modes3.queries.Output;
 import modes3.queries.OutputReflexive;
 import modes3.queries.Reachable;
-import modes3.queries.TooManyExtraInputsOfTurnout;
+import modes3.queries.TooFewInputsOfTurnout;
 import modes3.queries.TooManyInputsOfSegment;
-import modes3.queries.Turnout;
+import modes3.queries.TooManyInputsOfTurnout;
 import modes3.queries.TurnoutConnectedToBothOutputs;
-import modes3.queries.TurnoutInSegments;
 import modes3.queries.TurnoutOutput;
 import modes3.queries.TurnoutOutputsAreSame;
 import modes3.queries.Unreachable;
@@ -31,21 +29,19 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * in order to achieve better performance than one-by-one on-demand matcher initialization.
  * 
  * <p> From package modes3.queries, the group contains the definition of the following patterns: <ul>
- * <li>turnoutInSegments</li>
  * <li>connectedTo</li>
  * <li>connectedToNotSymmetric</li>
  * <li>connectedToReflexive</li>
  * <li>turnoutOutput</li>
  * <li>outputReflexive</li>
  * <li>turnoutOutputsAreSame</li>
- * <li>turnout</li>
  * <li>output</li>
  * <li>tooManyInputsOfSegment</li>
  * <li>turnoutConnectedToBothOutputs</li>
- * <li>extraInputOfTurnout</li>
- * <li>noExtraInputOfTurnout</li>
- * <li>tooManyExtraInputsOfTurnout</li>
  * <li>adjacent</li>
+ * <li>tooManyInputsOfTurnout</li>
+ * <li>inputsOfTurnout</li>
+ * <li>tooFewInputsOfTurnout</li>
  * <li>reachable</li>
  * <li>unreachable</li>
  * </ul>
@@ -72,31 +68,21 @@ public final class Modes3Queries extends BaseGeneratedPatternGroup {
   private static Modes3Queries INSTANCE;
   
   private Modes3Queries() {
-    querySpecifications.add(TurnoutInSegments.instance());
     querySpecifications.add(ConnectedTo.instance());
     querySpecifications.add(ConnectedToNotSymmetric.instance());
     querySpecifications.add(ConnectedToReflexive.instance());
     querySpecifications.add(TurnoutOutput.instance());
     querySpecifications.add(OutputReflexive.instance());
     querySpecifications.add(TurnoutOutputsAreSame.instance());
-    querySpecifications.add(Turnout.instance());
     querySpecifications.add(Output.instance());
     querySpecifications.add(TooManyInputsOfSegment.instance());
     querySpecifications.add(TurnoutConnectedToBothOutputs.instance());
-    querySpecifications.add(ExtraInputOfTurnout.instance());
-    querySpecifications.add(NoExtraInputOfTurnout.instance());
-    querySpecifications.add(TooManyExtraInputsOfTurnout.instance());
     querySpecifications.add(Adjacent.instance());
+    querySpecifications.add(TooManyInputsOfTurnout.instance());
+    querySpecifications.add(InputsOfTurnout.instance());
+    querySpecifications.add(TooFewInputsOfTurnout.instance());
     querySpecifications.add(Reachable.instance());
     querySpecifications.add(Unreachable.instance());
-  }
-  
-  public TurnoutInSegments getTurnoutInSegments() {
-    return TurnoutInSegments.instance();
-  }
-  
-  public TurnoutInSegments.Matcher getTurnoutInSegments(final ViatraQueryEngine engine) {
-    return TurnoutInSegments.Matcher.on(engine);
   }
   
   public ConnectedTo getConnectedTo() {
@@ -147,14 +133,6 @@ public final class Modes3Queries extends BaseGeneratedPatternGroup {
     return TurnoutOutputsAreSame.Matcher.on(engine);
   }
   
-  public Turnout getTurnout() {
-    return Turnout.instance();
-  }
-  
-  public Turnout.Matcher getTurnout(final ViatraQueryEngine engine) {
-    return Turnout.Matcher.on(engine);
-  }
-  
   public Output getOutput() {
     return Output.instance();
   }
@@ -179,36 +157,36 @@ public final class Modes3Queries extends BaseGeneratedPatternGroup {
     return TurnoutConnectedToBothOutputs.Matcher.on(engine);
   }
   
-  public ExtraInputOfTurnout getExtraInputOfTurnout() {
-    return ExtraInputOfTurnout.instance();
-  }
-  
-  public ExtraInputOfTurnout.Matcher getExtraInputOfTurnout(final ViatraQueryEngine engine) {
-    return ExtraInputOfTurnout.Matcher.on(engine);
-  }
-  
-  public NoExtraInputOfTurnout getNoExtraInputOfTurnout() {
-    return NoExtraInputOfTurnout.instance();
-  }
-  
-  public NoExtraInputOfTurnout.Matcher getNoExtraInputOfTurnout(final ViatraQueryEngine engine) {
-    return NoExtraInputOfTurnout.Matcher.on(engine);
-  }
-  
-  public TooManyExtraInputsOfTurnout getTooManyExtraInputsOfTurnout() {
-    return TooManyExtraInputsOfTurnout.instance();
-  }
-  
-  public TooManyExtraInputsOfTurnout.Matcher getTooManyExtraInputsOfTurnout(final ViatraQueryEngine engine) {
-    return TooManyExtraInputsOfTurnout.Matcher.on(engine);
-  }
-  
   public Adjacent getAdjacent() {
     return Adjacent.instance();
   }
   
   public Adjacent.Matcher getAdjacent(final ViatraQueryEngine engine) {
     return Adjacent.Matcher.on(engine);
+  }
+  
+  public TooManyInputsOfTurnout getTooManyInputsOfTurnout() {
+    return TooManyInputsOfTurnout.instance();
+  }
+  
+  public TooManyInputsOfTurnout.Matcher getTooManyInputsOfTurnout(final ViatraQueryEngine engine) {
+    return TooManyInputsOfTurnout.Matcher.on(engine);
+  }
+  
+  public InputsOfTurnout getInputsOfTurnout() {
+    return InputsOfTurnout.instance();
+  }
+  
+  public InputsOfTurnout.Matcher getInputsOfTurnout(final ViatraQueryEngine engine) {
+    return InputsOfTurnout.Matcher.on(engine);
+  }
+  
+  public TooFewInputsOfTurnout getTooFewInputsOfTurnout() {
+    return TooFewInputsOfTurnout.instance();
+  }
+  
+  public TooFewInputsOfTurnout.Matcher getTooFewInputsOfTurnout(final ViatraQueryEngine engine) {
+    return TooFewInputsOfTurnout.Matcher.on(engine);
   }
   
   public Reachable getReachable() {

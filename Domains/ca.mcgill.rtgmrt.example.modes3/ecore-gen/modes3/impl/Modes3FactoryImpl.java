@@ -60,6 +60,7 @@ public class Modes3FactoryImpl extends EFactoryImpl implements Modes3Factory {
 			case Modes3Package.MODES3_MODEL_ROOT: return createModes3ModelRoot();
 			case Modes3Package.TURNOUT: return createTurnout();
 			case Modes3Package.TRAIN: return createTrain();
+			case Modes3Package.SIMPLE_SEGMENT: return createSimpleSegment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +104,16 @@ public class Modes3FactoryImpl extends EFactoryImpl implements Modes3Factory {
 	public Train createTrain() {
 		TrainImpl train = new TrainImpl();
 		return train;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimpleSegment createSimpleSegment() {
+		SimpleSegmentImpl simpleSegment = new SimpleSegmentImpl();
+		return simpleSegment;
 	}
 
 	/**

@@ -38,7 +38,8 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 	public IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> hasElementInContainmentQuery
 	public Map<ObjectCreationPrecondition, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineObjectQueries
 	public Map<? extends Type, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineTypeQueries
-	public Map<Pair<RelationDeclaration, Relation>, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refinerelationQueries
+	public Map<Pair<RelationDeclaration, Relation>, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineRelationQueries
+	public Map<Pair<RelationDeclaration, Relation>, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> mustRelationPropagationQueries
 	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> mustUnitPropagationPreconditionPatterns
 	public Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> currentUnitPropagationPreconditionPatterns
 	public Map<RelationDefinition, ModalPatternQueries> modalRelationQueries
@@ -70,7 +71,6 @@ class UnifinishedMultiplicityQueries {
 }
 
 class PatternProvider {
-
 	val TypeAnalysis typeAnalysis = new TypeAnalysis
 
 	def generateQueries(LogicProblem problem, PartialInterpretation emptySolution, ModelGenerationStatistics statistics,
@@ -98,7 +98,8 @@ class PatternProvider {
 		val generatedQueries = parseUtil.parse(patternGeneratorResult.patternText)
 		val runtimeQueries = calclulateRuntimeQueries(patternGenerator, problem, emptySolution, typeAnalysisResult,
 			patternGeneratorResult.constraint2MustPreconditionName,
-			patternGeneratorResult.constraint2CurrentPreconditionName, relationConstraints, generatedQueries)
+			patternGeneratorResult.constraint2CurrentPreconditionName, relationConstraints,
+			unitPropagationPatternGenerators, generatedQueries)
 		return runtimeQueries
 	}
 
@@ -110,6 +111,7 @@ class PatternProvider {
 		HashMap<PConstraint, String> mustUnitPropagationTrace,
 		HashMap<PConstraint, String> currentUnitPropagationTrace,
 		RelationConstraints relationConstraints,
+		Collection<UnitPropagationPatternGenerator> unitPropagationPatternGenerators,
 		Map<String, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> queries
 	) {
 		val Map<Relation, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> invalidWFQueries = patternGenerator.
@@ -136,6 +138,8 @@ class PatternProvider {
 			]
 		val Map<Pair<RelationDeclaration, Relation>, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> refineRelationQueries = patternGenerator.
 			relationRefinementGenerator.getRefineRelationQueries(problem).mapValues[it.lookup(queries)]
+		val Map<Pair<RelationDeclaration, Relation>, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> mustRelationPropagationQueries = patternGenerator.
+			relationRefinementGenerator.getMustPropagationQueries(problem, unitPropagationPatternGenerators).mapValues[it.lookup(queries)]
 		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> mustUnitPropagationPreconditionPatterns = mustUnitPropagationTrace.
 			mapValues[it.lookup(queries)]
 		val Map<PConstraint, IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>>> currentUnitPropagationPreconditionPatterns = currentUnitPropagationTrace.
@@ -158,6 +162,7 @@ class PatternProvider {
 			refineObjectsQueries,
 			refineTypeQueries,
 			refineRelationQueries,
+			mustRelationPropagationQueries,
 			mustUnitPropagationPreconditionPatterns,
 			currentUnitPropagationPreconditionPatterns,
 			modalRelationQueries,

@@ -307,7 +307,6 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	
 	public List<String> times = new LinkedList<String>();
 	private void saveTimes() {
-		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder<?, ?>)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
 		long forwardTime = context.getDesignSpaceManager().getForwardTime()/1000000;
 		long backtrackingTime = context.getDesignSpaceManager().getBacktrackingTime()/1000000;
 		long activationSelection = this.activationSelector.getRuntime()/1000000;
@@ -317,8 +316,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
 		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
 		this.times.add(
-			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+ 
-			"|StateCoderTime:"+statecoderTime+
+			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+
 			"|ForwardTime:"+forwardTime+
 			"|Backtrackingtime:"+backtrackingTime+
 			"|GlobalConstraintEvaluationTime:"+(globalConstraintEvaluationTime/1000000)+

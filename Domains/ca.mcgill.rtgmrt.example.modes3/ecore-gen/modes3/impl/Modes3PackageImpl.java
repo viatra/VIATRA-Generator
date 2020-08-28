@@ -6,6 +6,7 @@ import modes3.Modes3Factory;
 import modes3.Modes3ModelRoot;
 import modes3.Modes3Package;
 import modes3.Segment;
+import modes3.SimpleSegment;
 import modes3.Train;
 import modes3.Turnout;
 
@@ -50,6 +51,13 @@ public class Modes3PackageImpl extends EPackageImpl implements Modes3Package {
 	 * @generated
 	 */
 	private EClass trainEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass simpleSegmentEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -261,6 +269,15 @@ public class Modes3PackageImpl extends EPackageImpl implements Modes3Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSimpleSegment() {
+		return simpleSegmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Modes3Factory getModes3Factory() {
 		return (Modes3Factory)getEFactoryInstance();
 	}
@@ -303,6 +320,8 @@ public class Modes3PackageImpl extends EPackageImpl implements Modes3Package {
 		createEReference(trainEClass, TRAIN__LOCATION);
 		createEAttribute(trainEClass, TRAIN__ID);
 		createEAttribute(trainEClass, TRAIN__SPEED);
+
+		simpleSegmentEClass = createEClass(SIMPLE_SEGMENT);
 	}
 
 	/**
@@ -334,6 +353,7 @@ public class Modes3PackageImpl extends EPackageImpl implements Modes3Package {
 
 		// Add supertypes to classes
 		turnoutEClass.getESuperTypes().add(this.getSegment());
+		simpleSegmentEClass.getESuperTypes().add(this.getSegment());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(segmentEClass, Segment.class, "Segment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -344,7 +364,7 @@ public class Modes3PackageImpl extends EPackageImpl implements Modes3Package {
 		initEClass(modes3ModelRootEClass, Modes3ModelRoot.class, "Modes3ModelRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModes3ModelRoot_Id(), ecorePackage.getEInt(), "id", null, 0, 1, Modes3ModelRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModes3ModelRoot_Trains(), this.getTrain(), null, "trains", null, 0, -1, Modes3ModelRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModes3ModelRoot_Segments(), this.getSegment(), null, "segments", null, 0, -1, Modes3ModelRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModes3ModelRoot_Segments(), this.getSimpleSegment(), null, "segments", null, 0, -1, Modes3ModelRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModes3ModelRoot_Turnouts(), this.getTurnout(), null, "turnouts", null, 0, -1, Modes3ModelRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(turnoutEClass, Turnout.class, "Turnout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -355,6 +375,8 @@ public class Modes3PackageImpl extends EPackageImpl implements Modes3Package {
 		initEReference(getTrain_Location(), this.getSegment(), this.getSegment_OccupiedBy(), "location", null, 1, 1, Train.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTrain_Id(), ecorePackage.getEInt(), "id", null, 0, 1, Train.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTrain_Speed(), ecorePackage.getEDouble(), "speed", null, 0, 1, Train.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(simpleSegmentEClass, SimpleSegment.class, "SimpleSegment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

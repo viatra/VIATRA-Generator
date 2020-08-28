@@ -62,7 +62,7 @@ public interface Modes3ModelRoot extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Segments</b></em>' containment reference list.
-	 * The list contents are of type {@link modes3.Segment}.
+	 * The list contents are of type {@link modes3.SimpleSegment}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Segments</em>' containment reference list.
@@ -70,7 +70,7 @@ public interface Modes3ModelRoot extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Segment> getSegments();
+	EList<SimpleSegment> getSegments();
 
 	/**
 	 * Returns the value of the '<em><b>Turnouts</b></em>' containment reference list.

@@ -13,9 +13,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import modes3.Segment;
 import modes3.Turnout;
-import modes3.queries.Output;
+import modes3.queries.Adjacent;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
@@ -26,11 +25,11 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
+import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
@@ -47,12 +46,18 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern extraInputOfTurnout(T : Turnout, S : Segment) {
- *         	Turnout.straight(T, Straight);
- *         	Turnout.divergent(T, Divergent);
- *         	find output(S, T);
- *         	S != Straight;
- *         	S != Divergent;
+ *         {@literal @}Constraint(message = "turnoutConnectedToBothOutputs", severity = "error", key = { T })
+ *         pattern tooManyInputsOfTurnout(T : Turnout) {
+ *         	find adjacent(I1, T);
+ *         	find adjacent(I2, T);
+ *         	find adjacent(I3, T);
+ *         	find adjacent(I4, T);
+ *         	I1 != I2;
+ *         	I1 != I3;
+ *         	I1 != I4;
+ *         	I2 != I3;
+ *         	I2 != I4;
+ *         	I3 != I4;
  *         }
  * </pre></code>
  * 
@@ -61,9 +66,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecification<ExtraInputOfTurnout.Matcher> {
+public final class TooManyInputsOfTurnout extends BaseGeneratedEMFQuerySpecification<TooManyInputsOfTurnout.Matcher> {
   /**
-   * Pattern-specific match representation of the modes3.queries.extraInputOfTurnout pattern,
+   * Pattern-specific match representation of the modes3.queries.tooManyInputsOfTurnout pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -77,20 +82,16 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
   public static abstract class Match extends BasePatternMatch {
     private Turnout fT;
     
-    private Segment fS;
+    private static List<String> parameterNames = makeImmutableList("T");
     
-    private static List<String> parameterNames = makeImmutableList("T", "S");
-    
-    private Match(final Turnout pT, final Segment pS) {
+    private Match(final Turnout pT) {
       this.fT = pT;
-      this.fS = pS;
     }
     
     @Override
     public Object get(final String parameterName) {
       switch(parameterName) {
           case "T": return this.fT;
-          case "S": return this.fS;
           default: return null;
       }
     }
@@ -99,7 +100,6 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
     public Object get(final int index) {
       switch(index) {
           case 0: return this.fT;
-          case 1: return this.fS;
           default: return null;
       }
     }
@@ -108,19 +108,11 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
       return this.fT;
     }
     
-    public Segment getS() {
-      return this.fS;
-    }
-    
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
       if ("T".equals(parameterName) ) {
           this.fT = (Turnout) newValue;
-          return true;
-      }
-      if ("S".equals(parameterName) ) {
-          this.fS = (Segment) newValue;
           return true;
       }
       return false;
@@ -131,42 +123,36 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
       this.fT = pT;
     }
     
-    public void setS(final Segment pS) {
-      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fS = pS;
-    }
-    
     @Override
     public String patternName() {
-      return "modes3.queries.extraInputOfTurnout";
+      return "modes3.queries.tooManyInputsOfTurnout";
     }
     
     @Override
     public List<String> parameterNames() {
-      return ExtraInputOfTurnout.Match.parameterNames;
+      return TooManyInputsOfTurnout.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fT, fS};
+      return new Object[]{fT};
     }
     
     @Override
-    public ExtraInputOfTurnout.Match toImmutable() {
-      return isMutable() ? newMatch(fT, fS) : this;
+    public TooManyInputsOfTurnout.Match toImmutable() {
+      return isMutable() ? newMatch(fT) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"T\"=" + prettyPrintValue(fT) + ", ");
-      result.append("\"S\"=" + prettyPrintValue(fS));
+      result.append("\"T\"=" + prettyPrintValue(fT));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fT, fS);
+      return Objects.hash(fT);
     }
     
     @Override
@@ -176,9 +162,9 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof ExtraInputOfTurnout.Match)) {
-          ExtraInputOfTurnout.Match other = (ExtraInputOfTurnout.Match) obj;
-          return Objects.equals(fT, other.fT) && Objects.equals(fS, other.fS);
+      if ((obj instanceof TooManyInputsOfTurnout.Match)) {
+          TooManyInputsOfTurnout.Match other = (TooManyInputsOfTurnout.Match) obj;
+          return Objects.equals(fT, other.fT);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -190,8 +176,8 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
     }
     
     @Override
-    public ExtraInputOfTurnout specification() {
-      return ExtraInputOfTurnout.instance();
+    public TooManyInputsOfTurnout specification() {
+      return TooManyInputsOfTurnout.instance();
     }
     
     /**
@@ -201,8 +187,8 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * @return the empty match.
      * 
      */
-    public static ExtraInputOfTurnout.Match newEmptyMatch() {
-      return new Mutable(null, null);
+    public static TooManyInputsOfTurnout.Match newEmptyMatch() {
+      return new Mutable(null);
     }
     
     /**
@@ -210,12 +196,11 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static ExtraInputOfTurnout.Match newMutableMatch(final Turnout pT, final Segment pS) {
-      return new Mutable(pT, pS);
+    public static TooManyInputsOfTurnout.Match newMutableMatch(final Turnout pT) {
+      return new Mutable(pT);
     }
     
     /**
@@ -223,17 +208,16 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static ExtraInputOfTurnout.Match newMatch(final Turnout pT, final Segment pS) {
-      return new Immutable(pT, pS);
+    public static TooManyInputsOfTurnout.Match newMatch(final Turnout pT) {
+      return new Immutable(pT);
     }
     
-    private static final class Mutable extends ExtraInputOfTurnout.Match {
-      Mutable(final Turnout pT, final Segment pS) {
-        super(pT, pS);
+    private static final class Mutable extends TooManyInputsOfTurnout.Match {
+      Mutable(final Turnout pT) {
+        super(pT);
       }
       
       @Override
@@ -242,9 +226,9 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
       }
     }
     
-    private static final class Immutable extends ExtraInputOfTurnout.Match {
-      Immutable(final Turnout pT, final Segment pS) {
-        super(pT, pS);
+    private static final class Immutable extends TooManyInputsOfTurnout.Match {
+      Immutable(final Turnout pT) {
+        super(pT);
       }
       
       @Override
@@ -255,7 +239,7 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
   }
   
   /**
-   * Generated pattern matcher API of the modes3.queries.extraInputOfTurnout pattern,
+   * Generated pattern matcher API of the modes3.queries.tooManyInputsOfTurnout pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -265,20 +249,26 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern extraInputOfTurnout(T : Turnout, S : Segment) {
-   * 	Turnout.straight(T, Straight);
-   * 	Turnout.divergent(T, Divergent);
-   * 	find output(S, T);
-   * 	S != Straight;
-   * 	S != Divergent;
+   * {@literal @}Constraint(message = "turnoutConnectedToBothOutputs", severity = "error", key = { T })
+   * pattern tooManyInputsOfTurnout(T : Turnout) {
+   * 	find adjacent(I1, T);
+   * 	find adjacent(I2, T);
+   * 	find adjacent(I3, T);
+   * 	find adjacent(I4, T);
+   * 	I1 != I2;
+   * 	I1 != I3;
+   * 	I1 != I4;
+   * 	I2 != I3;
+   * 	I2 != I4;
+   * 	I3 != I4;
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see ExtraInputOfTurnout
+   * @see TooManyInputsOfTurnout
    * 
    */
-  public static class Matcher extends BaseMatcher<ExtraInputOfTurnout.Match> {
+  public static class Matcher extends BaseMatcher<TooManyInputsOfTurnout.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -287,7 +277,7 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static ExtraInputOfTurnout.Matcher on(final ViatraQueryEngine engine) {
+    public static TooManyInputsOfTurnout.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -302,15 +292,13 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static ExtraInputOfTurnout.Matcher create() {
+    public static TooManyInputsOfTurnout.Matcher create() {
       return new Matcher();
     }
     
     private static final int POSITION_T = 0;
     
-    private static final int POSITION_S = 1;
-    
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(ExtraInputOfTurnout.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(TooManyInputsOfTurnout.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -327,12 +315,11 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<ExtraInputOfTurnout.Match> getAllMatches(final Turnout pT, final Segment pS) {
-      return rawStreamAllMatches(new Object[]{pT, pS}).collect(Collectors.toSet());
+    public Collection<TooManyInputsOfTurnout.Match> getAllMatches(final Turnout pT) {
+      return rawStreamAllMatches(new Object[]{pT}).collect(Collectors.toSet());
     }
     
     /**
@@ -342,60 +329,55 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<ExtraInputOfTurnout.Match> streamAllMatches(final Turnout pT, final Segment pS) {
-      return rawStreamAllMatches(new Object[]{pT, pS});
+    public Stream<TooManyInputsOfTurnout.Match> streamAllMatches(final Turnout pT) {
+      return rawStreamAllMatches(new Object[]{pT});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<ExtraInputOfTurnout.Match> getOneArbitraryMatch(final Turnout pT, final Segment pS) {
-      return rawGetOneArbitraryMatch(new Object[]{pT, pS});
+    public Optional<TooManyInputsOfTurnout.Match> getOneArbitraryMatch(final Turnout pT) {
+      return rawGetOneArbitraryMatch(new Object[]{pT});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Turnout pT, final Segment pS) {
-      return rawHasMatch(new Object[]{pT, pS});
+    public boolean hasMatch(final Turnout pT) {
+      return rawHasMatch(new Object[]{pT});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Turnout pT, final Segment pS) {
-      return rawCountMatches(new Object[]{pT, pS});
+    public int countMatches(final Turnout pT) {
+      return rawCountMatches(new Object[]{pT});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Turnout pT, final Segment pS, final Consumer<? super ExtraInputOfTurnout.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pT, pS}, processor);
+    public boolean forOneArbitraryMatch(final Turnout pT, final Consumer<? super TooManyInputsOfTurnout.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pT}, processor);
     }
     
     /**
@@ -403,12 +385,11 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
      * @param pT the fixed value of pattern parameter T, or null if not bound.
-     * @param pS the fixed value of pattern parameter S, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public ExtraInputOfTurnout.Match newMatch(final Turnout pT, final Segment pS) {
-      return ExtraInputOfTurnout.Match.newMatch(pT, pS);
+    public TooManyInputsOfTurnout.Match newMatch(final Turnout pT) {
+      return TooManyInputsOfTurnout.Match.newMatch(pT);
     }
     
     /**
@@ -438,129 +419,10 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
       return rawStreamAllValuesOfT(emptyArray());
     }
     
-    /**
-     * Retrieve the set of values that occur in matches for T.
-     * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
-     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     *      
-     * @return the Stream of all values or empty set if there are no matches
-     * 
-     */
-    public Stream<Turnout> streamAllValuesOfT(final ExtraInputOfTurnout.Match partialMatch) {
-      return rawStreamAllValuesOfT(partialMatch.toArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for T.
-     * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
-     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     *      
-     * @return the Stream of all values or empty set if there are no matches
-     * 
-     */
-    public Stream<Turnout> streamAllValuesOfT(final Segment pS) {
-      return rawStreamAllValuesOfT(new Object[]{null, pS});
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for T.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Turnout> getAllValuesOfT(final ExtraInputOfTurnout.Match partialMatch) {
-      return rawStreamAllValuesOfT(partialMatch.toArray()).collect(Collectors.toSet());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for T.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Turnout> getAllValuesOfT(final Segment pS) {
-      return rawStreamAllValuesOfT(new Object[]{null, pS}).collect(Collectors.toSet());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    protected Stream<Segment> rawStreamAllValuesOfS(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_S, parameters).map(Segment.class::cast);
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Segment> getAllValuesOfS() {
-      return rawStreamAllValuesOfS(emptyArray()).collect(Collectors.toSet());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Stream<Segment> streamAllValuesOfS() {
-      return rawStreamAllValuesOfS(emptyArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
-     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     *      
-     * @return the Stream of all values or empty set if there are no matches
-     * 
-     */
-    public Stream<Segment> streamAllValuesOfS(final ExtraInputOfTurnout.Match partialMatch) {
-      return rawStreamAllValuesOfS(partialMatch.toArray());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * </p>
-     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
-     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
-     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     *      
-     * @return the Stream of all values or empty set if there are no matches
-     * 
-     */
-    public Stream<Segment> streamAllValuesOfS(final Turnout pT) {
-      return rawStreamAllValuesOfS(new Object[]{pT, null});
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Segment> getAllValuesOfS(final ExtraInputOfTurnout.Match partialMatch) {
-      return rawStreamAllValuesOfS(partialMatch.toArray()).collect(Collectors.toSet());
-    }
-    
-    /**
-     * Retrieve the set of values that occur in matches for S.
-     * @return the Set of all values or empty set if there are no matches
-     * 
-     */
-    public Set<Segment> getAllValuesOfS(final Turnout pT) {
-      return rawStreamAllValuesOfS(new Object[]{pT, null}).collect(Collectors.toSet());
-    }
-    
     @Override
-    protected ExtraInputOfTurnout.Match tupleToMatch(final Tuple t) {
+    protected TooManyInputsOfTurnout.Match tupleToMatch(final Tuple t) {
       try {
-          return ExtraInputOfTurnout.Match.newMatch((Turnout) t.get(POSITION_T), (Segment) t.get(POSITION_S));
+          return TooManyInputsOfTurnout.Match.newMatch((Turnout) t.get(POSITION_T));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -568,9 +430,9 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
     }
     
     @Override
-    protected ExtraInputOfTurnout.Match arrayToMatch(final Object[] match) {
+    protected TooManyInputsOfTurnout.Match arrayToMatch(final Object[] match) {
       try {
-          return ExtraInputOfTurnout.Match.newMatch((Turnout) match[POSITION_T], (Segment) match[POSITION_S]);
+          return TooManyInputsOfTurnout.Match.newMatch((Turnout) match[POSITION_T]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -578,9 +440,9 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
     }
     
     @Override
-    protected ExtraInputOfTurnout.Match arrayToMatchMutable(final Object[] match) {
+    protected TooManyInputsOfTurnout.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return ExtraInputOfTurnout.Match.newMutableMatch((Turnout) match[POSITION_T], (Segment) match[POSITION_S]);
+          return TooManyInputsOfTurnout.Match.newMutableMatch((Turnout) match[POSITION_T]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -592,12 +454,12 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<ExtraInputOfTurnout.Matcher> querySpecification() {
-      return ExtraInputOfTurnout.instance();
+    public static IQuerySpecification<TooManyInputsOfTurnout.Matcher> querySpecification() {
+      return TooManyInputsOfTurnout.instance();
     }
   }
   
-  private ExtraInputOfTurnout() {
+  private TooManyInputsOfTurnout() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -606,7 +468,7 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static ExtraInputOfTurnout instance() {
+  public static TooManyInputsOfTurnout instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -615,35 +477,35 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
   }
   
   @Override
-  protected ExtraInputOfTurnout.Matcher instantiate(final ViatraQueryEngine engine) {
-    return ExtraInputOfTurnout.Matcher.on(engine);
+  protected TooManyInputsOfTurnout.Matcher instantiate(final ViatraQueryEngine engine) {
+    return TooManyInputsOfTurnout.Matcher.on(engine);
   }
   
   @Override
-  public ExtraInputOfTurnout.Matcher instantiate() {
-    return ExtraInputOfTurnout.Matcher.create();
+  public TooManyInputsOfTurnout.Matcher instantiate() {
+    return TooManyInputsOfTurnout.Matcher.create();
   }
   
   @Override
-  public ExtraInputOfTurnout.Match newEmptyMatch() {
-    return ExtraInputOfTurnout.Match.newEmptyMatch();
+  public TooManyInputsOfTurnout.Match newEmptyMatch() {
+    return TooManyInputsOfTurnout.Match.newEmptyMatch();
   }
   
   @Override
-  public ExtraInputOfTurnout.Match newMatch(final Object... parameters) {
-    return ExtraInputOfTurnout.Match.newMatch((modes3.Turnout) parameters[0], (modes3.Segment) parameters[1]);
+  public TooManyInputsOfTurnout.Match newMatch(final Object... parameters) {
+    return TooManyInputsOfTurnout.Match.newMatch((modes3.Turnout) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link ExtraInputOfTurnout} to be created 
+   * Inner class allowing the singleton instance of {@link TooManyInputsOfTurnout} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link ExtraInputOfTurnout#instance()}.
+   *     but rather at the first call to {@link TooManyInputsOfTurnout#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final ExtraInputOfTurnout INSTANCE = new ExtraInputOfTurnout();
+    private static final TooManyInputsOfTurnout INSTANCE = new TooManyInputsOfTurnout();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -661,13 +523,11 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final ExtraInputOfTurnout.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final TooManyInputsOfTurnout.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     private final PParameter parameter_T = new PParameter("T", "modes3.Turnout", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")), PParameterDirection.INOUT);
     
-    private final PParameter parameter_S = new PParameter("S", "modes3.Segment", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.ece.mcgill.ca/wcet/modes3", "Segment")), PParameterDirection.INOUT);
-    
-    private final List<PParameter> parameters = Arrays.asList(parameter_T, parameter_S);
+    private final List<PParameter> parameters = Arrays.asList(parameter_T);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -675,12 +535,12 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
     
     @Override
     public String getFullyQualifiedName() {
-      return "modes3.queries.extraInputOfTurnout";
+      return "modes3.queries.tooManyInputsOfTurnout";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("T","S");
+      return Arrays.asList("T");
     }
     
     @Override
@@ -695,34 +555,44 @@ public final class ExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificatio
       {
           PBody body = new PBody(this);
           PVariable var_T = body.getOrCreateVariableByName("T");
-          PVariable var_S = body.getOrCreateVariableByName("S");
-          PVariable var_Straight = body.getOrCreateVariableByName("Straight");
-          PVariable var_Divergent = body.getOrCreateVariableByName("Divergent");
+          PVariable var_I1 = body.getOrCreateVariableByName("I1");
+          PVariable var_I2 = body.getOrCreateVariableByName("I2");
+          PVariable var_I3 = body.getOrCreateVariableByName("I3");
+          PVariable var_I4 = body.getOrCreateVariableByName("I4");
           new TypeConstraint(body, Tuples.flatTupleOf(var_T), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var_S), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Segment")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_T, parameter_T),
-             new ExportedParameter(body, var_S, parameter_S)
+             new ExportedParameter(body, var_T, parameter_T)
           ));
-          // 	Turnout.straight(T, Straight)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_T), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")));
-          PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_T, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout", "straight")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Segment")));
-          new Equality(body, var__virtual_0_, var_Straight);
-          // 	Turnout.divergent(T, Divergent)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_T), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")));
-          PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_T, var__virtual_1_), new EStructuralFeatureInstancesKey(getFeatureLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout", "divergent")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_1_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Segment")));
-          new Equality(body, var__virtual_1_, var_Divergent);
-          // 	find output(S, T)
-          new PositivePatternCall(body, Tuples.flatTupleOf(var_S, var_T), Output.instance().getInternalQueryRepresentation());
-          // 	S != Straight
-          new Inequality(body, var_S, var_Straight);
-          // 	S != Divergent
-          new Inequality(body, var_S, var_Divergent);
+          // 	find adjacent(I1, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I1, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	find adjacent(I2, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I2, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	find adjacent(I3, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I3, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	find adjacent(I4, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I4, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	I1 != I2
+          new Inequality(body, var_I1, var_I2);
+          // 	I1 != I3
+          new Inequality(body, var_I1, var_I3);
+          // 	I1 != I4
+          new Inequality(body, var_I1, var_I4);
+          // 	I2 != I3
+          new Inequality(body, var_I2, var_I3);
+          // 	I2 != I4
+          new Inequality(body, var_I2, var_I4);
+          // 	I3 != I4
+          new Inequality(body, var_I3, var_I4);
           bodies.add(body);
+      }
+      {
+          PAnnotation annotation = new PAnnotation("Constraint");
+          annotation.addAttribute("message", "turnoutConnectedToBothOutputs");
+          annotation.addAttribute("severity", "error");
+          annotation.addAttribute("key", Arrays.asList(new Object[] {
+                              new ParameterReference("T")
+                              }));
+          addAnnotation(annotation);
       }
       return bodies;
     }

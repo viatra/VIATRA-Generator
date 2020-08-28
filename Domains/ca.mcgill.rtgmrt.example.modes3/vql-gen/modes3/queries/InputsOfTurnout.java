@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import modes3.Turnout;
-import modes3.queries.ExtraInputOfTurnout;
+import modes3.queries.Adjacent;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.viatra.query.runtime.api.IPatternMatch;
@@ -28,10 +28,9 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.PAnnotation;
-import org.eclipse.viatra.query.runtime.matchers.psystem.annotations.ParameterReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -45,9 +44,13 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         {@literal @}Constraint(message = "noExtraInputOfTurnout", severity = "error", key = { T })
- *         pattern noExtraInputOfTurnout(T : Turnout) {
- *         	neg find extraInputOfTurnout(T, _);
+ *         pattern inputsOfTurnout(T : Turnout) {
+ *         	find adjacent(I1, T);
+ *         	find adjacent(I2, T);
+ *         	find adjacent(I3, T);
+ *         	I1 != I2;
+ *         	I1 != I3;
+ *         	I2 != I3;
  *         }
  * </pre></code>
  * 
@@ -56,9 +59,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecification<NoExtraInputOfTurnout.Matcher> {
+public final class InputsOfTurnout extends BaseGeneratedEMFQuerySpecification<InputsOfTurnout.Matcher> {
   /**
-   * Pattern-specific match representation of the modes3.queries.noExtraInputOfTurnout pattern,
+   * Pattern-specific match representation of the modes3.queries.inputsOfTurnout pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -115,12 +118,12 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     
     @Override
     public String patternName() {
-      return "modes3.queries.noExtraInputOfTurnout";
+      return "modes3.queries.inputsOfTurnout";
     }
     
     @Override
     public List<String> parameterNames() {
-      return NoExtraInputOfTurnout.Match.parameterNames;
+      return InputsOfTurnout.Match.parameterNames;
     }
     
     @Override
@@ -129,7 +132,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     }
     
     @Override
-    public NoExtraInputOfTurnout.Match toImmutable() {
+    public InputsOfTurnout.Match toImmutable() {
       return isMutable() ? newMatch(fT) : this;
     }
     
@@ -152,8 +155,8 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof NoExtraInputOfTurnout.Match)) {
-          NoExtraInputOfTurnout.Match other = (NoExtraInputOfTurnout.Match) obj;
+      if ((obj instanceof InputsOfTurnout.Match)) {
+          InputsOfTurnout.Match other = (InputsOfTurnout.Match) obj;
           return Objects.equals(fT, other.fT);
       } else {
           // this should be infrequent
@@ -166,8 +169,8 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     }
     
     @Override
-    public NoExtraInputOfTurnout specification() {
-      return NoExtraInputOfTurnout.instance();
+    public InputsOfTurnout specification() {
+      return InputsOfTurnout.instance();
     }
     
     /**
@@ -177,7 +180,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return the empty match.
      * 
      */
-    public static NoExtraInputOfTurnout.Match newEmptyMatch() {
+    public static InputsOfTurnout.Match newEmptyMatch() {
       return new Mutable(null);
     }
     
@@ -189,7 +192,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static NoExtraInputOfTurnout.Match newMutableMatch(final Turnout pT) {
+    public static InputsOfTurnout.Match newMutableMatch(final Turnout pT) {
       return new Mutable(pT);
     }
     
@@ -201,11 +204,11 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return the (partial) match object.
      * 
      */
-    public static NoExtraInputOfTurnout.Match newMatch(final Turnout pT) {
+    public static InputsOfTurnout.Match newMatch(final Turnout pT) {
       return new Immutable(pT);
     }
     
-    private static final class Mutable extends NoExtraInputOfTurnout.Match {
+    private static final class Mutable extends InputsOfTurnout.Match {
       Mutable(final Turnout pT) {
         super(pT);
       }
@@ -216,7 +219,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
       }
     }
     
-    private static final class Immutable extends NoExtraInputOfTurnout.Match {
+    private static final class Immutable extends InputsOfTurnout.Match {
       Immutable(final Turnout pT) {
         super(pT);
       }
@@ -229,7 +232,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
   }
   
   /**
-   * Generated pattern matcher API of the modes3.queries.noExtraInputOfTurnout pattern,
+   * Generated pattern matcher API of the modes3.queries.inputsOfTurnout pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -239,17 +242,21 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
    * 
    * <p>Original source:
    * <code><pre>
-   * {@literal @}Constraint(message = "noExtraInputOfTurnout", severity = "error", key = { T })
-   * pattern noExtraInputOfTurnout(T : Turnout) {
-   * 	neg find extraInputOfTurnout(T, _);
+   * pattern inputsOfTurnout(T : Turnout) {
+   * 	find adjacent(I1, T);
+   * 	find adjacent(I2, T);
+   * 	find adjacent(I3, T);
+   * 	I1 != I2;
+   * 	I1 != I3;
+   * 	I2 != I3;
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see NoExtraInputOfTurnout
+   * @see InputsOfTurnout
    * 
    */
-  public static class Matcher extends BaseMatcher<NoExtraInputOfTurnout.Match> {
+  public static class Matcher extends BaseMatcher<InputsOfTurnout.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -258,7 +265,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static NoExtraInputOfTurnout.Matcher on(final ViatraQueryEngine engine) {
+    public static InputsOfTurnout.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -273,13 +280,13 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static NoExtraInputOfTurnout.Matcher create() {
+    public static InputsOfTurnout.Matcher create() {
       return new Matcher();
     }
     
     private static final int POSITION_T = 0;
     
-    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(NoExtraInputOfTurnout.Matcher.class);
+    private static final Logger LOGGER = ViatraQueryLoggingUtil.getLogger(InputsOfTurnout.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -299,7 +306,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<NoExtraInputOfTurnout.Match> getAllMatches(final Turnout pT) {
+    public Collection<InputsOfTurnout.Match> getAllMatches(final Turnout pT) {
       return rawStreamAllMatches(new Object[]{pT}).collect(Collectors.toSet());
     }
     
@@ -313,7 +320,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<NoExtraInputOfTurnout.Match> streamAllMatches(final Turnout pT) {
+    public Stream<InputsOfTurnout.Match> streamAllMatches(final Turnout pT) {
       return rawStreamAllMatches(new Object[]{pT});
     }
     
@@ -324,7 +331,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<NoExtraInputOfTurnout.Match> getOneArbitraryMatch(final Turnout pT) {
+    public Optional<InputsOfTurnout.Match> getOneArbitraryMatch(final Turnout pT) {
       return rawGetOneArbitraryMatch(new Object[]{pT});
     }
     
@@ -357,7 +364,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Turnout pT, final Consumer<? super NoExtraInputOfTurnout.Match> processor) {
+    public boolean forOneArbitraryMatch(final Turnout pT, final Consumer<? super InputsOfTurnout.Match> processor) {
       return rawForOneArbitraryMatch(new Object[]{pT}, processor);
     }
     
@@ -369,8 +376,8 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @return the (partial) match object.
      * 
      */
-    public NoExtraInputOfTurnout.Match newMatch(final Turnout pT) {
-      return NoExtraInputOfTurnout.Match.newMatch(pT);
+    public InputsOfTurnout.Match newMatch(final Turnout pT) {
+      return InputsOfTurnout.Match.newMatch(pT);
     }
     
     /**
@@ -401,9 +408,9 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     }
     
     @Override
-    protected NoExtraInputOfTurnout.Match tupleToMatch(final Tuple t) {
+    protected InputsOfTurnout.Match tupleToMatch(final Tuple t) {
       try {
-          return NoExtraInputOfTurnout.Match.newMatch((Turnout) t.get(POSITION_T));
+          return InputsOfTurnout.Match.newMatch((Turnout) t.get(POSITION_T));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -411,9 +418,9 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     }
     
     @Override
-    protected NoExtraInputOfTurnout.Match arrayToMatch(final Object[] match) {
+    protected InputsOfTurnout.Match arrayToMatch(final Object[] match) {
       try {
-          return NoExtraInputOfTurnout.Match.newMatch((Turnout) match[POSITION_T]);
+          return InputsOfTurnout.Match.newMatch((Turnout) match[POSITION_T]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -421,9 +428,9 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     }
     
     @Override
-    protected NoExtraInputOfTurnout.Match arrayToMatchMutable(final Object[] match) {
+    protected InputsOfTurnout.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return NoExtraInputOfTurnout.Match.newMutableMatch((Turnout) match[POSITION_T]);
+          return InputsOfTurnout.Match.newMutableMatch((Turnout) match[POSITION_T]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -435,12 +442,12 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<NoExtraInputOfTurnout.Matcher> querySpecification() {
-      return NoExtraInputOfTurnout.instance();
+    public static IQuerySpecification<InputsOfTurnout.Matcher> querySpecification() {
+      return InputsOfTurnout.instance();
     }
   }
   
-  private NoExtraInputOfTurnout() {
+  private InputsOfTurnout() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -449,7 +456,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static NoExtraInputOfTurnout instance() {
+  public static InputsOfTurnout instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -458,35 +465,35 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
   }
   
   @Override
-  protected NoExtraInputOfTurnout.Matcher instantiate(final ViatraQueryEngine engine) {
-    return NoExtraInputOfTurnout.Matcher.on(engine);
+  protected InputsOfTurnout.Matcher instantiate(final ViatraQueryEngine engine) {
+    return InputsOfTurnout.Matcher.on(engine);
   }
   
   @Override
-  public NoExtraInputOfTurnout.Matcher instantiate() {
-    return NoExtraInputOfTurnout.Matcher.create();
+  public InputsOfTurnout.Matcher instantiate() {
+    return InputsOfTurnout.Matcher.create();
   }
   
   @Override
-  public NoExtraInputOfTurnout.Match newEmptyMatch() {
-    return NoExtraInputOfTurnout.Match.newEmptyMatch();
+  public InputsOfTurnout.Match newEmptyMatch() {
+    return InputsOfTurnout.Match.newEmptyMatch();
   }
   
   @Override
-  public NoExtraInputOfTurnout.Match newMatch(final Object... parameters) {
-    return NoExtraInputOfTurnout.Match.newMatch((modes3.Turnout) parameters[0]);
+  public InputsOfTurnout.Match newMatch(final Object... parameters) {
+    return InputsOfTurnout.Match.newMatch((modes3.Turnout) parameters[0]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link NoExtraInputOfTurnout} to be created 
+   * Inner class allowing the singleton instance of {@link InputsOfTurnout} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link NoExtraInputOfTurnout#instance()}.
+   *     but rather at the first call to {@link InputsOfTurnout#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private static final NoExtraInputOfTurnout INSTANCE = new NoExtraInputOfTurnout();
+    private static final InputsOfTurnout INSTANCE = new InputsOfTurnout();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -504,7 +511,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private static final NoExtraInputOfTurnout.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private static final InputsOfTurnout.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
     private final PParameter parameter_T = new PParameter("T", "modes3.Turnout", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")), PParameterDirection.INOUT);
     
@@ -516,7 +523,7 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
     
     @Override
     public String getFullyQualifiedName() {
-      return "modes3.queries.noExtraInputOfTurnout";
+      return "modes3.queries.inputsOfTurnout";
     }
     
     @Override
@@ -536,23 +543,26 @@ public final class NoExtraInputOfTurnout extends BaseGeneratedEMFQuerySpecificat
       {
           PBody body = new PBody(this);
           PVariable var_T = body.getOrCreateVariableByName("T");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
+          PVariable var_I1 = body.getOrCreateVariableByName("I1");
+          PVariable var_I2 = body.getOrCreateVariableByName("I2");
+          PVariable var_I3 = body.getOrCreateVariableByName("I3");
           new TypeConstraint(body, Tuples.flatTupleOf(var_T), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("http://www.ece.mcgill.ca/wcet/modes3", "Turnout")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_T, parameter_T)
           ));
-          // 	neg find extraInputOfTurnout(T, _)
-          new NegativePatternCall(body, Tuples.flatTupleOf(var_T, var___0_), ExtraInputOfTurnout.instance().getInternalQueryRepresentation());
+          // 	find adjacent(I1, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I1, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	find adjacent(I2, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I2, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	find adjacent(I3, T)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_I3, var_T), Adjacent.instance().getInternalQueryRepresentation());
+          // 	I1 != I2
+          new Inequality(body, var_I1, var_I2);
+          // 	I1 != I3
+          new Inequality(body, var_I1, var_I3);
+          // 	I2 != I3
+          new Inequality(body, var_I2, var_I3);
           bodies.add(body);
-      }
-      {
-          PAnnotation annotation = new PAnnotation("Constraint");
-          annotation.addAttribute("message", "noExtraInputOfTurnout");
-          annotation.addAttribute("severity", "error");
-          annotation.addAttribute("key", Arrays.asList(new Object[] {
-                              new ParameterReference("T")
-                              }));
-          addAnnotation(annotation);
       }
       return bodies;
     }

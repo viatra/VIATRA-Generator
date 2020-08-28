@@ -58,6 +58,15 @@ public interface Modes3Factory extends EFactory {
 	Train createTrain();
 
 	/**
+	 * Returns a new object of class '<em>Simple Segment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Segment</em>'.
+	 * @generated
+	 */
+	SimpleSegment createSimpleSegment();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
