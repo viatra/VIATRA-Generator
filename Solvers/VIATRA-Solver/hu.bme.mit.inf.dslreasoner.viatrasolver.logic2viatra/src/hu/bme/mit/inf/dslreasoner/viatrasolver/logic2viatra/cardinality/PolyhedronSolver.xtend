@@ -116,7 +116,7 @@ abstract class PolyhedronSignature {
 }
 
 @Accessors
-abstract class LinearBoundedExpression {
+class Bounds {
 	var Integer lowerBound
 	var Integer upperBound
 
@@ -132,10 +132,17 @@ abstract class LinearBoundedExpression {
 		}
 	}
 
-	def void assertEqualsTo(int bound) {
-		tightenLowerBound(bound)
-		tightenUpperBound(bound)
+	def void assertBetween(Integer tighterLowerBound, Integer tighterUpperBound) {
+		tightenLowerBound(tighterLowerBound)
+		tightenUpperBound(tighterUpperBound)
 	}
+
+	def void assertEqualsTo(int bound) {
+		assertBetween(bound, bound)
+	}
+}
+
+abstract class LinearBoundedExpression extends Bounds {
 }
 
 @Accessors

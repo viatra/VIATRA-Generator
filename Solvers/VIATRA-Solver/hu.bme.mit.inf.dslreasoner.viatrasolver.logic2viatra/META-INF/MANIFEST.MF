@@ -8,7 +8,8 @@ Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.interval,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.interval.aggregators,
  hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.patterns,
- hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries
+ hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.queries,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.rules
 Require-Bundle: hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",

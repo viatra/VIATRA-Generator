@@ -46,12 +46,6 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  * <p>Original source:
  *         <code><pre>
- *         //{@literal @}Constraint(message = "noInputOfSegment", severity = "error", key = { S })
- *         //pattern noInputOfSegment(S : Segment) {
- *         //	neg find turnout(S);
- *         //	neg find output(_, S);
- *         //}
- *         
  *         {@literal @}Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
  *         pattern tooManyInputsOfSegment(S : SimpleSegment) {
  *         	find output(I1, S);
@@ -251,12 +245,6 @@ public final class TooManyInputsOfSegment extends BaseGeneratedEMFQuerySpecifica
    * 
    * <p>Original source:
    * <code><pre>
-   * //{@literal @}Constraint(message = "noInputOfSegment", severity = "error", key = { S })
-   * //pattern noInputOfSegment(S : Segment) {
-   * //	neg find turnout(S);
-   * //	neg find output(_, S);
-   * //}
-   * 
    * {@literal @}Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
    * pattern tooManyInputsOfSegment(S : SimpleSegment) {
    * 	find output(I1, S);

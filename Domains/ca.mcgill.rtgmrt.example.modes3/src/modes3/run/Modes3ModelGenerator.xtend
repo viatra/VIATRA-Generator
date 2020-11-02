@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableSet
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EReferenceMapper_RelationsOverTypes_Trace
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2LogicConfiguration
+import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.ecore2logic.EcoreMetamodelDescriptor
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsFactory
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage
@@ -14,6 +15,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
+import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatra2logic.ViatraQuerySetDescriptor
@@ -25,18 +27,38 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePro
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveConfiguration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveElementConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.StateCoderStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.List
 import modes3.Modes3Factory
 import modes3.Modes3Package
+import modes3.queries.CloseTrains_step_2
+import modes3.queries.CloseTrains_step_3
+import modes3.queries.CloseTrains_step_4
+import modes3.queries.CloseTrains_step_5
+import modes3.queries.CloseTrains_step_6
+import modes3.queries.CloseTrains_step_7
+import modes3.queries.EndOfSiding_step_2
+import modes3.queries.EndOfSiding_step_3
+import modes3.queries.EndOfSiding_step_4
+import modes3.queries.EndOfSiding_step_5
+import modes3.queries.MisalignedTurnout_step_2
+import modes3.queries.MisalignedTurnout_step_3
+import modes3.queries.MisalignedTurnout_step_4
+import modes3.queries.MisalignedTurnout_step_5
 import modes3.queries.Modes3Queries
+import modes3.queries.TrainLocations_step_2
+import modes3.queries.TrainLocations_step_3
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -92,17 +114,21 @@ class Modes3ModelGenerator {
 				minNewElements = modelSize
 				maxNewElements = modelSize
 				minNewElementsByType => [
-//					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), 5)
+//					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.train), modelSize / 5)
+//					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), modelSize / 5)
+//					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.simpleSegment), 3 * modelSize / 5)
 				]
 				maxNewElementsByType => [
-					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.train), 5)
-					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), 5)
+					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.train), modelSize / 5)
+					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), modelSize / 5)
+					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.simpleSegment), 3 * modelSize / 5)
 				]
 			]
 			solutionScope => [
 				numberOfRequiredSolutions = 1
 			]
-			scopeWeight = 5
+			costObjectives += getObjective(ecore2Logic, metamodelLogic.trace)
+			scopeWeight = 6
 			nameNewElements = false
 			typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
 			stateCoderStrategy = StateCoderStrategy.PairwiseNeighbourhood
@@ -121,47 +147,60 @@ class Modes3ModelGenerator {
 		val solution = solver.solve(logic.output, config, workspace)
 		if (solution instanceof ModelResult) {
 			println("Saving generated solutions")
-			val representations = solution.representation
-			for (representationIndex : 0 ..< representations.size) {
-				val representation = representations.get(representationIndex)
+			val logic2Ecore = new Logic2Ecore(ecore2Logic)
+			val interpretations = solver.getInterpretations(solution)
+			for (representationIndex : 0 ..< interpretations.size) {
+				val interpretation = interpretations.get(representationIndex)
 				val representationNumber = representationIndex + 1
-				if (representation instanceof PartialInterpretation) {
+				if (interpretation instanceof PartialModelAsLogicInterpretation) {
+					val representation = interpretation.partialInterpretation
 					workspace.writeModel(representation, '''solution«representationNumber».partialinterpretation''')
 					val partialInterpretation2GML = new PartialInterpretation2Gml
 					val gml = partialInterpretation2GML.transform(representation)
 					workspace.writeText('''solution«representationNumber».gml''', gml)
-					if (representation.newElements.size < 160) {
-						if (representation instanceof PartialInterpretation) {
-							val rootType = (representation.problem.types.findFirst [
-								name == "Modes3ModelRoot class DefinedPart"
-							] as TypeDefinition)
-							val rootIntepretation = representation.partialtypeinterpratation.filter(
-								PartialComplexTypeInterpretation).findFirst [
-								interpretationOf.name == "Modes3ModelRoot class"
-							]
-							rootIntepretation.elements.removeAll(rootType.elements)
-							representation.problem.elements.removeAll(rootType.elements)
-							for (relationInterpretation : representation.partialrelationinterpretation) {
-								relationInterpretation.relationlinks.removeIf [ link |
-									if (link instanceof BinaryElementRelationLink) {
-										rootType.elements.contains(link.param1) || rootType.elements.contains(link.param2)
-									} else {
-										false
-									}
-								]
-							}
-							rootType.elements.clear
+					val model = logic2Ecore.transformInterpretation(interpretation, metamodelLogic.trace)
+					val iterator = model.eAllContents
+					var int id = 0
+					while (iterator.hasNext) {
+						val obj = iterator.next
+						val idFeature = obj.eClass.EAllAttributes.findFirst[name == 'id']
+						if (idFeature !== null) {
+							obj.eSet(idFeature, id)
+							id++
 						}
+					}
+					workspace.writeModel(model, '''solution«representationNumber».modes3''')
+					if (representation.newElements.size < 160) {
+						val rootType = (representation.problem.types.findFirst [
+							name == "Modes3ModelRoot class DefinedPart"
+						] as TypeDefinition)
+						val rootIntepretation = representation.partialtypeinterpratation.filter(
+							PartialComplexTypeInterpretation).findFirst [
+							interpretationOf.name == "Modes3ModelRoot class"
+						]
+						rootIntepretation.elements.removeAll(rootType.elements)
+						representation.problem.elements.removeAll(rootType.elements)
+						for (relationInterpretation : representation.partialrelationinterpretation) {
+							relationInterpretation.relationlinks.removeIf [ link |
+								if (link instanceof BinaryElementRelationLink) {
+									rootType.elements.contains(link.param1) ||
+										rootType.elements.contains(link.param2)
+								} else {
+									false
+								}
+							]
+						}
+						rootType.elements.clear
 						val visualiser = new GraphvizVisualiser
 						val visualisation = visualiser.visualiseConcretization(representation)
 						visualisation.writeToFile(workspace, '''solution«representationNumber».png''')
 					}
 				} else {
-					workspace.writeText('''solution«representationNumber».txt''', representation.toString)
+					workspace.writeText('''solution«representationNumber».txt''', interpretation.toString)
 				}
 			}
 		} else {
-			println("Failed to solver problem")
+			println("Failed to solve problem")
 			val partial = logic.output
 			workspace.writeModel(partial, "solution.partialinterpretation")
 		}
@@ -198,6 +237,94 @@ class Modes3ModelGenerator {
 		)
 	}
 
+	def getObjective(Ecore2Logic ecore2Logic, Ecore2Logic_Trace ecore2LogicTrace) {
+		new CostObjectiveConfiguration => [
+			switch (monitoringQuery) {
+				case closeTrains: {
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = CloseTrains_step_2.instance.fullyQualifiedName
+						weight = 14 + 53 + 11
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = CloseTrains_step_3.instance.fullyQualifiedName
+						weight = 21 + 14
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = CloseTrains_step_4.instance.fullyQualifiedName
+						weight = 14 + 44 + 14 + 9
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = CloseTrains_step_5.instance.fullyQualifiedName
+						weight = 14 + 41 + 11
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = CloseTrains_step_6.instance.fullyQualifiedName
+						weight = 27
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = CloseTrains_step_7.instance.fullyQualifiedName
+						weight = 48
+					]
+					hint = new CloseTrainsObjectiveHint(ecore2Logic, ecore2LogicTrace)
+				}
+				case trainLocations: {
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = TrainLocations_step_2.instance.fullyQualifiedName
+						weight = 14 + 53 + 11
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = TrainLocations_step_3.instance.fullyQualifiedName
+						weight = 48
+					]
+					hint = new TrainLocationsObjectiveHint(ecore2Logic, ecore2LogicTrace)
+				}
+				case misalignedTurnout: {
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = MisalignedTurnout_step_2.instance.fullyQualifiedName
+						weight = 14 + 53 + 11
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = MisalignedTurnout_step_3.instance.fullyQualifiedName
+						weight = 108
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = MisalignedTurnout_step_4.instance.fullyQualifiedName
+						weight = 27
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = MisalignedTurnout_step_5.instance.fullyQualifiedName
+						weight = 48
+					]
+					hint = new MisalignedTurnoutObjectiveHint(ecore2Logic, ecore2LogicTrace)
+				}
+				case endOfSiding: {
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = EndOfSiding_step_2.instance.fullyQualifiedName
+						weight = 14 + 53 + 11
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = EndOfSiding_step_3.instance.fullyQualifiedName
+						weight = 21 + 14
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = EndOfSiding_step_4.instance.fullyQualifiedName
+						weight = 14 + 35 + 21 + 15 + 14 + 21 + 15 + 11
+					]
+					elements += new CostObjectiveElementConfiguration => [
+						patternQualifiedName = EndOfSiding_step_5.instance.fullyQualifiedName
+						weight = 48
+					]
+					hint = new EndOfSidingObjectiveHint(ecore2Logic, ecore2LogicTrace)
+				}
+				default:
+					throw new IllegalArgumentException("Unknown monitoring query: " + monitoringQuery)
+			}
+			kind = ObjectiveKind.HIGHER_IS_BETTER
+			threshold = ObjectiveThreshold.NO_THRESHOLD
+			findExtremum = true
+		]
+	}
+
 	def static init() {
 		EMFPatternLanguageStandaloneSetup.doSetup
 		ViatraQueryEngineOptions.setSystemDefaultBackends(ReteBackendFactory.INSTANCE, ReteBackendFactory.INSTANCE,
@@ -223,6 +350,8 @@ class Modes3ModelGenerator {
 
 	private static enum MonitoringQuery {
 		closeTrains,
+		trainLocations,
+		endOfSiding,
 		misalignedTurnout
 	}
 }

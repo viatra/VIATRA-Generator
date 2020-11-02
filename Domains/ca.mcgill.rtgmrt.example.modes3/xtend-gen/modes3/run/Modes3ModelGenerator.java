@@ -13,6 +13,7 @@ import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.Ecore2logicannotationsPackage;
 import hu.bme.mit.inf.dslreasoner.ecore2logic.ecore2logicannotations.InverseRelationAssertion;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel;
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.SolutionScope;
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput;
@@ -32,6 +33,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
+import hu.bme.mit.inf.dslreasoner.logic2ecore.Logic2Ecore;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2Logic;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicTrace;
@@ -50,10 +52,15 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RelationLink;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveConfiguration;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveElementConfiguration;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DebugConfiguration;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.StateCoderStrategy;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold;
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser;
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace;
 import java.util.Collections;
@@ -64,10 +71,31 @@ import java.util.function.Predicate;
 import modes3.Modes3Factory;
 import modes3.Modes3ModelRoot;
 import modes3.Modes3Package;
+import modes3.queries.CloseTrains_step_2;
+import modes3.queries.CloseTrains_step_3;
+import modes3.queries.CloseTrains_step_4;
+import modes3.queries.CloseTrains_step_5;
+import modes3.queries.CloseTrains_step_6;
+import modes3.queries.CloseTrains_step_7;
+import modes3.queries.EndOfSiding_step_2;
+import modes3.queries.EndOfSiding_step_3;
+import modes3.queries.EndOfSiding_step_4;
+import modes3.queries.EndOfSiding_step_5;
+import modes3.queries.MisalignedTurnout_step_2;
+import modes3.queries.MisalignedTurnout_step_3;
+import modes3.queries.MisalignedTurnout_step_4;
+import modes3.queries.MisalignedTurnout_step_5;
 import modes3.queries.Modes3Queries;
+import modes3.queries.TrainLocations_step_2;
+import modes3.queries.TrainLocations_step_3;
+import modes3.run.CloseTrainsObjectiveHint;
+import modes3.run.EndOfSidingObjectiveHint;
+import modes3.run.MisalignedTurnoutObjectiveHint;
 import modes3.run.Modes3TypeScopeHint;
 import modes3.run.Modes3UnitPropagationGenerator;
+import modes3.run.TrainLocationsObjectiveHint;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -101,6 +129,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class Modes3ModelGenerator {
   private enum MonitoringQuery {
     closeTrains,
+    
+    trainLocations,
+    
+    endOfSiding,
     
     misalignedTurnout;
   }
@@ -183,8 +215,9 @@ public class Modes3ModelGenerator {
             ObjectExtensions.<Map<Type, Integer>>operator_doubleArrow(
               it_1.minNewElementsByType, _function_4);
             final Procedure1<Map<Type, Integer>> _function_5 = (Map<Type, Integer> it_2) -> {
-              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTrain()), Integer.valueOf(5));
-              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTurnout()), Integer.valueOf(5));
+              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTrain()), Integer.valueOf((this.modelSize / 5)));
+              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTurnout()), Integer.valueOf((this.modelSize / 5)));
+              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getSimpleSegment()), Integer.valueOf(((3 * this.modelSize) / 5)));
             };
             ObjectExtensions.<Map<Type, Integer>>operator_doubleArrow(
               it_1.maxNewElementsByType, _function_5);
@@ -196,7 +229,9 @@ public class Modes3ModelGenerator {
           };
           ObjectExtensions.<SolutionScope>operator_doubleArrow(
             it.solutionScope, _function_4);
-          it.scopeWeight = 5;
+          CostObjectiveConfiguration _objective = this.getObjective(this.ecore2Logic, metamodelLogic.getTrace());
+          it.costObjectives.add(_objective);
+          it.scopeWeight = 6;
           it.nameNewElements = false;
           it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis;
           it.stateCoderStrategy = StateCoderStrategy.PairwiseNeighbourhood;
@@ -224,80 +259,103 @@ public class Modes3ModelGenerator {
         URI _xifexpression = null;
         if ((solution instanceof ModelResult)) {
           InputOutput.<String>println("Saving generated solutions");
-          final EList<Object> representations = ((ModelResult)solution).getRepresentation();
-          int _size = representations.size();
+          final Logic2Ecore logic2Ecore = new Logic2Ecore(this.ecore2Logic);
+          final List<? extends LogicModelInterpretation> interpretations = this.solver.getInterpretations(((ModelResult)solution));
+          int _size = interpretations.size();
           ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
           for (final Integer representationIndex : _doubleDotLessThan) {
             {
-              final Object representation = representations.get((representationIndex).intValue());
+              final LogicModelInterpretation interpretation = interpretations.get((representationIndex).intValue());
               final int representationNumber = ((representationIndex).intValue() + 1);
-              if ((representation instanceof PartialInterpretation)) {
+              if ((interpretation instanceof PartialModelAsLogicInterpretation)) {
+                final PartialInterpretation representation = ((PartialModelAsLogicInterpretation)interpretation).getPartialInterpretation();
                 StringConcatenation _builder_1 = new StringConcatenation();
                 _builder_1.append("solution");
                 _builder_1.append(representationNumber);
                 _builder_1.append(".partialinterpretation");
-                workspace.writeModel(((EObject)representation), _builder_1.toString());
+                workspace.writeModel(representation, _builder_1.toString());
                 final PartialInterpretation2Gml partialInterpretation2GML = new PartialInterpretation2Gml();
-                final String gml = partialInterpretation2GML.transform(((PartialInterpretation)representation));
+                final String gml = partialInterpretation2GML.transform(representation);
                 StringConcatenation _builder_2 = new StringConcatenation();
                 _builder_2.append("solution");
                 _builder_2.append(representationNumber);
                 _builder_2.append(".gml");
                 workspace.writeText(_builder_2.toString(), gml);
-                int _size_1 = ((PartialInterpretation)representation).getNewElements().size();
+                final EObject model = logic2Ecore.transformInterpretation(interpretation, metamodelLogic.getTrace());
+                final TreeIterator<EObject> iterator = model.eAllContents();
+                int id = 0;
+                while (iterator.hasNext()) {
+                  {
+                    final EObject obj = iterator.next();
+                    final Function1<EAttribute, Boolean> _function_3 = (EAttribute it) -> {
+                      String _name_2 = it.getName();
+                      return Boolean.valueOf(Objects.equal(_name_2, "id"));
+                    };
+                    final EAttribute idFeature = IterableExtensions.<EAttribute>findFirst(obj.eClass().getEAllAttributes(), _function_3);
+                    if ((idFeature != null)) {
+                      obj.eSet(idFeature, Integer.valueOf(id));
+                      id++;
+                    }
+                  }
+                }
+                StringConcatenation _builder_3 = new StringConcatenation();
+                _builder_3.append("solution");
+                _builder_3.append(representationNumber);
+                _builder_3.append(".modes3");
+                workspace.writeModel(model, _builder_3.toString());
+                int _size_1 = representation.getNewElements().size();
                 boolean _lessThan = (_size_1 < 160);
                 if (_lessThan) {
-                  if ((representation instanceof PartialInterpretation)) {
-                    final Function1<Type, Boolean> _function_3 = (Type it) -> {
-                      String _name_2 = it.getName();
-                      return Boolean.valueOf(Objects.equal(_name_2, "Modes3ModelRoot class DefinedPart"));
+                  final Function1<Type, Boolean> _function_3 = (Type it) -> {
+                    String _name_2 = it.getName();
+                    return Boolean.valueOf(Objects.equal(_name_2, "Modes3ModelRoot class DefinedPart"));
+                  };
+                  Type _findFirst = IterableExtensions.<Type>findFirst(representation.getProblem().getTypes(), _function_3);
+                  final TypeDefinition rootType = ((TypeDefinition) _findFirst);
+                  final Function1<PartialComplexTypeInterpretation, Boolean> _function_4 = (PartialComplexTypeInterpretation it) -> {
+                    String _name_2 = it.getInterpretationOf().getName();
+                    return Boolean.valueOf(Objects.equal(_name_2, "Modes3ModelRoot class"));
+                  };
+                  final PartialComplexTypeInterpretation rootIntepretation = IterableExtensions.<PartialComplexTypeInterpretation>findFirst(Iterables.<PartialComplexTypeInterpretation>filter(representation.getPartialtypeinterpratation(), 
+                    PartialComplexTypeInterpretation.class), _function_4);
+                  rootIntepretation.getElements().removeAll(rootType.getElements());
+                  representation.getProblem().getElements().removeAll(rootType.getElements());
+                  EList<PartialRelationInterpretation> _partialrelationinterpretation = representation.getPartialrelationinterpretation();
+                  for (final PartialRelationInterpretation relationInterpretation : _partialrelationinterpretation) {
+                    final Predicate<RelationLink> _function_5 = (RelationLink link) -> {
+                      boolean _xifexpression_1 = false;
+                      if ((link instanceof BinaryElementRelationLink)) {
+                        _xifexpression_1 = (rootType.getElements().contains(((BinaryElementRelationLink)link).getParam1()) || 
+                          rootType.getElements().contains(((BinaryElementRelationLink)link).getParam2()));
+                      } else {
+                        _xifexpression_1 = false;
+                      }
+                      return _xifexpression_1;
                     };
-                    Type _findFirst = IterableExtensions.<Type>findFirst(((PartialInterpretation)representation).getProblem().getTypes(), _function_3);
-                    final TypeDefinition rootType = ((TypeDefinition) _findFirst);
-                    final Function1<PartialComplexTypeInterpretation, Boolean> _function_4 = (PartialComplexTypeInterpretation it) -> {
-                      String _name_2 = it.getInterpretationOf().getName();
-                      return Boolean.valueOf(Objects.equal(_name_2, "Modes3ModelRoot class"));
-                    };
-                    final PartialComplexTypeInterpretation rootIntepretation = IterableExtensions.<PartialComplexTypeInterpretation>findFirst(Iterables.<PartialComplexTypeInterpretation>filter(((PartialInterpretation)representation).getPartialtypeinterpratation(), 
-                      PartialComplexTypeInterpretation.class), _function_4);
-                    rootIntepretation.getElements().removeAll(rootType.getElements());
-                    ((PartialInterpretation)representation).getProblem().getElements().removeAll(rootType.getElements());
-                    EList<PartialRelationInterpretation> _partialrelationinterpretation = ((PartialInterpretation)representation).getPartialrelationinterpretation();
-                    for (final PartialRelationInterpretation relationInterpretation : _partialrelationinterpretation) {
-                      final Predicate<RelationLink> _function_5 = (RelationLink link) -> {
-                        boolean _xifexpression_1 = false;
-                        if ((link instanceof BinaryElementRelationLink)) {
-                          _xifexpression_1 = (rootType.getElements().contains(((BinaryElementRelationLink)link).getParam1()) || rootType.getElements().contains(((BinaryElementRelationLink)link).getParam2()));
-                        } else {
-                          _xifexpression_1 = false;
-                        }
-                        return _xifexpression_1;
-                      };
-                      relationInterpretation.getRelationlinks().removeIf(_function_5);
-                    }
-                    rootType.getElements().clear();
+                    relationInterpretation.getRelationlinks().removeIf(_function_5);
                   }
+                  rootType.getElements().clear();
                   final GraphvizVisualiser visualiser = new GraphvizVisualiser();
-                  final PartialInterpretationVisualisation visualisation = visualiser.visualiseConcretization(((PartialInterpretation)representation));
-                  StringConcatenation _builder_3 = new StringConcatenation();
-                  _builder_3.append("solution");
-                  _builder_3.append(representationNumber);
-                  _builder_3.append(".png");
-                  visualisation.writeToFile(workspace, _builder_3.toString());
+                  final PartialInterpretationVisualisation visualisation = visualiser.visualiseConcretization(representation);
+                  StringConcatenation _builder_4 = new StringConcatenation();
+                  _builder_4.append("solution");
+                  _builder_4.append(representationNumber);
+                  _builder_4.append(".png");
+                  visualisation.writeToFile(workspace, _builder_4.toString());
                 }
               } else {
-                StringConcatenation _builder_4 = new StringConcatenation();
-                _builder_4.append("solution");
-                _builder_4.append(representationNumber);
-                _builder_4.append(".txt");
-                workspace.writeText(_builder_4.toString(), representation.toString());
+                StringConcatenation _builder_5 = new StringConcatenation();
+                _builder_5.append("solution");
+                _builder_5.append(representationNumber);
+                _builder_5.append(".txt");
+                workspace.writeText(_builder_5.toString(), interpretation.toString());
               }
             }
           }
         } else {
           URI _xblockexpression_1 = null;
           {
-            InputOutput.<String>println("Failed to solver problem");
+            InputOutput.<String>println("Failed to solve problem");
             final LogicProblem partial = logic.getOutput();
             _xblockexpression_1 = workspace.writeModel(partial, "solution.partialinterpretation");
           }
@@ -352,6 +410,153 @@ public class Modes3ModelGenerator {
       _xblockexpression = new ViatraQuerySetDescriptor(patterns, validationPatterns, _emptyMap);
     }
     return _xblockexpression;
+  }
+  
+  public CostObjectiveConfiguration getObjective(final Ecore2Logic ecore2Logic, final Ecore2Logic_Trace ecore2LogicTrace) {
+    CostObjectiveConfiguration _costObjectiveConfiguration = new CostObjectiveConfiguration();
+    final Procedure1<CostObjectiveConfiguration> _function = (CostObjectiveConfiguration it) -> {
+      final Modes3ModelGenerator.MonitoringQuery monitoringQuery = this.monitoringQuery;
+      if (monitoringQuery != null) {
+        switch (monitoringQuery) {
+          case closeTrains:
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_1 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = CloseTrains_step_2.instance().getFullyQualifiedName();
+              it_1.weight = ((14 + 53) + 11);
+            };
+            CostObjectiveElementConfiguration _doubleArrow = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration, _function_1);
+            it.elements.add(_doubleArrow);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_1 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_2 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = CloseTrains_step_3.instance().getFullyQualifiedName();
+              it_1.weight = (21 + 14);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_1 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_1, _function_2);
+            it.elements.add(_doubleArrow_1);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_2 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_3 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = CloseTrains_step_4.instance().getFullyQualifiedName();
+              it_1.weight = (((14 + 44) + 14) + 9);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_2 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_2, _function_3);
+            it.elements.add(_doubleArrow_2);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_3 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_4 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = CloseTrains_step_5.instance().getFullyQualifiedName();
+              it_1.weight = ((14 + 41) + 11);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_3 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_3, _function_4);
+            it.elements.add(_doubleArrow_3);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_4 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_5 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = CloseTrains_step_6.instance().getFullyQualifiedName();
+              it_1.weight = 27;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_4 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_4, _function_5);
+            it.elements.add(_doubleArrow_4);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_5 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_6 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = CloseTrains_step_7.instance().getFullyQualifiedName();
+              it_1.weight = 48;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_5 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_5, _function_6);
+            it.elements.add(_doubleArrow_5);
+            CloseTrainsObjectiveHint _closeTrainsObjectiveHint = new CloseTrainsObjectiveHint(ecore2Logic, ecore2LogicTrace);
+            it.hint = _closeTrainsObjectiveHint;
+            break;
+          case trainLocations:
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_6 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_7 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = TrainLocations_step_2.instance().getFullyQualifiedName();
+              it_1.weight = ((14 + 53) + 11);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_6 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_6, _function_7);
+            it.elements.add(_doubleArrow_6);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_7 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_8 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = TrainLocations_step_3.instance().getFullyQualifiedName();
+              it_1.weight = 48;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_7 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_7, _function_8);
+            it.elements.add(_doubleArrow_7);
+            TrainLocationsObjectiveHint _trainLocationsObjectiveHint = new TrainLocationsObjectiveHint(ecore2Logic, ecore2LogicTrace);
+            it.hint = _trainLocationsObjectiveHint;
+            break;
+          case misalignedTurnout:
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_8 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_9 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = MisalignedTurnout_step_2.instance().getFullyQualifiedName();
+              it_1.weight = ((14 + 53) + 11);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_8 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_8, _function_9);
+            it.elements.add(_doubleArrow_8);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_9 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_10 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = MisalignedTurnout_step_3.instance().getFullyQualifiedName();
+              it_1.weight = 108;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_9 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_9, _function_10);
+            it.elements.add(_doubleArrow_9);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_10 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_11 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = MisalignedTurnout_step_4.instance().getFullyQualifiedName();
+              it_1.weight = 27;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_10 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_10, _function_11);
+            it.elements.add(_doubleArrow_10);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_11 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_12 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = MisalignedTurnout_step_5.instance().getFullyQualifiedName();
+              it_1.weight = 48;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_11 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_11, _function_12);
+            it.elements.add(_doubleArrow_11);
+            MisalignedTurnoutObjectiveHint _misalignedTurnoutObjectiveHint = new MisalignedTurnoutObjectiveHint(ecore2Logic, ecore2LogicTrace);
+            it.hint = _misalignedTurnoutObjectiveHint;
+            break;
+          case endOfSiding:
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_12 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_13 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = EndOfSiding_step_2.instance().getFullyQualifiedName();
+              it_1.weight = ((14 + 53) + 11);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_12 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_12, _function_13);
+            it.elements.add(_doubleArrow_12);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_13 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_14 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = EndOfSiding_step_3.instance().getFullyQualifiedName();
+              it_1.weight = (21 + 14);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_13 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_13, _function_14);
+            it.elements.add(_doubleArrow_13);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_14 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_15 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = EndOfSiding_step_4.instance().getFullyQualifiedName();
+              it_1.weight = (((((((14 + 35) + 21) + 15) + 14) + 21) + 15) + 11);
+            };
+            CostObjectiveElementConfiguration _doubleArrow_14 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_14, _function_15);
+            it.elements.add(_doubleArrow_14);
+            CostObjectiveElementConfiguration _costObjectiveElementConfiguration_15 = new CostObjectiveElementConfiguration();
+            final Procedure1<CostObjectiveElementConfiguration> _function_16 = (CostObjectiveElementConfiguration it_1) -> {
+              it_1.patternQualifiedName = EndOfSiding_step_5.instance().getFullyQualifiedName();
+              it_1.weight = 48;
+            };
+            CostObjectiveElementConfiguration _doubleArrow_15 = ObjectExtensions.<CostObjectiveElementConfiguration>operator_doubleArrow(_costObjectiveElementConfiguration_15, _function_16);
+            it.elements.add(_doubleArrow_15);
+            EndOfSidingObjectiveHint _endOfSidingObjectiveHint = new EndOfSidingObjectiveHint(ecore2Logic, ecore2LogicTrace);
+            it.hint = _endOfSidingObjectiveHint;
+            break;
+          default:
+            throw new IllegalArgumentException(("Unknown monitoring query: " + this.monitoringQuery));
+        }
+      } else {
+        throw new IllegalArgumentException(("Unknown monitoring query: " + this.monitoringQuery));
+      }
+      it.kind = ObjectiveKind.HIGHER_IS_BETTER;
+      it.threshold = ObjectiveThreshold.NO_THRESHOLD;
+      it.findExtremum = true;
+    };
+    return ObjectExtensions.<CostObjectiveConfiguration>operator_doubleArrow(_costObjectiveConfiguration, _function);
   }
   
   public static Object init() {

@@ -4,16 +4,34 @@
 package modes3.queries;
 
 import modes3.queries.Adjacent;
+import modes3.queries.CloseTrains_step_2;
+import modes3.queries.CloseTrains_step_3;
+import modes3.queries.CloseTrains_step_4;
+import modes3.queries.CloseTrains_step_5;
+import modes3.queries.CloseTrains_step_6;
+import modes3.queries.CloseTrains_step_7;
+import modes3.queries.ConnectedSegmentsDirected;
 import modes3.queries.ConnectedTo;
 import modes3.queries.ConnectedToNotSymmetric;
 import modes3.queries.ConnectedToReflexive;
+import modes3.queries.EndOfSiding_step_2;
+import modes3.queries.EndOfSiding_step_3;
+import modes3.queries.EndOfSiding_step_4;
+import modes3.queries.EndOfSiding_step_5;
 import modes3.queries.InputsOfTurnout;
+import modes3.queries.MisalignedTurnout_step_2;
+import modes3.queries.MisalignedTurnout_step_3;
+import modes3.queries.MisalignedTurnout_step_4;
+import modes3.queries.MisalignedTurnout_step_5;
+import modes3.queries.MultipleConnectedTo;
 import modes3.queries.Output;
 import modes3.queries.OutputReflexive;
 import modes3.queries.Reachable;
 import modes3.queries.TooFewInputsOfTurnout;
 import modes3.queries.TooManyInputsOfSegment;
 import modes3.queries.TooManyInputsOfTurnout;
+import modes3.queries.TrainLocations_step_2;
+import modes3.queries.TrainLocations_step_3;
 import modes3.queries.TurnoutConnectedToBothOutputs;
 import modes3.queries.TurnoutOutput;
 import modes3.queries.TurnoutOutputsAreSame;
@@ -44,6 +62,24 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
  * <li>tooFewInputsOfTurnout</li>
  * <li>reachable</li>
  * <li>unreachable</li>
+ * <li>closeTrains_step_2</li>
+ * <li>closeTrains_step_3</li>
+ * <li>closeTrains_step_4</li>
+ * <li>closeTrains_step_5</li>
+ * <li>closeTrains_step_6</li>
+ * <li>closeTrains_step_7</li>
+ * <li>trainLocations_step_2</li>
+ * <li>trainLocations_step_3</li>
+ * <li>misalignedTurnout_step_2</li>
+ * <li>misalignedTurnout_step_3</li>
+ * <li>misalignedTurnout_step_4</li>
+ * <li>misalignedTurnout_step_5</li>
+ * <li>connectedSegmentsDirected</li>
+ * <li>endOfSiding_step_2</li>
+ * <li>endOfSiding_step_3</li>
+ * <li>endOfSiding_step_4</li>
+ * <li>endOfSiding_step_5</li>
+ * <li>multipleConnectedTo</li>
  * </ul>
  * 
  * @see IQueryGroup
@@ -83,6 +119,24 @@ public final class Modes3Queries extends BaseGeneratedPatternGroup {
     querySpecifications.add(TooFewInputsOfTurnout.instance());
     querySpecifications.add(Reachable.instance());
     querySpecifications.add(Unreachable.instance());
+    querySpecifications.add(CloseTrains_step_2.instance());
+    querySpecifications.add(CloseTrains_step_3.instance());
+    querySpecifications.add(CloseTrains_step_4.instance());
+    querySpecifications.add(CloseTrains_step_5.instance());
+    querySpecifications.add(CloseTrains_step_6.instance());
+    querySpecifications.add(CloseTrains_step_7.instance());
+    querySpecifications.add(TrainLocations_step_2.instance());
+    querySpecifications.add(TrainLocations_step_3.instance());
+    querySpecifications.add(MisalignedTurnout_step_2.instance());
+    querySpecifications.add(MisalignedTurnout_step_3.instance());
+    querySpecifications.add(MisalignedTurnout_step_4.instance());
+    querySpecifications.add(MisalignedTurnout_step_5.instance());
+    querySpecifications.add(ConnectedSegmentsDirected.instance());
+    querySpecifications.add(EndOfSiding_step_2.instance());
+    querySpecifications.add(EndOfSiding_step_3.instance());
+    querySpecifications.add(EndOfSiding_step_4.instance());
+    querySpecifications.add(EndOfSiding_step_5.instance());
+    querySpecifications.add(MultipleConnectedTo.instance());
   }
   
   public ConnectedTo getConnectedTo() {
@@ -203,5 +257,149 @@ public final class Modes3Queries extends BaseGeneratedPatternGroup {
   
   public Unreachable.Matcher getUnreachable(final ViatraQueryEngine engine) {
     return Unreachable.Matcher.on(engine);
+  }
+  
+  public CloseTrains_step_2 getCloseTrains_step_2() {
+    return CloseTrains_step_2.instance();
+  }
+  
+  public CloseTrains_step_2.Matcher getCloseTrains_step_2(final ViatraQueryEngine engine) {
+    return CloseTrains_step_2.Matcher.on(engine);
+  }
+  
+  public CloseTrains_step_3 getCloseTrains_step_3() {
+    return CloseTrains_step_3.instance();
+  }
+  
+  public CloseTrains_step_3.Matcher getCloseTrains_step_3(final ViatraQueryEngine engine) {
+    return CloseTrains_step_3.Matcher.on(engine);
+  }
+  
+  public CloseTrains_step_4 getCloseTrains_step_4() {
+    return CloseTrains_step_4.instance();
+  }
+  
+  public CloseTrains_step_4.Matcher getCloseTrains_step_4(final ViatraQueryEngine engine) {
+    return CloseTrains_step_4.Matcher.on(engine);
+  }
+  
+  public CloseTrains_step_5 getCloseTrains_step_5() {
+    return CloseTrains_step_5.instance();
+  }
+  
+  public CloseTrains_step_5.Matcher getCloseTrains_step_5(final ViatraQueryEngine engine) {
+    return CloseTrains_step_5.Matcher.on(engine);
+  }
+  
+  public CloseTrains_step_6 getCloseTrains_step_6() {
+    return CloseTrains_step_6.instance();
+  }
+  
+  public CloseTrains_step_6.Matcher getCloseTrains_step_6(final ViatraQueryEngine engine) {
+    return CloseTrains_step_6.Matcher.on(engine);
+  }
+  
+  public CloseTrains_step_7 getCloseTrains_step_7() {
+    return CloseTrains_step_7.instance();
+  }
+  
+  public CloseTrains_step_7.Matcher getCloseTrains_step_7(final ViatraQueryEngine engine) {
+    return CloseTrains_step_7.Matcher.on(engine);
+  }
+  
+  public TrainLocations_step_2 getTrainLocations_step_2() {
+    return TrainLocations_step_2.instance();
+  }
+  
+  public TrainLocations_step_2.Matcher getTrainLocations_step_2(final ViatraQueryEngine engine) {
+    return TrainLocations_step_2.Matcher.on(engine);
+  }
+  
+  public TrainLocations_step_3 getTrainLocations_step_3() {
+    return TrainLocations_step_3.instance();
+  }
+  
+  public TrainLocations_step_3.Matcher getTrainLocations_step_3(final ViatraQueryEngine engine) {
+    return TrainLocations_step_3.Matcher.on(engine);
+  }
+  
+  public MisalignedTurnout_step_2 getMisalignedTurnout_step_2() {
+    return MisalignedTurnout_step_2.instance();
+  }
+  
+  public MisalignedTurnout_step_2.Matcher getMisalignedTurnout_step_2(final ViatraQueryEngine engine) {
+    return MisalignedTurnout_step_2.Matcher.on(engine);
+  }
+  
+  public MisalignedTurnout_step_3 getMisalignedTurnout_step_3() {
+    return MisalignedTurnout_step_3.instance();
+  }
+  
+  public MisalignedTurnout_step_3.Matcher getMisalignedTurnout_step_3(final ViatraQueryEngine engine) {
+    return MisalignedTurnout_step_3.Matcher.on(engine);
+  }
+  
+  public MisalignedTurnout_step_4 getMisalignedTurnout_step_4() {
+    return MisalignedTurnout_step_4.instance();
+  }
+  
+  public MisalignedTurnout_step_4.Matcher getMisalignedTurnout_step_4(final ViatraQueryEngine engine) {
+    return MisalignedTurnout_step_4.Matcher.on(engine);
+  }
+  
+  public MisalignedTurnout_step_5 getMisalignedTurnout_step_5() {
+    return MisalignedTurnout_step_5.instance();
+  }
+  
+  public MisalignedTurnout_step_5.Matcher getMisalignedTurnout_step_5(final ViatraQueryEngine engine) {
+    return MisalignedTurnout_step_5.Matcher.on(engine);
+  }
+  
+  public ConnectedSegmentsDirected getConnectedSegmentsDirected() {
+    return ConnectedSegmentsDirected.instance();
+  }
+  
+  public ConnectedSegmentsDirected.Matcher getConnectedSegmentsDirected(final ViatraQueryEngine engine) {
+    return ConnectedSegmentsDirected.Matcher.on(engine);
+  }
+  
+  public EndOfSiding_step_2 getEndOfSiding_step_2() {
+    return EndOfSiding_step_2.instance();
+  }
+  
+  public EndOfSiding_step_2.Matcher getEndOfSiding_step_2(final ViatraQueryEngine engine) {
+    return EndOfSiding_step_2.Matcher.on(engine);
+  }
+  
+  public EndOfSiding_step_3 getEndOfSiding_step_3() {
+    return EndOfSiding_step_3.instance();
+  }
+  
+  public EndOfSiding_step_3.Matcher getEndOfSiding_step_3(final ViatraQueryEngine engine) {
+    return EndOfSiding_step_3.Matcher.on(engine);
+  }
+  
+  public EndOfSiding_step_4 getEndOfSiding_step_4() {
+    return EndOfSiding_step_4.instance();
+  }
+  
+  public EndOfSiding_step_4.Matcher getEndOfSiding_step_4(final ViatraQueryEngine engine) {
+    return EndOfSiding_step_4.Matcher.on(engine);
+  }
+  
+  public EndOfSiding_step_5 getEndOfSiding_step_5() {
+    return EndOfSiding_step_5.instance();
+  }
+  
+  public EndOfSiding_step_5.Matcher getEndOfSiding_step_5(final ViatraQueryEngine engine) {
+    return EndOfSiding_step_5.Matcher.on(engine);
+  }
+  
+  public MultipleConnectedTo getMultipleConnectedTo() {
+    return MultipleConnectedTo.instance();
+  }
+  
+  public MultipleConnectedTo.Matcher getMultipleConnectedTo(final ViatraQueryEngine engine) {
+    return MultipleConnectedTo.Matcher.on(engine);
   }
 }

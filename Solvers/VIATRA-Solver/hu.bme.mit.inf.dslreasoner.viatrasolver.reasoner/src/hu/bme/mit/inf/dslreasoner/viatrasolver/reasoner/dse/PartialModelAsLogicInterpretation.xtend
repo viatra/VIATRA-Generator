@@ -22,12 +22,13 @@ import java.util.List
 import java.util.Map
 import java.util.TreeSet
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
 class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
-	val PartialInterpretation partialInterpretation
+	@Accessors val PartialInterpretation partialInterpretation
 	val Map<EObject, EObject> trace;
 	val Map<TypeDeclaration,PartialComplexTypeInterpretation> type2Interpretation
 	val Map<RelationDeclaration,PartialRelationInterpretation> relation2Interpretation

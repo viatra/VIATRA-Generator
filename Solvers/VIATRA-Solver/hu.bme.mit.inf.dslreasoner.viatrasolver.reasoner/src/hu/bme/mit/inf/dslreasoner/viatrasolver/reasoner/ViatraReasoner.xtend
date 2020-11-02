@@ -1,7 +1,5 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 
-import com.google.common.collect.ImmutableList
-import com.google.common.collect.Lists
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.DocumentationLevel
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasoner
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicReasonerException
@@ -11,7 +9,6 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicresultFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethodProvider
 import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePropagatorStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.PartialInterpretationInitialiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
@@ -22,7 +19,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.sta
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.PairwiseNeighbourhoodBasedStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BasicScopeGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyForModelGeneration
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityChecker
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.InconsistentScopeGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundHandler
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
@@ -32,11 +28,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PunishSizeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ScopeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SurelyViolatedObjectiveGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.UnfinishedMultiplicityObjective
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ViatraReasonerSolutionSaver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.WF2ObjectiveConverter
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKind
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ThreeValuedCostElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ThreeValuedCostObjective
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
 import java.util.List
 import java.util.Map
@@ -86,13 +79,7 @@ class ViatraReasoner extends LogicReasoner {
 			problem,
 			emptySolution,
 			workspace,
-			viatraConfig.nameNewElements,
-			viatraConfig.typeInferenceMethod,
-			viatraConfig.calculateObjectCreationCosts,
-			viatraConfig.scopePropagatorStrategy,
-			viatraConfig.hints,
-			viatraConfig.unitPropagationPatternGenerators,
-			viatraConfig.documentationLevel
+			viatraConfig
 		)
 
 		val compositeObjective = new ModelGenerationCompositeObjective(
@@ -112,45 +99,21 @@ class ViatraReasoner extends LogicReasoner {
 			dse.addObjective(punishObjective)
 		}
 
-		val extremalObjectives = Lists.newArrayListWithExpectedSize(viatraConfig.costObjectives.size)
-		for (entry : viatraConfig.costObjectives.indexed) {
-			val objectiveName = '''costObjective«entry.key»'''
-			val objectiveConfig = entry.value
-			val elementsBuilder = ImmutableList.builder
-			for (elementConfig : objectiveConfig.elements) {
-				val relationName = elementConfig.patternQualifiedName
-				val modalQueries = method.modalRelationQueries.get(relationName)
-				if (modalQueries === null) {
-					throw new IllegalArgumentException("Unknown relation: " + relationName)
-				}
-				elementsBuilder.add(new ThreeValuedCostElement(
-					modalQueries.currentQuery,
-					modalQueries.mayQuery,
-					modalQueries.mustQuery,
-					elementConfig.weight
-				))
-			}
-			val costElements = elementsBuilder.build
-			val costObjective = new ThreeValuedCostObjective(objectiveName, costElements, objectiveConfig.kind,
-				objectiveConfig.threshold, 3)
+		for (costObjective : method.costObjectives) {
 			dse.addObjective(costObjective)
-			if (objectiveConfig.findExtremum) {
-				extremalObjectives += costObjective
-			}
 		}
-
 		val numberOfRequiredSolutions = configuration.solutionScope.numberOfRequiredSolutions
-		val solutionStore = if (extremalObjectives.empty) {
-				new SolutionStore(numberOfRequiredSolutions)
-			} else {
+		val solutionStore = if (method.optimizationProblem) {
 				new SolutionStore()
+			} else {
+				new SolutionStore(numberOfRequiredSolutions)
 			}
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val diversityChecker = DiversityChecker.of(viatraConfig.diversityRequirement)
 		val numericSolver = new NumericSolver(method, viatraConfig.runIntermediateNumericalConsistencyChecks, false)
-		val solutionSaver = new ViatraReasonerSolutionSaver(newArrayList(extremalObjectives), numberOfRequiredSolutions,
-			diversityChecker, numericSolver)
+		val solutionSaver = method.solutionSaver
+		solutionSaver.numericSolver = numericSolver
 		val solutionCopier = solutionSaver.solutionCopier
+		val diversityChecker = solutionSaver.diversityChecker
 		solutionStore.withSolutionSaver(solutionSaver)
 		dse.solutionStore = solutionStore
 
@@ -185,7 +148,8 @@ class ViatraReasoner extends LogicReasoner {
 			dse.addTransformationRule(rule)
 		}
 
-		val strategy = new BestFirstStrategyForModelGeneration(workspace, viatraConfig, method, solutionSaver, numericSolver)
+		val strategy = new BestFirstStrategyForModelGeneration(workspace, viatraConfig, method, solutionSaver,
+			numericSolver)
 		viatraConfig.progressMonitor.workedForwardTransformation
 		val transformationFinished = System.nanoTime
 		val transformationTime = transformationFinished - transformationStartTime
@@ -211,14 +175,15 @@ class ViatraReasoner extends LogicReasoner {
 					it.value = (pair.value / 1000000) as int
 				]
 			}
-			for(x: 0..<strategy.times.size) {
+			for (x : 0 ..< strategy.times.size) {
 				it.entries += createStringStatisticEntry => [
 					it.name = '''Solution«x+1»DetailedStatistics'''
 					it.value = strategy.times.get(x)
 				]
 			}
 			it.entries += createIntStatisticEntry => [
-				it.name = "ExplorationInitializationTime" it.value = ((strategy.explorationStarted-transformationFinished)/1000000) as int
+				it.name = "ExplorationInitializationTime"
+				it.value = ((strategy.explorationStarted - transformationFinished) / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "TransformationExecutionTime"
@@ -253,22 +218,28 @@ class ViatraReasoner extends LogicReasoner {
 				it.value = dse.numberOfStates as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "ForwardTime" it.value = (strategy.forwardTime/1000000) as int
+				it.name = "ForwardTime"
+				it.value = (strategy.forwardTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "BacktrackingTime" it.value = (strategy.backtrackingTime/1000000) as int
+				it.name = "BacktrackingTime"
+				it.value = (strategy.backtrackingTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "GlobalConstraintEvaluationTime" it.value = (strategy.globalConstraintEvaluationTime/1000000) as int
+				it.name = "GlobalConstraintEvaluationTime"
+				it.value = (strategy.globalConstraintEvaluationTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "FitnessCalculationTime" it.value = (strategy.fitnessCalculationTime/1000000) as int
+				it.name = "FitnessCalculationTime"
+				it.value = (strategy.fitnessCalculationTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "SolutionCopyTime" it.value = (solutionSaver.totalCopierRuntime/1000000) as int
+				it.name = "SolutionCopyTime"
+				it.value = (solutionSaver.totalCopierRuntime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "ActivationSelectionTime" it.value = (strategy.activationSelector.runtime/1000000) as int
+				it.name = "ActivationSelectionTime"
+				it.value = (strategy.activationSelector.runtime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
 				it.name = "Decisions"
@@ -287,27 +258,34 @@ class ViatraReasoner extends LogicReasoner {
 				it.value = method.statistics.scopePropagatorSolverInvocations
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverSumTime" it.value = (strategy.numericSolver.runtime/1000000) as int
+				it.name = "NumericalSolverSumTime"
+				it.value = (strategy.numericSolver.runtime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverProblemFormingTime" it.value = (strategy.numericSolver.solverFormingProblem/1000000) as int
+				it.name = "NumericalSolverProblemFormingTime"
+				it.value = (strategy.numericSolver.solverFormingProblem / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverSolvingTime" it.value = (strategy.numericSolver.solverSolvingProblem/1000000) as int
+				it.name = "NumericalSolverSolvingTime"
+				it.value = (strategy.numericSolver.solverSolvingProblem / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverInterpretingSolution" it.value = (strategy.numericSolver.solverSolution/1000000) as int
+				it.name = "NumericalSolverInterpretingSolution"
+				it.value = (strategy.numericSolver.solverSolution / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverCachingTime" it.value = (strategy.numericSolver.cachingTime/1000000) as int
+				it.name = "NumericalSolverCachingTime"
+				it.value = (strategy.numericSolver.cachingTime / 1000000) as int
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverCallNumber" it.value = strategy.numericSolver.numberOfSolverCalls
+				it.name = "NumericalSolverCallNumber"
+				it.value = strategy.numericSolver.numberOfSolverCalls
 			]
 			it.entries += createIntStatisticEntry => [
-				it.name = "NumericalSolverCachedAnswerNumber" it.value = strategy.numericSolver.numberOfCachedSolverCalls
+				it.name = "NumericalSolverCachedAnswerNumber"
+				it.value = strategy.numericSolver.numberOfCachedSolverCalls
 			]
-			if(diversityChecker.active) {
+			if (diversityChecker.active) {
 				it.entries += createIntStatisticEntry => [
 					it.name = "SolutionDiversityCheckTime"
 					it.value = (diversityChecker.totalRuntime / 1000000) as int

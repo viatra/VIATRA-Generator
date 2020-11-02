@@ -1,85 +1,80 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization
 
-import com.google.common.collect.ImmutableList
-import java.util.Collection
+import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.BoundSaturationListener
+import java.util.Map
 import org.eclipse.viatra.dse.base.ThreadContext
-import org.eclipse.viatra.query.runtime.api.IPatternMatch
-import org.eclipse.viatra.query.runtime.api.IQuerySpecification
-import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.Accessors
 
-@Data
-class ThreeValuedCostElement {
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> currentMatchQuery
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> mayMatchQuery
-	val IQuerySpecification<? extends ViatraQueryMatcher<? extends IPatternMatch>> mustMatchQuery
-	val int weight
-}
+class ThreeValuedCostObjective extends AbstractThreeValuedObjective implements BoundSaturationListener {
+	@Accessors val Map<String, CostElementMatchers> matchers
+	double lowerBoundHint = Double.NEGATIVE_INFINITY
+	double upperBoundHint = Double.POSITIVE_INFINITY
 
-class ThreeValuedCostObjective extends AbstractThreeValuedObjective {
-	val Collection<ThreeValuedCostElement> costElements
-	Collection<CostElementMatchers> matchers
-
-	new(String name, Collection<ThreeValuedCostElement> costElements, ObjectiveKind kind, ObjectiveThreshold threshold,
+	new(String name, Map<String, CostElementMatchers> matchers, ObjectiveKind kind, ObjectiveThreshold threshold,
 		int level) {
 		super(name, kind, threshold, level)
-		this.costElements = costElements
+		this.matchers = matchers
 	}
 
 	override createNew() {
-		new ThreeValuedCostObjective(name, costElements, kind, threshold, level)
+		// new ThreeValuedCostObjective(name, matchers, kind, threshold, level)
+		throw new UnsupportedOperationException("ThreeValuedCostObjective can only be used from a single thread")
 	}
 
 	override init(ThreadContext context) {
-		val queryEngine = context.queryEngine
-		matchers = ImmutableList.copyOf(costElements.map [ element |
-			new CostElementMatchers(
-				queryEngine.getMatcher(element.currentMatchQuery),
-				queryEngine.getMatcher(element.mayMatchQuery),
-				queryEngine.getMatcher(element.mustMatchQuery),
-				element.weight
-			)
-		])
 	}
 
 	override getRawFitness(ThreadContext context) {
-		var int cost = 0
-		for (matcher : matchers) {
-			cost += matcher.weight * matcher.currentMatcher.countMatches
+		var double cost = 0
+		for (matcher : matchers.values) {
+			cost += matcher.weight * matcher.currentNumberOfMatches
 		}
-		cost as double
+		cost
 	}
 
 	override getLowestPossibleFitness(ThreadContext threadContext) {
-		var int cost = 0
-		for (matcher : matchers) {
+		var double cost = 0
+		for (matcher : matchers.values) {
 			if (matcher.weight >= 0) {
-				cost += matcher.weight * matcher.mustMatcher.countMatches
-			} else if (matcher.mayMatcher.countMatches > 0) {
-				// TODO Count may matches.
-				return Double.NEGATIVE_INFINITY
+				cost += matcher.weight * matcher.minimumNumberOfMatches
+			} else {
+				cost += matcher.weight * matcher.maximumNumberOfMatches
 			}
 		}
-		cost as double
+		val boundWithHint = Math.max(lowerBoundHint, cost)
+		if (boundWithHint > upperBoundHint) {
+			throw new IllegalStateException("Inconsistent cost bounds")
+		}
+		boundWithHint
 	}
 
 	override getHighestPossibleFitness(ThreadContext threadContext) {
-		var int cost = 0
-		for (matcher : matchers) {
+		var double cost = 0
+		for (matcher : matchers.values) {
 			if (matcher.weight <= 0) {
-				cost += matcher.weight * matcher.mustMatcher.countMatches
-			} else if (matcher.mayMatcher.countMatches > 0) {
-				return Double.POSITIVE_INFINITY
+				cost += matcher.weight * matcher.minimumNumberOfMatches
+			} else {
+				cost += matcher.weight * matcher.maximumNumberOfMatches
 			}
 		}
-		cost as double
+		val boundWithHint = Math.min(upperBoundHint, cost)
+		if (boundWithHint < lowerBoundHint) {
+			throw new IllegalStateException("Inconsistent cost bounds")
+		}
+		boundWithHint
 	}
 
-	@Data
-	private static class CostElementMatchers {
-		val ViatraQueryMatcher<? extends IPatternMatch> currentMatcher
-		val ViatraQueryMatcher<? extends IPatternMatch> mayMatcher
-		val ViatraQueryMatcher<? extends IPatternMatch> mustMatcher
-		val int weight
+	override boundsSaturated(Integer lower, Integer upper) {
+		lowerBoundHint = if (lower === null) {
+			Double.NEGATIVE_INFINITY
+		} else {
+			lower
+		}
+		upperBoundHint = if (upper === null) {
+			Double.POSITIVE_INFINITY
+		} else {
+			upper
+		}
+		println('''Bounds saturated: «lower»..«upper»''')
 	}
 }

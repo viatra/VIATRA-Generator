@@ -40,12 +40,6 @@ pattern output(S1 : Segment, S2 : Segment) {
 	find turnoutOutput(S1, S2);
 }
 
-//@Constraint(message = "noInputOfSegment", severity = "error", key = { S })
-//pattern noInputOfSegment(S : Segment) {
-//	neg find turnout(S);
-//	neg find output(_, S);
-//}
-
 @Constraint(message = "tooManyInputsOfSegment", severity = "error", key = { S })
 pattern tooManyInputsOfSegment(S : SimpleSegment) {
 	find output(I1, S);
@@ -107,4 +101,195 @@ pattern reachable(S1 : Segment, S2 : Segment) {
 @Constraint(message = "unreachable", severity = "error", key = { S1, S2 })
 pattern unreachable(S1 : Segment, S2 : Segment) {
 	neg find reachable(S1, S2);
+}
+
+//
+// closeTrains
+//
+
+pattern closeTrains_step_2(in train : Train) {
+//    frame->t1 = model->trains[i0];
+//    frame->start = frame->t1->location;
+//    if(frame->start != 0){
+// ...
+//    }
+//    + OUTER FOR LOOP COUNTER INCREMENT
+	Train(train);
+}
+
+pattern closeTrains_step_3(in train : Train, in start : Segment) {
+//      int loop_bound1 = frame->start->connected_to_count;
+//      for (int i1 = 0; i1 < loop_bound1; i1++) { LOOP COUNTER INCREMENT IS NOT INCLUDED HERE
+// ...
+//      }
+	Train.location(train, start);
+}
+
+pattern closeTrains_step_4(in train : Train, in start : Segment, in middle : Segment) {
+//          frame->middle = frame->start->connected_to[i1];
+//        int loop_bound2 = frame->middle->connected_to_count;
+
+//        for (int i2 = 0; i2 < loop_bound2; i2++) { LOOP COUNTER INCREMENT IS NOT INCLUDED HERE
+// ...
+//        }
+//        + OUTER FOR LOOP COUNTER INCREMENT
+	Train.location(train, start);
+	Segment.connectedTo(start, middle);
+}
+
+pattern closeTrains_step_5(in train : Train, in start : Segment, in middle : Segment, in end : Segment) {
+//           frame->end = frame->middle->connected_to[i2];
+//          if (frame->start != frame->end) {
+// ...
+//          }
+//          + OUTER FOR LOOP COUNTER INCREMENT
+	Train.location(train, start);
+	Segment.connectedTo(start, middle);
+	Segment.connectedTo(middle, end);
+}
+
+pattern closeTrains_step_6(in train : Train, in start : Segment, in middle : Segment, in end : Segment) {
+//            frame->t2 = frame->end->train;
+//            if (frame->t2 != 0) {
+// ...
+//            }
+	Train.location(train, start);
+	Segment.connectedTo(start, middle);
+	Segment.connectedTo(middle, end);
+	start != end;
+}
+
+pattern closeTrains_step_7(in train : Train, in start : Segment, in middle : Segment, in end : Segment, in otherTrain : Train) {
+//              results->matches[match_cntr].start = frame->start;
+//              results->matches[match_cntr++].end = frame->end;
+	Train.location(train, start);
+	Segment.connectedTo(start, middle);
+	Segment.connectedTo(middle, end);
+	start != end;
+	Segment.occupiedBy(end, otherTrain);
+}
+
+//
+// trainLocations
+//
+
+pattern trainLocations_step_2(in train : Train) {
+//   frame->train = model->trains[i0];
+//   frame->location = frame->train->location;
+//   if (frame->location != NULL) {
+//     ...
+//   }
+
+	Train(train);
+}
+
+pattern trainLocations_step_3(in train : Train, in location : Segment) {
+//     results->matches[match_cntr].location = frame->location;
+//     results->matches[match_cntr++].train = frame->train;
+	Train(train);
+    Train.location(train, location);
+}
+
+//
+// misalignedTurnout
+//
+
+pattern misalignedTurnout_step_2(in turnout : Turnout) {
+//    frame->turnout = model->turnouts[i0];
+//    frame->location = frame->turnout->straight;
+//    if (frame->location != NULL) {
+// ...
+//    }
+	Turnout(turnout);
+}
+
+pattern misalignedTurnout_step_3(in turnout : Turnout, in location : Segment) {
+//      Segment *disconnected = ((Segment *)frame->turnout);
+//      if (disconnected->connected_to[0] != frame->location &&
+//          disconnected->connected_to[1] != frame->location) {
+// ...
+//      }
+	Turnout(turnout);
+	Turnout.straight(turnout, location);
+}
+
+pattern misalignedTurnout_step_4(in turnout : Turnout, in location : Segment) {
+//        frame->train = frame->location->train;
+//        if (frame->train != NULL) {
+// ...
+//        }
+	Turnout(turnout);
+	Turnout.straight(turnout, location);
+	neg find connectedSegmentsDirected(turnout, location);	
+}
+
+pattern misalignedTurnout_step_5(in turnout : Turnout, in location : Segment, in train : Train) {
+//              results->matches[match_cntr].start = frame->start;
+//              results->matches[match_cntr++].end = frame->end;
+	Turnout(turnout);
+	Turnout.straight(turnout, location);
+	neg find connectedSegmentsDirected(turnout, location);
+	Segment.occupiedBy(location, train);
+}
+
+pattern connectedSegmentsDirected(s1 : Segment, s2 : Segment) {
+	Segment.connectedTo(s1, s2);
+}
+
+//
+// endOfSiding
+//
+
+pattern endOfSiding_step_2(in train : Train) {
+//   frame->train = model->trains[i0];
+//   frame->location = frame->train->location;
+//   if (frame->location != NULL) {
+//     ...
+//   }
+
+	Train(train);
+}
+
+pattern endOfSiding_step_3(in train : Train, in location : Segment) {
+//     int loop_bound1 = frame->location->connected_to_count;
+//     for (int i1 = 0; i1 < loop_bound1; i1++) {
+//       ...
+//     }
+	Train(train);
+    Train.location(train, location);
+}
+
+pattern endOfSiding_step_4(in train : Train, in location : Segment, in end : Segment) {
+//       frame->end = frame->location->connected_to[i1];
+//       if (frame->end != NULL &&
+//			 frame->end->connected_to[1] == frame->location &&
+//           frame->end->connected_to[0] == NULL) {
+//         ...
+//       } 
+//     	 if (frame->end != NULL &&
+//			 frame->end->connected_to[0] == frame->location &&
+//           frame->end->connected_to[1] == NULL) {
+//         ...
+//       }
+	Train(train);
+    Train.location(train, location);
+    Segment.connectedTo(location, end);
+}
+
+pattern endOfSiding_step_5(in train : Train, in location : Segment, in end : Segment) {
+//         results->matches[match_cntr].location = frame->location;
+//         results->matches[match_cntr++].train = frame->train;
+//         ...OR...
+//         results->matches[match_cntr].location = frame->location;
+//         results->matches[match_cntr++].train = frame->train;
+	Train(train);
+    Train.location(train, location);
+    Segment.connectedTo(location, end);
+	neg find multipleConnectedTo(end);
+}
+
+pattern multipleConnectedTo(s : Segment) {
+	Segment.connectedTo(s, n1);
+	Segment.connectedTo(s, n2);
+	n1 != n2;
 }

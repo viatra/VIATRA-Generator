@@ -7,3 +7,7 @@
 /.MemberHasParent.java._trace
 /.TwoMembersHaveNoParent.java._trace
 /.NegativeAge.java._trace
+/MemberHasParent.java
+/NegativeAge.java
+/ParentTooYoung.java
+/TwoMembersHaveNoParent.java

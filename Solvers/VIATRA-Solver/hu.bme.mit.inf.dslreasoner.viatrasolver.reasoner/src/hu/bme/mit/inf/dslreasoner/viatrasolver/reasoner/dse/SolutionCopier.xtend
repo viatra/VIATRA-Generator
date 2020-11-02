@@ -26,15 +26,11 @@ class CopiedSolution {
  * using the supplied {@link NumericSolver}.
  */
 class SolutionCopier {
-	val NumericSolver numericSolver
 	val copiedSolutions = new LinkedHashMap<Object, CopiedSolution>
 
+	@Accessors NumericSolver numericSolver
 	long startTime = System.nanoTime
 	@Accessors(PUBLIC_GETTER) long totalCopierRuntime = 0
-
-	new(NumericSolver numericSolver) {
-		this.numericSolver = numericSolver
-	}
 
 	def void copySolution(ThreadContext context, Object solutionId) {
 		val existingCopy = copiedSolutions.get(solutionId)
@@ -47,7 +43,7 @@ class SolutionCopier {
 			totalCopierRuntime += System.nanoTime - copyStart
 			val copierRuntime = System.nanoTime - startTime
 			val copiedSolution = new CopiedSolution(copiedPartialInterpretation, copier, copierRuntime)
-			numericSolver.fillSolutionCopy(copiedSolution.trace)
+			numericSolver?.fillSolutionCopy(copiedSolution.trace)
 			copiedSolutions.put(solutionId, copiedSolution)
 		} else {
 			existingCopy.current = true

@@ -21,6 +21,24 @@
       <query-specification fqn="modes3.queries.tooFewInputsOfTurnout"/>
       <query-specification fqn="modes3.queries.reachable"/>
       <query-specification fqn="modes3.queries.unreachable"/>
+      <query-specification fqn="modes3.queries.closeTrains_step_2"/>
+      <query-specification fqn="modes3.queries.closeTrains_step_3"/>
+      <query-specification fqn="modes3.queries.closeTrains_step_4"/>
+      <query-specification fqn="modes3.queries.closeTrains_step_5"/>
+      <query-specification fqn="modes3.queries.closeTrains_step_6"/>
+      <query-specification fqn="modes3.queries.closeTrains_step_7"/>
+      <query-specification fqn="modes3.queries.trainLocations_step_2"/>
+      <query-specification fqn="modes3.queries.trainLocations_step_3"/>
+      <query-specification fqn="modes3.queries.misalignedTurnout_step_2"/>
+      <query-specification fqn="modes3.queries.misalignedTurnout_step_3"/>
+      <query-specification fqn="modes3.queries.misalignedTurnout_step_4"/>
+      <query-specification fqn="modes3.queries.misalignedTurnout_step_5"/>
+      <query-specification fqn="modes3.queries.connectedSegmentsDirected"/>
+      <query-specification fqn="modes3.queries.endOfSiding_step_2"/>
+      <query-specification fqn="modes3.queries.endOfSiding_step_3"/>
+      <query-specification fqn="modes3.queries.endOfSiding_step_4"/>
+      <query-specification fqn="modes3.queries.endOfSiding_step_5"/>
+      <query-specification fqn="modes3.queries.multipleConnectedTo"/>
     </group>
   </extension>
 </plugin>
