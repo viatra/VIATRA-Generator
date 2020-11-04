@@ -5,9 +5,13 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Relation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
 import java.util.HashMap
 import java.util.Map
 import java.util.Set
@@ -106,9 +110,37 @@ class PartialInterpretation2Gml {
 		'''
 	}
 	
-	def protected transormTitle(DefinedElement object) {
-		if(object.name!= null)object.name
+	def protected dispatch transormTitle(DefinedElement object) {
+		if(object.name !== null) object.name.replace("\"", "")
 		else "null"
+	}
+	def protected dispatch transormTitle(BooleanElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
+	}
+	def protected dispatch transormTitle(IntegerElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
+	}
+	def protected dispatch transormTitle(RealElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
+	}
+	def protected dispatch transormTitle(StringElement object) {
+		if(object.valueSet) {
+			object.value.toString
+		} else {
+			"?"
+		}
 	}
 	
 	def protected transformLink(

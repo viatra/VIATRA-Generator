@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TaxationOld" nsURI="http:///TaxCardOld.ecore" nsPrefix="TaxCardOld">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EEnum" name="Grantor">
+    <eLiterals name="WWW" literal="WWW"/>
+    <eLiterals name="Employer" value="1" literal="Employer"/>
+    <eLiterals name="MMM" value="2" literal="MMM"/>
+    <eLiterals name="UUU" value="3" literal="UUU"/>
+    <eLiterals name="YYY" value="4" literal="YYY"/>
+    <eLiterals name="OOO" value="5" literal="OOO"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constants" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_CE_RATE_FOR_CHILD_NOT_BEING_PART_OF_HOUSEHOLD"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="3480.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_CE_RATE_FOR_HOUSE_CARE_AND_CHILD_PART_OF_THE_HOUSEHOLD_CARE"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="3600.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MINIMUM_SALARY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1500.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_FOR_EXTRA_PROFESSIONAL_DEDUCTION"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="4500.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_DEDUCTIBLE_PERCENTAGE_FOR_DONATIONS"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="20.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MINIMUM_DEDUCTIBLE_AMOUNT_FOR_DONATIONS"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="120.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_ADDITIONAL_PENSION_AND_INSURANC"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_ALIMONY_EXPENSE"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="24000.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMAL_DISTANCE_FOR_TRAVEL_EXPENSE_DEDUCTION"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="99.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMAL_FLAT_DISTANCE_FOR_TRAVEL_EXPENSE_DEDUCTION"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="30.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MINIMAL_DISTANCE_FOR_TRAVEL_EXPENSE_DEDUCTION"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="4.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIM_DAILY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="2.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIM_MONTHLY"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="62.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIM_YEARLY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="750.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIP_DAILY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIP_MONTHLY"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="25.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIP_YEARLY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="30.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIS_DAILY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIS_MONTHLY"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="25.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_CIS_YEARLY" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="300.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_FOR_TRAVEL_EXPENSE_PER_UNIT"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="99.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_DS"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLAT_RATE_FOR_MISCELLANEOUS_EXPENSE"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DISABILITY_FLAT_RATE_FOR_MISCELLANEOUS_EXPENSE"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_ADDITIONAL_PENSION_AND_INSURANCE"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Disability_Types">
+    <eLiterals name="beug"/>
+    <eLiterals name="NONE" value="1"/>
+    <eLiterals name="A" value="2" literal="A"/>
+    <eLiterals name="B" value="3" literal="B"/>
+    <eLiterals name="C" value="4" literal="C"/>
+    <eLiterals name="D" value="5" literal="D"/>
+    <eLiterals name="E" value="6" literal="E"/>
+    <eLiterals name="OTHER" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Country">
+    <eLiterals name="ZZ" literal="ZZ"/>
+    <eLiterals name="FF" value="1" literal="FF"/>
+    <eLiterals name="BB" value="2" literal="BB"/>
+    <eLiterals name="DD" value="3" literal="DD"/>
+    <eLiterals name="NN" value="4" literal="NN"/>
+    <eLiterals name="OTHER" value="5" literal="OTHER"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Tax_Card_Type">
+    <eLiterals name="Principal" literal="Principal"/>
+    <eLiterals name="Additional" value="1" literal="Additional"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Tax_Office">
+    <eLiterals name="RTS_2" literal="RTS_2"/>
+    <eLiterals name="RTS_3" value="1" literal="RTS_3"/>
+    <eLiterals name="RTS_4" value="2" literal="RTS_4"/>
+    <eLiterals name="RTS_5" value="3" literal="RTS_5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Tax_Class_Category">
+    <eLiterals name="One" literal="One"/>
+    <eLiterals name="One_A" value="1" literal="One_A"/>
+    <eLiterals name="Two" value="2" literal="Two"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Job_Activity">
+    <eLiterals name="Salary" literal="Salary"/>
+    <eLiterals name="Pension" value="1" literal="Pension"/>
+    <eLiterals name="Annuity" value="2" literal="Annuity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Town">
+    <eLiterals name="LL" literal="LL"/>
+    <eLiterals name="BB" value="1" literal="BB"/>
+    <eLiterals name="SS" value="2" literal="SS"/>
+    <eLiterals name="TT" value="3" literal="TT"/>
+    <eLiterals name="Other" value="4" literal="Other"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type_of_Rate">
+    <eLiterals name="REGULAR" literal="REGULAR"/>
+    <eLiterals name="REAL_COST" value="1" literal="REAL_COST"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CE_Type">
+    <eLiterals name="INALIDITY_AND_INFIRMITY" literal="INALIDITY_AND_INFIRMITY"/>
+    <eLiterals name="DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD"
+        value="1" literal="DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD"/>
+    <eLiterals name="CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD" value="2" literal="CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Expense_Purpose">
+    <eLiterals name="HOUSE_CARE" literal="HOUSE_CARE"/>
+    <eLiterals name="CHILD_CARE" value="1" literal="CHILD_CARE"/>
+    <eLiterals name="DEPENDENCE_CARE" value="2" literal="DEPENDENCE_CARE"/>
+    <eLiterals name="OTHER" value="3" literal="OTHER"/>
+    <eLiterals name="ALIMONY" value="4"/>
+    <eLiterals name="RECURRENT_DEPT" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Dependent_Type">
+    <eLiterals name="CHILD" literal="CHILD"/>
+    <eLiterals name="SPOUSE" value="1" literal="SPOUSE"/>
+    <eLiterals name="RELATIVE" value="2" literal="RELATIVE"/>
+    <eLiterals name="OTHER_FAMILY_MEMBER" value="3" literal="OTHER_FAMILY_MEMBER"/>
+    <eLiterals name="NOT_OWN_CHILD" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Income_Tax">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" lowerBound="1"
+        eType="#//Tax_Payer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_amount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_year" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id6" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tax_Payer" abstract="true" eSuperTypes="#//Physical_Person #//Tax_Case">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EReference" name="expenses" ordered="false" upperBound="-1"
+          eType="#//Expense" containment="true">
+        <eAnnotations source="redefines" references="#//Physical_Person/expenses"/>
+      </contents>
+    </eAnnotations>
+    <eOperations name="is_dependent_part_of_the_household" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="IN_dependent" lowerBound="1" eType="#//Dependent"/>
+    </eOperations>
+    <eOperations name="number_of_months_of_allowance" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eOperations name="deduction_according_disability_rate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if ( self.disability_percentage >= 0.25 and  self.disability_percentage &lt; 0.35) then&#xA;&#x9;&#x9;&#x9;150.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >= 0.35  and self.disability_percentage &lt; 0.45) then&#xA;&#x9;&#x9;&#x9;225.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >=0.45 and  self.disability_percentage &lt;0.55) then&#xA;&#x9;&#x9;&#x9;375.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >= 0.55 and  self.disability_percentage &lt; 0.65 ) then&#xA;&#x9;&#x9;&#x9;450.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >= 0.65 and self.disability_percentage &lt; 0.75) then&#xA;&#x9;&#x9;&#x9;525.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >=0.75 and self.disability_percentage &lt; 0.85) then&#xA;&#x9;&#x9;&#x9;585.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >=0.85 and  self.disability_percentage&lt;  0.95) then&#xA;&#x9;&#x9;&#x9;645.0&#xA;&#x9;&#x9;&#x9;else if ( self.disability_percentage >= 0.95 and self.disability_percentage&lt;=1)then&#xA;&#x9;&#x9;&#x9;735.0 else 0.0 endif endif endif endif endif endif endif endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getIsTaxedJointly" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let is_married:Boolean = if(self.getLegalUnionRecord(year).oclIsUndefined()) then false else self.getLegalUnionRecord(year).oclIsTypeOf(Marriage_Record) endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;/** Description: - **/&#x9;&#xA;if (is_married) = false then&#xA;   let is_in_partnership_relation:Boolean = if(self.getLegalUnionRecord(year).oclIsUndefined()) then false else self.getLegalUnionRecord(year).oclIsTypeOf(Partnership_Record) endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;   /** Description: -  **/&#x9;&#xA;   if (is_in_partnership_relation) = false then&#xA;   false&#xA;   else&#xA;     if (is_in_partnership_relation) = true then&#xA;          let is_joint_tax_beneficial:Boolean = true in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;          /** Description: -  **/&#x9;&#xA;          if (is_joint_tax_beneficial) = true then&#xA;                  let is_couple_living_apart:Boolean = false in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                  /** Description: -  **/&#x9;&#xA;                  let relation_lasted_for_the_taxation_year:Boolean = true  in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                  /** Description: -  **/&#x9;&#xA;                  if (relation_lasted_for_the_taxation_year and not is_couple_living_apart) = false then&#xA;                  false&#xA;                  else&#xA;                    if (relation_lasted_for_the_taxation_year and not is_couple_living_apart) = true then&#xA;                              let are_both_spouses_resident:Boolean = (self.getSpouse(year).oclIsTypeOf(Resident_Tax_Payer) or self.getSpouse(year).oclIsTypeOf(Physical_Person)) and self.oclIsTypeOf(Resident_Tax_Payer) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                              /** Description: -  **/&#x9;&#xA;                              if (are_both_spouses_resident) = true then&#xA;                              true&#xA;                              else&#xA;                                 if (are_both_spouses_resident) = false then&#xA;                                             let are_both_spouses_non_resident:Boolean = (self.getSpouse(year).oclIsTypeOf(Non_Resident_Tax_Payer) or self.getSpouse(year).oclIsTypeOf(Physical_Person)) and self.oclIsTypeOf(Non_Resident_Tax_Payer) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                             /** Description: -  **/&#x9;&#xA;                                             if (are_both_spouses_non_resident) = false then&#xA;                                             false&#xA;                                             else&#xA;                                                if (are_both_spouses_non_resident) = true then&#xA;                                                               let my_incomes_all:Set(Income) = self.incomes->select(i:Income|i.year=year and i.oclIsTypeOf(Local_Income)) &#xA;                                                               &#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: -  **/&#x9;&#xA;                                                               let spouse_incomes_all:Set(Income) = if(self.getSpouse(year).oclIsKindOf(Tax_Payer)) then self.getSpouse(year).oclAsType(Tax_Payer).incomes->select(i:Income|i.year=year and i.oclIsTypeOf(Local_Income)) else OrderedSet{} endif&#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               let total_household_income:Real = if(my_incomes_all->oclIsInvalid() and spouse_incomes_all->oclIsInvalid()) then 0 else if(my_incomes_all->oclIsInvalid()) then spouse_incomes_all.income_amount->sum() else if(spouse_incomes_all->oclIsInvalid()) then my_incomes_all.income_amount->sum() else my_incomes_all.income_amount->sum() + spouse_incomes_all.income_amount->sum()  endif endif endif&#xA;                                                               in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: -  **/&#x9;&#xA;                                                               let resident_taxpayer_income:Real = if(self.oclIsTypeOf(Resident_Tax_Payer)) then if(my_incomes_all->oclIsInvalid()) then 0.0 else my_incomes_all.income_amount->sum() endif else if(spouse_incomes_all->oclIsInvalid()) then 0.0 else spouse_incomes_all.income_amount->sum() endif endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: -  **/&#x9;&#xA;                                                               let non_resident_taxpayer_in_Belgium:Boolean = false in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: -  **/&#x9;&#xA;                                                               if ((resident_taxpayer_income > total_household_income * 0.9) or (non_resident_taxpayer_in_Belgium and resident_taxpayer_income > total_household_income * 0.5)) = true then&#xA;                                                               true&#xA;                                                               else&#xA;                                                                 if ((resident_taxpayer_income > total_household_income * 0.9) or (non_resident_taxpayer_in_Belgium and resident_taxpayer_income > total_household_income * 0.5)) = false then&#xA;                                                                 false&#xA;                                                                 else&#xA;                                                                 invalid&#xA;                                                                 endif&#xA;                                                               endif&#xA;                                                else&#xA;                                                invalid&#xA;                                                endif&#xA;                                             endif&#xA;                                 else&#xA;                                 invalid&#xA;                                 endif&#xA;                              endif&#xA;                    else&#xA;                    invalid&#xA;                    endif&#xA;                  endif&#xA;          else&#xA;             if (is_joint_tax_beneficial) = false then&#xA;             false&#xA;             else&#xA;             invalid&#xA;             endif&#xA;          endif&#xA;     else&#xA;     invalid&#xA;     endif&#xA;   endif&#xA;else&#xA;   if (is_married) = true then&#xA;     let are_both_spouses_resident:Boolean = (self.getSpouse(year).oclIsTypeOf(Resident_Tax_Payer) or  self.getSpouse(year).oclIsTypeOf(Physical_Person)) and self.oclIsTypeOf(Resident_Tax_Payer) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;     /** Description: -  **/&#x9;&#xA;     if (are_both_spouses_resident) = true then&#xA;     true&#xA;     else&#xA;        if (are_both_spouses_resident) = false then&#xA;             let are_both_spouses_non_resident:Boolean = (self.getSpouse(year).oclIsTypeOf(Non_Resident_Tax_Payer) or self.getSpouse(year).oclIsTypeOf(Physical_Person)) and self.oclIsTypeOf(Non_Resident_Tax_Payer) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;             /** Description: -  **/&#x9;&#xA;             if (are_both_spouses_non_resident) = true then&#xA;                    let my_incomes_all:Set(Income) = self.incomes->select(i:Income|i.year=year and i.oclIsTypeOf(Local_Income)) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: -  **/&#x9;&#xA;                     let spouse_incomes_all:Set(Income) = if(self.getSpouse(year).oclIsKindOf(Tax_Payer)) then self.getSpouse(year).oclAsType(Tax_Payer).incomes->select(i:Income|i.year=year and i.oclIsTypeOf(Local_Income)) else OrderedSet{} endif&#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: -  **/&#x9;&#xA;                    let total_household_income:Real = if(my_incomes_all->oclIsInvalid() and spouse_incomes_all->oclIsInvalid()) then 0 else if(my_incomes_all->oclIsInvalid()) then spouse_incomes_all.income_amount->sum() else if(spouse_incomes_all->oclIsInvalid()) then my_incomes_all.income_amount->sum() else my_incomes_all.income_amount->sum() + spouse_incomes_all.income_amount->sum()  endif endif endif&#xA;                     in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: -  **/&#x9;&#xA;                    let resident_taxpayer_income:Real = if(self.oclIsTypeOf(Resident_Tax_Payer)) then if(my_incomes_all->oclIsInvalid()) then 0.0 else my_incomes_all.income_amount->sum() endif else if(spouse_incomes_all->oclIsInvalid()) then 0.0 else spouse_incomes_all.income_amount->sum() endif endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: -  **/&#x9;&#xA;                    let non_resident_taxpayer_in_Belgium:Boolean = false in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: -  **/&#x9;&#xA;                    let is_couple_assimilated_to_residents:Boolean = (resident_taxpayer_income > total_household_income * 0.9) or (non_resident_taxpayer_in_Belgium and resident_taxpayer_income > total_household_income * 0.5) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: -  **/&#x9;&#xA;                    if (is_couple_assimilated_to_residents) = true then&#xA;                    true&#xA;                    else&#xA;                       if (is_couple_assimilated_to_residents) = false then&#xA;                                 let is_couple_living_apart:Boolean = false in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                 /** Description: -  **/&#x9;&#xA;                                 if (is_couple_living_apart) = true then&#xA;                                 false&#xA;                                 else&#xA;                                   if (is_couple_living_apart) = false then&#xA;                                                let my_incomes:Set(Income) = self.incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income) and i.oclIsTypeOf(Local_Income)) &#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                /** Description: -  **/&#x9;&#xA;                                                let spouse_incomes:Set(Income) = if(self.getSpouse(year).oclIsKindOf(Tax_Payer)) then self.getSpouse(year).oclAsType(Tax_Payer).incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income) and i.oclIsTypeOf(Local_Income)) else OrderedSet{} endif&#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                /** Description: -  **/&#x9;&#xA;                                                let both_spouses_have_professional_income:Boolean = if(my_incomes->oclIsInvalid() or spouse_incomes->oclIsInvalid()) then false else my_incomes->size()>0 and spouse_incomes->size()>0 endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                /** Description: -  **/&#x9;&#xA;                                                if (both_spouses_have_professional_income) = true then&#xA;                                                               let local_professional_household_income:Real = self.getProfetionalIncomeHouseholdZZ(year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: -  **/&#x9;&#xA;                                                               let total_professional_household_income:Real = self.getProfetionalIncomeHousehold(year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: -  **/&#x9;&#xA;                                                               if (local_professional_household_income   > total_professional_household_income * 0.5) = false then&#xA;                                                               false&#xA;                                                               else&#xA;                                                                 if (local_professional_household_income   > total_professional_household_income * 0.5) = true then&#xA;                                                                 true&#xA;                                                                 else&#xA;                                                                 invalid&#xA;                                                                 endif&#xA;                                                               endif&#xA;                                                else&#xA;                                                  if (both_spouses_have_professional_income) = false then&#xA;                                                  false&#xA;                                                  else&#xA;                                                  invalid&#xA;                                                  endif&#xA;                                                endif&#xA;                                   else&#xA;                                   invalid&#xA;                                   endif&#xA;                                 endif&#xA;                       else&#xA;                       invalid&#xA;                       endif&#xA;                    endif&#xA;             else&#xA;               if (are_both_spouses_non_resident) = false then&#xA;                       let is_couple_living_apart:Boolean = false in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                       /** Description: -  **/&#x9;&#xA;                       if (is_couple_living_apart) = true then&#xA;                       false&#xA;                       else&#xA;                         if (is_couple_living_apart) = false then&#xA;                                   let my_incomes:Set(Income) = self.incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income) and i.oclIsTypeOf(Local_Income)) &#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                   /** Description: -  **/&#x9;&#xA;                                   let spouse_incomes:Set(Income) = if(self.getSpouse(year).oclIsKindOf(Tax_Payer)) then self.getSpouse(year).oclAsType(Tax_Payer).incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income) and i.oclIsTypeOf(Local_Income)) else OrderedSet{} endif&#x9;in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                   /** Description: -  **/&#x9;&#xA;                                   let both_spouses_have_professional_income:Boolean = if(my_incomes->oclIsInvalid() or spouse_incomes->oclIsInvalid()) then false else my_incomes->size()>0 and spouse_incomes->size()>0 endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                   /** Description: -  **/&#x9;&#xA;                                   if (both_spouses_have_professional_income) = true then&#xA;                                                let total_professional_household_income:Real = self.getProfetionalIncomeHousehold(year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                /** Description: -  **/&#x9;&#xA;                                                let professional_income_resident_taxpayer:Real = if(self.oclIsTypeOf(Resident_Tax_Payer)) then if(my_incomes->oclIsInvalid()) then 0.0 else my_incomes.income_amount->sum() endif else if(spouse_incomes->oclIsInvalid()) then 0.0 else spouse_incomes.income_amount->sum() endif endif in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                /** Description: -  **/&#x9;&#xA;                                                if (professional_income_resident_taxpayer > total_professional_household_income * 0.9) = false then&#xA;                                                false&#xA;                                                else&#xA;                                                  if (professional_income_resident_taxpayer > total_professional_household_income * 0.9) = true then&#xA;                                                  true&#xA;                                                  else&#xA;                                                  invalid&#xA;                                                  endif&#xA;                                                endif&#xA;                                   else&#xA;                                      if (both_spouses_have_professional_income) = false then&#xA;                                      false&#xA;                                      else&#xA;                                      invalid&#xA;                                      endif&#xA;                                   endif&#xA;                         else&#xA;                         invalid&#xA;                         endif&#xA;                       endif&#xA;               else&#xA;               invalid&#xA;               endif&#xA;             endif&#xA;        else&#xA;        invalid&#xA;        endif&#xA;     endif&#xA;   else&#xA;   invalid&#xA;   endif&#xA;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getIsreceivingAllowancesForChildren" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let children1:Set(Dependent)=self.dependents->select(dependent_type=Dependent_Type::CHILD) in&#xA;&#x9;&#x9;&#x9;let union:Legal_Union_Record=self.getLegalUnionRecord(year) in&#xA;&#x9;&#x9;&#x9;let house: Household = union.household in&#xA;&#x9;&#x9;&#x9;let children:Set(Dependent)=if (house.oclIsInvalid()) then children1 else children1->union(house.children) endif in&#xA;&#x9;&#x9;&#x9;if(children->size()=0)then&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;else&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;let allowances:Boolean=children.allowances->select(starting_year&lt;=year and ending_year=-1 and amount>0)->size()>0in&#xA;&#x9;&#x9;&#x9;if(allowances)then&#xA;&#x9;&#x9;&#x9;true&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;endif&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getProfetionalIncomeHousehold" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let spouse:Physical_Person= self.getSpouse(year)in&#xA;&#x9;&#x9;&#x9;let include_spouse:Boolean= if(not spouse.oclIsUndefined()) then spouse.oclIsKindOf(Tax_Payer) else false endif in&#xA;&#x9;&#x9;&#x9;let myIncomes:Set(Income)=self.incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income)) in&#xA;&#x9;&#x9;&#x9;let myPart:Real= if(myIncomes->oclIsInvalid())then 0.0 else myIncomes.income_amount->sum() endif in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(include_spouse=false)then&#xA;&#x9;&#x9;&#x9;myPart&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let herIncomes:Set(Income)=spouse.oclAsType(Tax_Payer).incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income)) in&#xA;&#x9;&#x9;&#x9;let herPart:Real=if(herIncomes->oclIsInvalid())then 0.0 else herIncomes.income_amount->sum() endif in&#xA;&#x9;&#x9;&#x9;myPart+herPart&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getProfetionalIncomeHouseholdZZ" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let spouse:Physical_Person= self.getSpouse(year)in&#xA;&#x9;&#x9;&#x9;let include_spouse:Boolean= if(not spouse.oclIsUndefined()) then spouse.oclIsKindOf(Tax_Payer) else false endif in&#xA;&#x9;&#x9;&#x9;let myIncomes:Set(Income)=self.incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income) and i.oclIsTypeOf(Local_Income)) in&#xA;&#x9;&#x9;&#x9;let myPart:Real=if(myIncomes->oclIsInvalid())then 0.0 else myIncomes.income_amount->sum() endif in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(include_spouse=false)then&#xA;&#x9;&#x9;&#x9;myPart&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let herIncomes:Set(Income)=spouse.oclAsType(Tax_Payer).incomes->select(i:Income|i.year=year and i.income_type.oclIsKindOf(Employment_Income)and i.oclIsTypeOf(Local_Income)) in&#xA;&#x9;&#x9;&#x9;let herPart:Real=if(herIncomes->oclIsInvalid())then 0.0 else  herIncomes.income_amount->sum() endif in&#xA;&#x9;&#x9;&#x9;myPart+herPart&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getTaxClass" ordered="false" lowerBound="1" eType="#//Tax_Class_Category">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let is_resident_taxpayer:Boolean = self.oclIsKindOf(Resident_Tax_Payer) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;/** Description: Returns yes if a given taxpayer is a resident. - **/&#x9;&#xA;if (is_resident_taxpayer) = true then&#xA;   let is_taxed_jointly:Boolean = self.getIsTaxedJointly(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;   /** Description: Returns yes if the taxpayer is married or has a partnership contract. -  **/&#x9;&#xA;   if (is_taxed_jointly) = true then&#xA;   Tax_Class_Category::Two&#xA;   else&#xA;     if (is_taxed_jointly) = false then&#xA;          let is_divorced:Boolean = self.getSeperationState(taxation_year,Separation_Causes::DIVORCE) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;          /** Description: Returns yes if the taxpayer is divorced within the selected taxation year. -  **/&#x9;&#xA;          let is_living_separately:Boolean = self.getSeperationState(taxation_year,Separation_Causes::SEPARATION_DE_FAIT) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;          /** Description: Returns yes if the taxpayer is not cohabiting with his/her spouse. In French: &quot;Separation de fait&quot;. -  **/&#x9;&#xA;          let is_living_separately_by_court:Boolean = self.getSeperationState(taxation_year,Separation_Causes::SEPARATION_BY_COURT) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;          /** Description: Returns yes if the taxpayer has a judicial sentence dismissing him from cohabiting with his/her spouse. In French: &quot;Separation de corps&quot;. -  **/&#x9;&#xA;          if (is_divorced or is_living_separately_by_court or (is_living_separately and not is_resident_taxpayer)) = false then&#xA;                  let is_widower:Boolean = self.is_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                  /** Description: Returns yes if the taxpayer has the statute of widower for the current taxation year. -  **/&#x9;&#xA;                  if (is_widower) = true then&#xA;                            let spouse_death_year:Integer = self.last_start_year_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                            /** Description: Returns the year on which the spouse of the taxpayer past away. -  **/&#x9;&#xA;                            if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = true then&#xA;                            Tax_Class_Category::Two&#xA;                            else&#xA;                              if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = false then&#xA;                              Tax_Class_Category::One_A&#xA;                              else&#xA;                              invalid&#xA;                              endif&#xA;                            endif&#xA;                  else&#xA;                    if (is_widower) = false then&#xA;                              let is_reciving_bonus_for_children:Boolean = self.getIsreceivingAllowancesForChildren(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                              /** Description: Returns yes if the taxpayer is receiving a bonus for children in household. -  **/&#x9;&#xA;                              if (is_reciving_bonus_for_children) = true then&#xA;                              Tax_Class_Category::One_A&#xA;                              else&#xA;                                 if (is_reciving_bonus_for_children) = false then&#xA;                                             let taxpayer_age:Integer = self.getAge(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                             /** Description: Returns the age of a given taxpayer. -  **/&#x9;&#xA;                                             if (taxpayer_age >= 64) = true then&#xA;                                             Tax_Class_Category::One_A&#xA;                                             else&#xA;                                                if (taxpayer_age >= 64) = false then&#xA;                                                Tax_Class_Category::One&#xA;                                                else&#xA;                                                invalid&#xA;                                                endif&#xA;                                             endif&#xA;                                 else&#xA;                                 invalid&#xA;                                 endif&#xA;                              endif&#xA;                    else&#xA;                    invalid&#xA;                    endif&#xA;                  endif&#xA;          else&#xA;             if (is_divorced or is_living_separately_by_court or (is_living_separately and not is_resident_taxpayer)) = true then&#xA;                    let can_beneficiate_from_transition_state :Boolean = self.getDivorceTransitionState(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: Returns yes if: (1) the divorce/separation occurred within the last three years from the taxation year, and (2) the taxpayer did has not benefited from a divorce/separation transition state for the last five years from the current taxation year.  -  **/&#x9;&#xA;                    if (can_beneficiate_from_transition_state ) = false then&#xA;                              let is_widower:Boolean = self.is_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                              /** Description: Returns yes if the taxpayer has the statute of widower for the current taxation year. -  **/&#x9;&#xA;                              if (is_widower) = true then&#xA;                                           let spouse_death_year:Integer = self.last_start_year_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                           /** Description: Returns the year on which the spouse of the taxpayer past away. -  **/&#x9;&#xA;                                           if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = true then&#xA;                                           Tax_Class_Category::Two&#xA;                                           else&#xA;                                             if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = false then&#xA;                                             Tax_Class_Category::One_A&#xA;                                             else&#xA;                                             invalid&#xA;                                             endif&#xA;                                           endif&#xA;                              else&#xA;                                 if (is_widower) = false then&#xA;                                             let is_reciving_bonus_for_children:Boolean = self.getIsreceivingAllowancesForChildren(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                             /** Description: Returns yes if the taxpayer is receiving a bonus for children in household. -  **/&#x9;&#xA;                                             if (is_reciving_bonus_for_children) = true then&#xA;                                             Tax_Class_Category::One_A&#xA;                                             else&#xA;                                                if (is_reciving_bonus_for_children) = false then&#xA;                                                               let taxpayer_age:Integer = self.getAge(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: Returns the age of a given taxpayer. -  **/&#x9;&#xA;                                                               if (taxpayer_age >= 64) = true then&#xA;                                                               Tax_Class_Category::One_A&#xA;                                                               else&#xA;                                                                 if (taxpayer_age >= 64) = false then&#xA;                                                                 Tax_Class_Category::One&#xA;                                                                 else&#xA;                                                                 invalid&#xA;                                                                 endif&#xA;                                                               endif&#xA;                                                else&#xA;                                                invalid&#xA;                                                endif&#xA;                                             endif&#xA;                                 else&#xA;                                 invalid&#xA;                                 endif&#xA;                              endif&#xA;                    else&#xA;                       if (can_beneficiate_from_transition_state ) = true then&#xA;                       Tax_Class_Category::Two&#xA;                       else&#xA;                       invalid&#xA;                       endif&#xA;                    endif&#xA;             else&#xA;             invalid&#xA;             endif&#xA;          endif&#xA;     else&#xA;     invalid&#xA;     endif&#xA;   endif&#xA;else&#xA;   if (is_resident_taxpayer) = false then&#xA;     let is_married:Boolean = self.getIsMaried(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;     /** Description: Returns yes if the taxpayer is married. -  **/&#x9;&#xA;     if (is_married) = false then&#xA;          let is_taxed_jointly:Boolean = self.getIsTaxedJointly(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;          /** Description: Returns yes if the taxpayer is married or has a partnership contract. -  **/&#x9;&#xA;          if (is_taxed_jointly) = true then&#xA;          Tax_Class_Category::Two&#xA;          else&#xA;             if (is_taxed_jointly) = false then&#xA;                    let is_divorced:Boolean = self.getSeperationState(taxation_year,Separation_Causes::DIVORCE) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: Returns yes if the taxpayer is divorced within the selected taxation year. -  **/&#x9;&#xA;                    let is_living_separately:Boolean = self.getSeperationState(taxation_year,Separation_Causes::SEPARATION_DE_FAIT) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: Returns yes if the taxpayer is not cohabiting with his/her spouse. In French: &quot;Separation de fait&quot;. -  **/&#x9;&#xA;                    let is_living_separately_by_court:Boolean = self.getSeperationState(taxation_year,Separation_Causes::SEPARATION_BY_COURT) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                    /** Description: Returns yes if the taxpayer has a judicial sentence dismissing him from cohabiting with his/her spouse. In French: &quot;Separation de corps&quot;. -  **/&#x9;&#xA;                    if (is_divorced or is_living_separately_by_court or (is_living_separately and not is_resident_taxpayer)) = false then&#xA;                              let is_widower:Boolean = self.is_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                              /** Description: Returns yes if the taxpayer has the statute of widower for the current taxation year. -  **/&#x9;&#xA;                              if (is_widower) = true then&#xA;                                           let spouse_death_year:Integer = self.last_start_year_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                           /** Description: Returns the year on which the spouse of the taxpayer past away. -  **/&#x9;&#xA;                                           if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = true then&#xA;                                           Tax_Class_Category::Two&#xA;                                           else&#xA;                                             if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = false then&#xA;                                             Tax_Class_Category::One_A&#xA;                                             else&#xA;                                             invalid&#xA;                                             endif&#xA;                                           endif&#xA;                              else&#xA;                                 if (is_widower) = false then&#xA;                                             let is_reciving_bonus_for_children:Boolean = self.getIsreceivingAllowancesForChildren(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                             /** Description: Returns yes if the taxpayer is receiving a bonus for children in household. -  **/&#x9;&#xA;                                             if (is_reciving_bonus_for_children) = true then&#xA;                                             Tax_Class_Category::One_A&#xA;                                             else&#xA;                                                if (is_reciving_bonus_for_children) = false then&#xA;                                                               let taxpayer_age:Integer = self.getAge(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: Returns the age of a given taxpayer. -  **/&#x9;&#xA;                                                               if (taxpayer_age >= 64) = true then&#xA;                                                               Tax_Class_Category::One_A&#xA;                                                               else&#xA;                                                                 if (taxpayer_age >= 64) = false then&#xA;                                                                 Tax_Class_Category::One&#xA;                                                                 else&#xA;                                                                 invalid&#xA;                                                                 endif&#xA;                                                               endif&#xA;                                                else&#xA;                                                invalid&#xA;                                                endif&#xA;                                             endif&#xA;                                 else&#xA;                                 invalid&#xA;                                 endif&#xA;                              endif&#xA;                    else&#xA;                       if (is_divorced or is_living_separately_by_court or (is_living_separately and not is_resident_taxpayer)) = true then&#xA;                                 let can_beneficiate_from_transition_state :Boolean = self.getDivorceTransitionState(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                 /** Description: Returns yes if: (1) the divorce/separation occurred within the last three years from the taxation year, and (2) the taxpayer did has not benefited from a divorce/separation transition state for the last five years from the current taxation year.  -  **/&#x9;&#xA;                                 if (can_beneficiate_from_transition_state ) = false then&#xA;                                             let is_widower:Boolean = self.is_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                             /** Description: Returns yes if the taxpayer has the statute of widower for the current taxation year. -  **/&#x9;&#xA;                                             if (is_widower) = true then&#xA;                                                            let spouse_death_year:Integer = self.last_start_year_widower in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                            /** Description: Returns the year on which the spouse of the taxpayer past away. -  **/&#x9;&#xA;                                                            if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = true then&#xA;                                                            Tax_Class_Category::Two&#xA;                                                            else&#xA;                                                               if (spouse_death_year &lt;= taxation_year and spouse_death_year >= taxation_year -3) = false then&#xA;                                                               Tax_Class_Category::One_A&#xA;                                                               else&#xA;                                                               invalid&#xA;                                                               endif&#xA;                                                            endif&#xA;                                             else&#xA;                                                if (is_widower) = false then&#xA;                                                               let is_reciving_bonus_for_children:Boolean = self.getIsreceivingAllowancesForChildren(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                               /** Description: Returns yes if the taxpayer is receiving a bonus for children in household. -  **/&#x9;&#xA;                                                               if (is_reciving_bonus_for_children) = true then&#xA;                                                               Tax_Class_Category::One_A&#xA;                                                               else&#xA;                                                                 if (is_reciving_bonus_for_children) = false then&#xA;                                                                                   let taxpayer_age:Integer = self.getAge(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;                                                                                   /** Description: Returns the age of a given taxpayer. -  **/&#x9;&#xA;                                                                                   if (taxpayer_age >= 64) = true then&#xA;                                                                                   Tax_Class_Category::One_A&#xA;                                                                                   else&#xA;                                                                                     if (taxpayer_age >= 64) = false then&#xA;                                                                                     Tax_Class_Category::One&#xA;                                                                                     else&#xA;                                                                                     invalid&#xA;                                                                                     endif&#xA;                                                                                   endif&#xA;                                                                 else&#xA;                                                                 invalid&#xA;                                                                 endif&#xA;                                                               endif&#xA;                                                else&#xA;                                                invalid&#xA;                                                endif&#xA;                                             endif&#xA;                                 else&#xA;                                   if (can_beneficiate_from_transition_state ) = true then&#xA;                                   Tax_Class_Category::Two&#xA;                                   else&#xA;                                   invalid&#xA;                                   endif&#xA;                                 endif&#xA;                       else&#xA;                       invalid&#xA;                       endif&#xA;                    endif&#xA;             else&#xA;             invalid&#xA;             endif&#xA;          endif&#xA;     else&#xA;        if (is_married) = true then&#xA;             let total_professional_income_household:Real = self.getProfetionalIncomeHousehold(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;             /** Description: Returns the sum of the taxpayer's household professional incomes. -  **/&#x9;&#xA;             let sum_professional_income_household_ZZ:Real = self.getProfetionalIncomeHouseholdZZ(taxation_year) in&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;             /** Description: Returns the sum of the taxpayer's household professional incomes that are taxed in ZZ. -  **/&#x9;&#xA;             if (sum_professional_income_household_ZZ > (0.5 * total_professional_income_household)) = true then&#xA;             Tax_Class_Category::Two&#xA;             else&#xA;               if (sum_professional_income_household_ZZ > (0.5 * total_professional_income_household)) = false then&#xA;               Tax_Class_Category::One_A&#xA;               else&#xA;               invalid&#xA;               endif&#xA;             endif&#xA;        else&#xA;        invalid&#xA;        endif&#xA;     endif&#xA;   else&#xA;   invalid&#xA;   endif&#xA;endif"/>
+      </eAnnotations>
+      <eParameters name="taxation_year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" ordered="false"
+        upperBound="-1" eType="#//Dependent" containment="true" eOpposite="#//Dependent/responsible_person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from_agent" lowerBound="1"
+        eType="#//FromAgent" containment="true" eOpposite="#//FromAgent/taxPayer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomes" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Income" containment="true" eOpposite="#//Income/taxPayer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from_law" lowerBound="1"
+        eType="#//FromLaw" containment="true" eOpposite="#//FromLaw/taxPayer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="AEP_deduction" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taxesDue" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Physical_Person">
+    <eOperations name="is_separated_from" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="IN_person" lowerBound="1" eType="#//Physical_Person"/>
+    </eOperations>
+    <eOperations name="is_person_affiliated_personnaly_to_social_security" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getSeperationState" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let legel_unions:Set(Legal_Union_Record)=Legal_Union_Record.allInstances()->select(individual_A=self or individual_B=self) in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(legel_unions->size()=0) then&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let possible_unions:Set(Legal_Union_Record)=legel_unions->select(start_year&lt;=year)in&#xA;&#x9;&#x9;&#x9;let lasted_union:Legal_Union_Record= possible_unions->select(start_year=possible_unions.start_year->max())->any(true) in&#xA;&#x9;&#x9;&#x9;if(lasted_union.end_year=-1)then&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;lasted_union.separation_cause=seperation_type&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+      <eParameters name="seperation_type" ordered="false" lowerBound="1" eType="#//Separation_Causes"/>
+    </eOperations>
+    <eOperations name="getAge" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;if(birth_year>=year )then&#xA;&#x9;&#x9;&#x9;0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;year-birth_year&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getIsMaried" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;let legel_unions:Set(Legal_Union_Record)=Legal_Union_Record.allInstances()->select( ((individual_A=self or individual_B=self) and oclIsKindOf(Marriage_Record))) in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(legel_unions->size()=0) then&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let possible_unions:Set(Legal_Union_Record)=legel_unions->select(start_year&lt;=year)in&#xA;&#x9;&#x9;&#x9;let lasted_union:Legal_Union_Record= possible_unions->select(start_year=possible_unions.start_year->max())->any(true) in&#xA;&#x9;&#x9;&#x9;if(lasted_union.end_year=-1)then&#xA;&#x9;&#x9;&#x9;true&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getSeperationYear" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let legel_unions:Set(Legal_Union_Record)=Legal_Union_Record.allInstances()->select(individual_A=self or individual_B=self) in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(legel_unions->size()=0) then&#xA;&#x9;&#x9;&#x9;-1&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let possible_unions:Set(Legal_Union_Record)=legel_unions->select(start_year&lt;=year)in&#xA;&#x9;&#x9;&#x9;let lasted_union:Legal_Union_Record= possible_unions->select(start_year=possible_unions.start_year->max())->any(true) in&#xA;&#x9;&#x9;&#x9;if(lasted_union.oclIsUndefined()) then&#xA;&#x9;&#x9;&#x9;-1&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(lasted_union.end_year=-1)then&#xA;&#x9;&#x9;&#x9;-1&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;lasted_union.end_year&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getDivorceTransitionState" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let sep_year:Integer=self.getSeperationYear(year) in&#xA;&#x9;&#x9;&#x9;if(sep_year=-1)then&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if( (sep_year &lt;= year and sep_year >= (year -3))=false) then&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let past_sep_year:Integer=self.getSeperationYear(year-5) in&#xA;&#x9;&#x9;&#x9;if(past_sep_year=-1)then&#xA;&#x9;&#x9;&#x9;true&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;false&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getSpouse" ordered="false" lowerBound="1" eType="#//Physical_Person">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;let legel_unions:Set(Legal_Union_Record)=Legal_Union_Record.allInstances()->select( ((individual_A=self or individual_B=self))) in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(legel_unions->size()=0) then&#xA;&#x9;&#x9;&#x9;let union:Legal_Union_Record=self.getLegalUnionRecord(year) in &#xA;&#x9;&#x9;&#x9;if(union.oclIsInvalid())then&#xA;&#x9;&#x9;&#x9;invalid&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;        if(union.individual_B=self) then union.individual_A.oclAsType(Physical_Person) else union.individual_B.oclAsType(Physical_Person) endif endif&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let possible_unions:Set(Legal_Union_Record)=legel_unions->select(start_year&lt;=year)in&#xA;&#x9;&#x9;&#x9;let lasted_union:Legal_Union_Record= possible_unions->select(start_year=possible_unions.start_year->max())->any(true) in&#xA;&#x9;&#x9;&#x9;if(lasted_union.end_year=-1)then&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(lasted_union.individual_A=self)then&#xA;&#x9;&#x9;&#x9;lasted_union.individual_B&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;lasted_union.individual_A&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;invalid&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="getLegalUnionRecord" ordered="false" lowerBound="1" eType="#//Legal_Union_Record">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let legel_unions:Set(Legal_Union_Record)=Legal_Union_Record.allInstances()->select( ((individual_A=self or individual_B=self))) in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(legel_unions->size()=0) then&#xA;&#x9;&#x9;&#x9;invalid&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let possible_unions:Set(Legal_Union_Record)=legel_unions->select(start_year&lt;=year)in&#xA;&#x9;&#x9;&#x9;let lasted_union:Legal_Union_Record= possible_unions->select(start_year=possible_unions.start_year->max())->any(true) in&#xA;&#x9;&#x9;&#x9;lasted_union&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_assisting_spouse" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SSNo" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addresses" ordered="false"
+        upperBound="-1" eType="#//Address" eOpposite="#//Address/taxPayer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birth_year" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disability_percentage"
+        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disability_type" ordered="false"
+        unique="false" lowerBound="1" eType="#//Disability_Types"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_affiliated_personnaly_to_social_security"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birth_month" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birth_day" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expenses" ordered="false"
+        upperBound="-1" eType="#//Expense" eOpposite="#//Expense/beneficiary"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_widower" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="last_start_year_widower"
+        ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="country" lowerBound="1"
+        eType="#//Country" defaultValueLiteral="ZZ"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="zipCode" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" ordered="false"
+        upperBound="-1" eType="#//Physical_Person" eOpposite="#//Physical_Person/addresses"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expense">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="declared_amount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expense_purpose" lowerBound="1"
+        eType="#//Expense_Purpose" defaultValueLiteral="OTHER"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependent" eType="#//Dependent"
+        eOpposite="#//Dependent/expense"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from_agent" ordered="false"
+        eType="#//FromAgent" eOpposite="#//FromAgent/expense"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year_expense_was_incurred_in"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
+        eType="#//Income" eOpposite="#//Income/expenses"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id4" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="beneficiary" ordered="false"
+        eType="#//Physical_Person" eOpposite="#//Physical_Person/expenses"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependent" eSuperTypes="#//Physical_Person">
+    <eOperations name="compute_if_dependent_receives_allowances_eligible_for_CIM"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="compute_if_dependent_receives_allowances_eligible_for_DS" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="compute_if_dependent_receives_allowances_eligible_for_CE_dependance_and_care"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="is_dependent_following_continued_studies" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="IN_continued_studies" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dependent_type" lowerBound="1"
+        eType="#//Dependent_Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsible_person" eType="#//Tax_Payer"
+        eOpposite="#//Tax_Payer/dependents"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="continued_studies" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allowances" ordered="false"
+        upperBound="-1" eType="#//External_Allowance" containment="true" eOpposite="#//External_Allowance/person"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="household" ordered="false"
+        eType="#//Household" eOpposite="#//Household/children"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from_agent" ordered="false"
+        eType="#//FromAgent" eOpposite="#//FromAgent/dependent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expense" ordered="false"
+        upperBound="-1" eType="#//Expense" eOpposite="#//Expense/dependent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="External_Allowance">
+    <eOperations name="getAmount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value=" if(dep_age>=6 and dep_age&lt;=11) then&#xA;(base + 16.17).round()&#xA;  else if (dep_age>=12) then (base + 48.52).round() else &#xA;  if(is_disabled) then(base + 185.60).round() else base endif endif endif"/>
+      </eAnnotations>
+      <eParameters name="base" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="dep_age" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+      <eParameters name="is_disabled" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="round_lower_euros" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let p1:Integer = amount.floor() in&#xA;&#x9;&#x9;&#x9;p1.toString().toReal()"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grantor" lowerBound="1"
+        eType="#//Grantor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="starting_year" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ending_year" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reciver" ordered="false"
+        lowerBound="1" eType="#//Physical_Person"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id5" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="person" ordered="false"
+        lowerBound="1" eType="#//Dependent" eOpposite="#//Dependent/allowances"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Household" eSuperTypes="#//Tax_Case">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" ordered="false"
+        lowerBound="1" eType="#//Legal_Union_Record" containment="true" eOpposite="#//Legal_Union_Record/household"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
+        upperBound="-1" eType="#//Dependent" containment="true" eOpposite="#//Dependent/household"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Legal_Union_Record" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_year" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end_year" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="separation_cause" ordered="false"
+        lowerBound="1" eType="#//Separation_Causes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="individual_A" ordered="false"
+        lowerBound="1" eType="#//Physical_Person" containment="true">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="legal_union_A"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="individual_B" ordered="false"
+        lowerBound="1" eType="#//Physical_Person" containment="true">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="legal_union_B"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Tax_Property" containment="true"
+        eOpposite="#//Tax_Property/union_record"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mutual_agreement" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id9" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="household" ordered="false"
+        lowerBound="1" eType="#//Household" eOpposite="#//Household/parents"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Separation_Causes">
+    <eLiterals name="NONE"/>
+    <eLiterals name="DIVORCE" value="1"/>
+    <eLiterals name="SEPARATION_DE_FAIT" value="2"/>
+    <eLiterals name="SEPARATION_BY_COURT" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tax_Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="starting_year" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taxed_jointly" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id10" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="union_record" ordered="false"
+        lowerBound="1" eType="#//Legal_Union_Record" eOpposite="#//Legal_Union_Record/properties"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tax_Case" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FromAgent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taxation_year" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" lowerBound="1"
+        eType="#//Tax_Payer" eOpposite="#//Tax_Payer/from_agent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_dependent_eligible_for_CE_Not_In_Houshold_Children_Care"
+        ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expense" ordered="false"
+        eType="#//Expense" eOpposite="#//Expense/from_agent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_eligible_debt" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependent" ordered="false"
+        eType="#//Dependent" eOpposite="#//Dependent/from_agent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Income" abstract="true">
+    <eOperations name="compute_duration_of_contract" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eOperations name="compute_duration_of_contract_within_taxation_year" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eParameters name="IN_date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eOperations name="prorata_worked_months" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.details->select(is_worked)->size()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="prorata_worked_days" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let a:Set(Income_Detail)=self.details->select(is_worked) in  &#xA;&#x9;&#x9;&#x9;a.worked_days->sum().mod(25)"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="prorata_period" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;let nb_months:Integer=self.prorata_worked_months()in&#xA;&#x9;&#x9;&#x9;let nb_days:Integer=self.prorata_worked_days()in&#xA;&#x9;&#x9;&#x9; if(nb_months=12) then&#xA;&#x9;&#x9;&#x9;1&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;nb_months/12 + nb_days/300&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="income_per_day" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="income_per_year()/300"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="income_per_month" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="income_per_year()/12"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="income_per_year" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;&#x9;&#x9;let involved_details:Set(Income_Detail)=self.details->select(i:Income_Detail| i.is_worked=true) in&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;involved_details.amount->sum()"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getDurationInyears" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;&#x9;&#x9;&#x9;if(self.income_type.oclIsTypeOf(Pensions_and_Annuities_Income)) then &#xA;&#x9;&#x9;&#x9;if(start_year.oclIsUndefined())then&#xA;&#x9;&#x9;&#x9;-1&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let res:Integer=self.taxPayer.from_agent.taxation_year-start_year in&#xA;&#x9;&#x9;&#x9;if(res&lt;0) then&#xA;&#x9;&#x9;&#x9;0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;res&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;-1&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="income_amount" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="let non_null_amounts:OrderedSet(Income_Detail)=self.details->select(det:Income_Detail|det.amount>0)->asOrderedSet() in&#xA;non_null_amounts->collect(amount)->min()"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income_type" lowerBound="1"
+        eType="#//Income_Type" containment="true" eOpposite="#//Income_Type/income"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_date_within_taxation_year"
+        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_date_of_contract"
+        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end_date_within_taxation_year"
+        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tax_card" eType="#//Tax_Card"
+        containment="true" eOpposite="#//Tax_Card/income"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_liability" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" ordered="false"
+        lowerBound="1" eType="#//Tax_Payer" eOpposite="#//Tax_Payer/incomes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="details" lowerBound="12"
+        upperBound="12" eType="#//Income_Detail" containment="true" eOpposite="#//Income_Detail/income"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="num" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start_year" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expenses" ordered="false"
+        upperBound="-1" eType="#//Expense" containment="true" eOpposite="#//Expense/income"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Income_Type" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subjectToWithholdingTax"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.income.tax_card->notEmpty()&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id8" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
+        eType="#//Income" eOpposite="#//Income/income_type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tax_Card">
+    <eOperations name="getSumDeductionsYear" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="deduction_FO_yearly+deduction_FD_yearly+deduction_CE_invalidity_yearly"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getSumCreditsYear" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="credit_CIS_yearly+credit_CIP_yearly"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="card_identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_card_type" lowerBound="1"
+        eType="#//Tax_Card_Type" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="if(self.income.taxPayer.incomes->size()=1) then &#xA;Tax_Card_Type::Principal&#xA;&#x9;else&#xA;&#x9;&#x9;let all_incomes:OrderedSet(Income)=self.income.taxPayer.incomes->select(inc:Income| inc.income_amount= self.income.taxPayer.incomes.income_amount->max())->asOrderedSet() in&#xA;&#x9;&#x9;let bigest_income:Income= all_incomes->first() in&#xA;&#x9;&#x9;&#x9;    if(bigest_income=self.income) then&#xA;&#x9;&#x9;&#x9;   &#x9; Tax_Card_Type::Principal&#xA;&#x9;&#x9;&#x9;    else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Tax_Card_Type::Additional&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;endif&#xA;&#x9;&#x9;&#x9;&#x9;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_office" lowerBound="1"
+        eType="#//Tax_Office"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_from_date" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valid_until_date" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="percentage_of_witholding"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_payers_name_surname"
+        ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_payers_partner_name_surname"
+        ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tax_payers_address" eType="#//Address"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobs_Employer_SSNo" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobs_employers_name" ordered="false"
+        unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobs_activity_type" lowerBound="1"
+        eType="#//Job_Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobs_place_of_work" lowerBound="1"
+        eType="#//Town"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_FD_daily" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_FD_monthly" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_FD_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_AC_daily" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_AC_monthly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_AC_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_CE_daily" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_CE_monthly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_CE_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_CE_invalidity_yearly"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_DS_daily" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_DS_monthly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_DS_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_FO_daily" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_FO_monthly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_FO_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIS_daily" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIS_monthly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIP_monthly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIP_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIM_daily" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIM_monthly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIS_yearly" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="validity" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income_Tax_Credit" ordered="false"
+        upperBound="-1" eType="#//Income_Tax_Credit" eOpposite="#//Income_Tax_Credit/taxation_Frame"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Tax_Card"
+        eOpposite="#//Tax_Card/current_tax_card"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="current_tax_card" eType="#//Tax_Card"
+        eOpposite="#//Tax_Card/previous"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credit_CIM_yearly" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_DS_Alimony_yearly"
+        ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deduction_DS_Debt_yearly"
+        ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
+        eType="#//Income" eOpposite="#//Income/tax_card"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Income_Tax_Credit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grantedBy" lowerBound="1"
+        eType="#//Grantor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" eType="#//Tax_Payer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_year" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yearly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="300.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="monthly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="25.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="daily" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="1.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id7" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxation_Frame" eType="#//Tax_Card"
+        eOpposite="#//Tax_Card/income_Tax_Credit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Income_Detail">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="month" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="amount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_worked" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="worked_days" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_contributing_CNS" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_contributing_pension"
+        ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id5" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="income" lowerBound="1"
+        eType="#//Income" eOpposite="#//Income/details"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromLaw">
+    <eOperations name="CE_INVALIDITY_FLAT_RATE_TYPE_E" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="1455.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="CIP_MINIMUM_INCOME_MONTH" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="25.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="CIP_MINIMUM_INCOME_YEAR" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="300.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="FLAT_RATE_CIP_YEARLY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="300.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="FLAT_RATE_PER_UNIT" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="99.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="MAXIMUM_DISTANCE_IN_UNITS" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="30.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="MINIMUM_DISTANCE_IN_UNITS" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="4.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="FLAT_MAXIMUM_FD" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="2574.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="CIS_MINIMUM_INCOME_DAY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="3.12"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="CIS_MINIMUM_INCOME_MONTH" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="78.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="CIS_MINIMUM_INCOME_YEAR" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="936.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="FLAT_RATE_CIS_DAILY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="1.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="FLAT_RATE_CIS_MONTHLY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="25.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="FLAT_RATE_CIS_YEARLY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="300.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="get_A_for_salary_class_1" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1020) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 1180) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 1340) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 1500) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 1655) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 1815) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 1975) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 2135) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 2295) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 2450) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 2610) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 2770) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 2930) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 3090) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 3245) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 3405) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 3565) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 8415) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;      &#x9;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_salary_class_1" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1020) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 1180) then 81.9&#xA;&#x9;&#x9;else if(revenu &lt;= 1340) then 105.555&#xA;&#x9;&#x9;else if(revenu &lt;= 1500) then 132.39000&#xA;&#x9;&#x9;else if(revenu &lt;= 1655) then 162.405&#xA;&#x9;&#x9;else if(revenu &lt;= 1815) then 195.6&#xA;&#x9;&#x9;else if(revenu &lt;= 1975) then 231.975&#xA;&#x9;&#x9;else if(revenu &lt;= 2135) then 271.53&#xA;&#x9;&#x9;else if(revenu &lt;= 2295) then 314.265&#xA;&#x9;&#x9;else if(revenu &lt;= 2450) then 360.18&#xA;&#x9;&#x9;else if(revenu &lt;= 2610) then 409.275&#xA;&#x9;&#x9;else if(revenu &lt;= 2770) then 461.55&#xA;&#x9;&#x9;else if(revenu &lt;= 2930) then 517.005&#xA;&#x9;&#x9;else if(revenu &lt;= 3090) then 575.64&#xA;&#x9;&#x9;else if(revenu &lt;= 3245) then 637.455&#xA;&#x9;&#x9;else if(revenu &lt;= 3405) then 702.45&#xA;&#x9;&#x9;else if(revenu &lt;= 3565) then 770.625&#xA;&#x9;&#x9;else if(revenu &lt;= 8415) then 806.30250 &#xA;&#x9;&#x9;else 890.48583&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_salary_class_1A" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1960) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2065) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 2170) then 0.15&#xA;&#x9;&#x9;else if(revenu &lt;= 2280) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 2385) then 0.21&#xA;&#x9;&#x9;else if(revenu &lt;= 2490) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 2595) then 0.27&#xA;&#x9;&#x9;else if(revenu &lt;= 2700) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 2810) then 0.33&#xA;&#x9;&#x9;else if(revenu &lt;= 2915) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 3020) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_salary_class_1A" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1960) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2065) then 235.5&#xA;&#x9;&#x9;else if(revenu &lt;= 2170) then 297.555&#xA;&#x9;&#x9;else if(revenu &lt;= 2280) then 362.79&#xA;&#x9;&#x9;else if(revenu &lt;= 2385) then 431.205&#xA;&#x9;&#x9;else if(revenu &lt;= 2490) then 502.8&#xA;&#x9;&#x9;else if(revenu &lt;= 2595) then 577.575&#xA;&#x9;&#x9;else if(revenu &lt;= 2700) then 655.53&#xA;&#x9;&#x9;else if(revenu &lt;= 2810) then 736.665&#xA;&#x9;&#x9;else if(revenu &lt;= 2915) then 820.98&#xA;&#x9;&#x9;else if(revenu &lt;= 3020) then 908.475&#xA;&#x9;&#x9;else 938.7&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        &#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_salary_class_2" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1960) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2280) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 2595) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 2915) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 3230) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 3550) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 3870) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 4185) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 4505) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 4820) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 5140) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 5460) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 5775) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 6095) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 6410) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 6730) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 7050) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 16750) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;                endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_salary_class_2" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1960) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2280) then 157&#xA;&#x9;&#x9;else if(revenu &lt;= 2595) then 202.61&#xA;&#x9;&#x9;else if(revenu &lt;= 2915) then 254.58&#xA;&#x9;&#x9;else if(revenu &lt;= 3230) then 312.91&#xA;&#x9;&#x9;else if(revenu &lt;= 3550) then 377.6&#xA;&#x9;&#x9;else if(revenu &lt;= 3870) then 448.65&#xA;&#x9;&#x9;else if(revenu &lt;= 4185) then 526.06&#xA;&#x9;&#x9;else if(revenu &lt;= 4505) then 609.83&#xA;&#x9;&#x9;else if(revenu &lt;= 4820) then 699.96&#xA;&#x9;&#x9;else if(revenu &lt;= 5140) then 796.45&#xA;&#x9;&#x9;else if(revenu &lt;= 5460) then 899.3&#xA;&#x9;&#x9;else if(revenu &lt;= 5775) then 1008.51&#xA;&#x9;&#x9;else if(revenu &lt;= 6095) then 1124.08&#xA;&#x9;&#x9;else if(revenu &lt;= 6410) then 1246.01&#xA;&#x9;&#x9;else if(revenu &lt;= 6730) then 1374.3&#xA;&#x9;&#x9;else if(revenu &lt;= 7050) then 1508.95&#xA;&#x9;&#x9;else if(revenu &lt;= 16750) then  1579.455&#xA;&#x9;&#x9;else 1746.97166&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_pension_class_1" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1000) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 1160) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 1320) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 1480) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 1635) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 1795) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 1955) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 2115) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 2275) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 2430) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 2590) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 2750) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 2910) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 3070) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 3225) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 3385) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 3545) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 8395) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_pension_class_1" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1000) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 1160) then 80.3&#xA;&#x9;&#x9;else if(revenu &lt;= 1320) then 103.555&#xA;&#x9;&#x9;else if(revenu &lt;= 1480) then 129.99&#xA;&#x9;&#x9;else if(revenu &lt;= 1635) then 159.605&#xA;&#x9;&#x9;else if(revenu &lt;= 1795) then 192.4&#xA;&#x9;&#x9;else if(revenu &lt;= 1955) then 228.375&#xA;&#x9;&#x9;else if(revenu &lt;= 2115) then 267.53&#xA;&#x9;&#x9;else if(revenu &lt;= 2275) then 309.865&#xA;&#x9;&#x9;else if(revenu &lt;= 2430) then 355.38&#xA;&#x9;&#x9;else if(revenu &lt;= 2590) then 404.075&#xA;&#x9;&#x9;else if(revenu &lt;= 2750) then 455.95&#xA;&#x9;&#x9;else if(revenu &lt;= 2910) then 511.005&#xA;&#x9;&#x9;else if(revenu &lt;= 3070) then 569.24&#xA;&#x9;&#x9;else if(revenu &lt;= 3225) then 630.655&#xA;&#x9;&#x9;else if(revenu &lt;= 3385) then 695.25&#xA;&#x9;&#x9;else if(revenu &lt;= 3545) then 763.025&#xA;&#x9;&#x9;else if(revenu &lt;= 8395) then 798.5025&#xA;&#x9;&#x9;else 882.48583&#x9;&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_pension_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1940) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2045) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 2150) then 0.15&#xA;&#x9;&#x9;else if(revenu &lt;= 2260) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 2365) then 0.21&#xA;&#x9;&#x9;else if(revenu &lt;= 2470) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 2575) then 0.27&#xA;&#x9;&#x9;else if(revenu &lt;= 2680) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 2790) then 0.33&#xA;&#x9;&#x9;else if(revenu &lt;= 2895) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 3000) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_pension_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1940) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2045) then 233.100&#xA;&#x9;&#x9;else if(revenu &lt;= 2150) then 294.555&#xA;&#x9;&#x9;else if(revenu &lt;= 2260) then 359.190&#xA;&#x9;&#x9;else if(revenu &lt;= 2365) then 427.005&#xA;&#x9;&#x9;else if(revenu &lt;= 2470) then 498&#xA;&#x9;&#x9;else if(revenu &lt;= 2575) then 572.175&#xA;&#x9;&#x9;else if(revenu &lt;= 2680) then 649.53&#xA;&#x9;&#x9;else if(revenu &lt;= 2790) then 730.065&#xA;&#x9;&#x9;else if(revenu &lt;= 2895) then 813.780&#xA;&#x9;&#x9;else if(revenu &lt;= 3000) then 900.675&#xA;&#x9;&#x9;else 930.700&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_pension_class_2" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1940) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2260) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 2575) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 2895) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 3210) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 3530) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 3850) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 4165) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 4485) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 4800) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 5120) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 5440) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 5755) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 6075) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 6390) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 6710) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 7030) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 16730) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_pension_class_2" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 1940) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 2260) then 155.4&#xA;&#x9;&#x9;else if(revenu &lt;= 2575) then 200.61&#xA;&#x9;&#x9;else if(revenu &lt;= 2895) then 252.18&#xA;&#x9;&#x9;else if(revenu &lt;= 3210) then 310.11&#xA;&#x9;&#x9;else if(revenu &lt;= 3530) then 374.4&#xA;&#x9;&#x9;else if(revenu &lt;= 3850) then 445.05&#xA;&#x9;&#x9;else if(revenu &lt;= 4165) then 522.06&#xA;&#x9;&#x9;else if(revenu &lt;= 4485) then 605.43&#xA;&#x9;&#x9;else if(revenu &lt;= 4800) then 695.16&#xA;&#x9;&#x9;else if(revenu &lt;= 5120) then 791.25&#xA;&#x9;&#x9;else if(revenu &lt;= 5440) then 893.7&#xA;&#x9;&#x9;else if(revenu &lt;= 5755) then 1002.51&#xA;&#x9;&#x9;else if(revenu &lt;= 6075) then 1117.68&#xA;&#x9;&#x9;else if(revenu &lt;= 6390) then 1239.21&#xA;&#x9;&#x9;else if(revenu &lt;= 6710) then  1367.1&#xA;&#x9;&#x9;else if(revenu &lt;= 7030) then 1501.35&#xA;&#x9;&#x9;else if(revenu &lt;= 16730) then 1571.655&#xA;&#x9;&#x9;else 1738.97166&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_other_yearly_class_1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value=" if(revenu&lt;= 11250) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 13150) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 15050) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 16950) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 18850) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 20800) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 22700) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 24600) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 26500) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 28400) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 30300) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 32250) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 34150) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 36050) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 37950) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 39850) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 41750) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 100000) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_other_yearly_class_1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 11250) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 13150) then 901.200 &#xA;&#x9;&#x9;else if(revenu &lt;= 15050) then 1164.660&#xA;&#x9;&#x9;else if(revenu &lt;= 16950) then 1466.280&#xA;&#x9;&#x9;else if(revenu &lt;= 18850) then 1806.060&#xA;&#x9;&#x9;else if(revenu &lt;= 20800) then 2184&#xA;&#x9;&#x9;else if(revenu &lt;= 22700) then 2600.100&#xA;&#x9;&#x9;else if(revenu &lt;= 24600) then 3054.360&#xA;&#x9;&#x9;else if(revenu &lt;= 26500) then 3546.780 &#xA;&#x9;&#x9;else if(revenu &lt;= 28400) then 4077.360&#xA;&#x9;&#x9;else if(revenu &lt;= 30300) then 4646.100&#xA;&#x9;&#x9;else if(revenu &lt;= 32250) then 5253&#xA;&#x9;&#x9;else if(revenu &lt;= 34150) then 5898.060&#xA;&#x9;&#x9;else if(revenu &lt;= 36050) then 6581.28&#xA;&#x9;&#x9;else if(revenu &lt;= 37950) then 7302.66&#xA;&#x9;&#x9;else if(revenu &lt;= 39850) then 8062.2&#xA;&#x9;&#x9;else if(revenu &lt;= 41750) then 8859.9&#xA;&#x9;&#x9;else if(revenu &lt;= 100000) then 9277.83&#xA;&#x9;&#x9;else 10277.83&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_other_yearly_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;=22500) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 23800) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 25050) then 0.15&#xA;&#x9;&#x9;else if(revenu &lt;= 26300) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 27600) then 0.21&#xA;&#x9;&#x9;else if(revenu &lt;= 28850) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 30150) then 0.27&#xA;&#x9;&#x9;else if(revenu &lt;= 31400) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 32700) then 0.33&#xA;&#x9;&#x9;else if(revenu &lt;= 33950) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 35250) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_other_yearly_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;=22500) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 23800) then 2703.600&#xA;&#x9;&#x9;else if(revenu &lt;= 25050) then 3417.660&#xA;&#x9;&#x9;else if(revenu &lt;= 26300) then 4169.880&#xA;&#x9;&#x9;else if(revenu &lt;= 27600) then 4960.260&#xA;&#x9;&#x9;else if(revenu &lt;= 28850) then 5788.800&#xA;&#x9;&#x9;else if(revenu &lt;= 30150) then 6655.500&#xA;&#x9;&#x9;else if(revenu &lt;= 31400) then 7560.360&#xA;&#x9;&#x9;else if(revenu &lt;= 32700) then 8503.380&#xA;&#x9;&#x9;else if(revenu &lt;= 33950) then 9484.560&#xA;&#x9;&#x9;else if(revenu &lt;= 35250) then 10503.900&#xA;&#x9;&#x9;else  10856.400&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_other_yearly_class_2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;=22500) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 26300) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 30150) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 33950) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 37750) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 41600) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 45400) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 49200) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 53050) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 56850) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 60650) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 64500) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 68300) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 72100) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 75950) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 79750) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 83550) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 200000) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_other_yearly_class_2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;=22500) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 26300) then 1802.400 &#xA;&#x9;&#x9;else if(revenu &lt;= 30150) then 2329.320&#xA;&#x9;&#x9;else if(revenu &lt;= 33950) then 2932.560&#xA;&#x9;&#x9;else if(revenu &lt;= 37750) then 3612.120&#xA;&#x9;&#x9;else if(revenu &lt;= 41600) then 4368.000&#xA;&#x9;&#x9;else if(revenu &lt;= 45400) then 5200.200&#xA;&#x9;&#x9;else if(revenu &lt;= 49200) then 6108.720&#xA;&#x9;&#x9;else if(revenu &lt;= 53050) then 7093.560&#xA;&#x9;&#x9;else if(revenu &lt;= 56850) then 8154.720&#xA;&#x9;&#x9;else if(revenu &lt;= 60650) then 9292.200&#xA;&#x9;&#x9;else if(revenu &lt;= 64500) then 10506.000&#xA;&#x9;&#x9;else if(revenu &lt;= 68300) then 11796.120&#xA;&#x9;&#x9;else if(revenu &lt;= 72100) then 13162.560&#xA;&#x9;&#x9;else if(revenu &lt;= 75950) then 14605.320&#xA;&#x9;&#x9;else if(revenu &lt;= 79750) then 16124.400&#xA;&#x9;&#x9;else if(revenu &lt;= 83550) then 17719.800&#xA;&#x9;&#x9;else if(revenu &lt;= 200000) then 18555.660&#xA;&#x9;&#x9;else 20555.660&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="calculate_taxes_per_month" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(income_type='Employment') then&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_salary_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_salary_class_2(amount) else get_A_for_salary_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_salary_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_salary_class_2(amount) else get_B_for_salary_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_ten_cent(a * amount - b) in&#xA;            let max:Real = if(classe=Tax_Class_Category::Two) then 25085 else 12585 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_ten_cent(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;1)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 81.906 else if(classe=Tax_Class_Category::Two) then 165.74 else 82.87 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_ten_cent(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;1)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    &#xA;&#x9;&#x9;   &#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(income_type='Pension') then&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_pension_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_pension_class_2(amount) else get_A_for_pension_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_pension_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_pension_class_2(amount) else get_B_for_pension_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_ten_cent(a * amount - b) in&#xA;&#x9;&#x9;    let max:Real = if(classe=Tax_Class_Category::Two) then 25065 else 12565 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_ten_cent(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;1)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 81.906 else if(classe=Tax_Class_Category::Two) then 165.74 else 82.87 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_ten_cent(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;1)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    endif&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;-1&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="classe" ordered="false" lowerBound="1" eType="#//Tax_Class_Category"/>
+      <eParameters name="income_type" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="round_lower_euros" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let p1:Integer = amount.floor() in&#xA;&#x9;&#x9;&#x9;p1.toString().toReal()"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="round_ten_cent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let p1:Integer = amount.floor() in&#xA;&#x9;&#x9;&#x9;if(p1=amount) then&#xA;&#x9;&#x9;&#x9;amount&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let p2_temp:Real = (amount-p1) * 10 in&#xA;&#x9;&#x9;&#x9;let p2:Integer = p2_temp.floor() in&#xA;&#x9;&#x9;&#x9;p1.toString().toReal()+(p2.toString().toReal()/10.0)&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_salary_yearly_class_1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 12250) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 14150) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 16100) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 18000) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 19900) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 21800) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 23700) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 25600) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 27500) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 29450) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 31350) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 33250) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 35150) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 37050) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 38950) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 40900) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 42800) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 101000) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_salary_yearly_class_1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 12250) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 14150) then 982.8000&#xA;&#x9;&#x9;else if(revenu &lt;= 16100) then 1266.6600&#xA;&#x9;&#x9;else if(revenu &lt;= 18000) then 1588.6800&#xA;&#x9;&#x9;else if(revenu &lt;= 19900) then 1948.8600&#xA;&#x9;&#x9;else if(revenu &lt;= 21800) then 2347.2000&#xA;&#x9;&#x9;else if(revenu &lt;= 23700) then 2783.7000&#xA;&#x9;&#x9;else if(revenu &lt;= 25600) then 3258.3600&#xA;&#x9;&#x9;else if(revenu &lt;= 27500) then 3771.1800&#xA;&#x9;&#x9;else if(revenu &lt;= 29450) then 4322.1600&#xA;&#x9;&#x9;else if(revenu &lt;= 31350) then 4911.3000&#xA;&#x9;&#x9;else if(revenu &lt;= 33250) then 5538.6000&#xA;&#x9;&#x9;else if(revenu &lt;= 35150) then 6204.0600&#xA;&#x9;&#x9;else if(revenu &lt;= 37050) then 6907.6800&#xA;&#x9;&#x9;else if(revenu &lt;= 38950) then 7649.4600&#xA;&#x9;&#x9;else if(revenu &lt;= 40900) then 8429.4000&#xA;&#x9;&#x9;else if(revenu &lt;= 42800) then  9247.5000&#xA;&#x9;&#x9;else if(revenu &lt;= 101000) then  9675.6300&#xA;&#x9;&#x9;else 10685.8300&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_salary_yearly_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23500) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 24800) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 26050) then 0.15&#xA;&#x9;&#x9;else if(revenu &lt;= 27350) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 28600) then 0.21&#xA;&#x9;&#x9;else if(revenu &lt;= 29900) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 31150) then 0.27&#xA;&#x9;&#x9;else if(revenu &lt;= 32450) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 33700) then 0.33&#xA;&#x9;&#x9;else if(revenu &lt;= 34950) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 36250) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_salary_yearly_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23500) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 24800) then 2826.0000&#xA;&#x9;&#x9;else if(revenu &lt;= 26050) then 3570.6600&#xA;&#x9;&#x9;else if(revenu &lt;= 27350) then 4353.4800&#xA;&#x9;&#x9;else if(revenu &lt;= 28600) then 5174.4600&#xA;&#x9;&#x9;else if(revenu &lt;= 29900) then 6033.6000&#xA;&#x9;&#x9;else if(revenu &lt;= 31150) then 6930.9000&#xA;&#x9;&#x9;else if(revenu &lt;= 32450) then 7866.3600&#xA;&#x9;&#x9;else if(revenu &lt;= 33700) then 8839.9800&#xA;&#x9;&#x9;else if(revenu &lt;= 34950) then 9851.7600&#xA;&#x9;&#x9;else if(revenu &lt;= 36250) then  10901.7000&#xA;&#x9;&#x9;else 11264.4000&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_salary_yearly_class_2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23550) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 27350) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 31150) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 34950) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 38800) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 42600) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 46400) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 50250) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 54050) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 57850) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 61700) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 65500) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 69300) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 73150) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 76950) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 80750) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 84600) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 201000) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_salary_yearly_class_2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value=" if(revenu&lt;= 23550) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 27350) then 1884.000&#xA;&#x9;&#x9;else if(revenu &lt;= 31150) then 2431.3200&#xA;&#x9;&#x9;else if(revenu &lt;= 34950) then 3054.9600&#xA;&#x9;&#x9;else if(revenu &lt;= 38800) then 3754.9200&#xA;&#x9;&#x9;else if(revenu &lt;= 42600) then 4531.2000&#xA;&#x9;&#x9;else if(revenu &lt;= 46400) then 5383.8000&#xA;&#x9;&#x9;else if(revenu &lt;= 50250) then 6312.7200&#xA;&#x9;&#x9;else if(revenu &lt;= 54050) then 7317.9600&#xA;&#x9;&#x9;else if(revenu &lt;= 57850) then 8399.5200&#xA;&#x9;&#x9;else if(revenu &lt;= 61700) then 9557.4000&#xA;&#x9;&#x9;else if(revenu &lt;= 65500) then 10791.6000&#xA;&#x9;&#x9;else if(revenu &lt;= 69300) then 12102.1200&#xA;&#x9;&#x9;else if(revenu &lt;= 73150) then 13488.9600&#xA;&#x9;&#x9;else if(revenu &lt;= 76950) then 14952.1200&#xA;&#x9;&#x9;else if(revenu &lt;= 80750) then 16491.6000&#xA;&#x9;&#x9;else if(revenu &lt;= 84600) then 18107.4000&#xA;&#x9;&#x9;else if(revenu &lt;= 201000) then 18953.4600&#xA;&#x9;&#x9;else 20963.6600&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_pension_yearly_class_1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 12000) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 13950) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 15850) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 17750) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 19650) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 21550) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 23450) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 25400) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 27300) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 29200) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 31100) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 33000) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 34900) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 36800) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 38750) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 40650) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 42550) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 100750) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_pension_yearly_class_1" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 12000) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 13950) then 963.600&#xA;&#x9;&#x9;else if(revenu &lt;= 15850) then 1242.660&#xA;&#x9;&#x9;else if(revenu &lt;= 17750) then 1559.880&#xA;&#x9;&#x9;else if(revenu &lt;= 19650) then 1915.260&#xA;&#x9;&#x9;else if(revenu &lt;= 21550) then 2308.800&#xA;&#x9;&#x9;else if(revenu &lt;= 23450) then 2740.500&#xA;&#x9;&#x9;else if(revenu &lt;= 25400) then 3210.360&#xA;&#x9;&#x9;else if(revenu &lt;= 27300) then 3718.380&#xA;&#x9;&#x9;else if(revenu &lt;= 29200) then 4264.560&#xA;&#x9;&#x9;else if(revenu &lt;= 31100) then 4848.900&#xA;&#x9;&#x9;else if(revenu &lt;= 33000) then 5471.400&#xA;&#x9;&#x9;else if(revenu &lt;= 34900) then 6132.060&#xA;&#x9;&#x9;else if(revenu &lt;= 36800) then 6830.880&#xA;&#x9;&#x9;else if(revenu &lt;= 38750) then 7567.860&#xA;&#x9;&#x9;else if(revenu &lt;= 40650) then 8343.000&#xA;&#x9;&#x9;else if(revenu &lt;= 42550) then 9156.300&#xA;&#x9;&#x9;else if(revenu &lt;= 100750) then 9582.030&#xA;&#x9;&#x9;else 10589.830&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_pension_yearly_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23300) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 24550) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 25850) then 0.15&#xA;&#x9;&#x9;else if(revenu &lt;= 27100) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 28350) then 0.21&#xA;&#x9;&#x9;else if(revenu &lt;= 29650) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 30900) then 0.27&#xA;&#x9;&#x9;else if(revenu &lt;= 32200) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 33450) then 0.33&#xA;&#x9;&#x9;else if(revenu &lt;= 34750) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 36000) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_pension_yearly_class_1A" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23300) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 24550) then 2797.200&#xA;&#x9;&#x9;else if(revenu &lt;= 25850) then 3534.660&#xA;&#x9;&#x9;else if(revenu &lt;= 27100) then 4310.280&#xA;&#x9;&#x9;else if(revenu &lt;= 28350) then 5124.060&#xA;&#x9;&#x9;else if(revenu &lt;= 29650) then 5976.000&#xA;&#x9;&#x9;else if(revenu &lt;= 30900) then 6866.100&#xA;&#x9;&#x9;else if(revenu &lt;= 32200) then 7794.360&#xA;&#x9;&#x9;else if(revenu &lt;= 33450) then 8760.780&#xA;&#x9;&#x9;else if(revenu &lt;= 34750) then 9765.360&#xA;&#x9;&#x9;else if(revenu &lt;= 36000) then  10808.100&#xA;&#x9;&#x9;else 11168.400&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_A_for_pension_yearly_class_2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23300) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 27100) then 0.08&#xA;&#x9;&#x9;else if(revenu &lt;= 30900) then 0.1&#xA;&#x9;&#x9;else if(revenu &lt;= 34750) then 0.12&#xA;&#x9;&#x9;else if(revenu &lt;= 38550) then 0.14&#xA;&#x9;&#x9;else if(revenu &lt;= 42350) then 0.16&#xA;&#x9;&#x9;else if(revenu &lt;= 46200) then 0.18&#xA;&#x9;&#x9;else if(revenu &lt;= 50000) then 0.2&#xA;&#x9;&#x9;else if(revenu &lt;= 53800) then 0.22&#xA;&#x9;&#x9;else if(revenu &lt;= 57650) then 0.24&#xA;&#x9;&#x9;else if(revenu &lt;= 61450) then 0.26&#xA;&#x9;&#x9;else if(revenu &lt;= 65250) then 0.28&#xA;&#x9;&#x9;else if(revenu &lt;= 69100) then 0.3&#xA;&#x9;&#x9;else if(revenu &lt;= 72900) then 0.32&#xA;&#x9;&#x9;else if(revenu &lt;= 76700) then 0.34&#xA;&#x9;&#x9;else if(revenu &lt;= 80550) then 0.36&#xA;&#x9;&#x9;else if(revenu &lt;= 84350) then 0.38&#xA;&#x9;&#x9;else if(revenu &lt;= 200750) then 0.39&#xA;&#x9;&#x9;else 0.4&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="get_B_for_pension_yearly_class_2" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(revenu&lt;= 23300) then 0&#xA;&#x9;&#x9;else if(revenu &lt;= 27100) then 1864.800&#xA;&#x9;&#x9;else if(revenu &lt;= 30900) then 2407.320&#xA;&#x9;&#x9;else if(revenu &lt;= 34750) then 3026.160&#xA;&#x9;&#x9;else if(revenu &lt;= 38550) then 3721.320&#xA;&#x9;&#x9;else if(revenu &lt;= 42350) then 4492.800&#xA;&#x9;&#x9;else if(revenu &lt;= 46200) then 5340.600&#xA;&#x9;&#x9;else if(revenu &lt;= 50000) then 6264.720&#xA;&#x9;&#x9;else if(revenu &lt;= 53800) then 7265.160&#xA;&#x9;&#x9;else if(revenu &lt;= 57650) then 8341.920&#xA;&#x9;&#x9;else if(revenu &lt;= 61450) then 9495.000&#xA;&#x9;&#x9;else if(revenu &lt;= 65250) then 10724.400&#xA;&#x9;&#x9;else if(revenu &lt;= 69100) then 12030.120&#xA;&#x9;&#x9;else if(revenu &lt;= 72900) then 13412.160&#xA;&#x9;&#x9;else if(revenu &lt;= 76700) then 14870.520&#xA;&#x9;&#x9;else if(revenu &lt;= 80550) then 16405.200&#xA;&#x9;&#x9;else if(revenu &lt;= 84350) then 18016.200&#xA;&#x9;&#x9;else if(revenu &lt;= 200750) then 18859.860&#xA;&#x9;&#x9;else 20867.660&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;&#x9;&#x9;endif&#xA;        endif"/>
+      </eAnnotations>
+      <eParameters name="revenu" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="calculate_taxes_per_year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(income_type='Employment') then&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_salary_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_salary_yearly_class_2(amount) else get_A_for_salary_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_salary_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_salary_yearly_class_2(amount) else get_B_for_salary_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_lower_euros(a * amount - b) in&#xA;            let max:Real = if(classe=Tax_Class_Category::Two) then 301020 else 151020 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_lower_euros(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 982.86 else if(classe=Tax_Class_Category::Two) then 1988.88 else 994.44 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_lower_euros(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    &#xA;&#x9;&#x9;   &#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(income_type='Pension') then&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_pension_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_pension_yearly_class_2(amount) else get_A_for_pension_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_pension_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_pension_yearly_class_2(amount) else get_B_for_pension_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_lower_euros(a * amount - b) in&#xA;&#x9;&#x9;    let max:Real = if(classe=Tax_Class_Category::Two) then 300780 else 150780 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_lower_euros(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 982.86 else if(classe=Tax_Class_Category::Two) then 1988.88 else 994.44 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_lower_euros(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_other_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_other_yearly_class_2(amount) else get_A_for_other_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_other_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_other_yearly_class_2(amount) else get_B_for_other_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_lower_euros(a * amount - b) in&#xA;            let max:Real = if(classe=Tax_Class_Category::Two) then 300000 else 150000 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_lower_euros(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 982.86 else if(classe=Tax_Class_Category::Two) then 1988.88 else 994.44 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_lower_euros(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif &#xA;&#x9;&#x9;    endif  &#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="classe" ordered="false" lowerBound="1" eType="#//Tax_Class_Category"/>
+      <eParameters name="income_type" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="CNS_RATE" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="0.0305"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="PENSION_RATE" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="0.08"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="round_lower_fifty_euros" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;&#x9;if(amount&lt;50) then&#xA;&#x9;&#x9;&#x9;0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if (amount>=50 and amount&lt;100) then&#xA;&#x9;&#x9;&#x9;50.0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let temp_amount:Real = round_lower_euros(amount) in&#xA;&#x9;&#x9;&#x9;let ch:String=temp_amount.toString()in&#xA;&#x9;&#x9;&#x9;let temp_amount1:Real = temp_amount / 100.0 in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(temp_amount1.round() = temp_amount1.floor()) then&#xA;&#x9;&#x9;&#x9;temp_amount1.floor() * 100.0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;(temp_amount1.round()  * 100.0) - 50&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eOperations name="getTaxableIncomePerYear" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="let gross_salary_year:Real= income.income_per_year() in&#xA;&#x9;&#x9;&#x9;let type:Income_Type=income.income_type in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if(type.oclIsTypeOf(Employment_Income)) then&#xA;&#x9;&#x9;&#x9;let sum_deductions_year:Real=income.tax_card.getSumDeductionsYear() in&#xA;&#x9;&#x9;&#x9;let part_pension_year:Real= gross_salary_year * income.taxPayer.from_law.PENSION_RATE() in&#xA;&#x9;&#x9;&#x9;let part_CNS_year:Real= gross_salary_year * income.taxPayer.from_law.CNS_RATE() in&#xA;&#x9;&#x9;&#x9;let taxable_income:Real= gross_salary_year- (part_CNS_year + part_pension_year + sum_deductions_year) in  &#x9;&#xA;&#x9;&#x9;&#x9;round_lower_fifty_euros(taxable_income)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(type.oclIsTypeOf(Pensions_and_Annuities_Income))then&#xA;&#x9;&#x9;&#x9;let sum_deductions_year:Real=income.tax_card.getSumDeductionsYear() in&#xA;&#x9;&#x9;&#x9;let taxable_income:Real= gross_salary_year- sum_deductions_year in  &#x9;&#xA;&#x9;&#x9;&#x9;round_lower_fifty_euros(taxable_income)&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let details:Set(Income_Detail)= income.details->select(i:Income_Detail|i.is_worked=true) in&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;let res:Real= details->iterate( elem : Income_Detail;  acc : Real = 0 | &#xA;&#x9;&#x9;&#x9; &#x9;&#xA;&#x9;&#x9;&#x9; &#x9;if(elem.is_contributing_CNS=false and elem.is_contributing_pension=false) then acc + elem.amount &#xA;&#x9;&#x9;&#x9; &#x9;else&#xA;&#x9;&#x9;&#x9; &#x9;if(elem.is_contributing_CNS=true and elem.is_contributing_pension=true) then&#xA;&#x9;&#x9;&#x9; &#x9;acc+  elem.amount - (elem.amount* income.taxPayer.from_law.PENSION_RATE()) - (elem.amount* income.taxPayer.from_law.CNS_RATE())&#xA;&#x9;&#x9;&#x9; &#x9;else&#xA;&#x9;&#x9;&#x9; &#x9;if(elem.is_contributing_CNS=true)then&#xA;&#x9;&#x9;&#x9;    acc+  elem.amount  - (elem.amount* income.taxPayer.from_law.CNS_RATE())&#xA;&#x9;&#x9;&#x9; &#x9;else&#xA;&#x9;&#x9;&#x9; &#x9;acc+  elem.amount  - (elem.amount* income.taxPayer.from_law.PENSION_RATE()) &#xA;&#x9;&#x9;&#x9; &#x9;&#xA;&#x9;&#x9;&#x9; &#x9;endif &#xA;&#x9;&#x9;&#x9; &#x9;endif &#xA;&#x9;&#x9;&#x9; &#x9;endif &#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9; )&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;in round_lower_fifty_euros(res)&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="income" ordered="false" lowerBound="1" eType="#//Income"/>
+    </eOperations>
+    <eOperations name="precision" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;&#x9;let ch:String=amount.toString() in&#xA;&#x9;&#x9;&#x9;if(ch.indexOf('.')=-1)then&#xA;&#x9;&#x9;&#x9;amount&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let pos_pt:Integer=ch.indexOf('.') in&#xA;&#x9;&#x9;&#x9;if(pos_pt+degit >=ch.size()) then&#xA;&#x9;&#x9;&#x9;amount &#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;let ch1:String=ch.substring(1,pos_pt+degit) in&#xA;&#x9;&#x9;&#x9;ch1.toReal()&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="degit" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="MAXIMUM_RATE_FOR_CE_CHILDREN" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="3480.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="MINIMUM_LEGAL_SALARY" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="1921.03"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="MAXIMUM_FLAT_RATE_FOR_ALIMONY" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#x9;&#x9;&#x9;if(year_divorce>1997)then&#xA;&#x9;&#x9;&#x9;if(year &lt;=2007) then&#xA;&#x9;&#x9;&#x9;20400.0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(year=2008) then&#xA;&#x9;&#x9;&#x9;21600.0&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;if(year=2009 or year = 2010) then&#xA;&#x9;&#x9;&#x9;23400.0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;24000.0&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;else&#xA;&#xA;&#x9;&#x9;&#x9;if(year &lt;=2007) then&#xA;&#x9;&#x9;&#x9;20400.0&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(year=2008) then&#xA;&#x9;&#x9;&#x9;21600.0&#xA;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;23400.0&#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif&#x9;&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="year" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+      <eParameters name="year_divorce" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    </eOperations>
+    <eOperations name="AEP_FLAT_RATE" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="4500.0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="calculate_taxes_per_year_mixed" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="if(income_type='Employment') then&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_salary_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_salary_yearly_class_2(amount) else get_A_for_salary_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_salary_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_salary_yearly_class_2(amount) else get_B_for_salary_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_lower_euros(a * local_amount - b) in&#xA;            let max:Real = if(classe=Tax_Class_Category::Two) then 301020 else 151020 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_lower_euros(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 982.86 else if(classe=Tax_Class_Category::Two) then 1988.88 else 994.44 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_lower_euros(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    &#xA;&#x9;&#x9;   &#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;if(income_type='Pension') then&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_pension_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_pension_yearly_class_2(amount) else get_A_for_pension_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_pension_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_pension_yearly_class_2(amount) else get_B_for_pension_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_lower_euros(a * local_amount - b) in&#xA;&#x9;&#x9;    let max:Real = if(classe=Tax_Class_Category::Two) then 300780 else 150780 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_lower_euros(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 982.86 else if(classe=Tax_Class_Category::Two) then 1988.88 else 994.44 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_lower_euros(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;let a:Real = if(classe=Tax_Class_Category::One_A) then get_A_for_other_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_A_for_other_yearly_class_2(amount) else get_A_for_other_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;&#x9;let b:Real = if(classe=Tax_Class_Category::One_A) then get_B_for_other_yearly_class_1A(amount) else if(classe=Tax_Class_Category::Two) then get_B_for_other_yearly_class_2(amount) else get_B_for_other_yearly_class_1(amount) endif endif in&#xA;&#x9;&#x9;    let res:Real = round_lower_euros(a * local_amount - b) in&#xA;            let max:Real = if(classe=Tax_Class_Category::Two) then 300000 else 150000 endif in&#xA;            &#xA;&#x9;&#x9;    if(amount&lt;max) then&#xA;&#x9;&#x9;    let final_res:Real= round_lower_euros(res*1.07) in&#xA;&#x9;&#x9;    if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif&#xA;&#x9;&#x9;    else &#xA;&#x9;&#x9;    let adjustement:Real= if(classe=Tax_Class_Category::One_A) then 982.86 else if(classe=Tax_Class_Category::Two) then 1988.88 else 994.44 endif endif in&#xA;&#x9;&#x9; &#x9;let final_res:Real=  round_lower_euros(res + (res*0.09-adjustement)) in&#xA;&#x9;&#x9; &#x9;if(final_res&lt;12)then&#xA;&#x9;&#x9;    0&#xA;&#x9;&#x9;    else&#xA;&#x9;&#x9;    final_res&#xA;&#x9;&#x9;    endif &#xA;&#x9;&#x9;    endif  &#xA;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="local_amount" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eParameters name="classe" ordered="false" lowerBound="1" eType="#//Tax_Class_Category"/>
+      <eParameters name="income_type" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taxPayer" lowerBound="1"
+        eType="#//Tax_Payer" eOpposite="#//Tax_Payer/from_law"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fiscal_Address" eSuperTypes="#//Address"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Habitual_Address" eSuperTypes="#//Address"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Marriage_Record" eSuperTypes="#//Legal_Union_Record"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Non_Resident_Tax_Payer" eSuperTypes="#//Tax_Payer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_assimilated_to_resident"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Partnership_Record" eSuperTypes="#//Legal_Union_Record"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Resident_Tax_Payer" eSuperTypes="#//Tax_Payer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="test" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="self.oclAsType(Tax_Payer).from_agent.taxation_year=2014"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trade_and_Business_Income" eSuperTypes="#//Income_Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Agriculture_and_Forestry_Income" eSuperTypes="#//Income_Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Pensions_and_Annuities_Income" eSuperTypes="#//Income_Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="occasional_payement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Capital_and_Investments_Income" eSuperTypes="#//Income_Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Employment_Income" eSuperTypes="#//Income_Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rentals_and_Leases_Income" eSuperTypes="#//Income_Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_periodic" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Foreign_Income" eSuperTypes="#//Income"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Local_Income" eSuperTypes="#//Income"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CIM" eSuperTypes="#//Income_Tax_Credit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CIP" eSuperTypes="#//Income_Tax_Credit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CIS" eSuperTypes="#//Income_Tax_Credit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FD" eSuperTypes="#//Professional_Expenses_Deduction">
+    <eOperations name="compute_distance_unit_between_home_and_workpalce" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance_declared_in_january"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="calculated_distance" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Professional_Expenses_Deduction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FO" eSuperTypes="#//Professional_Expenses_Deduction">
+    <eOperations name="compute_disability_flat_rate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eOperations name="compute_regular_flat_rate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rate_type_for_FO" lowerBound="1"
+        eType="#//Type_of_Rate" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Permanent_Expense" eSuperTypes="#//DS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="permanent_expense_category"
+        lowerBound="1" eType="#//Category_of_Permanent_Expense"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximum_deductible_amount"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id3" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Category_of_Permanent_Expense">
+    <eLiterals name="MISCELLANEOUS_DEBT" literal="MISCELLANEOUS_DEBT"/>
+    <eLiterals name="ALIMONY" value="1" literal="ALIMONY"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Interest_Expense" eSuperTypes="#//DS">
+    <eOperations name="compute_maximum_deductible_amount" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="IN_children_with_allowances" ordered="false" upperBound="-1"
+          eType="#//Dependent"/>
+      <eParameters name="IN_legal_union" ordered="false" upperBound="-1" eType="#//Legal_Union_Record"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Health_and_Pension_Insurance"
+      eSuperTypes="#//DS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="insurance_category" lowerBound="1"
+        eType="#//Category_of_Health_and_Pension_Insurances"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Category_of_Health_and_Pension_Insurances">
+    <eLiterals name="MANDATORY_HEALTH_AND_PENSION_INSURANCE" literal="MANDATORY_HEALTH_AND_PENSION_INSURANCE"/>
+    <eLiterals name="ADDITIONAL_EMPLOYERS_PENSION_INSURANCE" value="1" literal="ADDITIONAL_EMPLOYERS_PENSION_INSURANCE"/>
+    <eLiterals name="CONTINUED_HEALTH_AND_PENSION_INSURANCE" value="2" literal="CONTINUED_HEALTH_AND_PENSION_INSURANCE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Private_Insurance_and_Plan" eSuperTypes="#//DS">
+    <eOperations name="compute_increase_for_life_insurance" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eOperations name="compute_maximum_deductible_amount_for_private_insruance" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eOperations name="compute_maximum_deductible_amount_for_old_age_pension_plan"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="private_insurance_and_plan_category"
+        lowerBound="1" eType="#//Category_of_Private_Insurance_and_Plan"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="increase_for_life_insurance"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximum_deductible_amount_for_private_insurance"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximum_deductible_amount_for_old_age_pension_plan"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Category_of_Private_Insurance_and_Plan">
+    <eLiterals name="PRIVATE_INSURANCE" literal="PRIVATE_INSURANCE"/>
+    <eLiterals name="PRIVATE_LIFE_INSURANCE" value="1" literal="PRIVATE_LIFE_INSURANCE"/>
+    <eLiterals name="COMPANY_MEMBERS_PRIVATE_INSURANCE" value="2" literal="COMPANY_MEMBERS_PRIVATE_INSURANCE"/>
+    <eLiterals name="HOUSING_SAVING_PLAN" value="3" literal="HOUSING_SAVING_PLAN"/>
+    <eLiterals name="OLD_AGE_PENSION_PLAN" value="4" literal="OLD_AGE_PENSION_PLAN"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Loss_Carryforward" eSuperTypes="#//DS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DS_for_Donation" eSuperTypes="#//DS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Permanent_Expense" eSuperTypes="#//Special_Expense_DS">
+    <eOperations name="is_expense_eligible_for_deduction" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="IN_agent_response" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" lowerBound="1"
+        eType="#//Category_of_Permanent_Expense"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_eligible_for_deduction"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Special_Expense_DS" eSuperTypes="#//Expense"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interest_Expense" eSuperTypes="#//Special_Expense_DS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Private_Insurance_and_Plan" eSuperTypes="#//Special_Expense_DS">
+    <eOperations name="is_private_insurance_and_plan_eligible_for_deduction" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" lowerBound="1"
+        eType="#//Category_of_Private_Insurance_and_Plan"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration_of_contract" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_private_insurance_and_plan_eligible_for_deduction"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Health_and_Pension_Insurance" eSuperTypes="#//Special_Expense_DS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" lowerBound="1"
+        eType="#//Category_of_Health_and_Pension_Insurances"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_related_to_additional_salary"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Donation" eSuperTypes="#//Special_Expense_DS">
+    <eOperations name="get_beneficiary_eligibility_for_deduction" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="beneficiary1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_beneficiary_eligible"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="is_donation_reported" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Loss_Carryforward" eSuperTypes="#//Special_Expense_DS">
+    <eOperations name="is_accountability_regular" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="is_compensated_by_other_means" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="has_been_tax_payer_partner_in_business" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="has_tax_payer_inherited_business_ownership" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="regular_accountability"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compensation_by_other_means"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_payer_has_inherited_business_ownership"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tax_payer_has_been_partner_in_business"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Spousal_Expense_AC" eSuperTypes="#//Expense"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Extraordinary_Expense_CE" eSuperTypes="#//Expense">
+    <eOperations name="is_above_thresholded_deduction_percentage_for_CE" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="compute_thresholded_deduction_percentage_for_CE" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="IN_thresholded_deduction_percentage" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="thresholded_deduction_percentage"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ce_type" lowerBound="1"
+        eType="#//CE_Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Travel_Expense_FD" eSuperTypes="#//Professional_Expense"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Professional_Expense" eSuperTypes="#//Expense"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Miscellaneous_Expense_FO" eSuperTypes="#//Professional_Expense"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Legal_Union_Types">
+    <eLiterals name="MARIAGE"/>
+    <eLiterals name="PARTNERSHIP" value="1"/>
+    <eLiterals name="OTHER" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

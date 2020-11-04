@@ -419,12 +419,20 @@
        point="org.eclipse.ui.menus">
     <menuContribution
           allPopups="false"
-          locationURI="popup:org.eclipse.ui.popup.any?after=org.eclipse.viatra.addon.validation.runtime.ui.menu">
+          locationURI="popup:hu.bme.mit.inf.dslreasoner.application.ui.menu">
        <command
              commandId="hu.bme.mit.inf.dslreasoner.application.ui.executescript"
-             label="VIATRA Solver: Execute"
+             label="Execute Application Configuration"
              style="push">
        </command>
+    </menuContribution>
+    <menuContribution
+          allPopups="false"
+          locationURI="popup:org.eclipse.ui.popup.any?after=org.eclipse.viatra.addon.validation.runtime.ui.menu">
+       <menu
+             id="hu.bme.mit.inf.dslreasoner.application.ui.menu"
+             label="VIATRA Solver">
+       </menu>
     </menuContribution>
  </extension>
 </plugin>

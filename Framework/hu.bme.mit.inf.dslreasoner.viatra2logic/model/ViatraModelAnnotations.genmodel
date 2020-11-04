@@ -8,9 +8,21 @@
   <foreignModel>ViatraModelAnnotations.ecore</foreignModel>
   <genPackages prefix="Viatra2LogicAnnotations" basePackage="hu.bme.mit.inf.dslreasoner.viatra2logic"
       disposableProviderFactory="true" ecorePackage="ViatraModelAnnotations.ecore#/">
-    <genClasses ecoreClass="ViatraModelAnnotations.ecore#//TransfomedViatraQuery"/>
+    <genClasses ecoreClass="ViatraModelAnnotations.ecore#//TransfomedViatraQuery">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ViatraModelAnnotations.ecore#//TransfomedViatraQuery/patternFullyQualifiedName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ViatraModelAnnotations.ecore#//TransfomedViatraQuery/patternPQuery"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ViatraModelAnnotations.ecore#//TransfomedViatraQuery/variableTrace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ViatraModelAnnotations.ecore#//TransfomedViatraQuery/optimizedDisjunction"/>
+    </genClasses>
     <genClasses ecoreClass="ViatraModelAnnotations.ecore#//TransformedViatraWellformednessConstraint">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ViatraModelAnnotations.ecore#//TransformedViatraWellformednessConstraint/query"/>
+    </genClasses>
+    <genClasses ecoreClass="ViatraModelAnnotations.ecore#//DefinedByDerivedFeature">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ViatraModelAnnotations.ecore#//DefinedByDerivedFeature/query"/>
+    </genClasses>
+    <genClasses ecoreClass="ViatraModelAnnotations.ecore#//VariableMapping">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ViatraModelAnnotations.ecore#//VariableMapping/sourcePVariable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ViatraModelAnnotations.ecore#//VariableMapping/targetLogicVariable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

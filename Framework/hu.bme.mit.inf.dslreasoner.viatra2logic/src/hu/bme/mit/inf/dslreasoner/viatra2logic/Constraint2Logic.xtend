@@ -30,10 +30,20 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeCo
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.AggregatorConstraint
+import org.eclipse.viatra.query.runtime.matchers.aggregators.DoubleSumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.IntegerSumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.LongSumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.ExtremumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.ExtremumOperator.Extreme
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.PatternMatchCounter
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
 
 class Constraint2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
 	val Ecore2Logic ecore2Logic
+	val ExpressionEvaluation2Logic expressionEvaliation2Logic = new ExpressionEvaluation2Logic
+	val expressionExtractor = new XExpressionExtractor
 	
 	new(Ecore2Logic ecore2Logic) {
 		this.ecore2Logic = ecore2Logic
@@ -267,6 +277,69 @@ class Constraint2Logic {
 			val trg = tuple.get(1) as PVariable
 			return transformPathConstraint(type,src,trg,ecore2LogicTrace,variable2Variable,viatra2LogicTrace)
 		} else throw new IllegalArgumentException('''unknown tuple: «tuple»''')
+	}
+	
+	def dispatch Term transformConstraint(AggregatorConstraint constraint,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,		
+		Map<PVariable, Variable> variable2Variable,
+		Viatra2LogicConfiguration config)
+	{
+		val logicReferred = constraint.referredQuery.lookup(viatra2LogicTrace.query2Relation)
+		val parameterSubstitution = new LinkedList
+		for(index : 0..<constraint.actualParametersTuple.size) {
+			val term = (constraint.actualParametersTuple.get(index) as PVariable).lookup(variable2Variable)
+			parameterSubstitution += term
+		}
+		val aggregatorIndex = constraint.aggregatedColumn
+		val logicResultVariable = constraint.resultVariable.lookup(variable2Variable)
+		val type = constraint.aggregator.operator
+		if(type === null) {
+			return Count(logicReferred,parameterSubstitution,logicResultVariable)
+		} else if(type instanceof IntegerSumOperator || type instanceof DoubleSumOperator || type instanceof LongSumOperator){
+			return Sum(logicReferred,parameterSubstitution,aggregatorIndex,logicResultVariable)
+		} else if(type instanceof ExtremumOperator) {
+			if(type.name == Extreme.MIN.name.toLowerCase) {
+				return Min(logicReferred,parameterSubstitution,aggregatorIndex,logicResultVariable)
+			} else if(type.name == Extreme.MAX.name.toLowerCase){
+				return Max(logicReferred,parameterSubstitution,aggregatorIndex,logicResultVariable)
+			} else {
+				throw new UnsupportedOperationException('''Unkown Extremum aggregator type: «type.name»''')
+			}
+		} else {
+			throw new UnsupportedOperationException('''Unkown aggregator type: «type.name»''')
+		}
+	}
+	
+	def dispatch Term transformConstraint(PatternMatchCounter constraint,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,		
+		Map<PVariable, Variable> variable2Variable,
+		Viatra2LogicConfiguration config)
+	{
+		val logicReferred = constraint.referredQuery.lookup(viatra2LogicTrace.query2Relation)
+		val parameterSubstitution = new LinkedList
+		for(index : 0..<constraint.actualParametersTuple.size) {
+			val term = (constraint.actualParametersTuple.get(index) as PVariable).lookup(variable2Variable)
+			parameterSubstitution += term
+		}
+		val logicResultVariable = constraint.resultVariable.lookup(variable2Variable)
+		return Count(logicReferred,parameterSubstitution,logicResultVariable)
+	}
+	
+	def dispatch Term transformConstraint(ExpressionEvaluation constraint,
+		TracedOutput<LogicProblem, Ecore2Logic_Trace> ecore2LogicTrace,
+		Viatra2LogicTrace viatra2LogicTrace,		
+		Map<PVariable, Variable> variable2Variable,
+		Viatra2LogicConfiguration config)
+	{
+		val outputVariable = constraint.outputVariable
+		val expression = expressionExtractor.extractExpression(constraint.evaluator)
+		if(outputVariable === null) {
+			return expressionEvaliation2Logic.transformCheck(expression,variable2Variable)
+		} else {
+			return expressionEvaliation2Logic.transformEval(outputVariable,expression,variable2Variable)
+		}	
 	}
 	
 	def dispatch Term transformConstraint(PConstraint constraint,

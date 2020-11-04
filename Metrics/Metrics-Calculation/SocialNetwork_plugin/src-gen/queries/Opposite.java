@@ -80,9 +80,20 @@ public final class Opposite extends BaseGeneratedEMFQuerySpecification<Opposite.
     
     @Override
     public Object get(final String parameterName) {
-      if ("a".equals(parameterName)) return this.fA;
-      if ("b".equals(parameterName)) return this.fB;
-      return null;
+      switch(parameterName) {
+          case "a": return this.fA;
+          case "b": return this.fB;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fA;
+          case 1: return this.fB;
+          default: return null;
+      }
     }
     
     public EReference getA() {
@@ -612,9 +623,9 @@ public final class Opposite extends BaseGeneratedEMFQuerySpecification<Opposite.
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: queries.Opposite (visibility: PUBLIC, simpleName: Opposite, identifier: queries.Opposite, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link Opposite} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: queries.Opposite (visibility: PUBLIC, simpleName: Opposite, identifier: queries.Opposite, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link Opposite#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

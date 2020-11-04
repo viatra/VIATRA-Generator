@@ -3,7 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Reasoner
 Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
 Bundle-Version: 1.0.0.qualifier
-Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner
+Export-Package: hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse,
+ hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization
 Require-Bundle: hu.bme.mit.inf.dslreasoner.ecore2logic;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.logic.model;bundle-version="1.0.0",
  hu.bme.mit.inf.dslreasoner.viatra2logic;bundle-version="1.0.0",

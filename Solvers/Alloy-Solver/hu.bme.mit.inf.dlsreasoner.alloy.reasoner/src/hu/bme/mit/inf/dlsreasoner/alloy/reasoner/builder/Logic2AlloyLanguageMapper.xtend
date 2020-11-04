@@ -194,13 +194,12 @@ class Logic2AlloyLanguageMapper {
 			val relation = relationMapper.getRelationReference((x as RelationDeclaration),trace)
 			val type = relation.type
 			
-			if(type instanceof ALSDirectProduct) {
-				type.rightMultiplicit = type.rightMultiplicit.addUpper
-			} else {
-				relation.multiplicity = relation.multiplicity.addUpper
-			}
-			
 			if(assertion.upper === 1) {
+				if(type instanceof ALSDirectProduct) {
+					type.rightMultiplicit = type.rightMultiplicit.addUpper
+				} else {
+					relation.multiplicity = relation.multiplicity.addUpper
+				}
 				return true
 			} else {
 				return transformAssertion(assertion.target,trace)

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<partialinterpretation:PartialInterpretation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:language="http://www.bme.hu/mit/inf/dslreasoner/logic/model/language" xmlns:partialinterpretation="http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" minNewElements="6" maxNewElements="6">
+  <problem href="outputs/debug/generation.logicproblem#/"/>
+  <partialrelationinterpretation>
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.0"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.0/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.0/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.1"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.1/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.1/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.2"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.2/@parameters.0"/>
+    <param2 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.2/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.3"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.3/@parameters.0"/>
+    <param2 xsi:type="language:StringTypeReference" href="outputs/debug/generation.logicproblem#//@relations.3/@parameters.1"/>
+  </partialrelationinterpretation>
+  <partialrelationinterpretation>
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@relations.4"/>
+    <param1 xsi:type="language:ComplexTypeReference" href="outputs/debug/generation.logicproblem#//@relations.4/@parameters.0"/>
+    <param2 xsi:type="language:IntTypeReference" href="outputs/debug/generation.logicproblem#//@relations.4/@parameters.1"/>
+  </partialrelationinterpretation>
+  <newElements xsi:type="partialinterpretation:BooleanElement" name="true" valueSet="true" value="true"/>
+  <newElements xsi:type="partialinterpretation:BooleanElement" name="false" valueSet="true"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="1" valueSet="true" value="1"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="2" valueSet="true" value="2"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="3" valueSet="true" value="3"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="4" valueSet="true" value="4"/>
+  <newElements xsi:type="partialinterpretation:IntegerElement" name="5" valueSet="true" value="5"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialBooleanInterpretation" elements="//@newElements.0 //@newElements.1"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialIntegerInterpretation" elements="//@newElements.2 //@newElements.3 //@newElements.4 //@newElements.5 //@newElements.6"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialRealInterpretation" elements="//@openWorldElements.0"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialStringInterpretation" elements="//@openWorldElements.1"/>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.0">
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@types.0"/>
+  </partialtypeinterpratation>
+  <partialtypeinterpratation xsi:type="partialinterpretation:PartialComplexTypeInterpretation" scopes="//@scopes.1">
+    <interpretationOf href="outputs/debug/generation.logicproblem#//@types.1"/>
+  </partialtypeinterpratation>
+  <openWorldElements xsi:type="partialinterpretation:RealElement" name="New Reals"/>
+  <openWorldElements xsi:type="partialinterpretation:StringElement" name="New Strings"/>
+  <openWorldElements name="New Objects"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.4"/>
+  <scopes targetTypeInterpretation="//@partialtypeinterpratation.5"/>
+</partialinterpretation:PartialInterpretation>

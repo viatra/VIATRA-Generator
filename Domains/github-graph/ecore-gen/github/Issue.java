@@ -35,7 +35,7 @@ public interface Issue extends EObject {
 	 * @return the value of the '<em>Pullrequest</em>' containment reference.
 	 * @see #setPullrequest(PullRequest)
 	 * @see github.GithubPackage#getIssue_Pullrequest()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	PullRequest getPullrequest();

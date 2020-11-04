@@ -10,7 +10,7 @@ import org.eclipse.viatra.query.patternlanguage.emf.vql.Pattern
 
 class QueryAndMetamodelValidator {
 	
-	def public validateQueryAndMetamodel(
+	def validateQueryAndMetamodel(
 		EcoreMetamodelDescriptor metamodel,
 		Pair<ViatraQuerySetDescriptor, Set<Pattern>> viatra)
 	{

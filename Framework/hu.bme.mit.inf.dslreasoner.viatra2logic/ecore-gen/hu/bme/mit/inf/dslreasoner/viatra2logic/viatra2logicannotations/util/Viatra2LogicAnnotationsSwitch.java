@@ -94,6 +94,12 @@ public class Viatra2LogicAnnotationsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Viatra2LogicAnnotationsPackage.VARIABLE_MAPPING: {
+				VariableMapping variableMapping = (VariableMapping)theEObject;
+				T result = caseVariableMapping(variableMapping);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -140,6 +146,21 @@ public class Viatra2LogicAnnotationsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDefinedByDerivedFeature(DefinedByDerivedFeature object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Mapping</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Mapping</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableMapping(VariableMapping object) {
 		return null;
 	}
 

@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see github.GithubPackage#getCommit()
- * @model
+ * @model annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='Role'"
  * @generated
  */
 public interface Commit extends EObject {

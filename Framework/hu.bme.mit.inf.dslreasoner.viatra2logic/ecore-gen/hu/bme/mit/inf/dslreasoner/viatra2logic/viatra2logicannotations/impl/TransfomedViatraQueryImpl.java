@@ -5,11 +5,18 @@ package hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.impl.RelationAnnotationImpl;
 
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.TransfomedViatraQuery;
+import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.VariableMapping;
 import hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.Viatra2LogicAnnotationsPackage;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,6 +28,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransfomedViatraQueryImpl#getPatternFullyQualifiedName <em>Pattern Fully Qualified Name</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransfomedViatraQueryImpl#getPatternPQuery <em>Pattern PQuery</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransfomedViatraQueryImpl#getVariableTrace <em>Variable Trace</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatra2logic.viatra2logicannotations.impl.TransfomedViatraQueryImpl#getOptimizedDisjunction <em>Optimized Disjunction</em>}</li>
  * </ul>
  *
  * @generated
@@ -64,6 +73,33 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 */
 	protected Object patternPQuery = PATTERN_PQUERY_EDEFAULT;
 	/**
+	 * The cached value of the '{@link #getVariableTrace() <em>Variable Trace</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariableTrace()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<VariableMapping> variableTrace;
+	/**
+	 * The default value of the '{@link #getOptimizedDisjunction() <em>Optimized Disjunction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptimizedDisjunction()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Object OPTIMIZED_DISJUNCTION_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getOptimizedDisjunction() <em>Optimized Disjunction</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOptimizedDisjunction()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object optimizedDisjunction = OPTIMIZED_DISJUNCTION_EDEFAULT;
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -87,6 +123,7 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPatternFullyQualifiedName() {
 		return patternFullyQualifiedName;
 	}
@@ -96,6 +133,7 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPatternFullyQualifiedName(String newPatternFullyQualifiedName) {
 		String oldPatternFullyQualifiedName = patternFullyQualifiedName;
 		patternFullyQualifiedName = newPatternFullyQualifiedName;
@@ -108,6 +146,7 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object getPatternPQuery() {
 		return patternPQuery;
 	}
@@ -117,11 +156,62 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPatternPQuery(Object newPatternPQuery) {
 		Object oldPatternPQuery = patternPQuery;
 		patternPQuery = newPatternPQuery;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY, oldPatternPQuery, patternPQuery));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<VariableMapping> getVariableTrace() {
+		if (variableTrace == null) {
+			variableTrace = new EObjectContainmentEList<VariableMapping>(VariableMapping.class, this, Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE);
+		}
+		return variableTrace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getOptimizedDisjunction() {
+		return optimizedDisjunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOptimizedDisjunction(Object newOptimizedDisjunction) {
+		Object oldOptimizedDisjunction = optimizedDisjunction;
+		optimizedDisjunction = newOptimizedDisjunction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION, oldOptimizedDisjunction, optimizedDisjunction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE:
+				return ((InternalEList<?>)getVariableTrace()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -136,6 +226,10 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 				return getPatternFullyQualifiedName();
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
 				return getPatternPQuery();
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE:
+				return getVariableTrace();
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION:
+				return getOptimizedDisjunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,6 +239,7 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -153,6 +248,13 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 				return;
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
 				setPatternPQuery(newValue);
+				return;
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE:
+				getVariableTrace().clear();
+				getVariableTrace().addAll((Collection<? extends VariableMapping>)newValue);
+				return;
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION:
+				setOptimizedDisjunction(newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -172,6 +274,12 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
 				setPatternPQuery(PATTERN_PQUERY_EDEFAULT);
 				return;
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE:
+				getVariableTrace().clear();
+				return;
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION:
+				setOptimizedDisjunction(OPTIMIZED_DISJUNCTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -188,6 +296,10 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 				return PATTERN_FULLY_QUALIFIED_NAME_EDEFAULT == null ? patternFullyQualifiedName != null : !PATTERN_FULLY_QUALIFIED_NAME_EDEFAULT.equals(patternFullyQualifiedName);
 			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__PATTERN_PQUERY:
 				return PATTERN_PQUERY_EDEFAULT == null ? patternPQuery != null : !PATTERN_PQUERY_EDEFAULT.equals(patternPQuery);
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__VARIABLE_TRACE:
+				return variableTrace != null && !variableTrace.isEmpty();
+			case Viatra2LogicAnnotationsPackage.TRANSFOMED_VIATRA_QUERY__OPTIMIZED_DISJUNCTION:
+				return OPTIMIZED_DISJUNCTION_EDEFAULT == null ? optimizedDisjunction != null : !OPTIMIZED_DISJUNCTION_EDEFAULT.equals(optimizedDisjunction);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -201,11 +313,13 @@ public class TransfomedViatraQueryImpl extends RelationAnnotationImpl implements
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (patternFullyQualifiedName: ");
 		result.append(patternFullyQualifiedName);
 		result.append(", patternPQuery: ");
 		result.append(patternPQuery);
+		result.append(", optimizedDisjunction: ");
+		result.append(optimizedDisjunction);
 		result.append(')');
 		return result.toString();
 	}

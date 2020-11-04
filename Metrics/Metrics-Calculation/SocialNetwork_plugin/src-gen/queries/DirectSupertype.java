@@ -79,9 +79,20 @@ public final class DirectSupertype extends BaseGeneratedEMFQuerySpecification<Di
     
     @Override
     public Object get(final String parameterName) {
-      if ("a".equals(parameterName)) return this.fA;
-      if ("b".equals(parameterName)) return this.fB;
-      return null;
+      switch(parameterName) {
+          case "a": return this.fA;
+          case "b": return this.fB;
+          default: return null;
+      }
+    }
+    
+    @Override
+    public Object get(final int index) {
+      switch(index) {
+          case 0: return this.fA;
+          case 1: return this.fB;
+          default: return null;
+      }
     }
     
     public EClass getA() {
@@ -611,9 +622,9 @@ public final class DirectSupertype extends BaseGeneratedEMFQuerySpecification<Di
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: queries.DirectSupertype (visibility: PUBLIC, simpleName: DirectSupertype, identifier: queries.DirectSupertype, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link DirectSupertype} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: queries.DirectSupertype (visibility: PUBLIC, simpleName: DirectSupertype, identifier: queries.DirectSupertype, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link DirectSupertype#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 

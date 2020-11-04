@@ -1,0 +1,23 @@
+import epackage	"inputs/familytree.ecore"
+import viatra	"src/queries/familyTreeConstraints.vql"
+
+generate {
+	metamodel = { package familytree }
+	constraints = { package queries}
+	solver = ViatraSolver
+	scope = {
+		#node = 6..15,
+		#int = {}
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal
+	}
+	
+	runs = 1
+	
+	debug =			"outputs/debug"
+	log =			"outputs/log.txt"
+	output =		"outputs/models"
+}

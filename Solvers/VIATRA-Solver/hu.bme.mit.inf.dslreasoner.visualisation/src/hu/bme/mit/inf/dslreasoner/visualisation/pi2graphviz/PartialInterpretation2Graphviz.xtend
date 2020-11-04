@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1
 import static guru.nidi.graphviz.model.Factory.*
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
 
 class GraphvizVisualiser implements PartialInterpretationVisualiser {
 	
@@ -106,10 +107,10 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 //			elements2Node.put(newElement,image)
 //		}
 		
-		partialInterpretation.newElements.filter(BooleanElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
-		partialInterpretation.newElements.filter(IntegerElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
-		partialInterpretation.newElements.filter(StringElement).drawDataTypes(['''"«it.value.toString»"'''],elements2Node,elements2ID)
-		partialInterpretation.newElements.filter(RealElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		//partialInterpretation.newElements.filter(BooleanElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		//partialInterpretation.newElements.filter(IntegerElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
+		//partialInterpretation.newElements.filter(StringElement).drawDataTypes(['''"«it.value.toString»"'''],elements2Node,elements2ID)
+		//partialInterpretation.newElements.filter(RealElement).drawDataTypes([it.value.toString],elements2Node,elements2ID)
 		
 		// Drawing the edges
 		val edges = new HashMap
@@ -135,35 +136,51 @@ class GraphvizVisualiser implements PartialInterpretationVisualiser {
 		return new GraphvizVisualisation(graph)
 	}
 	
-	def protected <T extends DefinedElement> void drawDataTypes(Iterable<T> collection, Function1<T,String> namer, HashMap<DefinedElement, Node> elements2Node, HashMap<DefinedElement, String> elements2ID) {
-		for(booleanElementIndex: 0..<collection.size) {
-			val newElement = collection.get(booleanElementIndex)
-			val id = namer.apply(newElement)
-			val image = drawElement(newElement,id,false,emptySet,emptySet)
-			elements2ID.put(newElement,id)
-			elements2Node.put(newElement,image)
-		}
-	}
+//	def protected <T extends DefinedElement> void drawDataTypes(Iterable<T> collection, Function1<T,String> namer, HashMap<DefinedElement, Node> elements2Node, HashMap<DefinedElement, String> elements2ID) {
+//		for(booleanElementIndex: 0..<collection.size) {
+//			val newElement = collection.get(booleanElementIndex)
+//			val name = namer.apply(newElement)
+//			val image = drawElement(newElement,name,newElement.lookup(elements2ID),false,emptySet,emptySet)
+//			elements2Node.put(newElement,image)
+//		}
+//	}
 	
 	def protected drawElement(DefinedElement element, String ID, boolean old, Set<Type> mustTypes, Set<Type> mayTypes) {
 		var tableStyle =  ''' CELLSPACING="0" BORDER="2" CELLBORDER="0" CELLPADDING="1" STYLE="ROUNDED"'''
 		if(typeColoringStyle==TypeColoringStyle::AVERAGE) {
 			tableStyle += ''' BGCOLOR="#«typePredicateColor(mustTypes).toBackgroundColorString»"'''
 		}
-		val mainLabel = if(element.name !== null) {
+		val mainLabel = if(element instanceof PrimitiveElement) {
+			if(element.isValueSet) {
+				if(element instanceof BooleanElement) { element.value.toString }
+				else if(element instanceof IntegerElement) { element.value.toString }
+				else if(element instanceof RealElement) { element.value.toString }
+				else if(element instanceof StringElement) { "\""+element.value.toString+"\"" }
+			} else {
+				"?"
+			}
+		 }else if(element.name !== null) {
 			val parts = element.name.split("\\s+")
 			textWithSubSup(parts.getOrNull(0),parts.getOrNull(1),parts.getOrNull(2),null)
 		} else {
 			val parts = ID.split("\\s+")
-			textWithSubSup(parts.get(0),parts.get(1),parts.getOrNull(2),null)
+			textWithSubSup(parts.getOrNull(0),parts.getOrNull(1),parts.getOrNull(2),null)
 		}
-		val label = Label.html(
+		val hasNoCompexType = (mustTypes.empty) && (mayTypes.empty)
+		
+		val label = if(hasNoCompexType) {
+			Label.html(
+				'''<TABLE«tableStyle»>'''+
+				'''<TR><TD COLSPAN="2">    «mainLabel»  </TD></TR>'''+
+				'''</TABLE>''')
+		} else {
+			Label.html(
 			'''<TABLE«tableStyle»>'''+
 			'''<TR><TD COLSPAN="2" BORDER="2" SIDES="B">«mainLabel»</TD></TR>'''+
 			'''«FOR mustTypeName : mustTypes.map[it.name].sort»«typePredicateDescription(mustTypeName,true)»«ENDFOR»'''+
 			'''«FOR mayTypeName : mayTypes.map[it.name].sort»«typePredicateDescription(mayTypeName,false)»«ENDFOR»'''+
 			'''</TABLE>''')
-			
+		}
 		val node = node(ID).with(label).with(
 			Shape.NONE
 			//,

@@ -1,7 +1,5 @@
 package hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder
 
-import com.google.common.util.concurrent.SimpleTimeLimiter
-import com.google.common.util.concurrent.UncheckedTimeoutException
 import edu.mit.csail.sdg.alloy4.A4Reporter
 import edu.mit.csail.sdg.alloy4.Err
 import edu.mit.csail.sdg.alloy4.ErrorWarning
@@ -23,7 +21,11 @@ import java.util.LinkedList
 import java.util.List
 import java.util.Map
 import java.util.concurrent.Callable
+import java.util.concurrent.ExecutionException
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 import org.eclipse.xtend.lib.annotations.Data
 
 class AlloySolverException extends Exception{
@@ -46,7 +48,7 @@ class AlloyHandler {
 	
 	//val fileName = "problem.als"
 	
-	public def callSolver(ALSDocument problem, ReasonerWorkspace workspace, AlloySolverConfiguration configuration,String alloyCode) {
+	def callSolver(ALSDocument problem, ReasonerWorkspace workspace, AlloySolverConfiguration configuration,String alloyCode) {
 		
 		//Prepare
 		val warnings = new LinkedList<String>
@@ -87,7 +89,6 @@ class AlloyHandler {
 		val kodkodTransformFinish = System.currentTimeMillis - kodkodTransformStart
 		// Finish: Alloy -> Kodkod
 		
-		val limiter = new SimpleTimeLimiter
 		val callable = new AlloyCallerWithTimeout(warnings,debugs,reporter,options,command,compModule,configuration)
 		var List<Pair<A4Solution, Long>> answers
 		var boolean finished
@@ -95,10 +96,13 @@ class AlloyHandler {
 			answers = callable.call
 			finished = true
 		} else {
+			val ExecutorService executor = Executors.newCachedThreadPool();
+			val future = executor.submit(callable)
 			try{
-				answers = limiter.callWithTimeout(callable,configuration.runtimeLimit,TimeUnit.SECONDS,true)
+				answers = future.get(configuration.runtimeLimit,TimeUnit.SECONDS)
 				finished = true
-			} catch (UncheckedTimeoutException e) {
+			} catch (TimeoutException | InterruptedException | ExecutionException e) {
+				future.cancel(true)
 				answers = callable.partialAnswers
 				finished = false
 			}
@@ -184,7 +188,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 					} else {
 						lastAnswer = lastAnswer.next
 					}
-					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolution)
+					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolutions)
 					
 					val runtime = System.currentTimeMillis -startTime
 					synchronized(this) {
@@ -201,8 +205,8 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 	}
 	
 	def hasEnoughSolution(List<?> answers) {
-		if(configuration.solutionScope.numberOfRequiredSolution < 0) return false
-		else return answers.size() == configuration.solutionScope.numberOfRequiredSolution
+		if(configuration.solutionScope.numberOfRequiredSolutions < 0) return false
+		else return answers.size() == configuration.solutionScope.numberOfRequiredSolutions
 	}
 	
 	public def getPartialAnswers() {

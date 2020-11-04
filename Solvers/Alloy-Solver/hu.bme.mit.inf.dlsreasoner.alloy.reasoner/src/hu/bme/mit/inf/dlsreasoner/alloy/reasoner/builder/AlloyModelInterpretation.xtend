@@ -117,7 +117,7 @@ class AlloyModelInterpretation implements LogicModelInterpretation{
 		for(atom: allAtoms) {
 			val typeName = getName(atom.type)
 			val atomName = atom.name
-			println(atom.toString + "  < -  " + typeName)
+			//println(atom.toString + "  < -  " + typeName)
 			if(typeName == forwardTrace.logicLanguage.name) {
 				this.logicLanguage = atom
 			} else if(typeName == "Int" || typeName == "seq/Int") {

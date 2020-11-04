@@ -80,6 +80,7 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Transition> getIncomingTransitions() {
 		if (incomingTransitions == null) {
 			incomingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, YakindummPackage.VERTEX__INCOMING_TRANSITIONS, YakindummPackage.TRANSITION__TARGET);
@@ -92,6 +93,7 @@ public abstract class VertexImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Transition> getOutgoingTransitions() {
 		if (outgoingTransitions == null) {
 			outgoingTransitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, YakindummPackage.VERTEX__OUTGOING_TRANSITIONS, YakindummPackage.TRANSITION__SOURCE);

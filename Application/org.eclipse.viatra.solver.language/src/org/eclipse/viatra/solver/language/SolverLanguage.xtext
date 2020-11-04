@@ -1,0 +1,274 @@
+grammar org.eclipse.viatra.solver.language.SolverLanguage with org.eclipse.xtext.common.Terminals
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/viatra/solver/language/SolverLanguage"
+
+Problem:
+	("problem" name=QualifiedName FULL_STOP)?
+	imports+=Import*
+	statements+=Statement*;
+
+Statement: 
+	(
+		AssertionOrDefinition | PredicateDefinition | UnnamedErrorPredicateDefintion | DefaultAssertion |
+		FunctionDefinition | Attribute | ExternDeclaration | ScopeDeclaration | ObjectiveDeclaration |
+		ClassDeclaration | EnumDeclaration
+	);
+
+Import:
+	UriImport | NamespaceImport;
+
+UriImport:
+	"import" uri=STRING ("as" alias=QualifiedName) FULL_STOP;
+
+NamespaceImport:
+	"import" importedNamespace=QualifiedName ("as" alias=QualifiedName) FULL_STOP;
+
+AssertionOrDefinition returns Statement:
+	Expression (
+		{Assertion.expression=current} (":" range=Expression)? |
+		{PredicateDefinition.head=current} ":-" body=Expression |
+		{FunctionDefinition.head=current} ":=" body=Expression
+	) FULL_STOP;
+
+PredicateDefinition:
+	(functional?="functional" error?="error"? | error?="error" functional?="functional"?) head=Call ":-" body=Expression FULL_STOP;
+
+UnnamedErrorPredicateDefintion:
+	"error" argumentList=ArgumentList ":-" body=Expression FULL_STOP;
+
+DefaultAssertion:
+	"default" expression=Call (":" range=Expression)? FULL_STOP;
+
+FunctionDefinition:
+	resultType=[Symbol|QualifiedName] head=Call ":=" body=Expression FULL_STOP;
+
+TypeReference:
+	type=[Symbol|QualifiedName] forceObjectType?="object"?;
+
+enum AttributeKind:
+	FUNCTIONAL="functional" | ERROR="error" | ROOT="root" | CONTAINMENT="containment";
+
+Attribute:
+	kind=AttributeKind target=[Symbol|QualifiedName] FULL_STOP;
+
+ExternDeclaration: 
+	ExternPredicateDeclaration | ExternFunctionDeclaration | ExternAggregationOperatorDeclaration | ExternDatatypeDeclaration;
+
+ExternPredicateDeclaration:
+	"extern" (functional?="functional"? & error?="error"?) name=QualifiedName argumentList=ArgumentList FULL_STOP;
+
+ExternFunctionDeclaration:
+	"extern" resultType=[Symbol|QualifiedName] name=QualifiedName argumentList=ArgumentList FULL_STOP;
+
+ExternAggregationOperatorDeclaration:
+	"extern" resultType=[Symbol|QualifiedName] name=QualifiedName "{" argumentType=[Symbol|QualifiedName] "..." "}" FULL_STOP;
+
+ExternDatatypeDeclaration:
+	"extern" "datatype" name=QualifiedName FULL_STOP;
+
+Expression:
+	ConditionalExpression | LetExpression | DisjunctiveExpression ({Forall.condition=current} "=>" body=DisjunctiveExpression)?;
+
+ConditionalExpression:
+	"if" condition=DisjunctiveExpression "then" then=Expression "else" else=Expression;
+
+LetExpression: 
+	"let" bindings+=LetBinding ("," bindings+=LetBinding)* "in" body=Expression;
+
+LetBinding:
+	type=[Symbol|QualifiedName]? name=ID "=" value=AdditiveExpression;
+
+DisjunctiveExpression returns Expression:
+	ConjunctiveExpression (
+		{Disjunction.children+=current} (";" children+=ConjunctiveExpression)+ |
+		{Case.condition=current} "->" body=ConjunctiveExpression {Switch.cases+=current} (";" cases+=Case)*
+	)?;
+
+Case:
+	condition=ConjunctiveExpression "->" body=ConjunctiveExpression;
+
+ConjunctiveExpression returns Expression:
+	ComparisonExpression ({Conjunction.children+=current} ("," children+=ComparisonExpression)+)?;
+
+enum ComparisonOperator returns BinaryOperator:
+	EQUALS="==" | NOT_EQUALS="!=" | LESS="<" | LESS_EQUALS="<=" | GREATER=">" | GREATER_EQUALS=">=" | IN="in";
+
+ComparisonExpression returns Expression:
+	AdditiveExpression ({BinaryExpression.left=current} op=ComparisonOperator right=AdditiveExpression)?;
+
+enum AdditiveBinaryOperator returns BinaryOperator:
+	PLUS="+" | MINUS="-";
+
+AdditiveExpression returns Expression:
+	MultiplicativeExpression ({BinaryExpression.left=current} op=AdditiveBinaryOperator right=MultiplicativeExpression)*;
+
+enum MultiplicativeBinaryOperator returns BinaryOperator:
+	MULTIPLY="*" | DIVIDE="/";
+
+MultiplicativeExpression returns Expression:
+	ExponentialExpression ({BinaryExpression.left=current} op=MultiplicativeBinaryOperator right=ExponentialExpression)*;
+
+enum ExponentialOp returns BinaryOperator:
+	POW="^";
+
+ExponentialExpression returns Expression:
+	CastExpression ({BinaryExpression.left=current} op=ExponentialOp right=CastExpression)?;
+
+CastExpression returns Expression:
+	UnaryExpression ({CastExpression.body=current} "as" targetType=[Symbol|QualifiedName])?;
+
+enum UnaryOperator:
+	NOT="!" | PLUS="+" | MINUS="-" | MAYBE="?";
+
+UnaryExpression returns Expression:
+	BracedAggregateExpression | {UnaryExpression} op=UnaryOperator body=BracedAggregateExpression;
+
+BracedAggregateExpression returns Expression:
+	AtomicExpression | Aggregation | Count ;
+
+Aggregation:
+	op=[Symbol|QualifiedName] "{" value=Expression "|" condition=Expression "}";
+
+Count:
+	"count" "{" condition=Expression "}";
+
+AtomicExpression returns Expression:
+	Reference | Call | Interval | Literal | "(" Expression ")";
+
+Call:
+	functor=Reference argumentList=ArgumentList;
+
+ArgumentList:
+	{ArgumentList} "(" (arguments+=Argument ("," arguments+=Argument)*)? ")";
+
+Argument:
+	ExpressionArgument | StarArgument | TypedVariableArgument | TypedStarArgument;
+
+ExpressionArgument:
+	expression=ComparisonExpression;
+
+StarArgument:
+	{StarArgument} "*";
+
+TypedVariableArgument:
+	typeReference=TypeReference name=ID;
+
+TypedStarArgument:
+	typeReference=TypeReference "*";
+
+Reference:
+	components+=PathComponent ("." components+=PathComponent)*;
+
+PathComponent:
+	inverse?="~"? symbol=[Symbol|QualifiedName]
+	(transitiveClosure?=TRANSITIVE_CLOSURE | reflexiveTransitiveClosure?=REFLEXIVE_TRANSITIVE_CLOSURE)?;
+
+Interval:
+	"[" lowerBound=AdditiveExpression "," upperBound=AdditiveExpression "]";
+
+Literal:
+	LogicLiteral | IntLiteral | RealLiteral | InfinityLiteral | EmptyLiteral | StringLiteral;
+
+enum LogicValue:
+	TRUE="true" | FALSE="false" | UNKNOWN="unknown" | ERROR="error";
+
+LogicLiteral:
+	value=LogicValue;
+
+IntLiteral:
+	value=INT;
+
+RealLiteral:
+	value=Real;
+
+InfinityLiteral:
+	{InfinityLiteral} "inf";
+
+EmptyLiteral:
+	{EmptyLiteral} "empty";
+
+StringLiteral:
+	value=STRING;
+
+ClassDeclaration: 
+	(abstract?="abstract"? & root?="root"?) "class" name=ID ("extends" supertypes+=[Symbol|QualifiedName] ("," supertypes+=[Symbol|QualifiedName])*)?
+	("{" fields+=Field* "}" | FULL_STOP);
+
+Field: 
+	(containment?="contains" | crossReference?="refers")? type=[Symbol|QualifiedName] multiplicity=Multiplicity?
+	name=ID ("opposite" opposite=[Symbol|QualifiedName])? ";"?;
+
+Multiplicity:
+	UnboundedMultiplicity | ExactMultiplicity | BoundedMultiplicity;
+
+UnboundedMultiplicity:
+	{UnboundedMultiplicity} "[" "]";
+
+ExactMultiplicity:
+	"[" value=UpperMultiplicty "]";
+
+BoundedMultiplicity:
+	"[" lowerBound=INT "," upperBound=UpperMultiplicty "]";
+
+EnumDeclaration:
+	"enum" name=ID ("{" (literals+=EnumLiteral (","? literals+=EnumLiteral)*)? "}" | FULL_STOP);
+
+EnumLiteral:
+	name=ID;
+
+ScopeDeclaration:
+	ExactScope | BoundedScope | LowerBoundedScope;
+
+ExactScope:
+	"scope" type=[Symbol|QualifiedName] "==" size=INT FULL_STOP;
+
+BoundedScope:
+	"scope" (
+		(lowerBound=INT "<=")? type=[Symbol|QualifiedName] "<=" upperBound=INT |
+		upperBound=INT ">=" type=[Symbol|QualifiedName] (">=" lowerBound=INT)?
+	) FULL_STOP;
+
+LowerBoundedScope:
+	"scope" (
+		lowerBound=INT "<=" type=[Symbol|QualifiedName] |
+		type=[Symbol|QualifiedName] ">=" lowerBound=INT
+	) FULL_STOP;
+
+enum ObjectiveKind:
+	MINIMIZATION="minimize" | MAXIMIZATION="maximize";
+
+ObjectiveDeclaration:
+	kind=ObjectiveKind objective=Expression FULL_STOP;
+
+UpperMultiplicty returns ecore::EInt:
+	INT | "*";
+
+Real returns ecore::EBigDecimal hidden():
+	INT "." INT;
+
+QualifiedNameSegment:
+	ID | QUOTED_ID | "object";
+
+QualifiedName hidden():
+	QualifiedNameSegment ("::" QualifiedNameSegment)*;
+
+@Override
+terminal STRING returns ecore::EString:
+	'"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
+
+terminal QUOTED_ID:
+	'\'' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'\'') )* '\'';
+
+@Override
+terminal SL_COMMENT:
+	('%' | '//') !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal TRANSITIVE_CLOSURE:
+	"synthetic:TRANSITIVE_CLOSURE";
+
+terminal REFLEXIVE_TRANSITIVE_CLOSURE:
+	"synthetic:REFLEXIVE_TRANSITIVE_CLOSURE";
+
+terminal FULL_STOP:
+	"synthetic:FULL_STOP";
+

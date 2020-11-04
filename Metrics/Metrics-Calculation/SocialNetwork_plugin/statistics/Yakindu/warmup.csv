@@ -1,7 +1,3 @@
-Task,Run,Result,Domain to logic transformation time,Logic to solver transformation time,Solver time,Postprocessing time,_Solution0FoundAt,TransformationExecutionTime,TypeAnalysisTime,MetricCalculationTime,StateCoderTime,StateCoderFailCount,SolutionCopyTime
-1,1,ModelResultImpl,494,2798,2766,45079800,1362,547,125,46,190,0,3
-1,2,ModelResultImpl,494,1544,1988,11110900,1033,357,0,30,249,0,1
-1,3,ModelResultImpl,494,1366,1867,7926900,1060,364,2,24,258,0,1
-1,4,ModelResultImpl,494,1233,1588,8919800,863,312,0,19,146,0,1
-1,5,ModelResultImpl,494,1253,1434,7416800,681,268,1,17,133,0,0
+Task,Run,Result,Domain to logic transformation time,Logic to solver transformation time,Solver time,Postprocessing time,Solution0FoundAt,ExplorationInitializationTime,TransformationExecutionTime,ScopePropagationTime,MustRelationPropagationTime,TypeAnalysisTime,StateCoderTime,StateCoderFailCount,SolutionCopyTime,States,ForwardTime,BacktrackingTime,GlobalConstraintEvaluationTime,FitnessCalculationTime,ActivationSelectionTime,Decisions,MetricCalculationTime,Transformations,ScopePropagations,ScopePropagationsSolverCalls
+1,1,ModelResultImpl,2352,10681,69124,604,69169,829,1295,348,0,1040,24989,0,6,15152,20133,10141,18,0,6,0,8446,15835,6904,0
 

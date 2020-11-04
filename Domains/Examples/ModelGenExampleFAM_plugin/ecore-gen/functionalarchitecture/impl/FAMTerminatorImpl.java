@@ -55,6 +55,7 @@ public class FAMTerminatorImpl extends MinimalEObjectImpl.Container implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalData getData() {
 		if (eContainerFeatureID() != FunctionalarchitecturePackage.FAM_TERMINATOR__DATA) return null;
 		return (FunctionalData)eInternalContainer();
@@ -75,6 +76,7 @@ public class FAMTerminatorImpl extends MinimalEObjectImpl.Container implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setData(FunctionalData newData) {
 		if (newData != eInternalContainer() || (eContainerFeatureID() != FunctionalarchitecturePackage.FAM_TERMINATOR__DATA && newData != null)) {
 			if (EcoreUtil.isAncestor(this, newData))

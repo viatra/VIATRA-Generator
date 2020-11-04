@@ -106,6 +106,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationDeclaration getInterpretationOf() {
 		if (interpretationOf != null && interpretationOf.eIsProxy()) {
 			InternalEObject oldInterpretationOf = (InternalEObject)interpretationOf;
@@ -132,6 +133,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInterpretationOf(RelationDeclaration newInterpretationOf) {
 		RelationDeclaration oldInterpretationOf = interpretationOf;
 		interpretationOf = newInterpretationOf;
@@ -144,6 +146,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RelationLink> getRelationlinks() {
 		if (relationlinks == null) {
 			relationlinks = new EObjectContainmentEList<RelationLink>(RelationLink.class, this, PartialinterpretationPackage.PARTIAL_RELATION_INTERPRETATION__RELATIONLINKS);
@@ -156,6 +159,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeReference getParam1() {
 		if (param1 != null && param1.eIsProxy()) {
 			InternalEObject oldParam1 = (InternalEObject)param1;
@@ -182,6 +186,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam1(TypeReference newParam1) {
 		TypeReference oldParam1 = param1;
 		param1 = newParam1;
@@ -194,6 +199,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypeReference getParam2() {
 		if (param2 != null && param2.eIsProxy()) {
 			InternalEObject oldParam2 = (InternalEObject)param2;
@@ -220,6 +226,7 @@ public class PartialRelationInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParam2(TypeReference newParam2) {
 		TypeReference oldParam2 = param2;
 		param2 = newParam2;

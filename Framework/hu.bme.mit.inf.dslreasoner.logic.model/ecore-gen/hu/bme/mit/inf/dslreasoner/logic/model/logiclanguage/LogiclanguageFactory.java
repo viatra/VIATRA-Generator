@@ -454,6 +454,15 @@ public interface LogiclanguageFactory extends EFactory {
 	Max createMax();
 
 	/**
+	 * Returns a new object of class '<em>Aggregated Parameter Substitution</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Aggregated Parameter Substitution</em>'.
+	 * @generated
+	 */
+	AggregatedParameterSubstitution createAggregatedParameterSubstitution();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

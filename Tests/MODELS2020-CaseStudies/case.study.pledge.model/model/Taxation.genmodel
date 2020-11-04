@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/case.study.pledge.model/src" modelPluginID="case.study.pledge.model"
+    modelName="Taxation" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Taxation.ecore</foreignModel>
+  <genPackages prefix="Taxation" disposableProviderFactory="true" ecorePackage="Taxation.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Grantor">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Grantor/WWW"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Grantor/Employer"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Grantor/MMM"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Grantor/UUU"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Grantor/YYY"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Grantor/OOO"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Disability_Types">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/beug"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/A"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/B"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/C"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/D"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/E"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Disability_Types/OTHER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Country">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Country/ZZ"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Country/FF"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Country/BB"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Country/DD"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Country/NN"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Country/OTHER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Tax_Office">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Office/RTS_2"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Office/RTS_3"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Office/RTS_4"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Office/RTS_5"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Tax_Class_Category">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Class_Category/One"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Class_Category/One_A"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Tax_Class_Category/Two"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Job_Activity">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Job_Activity/Salary"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Job_Activity/Pension"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Job_Activity/Annuity"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Town">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Town/LL"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Town/BB"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Town/SS"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Town/TT"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Town/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//CE_Type">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//CE_Type/INALIDITY_AND_INFIRMITY"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//CE_Type/DEPENDENCE_AND_CARE_EXCLUDING_CHLIDREN_NOT_PART_OF_HOUSEHOLD"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//CE_Type/CARE_FOR_CHILDREN_NOT_BEING_PART_OF_HOUSEHOLD"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Expense_Purpose">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Expense_Purpose/HOUSE_CARE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Expense_Purpose/CHILD_CARE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Expense_Purpose/DEPENDENCE_CARE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Expense_Purpose/OTHER"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Expense_Purpose/ALIMONY"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Expense_Purpose/RECURRENT_DEPT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Dependent_Type">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Dependent_Type/CHILD"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Dependent_Type/SPOUSE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Dependent_Type/RELATIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Dependent_Type/OTHER_FAMILY_MEMBER"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Dependent_Type/NOT_OWN_CHILD"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Separation_Causes">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Separation_Causes/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Separation_Causes/DIVORCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Separation_Causes/SEPARATION_DE_FAIT"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Separation_Causes/SEPARATION_BY_COURT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Category_of_Permanent_Expense">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Permanent_Expense/MISCELLANEOUS_DEBT"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Permanent_Expense/ALIMONY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Category_of_Health_and_Pension_Insurances">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Health_and_Pension_Insurances/MANDATORY_HEALTH_AND_PENSION_INSURANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Health_and_Pension_Insurances/ADDITIONAL_EMPLOYERS_PENSION_INSURANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Health_and_Pension_Insurances/CONTINUED_HEALTH_AND_PENSION_INSURANCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Category_of_Private_Insurance_and_Plan">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Private_Insurance_and_Plan/PRIVATE_INSURANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Private_Insurance_and_Plan/PRIVATE_LIFE_INSURANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Private_Insurance_and_Plan/COMPANY_MEMBERS_PRIVATE_INSURANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Private_Insurance_and_Plan/HOUSING_SAVING_PLAN"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Category_of_Private_Insurance_and_Plan/OLD_AGE_PENSION_PLAN"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Taxation.ecore#//Legal_Union_Types">
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Legal_Union_Types/MARIAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Legal_Union_Types/PARTNERSHIP"/>
+      <genEnumLiterals ecoreEnumLiteral="Taxation.ecore#//Legal_Union_Types/OTHER"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="Taxation.ecore#//Constants">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_CE_RATE_FOR_CHILD_NOT_BEING_PART_OF_HOUSEHOLD"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_CE_RATE_FOR_HOUSE_CARE_AND_CHILD_PART_OF_THE_HOUSEHOLD_CARE"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MINIMUM_SALARY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_FOR_EXTRA_PROFESSIONAL_DEDUCTION"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_DEDUCTIBLE_PERCENTAGE_FOR_DONATIONS"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MINIMUM_DEDUCTIBLE_AMOUNT_FOR_DONATIONS"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_ADDITIONAL_PENSION_AND_INSURANC"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_ALIMONY_EXPENSE"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMAL_DISTANCE_FOR_TRAVEL_EXPENSE_DEDUCTION"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMAL_FLAT_DISTANCE_FOR_TRAVEL_EXPENSE_DEDUCTION"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MINIMAL_DISTANCE_FOR_TRAVEL_EXPENSE_DEDUCTION"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIM_DAILY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIM_MONTHLY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIM_YEARLY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIP_DAILY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIP_MONTHLY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIP_YEARLY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIS_DAILY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIS_MONTHLY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_CIS_YEARLY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_FOR_TRAVEL_EXPENSE_PER_UNIT"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_DS"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/FLAT_RATE_FOR_MISCELLANEOUS_EXPENSE"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/DISABILITY_FLAT_RATE_FOR_MISCELLANEOUS_EXPENSE"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Constants/MAXIMUM_DEDUCTIBLE_AMOUNT_FOR_ADDITIONAL_PENSION_AND_INSURANCE"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Income_Tax">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income_Tax/taxPayer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax/tax_amount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax/tax_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax/id6"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Taxation.ecore#//Tax_Payer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Payer/dependents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Payer/from_agent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Payer/incomes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Payer/from_law"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Physical_Person">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/SSNo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Physical_Person/addresses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/birth_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/disability_percentage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/disability_type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/birth_month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/birth_day"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Physical_Person/expenses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Physical_Person/is_widower"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Address">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Address/country"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Address/street"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Address/zipCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Address/city"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Address/id2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Address/taxPayer"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Expense">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Expense/declared_amount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Expense/expense_purpose"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Expense/dependent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Expense/from_agent"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Expense/income"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Expense/id4"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Expense/beneficiary"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Dependent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Dependent/dependent_type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Dependent/responsible_person"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Dependent/continued_studies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Dependent/allowances"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Dependent/household"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Dependent/from_agent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Dependent/expense"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//External_Allowance">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//External_Allowance/grantor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//External_Allowance/starting_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//External_Allowance/ending_year"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//External_Allowance/reciver"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//External_Allowance/id5"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//External_Allowance/person"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Household">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Household/parents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Household/id1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Household/children"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Taxation.ecore#//Legal_Union_Record">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Legal_Union_Record/start_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Legal_Union_Record/end_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Legal_Union_Record/separation_cause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Legal_Union_Record/individual_A"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Legal_Union_Record/individual_B"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Legal_Union_Record/properties"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Legal_Union_Record/mutual_agreement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Legal_Union_Record/id9"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Legal_Union_Record/household"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Tax_Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Property/starting_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Property/id10"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Property/union_record"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Taxation.ecore#//Tax_Case"/>
+    <genClasses ecoreClass="Taxation.ecore#//FromAgent">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//FromAgent/taxPayer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//FromAgent/is_dependent_eligible_for_CE_Not_In_Houshold_Children_Care"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//FromAgent/expense"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//FromAgent/is_eligible_debt"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//FromAgent/dependent"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Taxation.ecore#//Income">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/income_amount"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income/income_type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income/tax_card"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/tax_liability"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Income/taxPayer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income/details"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income/num"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income/expenses"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Taxation.ecore#//Income_Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Type/id8"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Income_Type/income"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Tax_Card">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/card_identifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_office"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/percentage_of_witholding"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_payers_name_surname"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/tax_payers_partner_name_surname"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Card/tax_payers_address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/jobs_Employer_SSNo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/jobs_employers_name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/jobs_activity_type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/jobs_place_of_work"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_FD_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_FD_monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_AC_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_AC_monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_AC_yearly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_CE_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_CE_monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_CE_yearly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_DS_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_DS_monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_FO_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_FO_monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_FO_yearly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/credit_CIS_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/credit_CIS_monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/credit_CIM_daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/validity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Card/income_Tax_Credit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Card/previous"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Card/current_tax_card"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/credit_CIM_yearly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_DS_Alimony_yearly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Tax_Card/deduction_DS_Debt_yearly"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Tax_Card/income"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Income_Tax_Credit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax_Credit/grantedBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income_Tax_Credit/taxPayer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax_Credit/tax_year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax_Credit/yearly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax_Credit/monthly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax_Credit/daily"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Tax_Credit/id7"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Taxation.ecore#//Income_Tax_Credit/taxation_Frame"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Income_Detail">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Detail/amount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Detail/is_worked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Detail/distance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Detail/worked_days"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Detail/is_contributing_CNS"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Income_Detail/id5"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//Income_Detail/income"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//FromLaw">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//FromLaw/id"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Taxation.ecore#//FromLaw/taxPayer"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Fiscal_Address"/>
+    <genClasses ecoreClass="Taxation.ecore#//Habitual_Address"/>
+    <genClasses ecoreClass="Taxation.ecore#//Marriage_Record"/>
+    <genClasses ecoreClass="Taxation.ecore#//Non_Resident_Tax_Payer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Non_Resident_Tax_Payer/is_assimilated_to_resident"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Partnership_Record"/>
+    <genClasses ecoreClass="Taxation.ecore#//Resident_Tax_Payer"/>
+    <genClasses ecoreClass="Taxation.ecore#//Trade_and_Business_Income"/>
+    <genClasses ecoreClass="Taxation.ecore#//Agriculture_and_Forestry_Income"/>
+    <genClasses ecoreClass="Taxation.ecore#//Pensions_and_Annuities_Income">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Pensions_and_Annuities_Income/occasional_payement"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Capital_and_Investments_Income"/>
+    <genClasses ecoreClass="Taxation.ecore#//Employment_Income"/>
+    <genClasses ecoreClass="Taxation.ecore#//Rentals_and_Leases_Income">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Rentals_and_Leases_Income/is_periodic"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Foreign_Income"/>
+    <genClasses ecoreClass="Taxation.ecore#//Local_Income"/>
+    <genClasses ecoreClass="Taxation.ecore#//CIM"/>
+    <genClasses ecoreClass="Taxation.ecore#//CIP"/>
+    <genClasses ecoreClass="Taxation.ecore#//CIS"/>
+    <genClasses ecoreClass="Taxation.ecore#//FD">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//FD/distance_declared_in_january"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Professional_Expenses_Deduction"/>
+    <genClasses ecoreClass="Taxation.ecore#//FO"/>
+    <genClasses ecoreClass="Taxation.ecore#//DS_for_Permanent_Expense">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//DS_for_Permanent_Expense/permanent_expense_category"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//DS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//DS/maximum_deductible_amount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//DS/id3"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//DS_for_Interest_Expense"/>
+    <genClasses ecoreClass="Taxation.ecore#//DS_for_Health_and_Pension_Insurance">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//DS_for_Health_and_Pension_Insurance/insurance_category"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//DS_for_Private_Insurance_and_Plan">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//DS_for_Private_Insurance_and_Plan/private_insurance_and_plan_category"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//DS_for_Loss_Carryforward"/>
+    <genClasses ecoreClass="Taxation.ecore#//DS_for_Donation"/>
+    <genClasses ecoreClass="Taxation.ecore#//Permanent_Expense">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Permanent_Expense/category"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Special_Expense_DS"/>
+    <genClasses ecoreClass="Taxation.ecore#//Interest_Expense"/>
+    <genClasses ecoreClass="Taxation.ecore#//Private_Insurance_and_Plan">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Private_Insurance_and_Plan/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Private_Insurance_and_Plan/duration_of_contract"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Health_and_Pension_Insurance">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Health_and_Pension_Insurance/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Health_and_Pension_Insurance/is_related_to_additional_salary"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Donation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Donation/beneficiary1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Donation/is_donation_reported"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Loss_Carryforward"/>
+    <genClasses ecoreClass="Taxation.ecore#//Spousal_Expense_AC"/>
+    <genClasses ecoreClass="Taxation.ecore#//Extraordinary_Expense_CE">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Extraordinary_Expense_CE/thresholded_deduction_percentage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Taxation.ecore#//Extraordinary_Expense_CE/ce_type"/>
+    </genClasses>
+    <genClasses ecoreClass="Taxation.ecore#//Travel_Expense_FD"/>
+    <genClasses ecoreClass="Taxation.ecore#//Professional_Expense"/>
+    <genClasses ecoreClass="Taxation.ecore#//Miscellaneous_Expense_FO"/>
+  </genPackages>
+</genmodel:GenModel>

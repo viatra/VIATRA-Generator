@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Cbc
+Bundle-SymbolicName: hu.bme.mit.inf.dslreasoner.ilp.cbc
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: hu.bme.mit.inf.dslreasoner.ilp.cbc
+Export-Package: hu.bme.mit.inf.dslreasoner.ilp.cbc
+Bundle-NativeCode: libviatracbc.so;
+ osname=Linux;
+ processor=x86_64

@@ -2,19 +2,24 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Type
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.patterns.SupertypeStar
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partial2logicannotations.PartialModelRelation2Assertion
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BinaryElementRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.NaryRelationLink
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialBooleanInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialComplexTypeInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialIntegerInterpretation
@@ -22,10 +27,10 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRealInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialStringInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.UnaryElementRelationLink
 import java.math.BigDecimal
 import java.util.HashMap
 import java.util.Map
@@ -35,13 +40,6 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.SymbolicValue
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
-import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialTypeInterpratation
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialComplexTypeInterpretation> type2Interpretation
@@ -193,7 +191,7 @@ class PartialInterpretationInitialiser {
 		interpretation.minNewElements = minNewElements
 		interpretation.maxNewElements = maxNewElements
 		// elements from problem are included
-		if(maxNewElements>0) {
+		if(maxNewElements != 0) {
 			val newElements = createDefinedElement => [it.name = "New Objects"]
 			interpretation.openWorldElements += newElements 
 		}
@@ -212,12 +210,8 @@ class PartialInterpretationInitialiser {
 	def private initialiseTypeScope(PartialTypeInterpratation interpretation, Integer min, Integer max) {
 		val res = createScope
 		res.targetTypeInterpretation = interpretation
-		if(min !== null) {
-			res.minNewElements = min
-		}
-		if(max !== null) {
-			res.maxNewElements = max
-		}
+		res.minNewElements = min ?: 0
+		res.maxNewElements = max ?: -1
 		return res
 	}
 	
@@ -233,7 +227,11 @@ class PartialInterpretationInitialiser {
 	
 	def private Map<RelationDeclaration, PartialRelationInterpretation> initRelations(PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		val Map<RelationDeclaration, PartialRelationInterpretation> relation2Interpretation = new HashMap
-		for(relation : interpretation.problem.relations.filter(RelationDeclaration)) {
+		val definedRelationDeclarations = interpretation.problem.relations.filter(RelationDefinition).map[defines]
+		val undefinedRelationDeclarations = interpretation.problem.relations.filter(RelationDeclaration).filter[
+			declared | !definedRelationDeclarations.exists[defined | defined === declared]
+		]
+		for(relation : undefinedRelationDeclarations) {
 			val partialInterpretation = relation.initialisePartialRelationInterpretation
 			interpretation.partialrelationinterpretation += partialInterpretation
 			relation2Interpretation.put(relation,partialInterpretation)

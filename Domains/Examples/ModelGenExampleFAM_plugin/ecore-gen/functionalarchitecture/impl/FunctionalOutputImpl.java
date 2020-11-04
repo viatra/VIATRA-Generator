@@ -66,6 +66,7 @@ public class FunctionalOutputImpl extends FunctionalDataImpl implements Function
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<InformationLink> getOutgoingLinks() {
 		if (outgoingLinks == null) {
 			outgoingLinks = new EObjectContainmentWithInverseEList<InformationLink>(InformationLink.class, this, FunctionalarchitecturePackage.FUNCTIONAL_OUTPUT__OUTGOING_LINKS, FunctionalarchitecturePackage.INFORMATION_LINK__FROM);

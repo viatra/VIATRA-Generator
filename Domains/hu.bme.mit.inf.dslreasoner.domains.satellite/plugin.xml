@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated satellite -->
+    <package class="satellite.SatellitePackage" genModel="model/satellite.genmodel" uri="http://www.example.org/satellite"/>
+  </extension>
+  <extension id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries" id="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.SatelliteQueries">
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.communicationLinkDoesNotStartAtContainingElement"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.transmittingGroundStationNetwork"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.roundStationNetworkUHF"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.notEnoughInterferometryPayloads"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.communicationLoop"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.incompatibleSourceAndTargetBand"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.threeUCubeSatWithNonUhfCrossLink"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.cubeSatWithKaAntenna"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.smallSat"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.differentFrequency"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighFrequencyForUHF"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowFrequencyForUHF"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighFrequencyForKaComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowFrequencyForKaComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighFrequencyForXComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowFrequencyForXComm"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooHighPathLengthForSatelite"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowPathLengthForSatelite"/>
+      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.satellite.queries.tooLowPathLengthForGroundStation"/>
+    </group>
+  </extension>
+</plugin>

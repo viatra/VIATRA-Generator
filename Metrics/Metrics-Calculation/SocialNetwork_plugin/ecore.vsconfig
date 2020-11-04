@@ -30,18 +30,19 @@ generate {
 	
 	//median run time
 	scope = {
-		#node = 10  // (warm-up: 10) 30, 50, 80, 100, 120 ....
+		#node = 30  // (warm-up: 10) 30, 50, 80, 100, 120 ....
 	}
 	
 	number = 1
-	runs = 5
+	runs = 1
 	config = {
 		log-level = none,
 		runtime = 300, // the runtime is in seconds, want to set is to 5 mins
 		"optional-wf" = "false",
 		"realistic-guidance" = "Composite",
 		"allow-must-violations" = "false",
-		"domain" = "Ecore"
+		"domain" = "Ecore",
+		"scopePropagator" = "typeHierarchy"
 	}
 	
 	debug = "debug"

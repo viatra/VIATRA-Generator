@@ -1,0 +1,629 @@
+import 'file:/Users/Aren Babikian/git/VIATRA-Attributes/original.PLEDGE.case.studies/model/CD_Case_C.uml'
+--e.g., import 'file:/Users/User_X/CD_Case_C.uml'
+
+package inputData 
+
+
+ context Vcdu inv invextracted108:
+let transmissionData : TransmissionData = self.cadu.channelData.transmissionData in 
+let rtStpsConfig : XsveRtStps = transmissionData.configuration.rtStpsConfig.xsveRtStps 
+in self.vcduHeader.virtualChannelId.value.intValue = rtStpsConfig.idleVcid.value.intValue 
+
+ context Vcdu inv invGenMult1:
+not self.mpduPacketZone.oclIsUndefined()
+
+ context Vcdu inv invGenMult2:
+not self.vcduHeader.oclIsUndefined()
+
+ context Vcdu inv invGenMult3:
+not self.cadu.oclIsUndefined()
+
+ context Vcdu inv invGenMult4:
+not self.mpduHeader.oclIsUndefined()
+
+
+ context MpduIdlePacketZone inv invGenMult6:
+not self.value.oclIsUndefined()
+
+ context MpduActivePacketZone inv invGenMult7:
+self.isp->size() >= 1
+
+ context MpduActivePacketZone inv invGenMult8:
+not self.value.oclIsUndefined()
+
+ context Isp inv invGenMult9:
+not self.packetDataField.oclIsUndefined()
+
+ context Isp inv invGenMult10:
+self.mpduActivePacketZone->size() >= 1
+
+ context Isp inv invGenMult11:
+not self.channelDataPerVcid.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult12:
+not self.versionNumber.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult13:
+not self.type.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult14:
+not self.shf.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult15:
+not self.apidPid.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult16:
+not self.apidPcat.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult17:
+not self.sequenceFlags.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult18:
+not self.sequenceCount.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult19:
+not self.dataLength.oclIsUndefined()
+
+ context PacketPrimaryHeader inv invGenMult20:
+not self.isp.oclIsUndefined()
+
+ context PacketDataField inv invGenMult21:
+not self.isp.oclIsUndefined()
+
+ context IdlePacketDataField inv invGenMult22:
+not self.idleDataArray.oclIsUndefined()
+
+ context ActivePacketDataField inv invGenMult23:
+not self.packetData.oclIsUndefined()
+
+ context ActivePacketDataField inv invGenMult24:
+not self.packetErrorControl.oclIsUndefined()
+
+ context PacketSecondaryHeader inv invGenMult25:
+not self.activePacketDataField.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult26:
+not self.fillerA.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult27:
+not self.version.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult28:
+not self.fillerB.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult29:
+not self.type.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult30:
+not self.subtype.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult31:
+not self.destinationId.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult32:
+not self.tfUndefinedA.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult33:
+not self.tfSeconds.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult34:
+not self.tfSubSeconds.oclIsUndefined()
+
+ context TmGpsrS1DataFieldHeader inv invGenMult35:
+not self.tfUndefinedB.oclIsUndefined()
+
+ context SarS1DataFieldHeader inv invGenMult36:
+not self.tcCoarseTime.oclIsUndefined()
+
+ context SarS1DataFieldHeader inv invGenMult37:
+not self.tcFineTime.oclIsUndefined()
+
+ context SarS1DataFieldHeader inv invGenMult38:
+not self.ancillaryData.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult39:
+not self.startTimeCoarse.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult40:
+not self.startTimeFine.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult41:
+not self.timeCorrectionValue.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult42:
+not self.syncStatusValidity.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult43:
+not self.syncStatusFlag.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult44:
+not self.systemOperationMode.oclIsUndefined()
+
+ context MsiS2DataFieldHeader inv invGenMult45:
+not self.compressionStatus.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult46:
+not self.fillerA.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult47:
+not self.version.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult48:
+not self.fillerB.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult49:
+not self.type.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult50:
+not self.subtype.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult51:
+not self.destinationId.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult52:
+not self.tfSeconds.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult53:
+not self.tfSubSeconds.oclIsUndefined()
+
+ context TmGpsrS2DataFieldHeader inv invGenMult54:
+not self.tfUndefinedA.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult55:
+not self.fillerA.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult56:
+not self.version.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult57:
+not self.fillerB.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult58:
+not self.type.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult59:
+not self.subtype.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult60:
+not self.destinationId.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult61:
+not self.tfSeconds.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult62:
+not self.tfSubSeconds.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult63:
+not self.syncA.oclIsUndefined()
+
+ context TmStrS2DataFieldHeader inv invGenMult64:
+not self.syncB.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult65:
+not self.fillerA.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult66:
+not self.version.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult67:
+not self.fillerB.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult68:
+not self.type.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult69:
+not self.subtype.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult70:
+not self.destinationId.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult71:
+not self.tfSeconds.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult72:
+not self.tfSubSeconds.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult73:
+not self.syncA.oclIsUndefined()
+
+ context TmCswS2DataFieldHeader inv invGenMult74:
+not self.syncB.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult75:
+not self.fillerA.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult76:
+not self.version.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult77:
+not self.fillerB.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult78:
+not self.type.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult79:
+not self.subtype.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult80:
+not self.destinationId.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult81:
+not self.tfScienceTimeMsp.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult82:
+not self.tfScienceTimeLsp.oclIsUndefined()
+
+ context OlciS3DataFieldHeader inv invGenMult83:
+not self.tfStat.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult84:
+not self.fillerA.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult85:
+not self.version.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult86:
+not self.fillerB.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult87:
+not self.type.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult88:
+not self.subtype.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult89:
+not self.destinationId.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult90:
+not self.tfTime.oclIsUndefined()
+
+ context SlstrS3DataFieldHeader inv invGenMult91:
+not self.tfStat.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult92:
+not self.fillerA.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult93:
+not self.version.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult94:
+not self.fillerB.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult95:
+not self.type.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult96:
+not self.subtype.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult97:
+not self.destinationId.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult98:
+not self.tfTime.oclIsUndefined()
+
+ context DorisS3DateFieldHeader inv invGenMult99:
+not self.spare.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult100:
+not self.fillerA.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult101:
+not self.version.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult102:
+not self.fillerB.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult103:
+not self.type.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult104:
+not self.subtype.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult105:
+not self.destinationId.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult106:
+not self.tfCoarse.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult107:
+not self.tfFine.oclIsUndefined()
+
+ context TmNavattS3DataFieldHeader inv invGenMult108:
+not self.tfStat.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult109:
+not self.fillerA.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult110:
+not self.version.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult111:
+not self.fillerB.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult112:
+not self.type.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult113:
+not self.subtype.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult114:
+not self.destinationId.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult115:
+not self.tfOverSecond.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult116:
+not self.tfSubSecond.oclIsUndefined()
+
+ context MwrS3DataFieldHeader inv invGenMult117:
+not self.tfStat.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult118:
+not self.fillerA.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult119:
+not self.version.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult120:
+not self.fillerB.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult121:
+not self.type.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult122:
+not self.subtype.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult123:
+not self.destinationId.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult124:
+not self.tfCoarse.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult125:
+not self.tfFine.oclIsUndefined()
+
+ context SralS3DataFieldHeader inv invGenMult126:
+not self.tfStat.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult127:
+not self.fillerA.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult128:
+not self.version.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult129:
+not self.fillerB.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult130:
+not self.type.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult131:
+not self.subtype.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult132:
+not self.destinationId.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult133:
+not self.tfSeconds.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult134:
+not self.tfSubSeconds.oclIsUndefined()
+
+ context TmGpsrS3DataFieldHeader inv invGenMult135:
+not self.tfBlank.oclIsUndefined()
+
+ context PacketData inv invGenMult136:
+not self.dataArray.oclIsUndefined()
+
+ context PacketData inv invGenMult137:
+not self.activePacketDataField.oclIsUndefined()
+
+ context PacketErrorControl inv invGenMult138:
+not self.actualValue.oclIsUndefined()
+
+ context PacketErrorControl inv invGenMult139:
+not self.calculatedValue.oclIsUndefined()
+
+ context PacketErrorControl inv invGenMult140:
+not self.activePacketDataField.oclIsUndefined()
+
+ context FragmentPacketDataField inv invGenMult141:
+not self.dataArray.oclIsUndefined()
+
+ context ChannelDataPerVcid inv invGenMult142:
+not self.virtualChannelId.oclIsUndefined()
+
+ context ChannelDataPerVcid inv invGenMult143:
+self.channelData->size() >= 1
+
+ context ChannelDataPerVcid inv invGenMult144:
+self.isp->size() >= 1
+
+ context ChannelData inv invGenMult145:
+not self.transmissionData.oclIsUndefined()
+
+ context ChannelData inv invGenMult146:
+not self.channelDataPerVcid.oclIsUndefined()
+
+ context Cadu inv invGenMult147:
+not self.sync.oclIsUndefined()
+
+ context Cadu inv invGenMult148:
+not self.reedSolomonCoding.oclIsUndefined()
+
+
+ context Cadu inv invGenMult150:
+not self.channelData.oclIsUndefined()
+
+ context Sync inv invGenMult151:
+not self.value.oclIsUndefined()
+
+ context Sync inv invGenMult152:
+not self.cadu.oclIsUndefined()
+
+ context ReedSolomonCoding inv invGenMult153:
+not self.rsActualCheckSymbols.oclIsUndefined()
+
+ context ReedSolomonCoding inv invGenMult154:
+not self.rsCalculatedCheckSymbols.oclIsUndefined()
+
+ context ReedSolomonCoding inv invGenMult155:
+not self.cadu.oclIsUndefined()
+
+ context ExtendedCaduInfo inv invGenMult156:
+not self.value.oclIsUndefined()
+
+ context ExtendedCaduInfo inv invGenMult157:
+not self.cadu.oclIsUndefined()
+
+ context TransmissionData inv invGenMult158:
+not self.configuration.oclIsUndefined()
+
+ context Configuration inv invGenMult159:
+not self.transmission.oclIsUndefined()
+
+ context Configuration inv invGenMult160:
+not self.maxCounterPerApidSuffixConfig.oclIsUndefined()
+
+ context Configuration inv invGenMult161:
+not self.validApidsConfig.oclIsUndefined()
+
+ context Configuration inv invGenMult162:
+not self.rtStpsConfig.oclIsUndefined()
+
+ context MaxCounterPerApidSuffixConfig inv invGenMult163:
+self.apidSuffixAndMaxCounter->size() >= 1
+
+ context MaxCounterPerApidSuffixConfig inv invGenMult164:
+not self.configuration.oclIsUndefined()
+
+ context ApidSuffixAndMaxCounter inv invGenMult165:
+not self.apidSuffix.oclIsUndefined()
+
+ context ApidSuffixAndMaxCounter inv invGenMult166:
+not self.maxCounterPerApidSuffixConfig.oclIsUndefined()
+
+ context ValidApidsConfig inv invGenMult167:
+not self.configuration.oclIsUndefined()
+
+ context ValidApidsConfig inv invGenMult168:
+self.ispInfo->size() >= 1
+
+ context IspInfo inv invGenMult169:
+not self.validApidsConfig.oclIsUndefined()
+
+ context RtStpsConfig inv invGenMult170:
+not self.configuration.oclIsUndefined()
+
+ context RtStpsConfig inv invGenMult171:
+not self.xsveRtStps.oclIsUndefined()
+
+ context XsveRtStps inv invGenMult172:
+not self.frameLength.oclIsUndefined()
+
+ context XsveRtStps inv invGenMult173:
+not self.rsCorrectSize.oclIsUndefined()
+
+ context XsveRtStps inv invGenMult174:
+not self.idleVcid.oclIsUndefined()
+
+ context XsveRtStps inv invGenMult175:
+not self.idleApid.oclIsUndefined()
+
+ context XsveRtStps inv invGenMult176:
+not self.vcdusConfig.oclIsUndefined()
+
+ context XsveRtStps inv invGenMult177:
+not self.rtStpsConfig.oclIsUndefined()
+
+ context VcdusConfig inv invGenMult178:
+not self.xsveRtStps.oclIsUndefined()
+
+ context VcdusConfig inv invGenMult179:
+self.vcduConfig->size() >= 1
+
+ context VcduConfig inv invGenMult180:
+not self.vcdusConfig.oclIsUndefined()
+
+ context VcduConfig inv invGenMult181:
+not self.vcid.oclIsUndefined()
+
+ context VcduConfig inv invGenMult182:
+not self.minPacketSize.oclIsUndefined()
+
+ context VcduConfig inv invGenMult183:
+not self.maxPacketSize.oclIsUndefined()
+
+ context VcduConfig inv invGenMult184:
+not self.ispsConfig.oclIsUndefined()
+
+ context IspsConfig inv invGenMult185:
+not self.vcduConfig.oclIsUndefined()
+
+ context IspsConfig inv invGenMult186:
+self.ispConfig->size() >= 1
+
+ context IspConfig inv invGenMult187:
+not self.ispsConfig.oclIsUndefined()
+
+ context IspConfig inv invGenMult188:
+not self.apid.oclIsUndefined()
+
+ context VcduHeader inv invGenMult189:
+not self.mcidTfVersionNumber.oclIsUndefined()
+
+ context VcduHeader inv invGenMult190:
+not self.mcidSpacecraftId.oclIsUndefined()
+
+ context VcduHeader inv invGenMult191:
+not self.virtualChannelId.oclIsUndefined()
+
+ context VcduHeader inv invGenMult192:
+not self.virtualChannelFrameCount.oclIsUndefined()
+
+ context VcduHeader inv invGenMult193:
+not self.signFieldReplayFlag.oclIsUndefined()
+
+ context VcduHeader inv invGenMult194:
+not self.signFieldRsvdSpare.oclIsUndefined()
+
+ context VcduHeader inv invGenMult195:
+not self.frameHeaderErrorControl.oclIsUndefined()
+
+ context MpduIdleHeader inv invGenMult198:
+not self.value.oclIsUndefined()
+
+ context MpduActiveHeader inv invGenMult199:
+not self.rsvdSpare.oclIsUndefined()
+
+ context MpduActiveHeader inv invGenMult200:
+not self.firstHeaderPointer.oclIsUndefined()
+
+context ByteSequence inv invGenMult201:
+self.byte->size()>=1
+
+context Vcid inv invGenMult202:
+not self.value.oclIsUndefined()
+
+context ApidPcat inv invGenMult203:
+not self.value.oclIsUndefined()
+
+context Apid inv invGenMult204:
+not self.value.oclIsUndefined()
+
+context Apid inv invGenMult205:
+not self.apidPid.oclIsUndefined()
+
+context Apid inv invGenMult206:
+not self.apidPcat.oclIsUndefined()
+
+context ApidPid inv invGenMult207:
+not self.value.oclIsUndefined()
+
+context ChannelData inv invextracted1:
+self.cadu->size() > 0
+
+
+
+
+endpackage

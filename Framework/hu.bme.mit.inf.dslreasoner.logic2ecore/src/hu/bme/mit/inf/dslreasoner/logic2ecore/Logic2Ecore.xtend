@@ -3,23 +3,24 @@ package hu.bme.mit.inf.dslreasoner.logic2ecore
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicModelInterpretation
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicStructureBuilder
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription
+import java.math.BigDecimal
 import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
+import java.util.Map
 import java.util.Set
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EDataType
+import org.eclipse.emf.ecore.EEnum
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.EcorePackage
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.emf.ecore.EEnum
-import org.eclipse.emf.ecore.EDataType
-import org.eclipse.emf.ecore.EcorePackage
-import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TermDescription
-import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
-import java.util.Map
 
 class Logic2Ecore {
 	val extension LogicStructureBuilder structureBuilder = new LogicStructureBuilder
@@ -84,15 +85,15 @@ class Logic2Ecore {
 					if(attributeType.EContainingClass.isSuperTypeOf(sourceObject.eClass)) {
 						val allElementsOfTargetDatatype = getAllElementsOfDatatype(attributeType.EAttributeType,forwardTrace,interpretation)
 						for(l : allElementsOfTargetDatatype.entrySet) {
-							val expression = ecore2Logic.IsAttributeValue(forwardTrace,sourceElement,l.value,attributeType)
+							val expression = ecore2Logic.IsAttributeValue(forwardTrace,sourceElement,l.key,attributeType)
 							val linkExist = interpretation.evalAsBool(expression)
 							if(linkExist) {
 								if(attributeType.isMany) {
 									val list = sourceObject.eGet(attributeType) as List<? super Object>
-									list += l.key
+									list += l.value
 								} else {
 									try {
-										sourceObject.eSet(attributeType,l.key)
+										sourceObject.eSet(attributeType,translateType(attributeType.EAttributeType,l.value))
 									} catch(Exception e) {
 										e.printStackTrace
 									}
@@ -107,34 +108,30 @@ class Logic2Ecore {
 		return element2Object.values.root
 	}
 	
-	
-//							if(attributeType.EAttributeType.isSuperTypeOf(targetObject.eClass)) {
-//								val expression = ecore2Logic.IsAttributeValue(forwardTrace,sourceElement,targetElement,attributeType)
-//								val linkExist = interpretation.evalAsBool(expression)
-//								if(linkExist) {
-//									if(attributeType.isMany) {
-//											val list = sourceObject.eGet(attributeType) as List<? super EObject>
-//											list+= targetObject
-//										} else {
-//											sourceObject.eSet(referenceType,targetObject)
-//										}
-//								}
-//							}
-	
-	protected dispatch def Map<? extends Object, ? extends TermDescription> getAllElementsOfDatatype(EEnum type, Ecore2Logic_Trace forwardTrace, LogicModelInterpretation interpretation) {
-		ecore2Logic.allLiteralsInScope(forwardTrace).toInvertedMap[ecore2Logic.Literal(forwardTrace,it)]
+	def translateType(EDataType type, Object value) {
+		if(type == EcorePackage.eINSTANCE.EFloat) {
+			val bd = value as BigDecimal
+			return bd.floatValue
+		} else if( type  == EcorePackage.eINSTANCE.EDouble ) {
+			val bd = value as BigDecimal
+			return bd.doubleValue
+		} else return value
 	}
 	
-	protected dispatch def Map<? extends Object, ? extends TermDescription> getAllElementsOfDatatype(EDataType primitive, Ecore2Logic_Trace forwardTrace, LogicModelInterpretation interpretation) {
+	protected dispatch def Map<? extends TermDescription, ? extends Object> getAllElementsOfDatatype(EEnum type, Ecore2Logic_Trace forwardTrace, LogicModelInterpretation interpretation) {
+		ecore2Logic.allLiteralsInScope(forwardTrace).toMap[ecore2Logic.Literal(forwardTrace,it)]
+	}
+	
+	protected dispatch def Map<? extends TermDescription, ? extends Object> getAllElementsOfDatatype(EDataType primitive, Ecore2Logic_Trace forwardTrace, LogicModelInterpretation interpretation) {
 		val extension LogicProblemBuilder b = new LogicProblemBuilder
 		if(primitive === EcorePackage.eINSTANCE.EInt || primitive === EcorePackage.eINSTANCE.EShort || primitive === EcorePackage.eINSTANCE.ELong) {
-			interpretation.allIntegersInStructure.toInvertedMap[it.asTerm]
+			interpretation.allIntegersWithInterpretation
 		} else if(primitive === EcorePackage.eINSTANCE.EDouble || primitive === EcorePackage.eINSTANCE.EFloat) {
-			interpretation.allRealsInStructure.toInvertedMap[it.asTerm]
+			interpretation.allRealsWithInterpretation
 		} else if(primitive === EcorePackage.eINSTANCE.EString) {
-			interpretation.allStringsInStructure.toInvertedMap[it.asTerm]
+			interpretation.allStringsWithInterpretation
 		} else if(primitive === EcorePackage.eINSTANCE.EBoolean) {
-			return #[false,true].toInvertedMap[it.asTerm]
+			interpretation.allBooleansWithInterpretation
 		}
 	}
 	

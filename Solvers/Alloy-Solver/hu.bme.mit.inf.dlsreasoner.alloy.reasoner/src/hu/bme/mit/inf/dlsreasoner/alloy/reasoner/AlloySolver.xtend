@@ -16,6 +16,9 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapper
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.Logic2AlloyLanguageMapper_TypeMapperTrace_InheritanceAndHorizontal
 
 class AlloySolver extends LogicReasoner{
 	
@@ -25,7 +28,9 @@ class AlloySolver extends LogicReasoner{
 		x.createInjectorAndDoEMFRegistration
 	}
 	
-	val Logic2AlloyLanguageMapper forwardMapper = new Logic2AlloyLanguageMapper(new Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes)
+	val Logic2AlloyLanguageMapper_TypeMapper typeMapper = new Logic2AlloyLanguageMapper_TypeMapper_InheritanceAndHorizontal//Logic2AlloyLanguageMapper_TypeMapper_FilteredTypes
+	
+	val Logic2AlloyLanguageMapper forwardMapper = new Logic2AlloyLanguageMapper(typeMapper)
 	val AlloyHandler handler = new AlloyHandler
 	val Alloy2LogicMapper backwardMapper = new Alloy2LogicMapper
 	
@@ -57,7 +62,7 @@ class AlloySolver extends LogicReasoner{
 		val result2 = handler.callSolver(alloyProblem,workspace,alloyConfig,alloyCode)
 		alloyConfig.progressMonitor.workedSearchFinished
 		
-		val logicResult = backwardMapper.transformOutput(problem,configuration.solutionScope.numberOfRequiredSolution,result2,forwardTrace,transformationTime)
+		val logicResult = backwardMapper.transformOutput(problem,configuration.solutionScope.numberOfRequiredSolutions,result2,forwardTrace,transformationTime)
 		alloyConfig.progressMonitor.workedBackwardTransformationFinished
 		//val solverFinish = System.currentTimeMillis-solverStart
 		// Finish: Solving Alloy problem

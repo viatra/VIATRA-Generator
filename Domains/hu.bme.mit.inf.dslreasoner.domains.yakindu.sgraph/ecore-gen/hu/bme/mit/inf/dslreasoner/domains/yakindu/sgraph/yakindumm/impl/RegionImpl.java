@@ -68,6 +68,7 @@ public class RegionImpl extends MinimalEObjectImpl.Container implements Region {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Vertex> getVertices() {
 		if (vertices == null) {
 			vertices = new EObjectContainmentEList<Vertex>(Vertex.class, this, YakindummPackage.REGION__VERTICES);

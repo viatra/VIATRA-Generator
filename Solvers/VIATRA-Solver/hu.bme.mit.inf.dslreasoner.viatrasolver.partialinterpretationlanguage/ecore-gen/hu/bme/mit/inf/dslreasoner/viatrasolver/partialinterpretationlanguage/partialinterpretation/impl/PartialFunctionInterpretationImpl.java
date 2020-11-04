@@ -63,6 +63,7 @@ public class PartialFunctionInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionDeclaration getInterpretationOf() {
 		if (interpretationOf != null && interpretationOf.eIsProxy()) {
 			InternalEObject oldInterpretationOf = (InternalEObject)interpretationOf;
@@ -89,6 +90,7 @@ public class PartialFunctionInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInterpretationOf(FunctionDeclaration newInterpretationOf) {
 		FunctionDeclaration oldInterpretationOf = interpretationOf;
 		interpretationOf = newInterpretationOf;

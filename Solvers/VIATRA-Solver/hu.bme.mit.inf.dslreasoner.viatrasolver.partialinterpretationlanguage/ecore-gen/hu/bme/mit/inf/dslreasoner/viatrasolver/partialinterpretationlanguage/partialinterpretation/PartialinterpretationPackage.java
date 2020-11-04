@@ -167,13 +167,22 @@ public interface PartialinterpretationPackage extends EPackage {
 	int PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS = 10;
 
 	/**
+	 * The feature id for the '<em><b>Min New Elements Heuristic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC = 11;
+
+	/**
 	 * The number of structural features of the '<em>Partial Interpretation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTIAL_INTERPRETATION_FEATURE_COUNT = 11;
+	int PARTIAL_INTERPRETATION_FEATURE_COUNT = 12;
 
 	/**
 	 * The number of operations of the '<em>Partial Interpretation</em>' class.
@@ -913,13 +922,22 @@ public interface PartialinterpretationPackage extends EPackage {
 	int SCOPE__TARGET_TYPE_INTERPRETATION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Min New Elements Heuristic</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__MIN_NEW_ELEMENTS_HEURISTIC = 3;
+
+	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = 3;
+	int SCOPE_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Scope</em>' class.
@@ -1358,6 +1376,17 @@ public interface PartialinterpretationPackage extends EPackage {
 	EAttribute getPartialInterpretation_MaxNewElements();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMinNewElementsHeuristic <em>Min New Elements Heuristic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Min New Elements Heuristic</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation#getMinNewElementsHeuristic()
+	 * @see #getPartialInterpretation()
+	 * @generated
+	 */
+	EAttribute getPartialInterpretation_MinNewElementsHeuristic();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialConstantInterpretation <em>Partial Constant Interpretation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1750,6 +1779,17 @@ public interface PartialinterpretationPackage extends EPackage {
 	EReference getScope_TargetTypeInterpretation();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.Scope#getMinNewElementsHeuristic <em>Min New Elements Heuristic</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Min New Elements Heuristic</em>'.
+	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.Scope#getMinNewElementsHeuristic()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EAttribute getScope_MinNewElementsHeuristic();
+
+	/**
 	 * Returns the meta object for class '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation <em>Partial Primitive Interpretation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1951,6 +1991,14 @@ public interface PartialinterpretationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS = eINSTANCE.getPartialInterpretation_MaxNewElements();
+
+		/**
+		 * The meta object literal for the '<em><b>Min New Elements Heuristic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC = eINSTANCE.getPartialInterpretation_MinNewElementsHeuristic();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialConstantInterpretationImpl <em>Partial Constant Interpretation</em>}' class.
@@ -2277,6 +2325,14 @@ public interface PartialinterpretationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPE__TARGET_TYPE_INTERPRETATION = eINSTANCE.getScope_TargetTypeInterpretation();
+
+		/**
+		 * The meta object literal for the '<em><b>Min New Elements Heuristic</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCOPE__MIN_NEW_ELEMENTS_HEURISTIC = eINSTANCE.getScope_MinNewElementsHeuristic();
 
 		/**
 		 * The meta object literal for the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialPrimitiveInterpretationImpl <em>Partial Primitive Interpretation</em>}' class.

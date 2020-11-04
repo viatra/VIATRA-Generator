@@ -15,7 +15,6 @@ import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.GraphReader;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.io.RepMetricsReader;
 import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.MetricSampleGroup;
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor;
-import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.validation.ViolationCheck;
 import hu.bme.mit.inf.dslreasoner.domains.yakindu.sgraph.yakindumm.YakindummPackage;
 import socialnetwork.Person;
 
@@ -34,10 +33,13 @@ public class Main {
 	public static void main(String args[]) {
 		String ecoreFile = args[0];
 		System.out.println("Generation Started");
+		
+		System.out.println(System.getProperty("java.library.path"));
+		
 		long begin = System.currentTimeMillis();
 		String message = runWithPath(ecoreFile);
 		long elapsed = System.currentTimeMillis() - begin;
-
+		
 		if(message != null) {
 			System.out.println(message);
 			return;
@@ -62,87 +64,87 @@ public class Main {
 		System.out.println("Finished");
 	}
 
-	public static void generateModel(int run) {
-		String filename = run+"_1.xmi";
-		//prepare initial info
-		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		ArrayList<String> infoOutput = new ArrayList<String>();
-		infoOutput.add(run+ "");
-		infoOutput.addAll(calculateMetric(run));
-
-		YakinduumModel model = new YakinduumModel(fileReadFolder +"run" +run + "/" + filename);
-		int violationCount = ViolationCheck.calculateViolationCounts(model.yakinduum);
-		infoOutput.add(violationCount + "");
-
-		
-		
-		//save model to another directory
-		model.save(configFolder + run + ".xmi");
-		output.add(infoOutput);
-		CsvFileWriter.append(output, configFileName);
-	}
-	
-	public static void singleModelViolationMeasure(int run) {
-		String filename = run+"_1.xmi";
-		//prepare initial info
-		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		ArrayList<String> infoOutput = new ArrayList<String>();
-		infoOutput.add(run+ "");
-
-		YakinduumModel model = new YakinduumModel(fileReadFolder+"/run"+run+"/"+ filename);
-		
-		//parse map of violation counts to two list and add them to the result list 
-		Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
-		ArrayList<String> counts = new ArrayList<String>();
-		ArrayList<String> violationNames = new ArrayList<String>(map.keySet());
-		for(int i = 0; i < violationNames.size(); i++) {
-			String name = violationNames.get(i);
-			int total = map.get(name);
-			counts.add(total + "");
-		}
-		output.add(infoOutput);
-		output.add(violationNames);
-		output.add(counts);
-		
-		CsvFileWriter.append(output, configFileName);
-	}
-	
-	public static void aggregateViolationMeasure(int size) {
-		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
-		ArrayList<String> counts = new ArrayList<String>();
-		ArrayList<String> violationNames = null;
-		for(int run = 1; run < size+1; run++) {
-			String filename = run+"_1.xmi";
-			YakinduumModel model = new YakinduumModel(fileReadFolder+"/run"+run+"/"+ filename);
-
-			Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
-			if(run == 1) {
-				violationNames = new ArrayList<String>(map.keySet());
-				for(int i = 0; i < violationNames.size(); i++) {
-					String name = violationNames.get(i);
-					int total = map.get(name);
-					counts.add(total + "");
-				}
-			}else {
-				for(int i = 0; i < violationNames.size(); i++) {
-					int count = Integer.parseInt(counts.get(i));
-					String name = violationNames.get(i);
-					int total = count + map.get(name);
-					counts.set(i, total + "");
-				}
-			}
-		}
-		
-		for(int i = 0; i < counts.size(); i++) {
-			double count = Integer.parseInt(counts.get(i)) / (double) size;
-			counts.set(i, count + "");
-		}
-		
-		output.add(violationNames);
-		output.add(counts);
-		CsvFileWriter.write(output, aggregateViolationMeasureFileName);
-	}
-	
+//	public static void generateModel(int run) {
+//		String filename = run+"_1.xmi";
+//		//prepare initial info
+//		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> infoOutput = new ArrayList<String>();
+//		infoOutput.add(run+ "");
+//		infoOutput.addAll(calculateMetric(run));
+//
+//		YakinduumModel model = new YakinduumModel(fileReadFolder +"run" +run + "/" + filename);
+//		int violationCount = ViolationCheck.calculateViolationCounts(model.yakinduum);
+//		infoOutput.add(violationCount + "");
+//
+//		
+//		
+//		//save model to another directory
+//		model.save(configFolder + run + ".xmi");
+//		output.add(infoOutput);
+//		CsvFileWriter.append(output, configFileName);
+//	}
+//	
+//	public static void singleModelViolationMeasure(int run) {
+//		String filename = run+"_1.xmi";
+//		//prepare initial info
+//		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> infoOutput = new ArrayList<String>();
+//		infoOutput.add(run+ "");
+//
+//		YakinduumModel model = new YakinduumModel(fileReadFolder+"/run"+run+"/"+ filename);
+//		
+//		//parse map of violation counts to two list and add them to the result list 
+//		Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
+//		ArrayList<String> counts = new ArrayList<String>();
+//		ArrayList<String> violationNames = new ArrayList<String>(map.keySet());
+//		for(int i = 0; i < violationNames.size(); i++) {
+//			String name = violationNames.get(i);
+//			int total = map.get(name);
+//			counts.add(total + "");
+//		}
+//		output.add(infoOutput);
+//		output.add(violationNames);
+//		output.add(counts);
+//		
+//		CsvFileWriter.append(output, configFileName);
+//	}
+//	
+//	public static void aggregateViolationMeasure(int size) {
+//		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> counts = new ArrayList<String>();
+//		ArrayList<String> violationNames = null;
+//		for(int run = 1; run < size+1; run++) {
+//			String filename = run+"_1.xmi";
+//			YakinduumModel model = new YakinduumModel(fileReadFolder+"/run"+run+"/"+ filename);
+//
+//			Map<String, Integer> map = ViolationCheck.violationMaps(model.yakinduum);
+//			if(run == 1) {
+//				violationNames = new ArrayList<String>(map.keySet());
+//				for(int i = 0; i < violationNames.size(); i++) {
+//					String name = violationNames.get(i);
+//					int total = map.get(name);
+//					counts.add(total + "");
+//				}
+//			}else {
+//				for(int i = 0; i < violationNames.size(); i++) {
+//					int count = Integer.parseInt(counts.get(i));
+//					String name = violationNames.get(i);
+//					int total = count + map.get(name);
+//					counts.set(i, total + "");
+//				}
+//			}
+//		}
+//		
+//		for(int i = 0; i < counts.size(); i++) {
+//			double count = Integer.parseInt(counts.get(i)) / (double) size;
+//			counts.set(i, count + "");
+//		}
+//		
+//		output.add(violationNames);
+//		output.add(counts);
+//		CsvFileWriter.write(output, aggregateViolationMeasureFileName);
+//	}
+//	
 	public static ArrayList<String> calculateMetric(int run) {
 		//read model and metric
 		ArrayList<String> output = new ArrayList<String>();

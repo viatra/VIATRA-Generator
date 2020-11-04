@@ -79,7 +79,7 @@ public class QueryAndMetamodelValidator {
           }
         }
       };
-      return Iterables.<ENamedElement>filter(Iterables.<ENamedElement>concat(ListExtensions.<EReference, Iterable<ENamedElement>>map(references, _function_1)), ENamedElement.class);
+      return Iterables.<ENamedElement>filter((Iterables.<ENamedElement>concat(ListExtensions.<EReference, Iterable<ENamedElement>>map(references, _function_1))), ENamedElement.class);
     };
     return Iterables.<ENamedElement>concat(ListExtensions.<EObject, Iterable<ENamedElement>>map(elements, _function));
   }

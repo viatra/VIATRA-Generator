@@ -1,0 +1,13 @@
+{
+	"inputPath": "initialModels",
+	"outputPath": "outputModels",
+	"timeout": 300,
+	"saveModels": true,
+	"saveTemporaryFiles": false,
+	"warmupIterations": 0,
+	"iterations": 30,
+	"domain": "Yakindu",
+	"scope": "unsat",
+	"sizes": [20],
+	"solver": "AlloySolver"
+}

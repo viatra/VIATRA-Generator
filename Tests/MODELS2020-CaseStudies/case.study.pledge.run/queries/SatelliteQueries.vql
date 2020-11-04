@@ -1,0 +1,248 @@
+package hu.bme.mit.inf.dslreasoner.domains.satellite.queries
+
+import "http://www.example.org/satellite"
+
+@Constraint(severity = "error", key = {Element},
+	message = "A communicating element may not have two transmitting communication subsystems.")
+pattern communicationLinkDoesNotStartAtContainingElement(Element : CommunicatingElement) {
+	find transmittingCommSubsystem(Element, Comm1);
+	find transmittingCommSubsystem(Element, Comm2);
+	Comm1 != Comm2;
+}
+
+private pattern transmittingCommSubsystem(Element : CommunicatingElement, Comm : CommSubsystem) {
+	CommunicatingElement.commSubsystem(Element, Comm);
+	CommSubsystem.target(Comm, _);
+}
+
+@Constraint(severity = "error", key = {Station},
+	message = "The ground station network may not have outgoing communication links.")
+pattern transmittingGroundStationNetwork(Station : GroundStationNetwork) {
+	find transmittingCommSubsystem(Station, _);
+}
+
+@Constraint(severity = "error", key = {Station},
+	message = "The ground station network may not have UHF communication subsystems.")
+pattern roundStationNetworkUHF(Station : GroundStationNetwork) {
+	CommunicatingElement.commSubsystem(Station, Comm);
+	UHFCommSubsystem(Comm);
+}
+
+// At least two spacecraft must have the interferometry payload configured
+
+@Constraint(severity = "error", key = {Mission},
+	message = "Interferometry mission needs at least two spacecraft configured with the interferometry payload.")
+pattern notEnoughInterferometryPayloads(Mission : InterferometryMission) {
+	InterferometryMission(Mission);
+	neg find atLeastTwoInterferometryPayloads(Mission);
+}
+
+private pattern atLeastTwoInterferometryPayloads(Mission : InterferometryMission) {
+	find spacecraftWithInterferometryPayload(Mission, Spacecraft1);
+	find spacecraftWithInterferometryPayload(Mission, Spacecraft2);
+	Spacecraft1 != Spacecraft2;
+}
+
+private pattern spacecraftWithInterferometryPayload(Mission : ConstellationMission, Spacecraft : Spacecraft) {
+	ConstellationMission.spacecraft(Mission, Spacecraft);
+	Spacecraft.payload(Spacecraft, Payload);
+	InterferometryPayload(Payload);
+}
+
+// All spacecraft must have some communication path to the ground station
+
+//@Constraint(severity = "error", key = {Spacecraft},
+//	message = "Spacecraft has no communication path to the ground station.")
+//pattern noLinkToGroundStation(Spacecraft : Spacecraft) {
+//	ConstellationMission.groundStationNetwork(Mission, GroundStation);
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	neg find indirectCommunicationLink(Spacecraft, GroundStation);
+//}
+
+//@Constraint(severity = "error", key = {Spacecraft}, message = "UNSAT")
+//pattern unsat_linkToGroundStation(Spacecraft : Spacecraft) {
+//	ConstellationMission.groundStationNetwork(Mission, GroundStation);
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	find indirectCommunicationLink(Spacecraft, GroundStation);
+//}
+
+//@Constraint(severity = "error", key = {Mission}, message = "UNSAT")
+//pattern unsat_linkToGroundStation(Mission : InterferometryMission) {
+//	InterferometryMission(Mission);
+//	neg find noLinkToGroundStation(_);
+//}
+
+//@Constraint(severity = "error", key = {Spacecraft},
+//	message = "Spacecraft has no potential communication path to the ground station.")
+//pattern noPotentialLinkToGroundStation(Spacecraft : Spacecraft) {
+//	ConstellationMission.groundStationNetwork(Mission, GroundStation);
+//	ConstellationMission.spacecraft(Mission, Spacecraft);
+//	neg find indirectLinkAllowed(Spacecraft, GroundStation);
+//}
+
+//private pattern indirectLinkAllowed(From : Spacecraft, To : CommunicatingElement) {
+//	find linkAllowed+(From, To);
+//}
+
+//private pattern linkAllowed(From : Spacecraft, To : CommunicatingElement) {
+//	find matchingAntenna(From, To);
+//	neg find cubeSat3U(From);
+//} or {
+//	find matchingAntenna(From, To);
+//	CubeSat3U(From);
+//} or {
+//	find matchingAntenna(From, To);
+//	CubeSat3U(From);
+//	GroundStationNetwork(To);
+//}
+
+//private pattern matchingAntenna(From : Spacecraft, To : CommunicatingElement) {
+//	CommunicatingElement.commSubsystem(From, FromSys);
+//	CommunicatingElement.commSubsystem(To, ToSys);
+//	find matchingCommSubsystem(FromSys, ToSys);
+//}
+
+private pattern matchingCommSubsystem(From : CommSubsystem, To : CommSubsystem) {
+	UHFCommSubsystem(From);
+	UHFCommSubsystem(To);
+} or {
+	XCommSubsystem(From);
+	XCommSubsystem(To);
+} or {
+	KaCommSubsystem(From);
+	KaCommSubsystem(To);
+}
+
+//private pattern cubeSat3U(Sat : CubeSat3U) {
+//	CubeSat3U(Sat);
+//}
+
+// No communication loops may exist
+// No spacecraft may directly communicate with itself
+
+@Constraint(severity = "error", key = {Element},
+	message = "Communication loop.")
+pattern communicationLoop(Element : CommunicatingElement) {
+	find indirectCommunicationLink(Element, Element);
+}
+
+private pattern indirectCommunicationLink(Source : CommunicatingElement, Target : CommunicatingElement) {
+	find directCommunicationLink+(Source, Target);
+}
+
+private pattern directCommunicationLink(Source : CommunicatingElement, Target : CommunicatingElement) {
+	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
+	CommunicatingElement.commSubsystem(Source, SourceSubsystem);
+	CommunicatingElement.commSubsystem(Target, TargetSubsystem);
+}
+
+// Source and target communication systems must be compatible.
+
+@Constraint(severity = "error", key = {SourceSubsystem},
+	message = "Two ends of a communication link must use the same band.")
+pattern incompatibleSourceAndTargetBand(SourceSubsystem : CommSubsystem) {
+	CommSubsystem.target(SourceSubsystem, TargetSubsystem);
+	neg find matchingCommSubsystem(SourceSubsystem, TargetSubsystem);
+}
+
+// 3U CubeSats are assumed to only be able to downlink to Earth using an X-band trasmitter,
+// but cross-link using UHF
+
+@Constraint(severity = "error", key = {Sat},
+	message = "3U CubeSats can only cross-link using UHF.")
+pattern threeUCubeSatWithNonUhfCrossLink(Sat : CubeSat3U) {
+	CommunicatingElement.commSubsystem(Sat, SourceComm);
+	neg find commSubsystemBandUhf(SourceComm);
+	CommSubsystem.target(SourceComm, TargetComm);
+	CommunicatingElement.commSubsystem(Target, TargetComm);
+	neg find groundStationNetwork(Target);
+}
+
+private pattern commSubsystemBandUhf(Comm : UHFCommSubsystem) {
+	UHFCommSubsystem(Comm);
+}
+
+private pattern groundStationNetwork(Network : GroundStationNetwork) {
+	GroundStationNetwork(Network);
+}
+
+// Only a Small Satellite can be configured with a Ka-band communication system
+
+@Constraint(severity = "error", key = {Spacecraft},
+	message = "Only a Small Satellite can be configured with a Ka-band communication system.")
+pattern cubeSatWithKaAntenna(Spacecraft : Spacecraft) {
+	CommunicatingElement.commSubsystem(Spacecraft, Comm);
+	KaCommSubsystem(Comm);
+	neg find smallSat(Spacecraft);
+}
+
+pattern smallSat(Sat : SmallSat) {
+	SmallSat(Sat);
+}
+
+@Constraint(severity = "error", key = {c1,c2}, message = "error")
+pattern differentFrequency(c1 : CommSubsystem, c2 : CommSubsystem) {
+	CommSubsystem.target(c1,c2);
+	CommSubsystem.frequency(c1,f1);
+	CommSubsystem.frequency(c2,f2);
+	check(f1!=f2);
+}
+
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooHighFrequencyForUHF(s : UHFCommSubsystem) {
+	UHFCommSubsystem(s);
+	CommSubsystem.frequency(s,f);
+	check(f>1000);//1GHz
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooLowFrequencyForUHF(s : UHFCommSubsystem) {
+	UHFCommSubsystem(s);
+	CommSubsystem.frequency(s,f);
+	check(f<300);//300MHz
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooHighFrequencyForKaComm(s : KaCommSubsystem) {
+	KaCommSubsystem(s);
+	CommSubsystem.frequency(s,f);
+	check(f>40000);//40GHz
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooLowFrequencyForKaComm(s : KaCommSubsystem) {
+	KaCommSubsystem(s);
+	CommSubsystem.frequency(s,f);
+	check(f<26500);//26.5GHz
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooHighFrequencyForXComm(s : XCommSubsystem) {
+	XCommSubsystem(s);
+	CommSubsystem.frequency(s,f);
+	check(f>12000);//12GHz
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooLowFrequencyForXComm(s : XCommSubsystem) {
+	XCommSubsystem(s);
+	CommSubsystem.frequency(s,f);
+	check(f<8000);//8GHz
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooHighPathLengthForSatelite(s:CommSubsystem) {
+	CommSubsystem.pathLength(s,l);
+	CommSubsystem.target(s,ts);
+	Spacecraft.commSubsystem(_,ts);
+	check(l>250);//250km
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooLowPathLengthForSatelite(s:CommSubsystem) {
+	CommSubsystem.pathLength(s,l);
+	CommSubsystem.target(s,ts);
+	Spacecraft.commSubsystem(_,ts);
+	check(l<150);//150km
+}
+@Constraint(severity = "error", key = {s,s}, message = "error")
+pattern tooLowPathLengthForGroundStation(s:CommSubsystem) {
+	CommSubsystem.pathLength(s,l);
+	CommSubsystem.target(s,ts);
+	GroundStationNetwork.commSubsystem(_,ts);
+	check(l!=385000);//385.000km
+}
+

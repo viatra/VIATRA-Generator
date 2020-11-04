@@ -34,7 +34,7 @@ public class LogicReasonerException extends Exception {
 	}
 }
 
-abstract class LogicSolverConfiguration {
+abstract class SolverConfiguration {
 	public static val Unlimited = -1;
 	public static val String UndefinedPath = null
 
@@ -42,7 +42,7 @@ abstract class LogicSolverConfiguration {
 	public String solverPath = UndefinedPath
 	/** Max runtime limit in seconds. */
 	public int runtimeLimit = Unlimited
-	/** Max runtime limit in seconds. */
+	/** Max memory limit in megabytes. */
 	public int memoryLimit = Unlimited
 	/** Documentation level of the solver. */
 	public DocumentationLevel documentationLevel = DocumentationLevel::NONE
@@ -52,7 +52,9 @@ abstract class LogicSolverConfiguration {
  	 *     or via a listener registered by {@link progressMonitor.addCancelListener}</li>
 	 */
 	public SolverProgressMonitor progressMonitor = new NullSolverProgressMonitor
+}
 
+abstract class LogicSolverConfiguration extends SolverConfiguration {
 	public var TypeScopes typeScopes = new TypeScopes;
 	public var SolutionScope solutionScope = new SolutionScope
 }
@@ -157,7 +159,7 @@ public class TypeScopes {
  */
 public class SolutionScope {
 	public static val All = Integer.MAX_VALUE;
-	public var numberOfRequiredSolution = 1
+	public var numberOfRequiredSolutions = 1
 }
 /** Progress monitor class for a solver to
  * <li>(optionally) report progress via {@link worked}</li>

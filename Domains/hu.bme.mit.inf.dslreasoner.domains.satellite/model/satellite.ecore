@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="satellite" nsURI="http://www.example.org/satellite" nsPrefix="satellite">
+  <eClassifiers xsi:type="ecore:EClass" name="ConstellationMission" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groundStationNetwork" lowerBound="1"
+        eType="#//GroundStationNetwork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spacecraft" lowerBound="2"
+        upperBound="-1" eType="#//Spacecraft" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryMission" eSuperTypes="#//ConstellationMission"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommunicatingElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commSubsystem" lowerBound="1"
+        upperBound="2" eType="#//CommSubsystem" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroundStationNetwork" eSuperTypes="#//CommunicatingElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Spacecraft" abstract="true" eSuperTypes="#//CommunicatingElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" eType="#//Payload"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommSubsystem" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//CommSubsystem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequency" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathLength" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Payload" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterferometryPayload" eSuperTypes="#//Payload"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat3U" eSuperTypes="#//CubeSat"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat6U" eSuperTypes="#//CubeSat"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmallSat" eSuperTypes="#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CubeSat" abstract="true" eSuperTypes="#//Spacecraft"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UHFCommSubsystem" eSuperTypes="#//CommSubsystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XCommSubsystem" eSuperTypes="#//CommSubsystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KaCommSubsystem" eSuperTypes="#//CommSubsystem"/>
+</ecore:EPackage>

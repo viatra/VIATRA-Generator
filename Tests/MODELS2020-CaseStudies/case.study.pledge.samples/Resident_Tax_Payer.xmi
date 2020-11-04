@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TaxCard:Resident_Tax_Payer
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:TaxCard="http:///TaxCard.ecore">
+  <dependents/>
+</TaxCard:Resident_Tax_Payer>

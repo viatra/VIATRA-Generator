@@ -27,6 +27,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNewElements" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNewElementsHeuristic"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PartialConstantInterpretation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="interpretationOf" lowerBound="1"
@@ -92,6 +95,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetTypeInterpretation"
         lowerBound="1" eType="#//PartialTypeInterpratation" eOpposite="#//PartialTypeInterpratation/scopes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minNewElementsHeuristic"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PartialPrimitiveInterpretation" abstract="true"
       eSuperTypes="#//PartialTypeInterpratation"/>
