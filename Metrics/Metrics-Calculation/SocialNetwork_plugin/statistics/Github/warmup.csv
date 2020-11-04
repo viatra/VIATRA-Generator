@@ -1,0 +1,7 @@
+Task,Run,Result,Domain to logic transformation time,Logic to solver transformation time,Solver time,Postprocessing time,_Solution0FoundAt,TransformationExecutionTime,TypeAnalysisTime,MetricCalculationTime,StateCoderTime,StateCoderFailCount,SolutionCopyTime
+1,1,ModelResultImpl,1483,2558,3108,60043900,1609,456,424,87,272,0,1
+1,2,ModelResultImpl,1483,1126,1487,9020100,931,292,1,60,256,0,1
+1,3,ModelResultImpl,1483,927,1424,9739900,827,263,0,51,217,0,0
+1,4,ModelResultImpl,1483,886,1069,8613600,495,208,1,25,97,0,0
+1,5,ModelResultImpl,1483,768,1268,9369800,856,262,0,35,223,0,0
+

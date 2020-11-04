@@ -1,0 +1,11 @@
+package queries
+import epackage "sure.ghtorrent.github"
+
+pattern directParent(a : Commit, b: Commit) {
+	Commit.parents(a,b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern loopInParent(a){
+ find directParent+(a,a);
+}

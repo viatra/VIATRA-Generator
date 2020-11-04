@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.builder.SolverConfiguration
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.RealisticGuidance
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {
@@ -129,6 +130,30 @@ class SolverLoader {
 					try {
 						c.calculateObjectCreationCosts = Boolean.parseBoolean(stringValue)
 					} catch(Exception e) {}
+				}
+				
+								if(config.containsKey('realistic-guidance')){
+					try{
+						val stringValue = config.get('realistic-guidance');
+						c.realisticGuidance = RealisticGuidance.valueOf(stringValue);
+					}catch(IllegalArgumentException e){
+						console.writeError('''Illegal Guidance Name: «e.message»''')
+					}
+				}
+
+				if(config.containsKey('domain')){
+					val stringValue = config.get('domain');
+					c.domain = stringValue
+				}
+
+				if(config.containsKey('optional-wf')){
+					val stringValue = config.get('optional-wf');
+					c.isWFOptional = Boolean.parseBoolean(stringValue)
+				}
+
+				if(config.containsKey('allow-must-violations')){
+					val stringValue = config.get('allow-must-violations');
+					c.allowMustViolations = Boolean.parseBoolean(stringValue);
 				}
 			]
 		} else {

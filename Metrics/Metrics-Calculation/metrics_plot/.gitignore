@@ -1,0 +1,10 @@
+# virtual enviroment
+venv/
+
+# python cache
+*.pyc
+.ipynb_checkpoints/
+.idea/
+
+# keep folders
+!.gitignore

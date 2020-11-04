@@ -1,0 +1,50 @@
+import viatra "./queries/queries/Ecore.vql"
+import epackage "http://www.eclipse.org/emf/2002/Ecore"
+
+// Copy this for different model sizes
+generate {
+	metamodel = {package ecore excluding{EClassifier.instanceClass, EClassifier.defaultValue, 
+										 EEnumLiteral.instance, EStructuralFeature.defaultValue, EStructuralFeature.changeable,
+										 EStructuralFeature.derived, ENamedElement.name, EClass.interface, EClass.abstract, EClassifier.instanceTypeName,
+										 EClassifier.instanceClassName, EPackage.nsPrefix, EPackage.nsURI, EAnnotation.source,
+										 EAttribute.iD, EDataType.serializable, EEnumLiteral.literal, EEnumLiteral.value,
+										 EReference.resolveProxies, EReference.container, EReference.containment, EStringToStringMapEntry.key,
+										 EStringToStringMapEntry.value, EStructuralFeature.defaultValueLiteral, EStructuralFeature.transient,
+										 EStructuralFeature.unsettable, EStructuralFeature.volatile, ETypedElement.lowerBound,
+										 ETypedElement.many, ETypedElement.ordered, ETypedElement.required, ETypedElement.unique,ETypedElement.upperBound,
+										 // cannot generate eFactoryInstance
+										 EPackage.eFactoryInstance, 
+										 //Derived edges
+										 EClass.eAllSuperTypes, EClass.eAllAttributes, EClass.eAllReferences, EClass.eAllContainments, EClass.eAllGenericSuperTypes,
+										 EClass. eAllOperations, EClass.eAllStructuralFeatures, EClass.eAttributes, EClass.eIDAttribute, EClass.eReferences,
+										 EAttribute.eAttributeType, EGenericType.eRawType, EReference.eReferenceType,
+										 //Generic Types
+										 EClass.eGenericSuperTypes, ETypedElement.eGenericType, EOperation.eGenericExceptions, EObject, EAnnotation.references, EAnnotation.contents
+										 
+										 }}
+	partial-model = { "inputs/ecore.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	//median run time
+	scope = {
+		#node = 30  // (warm-up: 10) 30, 50, 80, 100, 120 ....
+	}
+	
+	number = 1
+	runs = 1
+	config = {
+		log-level = none,
+		runtime = 300, // the runtime is in seconds, want to set is to 5 mins
+		"optional-wf" = "false",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "false",
+		"domain" = "Ecore"
+	}
+	
+	debug = "debug"
+	statistics = "statistics/Ecore/warmup.csv"  //give different set up different filenames
+	output = "output/Ecore/run_time/"
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/github-graph/ecore-gen" modelPluginID="github-graph"
+    modelName="Github" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>github.ecore</foreignModel>
+  <genPackages prefix="Github" disposableProviderFactory="true" ecorePackage="github.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="github.ecore#//Action">
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/SUBSCRIBED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/MENTIONED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/REFERENCED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/ASSIGNED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/REOPENED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/UNSUBSCRIBED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/MERGED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/HEAD_REF_CLEANED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/HEAD_REF_DELETED"/>
+      <genEnumLiterals ecoreEnumLiteral="github.ecore#//Action/HEAD_REF_RESTORED"/>
+    </genEnums>
+    <genClasses ecoreClass="github.ecore#//User">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//User/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//User/name"/>
+    </genClasses>
+    <genClasses ecoreClass="github.ecore#//Project">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference github.ecore#//Project/issue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Project/creatd_at"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Project/deleted"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Project/updated_at"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference github.ecore#//Project/projectMembers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Project/url"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference github.ecore#//Project/commits"/>
+    </genClasses>
+    <genClasses ecoreClass="github.ecore#//Commit">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference github.ecore#//Commit/committer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference github.ecore#//Commit/parents"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference github.ecore#//Commit/pullrequest"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Commit/created_at"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Commit/sha"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Commit/parents_sha"/>
+    </genClasses>
+    <genClasses ecoreClass="github.ecore#//Issue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference github.ecore#//Issue/pullrequest"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference github.ecore#//Issue/issueevent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Issue/created_at"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//Issue/url"/>
+    </genClasses>
+    <genClasses ecoreClass="github.ecore#//PullRequest">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference github.ecore#//PullRequest/commit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//PullRequest/url"/>
+    </genClasses>
+    <genClasses ecoreClass="github.ecore#//IssueEvent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference github.ecore#//IssueEvent/user"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//IssueEvent/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//IssueEvent/created_at"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute github.ecore#//IssueEvent/actor_url"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

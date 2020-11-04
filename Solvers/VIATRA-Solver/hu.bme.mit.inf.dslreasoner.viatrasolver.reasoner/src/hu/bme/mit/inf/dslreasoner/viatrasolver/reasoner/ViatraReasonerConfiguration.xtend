@@ -55,6 +55,14 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration{
 	public var unfinishedWFWeight = 1
 	
 	public var calculateObjectCreationCosts = false
+	
+	public var RealisticGuidance realisticGuidance = RealisticGuidance.Composite;
+	 
+	 public var isWFOptional = false;
+	 
+	 public var allowMustViolations = false;
+	 
+	 public var String domain = '';
 }
 
 public class DiversityDescriptor {
@@ -83,4 +91,14 @@ public class SearchSpaceConstraint {
 	public static val UNLIMITED_MAXDEPTH = Integer.MAX_VALUE
 	public var int maxDepth = UNLIMITED_MAXDEPTH
 	public var List<Function1<ModelGenerationMethod, ModelGenerationMethodBasedGlobalConstraint>> additionalGlobalConstraints = new LinkedList
+}
+
+public enum RealisticGuidance{
+	MPC,
+	NodeActivity,
+	OutDegree,
+	NodeType,
+	Composite,
+	Composite_Without_Violations,
+	Violations
 }

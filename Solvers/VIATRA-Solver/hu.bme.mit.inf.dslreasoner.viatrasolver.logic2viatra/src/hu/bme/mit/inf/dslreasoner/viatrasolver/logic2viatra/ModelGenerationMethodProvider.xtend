@@ -22,9 +22,16 @@ import java.util.Map
 
 class ModelGenerationStatistics {
 	public var long transformationExecutionTime = 0
+	public var long metricCalculationTime = 0
+	
 	synchronized def addExecutionTime(long amount) {
 		transformationExecutionTime+=amount
 	}
+	
+	synchronized def addMetricCalculationTime(long amount) {
+		metricCalculationTime+=amount
+	}
+	
 	public var long PreliminaryTypeAnalisisTime = 0
 }
 @Data class ModelGenerationMethod {

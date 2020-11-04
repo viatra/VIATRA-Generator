@@ -33,6 +33,8 @@ import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.SolutionStoreWithDiversityDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.DiversityGranularity
+import org.eclipse.emf.ecore.util.EcoreUtil
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.HillClimbingOnRealisticMetricStrategyForModelGeneration
 
 class ViatraReasoner extends LogicReasoner{
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -64,6 +66,7 @@ class ViatraReasoner extends LogicReasoner{
 			workspace.writeModel(emptySolution,"init.partialmodel")
 		} 
 		emptySolution.problemConainer = problem
+		val emptySolutionCopy = EcoreUtil.copy(emptySolution)
 		
 		val ScopePropagator scopePropagator = new ScopePropagator(emptySolution)
 		scopePropagator.propagateAllScopeConstraints		
@@ -113,7 +116,7 @@ class ViatraReasoner extends LogicReasoner{
 			dse.addTransformationRule(rule)
 		}
 		
-		val strategy = new BestFirstStrategyForModelGeneration(workspace,viatraConfig,method)
+		val strategy = new HillClimbingOnRealisticMetricStrategyForModelGeneration(workspace,viatraConfig,method)
 		viatraConfig.progressMonitor.workedForwardTransformation
 		val transformationFinished = System.nanoTime 
 		val transformationTime = transformationFinished - transformationStartTime

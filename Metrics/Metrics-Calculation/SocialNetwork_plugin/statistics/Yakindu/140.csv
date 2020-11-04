@@ -1,0 +1,22 @@
+Task,Run,Result,Domain to logic transformation time,Logic to solver transformation time,Solver time,Postprocessing time,Solution1FoundAt,ExplorationInitializationTime,TransformationExecutionTime,TypeAnalysisTime,StateCoderTime,StateCoderFailCount,SolutionCopyTime,ActivationSelectionTime,NumericalSolverSumTime,NumericalSolverProblemFormingTime,NumericalSolverSolvingTime,NumericalSolverInterpretingSolution,NumericalSolverCachingTime,NumericalSolverCallNumber,NumericalSolverCachedAnswerNumber
+2,1,ModelResultImpl,49,948,55965,249,54293,1336,6134,11,17708,0,3,2,0,0,0,0,0,0,0
+2,2,ModelResultImpl,49,638,65106,310,63703,837,7067,0,20870,0,3,2,0,0,0,0,0,0,0
+2,3,ModelResultImpl,49,1929,69666,268,67267,1926,7537,0,20708,0,1,0,0,0,0,0,0,0,0
+2,4,ModelResultImpl,49,617,67091,318,65452,1078,8304,0,18694,0,1,0,0,0,0,0,0,0,0
+2,5,ModelResultImpl,49,1068,75850,145,74083,1480,8386,0,19637,0,1,0,0,0,0,0,0,0,0
+2,6,ModelResultImpl,49,785,65738,301,63408,1430,7695,0,16497,0,3,0,0,0,0,0,0,0,0
+2,7,ModelResultImpl,49,1055,85078,387,82888,1365,9313,0,22220,0,1,0,0,0,0,0,0,0,0
+2,8,ModelResultImpl,49,1189,63131,136,61246,1586,7804,0,17380,0,2,1,0,0,0,0,0,0,0
+2,9,ModelResultImpl,49,530,60098,248,58756,657,6900,0,18737,0,2,0,0,0,0,0,0,0,0
+2,10,ModelResultImpl,49,706,58634,247,56728,1023,6237,0,18909,0,1,0,0,0,0,0,0,0,0
+2,11,ModelResultImpl,49,683,55087,174,53903,749,5838,0,17665,0,1,0,0,0,0,0,0,0,0
+2,12,ModelResultImpl,49,533,69793,206,68720,625,7827,0,22340,0,1,0,0,0,0,0,0,0,0
+2,13,ModelResultImpl,49,625,58198,256,56830,781,6177,0,20134,0,2,0,0,0,0,0,0,0,0
+2,14,ModelResultImpl,49,555,66046,250,64950,664,7385,0,15860,0,0,0,0,0,0,0,0,0,0
+2,15,ModelResultImpl,49,586,96452,367,92042,1007,12651,0,23019,0,6,0,0,0,0,0,0,0,0
+2,16,ModelResultImpl,49,1523,72460,210,70549,1181,9123,1,21222,0,2,0,0,0,0,0,0,0,0
+2,17,ModelResultImpl,49,734,74551,417,72763,842,8117,0,21326,0,3,0,0,0,0,0,0,0,0
+2,18,ModelResultImpl,49,1282,75020,208,72887,1459,8671,0,22596,0,3,1,0,0,0,0,0,0,0
+2,19,ModelResultImpl,49,871,70125,286,68362,947,8755,0,18829,0,1,0,0,0,0,0,0,0,0
+2,20,ModelResultImpl,49,633,65564,149,64398,816,7912,0,15815,0,0,0,0,0,0,0,0,0,0
+

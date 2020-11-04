@@ -1,0 +1,22 @@
+Task,Run,Result,Domain to logic transformation time,Logic to solver transformation time,Solver time,Postprocessing time,TransformationExecutionTime,TypeAnalysisTime,MetricCalculationTime,StateCoderTime,StateCoderFailCount,SolutionCopyTime,_Solution0FoundAt
+5,1,InsuficientResourcesResultImpl,26,1815,305292,1000,16140,15,12210,260570,0,0,
+5,2,InsuficientResourcesResultImpl,26,1237,301846,700,14659,0,12249,259139,0,0,
+5,3,InsuficientResourcesResultImpl,26,1218,301687,600,15765,0,12876,256432,0,0,
+5,4,InsuficientResourcesResultImpl,26,1294,302248,800,18015,0,11131,255608,0,0,
+5,5,InsuficientResourcesResultImpl,26,1290,300894,900,14893,0,11118,259377,0,0,
+5,6,InsuficientResourcesResultImpl,26,1184,302351,900,16463,0,11499,258946,0,0,
+5,7,ModelResultImpl,26,1180,289935,35396400,17823,0,14375,240465,0,4,287519
+5,8,InsuficientResourcesResultImpl,26,1298,304757,700,12762,0,10686,266461,0,0,
+5,9,ModelResultImpl,26,1166,287620,35860800,17055,0,15050,237850,0,1,285304
+5,10,ModelResultImpl,26,1185,168322,32789700,15059,0,9955,132727,0,0,166044
+5,11,InsuficientResourcesResultImpl,26,1176,302293,900,12773,0,10338,264930,0,0,
+5,12,InsuficientResourcesResultImpl,26,1200,300206,600,14139,0,11334,260462,0,0,
+5,13,InsuficientResourcesResultImpl,26,1199,305554,500,12939,0,11144,266919,0,0,
+5,14,InsuficientResourcesResultImpl,26,1193,300864,700,18895,0,14266,250111,0,0,
+5,15,InsuficientResourcesResultImpl,26,1197,303894,700,14501,0,12313,262474,0,0,
+5,16,InsuficientResourcesResultImpl,26,1171,303003,700,13178,0,11827,263585,0,0,
+5,17,InsuficientResourcesResultImpl,26,1169,305501,600,13479,0,11788,265540,0,0,
+5,18,InsuficientResourcesResultImpl,26,1175,301967,700,13531,0,11415,262420,0,0,
+5,19,InsuficientResourcesResultImpl,26,1274,300241,800,13254,0,11607,260895,0,0,
+5,20,ModelResultImpl,26,1166,269530,42362900,17007,0,13440,223316,0,1,267245
+
