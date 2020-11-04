@@ -1,13 +1,13 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
 import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericTranslator
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod
 import java.math.BigDecimal
 import java.util.HashMap
 import java.util.LinkedHashMap
@@ -21,7 +21,8 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 
 class NumericSolver {
-	val ThreadContext threadContext;
+	val ModelGenerationMethod method
+	var ThreadContext threadContext
 	val constraint2MustUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
 	val constraint2CurrentUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
 	NumericTranslator t = new NumericTranslator
@@ -35,8 +36,16 @@ class NumericSolver {
 	var int numberOfSolverCalls = 0
 	var int numberOfCachedSolverCalls = 0
 	
-	new(ThreadContext threadContext, ModelGenerationMethod method, boolean intermediateConsistencyCheck, boolean caching) {
-		this.threadContext = threadContext
+	new(ModelGenerationMethod method, boolean intermediateConsistencyCheck, boolean caching) {
+		this.method = method
+		this.intermediateConsistencyCheck = intermediateConsistencyCheck
+		this.caching = caching
+	}
+	
+	def init(ThreadContext context) {
+		// This makes the NumericSolver single-threaded,
+		// but that's not a problem, because we only use the solver on a single thread anyways.
+		this.threadContext = context
 		val engine = threadContext.queryEngine
 		for(entry : method.mustUnitPropagationPreconditions.entrySet) {
 			val constraint = entry.key
@@ -50,8 +59,6 @@ class NumericSolver {
 			val matcher = querySpec.getMatcher(engine);
 			constraint2CurrentUnitPropagationPrecondition.put(constraint,matcher)
 		}
-		this.intermediateConsistencyCheck = intermediateConsistencyCheck
-		this.caching = caching
 	}
 	
 	def getRuntime(){runtime}

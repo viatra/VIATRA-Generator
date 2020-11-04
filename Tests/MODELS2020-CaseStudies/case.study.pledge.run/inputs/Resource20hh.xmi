@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TaxCardWithRoot:Resource
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore"
+    xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../../case.study.pledge.model/model/TaxationWithRoot.ecore">
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+    <contains/>
+</TaxCardWithRoot:Resource>
+

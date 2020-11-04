@@ -68,6 +68,7 @@ public class FunctionalArchitectureModelImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FunctionalElement> getRootElements() {
 		if (rootElements == null) {
 			rootElements = new EObjectContainmentEList<FunctionalElement>(FunctionalElement.class, this, FunctionalarchitecturePackage.FUNCTIONAL_ARCHITECTURE_MODEL__ROOT_ELEMENTS);

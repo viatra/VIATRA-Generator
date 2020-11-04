@@ -9,7 +9,7 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 100
+		#node = 200
 	}
 	
 	number = 1
@@ -19,7 +19,8 @@ generate {
 		"optional-wf" = "false",
 		"realistic-guidance" = "Composite",
 		"allow-must-violations" = "false",
-		"domain" = "Yakindumm"
+		"domain" = "Yakindumm",
+		"scopePropagator" = "typeHierarchy"
 	}
 	
 	statistics = "statistics/Yakindu/warmup.csv"  //give different set up different filenames

@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getMinNewElements <em>Min New Elements</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getMaxNewElements <em>Max New Elements</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.PartialInterpretationImpl#getMinNewElementsHeuristic <em>Min New Elements Heuristic</em>}</li>
  * </ul>
  *
  * @generated
@@ -183,6 +184,26 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	protected int maxNewElements = MAX_NEW_ELEMENTS_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getMinNewElementsHeuristic() <em>Min New Elements Heuristic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinNewElementsHeuristic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMinNewElementsHeuristic() <em>Min New Elements Heuristic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinNewElementsHeuristic()
+	 * @generated
+	 * @ordered
+	 */
+	protected int minNewElementsHeuristic = MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -206,6 +227,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicProblem getProblem() {
 		if (problem != null && problem.eIsProxy()) {
 			InternalEObject oldProblem = (InternalEObject)problem;
@@ -232,6 +254,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProblem(LogicProblem newProblem) {
 		LogicProblem oldProblem = problem;
 		problem = newProblem;
@@ -244,6 +267,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PartialConstantInterpretation> getPartialconstantinterpretation() {
 		if (partialconstantinterpretation == null) {
 			partialconstantinterpretation = new EObjectContainmentEList<PartialConstantInterpretation>(PartialConstantInterpretation.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__PARTIALCONSTANTINTERPRETATION);
@@ -256,6 +280,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PartialRelationInterpretation> getPartialrelationinterpretation() {
 		if (partialrelationinterpretation == null) {
 			partialrelationinterpretation = new EObjectContainmentEList<PartialRelationInterpretation>(PartialRelationInterpretation.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__PARTIALRELATIONINTERPRETATION);
@@ -268,6 +293,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PartialFunctionInterpretation> getPartialfunctioninterpretation() {
 		if (partialfunctioninterpretation == null) {
 			partialfunctioninterpretation = new EObjectContainmentEList<PartialFunctionInterpretation>(PartialFunctionInterpretation.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__PARTIALFUNCTIONINTERPRETATION);
@@ -280,6 +306,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DefinedElement> getNewElements() {
 		if (newElements == null) {
 			newElements = new EObjectContainmentEList<DefinedElement>(DefinedElement.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__NEW_ELEMENTS);
@@ -292,6 +319,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PartialTypeInterpratation> getPartialtypeinterpratation() {
 		if (partialtypeinterpratation == null) {
 			partialtypeinterpratation = new EObjectContainmentEList<PartialTypeInterpratation>(PartialTypeInterpratation.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__PARTIALTYPEINTERPRATATION);
@@ -304,6 +332,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DefinedElement> getOpenWorldElements() {
 		if (openWorldElements == null) {
 			openWorldElements = new EObjectContainmentEList<DefinedElement>(DefinedElement.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__OPEN_WORLD_ELEMENTS);
@@ -316,6 +345,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogicProblem getProblemConainer() {
 		return problemConainer;
 	}
@@ -340,6 +370,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setProblemConainer(LogicProblem newProblemConainer) {
 		if (newProblemConainer != problemConainer) {
 			NotificationChain msgs = null;
@@ -359,6 +390,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
 			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, PartialinterpretationPackage.PARTIAL_INTERPRETATION__SCOPES);
@@ -371,6 +403,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMinNewElements() {
 		return minNewElements;
 	}
@@ -380,6 +413,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinNewElements(int newMinNewElements) {
 		int oldMinNewElements = minNewElements;
 		minNewElements = newMinNewElements;
@@ -392,6 +426,7 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMaxNewElements() {
 		return maxNewElements;
 	}
@@ -401,11 +436,35 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMaxNewElements(int newMaxNewElements) {
 		int oldMaxNewElements = maxNewElements;
 		maxNewElements = newMaxNewElements;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS, oldMaxNewElements, maxNewElements));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int getMinNewElementsHeuristic() {
+		return minNewElementsHeuristic;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMinNewElementsHeuristic(int newMinNewElementsHeuristic) {
+		int oldMinNewElementsHeuristic = minNewElementsHeuristic;
+		minNewElementsHeuristic = newMinNewElementsHeuristic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC, oldMinNewElementsHeuristic, minNewElementsHeuristic));
 	}
 
 	/**
@@ -467,6 +526,8 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 				return getMinNewElements();
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS:
 				return getMaxNewElements();
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC:
+				return getMinNewElementsHeuristic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -520,6 +581,9 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS:
 				setMaxNewElements((Integer)newValue);
 				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC:
+				setMinNewElementsHeuristic((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -565,6 +629,9 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS:
 				setMaxNewElements(MAX_NEW_ELEMENTS_EDEFAULT);
 				return;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC:
+				setMinNewElementsHeuristic(MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -599,6 +666,8 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 				return minNewElements != MIN_NEW_ELEMENTS_EDEFAULT;
 			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MAX_NEW_ELEMENTS:
 				return maxNewElements != MAX_NEW_ELEMENTS_EDEFAULT;
+			case PartialinterpretationPackage.PARTIAL_INTERPRETATION__MIN_NEW_ELEMENTS_HEURISTIC:
+				return minNewElementsHeuristic != MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -612,11 +681,13 @@ public class PartialInterpretationImpl extends MinimalEObjectImpl.Container impl
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (minNewElements: ");
 		result.append(minNewElements);
 		result.append(", maxNewElements: ");
 		result.append(maxNewElements);
+		result.append(", minNewElementsHeuristic: ");
+		result.append(minNewElementsHeuristic);
 		result.append(')');
 		return result.toString();
 	}

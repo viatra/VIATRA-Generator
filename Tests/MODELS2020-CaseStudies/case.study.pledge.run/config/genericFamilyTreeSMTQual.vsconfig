@@ -1,7 +1,7 @@
 import epackage	"../case.study.familyTree.model/model/familytree.ecore"
-import viatra	"src/queries/familyTreeConstraintsQual.vql"
+import viatra	"queries/familyTreeConstraintsQual.vql"
 import epackage "../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore"
-import viatra "src/queries/SatelliteQueries.vql"
+import viatra "queries/SatelliteQueries.vql"
 
 generate {
 	metamodel = { package satellite }
@@ -36,6 +36,9 @@ generate {
 		log-level = normal,
 		"fitness-punishSize" = "false",
 		"fitness-scope" = "3",
+		"fitness-objectCreationCosts" = "true",
+		"scopePropagator" = "typeHierarchy",
+		"fitness-missing-containment" = "2",
 		"numeric-solver-at-end" = "true"
 	}
 	

@@ -29,6 +29,7 @@ public class SolverLanguageTokenSource implements TokenSource {
 	private int plusTokenId = -1;
 	private int starTokenId = -1;
 	private int dotTokenId = -1;
+	private int tildeTokenId = -1;
 	private int openParenTokenId = -1;
 
 	public SolverLanguageTokenSource(TokenSource delegate) {
@@ -42,33 +43,49 @@ public class SolverLanguageTokenSource implements TokenSource {
 
 	@Override
 	public Token nextToken() {
-		Token token = internalNextToken();
+		Token token;
+		if (acceptor.hasNext()) {
+			token = acceptor.next();
+		} else {
+			token = delegate.nextToken();
+		}
+		postProcessToken(token);
 		lastTokenId = token.getType();
 		return token;
 	}
 
-	protected Token internalNextToken() {
-		if (acceptor.hasNext()) {
-			return acceptor.next();
-		}
-		Token token = delegate.nextToken();
+	protected void postProcessToken(Token token) {
 		int type = token.getType();
 		if (type == plusTokenId) {
-			if ((lastTokenId == RULE_ID || lastTokenId == RULE_QUOTED_ID)
-					&& peekUntilVisible().getType() == openParenTokenId) {
+			if (isTransitiveClosureInReferenceContext()) {
 				token.setType(RULE_TRANSITIVE_CLOSURE);
 			}
 		} else if (type == starTokenId) {
-			if ((lastTokenId == RULE_ID || lastTokenId == RULE_QUOTED_ID)
-					&& peekUntilVisible().getType() == openParenTokenId) {
+			if (isTransitiveClosureInReferenceContext()) {
 				token.setType(RULE_REFLEXIVE_TRANSITIVE_CLOSURE);
 			}
 		} else if (type == dotTokenId) {
-			if ((lastTokenId != RULE_ID && lastTokenId != RULE_INT) || peekToken().getType() != lastTokenId) {
+			if (isFullStopContext()) {
 				token.setType(RULE_FULL_STOP);
 			}
 		}
-		return token;
+	}
+
+	private boolean isIdFragment(int tokenId) {
+		return tokenId == RULE_ID || tokenId == RULE_QUOTED_ID;
+	}
+
+	private boolean isTransitiveClosureInReferenceContext() {
+		int nextVisibleTokenId = peekUntilVisible().getType();
+		return isIdFragment(lastTokenId)
+				&& (nextVisibleTokenId == dotTokenId || nextVisibleTokenId == openParenTokenId);
+	}
+
+	private boolean isFullStopContext() {
+		int nextTokenId = peekToken().getType();
+		boolean inReference = isIdFragment(lastTokenId) && (isIdFragment(nextTokenId) || nextTokenId == tildeTokenId);
+		boolean inReal = lastTokenId == RULE_INT && nextTokenId == RULE_INT;
+		return !(inReference || inReal);
 	}
 
 	protected Token peekUntilVisible() {
@@ -101,6 +118,9 @@ public class SolverLanguageTokenSource implements TokenSource {
 			case "'.'":
 				dotTokenId = entry.getKey();
 				break;
+			case "'~'":
+				tildeTokenId = entry.getKey();
+				break;
 			case "'('":
 				openParenTokenId = entry.getKey();
 				break;
@@ -114,6 +134,9 @@ public class SolverLanguageTokenSource implements TokenSource {
 		}
 		if (dotTokenId == -1) {
 			throw new IllegalStateException("Token '.' was not found");
+		}
+		if (tildeTokenId == -1) {
+			throw new IllegalStateException("Token '~' was not found");
 		}
 		if (openParenTokenId == -1) {
 			throw new IllegalStateException("Token '(' was not found");

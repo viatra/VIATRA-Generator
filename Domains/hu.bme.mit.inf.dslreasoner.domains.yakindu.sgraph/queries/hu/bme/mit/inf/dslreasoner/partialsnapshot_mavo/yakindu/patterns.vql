@@ -1,5 +1,4 @@
 package hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu
-
 import epackage "hu.bme.mit.inf.yakindumm"
 
 /////////
@@ -122,7 +121,7 @@ pattern choiceHasNoIncoming(c: Choice) {
 //	neg find hasMultipleOutgoingTrainsition(s);
 //	neg find hasMultipleIncomingTrainsition(s);
 //}
-//
+
 //pattern hasMultipleOutgoingTrainsition(v : Synchronization) {
 //	find transition(_, v, trg1);
 //	find transition(_, v, trg2);
@@ -203,10 +202,10 @@ pattern hasMultipleRegions(composite: CompositeElement) {
 //	t2!=t3;
 //	t1!=t3;
 //}
-//
-///**
-// * Simplifying model generation
-// */
+
+/**
+ * Simplifying model generation
+ */
 //@Constraint(severity="error", message="error", key = {s1,s2})
 //pattern twoSynch(s1 : Synchronization, s2 : Synchronization) {
 //	Synchronization(s1);

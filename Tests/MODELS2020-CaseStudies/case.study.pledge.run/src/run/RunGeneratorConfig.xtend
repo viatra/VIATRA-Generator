@@ -12,7 +12,9 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RuntimeEn
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ScopeSpecification
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor
-import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
+import hu.bme.mit.inf.dslreasoner.application.execution.StandardOutputBasedScriptConsole
+import java.io.File
+import java.io.PrintWriter
 import java.text.SimpleDateFormat
 import java.util.Date
 import org.apache.commons.cli.BasicParser
@@ -23,8 +25,6 @@ import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 import org.apache.commons.cli.ParseException
 import org.eclipse.core.runtime.NullProgressMonitor
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 
 class RunGeneratorConfig {
 	static var SIZE_LB = 20
@@ -40,6 +40,8 @@ class RunGeneratorConfig {
 	static val INITIAL = true
 
 	def static void main(String[] args) {
+//		MyChangeFactory.install()
+		
 //		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi", new XMIResourceFactoryImpl)
 //		val workspace = new FileSystemWorkspace('''x/''', "")
 //		workspace.initAndClear
@@ -100,7 +102,7 @@ class RunGeneratorConfig {
 		val SimpleDateFormat format = new SimpleDateFormat("dd-HHmm")
 		val formattedDate = format.format(date)
 
-		val executor = new ScriptExecutor
+		val executor = new ScriptExecutor(StandardOutputBasedScriptConsole.FACTORY)
 		val path = "config//generic" + DOMAIN + ".vsconfig"
 		var ConfigurationScript config = StandaloneScriptExecutor.loadScript(path)
 
@@ -142,7 +144,29 @@ class RunGeneratorConfig {
 				val pms = genTask.partialModel as PartialModelSpecification
 				val me = pms.entry.get(0) as ModelEntry
 				val fs = me.path as FileSpecification
-				fs.path = "inputs/Resource" + HOUSEHOLD + "hh.xmi"
+				val modelPath = "inputs/Resource" + HOUSEHOLD + "hh.xmi"
+				val modelFile = new File(modelPath)
+				if (!modelFile.exists) {
+					val writer = new PrintWriter(modelFile)
+					try {
+						writer.println('''
+						<?xml version="1.0" encoding="UTF-8"?>
+						<TaxCardWithRoot:Resource
+						    xmi:version="2.0"
+						    xmlns:xmi="http://www.omg.org/XMI"
+						    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						    xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore"
+						    xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../../case.study.pledge.model/model/TaxationWithRoot.ecore">
+						    «FOR i : 0 ..< HOUSEHOLD»
+						    	<contains/>
+						    «ENDFOR»
+						</TaxCardWithRoot:Resource>
+						''')
+					} finally {
+						writer.close
+					}
+				}
+				fs.path = modelPath
 				println("<<Using " + fs.path + " as initial model>>")
 			} else {
 				scopeSpec.scopes.remove(1)

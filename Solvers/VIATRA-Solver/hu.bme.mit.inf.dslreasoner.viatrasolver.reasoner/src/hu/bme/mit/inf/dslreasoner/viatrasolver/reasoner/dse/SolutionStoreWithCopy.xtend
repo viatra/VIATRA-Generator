@@ -1,14 +1,12 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
-import java.util.List
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import java.util.LinkedList
-import org.eclipse.emf.ecore.EObject
+import java.util.List
 import java.util.Map
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.dse.base.ThreadContext
-import java.util.TreeMap
-import java.util.SortedMap
 
 class SolutionStoreWithCopy {
 	

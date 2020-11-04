@@ -63,6 +63,7 @@ public class PartialConstantInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConstantDeclaration getInterpretationOf() {
 		if (interpretationOf != null && interpretationOf.eIsProxy()) {
 			InternalEObject oldInterpretationOf = (InternalEObject)interpretationOf;
@@ -89,6 +90,7 @@ public class PartialConstantInterpretationImpl extends MinimalEObjectImpl.Contai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInterpretationOf(ConstantDeclaration newInterpretationOf) {
 		ConstantDeclaration oldInterpretationOf = interpretationOf;
 		interpretationOf = newInterpretationOf;

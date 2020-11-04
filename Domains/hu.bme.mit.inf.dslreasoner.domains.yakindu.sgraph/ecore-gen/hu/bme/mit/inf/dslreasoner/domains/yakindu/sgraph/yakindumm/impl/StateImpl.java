@@ -67,6 +67,7 @@ public class StateImpl extends RegularStateImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Region> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentEList<Region>(Region.class, this, YakindummPackage.STATE__REGIONS);

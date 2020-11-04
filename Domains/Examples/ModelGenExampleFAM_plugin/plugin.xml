@@ -12,13 +12,6 @@
   <extension id="hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns" id="hu.bme.mit.inf.dslreasoner.domains.transima.fam.FamPatterns">
       <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.terminatorAndInformation"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.type"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.rootElements"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.parent"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.model"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.hasRoot"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.hasInt"/>
-      <query-specification fqn="hu.bme.mit.inf.dslreasoner.domains.transima.fam.hasLeaf"/>
     </group>
   </extension>
 </plugin>

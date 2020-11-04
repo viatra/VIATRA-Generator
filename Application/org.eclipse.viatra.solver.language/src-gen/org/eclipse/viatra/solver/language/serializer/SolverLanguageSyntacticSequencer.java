@@ -11,6 +11,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -22,14 +24,20 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	protected SolverLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_AtomicExpression_LeftParenthesisKeyword_4_0_a;
 	protected AbstractElementAlias match_AtomicExpression_LeftParenthesisKeyword_4_0_p;
-	protected AbstractElementAlias match_MemberDefinition_SemicolonKeyword_5_q;
+	protected AbstractElementAlias match_ClassDeclaration_FULL_STOPTerminalRuleCall_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__;
+	protected AbstractElementAlias match_EnumDeclaration_CommaKeyword_2_0_1_1_0_q;
+	protected AbstractElementAlias match_EnumDeclaration_FULL_STOPTerminalRuleCall_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__;
+	protected AbstractElementAlias match_Field_SemicolonKeyword_5_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SolverLanguageGrammarAccess) access;
 		match_AtomicExpression_LeftParenthesisKeyword_4_0_a = new TokenAlias(true, true, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_4_0());
 		match_AtomicExpression_LeftParenthesisKeyword_4_0_p = new TokenAlias(true, false, grammarAccess.getAtomicExpressionAccess().getLeftParenthesisKeyword_4_0());
-		match_MemberDefinition_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getMemberDefinitionAccess().getSemicolonKeyword_5());
+		match_ClassDeclaration_FULL_STOPTerminalRuleCall_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getLeftCurlyBracketKeyword_4_0_0()), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getRightCurlyBracketKeyword_4_0_2())), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getFULL_STOPTerminalRuleCall_4_1()));
+		match_EnumDeclaration_CommaKeyword_2_0_1_1_0_q = new TokenAlias(false, true, grammarAccess.getEnumDeclarationAccess().getCommaKeyword_2_0_1_1_0());
+		match_EnumDeclaration_FULL_STOPTerminalRuleCall_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getLeftCurlyBracketKeyword_2_0_0()), new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getRightCurlyBracketKeyword_2_0_2())), new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getFULL_STOPTerminalRuleCall_2_1()));
+		match_Field_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getFieldAccess().getSemicolonKeyword_5());
 	}
 	
 	@Override
@@ -71,8 +79,14 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 				emit_AtomicExpression_LeftParenthesisKeyword_4_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_AtomicExpression_LeftParenthesisKeyword_4_0_p.equals(syntax))
 				emit_AtomicExpression_LeftParenthesisKeyword_4_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_MemberDefinition_SemicolonKeyword_5_q.equals(syntax))
-				emit_MemberDefinition_SemicolonKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ClassDeclaration_FULL_STOPTerminalRuleCall_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__.equals(syntax))
+				emit_ClassDeclaration_FULL_STOPTerminalRuleCall_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EnumDeclaration_CommaKeyword_2_0_1_1_0_q.equals(syntax))
+				emit_EnumDeclaration_CommaKeyword_2_0_1_1_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EnumDeclaration_FULL_STOPTerminalRuleCall_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__.equals(syntax))
+				emit_EnumDeclaration_FULL_STOPTerminalRuleCall_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Field_SemicolonKeyword_5_q.equals(syntax))
+				emit_Field_SemicolonKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -82,26 +96,25 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) '[' lowerBound=Expression
+	 *     (rule start) (ambiguity) '[' lowerBound=AdditiveExpression
+	 *     (rule start) (ambiguity) 'count' '{' condition=Expression
 	 *     (rule start) (ambiguity) 'empty' (rule start)
-	 *     (rule start) (ambiguity) 'empty' FULL_STOP (rule start)
-	 *     (rule start) (ambiguity) 'if' condition=Expression
+	 *     (rule start) (ambiguity) 'if' condition=DisjunctiveExpression
 	 *     (rule start) (ambiguity) 'inf' (rule start)
-	 *     (rule start) (ambiguity) 'inf' FULL_STOP (rule start)
 	 *     (rule start) (ambiguity) 'let' bindings+=LetBinding
+	 *     (rule start) (ambiguity) components+=PathComponent
 	 *     (rule start) (ambiguity) functor=Reference
-	 *     (rule start) (ambiguity) op=UnaryOp
-	 *     (rule start) (ambiguity) op=[NamedElement|QualifiedName]
-	 *     (rule start) (ambiguity) quantifier=Quantifier
-	 *     (rule start) (ambiguity) referred=[NamedElement|QualifiedName]
+	 *     (rule start) (ambiguity) op=UnaryOperator
+	 *     (rule start) (ambiguity) op=[Symbol|QualifiedName]
+	 *     (rule start) (ambiguity) value=INT
 	 *     (rule start) (ambiguity) value=LogicValue
 	 *     (rule start) (ambiguity) value=Real
 	 *     (rule start) (ambiguity) value=STRING
 	 *     (rule start) (ambiguity) {BinaryExpression.left=}
 	 *     (rule start) (ambiguity) {CastExpression.body=}
-	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Conjunction.children+=}
 	 *     (rule start) (ambiguity) {Disjunction.children+=}
+	 *     (rule start) (ambiguity) {Forall.condition=}
 	 *     (rule start) (ambiguity) {Switch.cases+=}
 	 */
 	protected void emit_AtomicExpression_LeftParenthesisKeyword_4_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -113,19 +126,53 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'if' condition=Expression
+	 *     (rule start) (ambiguity) 'count' '{' condition=Expression
+	 *     (rule start) (ambiguity) 'if' condition=DisjunctiveExpression
 	 *     (rule start) (ambiguity) 'let' bindings+=LetBinding
-	 *     (rule start) (ambiguity) op=UnaryOp
-	 *     (rule start) (ambiguity) op=[NamedElement|QualifiedName]
-	 *     (rule start) (ambiguity) quantifier=Quantifier
+	 *     (rule start) (ambiguity) op=UnaryOperator
+	 *     (rule start) (ambiguity) op=[Symbol|QualifiedName]
 	 *     (rule start) (ambiguity) {BinaryExpression.left=}
 	 *     (rule start) (ambiguity) {CastExpression.body=}
-	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Conjunction.children+=}
 	 *     (rule start) (ambiguity) {Disjunction.children+=}
+	 *     (rule start) (ambiguity) {Forall.condition=}
 	 *     (rule start) (ambiguity) {Switch.cases+=}
 	 */
 	protected void emit_AtomicExpression_LeftParenthesisKeyword_4_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}') | FULL_STOP
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=ID (ambiguity) (rule end)
+	 *     supertypes+=[Symbol|QualifiedName] (ambiguity) (rule end)
+	 */
+	protected void emit_ClassDeclaration_FULL_STOPTerminalRuleCall_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     literals+=EnumLiteral (ambiguity) literals+=EnumLiteral
+	 */
+	protected void emit_EnumDeclaration_CommaKeyword_2_0_1_1_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}') | FULL_STOP
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=ID (ambiguity) (rule end)
+	 */
+	protected void emit_EnumDeclaration_FULL_STOPTerminalRuleCall_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -135,9 +182,9 @@ public class SolverLanguageSyntacticSequencer extends AbstractSyntacticSequencer
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
-	 *     opposite=[NamedElement|QualifiedName] (ambiguity) (rule end)
+	 *     opposite=[Symbol|QualifiedName] (ambiguity) (rule end)
 	 */
-	protected void emit_MemberDefinition_SemicolonKeyword_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Field_SemicolonKeyword_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

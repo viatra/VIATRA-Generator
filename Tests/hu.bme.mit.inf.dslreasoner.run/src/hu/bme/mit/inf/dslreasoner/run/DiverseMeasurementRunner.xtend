@@ -24,7 +24,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.StateCoderStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
-import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualisation
+import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.FileSystemWorkspace
 import java.util.LinkedList
 import java.util.List
@@ -32,9 +32,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.viatra.query.runtime.api.IQuerySpecification
-import java.util.Set
-import java.util.Comparator
 
 enum Metamodel {
 	FAM, YakinduWOSynch, Yakindu
@@ -187,8 +184,7 @@ class ScenarioRunner {
 				it.runtimeLimit = 300
 				it.typeScopes.maxNewElements = scenario.size
 				it.typeScopes.minNewElements = scenario.size
-				it.solutionScope.numberOfRequiredSolution = scenario.number
-				it.existingQueries = vq.patterns.map[it.internalQueryRepresentation]
+				it.solutionScope.numberOfRequiredSolutions = scenario.number
 				it.nameNewElements = false
 				it.typeInferenceMethod = TypeInferenceMethod.PreliminaryAnalysis
 				it.searchSpaceConstraints.additionalGlobalConstraints += loader.additionalConstraints
@@ -223,9 +219,8 @@ class ScenarioRunner {
 				it.runtimeLimit = 300
 				it.typeScopes.maxNewElements = scenario.size
 				it.typeScopes.minNewElements = scenario.size
-				it.solutionScope.numberOfRequiredSolution = scenario.number
+				it.solutionScope.numberOfRequiredSolutions = scenario.number
 				it.typeScopes.maxNewIntegers = 0
-				it.writeToFile=true
 				it.randomise = run-1
 			]
 		}
@@ -259,7 +254,7 @@ class ScenarioRunner {
 //				ecore2GML.transform(root)
 //				workspace.writeText('''solutionVisualisation«representationNumber».gml''',gml)
 //				
-				val visualiser = new GraphvizVisualisation
+				val visualiser = new GraphvizVisualiser
 				val visualisation = visualiser.visualiseConcretization(representation)
 				visualisation.writeToFile(workspace,'''solutionVisualisation«representationNumber»''')
 				

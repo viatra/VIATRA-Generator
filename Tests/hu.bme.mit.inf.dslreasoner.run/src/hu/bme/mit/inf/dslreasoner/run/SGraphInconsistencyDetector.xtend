@@ -1,7 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.run
 
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethodBasedGlobalConstraint
 import org.eclipse.viatra.dse.base.ThreadContext
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher

@@ -101,15 +101,8 @@ class AlloyHandler {
 			try{
 				answers = future.get(configuration.runtimeLimit,TimeUnit.SECONDS)
 				finished = true
-			} catch (TimeoutException ex) {
-   				// handle the timeout
-			} catch (InterruptedException e) {
-				// handle the interrupts
-			} catch (ExecutionException e) {
-				// handle other exceptions
-			} finally {
-				future.cancel(true);
-				
+			} catch (TimeoutException | InterruptedException | ExecutionException e) {
+				future.cancel(true)
 				answers = callable.partialAnswers
 				finished = false
 			}
@@ -195,7 +188,7 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 					} else {
 						lastAnswer = lastAnswer.next
 					}
-					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolution)
+					configuration.progressMonitor.workedBackwardTransformation(configuration.solutionScope.numberOfRequiredSolutions)
 					
 					val runtime = System.currentTimeMillis -startTime
 					synchronized(this) {
@@ -212,8 +205,8 @@ class AlloyCallerWithTimeout implements Callable<List<Pair<A4Solution,Long>>>{
 	}
 	
 	def hasEnoughSolution(List<?> answers) {
-		if(configuration.solutionScope.numberOfRequiredSolution < 0) return false
-		else return answers.size() == configuration.solutionScope.numberOfRequiredSolution
+		if(configuration.solutionScope.numberOfRequiredSolutions < 0) return false
+		else return answers.size() == configuration.solutionScope.numberOfRequiredSolutions
 	}
 	
 	public def getPartialAnswers() {

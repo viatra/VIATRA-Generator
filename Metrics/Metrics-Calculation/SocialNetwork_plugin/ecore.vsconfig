@@ -41,7 +41,8 @@ generate {
 		"optional-wf" = "false",
 		"realistic-guidance" = "Composite",
 		"allow-must-violations" = "false",
-		"domain" = "Ecore"
+		"domain" = "Ecore",
+		"scopePropagator" = "typeHierarchy"
 	}
 	
 	debug = "debug"

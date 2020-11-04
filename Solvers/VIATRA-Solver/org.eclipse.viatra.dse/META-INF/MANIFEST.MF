@@ -1,0 +1,387 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.eclipse.viatra.dse
+Bundle-SymbolicName: org.eclipse.viatra.dse;singleton:=true
+Require-Bundle: org.eclipse.viatra.query.runtime;bundle-version="[2.4.
+ 0,2.5.0)";visibility:=reexport,org.eclipse.viatra.transformation.evm;
+ bundle-version="[2.4.0,2.5.0)";visibility:=reexport,org.eclipse.emf.e
+ core,org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",org.eclipse.emf
+ .edit,org.eclipse.viatra.transformation.runtime.emf;bundle-version="[
+ 2.4.0,2.5.0)";visibility:=reexport
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/viatra
+ /org.eclipse.viatra.git;path="dse/plugins/org.eclipse.viatra.dse";com
+ mitId=2a7314b6b21df594743fa017d18ae62da85c73fa
+Bundle-Vendor: Eclipse VIATRA Project
+Import-Package: com.google.common.base;version="27.1.0",com.google.com
+ mon.collect;version="27.1.0",com.google.common.util.concurrent;versio
+ n="27.1.0",org.apache.log4j;version="1.2.15"
+Export-Package: org.eclipse.viatra.dse.api,org.eclipse.viatra.dse.api.
+ strategy.impl,org.eclipse.viatra.dse.api.strategy.interfaces,org.ecli
+ pse.viatra.dse.base,org.eclipse.viatra.dse.designspace.api,org.eclips
+ e.viatra.dse.multithreading,org.eclipse.viatra.dse.objectives,org.ecl
+ ipse.viatra.dse.objectives.impl,org.eclipse.viatra.dse.solutionstore,
+ org.eclipse.viatra.dse.statecode,org.eclipse.viatra.dse.statecoding,o
+ rg.eclipse.viatra.dse.statecoding.simple,org.eclipse.viatra.dse.util,
+ org.eclipse.viatra.dse.visualizer
+SCM-Revision: 2a7314b6b21df594743fa017d18ae62da85c73fa
+Bundle-Name: VIATRA-DSE framework Base (Incubation)
+Bundle-Version: 0.24.0.202005060951
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.5.0
+
+Name: org/eclipse/viatra/dse/objectives/impl/NoRuleActivationsHardObje
+ ctive.class
+SHA-256-Digest: nEIutogP27RZKAUo9eH/DshkhyOF8voUnj4BC/pkhYU=
+
+Name: org/eclipse/viatra/dse/statecoding/simple/SimpleStateCoder$1.cla
+ ss
+SHA-256-Digest: t7KG11FngBrFGTPHJuEaP5BvpPqRYMDq8qKuQyccRWQ=
+
+Name: org/eclipse/viatra/dse/base/ThreadContext.class
+SHA-256-Digest: 0Z+RpFCBKvn1+SVJSLpRbEpoMATPujvvfqGsBr99mBI=
+
+Name: org/eclipse/viatra/dse/objectives/impl/ModelQueriesGlobalConstra
+ int.class
+SHA-256-Digest: 3qw4e1RY7TqpTKHRngBjCRWfJmMmu+DiUnKHO0yXVA4=
+
+Name: org/eclipse/viatra/dse/objectives/IObjective.class
+SHA-256-Digest: io0MQDhFysUXcHYcPUZENsy/xLn98SE65b2RbJ7QttM=
+
+Name: org/eclipse/viatra/dse/statecoding/simple/SimpleStateCoder.class
+SHA-256-Digest: yOvisOPQT9D/tuLV5fLonIoDpqi8bSRbPVjtLtv4UKo=
+
+Name: org/eclipse/viatra/dse/base/ExplorerThread.class
+SHA-256-Digest: N4tY8yMnFoKGoMyS0RdRtqpGIh6ucbvvAxnf/YPr/xk=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore$BestSolutionS
+ aver.class
+SHA-256-Digest: yZkg5ntRMOsrKEgo7kkAaK5J8h11Ng8tzH4QXsLRhsM=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/RandomSearchStrategy$Sh
+ aredData.class
+SHA-256-Digest: 2jBwT4lfAUh7LDDmpi3JuzyjcWhVeb+53PPB5ZKlGx4=
+
+Name: org/eclipse/viatra/dse/base/DseIdPoolHelper$IGetRuleExecutions.c
+ lass
+SHA-256-Digest: s7Pr9OPNF5baYmoZlOTWl6keA+b1TVxV8zxBXMGewrM=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/RandomSearchStrategy.cl
+ ass
+SHA-256-Digest: 0R8ENAT9UA3BCsveA38VjvR4k+Um3i1fFlQB85inLZY=
+
+Name: org/eclipse/viatra/dse/api/DesignSpaceExplorer.class
+SHA-256-Digest: JCDN006fVS56ROn6cV7Ssdl4CN+xtbdiWjVfDkkgRDM=
+
+Name: org/eclipse/viatra/dse/util/EMFHelper$ENamedElementComparator.cl
+ ass
+SHA-256-Digest: J8o5TEdYpuU/6q1qTw3lUIHaE4pEH/EpDUvuTNWusVA=
+
+Name: org/eclipse/viatra/dse/util/ValueComparableEObjectStringMap$EObj
+ ectComparator.class
+SHA-256-Digest: iwLJSS2Ip9WvN2lC8gfg+ys5Cp+P7ZSpGP6QF5lKYKQ=
+
+Name: org/eclipse/viatra/dse/api/DesignSpaceExplorer$DseLoggingLevel.c
+ lass
+SHA-256-Digest: z3h4wzaSMGzPvV4KL6ilStnLdT/mVCNNp7C/AwfQhqk=
+
+Name: org/eclipse/viatra/dse/multithreading/DSEThreadPool.class
+SHA-256-Digest: XoKcmDnafPfiyQ0LemN0ni31T+aY+lXp/Q8p157kj/g=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/DepthFirstStrategy.clas
+ s
+SHA-256-Digest: SGlKz9PbynZwkmaJ1rpE0kVUOHl7vl7GOscNFoNEHLg=
+
+Name: org/eclipse/viatra/dse/base/GlobalContext.class
+SHA-256-Digest: dLn/Iu9JVDaaKK21VeFAMDXGaJWROEJCWJjULwMzNik=
+
+Name: org/eclipse/viatra/dse/statecoding/IncrementalObjectProvider.cla
+ ss
+SHA-256-Digest: L0yK9bhku/F8MX/NyKoBuydeMbMgZir8N0BRcFzHnKs=
+
+Name: org/eclipse/viatra/dse/statecode/IStateCoderFactory.class
+SHA-256-Digest: 1GsfU5aBQs1ieo3dblcXFZ07oq9QzWr1NZLppgSdCOM=
+
+Name: org/eclipse/viatra/dse/base/DesignSpaceManager$1.class
+SHA-256-Digest: /suIApW5KeZ7OifoR8SRPc3gU+2B8/ZnWInhdpAOTd8=
+
+Name: org/eclipse/viatra/dse/objectives/ActivationFitnessProcessor.cla
+ ss
+SHA-256-Digest: vML6AN6aCbn/cKeccmvzRAai47jZJk0CpYhwFQdhwvI=
+
+Name: org/eclipse/viatra/dse/solutionstore/IdBasedSolutionNameProvider
+ .class
+SHA-256-Digest: QFWpXui2nID6PKhTHs/1e0gj9u8NiniES6/G0C/oSzM=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/BreadthFirstStrategy$Bf
+ sSharedObject.class
+SHA-256-Digest: wVno1chuJ8pYpfv5cpB0fjsGbO2s+2OWcaVQgoQb5+k=
+
+Name: org/eclipse/viatra/dse/objectives/TrajectoryFitness.class
+SHA-256-Digest: DIEgS7SFg5pWuxvFhRn3f7hBt8+qk1+40w9WpOkoyrc=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore$1.class
+SHA-256-Digest: V5AAqo4/81KOegdl1Wl8jIBrH57y4TdYrj+wOzV2vdM=
+
+Name: org/eclipse/viatra/dse/api/Solution.class
+SHA-256-Digest: U71jRd/R8tarIiHM+dETwXiwwPcmXO5m82bDUp/Mduo=
+
+Name: org/eclipse/viatra/dse/util/EMFHelper$EmfHelperException.class
+SHA-256-Digest: +OCT0+wqq9XGCze/qDE8hh3zprFMBAnkR7H1J7k/Htk=
+
+Name: org/eclipse/viatra/dse/base/DseEvmRuleBase.class
+SHA-256-Digest: iRILqfjFCMPd020YX8dMyRaNlUGfEUTd4N3gnqQRtDo=
+
+Name: org/eclipse/viatra/dse/objectives/impl/TrajectoryCostSoftObjecti
+ ve.class
+SHA-256-Digest: wXSfFPucpZyh72nGKuKn83N63Orl75XUM9SkzKfFBi4=
+
+Name: org/eclipse/viatra/dse/api/DSETransformationRule.class
+SHA-256-Digest: 01Ngrz/qbLR6j/4z9NxvtD2jHQAHMl698POXw8BSpPY=
+
+Name: org/eclipse/viatra/dse/objectives/impl/ModelQueryType.class
+SHA-256-Digest: SS0yM7NbAU0U4KoA4Tzy4gXKZ2IZaszyaqbtSN4GE74=
+
+Name: org/eclipse/viatra/dse/base/DseConflictResolver.class
+SHA-256-Digest: kLquKehufJSc2fJoUgztO62ucr1UUqfLQpyiFrY8BJc=
+
+Name: org/eclipse/viatra/dse/statecoding/TheStateCoderFactory.class
+SHA-256-Digest: 7tog5/ud60nPTYwPT6HHpHBDeutpFl2KLKXt8GnM3U8=
+
+Name: org/eclipse/viatra/dse/solutionstore/LogSolutionHandler.class
+SHA-256-Digest: cbpeCy8w558CbnhljT2TKalNqWBpKlIsMppr6hWDRpw=
+
+Name: org/eclipse/viatra/dse/designspace/api/TrajectoryInfo.class
+SHA-256-Digest: mXYUokn/RePXJXnfL7O3AZjvwqFkwiLZ0IipQGgdp0A=
+
+Name: org/eclipse/viatra/dse/statecoding/StatecodingDependencyType.cla
+ ss
+SHA-256-Digest: ef+0X9EnYYjpPiRNmjXrElCCaPekh+Wh6yimRTpp15E=
+
+Name: org/eclipse/viatra/dse/objectives/impl/CompositeObjective.class
+SHA-256-Digest: SJiO5Oina3I760xBUDGc4qYp1WrcSG6Yh0+8hQKf69U=
+
+Name: org/eclipse/viatra/dse/objectives/ObjectiveComparatorHelper.clas
+ s
+SHA-256-Digest: +uKjMIfQvBlKY9djJoP5Wd/EBKMkbrdk7shGdZ0rS2M=
+
+Name: org/eclipse/viatra/dse/api/Objectives.class
+SHA-256-Digest: pNQDcSeUV3oOM7aCgscjJwdyysQrMSZCyLhrSWLMUrI=
+
+Name: org/eclipse/viatra/dse/visualizer/DesignSpaceVisualizerOptions.c
+ lass
+SHA-256-Digest: nf/uvPeNaC8Nu9SPhk+sgvSheB/kh+GqsXXHbm7qer0=
+
+Name: org/eclipse/viatra/dse/api/DSEException.class
+SHA-256-Digest: MCUPB2tBDK01enENQDJ+qONxtl+WQyZaJf87iU+NFyU=
+
+Name: org/eclipse/viatra/dse/base/SingletonSetConflictResolver.class
+SHA-256-Digest: bd4gh7UG91EkNSE0JrpAKbHDxv6HYhL7YEq7PZZkRjo=
+
+Name: org/eclipse/viatra/dse/statecoding/IObjectsProvider.class
+SHA-256-Digest: SIcYuklHbTwYjV+gvS1B77Z0CR/2bannTSL77/qm/Gs=
+
+Name: org/eclipse/viatra/dse/statecoding/IncrementalObjectProviderFact
+ ory.class
+SHA-256-Digest: F12xo+nr94L4B1m1w2xmtA7t1TzGin5pFSEqkBmYxC0=
+
+Name: org/eclipse/viatra/dse/api/SolutionTrajectory.class
+SHA-256-Digest: uFjxXsF4khsOwgCsmRPMZbSayZ4qTDtwPGxDBH2lG74=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore$SimpleSolutio
+ nSaver.class
+SHA-256-Digest: 12aDZULU6fhdXx8a/BvCQwXW7RZfEmIPFueU7GOpBB0=
+
+Name: org/eclipse/viatra/dse/util/Hasher.class
+SHA-256-Digest: 0nFBMPZ6/YudYlnE/l8XiECkWIHBRvkdyi9WUCIaN4c=
+
+Name: org/eclipse/viatra/dse/solutionstore/ISolutionNameProvider.class
+SHA-256-Digest: Ig8utojCZoNY8V37gbZVVJFOX8NZiu2tPsnAIkS1BaU=
+
+Name: org/eclipse/viatra/dse/objectives/IGlobalConstraint.class
+SHA-256-Digest: UvJwqLRVvv444GgELIu/tUGs4eV8cf/Anqh6horECP8=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore.class
+SHA-256-Digest: V9OJ/9GqLq9cBToiBzapjyCs3mDuk4PkeduT5YpiTwE=
+
+Name: org/eclipse/viatra/dse/objectives/impl/DepthHardObjective.class
+SHA-256-Digest: Ra8i2f1YiRldwF06QotRoHkhKJLyGMYJnS6Lco1ldTM=
+
+Name: org/eclipse/viatra/dse/objectives/impl/BaseObjective.class
+SHA-256-Digest: DH8BIQo1OvBt5oEtS4sqsjtGOhlD1Nwz2yv7gdW3/hA=
+
+Name: org/eclipse/viatra/dse/api/DesignSpaceExplorer$1.class
+SHA-256-Digest: 1AccsshxVCMI2GPkioO7lQtS9JwPx17YrPTSjTZfqBQ=
+
+Name: org/eclipse/viatra/dse/objectives/impl/ConstraintsObjective.clas
+ s
+SHA-256-Digest: +eesnPuyvrf4xQOslHAFlNIyd4K9scCn8f6qprCxKzs=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/FixedPriorityStrategy.c
+ lass
+SHA-256-Digest: /+Dkno94lswrX5YEr60iH8szAKDL9hfAe2ZZ/amSe20=
+
+Name: org/eclipse/viatra/dse/base/IDseStrategyContext.class
+SHA-256-Digest: ACDjZwH6zo71KF8hXuAvC7NWmGPDv9lJ06U/iAptwEw=
+
+Name: org/eclipse/viatra/dse/statecode/IStateCoder.class
+SHA-256-Digest: L+foclr4t9XV4ltc7aDor4Ngf135J+UvTpTxCcegz9M=
+
+Name: org/eclipse/viatra/dse/objectives/impl/NeverSatisfiedDummyHardOb
+ jective.class
+SHA-256-Digest: KB8QybGLqya7vrKCMnwRdCOaJ/URoTIeR1NVYDNiOB4=
+
+Name: org/eclipse/viatra/dse/objectives/impl/AlwaysSatisfiedDummyHardO
+ bjective.class
+SHA-256-Digest: TzG4kskc7rM96sfpJc6YsSNF7PyE48NJLkUpkkwqsiI=
+
+Name: org/eclipse/viatra/dse/base/DesignSpaceManager.class
+SHA-256-Digest: WlF2FWYiBFQNAW2PsPpPorz64wQBWssTC/73maFotD8=
+
+Name: org/eclipse/viatra/dse/visualizer/IExploreEventHandler.class
+SHA-256-Digest: ZJwhUYNU+L1B88hsbfdIejJVUwhnvBjJSDHugw+RFh0=
+
+Name: META-INF/maven/org.eclipse.viatra/org.eclipse.viatra.dse/pom.pro
+ perties
+SHA-256-Digest: 0JWWPFaIUkYh4BehmajscXzAloPgjeIs0iZSPFC/g1g=
+
+Name: org/eclipse/viatra/dse/statecoding/StatecodingDependency.class
+SHA-256-Digest: AeHJlVqUAUsjBlYumYq/e/WEBNbtlvCk00SG9rHPO88=
+
+Name: org/eclipse/viatra/dse/api/strategy/interfaces/IStrategy.class
+SHA-256-Digest: K5feGvnijYpwPJCOvR4m7ChtC7wX7LhLaau5/SBnFek=
+
+Name: org/eclipse/viatra/dse/visualizer/IDesignSpaceVisualizer.class
+SHA-256-Digest: gF2AAXk6xxQIDqdn56Aeifqmj71pBicLO7VJJoB64bY=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore$ANumberOfEnou
+ ghSolutions.class
+SHA-256-Digest: qAOxgehQKfKkDSF2W2Gk/cXkDIBsQuN4yJ8Q3eRCnps=
+
+Name: META-INF/maven/org.eclipse.viatra/org.eclipse.viatra.dse/pom.xml
+SHA-256-Digest: /LSOqjjd6+fmn3MHbXK9bGr7k+1GKE3kgzaDoJkgCQQ=
+
+Name: org/eclipse/viatra/dse/base/DseIdPoolHelper$IdProvider.class
+SHA-256-Digest: VRQcpABZNkp3Lgivy9PUraJf04riM1MOZvY64suvo3M=
+
+Name: org/eclipse/viatra/dse/statecoding/simple/SimpleStateCoder$2.cla
+ ss
+SHA-256-Digest: NqiG7/1poRDLI2BbRvr2hfHZqH73hfFxBic+4YKHcCM=
+
+Name: org/eclipse/viatra/dse/base/ThreadContext$GetRuleExecutionsImpl.
+ class
+SHA-256-Digest: HGFHcAmOg3O3se9FT4oE4pWZ8EFdyRkkHkBVJZi+hmM=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/BestFirstStrategy.class
+SHA-256-Digest: qJyc4dMUiLGVoJPrMWQtCI2o2HW5p6Ki5J8Ra6wb/gE=
+
+Name: org/eclipse/viatra/dse/designspace/api/IDesignSpace.class
+SHA-256-Digest: IS5IjYyUCvaHWBvUsPFeGFv65W+YTG7u+iRXp/eDIuM=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/HillClimbingStrategy.cl
+ ass
+SHA-256-Digest: UfrnKlXVqN8LWbUPSoA5PDiJOT7cnCA46kIXicC5mg0=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/BestFirstStrategy$Traje
+ ctoryWithFitness.class
+SHA-256-Digest: n3K90JLwOOVAXsrkROhn0ZNogaAKVdcUpXBj8RUMI3c=
+
+Name: org/eclipse/viatra/dse/util/EMFHelper$MetaModelElements.class
+SHA-256-Digest: FjS8V9JksWMjbV9a1dn04gWFH3fctq9HdWSfbMsV5Ck=
+
+Name: org/eclipse/viatra/dse/statecoding/simple/SimpleStateCoderFactor
+ y.class
+SHA-256-Digest: jcBdVzrTpamZrT0pQZHyJJnooB+DKF6ADVS4RRhZGl4=
+
+Name: org/eclipse/viatra/dse/objectives/Fitness.class
+SHA-256-Digest: CJPJnXYS0WMnW4JVW2YO5/vvwKhRkRE7qROa87Ailpg=
+
+Name: org/eclipse/viatra/dse/api/strategy/impl/BreadthFirstStrategy.cl
+ ass
+SHA-256-Digest: 4odjR0x9jzt7Ed/hw6Q+ydZUrQQggqL8y216Lq60azM=
+
+Name: org/eclipse/viatra/dse/api/Strategies.class
+SHA-256-Digest: tURHC++pafgodWMnk4CperJDpZ9m4Do6xHAV37bHUoc=
+
+Name: org/eclipse/viatra/dse/statecoding/StatecodingNode.class
+SHA-256-Digest: 2xM/ShgCBqpV9tgQZPBxzTSPgbT7lcp7auQE14dEEqc=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore$ISolutionSave
+ r.class
+SHA-256-Digest: nuYmJKeNKfM0a9sAbRpA6Knzqu51hlK011aoAQpTH3Q=
+
+Name: org/eclipse/viatra/dse/statecoding/StatecodingDependencyGraph.cl
+ ass
+SHA-256-Digest: 9ZxUtKP6+hvWqY9l0b+opdginEK1BoksdLqZ+DYViqI=
+
+Name: org/eclipse/viatra/dse/util/EMFHelper.class
+SHA-256-Digest: hpOu0HMuLuiLYUbg0rhdfVG4/ZrlVftoKLmTsRAHW/E=
+
+Name: org/eclipse/viatra/dse/base/DesignSpaceManager$2.class
+SHA-256-Digest: x8i8lLzE/UkaQJya1kGbTlJnB/JFNy5607FLESkMQXA=
+
+Name: org/eclipse/viatra/dse/base/ActivationCodesConflictSet.class
+SHA-256-Digest: 0G/W2cxiS4R9GEpBWovAIEA4brmQ2sTjqi1F7vgS0/c=
+
+Name: org/eclipse/viatra/dse/api/SolutionTrajectory$1.class
+SHA-256-Digest: 7epxs7VJgi7Jmo2pKb22m2OLhOOIu3OHTJrWC8HjEzQ=
+
+Name: org/eclipse/viatra/dse/solutionstore/SolutionStore$IEnoughSoluti
+ ons.class
+SHA-256-Digest: /5Ux9DFOI3UHcG8om2rGzX2k0Yj1lIoeG/tR82P3zpQ=
+
+Name: org/eclipse/viatra/dse/objectives/impl/ConstraintsObjective$Quer
+ yConstraint.class
+SHA-256-Digest: 79pmTnUZbgOHEdGzyj5PIb2eGrd554q3c17LNdbTQxM=
+
+Name: org/eclipse/viatra/dse/objectives/Comparators.class
+SHA-256-Digest: V5MzedIHj3KBEBbR4UNAhqmbqB3sHuk183zxMlKhGD4=
+
+Name: org/eclipse/viatra/dse/statecoding/IObjectsProviderFactory.class
+SHA-256-Digest: VlWdfwyWo39xhvgIF9PedWC+Yv1Q0hYaDBSF7Z+ClSA=
+
+Name: org/eclipse/viatra/dse/base/GlobalContext$ExplorationProcessStat
+ e.class
+SHA-256-Digest: rNnsUlZX7z1yPBoNSfWvoXwKhSAjGUhpBo9CZVJwadw=
+
+Name: org/eclipse/viatra/dse/base/DseIdPoolHelper.class
+SHA-256-Digest: 8wUkapQg0xNS3Vy/Mtv18N9dEB9ev/QiH1tYPzFtBN8=
+
+Name: about.html
+SHA-256-Digest: Qx53vUKBh4ByLG9I8uUS7GH8BTecG5s70WKYlnHc04k=
+
+Name: org/eclipse/viatra/dse/solutionstore/ISolutionFoundHandler.class
+SHA-256-Digest: bjBZdHvq37DxouRprrTxR0l8CWUCY+aw5JtccbEeAJg=
+
+Name: org/eclipse/viatra/dse/designspace/api/DesignSpace.class
+SHA-256-Digest: D51XZw1Z2bCk+PxzX7i8WpE64L9s64FoedEMxM0fSYA=
+
+Name: org/eclipse/viatra/dse/util/ValueComparableEObjectStringMap.clas
+ s
+SHA-256-Digest: VYf9HcY2IbUo2d1K+c2rKIFkxNIRFeEi9zr9s1Inc7o=
+
+Name: org/eclipse/viatra/dse/statecoding/StatecodingNodeType.class
+SHA-256-Digest: VUsDepoiER2/0o3aIE8uX08eOdXzvKBkfXPpPaow5yU=
+
+Name: org/eclipse/viatra/dse/api/strategy/interfaces/IStrategyFactory.
+ class
+SHA-256-Digest: K51RjSOSyMrj86BO/zgmo4kO83HgxKvrEGeOTo5WoVs=
+
+Name: org/eclipse/viatra/dse/base/ActivationCodesConflictSet$Activatio
+ nCodesMultiBiMap.class
+SHA-256-Digest: DEtZHFLUnrSZG5x15o2lTasPd5+ufqWCCQXg+YXGxQA=
+
+Name: org/eclipse/viatra/dse/statecoding/TheStateCoder.class
+SHA-256-Digest: 7iWoLYIXKNGjRgpIHZDuW3i8wBpV5OqO978Fg9WxEK8=
+
+Name: org/eclipse/viatra/dse/objectives/LeveledObjectivesHelper.class
+SHA-256-Digest: HYJ6Z75XEjy3UGBB00bv/GfxdOey+9MpGM5aJuFm5fM=
+
+Name: org/eclipse/viatra/dse/solutionstore/ModelSaverSolutionFoundHand
+ ler.class
+SHA-256-Digest: CmINEWESAe5ynUDWoc8YQQdsmBx1bRLNabbzmoxxsUg=
+
+Name: org/eclipse/viatra/dse/base/DseConflictSet.class
+SHA-256-Digest: boreOAKc8L3ZEts53PUwZiZ4l+8Em3aLeXDQBJZihbY=
+

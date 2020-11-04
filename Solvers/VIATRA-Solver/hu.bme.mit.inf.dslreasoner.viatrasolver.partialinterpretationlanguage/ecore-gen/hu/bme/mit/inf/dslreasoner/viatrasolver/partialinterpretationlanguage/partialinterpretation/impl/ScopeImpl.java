@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.ScopeImpl#getMinNewElements <em>Min New Elements</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.ScopeImpl#getMaxNewElements <em>Max New Elements</em>}</li>
  *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.ScopeImpl#getTargetTypeInterpretation <em>Target Type Interpretation</em>}</li>
+ *   <li>{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.impl.ScopeImpl#getMinNewElementsHeuristic <em>Min New Elements Heuristic</em>}</li>
  * </ul>
  *
  * @generated
@@ -82,6 +83,26 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	protected PartialTypeInterpratation targetTypeInterpretation;
 
 	/**
+	 * The default value of the '{@link #getMinNewElementsHeuristic() <em>Min New Elements Heuristic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinNewElementsHeuristic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getMinNewElementsHeuristic() <em>Min New Elements Heuristic</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMinNewElementsHeuristic()
+	 * @generated
+	 * @ordered
+	 */
+	protected int minNewElementsHeuristic = MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -105,6 +126,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMinNewElements() {
 		return minNewElements;
 	}
@@ -114,6 +136,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMinNewElements(int newMinNewElements) {
 		int oldMinNewElements = minNewElements;
 		minNewElements = newMinNewElements;
@@ -126,6 +149,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getMaxNewElements() {
 		return maxNewElements;
 	}
@@ -135,6 +159,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMaxNewElements(int newMaxNewElements) {
 		int oldMaxNewElements = maxNewElements;
 		maxNewElements = newMaxNewElements;
@@ -147,6 +172,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PartialTypeInterpratation getTargetTypeInterpretation() {
 		if (targetTypeInterpretation != null && targetTypeInterpretation.eIsProxy()) {
 			InternalEObject oldTargetTypeInterpretation = (InternalEObject)targetTypeInterpretation;
@@ -188,6 +214,7 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTargetTypeInterpretation(PartialTypeInterpratation newTargetTypeInterpretation) {
 		if (newTargetTypeInterpretation != targetTypeInterpretation) {
 			NotificationChain msgs = null;
@@ -200,6 +227,29 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION, newTargetTypeInterpretation, newTargetTypeInterpretation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int getMinNewElementsHeuristic() {
+		return minNewElementsHeuristic;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMinNewElementsHeuristic(int newMinNewElementsHeuristic) {
+		int oldMinNewElementsHeuristic = minNewElementsHeuristic;
+		minNewElementsHeuristic = newMinNewElementsHeuristic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.SCOPE__MIN_NEW_ELEMENTS_HEURISTIC, oldMinNewElementsHeuristic, minNewElementsHeuristic));
 	}
 
 	/**
@@ -247,6 +297,8 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 			case PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION:
 				if (resolve) return getTargetTypeInterpretation();
 				return basicGetTargetTypeInterpretation();
+			case PartialinterpretationPackage.SCOPE__MIN_NEW_ELEMENTS_HEURISTIC:
+				return getMinNewElementsHeuristic();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -267,6 +319,9 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 				return;
 			case PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION:
 				setTargetTypeInterpretation((PartialTypeInterpratation)newValue);
+				return;
+			case PartialinterpretationPackage.SCOPE__MIN_NEW_ELEMENTS_HEURISTIC:
+				setMinNewElementsHeuristic((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -289,6 +344,9 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 			case PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION:
 				setTargetTypeInterpretation((PartialTypeInterpratation)null);
 				return;
+			case PartialinterpretationPackage.SCOPE__MIN_NEW_ELEMENTS_HEURISTIC:
+				setMinNewElementsHeuristic(MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -307,6 +365,8 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 				return maxNewElements != MAX_NEW_ELEMENTS_EDEFAULT;
 			case PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION:
 				return targetTypeInterpretation != null;
+			case PartialinterpretationPackage.SCOPE__MIN_NEW_ELEMENTS_HEURISTIC:
+				return minNewElementsHeuristic != MIN_NEW_ELEMENTS_HEURISTIC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -320,11 +380,13 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (minNewElements: ");
 		result.append(minNewElements);
 		result.append(", maxNewElements: ");
 		result.append(maxNewElements);
+		result.append(", minNewElementsHeuristic: ");
+		result.append(minNewElementsHeuristic);
 		result.append(')');
 		return result.toString();
 	}

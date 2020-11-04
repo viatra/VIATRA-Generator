@@ -1,10 +1,10 @@
 package hu.bme.mit.inf.dslreasoner.run
 
-import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethodBasedGlobalConstraint
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod
 import org.eclipse.viatra.dse.base.ThreadContext
+import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 
 class FileSystemInconsistencyDetector extends ModelGenerationMethodBasedGlobalConstraint {
 	var PartialInterpretation partialInterpretation
@@ -35,11 +35,11 @@ class FileSystemInconsistencyDetector extends ModelGenerationMethodBasedGlobalCo
 	
 	override checkGlobalConstraint(ThreadContext context) {
 		var requiredNewObjects = 
-				filesystem.countMatches*2 +
-				root.countMatches
+				root.countMatches*2 +
+				filesystem.countMatches
 		val availableNewObjects = partialInterpretation.maxNewElements
 		val res = availableNewObjects >= requiredNewObjects
-		//println('''[«availableNewObjects» >= «requiredNewObjects»] = «res»''')
+		println('''[«availableNewObjects» >= «requiredNewObjects»] = «res»''')
 		return res
 	}
 	

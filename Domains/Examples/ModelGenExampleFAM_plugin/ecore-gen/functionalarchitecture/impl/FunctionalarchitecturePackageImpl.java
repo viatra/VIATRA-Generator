@@ -9,7 +9,6 @@ import functionalarchitecture.FunctionalArchitectureModel;
 import functionalarchitecture.FunctionalData;
 import functionalarchitecture.FunctionalElement;
 import functionalarchitecture.FunctionalInput;
-import functionalarchitecture.FunctionalInterface;
 import functionalarchitecture.FunctionalOutput;
 import functionalarchitecture.FunctionalarchitectureFactory;
 import functionalarchitecture.FunctionalarchitecturePackage;
@@ -128,7 +127,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FunctionalarchitecturePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -142,7 +141,8 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		if (isInited) return (FunctionalarchitecturePackage)EPackage.Registry.INSTANCE.getEPackage(FunctionalarchitecturePackage.eNS_URI);
 
 		// Obtain or create and register package
-		FunctionalarchitecturePackageImpl theFunctionalarchitecturePackage = (FunctionalarchitecturePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof FunctionalarchitecturePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new FunctionalarchitecturePackageImpl());
+		Object registeredFunctionalarchitecturePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FunctionalarchitecturePackageImpl theFunctionalarchitecturePackage = registeredFunctionalarchitecturePackage instanceof FunctionalarchitecturePackageImpl ? (FunctionalarchitecturePackageImpl)registeredFunctionalarchitecturePackage : new FunctionalarchitecturePackageImpl();
 
 		isInited = true;
 
@@ -155,7 +155,6 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		// Mark meta-data to indicate it can't be changed
 		theFunctionalarchitecturePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FunctionalarchitecturePackage.eNS_URI, theFunctionalarchitecturePackage);
 		return theFunctionalarchitecturePackage;
@@ -166,6 +165,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionalElement() {
 		return functionalElementEClass;
 	}
@@ -175,6 +175,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalElement_Interface() {
 		return (EReference)functionalElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -184,6 +185,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalElement_Model() {
 		return (EReference)functionalElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -193,6 +195,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalElement_Parent() {
 		return (EReference)functionalElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -202,6 +205,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionalArchitectureModel() {
 		return functionalArchitectureModelEClass;
 	}
@@ -211,6 +215,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalArchitectureModel_RootElements() {
 		return (EReference)functionalArchitectureModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -220,6 +225,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunction() {
 		return functionEClass;
 	}
@@ -229,6 +235,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunction_SubElements() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(0);
 	}
@@ -238,6 +245,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFunction_Type() {
 		return (EAttribute)functionEClass.getEStructuralFeatures().get(1);
 	}
@@ -247,6 +255,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFAMTerminator() {
 		return famTerminatorEClass;
 	}
@@ -256,6 +265,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFAMTerminator_Data() {
 		return (EReference)famTerminatorEClass.getEStructuralFeatures().get(0);
 	}
@@ -265,6 +275,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInformationLink() {
 		return informationLinkEClass;
 	}
@@ -274,6 +285,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInformationLink_From() {
 		return (EReference)informationLinkEClass.getEStructuralFeatures().get(0);
 	}
@@ -283,6 +295,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInformationLink_To() {
 		return (EReference)informationLinkEClass.getEStructuralFeatures().get(1);
 	}
@@ -292,6 +305,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionalInterface() {
 		return functionalInterfaceEClass;
 	}
@@ -301,6 +315,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalInterface_Data() {
 		return (EReference)functionalInterfaceEClass.getEStructuralFeatures().get(0);
 	}
@@ -310,6 +325,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalInterface_Element() {
 		return (EReference)functionalInterfaceEClass.getEStructuralFeatures().get(1);
 	}
@@ -319,6 +335,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionalInput() {
 		return functionalInputEClass;
 	}
@@ -328,6 +345,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalInput_IncomingLinks() {
 		return (EReference)functionalInputEClass.getEStructuralFeatures().get(0);
 	}
@@ -337,6 +355,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionalOutput() {
 		return functionalOutputEClass;
 	}
@@ -346,6 +365,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalOutput_OutgoingLinks() {
 		return (EReference)functionalOutputEClass.getEStructuralFeatures().get(0);
 	}
@@ -355,6 +375,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionalData() {
 		return functionalDataEClass;
 	}
@@ -364,6 +385,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalData_Terminator() {
 		return (EReference)functionalDataEClass.getEStructuralFeatures().get(0);
 	}
@@ -373,6 +395,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunctionalData_Interface() {
 		return (EReference)functionalDataEClass.getEStructuralFeatures().get(1);
 	}
@@ -382,6 +405,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getFunctionType() {
 		return functionTypeEEnum;
 	}
@@ -391,6 +415,7 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalarchitectureFactory getFunctionalarchitectureFactory() {
 		return (FunctionalarchitectureFactory)getEFactoryInstance();
 	}
@@ -503,9 +528,9 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 		initEReference(getInformationLink_From(), this.getFunctionalOutput(), this.getFunctionalOutput_OutgoingLinks(), "from", null, 0, 1, InformationLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInformationLink_To(), this.getFunctionalInput(), this.getFunctionalInput_IncomingLinks(), "to", null, 1, 1, InformationLink.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(functionalInterfaceEClass, FunctionalInterface.class, "FunctionalInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionalInterface_Data(), this.getFunctionalData(), this.getFunctionalData_Interface(), "data", null, 0, -1, FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionalInterface_Element(), this.getFunctionalElement(), this.getFunctionalElement_Interface(), "element", null, 0, 1, FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(functionalInterfaceEClass, functionalarchitecture.FunctionalInterface.class, "FunctionalInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionalInterface_Data(), this.getFunctionalData(), this.getFunctionalData_Interface(), "data", null, 0, -1, functionalarchitecture.FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionalInterface_Element(), this.getFunctionalElement(), this.getFunctionalElement_Interface(), "element", null, 0, 1, functionalarchitecture.FunctionalInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(functionalInputEClass, FunctionalInput.class, "FunctionalInput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionalInput_IncomingLinks(), this.getInformationLink(), this.getInformationLink_To(), "IncomingLinks", null, 0, -1, FunctionalInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -540,12 +565,12 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
+			   "settingDelegates", "org.eclipse.viatra.query.querybasedfeature"
 		   });
 	}
 
@@ -556,18 +581,18 @@ public class FunctionalarchitecturePackageImpl extends EPackageImpl implements F
 	 * @generated
 	 */
 	protected void createOrgAnnotations() {
-		String source = "org.eclipse.viatra.query.querybasedfeature";	
+		String source = "org.eclipse.viatra.query.querybasedfeature";
 		addAnnotation
-		  (getFunctionalElement_Model(), 
-		   source, 
+		  (getFunctionalElement_Model(),
+		   source,
 		   new String[] {
-			 "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.model"
-		   });	
+			   "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.model"
+		   });
 		addAnnotation
-		  (getFunction_Type(), 
-		   source, 
+		  (getFunction_Type(),
+		   source,
 		   new String[] {
-			 "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.type"
+			   "patternFQN", "hu.bme.mit.inf.dslreasoner.domains.transima.fam.type"
 		   });
 	}
 

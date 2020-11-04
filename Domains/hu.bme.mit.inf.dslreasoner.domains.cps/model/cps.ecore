@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cps" nsURI="http://www.example.org/cps" nsPrefix="cps">
+  <eClassifiers xsi:type="ecore:EClass" name="CyberPhysicalSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requests" upperBound="-1"
+        eType="#//Request" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applicationTypes" upperBound="-1"
+        eType="#//ApplicationType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostTypes" upperBound="-1"
+        eType="#//HostType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+        eType="#//ApplicationInstance" containment="true" eOpposite="#//ApplicationInstance/type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
+        eType="#//ResourceRequirement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HostType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultMemory" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultHdd" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+        eType="#//HostInstance" containment="true" eOpposite="#//HostInstance/type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cost" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Request">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirements" upperBound="-1"
+        eType="#//Requirement" containment="true" eOpposite="#//Requirement/request"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Requirement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request" lowerBound="1"
+        eType="#//Request" eOpposite="#//Request/requirements"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ApplicationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1"
+        eType="#//ApplicationInstance" eOpposite="#//ApplicationInstance/requirement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirement" eType="#//Requirement"
+        eOpposite="#//Requirement/instances"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ApplicationType"
+        eOpposite="#//ApplicationType/instances"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedTo" lowerBound="1"
+        eType="#//HostInstance" eOpposite="#//HostInstance/applications"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceRequirement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredMemory" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredHdd" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostType" lowerBound="1"
+        eType="#//HostType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HostInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//HostType"
+        eOpposite="#//HostType/instances"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applications" upperBound="-1"
+        eType="#//ApplicationInstance" eOpposite="#//ApplicationInstance/allocatedTo"/>
+  </eClassifiers>
+</ecore:EPackage>

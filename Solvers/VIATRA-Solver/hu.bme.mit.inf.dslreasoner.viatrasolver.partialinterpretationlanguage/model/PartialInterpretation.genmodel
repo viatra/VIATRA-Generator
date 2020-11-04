@@ -18,7 +18,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialInterpretation/partialtypeinterpratation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialInterpretation/openWorldElements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialInterpretation/problemConainer"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialInterpretation/scope"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialInterpretation/scopes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//PartialInterpretation/minNewElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//PartialInterpretation/maxNewElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//PartialInterpretation/minNewElementsHeuristic"/>
     </genClasses>
     <genClasses ecoreClass="PartialInterpretation.ecore#//PartialConstantInterpretation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialConstantInterpretation/interpretationOf"/>
@@ -33,9 +36,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialFunctionInterpretation/interpretationOf"/>
     </genClasses>
     <genClasses ecoreClass="PartialInterpretation.ecore#//PartialTypeInterpratation">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialTypeInterpratation/interpretationOf"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialTypeInterpratation/elements"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialTypeInterpratation/supertypeInterpretation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialTypeInterpratation/scopes"/>
     </genClasses>
     <genClasses image="false" ecoreClass="PartialInterpretation.ecore#//RelationLink"/>
     <genClasses ecoreClass="PartialInterpretation.ecore#//UnaryElementRelationLink">
@@ -50,6 +52,7 @@
     </genClasses>
     <genClasses ecoreClass="PartialInterpretation.ecore#//NaryRelationLinkElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//NaryRelationLinkElement/index"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//NaryRelationLinkElement/param"/>
     </genClasses>
     <genClasses image="false" ecoreClass="PartialInterpretation.ecore#//PrimitiveElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//PrimitiveElement/valueSet"/>
@@ -70,11 +73,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//Scope/minNewElements"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//Scope/maxNewElements"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//Scope/targetTypeInterpretation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute PartialInterpretation.ecore#//Scope/minNewElementsHeuristic"/>
     </genClasses>
     <genClasses image="false" ecoreClass="PartialInterpretation.ecore#//PartialPrimitiveInterpretation"/>
     <genClasses ecoreClass="PartialInterpretation.ecore#//PartialBooleanInterpretation"/>
     <genClasses ecoreClass="PartialInterpretation.ecore#//PartialIntegerInterpretation"/>
     <genClasses ecoreClass="PartialInterpretation.ecore#//PartialRealInterpretation"/>
     <genClasses ecoreClass="PartialInterpretation.ecore#//PartialStringInterpretation"/>
+    <genClasses ecoreClass="PartialInterpretation.ecore#//PartialComplexTypeInterpretation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialComplexTypeInterpretation/supertypeInterpretation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference PartialInterpretation.ecore#//PartialComplexTypeInterpretation/interpretationOf"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

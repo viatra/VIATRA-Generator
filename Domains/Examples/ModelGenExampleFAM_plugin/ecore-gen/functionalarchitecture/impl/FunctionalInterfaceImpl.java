@@ -4,7 +4,6 @@ package functionalarchitecture.impl;
 
 import functionalarchitecture.FunctionalData;
 import functionalarchitecture.FunctionalElement;
-import functionalarchitecture.FunctionalInterface;
 import functionalarchitecture.FunctionalarchitecturePackage;
 
 import java.util.Collection;
@@ -38,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implements FunctionalInterface {
+public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implements functionalarchitecture.FunctionalInterface {
 	/**
 	 * The cached value of the '{@link #getData() <em>Data</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -73,6 +72,7 @@ public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FunctionalData> getData() {
 		if (data == null) {
 			data = new EObjectContainmentWithInverseEList<FunctionalData>(FunctionalData.class, this, FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__DATA, FunctionalarchitecturePackage.FUNCTIONAL_DATA__INTERFACE);
@@ -85,6 +85,7 @@ public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionalElement getElement() {
 		if (eContainerFeatureID() != FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__ELEMENT) return null;
 		return (FunctionalElement)eInternalContainer();
@@ -105,6 +106,7 @@ public class FunctionalInterfaceImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElement(FunctionalElement newElement) {
 		if (newElement != eInternalContainer() || (eContainerFeatureID() != FunctionalarchitecturePackage.FUNCTIONAL_INTERFACE__ELEMENT && newElement != null)) {
 			if (EcoreUtil.isAncestor(this, newElement))

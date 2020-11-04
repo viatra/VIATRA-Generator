@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.dse.api.strategy.interfaces.IStrategy;
 import org.eclipse.viatra.dse.base.ThreadContext;
@@ -35,12 +36,12 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicProblem;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.InconsistencyResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
-import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedPartialInterpretationStateCoder;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.RealisticGuidance;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration;
 import hu.bme.mit.inf.dslreasoner.workspace.ReasonerWorkspace;
@@ -84,6 +85,8 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	private double currentNodeTypeDistance = 1;
 	private int numNodesToGenerate = 0;
 	public long explorationStarted = 0;
+	public long globalConstraintEvaluationTime = 0;
+	public long fitnessCalculationTime = 0;
 	
 	public HillClimbingOnRealisticMetricStrategyForModelGeneration(
 			ReasonerWorkspace workspace,
@@ -103,6 +106,13 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	}
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
+	}
+	
+	public long getForwardTime() {
+		return context.getDesignSpaceManager().getForwardTime();
+	}
+	public long getBacktrackingTime() {
+		return context.getDesignSpaceManager().getBacktrackingTime();
 	}
 
 	@Override
@@ -147,13 +157,13 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 		//set whether allows must violations during the realistic generation
 		allowMustViolation = configuration.allowMustViolations;
 		targetSize = configuration.typeScopes.maxNewElements + 2;
-		this.numericSolver = new NumericSolver(context, method, this.configuration.runIntermediateNumericalConsistencyChecks, false);
+		//this.numericSolver = new NumericSolver(method, this.configuration.runIntermediateNumericalConsistencyChecks, false);
 	}
 
 	@Override
 	public void explore() {
 		this.explorationStarted=System.nanoTime();
-		if (!context.checkGlobalConstraints()) {
+		if (!checkGlobalConstraints()) {
 			logger.info("Global contraint is not satisifed in the first state. Terminate.");
 			return;
 		}
@@ -236,6 +246,14 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 				
+//				if (context.isCurrentStateAlreadyTraversed()) {
+//					logger.info("The new state is already visited.");
+//					context.backtrack();
+//				} else if (!checkGlobalConstraints()) {
+//					logger.debug("Global contraint is not satisifed.");
+//					context.backtrack();
+//				} 
+				
 				int currentSize = model.getNewElements().size();
 				int targetDiff = targetSize - currentSize;
 				boolean shouldFinish = currentSize >= targetSize;
@@ -278,6 +296,20 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 		logger.info("Interrupted.");
 	}
 
+	private boolean checkGlobalConstraints() {
+		long start = System.nanoTime();
+		boolean result = context.checkGlobalConstraints();
+		globalConstraintEvaluationTime += System.nanoTime() - start;
+		return result;
+	}
+	
+	private Fitness calculateFitness() {
+		long start = System.nanoTime();
+		Fitness fitness = context.calculateFitness(); 
+		fitnessCalculationTime += System.nanoTime() - start;
+		return fitness;
+	}
+	
 	/**
 	 *
 	 * @param activationIds
@@ -475,7 +507,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				solutionStoreWithCopy.newSolution(context);
 				solutionStoreWithDiversityDescriptor.newSolution(context);
 				solutionStore.newSolution(context);
-				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolution);
+				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolutions);
 
 				logger.debug("Found a solution.");
 			}
@@ -484,23 +516,27 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	
 	public List<String> times = new LinkedList<String>();
 	private void saveTimes() {
+		long forwardTime = context.getDesignSpaceManager().getForwardTime()/1000000;
+		long backtrackingTime = context.getDesignSpaceManager().getBacktrackingTime()/1000000;
 		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
 		long solutionCopy = solutionStoreWithCopy.getSumRuntime()/1000000;
 		long activationSelection = this.activationSelector.getRuntime()/1000000;
-		long numericalSolverSumTime = this.numericSolver.getRuntime()/1000000;
-		long numericalSolverProblemForming = this.numericSolver.getSolverSolvingProblem()/1000000;
-		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
-		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
+//		long numericalSolverSumTime = this.numericSolver.getRuntime()/1000000;
+//		long numericalSolverProblemForming = this.numericSolver.getSolverSolvingProblem()/1000000;
+//		long numericalSolverSolving = this.numericSolver.getSolverSolvingProblem()/1000000;
+//		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
 		long metricCalculationTime = this.method.getStatistics().metricCalculationTime / 1000000;
 		this.times.add(
 			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+ 
+			"|ForwardTime:"+forwardTime+
+			"|Backtrackingtime:"+backtrackingTime+
 			"|StateCoderTime:"+statecoderTime+
 			"|SolutionCopyTime:"+solutionCopy+
 			"|ActivationSelectionTime:"+activationSelection+
-			"|NumericalSolverSumTime:"+numericalSolverSumTime+
-			"|NumericalSolverProblemFormingTime:"+numericalSolverProblemForming+
-			"|NumericalSolverSolvingTime:"+numericalSolverSolving+
-			"|NumericalSolverInterpretingSolution:"+numericalSolverInterpreting+
+			//"|NumericalSolverSumTime:"+numericalSolverSumTime+
+			//"|NumericalSolverProblemFormingTime:"+numericalSolverProblemForming+
+			//"|NumericalSolverSolvingTime:"+numericalSolverSolving+
+			//"|NumericalSolverInterpretingSolution:"+numericalSolverInterpreting+
 			"|MetricCalculationTime:"+metricCalculationTime + ")"
 			);
 		
@@ -544,13 +580,16 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 //		}
 
 	public void visualiseCurrentState() {
-		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugCongiguration.partialInterpretatioVisualiser;
+		PartialInterpretationVisualiser partialInterpretatioVisualiser = configuration.debugConfiguration.partialInterpretatioVisualiser;
 		if(partialInterpretatioVisualiser != null && this.configuration.documentationLevel == DocumentationLevel.FULL && workspace != null) {
 			PartialInterpretation p = (PartialInterpretation) (context.getModel());
 			int id = ++numberOfPrintedModel;
-			if (id % configuration.debugCongiguration.partalInterpretationVisualisationFrequency == 0) {
+			if (id % configuration.debugConfiguration.partalInterpretationVisualisationFrequency == 0) {
 				PartialInterpretationVisualisation visualisation = partialInterpretatioVisualiser.visualiseConcretization(p);
-				visualisation.writeToFile(workspace, String.format("state%09d.png", id));
+				logger.debug("Visualizing state: " + id + " (" + context.getDesignSpaceManager().getCurrentState() + ")");
+				String name = String.format("state%09d", id);
+				visualisation.writeToFile(workspace, name + ".png");
+				workspace.writeModel((EObject) context.getModel(), name + ".xmi");
 			}
 		}
 	}

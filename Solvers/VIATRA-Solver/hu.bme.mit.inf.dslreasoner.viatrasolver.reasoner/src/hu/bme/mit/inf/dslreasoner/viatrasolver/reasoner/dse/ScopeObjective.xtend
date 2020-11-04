@@ -23,9 +23,9 @@ class ScopeObjective implements IObjective{
 	
 	override getFitness(ThreadContext context) {
 		val interpretation = context.model as PartialInterpretation
-		var res = interpretation.minNewElements.doubleValue
+		var res = interpretation.minNewElementsHeuristic.doubleValue
 		for(scope : interpretation.scopes) {
-			res += scope.minNewElements*2
+			res += scope.minNewElementsHeuristic * 2
 		}
 		return res
 	}

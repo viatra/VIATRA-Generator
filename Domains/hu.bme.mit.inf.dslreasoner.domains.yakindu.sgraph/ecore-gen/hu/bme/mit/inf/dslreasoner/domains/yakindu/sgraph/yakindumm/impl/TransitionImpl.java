@@ -66,6 +66,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Vertex getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
@@ -107,6 +108,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(Vertex newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
@@ -126,6 +128,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Vertex getSource() {
 		if (eContainerFeatureID() != YakindummPackage.TRANSITION__SOURCE) return null;
 		return (Vertex)eInternalContainer();
@@ -146,6 +149,7 @@ public class TransitionImpl extends MinimalEObjectImpl.Container implements Tran
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSource(Vertex newSource) {
 		if (newSource != eInternalContainer() || (eContainerFeatureID() != YakindummPackage.TRANSITION__SOURCE && newSource != null)) {
 			if (EcoreUtil.isAncestor(this, newSource))

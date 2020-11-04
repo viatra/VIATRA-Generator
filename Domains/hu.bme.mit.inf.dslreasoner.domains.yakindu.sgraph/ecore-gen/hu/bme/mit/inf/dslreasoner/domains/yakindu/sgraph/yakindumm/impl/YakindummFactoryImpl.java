@@ -75,6 +75,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Region createRegion() {
 		RegionImpl region = new RegionImpl();
 		return region;
@@ -85,6 +86,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transition createTransition() {
 		TransitionImpl transition = new TransitionImpl();
 		return transition;
@@ -95,6 +97,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Statechart createStatechart() {
 		StatechartImpl statechart = new StatechartImpl();
 		return statechart;
@@ -105,6 +108,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Entry createEntry() {
 		EntryImpl entry = new EntryImpl();
 		return entry;
@@ -115,6 +119,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Synchronization createSynchronization() {
 		SynchronizationImpl synchronization = new SynchronizationImpl();
 		return synchronization;
@@ -125,6 +130,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
@@ -135,6 +141,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Choice createChoice() {
 		ChoiceImpl choice = new ChoiceImpl();
 		return choice;
@@ -145,6 +152,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Exit createExit() {
 		ExitImpl exit = new ExitImpl();
 		return exit;
@@ -155,6 +163,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FinalState createFinalState() {
 		FinalStateImpl finalState = new FinalStateImpl();
 		return finalState;
@@ -165,6 +174,7 @@ public class YakindummFactoryImpl extends EFactoryImpl implements YakindummFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public YakindummPackage getYakindummPackage() {
 		return (YakindummPackage)getEPackage();
 	}

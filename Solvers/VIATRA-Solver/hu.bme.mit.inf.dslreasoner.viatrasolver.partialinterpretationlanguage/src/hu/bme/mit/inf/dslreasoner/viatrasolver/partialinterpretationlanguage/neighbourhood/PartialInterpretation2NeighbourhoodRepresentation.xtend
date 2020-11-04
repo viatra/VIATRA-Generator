@@ -8,11 +8,11 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialPrimitiveInterpretation
 import java.util.ArrayList
-import java.util.HashMap
-import java.util.HashSet
 import java.util.List
 import java.util.Map
 import java.util.Set
+import org.eclipse.collections.api.factory.Maps
+import org.eclipse.collections.impl.factory.Sets
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 
@@ -68,10 +68,11 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 
 	def createRepresentationWithFocus(PartialInterpretation model, int range, int parallels, int maxNumber,
 		Set<TypeDeclaration> relevantTypes, Set<RelationDeclaration> relevantRelations, DefinedElement focusedElement) {
-		val Map<DefinedElement, Set<String>> types = new HashMap
+		val initialSize = model.elements.size
+		val Map<DefinedElement, Set<String>> types = Maps.mutable.ofInitialCapacity(initialSize)
 		fillTypes(model, types, relevantTypes)
-		val Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations = new HashMap;
-		val Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations = new HashMap;
+		val Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations = Maps.mutable.ofInitialCapacity(initialSize);
+		val Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations = Maps.mutable.ofInitialCapacity(initialSize);
 		fillReferences(model, IncomingRelations, OutgoingRelations, relevantRelations)
 
 		val res = doRecursiveNeighbourCalculation(model, types, IncomingRelations, OutgoingRelations, range, parallels,
@@ -103,12 +104,12 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 		Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
 		Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations) {
 		val elements = types.keySet
-		var Map<DefinedElement, Set<DefinedElement>> reachable = new HashMap
-		var Map<DefinedElement, Set<DefinedElement>> newReachable = new HashMap
+		var Map<DefinedElement, Set<DefinedElement>> reachable = Maps.mutable.ofInitialCapacity(elements.size)
+		var Map<DefinedElement, Set<DefinedElement>> newReachable = Maps.mutable.ofInitialCapacity(elements.size)
 		for (element : elements) {
-			val set = new HashSet
+			val set = Sets.mutable.of
 			set.add(element)
-			reachable.put(element, new HashSet)
+			reachable.put(element, Sets.mutable.of)
 			newReachable.put(element, set)
 		}
 
@@ -201,8 +202,8 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 			val nextRepresentation = createFurtherRepresentation(next.key, next.value, lastRepresentation,
 				deepRepresentation)
 
-			val previousNumberOfTypes = lastRepresentation.nodeRepresentations.values.toSet.size
-			val nextNumberOfTypes = nextRepresentation.nodeRepresentations.values.toSet.size
+			val previousNumberOfTypes = Sets.immutable.withAll(lastRepresentation.nodeRepresentations.values).size
+			val nextNumberOfTypes = Sets.immutable.withAll(nextRepresentation.nodeRepresentations.values).size
 			hasRefined = nextNumberOfTypes > previousNumberOfTypes
 
 			lastRange = nextRange
@@ -224,7 +225,7 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	def private fillTypes(PartialInterpretation model, Map<DefinedElement, Set<String>> node2Type,
 		Set<TypeDeclaration> relevantTypes) {
 		for (element : model.elements) {
-			node2Type.put(element, new HashSet)
+			node2Type.put(element, Sets.mutable.of)
 		}
 
 //		for(typeDefinition : model.problem.types.filter(TypeDefinition)) {
@@ -286,7 +287,11 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 		boolean deepRepresentation
 	)
 
-	def private addOne(int original, int max) {
+	def private addOne(Integer originalObj, int max) {
+		if (originalObj === null) {
+			return 1
+		}
+		val original = originalObj.intValue
 		if(original == Integer.MAX_VALUE) return Integer.MAX_VALUE
 		if(original + 1 > max) return Integer.MAX_VALUE else return original + 1
 	}
@@ -294,15 +299,11 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	private def calculateIncomingEdges(Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
 		DefinedElement object, Map<DefinedElement, ? extends NodeRepresentation> previousNodeRepresentations,
 		int parallel) {
-		val Map<IncomingRelation<NodeRepresentation>, Integer> res = new HashMap
+		val Map<IncomingRelation<NodeRepresentation>, Integer> res = Maps.mutable.of
 		for (incomingConcreteEdge : IncomingRelations.get(object)) {
 			val IncomingRelation<NodeRepresentation> e = new IncomingRelation(
 				previousNodeRepresentations.get(incomingConcreteEdge.from), incomingConcreteEdge.type)
-			if (res.containsKey(e)) {
-				res.put(e, addOne(res.get(e), parallel))
-			} else {
-				res.put(e, 1)
-			}
+			res.compute(e, [key, value | addOne(value, parallel)])
 		}
 		return res
 	}
@@ -310,17 +311,13 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 	private def calcuateOutgoingEdges(Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations,
 		DefinedElement object, Map<DefinedElement, ? extends NodeRepresentation> previousNodeRepresentations,
 		int parallel) {
-		val Map<OutgoingRelation<NodeRepresentation>, Integer> res = new HashMap
+		val Map<OutgoingRelation<NodeRepresentation>, Integer> res = Maps.mutable.of
 		for (outgoingConcreteEdge : OutgoingRelations.get(object)) {
 			val OutgoingRelation<NodeRepresentation> e = new OutgoingRelation(
 				previousNodeRepresentations.get(outgoingConcreteEdge.to), outgoingConcreteEdge.type)
-			if (res.containsKey(e)) {
-				res.put(e, addOne(res.get(e), parallel))
-			} else {
-				res.put(e, 1)
-			}
+			res.compute(e, [key, value | addOne(value, parallel)])
 		}
-		return res;
+		return res
 	}
 
 	/*def private <KEY,VALUE> void addOrCreate_Set(Map<KEY,Set<VALUE>> map, KEY key, VALUE value) {
@@ -338,16 +335,17 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 		Map<DefinedElement, List<IncomingRelation<DefinedElement>>> IncomingRelations,
 		Map<DefinedElement, List<OutgoingRelation<DefinedElement>>> OutgoingRelations, int parallels, int maxNumber) {
 		val previousNodeRepresentations = previous.nodeRepresentations
-		val node2Representation = new HashMap<DefinedElement, FurtherNodeDescriptor<NodeRepresentation>>
+		val size = previousNodeRepresentations.size
+		val node2Representation = Maps.mutable.<DefinedElement, FurtherNodeDescriptor<NodeRepresentation>>ofInitialCapacity(size)
 		val Map<FurtherNodeDescriptor<NodeRepresentation>, Integer> descriptor2Number = if (this.
 				mergeSimilarNeighbourhood) {
-				new HashMap
+				Maps.mutable.ofInitialCapacity(size)
 			} else {
 				null
 			}
 		val Map<FurtherNodeDescriptor<NodeRepresentation>, FurtherNodeDescriptor<NodeRepresentation>> uniqueDescription = if (this.
 				mergeSimilarNeighbourhood) {
-				new HashMap
+				Maps.mutable.ofInitialCapacity(size)
 			} else {
 				null
 			}
@@ -392,14 +390,15 @@ abstract class PartialInterpretation2NeighbourhoodRepresentation<ModelRepresenta
 
 	private def calculateLocalNodeDescriptors(PartialInterpretation model, Map<DefinedElement, Set<String>> types,
 		int maxNumber, DefinedElement focusedElement) {
-		val Map<DefinedElement, LocalNodeDescriptor> node2Representation = new HashMap
+		val size = types.size
+		val Map<DefinedElement, LocalNodeDescriptor> node2Representation = Maps.mutable.ofInitialCapacity(size)
 		val Map<LocalNodeDescriptor, Integer> representation2Amount = if (mergeSimilarNeighbourhood) {
-				new HashMap
+				Maps.mutable.ofInitialCapacity(size)
 			} else {
 				null
 			}
 		val Map<LocalNodeDescriptor, LocalNodeDescriptor> uniqueRepresentation = if (this.mergeSimilarNeighbourhood) {
-				new HashMap
+				Maps.mutable.ofInitialCapacity(size)
 			} else {
 				null
 			}

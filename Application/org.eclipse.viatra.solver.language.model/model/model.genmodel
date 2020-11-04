@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/org.eclipse.viatra.solver.language.model/src-gen"
+    creationIcons="false" editDirectory="/org.eclipse.viatra.solver.language.model.edit/src-gen"
+    editorDirectory="/org.eclipse.viatra.solver.language.model.editor/src-gen" modelPluginID="org.eclipse.viatra.solver.language.model"
+    modelName="SolverLanguage" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>model.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="SolverLanguage" basePackage="org.eclipse.viatra.solver.language"
+      disposableProviderFactory="true" ecorePackage="model.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//UnaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//UnaryOperator/NOT"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//UnaryOperator/PLUS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//UnaryOperator/MINUS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//UnaryOperator/MAYBE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//BinaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/PLUS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/MINUS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/MULTIPLY"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/DIVIDE"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/POW"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/IN"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/NOT_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/LESS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/LESS_EQUALS"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/GREATER"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//BinaryOperator/GREATER_EQUALS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//LogicValue">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//LogicValue/UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//LogicValue/FALSE"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//LogicValue/TRUE"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//LogicValue/ERROR"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//ObjectiveKind">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ObjectiveKind/MINIMIZATION"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//ObjectiveKind/MAXIMIZATION"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="model.ecore#//AttributeKind">
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AttributeKind/FUNCTIONAL"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AttributeKind/ERROR"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AttributeKind/ROOT"/>
+      <genEnumLiterals ecoreEnumLiteral="model.ecore#//AttributeKind/CONTAINMENT"/>
+    </genEnums>
+    <genClasses ecoreClass="model.ecore#//PathComponent">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//PathComponent/symbol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PathComponent/inverse"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PathComponent/transitiveClosure"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//PathComponent/reflexiveTransitiveClosure"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Symbol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Symbol/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Call">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Call/functor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Call/argumentList"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Reference">
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Reference/components"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Expression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Expression/existsVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Argument"/>
+    <genClasses ecoreClass="model.ecore#//ArgumentList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ArgumentList/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExpressionArgument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ExpressionArgument/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StarArgument"/>
+    <genClasses ecoreClass="model.ecore#//TypedArgument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//TypedArgument/typeReference"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//MultiaryExpession">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//MultiaryExpession/children"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Variable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Variable/typeReference"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//UnaryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UnaryExpression/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UnaryExpression/op"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//BinaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BinaryExpression/op"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//BinaryExpression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//BinaryExpression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Disjunction"/>
+    <genClasses ecoreClass="model.ecore#//Conjunction"/>
+    <genClasses ecoreClass="model.ecore#//ConditionalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ConditionalExpression/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ConditionalExpression/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ConditionalExpression/else"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Switch">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Switch/cases"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Case">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Case/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Case/body"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//LetExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LetExpression/bindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LetExpression/body"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//LetBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LetBinding/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//LetBinding/variable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//LetBinding/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//LetBinding/type"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Literal"/>
+    <genClasses ecoreClass="model.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//LogicLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//LogicLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//EmptyLiteral"/>
+    <genClasses ecoreClass="model.ecore#//CastExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//CastExpression/body"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference model.ecore#//CastExpression/targetType"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//AggregateExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AggregateExpression/forallVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AggregateExpression/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Count"/>
+    <genClasses ecoreClass="model.ecore#//Aggregation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Aggregation/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Aggregation/op"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Forall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Forall/body"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//TypeReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypeReference/forceObjectType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//TypeReference/type"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//InfinityLiteral"/>
+    <genClasses ecoreClass="model.ecore#//Interval">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Interval/lowerBound"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Interval/upperBound"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Functor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Functor/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Relation"/>
+    <genClasses ecoreClass="model.ecore#//BaseRelation"/>
+    <genClasses ecoreClass="model.ecore#//Predicate"/>
+    <genClasses ecoreClass="model.ecore#//Datatype"/>
+    <genClasses ecoreClass="model.ecore#//Function">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Function/resultType"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Metric"/>
+    <genClasses ecoreClass="model.ecore#//Operator"/>
+    <genClasses ecoreClass="model.ecore#//Node">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Node/named"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Statement"/>
+    <genClasses ecoreClass="model.ecore#//AbstractAssertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AbstractAssertion/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//AbstractAssertion/range"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//FunctorDefiniton">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//FunctorDefiniton/head"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//FunctorDefiniton/body"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//PredicateDefinition"/>
+    <genClasses ecoreClass="model.ecore#//FunctionDefinition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//FunctionDefinition/resultType"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Attribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Attribute/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Attribute/kind"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExternDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ExternDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExternFunctorDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ExternFunctorDeclaration/argumentList"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExternPredicateDeclaration"/>
+    <genClasses ecoreClass="model.ecore#//ExternFunctionDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ExternFunctionDeclaration/resultType"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExternAggregationOperatorDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ExternAggregationOperatorDeclaration/argumentType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ExternAggregationOperatorDeclaration/resultType"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExternDatatypeDeclaration"/>
+    <genClasses ecoreClass="model.ecore#//ClassDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ClassDeclaration/fields"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ClassDeclaration/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ClassDeclaration/abstract"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ClassDeclaration/supertypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ClassDeclaration/root"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//EnumDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//EnumDeclaration/literals"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//EnumDeclaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//EnumLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//EnumLiteral/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Field">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Field/containment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Field/crossReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Field/opposite"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Field/multiplicity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//Field/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Field/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Multiplicity"/>
+    <genClasses ecoreClass="model.ecore#//DefaultAssertion"/>
+    <genClasses ecoreClass="model.ecore#//Assertion"/>
+    <genClasses ecoreClass="model.ecore#//UnboundedMultiplicity"/>
+    <genClasses ecoreClass="model.ecore#//ExactMultiplicity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ExactMultiplicity/value"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//BoundedMultiplicity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BoundedMultiplicity/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BoundedMultiplicity/upperBound"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//InlinePredicateAttrributes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//InlinePredicateAttrributes/error"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//InlinePredicateAttrributes/functional"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//AggregationOperator">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//AggregationOperator/argumentType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//AggregationOperator/resultType"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Problem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Problem/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/symbols"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//Problem/imports"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//TypedStarArgument"/>
+    <genClasses ecoreClass="model.ecore#//TypedVariableArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//TypedVariableArgument/name"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//UnnamedErrorPredicateDefintion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UnnamedErrorPredicateDefintion/argumentList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//UnnamedErrorPredicateDefintion/body"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ObjectiveDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ObjectiveDeclaration/kind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference model.ecore#//ObjectiveDeclaration/objective"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ScopeDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference model.ecore#//ScopeDeclaration/type"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//ExactScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//ExactScope/size"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//BoundedScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BoundedScope/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//BoundedScope/upperBound"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//LowerBoundedScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//LowerBoundedScope/lowerBound"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//NamespaceImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//NamespaceImport/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//Import/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="model.ecore#//UriImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute model.ecore#//UriImport/uri"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

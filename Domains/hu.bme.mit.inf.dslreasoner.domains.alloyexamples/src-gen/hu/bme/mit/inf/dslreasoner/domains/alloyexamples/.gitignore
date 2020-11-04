@@ -42,3 +42,11 @@
 /.Opposite.java._trace
 /.OppositeDifferentClass.java._trace
 /.PatternContent.java._trace
+/ContentInNotLive.java
+/DirectSupertype.java
+/Live.java
+/LoopInInheritence.java
+/NonSymmetricOpposite.java
+/Opposite.java
+/OppositeDifferentClass.java
+/PatternContent.java

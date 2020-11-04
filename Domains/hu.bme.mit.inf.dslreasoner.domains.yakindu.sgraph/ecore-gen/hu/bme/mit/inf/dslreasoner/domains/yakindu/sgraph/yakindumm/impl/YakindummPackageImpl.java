@@ -150,7 +150,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link YakindummPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -164,7 +164,8 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		if (isInited) return (YakindummPackage)EPackage.Registry.INSTANCE.getEPackage(YakindummPackage.eNS_URI);
 
 		// Obtain or create and register package
-		YakindummPackageImpl theYakindummPackage = (YakindummPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof YakindummPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new YakindummPackageImpl());
+		Object registeredYakindummPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		YakindummPackageImpl theYakindummPackage = registeredYakindummPackage instanceof YakindummPackageImpl ? (YakindummPackageImpl)registeredYakindummPackage : new YakindummPackageImpl();
 
 		isInited = true;
 
@@ -177,7 +178,6 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 		// Mark meta-data to indicate it can't be changed
 		theYakindummPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(YakindummPackage.eNS_URI, theYakindummPackage);
 		return theYakindummPackage;
@@ -188,6 +188,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPseudostate() {
 		return pseudostateEClass;
 	}
@@ -197,6 +198,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVertex() {
 		return vertexEClass;
 	}
@@ -206,6 +208,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVertex_IncomingTransitions() {
 		return (EReference)vertexEClass.getEStructuralFeatures().get(0);
 	}
@@ -215,6 +218,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVertex_OutgoingTransitions() {
 		return (EReference)vertexEClass.getEStructuralFeatures().get(1);
 	}
@@ -224,6 +228,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRegion() {
 		return regionEClass;
 	}
@@ -233,6 +238,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRegion_Vertices() {
 		return (EReference)regionEClass.getEStructuralFeatures().get(0);
 	}
@@ -242,6 +248,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransition() {
 		return transitionEClass;
 	}
@@ -251,6 +258,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransition_Target() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -260,6 +268,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransition_Source() {
 		return (EReference)transitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -269,6 +278,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStatechart() {
 		return statechartEClass;
 	}
@@ -278,6 +288,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEntry() {
 		return entryEClass;
 	}
@@ -287,6 +298,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSynchronization() {
 		return synchronizationEClass;
 	}
@@ -296,6 +308,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getState() {
 		return stateEClass;
 	}
@@ -305,6 +318,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRegularState() {
 		return regularStateEClass;
 	}
@@ -314,6 +328,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCompositeElement() {
 		return compositeElementEClass;
 	}
@@ -323,6 +338,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCompositeElement_Regions() {
 		return (EReference)compositeElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -332,6 +348,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getChoice() {
 		return choiceEClass;
 	}
@@ -341,6 +358,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getExit() {
 		return exitEClass;
 	}
@@ -350,6 +368,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFinalState() {
 		return finalStateEClass;
 	}
@@ -359,6 +378,7 @@ public class YakindummPackageImpl extends EPackageImpl implements YakindummPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public YakindummFactory getYakindummFactory() {
 		return (YakindummFactory)getEFactoryInstance();
 	}

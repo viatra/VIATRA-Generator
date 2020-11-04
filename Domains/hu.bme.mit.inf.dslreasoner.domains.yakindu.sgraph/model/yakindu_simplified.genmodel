@@ -29,5 +29,6 @@
     </genClasses>
     <genClasses ecoreClass="yakindu_simplified.ecore#//Choice"/>
     <genClasses ecoreClass="yakindu_simplified.ecore#//Exit"/>
+    <genClasses ecoreClass="yakindu_simplified.ecore#//FinalState"/>
   </genPackages>
 </genmodel:GenModel>

@@ -68,6 +68,7 @@ public abstract class CompositeElementImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Region> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentEList<Region>(Region.class, this, YakindummPackage.COMPOSITE_ELEMENT__REGIONS);

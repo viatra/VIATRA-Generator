@@ -79,6 +79,7 @@ public class FunctionImpl extends FunctionalElementImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<FunctionalElement> getSubElements() {
 		if (subElements == null) {
 			subElements = new EObjectContainmentWithInverseEList<FunctionalElement>(FunctionalElement.class, this, FunctionalarchitecturePackage.FUNCTION__SUB_ELEMENTS, FunctionalarchitecturePackage.FUNCTIONAL_ELEMENT__PARENT);
@@ -91,6 +92,7 @@ public class FunctionImpl extends FunctionalElementImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionType getType() {
 		return (FunctionType)TYPE__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
 	}

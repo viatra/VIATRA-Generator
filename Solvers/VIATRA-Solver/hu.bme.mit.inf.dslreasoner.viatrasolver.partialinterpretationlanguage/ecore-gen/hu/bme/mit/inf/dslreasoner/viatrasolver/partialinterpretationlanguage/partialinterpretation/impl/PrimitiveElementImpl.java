@@ -71,6 +71,7 @@ public abstract class PrimitiveElementImpl extends DefinedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isValueSet() {
 		return valueSet;
 	}
@@ -80,6 +81,7 @@ public abstract class PrimitiveElementImpl extends DefinedElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValueSet(boolean newValueSet) {
 		boolean oldValueSet = valueSet;
 		valueSet = newValueSet;
@@ -154,7 +156,7 @@ public abstract class PrimitiveElementImpl extends DefinedElementImpl implements
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (valueSet: ");
 		result.append(valueSet);
 		result.append(')');

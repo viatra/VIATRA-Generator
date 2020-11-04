@@ -76,6 +76,7 @@ public abstract class PartialTypeInterpratationImpl extends MinimalEObjectImpl.C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DefinedElement> getElements() {
 		if (elements == null) {
 			elements = new EObjectResolvingEList<DefinedElement>(DefinedElement.class, this, PartialinterpretationPackage.PARTIAL_TYPE_INTERPRATATION__ELEMENTS);
@@ -88,6 +89,7 @@ public abstract class PartialTypeInterpratationImpl extends MinimalEObjectImpl.C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
 			scopes = new EObjectWithInverseResolvingEList<Scope>(Scope.class, this, PartialinterpretationPackage.PARTIAL_TYPE_INTERPRATATION__SCOPES, PartialinterpretationPackage.SCOPE__TARGET_TYPE_INTERPRETATION);

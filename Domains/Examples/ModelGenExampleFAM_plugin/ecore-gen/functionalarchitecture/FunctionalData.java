@@ -60,13 +60,13 @@ public interface FunctionalData extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Interface</em>' container reference.
-	 * @see #setInterface(FunctionalInterface)
+	 * @see #setInterface(functionalarchitecture.FunctionalInterface)
 	 * @see functionalarchitecture.FunctionalarchitecturePackage#getFunctionalData_Interface()
 	 * @see functionalarchitecture.FunctionalInterface#getData
 	 * @model opposite="data" transient="false"
 	 * @generated
 	 */
-	FunctionalInterface getInterface();
+	functionalarchitecture.FunctionalInterface getInterface();
 
 	/**
 	 * Sets the value of the '{@link functionalarchitecture.FunctionalData#getInterface <em>Interface</em>}' container reference.
@@ -76,6 +76,6 @@ public interface FunctionalData extends EObject {
 	 * @see #getInterface()
 	 * @generated
 	 */
-	void setInterface(FunctionalInterface value);
+	void setInterface(functionalarchitecture.FunctionalInterface value);
 
 } // FunctionalData
