@@ -16,11 +16,13 @@ import org.eclipse.emf.ecore.EReference
 //import yakindumm2.impl.Yakindumm2PackageImpl
 
 class Main {
-	var static Domain d = Domain.Yakindumm;
+	var static Domain d = Domain.Ecore;
 	val static String suffix = '.xmi'
-	val static String OUTPUT_FOLDER = "Inputs/measurement2/yakindu/Alloy/";
-	val static String INPUT_FOLDER = "outputs/measurement2/yakindu/Alloy/";
+	val static String OUTPUT_FOLDER = "Inputs/random/ecore/";
+	val static String INPUT_FOLDER = "outputs/random/ecore/";
 	val static int NUM_RUNS = 1;
+	var static validFiles = 0;
+	var static totalFiles = 0;
 	
 	static class RWInformation{
 		public var String inputFolder;
@@ -56,6 +58,7 @@ class Main {
 
 		val models = new RWInformation(OUTPUT_FOLDER, INPUT_FOLDER, NUM_RUNS);
 		calculateAllModels(models.inputFolder, models.outputFolder,models.numRuns, reader);	
+		println("Valid File Ratio: " + (validFiles as double) / totalFiles)
 		println("finished");
 	}
 	
@@ -88,7 +91,10 @@ class Main {
 		
 		var outputs = model.evaluateAllMetrics();
 		var violations = ViolationCheck.calculateViolationCounts(model.root, d);
-		println(violations);
+		if (violations == 0) {
+			validFiles += 1;
+		}
+		totalFiles += 1;
 		var violationsOutput = newArrayList('violations', violations+'');
 		outputs.add(violationsOutput);
 		CsvFileWriter.write(outputs, fileName);

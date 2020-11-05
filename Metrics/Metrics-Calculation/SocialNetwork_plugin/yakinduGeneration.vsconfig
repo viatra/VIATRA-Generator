@@ -9,11 +9,11 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 200
+		#node = 30
 	}
 	
 	number = 1
-	runs = 1
+	runs = 10
 	config = {
 		log-level = none,
 		"optional-wf" = "false",

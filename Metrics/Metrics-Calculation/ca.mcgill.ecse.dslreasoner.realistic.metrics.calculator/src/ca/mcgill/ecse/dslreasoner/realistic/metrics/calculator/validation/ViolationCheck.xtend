@@ -12,50 +12,50 @@ class ViolationCheck {
 	/**
 	 * Return the total number of violations
 	 */
-	def static int calculateViolationCounts(EObject root, Domain d){
+	def static int calculateViolationCounts(EObject root, Domain d) {
 		var packageName = '';
-		if(d == Domain.Yakindumm){
+		if (d == Domain.Yakindumm) {
 			packageName = 'constraints.yakindumm';
-		}else if (d == Domain.Ecore){
+		} else if (d == Domain.Ecore) {
 			packageName = 'constraints.ecore';
-		}else if (d == Domain.Github){
+		} else if (d == Domain.Github) {
 			return -1;
 		}
-		
+
 		var constriants = loadConstraints(packageName);
 		var collections = new ConstraintCollection(constriants, Ecore.instance);
 		collections.addModel(root);
 		var results = collections.calculateViolations();
-		if(results.size > 0){
+		if (results.size > 0) {
 			return results.get(0);
-		}else{
+		} else {
 			throw new IllegalArgumentException("Calculate Violation Failed");
 		}
 	}
-	
+
 	/**
 	 * return a map contain the count for each type of violation
 	 */
-	def static violationMaps(EObject root){
+	def static violationMaps(EObject root) {
 		var constriants = loadConstraints('hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu');
 		var collections = new ConstraintCollection(constriants, Patterns.instance);
 		collections.addModel(root);
 		var results = collections.calculateViolationMaps();
-		if(results.size > 0){
+		if (results.size > 0) {
 			return results.get(0);
-		}else{
+		} else {
 			throw new IllegalArgumentException("Calculate Violation Failed");
 		}
 	}
-	
-	def static loadConstraints(String packageName){
+
+	def static loadConstraints(String packageName) {
 		val constraints = new ArrayList<IConstraintSpecification>();
-		
+
 		val classPath = ClassPath.from(ClassLoader.systemClassLoader);
 		val classInfos = classPath.getTopLevelClasses(packageName);
-		for(info : classInfos){
-			if(info.load.interfaces.contains(IConstraintSpecification)){
-				//IConstraintSpecification only has one constructor with empty argument list
+		for (info : classInfos) {
+			if (info.load.interfaces.contains(IConstraintSpecification)) {
+				// IConstraintSpecification only has one constructor with empty argument list
 				var constructor = info.load.constructors.get(0);
 				var instance = constructor.newInstance();
 				constraints.add(instance as IConstraintSpecification);

@@ -62,31 +62,30 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	 * Configuration for cutting search space.
 	 */
 	public var SearchSpaceConstraint searchSpaceConstraints = new SearchSpaceConstraint
-	 
+
 	public var runIntermediateNumericalConsistencyChecks = true
-	
+
 	public var punishSize = PunishSizeStrategy.NONE
 	public var scopeWeight = 1
 	public var conaintmentWeight = 2
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
 	public var calculateObjectCreationCosts = false
-	
+
 	public var RealisticGuidance realisticGuidance = RealisticGuidance.Composite;
-	 
-	 public var isWFOptional = false;
-	 
-	 public var allowMustViolations = false;
-	 
-	 public var String domain = '';
+
+	public var isWFOptional = false;
+
+	public var allowMustViolations = false;
+
+	public var String domain = '';
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
 //	public var ScopePropagatorStrategy scopePropagatorStrategy = ScopePropagatorStrategy.BasicTypeHierarchy
-	
 	public var List<LinearTypeConstraintHint> hints = newArrayList
 
 	public var List<CostObjectiveConfiguration> costObjectives = newArrayList
-	
+
 	public var List<UnitPropagationPatternGenerator> unitPropagationPatternGenerators = newArrayList
 }
 
@@ -117,7 +116,7 @@ class SearchSpaceConstraint {
 	public var List<Function1<ModelGenerationMethod, ModelGenerationMethodBasedGlobalConstraint>> additionalGlobalConstraints = new LinkedList
 }
 
-public enum RealisticGuidance{
+public enum RealisticGuidance {
 	MPC,
 	NodeActivity,
 	OutDegree,
@@ -126,6 +125,7 @@ public enum RealisticGuidance{
 	Composite_Without_Violations,
 	Violations
 }
+
 class CostObjectiveConfiguration {
 	public var List<CostObjectiveElementConfiguration> elements = newArrayList
 	public var ObjectiveKind kind
@@ -138,4 +138,3 @@ class CostObjectiveElementConfiguration {
 	public var String patternQualifiedName
 	public var int weight
 }
-

@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
@@ -58,7 +59,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	public NumericSolver numericSolver = null;
 
 	// Running
-	private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
+	private Queue<TrajectoryWithFitness> trajectoiresToExplore;
 	private SolutionStore solutionStore;
 	private SolutionStoreWithCopy solutionStoreWithCopy;
 	private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
@@ -150,7 +151,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
 		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
 		
-		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
+		trajectoiresToExplore = new LinkedList<TrajectoryWithFitness>();
 		stateAndActivations = new HashMap<Object, List<Object>>();
 		metricDistance = new PartialInterpretationMetricDistance(domain);
 		
@@ -218,9 +219,8 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 			}
 			
 			// calculate values for epsilon greedy
-			double epsilon = 1.0/count;
+			double epsilon = 1.0/model.getNewElements().size();
 			double draw = Math.random();
-			count++;
 			this.currentNodeTypeDistance = heuristics.getNodeTypeDistance();
 			numNodesToGenerate = model.getMaxNewElements();
 			System.out.println("NA distance: " + heuristics.getNADistance());	
@@ -262,7 +262,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				if((getNumberOfViolations(mustMatchers) > 0|| getNumberOfViolations(mayMatchers) > targetDiff) && !allowMustViolation && !shouldFinish) {
 					context.backtrack();
 				}else {
-					final Fitness nextFitness = context.calculateFitness();
+					final Fitness nextFitness = calculateFitness();
 					
 					// the only hard objectives are configured in the config file
 					checkForSolution(nextFitness);
@@ -634,7 +634,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	}
 
 	protected void removeSubtreeFromQueue(TrajectoryWithFitness t) {
-		PriorityQueue<TrajectoryWithFitness> previous = this.trajectoiresToExplore;
+		Queue<TrajectoryWithFitness> previous = this.trajectoiresToExplore;
 		this.trajectoiresToExplore = new PriorityQueue<>(this.comparator);
 		for (TrajectoryWithFitness trajectoryWithFitness : previous) {
 			if (!containsAsSubstring(trajectoryWithFitness.trajectory, t.trajectory)) {

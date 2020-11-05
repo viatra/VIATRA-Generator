@@ -60,17 +60,18 @@ class KSDistance extends CostDistance {
 		return value;
 	}
 	
+	// actually calculates Manhattan Distance due to KS-Distance does not make sense for discrete distributions
 	def nodeTypeDistance(HashMap<String, Double> samples){
 		var typesDistMap = g.nodeTypeSamples;
-		var sourceDist = newArrayList();
-		var instanceDist = newArrayList();
+		var keys = new HashSet<String>(typesDistMap.keySet());
+		keys.addAll(samples.keySet());
+		var distance = 0.0;
 		
-		for(key : typesDistMap.keySet()){
-			sourceDist.add(typesDistMap.get(key));
-			instanceDist.add(samples.getOrDefault(key, 0.0));
+		for(key : keys){
+			distance += Math.abs(typesDistMap.getOrDefault(key, 0.0) - samples.getOrDefault(key, 0.0));
 		}
 		
-		return ks_distance_two_dist(sourceDist, instanceDist);
+		return distance;
 	}
 	
 	def edgeTypeDistance(HashMap<String, Double> samples){

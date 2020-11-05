@@ -9,3 +9,11 @@ pattern directParent(a : Commit, b: Commit) {
 pattern loopInParent(a){
  find directParent+(a,a);
 }
+
+
+//1. issue with MERGED but no PullRequest
+//2. issue with 2 CLOSED events without a REOPENED event
+//3. issue with 2 REOPENED events without a CLOSED event
+//4. user-issue pair with 2 SUBSCRIBED events without an UNSUBSCRIBED event
+//5. user-issue pair with 2 UNSUBSCRIBED events without a SUBSCRIBED event
+//6. User MERGED/CLOSED/REOPENED issue without being a projectMember of the Project
