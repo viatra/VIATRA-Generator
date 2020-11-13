@@ -12,11 +12,15 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 
-import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-
 class ExpressionEvaluation2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
-	val NumericProblemSolver numericSolver = new NumericProblemSolver
+	var NumericProblemSolver _numericSolver = null //new NumericProblemSolver
+	def getNumericSolver() {
+		if(_numericSolver === null) {
+			_numericSolver = new NumericProblemSolver
+		}
+		return _numericSolver
+	}
 	
 	def Term transformCheck(XExpression expression, Map<PVariable, Variable> variable2Variable) {
 		return expression.transform(variable2Variable)
