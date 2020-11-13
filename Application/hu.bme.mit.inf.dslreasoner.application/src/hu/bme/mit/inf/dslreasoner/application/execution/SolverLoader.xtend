@@ -28,6 +28,7 @@ import java.util.Optional
 import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.xbase.lib.Functions.Function1
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {
@@ -74,8 +75,8 @@ class SolverLoader {
 					throw new IllegalArgumentException("Objectives are not supported by Alloy.")
 				}
 				val c = new AlloySolverConfiguration
-				config.getAsBoolean("fixRandomSeed", console).ifPresent[c.fixRandomSeed = it]
-				config.getAsType("path", console, [it], String).ifPresent[c.solverPath = it]
+				config.getAsInteger("symmetry", console).ifPresent[c.symmetry = it]
+				config.getAsType("solver",console,[x|AlloyBackendSolver::valueOf(x)],AlloyBackendSolver).ifPresent[c.solver = it]
 				c
 			}
 			case SMT_SOLVER: {
