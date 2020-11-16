@@ -15,6 +15,16 @@ def manual_ks(pdf1, pdf2):
         result = max(result, abs(sum1-sum2))
     return result
 
+def manhattan(pdf1, pdf2):
+    result = 0
+    sum1 = 0
+    sum2 = 0
+    for(a, b) in zip(pdf1, pdf2):
+        sum1 += a
+        sum2 += b
+        result += abs(sum1-sum2)
+    return result
+
 def js_distance(samples1, samples2):
     map1 = fromSamples(samples1)
     map2 = fromSamples(samples2)

@@ -12,17 +12,20 @@ import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 import org.eclipse.emf.ecore.impl.EcorePackageImpl
 import org.eclipse.emf.ecore.EReference
+import github.impl.GithubPackageImpl
 
 //import yakindumm2.impl.Yakindumm2PackageImpl
 
 class Main {
-	var static Domain d = Domain.Ecore;
+	var static Domain d = Domain.Github;
 	val static String suffix = '.xmi'
-	val static String OUTPUT_FOLDER = "Inputs/random/ecore/";
-	val static String INPUT_FOLDER = "outputs/random/ecore/";
+	val static String OUTPUT_FOLDER = "Inputs/Github/Alloy/";
+	val static String INPUT_FOLDER = "outputs/Github/Alloy/";
 	val static int NUM_RUNS = 1;
 	var static validFiles = 0;
 	var static totalFiles = 0;
+	var static ViolationCheck checker;
+	var static EPackage metamodel;
 	
 	static class RWInformation{
 		public var String inputFolder;
@@ -38,7 +41,6 @@ class Main {
 	
 	def static void main(String[] args){
 		//init model
-		var EPackage metamodel;
 		//init viatra engine for the violation checker
 		ReteEngine.getClass();
 		
@@ -49,10 +51,10 @@ class Main {
 			EcorePackage.eINSTANCE.eClass;
 			metamodel = EcorePackageImpl.eINSTANCE;
 		}else if (d == Domain.Github){
-			//TODO: Initialize Github Package
+			metamodel = GithubPackageImpl.eINSTANCE;
 		}
 		
-										
+		checker = new ViolationCheck(d);				
 		println("Start Reading Models...");
 		var reader = new GraphReader(metamodel, suffix);
 
@@ -68,7 +70,7 @@ class Main {
 			val models = new ArrayList<EMFGraph>();
 			models.addAll(reader.readModels(inputFolder + "run" + i));
 			for(model : models){
-				calculateAndOutputMetrics(model, YakindummPackageImpl.eNAME, outputFolder+model.name+"_run_"+i+".csv");
+				calculateAndOutputMetrics(model, metamodel.name, outputFolder+model.name+"_run_"+i+".csv");
 			}
 		}
 		println("output results Ended for: " + outputFolder);
@@ -90,7 +92,10 @@ class Main {
 		}
 		
 		var outputs = model.evaluateAllMetrics();
-		var violations = ViolationCheck.calculateViolationCounts(model.root, d);
+		var violations = checker.calculateViolationCounts(model.root);
+		var map = checker.violationMaps(model.root);
+		
+		println(violations);
 		if (violations == 0) {
 			validFiles += 1;
 		}

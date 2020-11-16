@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" nsURI="9EiRqlD5LVU5V5rOva1c">
+  <eClassifiers xsi:type="ecore:EDataType" name="zjUyi0ioznRBm" instanceClassName="tp7RQC69ZT3KJduCrm5KuQejM80hmnIb9PU3" instanceTypeName="difnr50rEA80Uv7yhAiFpDBmOEOe8kkriGfQByMayNB6DhoWYTjBfIN" serializable="false">
+    <eTypeParameters>
+      <eBounds>
+        <eUpperBound eClassifier="//@eClassifiers.2" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1">
+          <eUpperBound eClassifier="//@eClassifiers.4">
+            <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+              <eUpperBound eClassifier="//@eClassifiers.10" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+                <eUpperBound eClassifier="//@eClassifiers.7" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1">
+                  <eTypeArguments eClassifier="//@eClassifiers.11">
+                    <eUpperBound eClassifier="//@eClassifiers.4"/>
+                    <eLowerBound eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                  </eTypeArguments>
+                  <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+                    <eTypeArguments/>
+                    <eTypeArguments eClassifier="//@eClassifiers.7" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                    <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                    <eTypeArguments eClassifier="//@eClassifiers.6"/>
+                    <eTypeArguments/>
+                    <eTypeArguments/>
+                    <eTypeArguments eClassifier="//@eClassifiers.2"/>
+                    <eTypeArguments/>
+                    <eTypeArguments eClassifier="//@eClassifiers.1" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                    <eLowerBound/>
+                  </eTypeArguments>
+                  <eTypeArguments eClassifier="//@eClassifiers.6">
+                    <eUpperBound eClassifier="//@eClassifiers.10" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                    <eTypeArguments/>
+                    <eTypeArguments eClassifier="//@eClassifiers.12" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                    <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                    <eLowerBound eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                  </eTypeArguments>
+                  <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                  <eTypeArguments eClassifier="//@eClassifiers.8" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                  <eTypeArguments eClassifier="//@eClassifiers.12"/>
+                  <eTypeArguments/>
+                  <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+                  <eTypeArguments eClassifier="//@eClassifiers.11"/>
+                  <eTypeArguments/>
+                  <eTypeArguments/>
+                </eUpperBound>
+              </eUpperBound>
+            </eTypeArguments>
+            <eTypeArguments eClassifier="//@eClassifiers.4" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+          </eUpperBound>
+        </eUpperBound>
+      </eBounds>
+      <eBounds/>
+      <eBounds eClassifier="//@eClassifiers.5"/>
+      <eBounds eClassifier="//@eClassifiers.6"/>
+      <eBounds eClassifier="//@eClassifiers.4"/>
+      <eBounds eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+    </eTypeParameters>
+    <eTypeParameters name="3gqOqoIc8mIDURtS1KnoprzvdTemNcOZFe52BB32Jlc1C29rSIMHYyegiVtQqpkU29o1b73kJuKbw8sn9LZ6szoGBuSJjkyQi8sWySKkSN9C7pijvTpD6rhM"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="uwv2FXKDa1l6vhUMlZcsUoxN97NNw9Nr0hYlMurhfbKvmWqQFgc3eXCTB7c4U4prnQf0TIKr3oHiiJPVAOQ0oEIsseJxFufVVm6RwlurMMjw9JBHfPLw0iIKL" instanceTypeName="EbZHaXyTHJa8cRQAPSKxuFnY9iqCAHUlcldfChCJtCDnkY0ogJsOZ1q5mwFwliXdG1tUh21oNz8AfRRTKIv619qPYuLIoDXpJ13klKqpm87eIh2MELqLXYWpOljLl" abstract="true" eSuperTypes="//@eClassifiers.12 //@eClassifiers.1" interface="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" instanceClassName="BjowIccgd2HBFoIq4STnv2oyeIby3aU"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="jzQQsP8VOaB7y1fkF0qBpqYWZTf4ao9js0yE3DDALoVt120WLzlCfPLyOXtVW8HgKd1wHZ1Meyyz9CCEoIkBb5ytv" instanceTypeName="03RXp67KyzfcSoGQwAz3B3UIXM44SNGTjXAr5HNi74XLs2Kwx"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="lmS2HHIzc5pyWURKwUtFt3ZYN1V8Pt5sgan9QMffhj5OLrCinirXfwM3xAds85lZuaFrTYQGl76KWOGzxVR9MX9p7U5RBdbcZwoMTbaqkfW17jAd8t"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="AJMvEjUoHXQQSLhYyIK1dd7" instanceClassName="L4ueeT5Dz2AuymigwFobkkAegwQrWOClmxXB1CcCKiLJFFuHfs1NjHpP1A8gs2hpXgYZ82TJEULJ6F0cUSANmJwiArSkdMuLuRX5AP45pMhdMbKKWj"/>
+  <eClassifiers xsi:type="ecore:EClass" name="iYjDYWU1VN5J1qbB0RCVVEzoWJNTv4hNkBjqSd8" instanceClassName="QJ0FArS2yxRzo" eSuperTypes="//@eClassifiers.12 //@eClassifiers.1 //@eClassifiers.11 //@eClassifiers.9 //@eClassifiers.6" interface="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="OVt6nvDcfS9JrOWeCDoatvIK5kcQRKEW" instanceClassName="AaqToENEvhyiilxMe79t4ZgpGkioPz3KbYjrwq"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ptCoJscFVrMjACaVHwqkXUfmQBDCdb0bP9lqUgomvyLQU" instanceTypeName="S9ZOLjmsGqBljO4YLcI5a6pf1P3XSain1nkn5rIhKNC1A5YogYoZRVGHMHgnvyx8CnUgQfoxUK95lYFQmH15qoPPxNUQ92mhp6cnFUeEXMGcNk1"/>
+  <eClassifiers xsi:type="ecore:EClass" instanceClassName="DJqnwYQv1Pg88IrxUQn7JvwuUQ5UGB9EqZ" instanceTypeName="hhUZG9O827mCOXzqaFkDOgrMEVREwgx70KGkbnNHZBCPH9u40dq1i7kD" abstract="true" eSuperTypes="//@eClassifiers.11 //@eClassifiers.1 //@eClassifiers.6"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="WR2PiXR4lfwEx15eRKjM4k0Z59Vx7lCsgPe03C7jmGSVa514rSIKJ8iAeCWb" instanceClassName="qexPb6WKAL92sBwZZexqa9f5PBUUwArZOCRdJfNLmHAZvPiw84FgDCKaSzxQa3vq8Q"/>
+  <eClassifiers xsi:type="ecore:EClass" name="dcRrnXQzHJJB" instanceClassName="MtujFsIpN3I6FaiMM0ursW7MH1zyjruySi4LmwrWOoHu8rpH28fY2R0fJdXWvJ80iO4Kv2BaohiZNhXCbCGjbW9NBb25f6CJfeGfq0oG4oqzYFrMbDWaEElRixS" eSuperTypes="//@eClassifiers.9 //@eClassifiers.1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="hnRlpovGFz30" instanceClassName="EQi2vhdZZLmep9sH7v7XLxvNyODnerd0s0zcSG" instanceTypeName="RCC" eSuperTypes="//@eClassifiers.12 //@eClassifiers.6 //@eClassifiers.11 //@eClassifiers.9 //@eClassifiers.1" interface="true"/>
+</ecore:EPackage>

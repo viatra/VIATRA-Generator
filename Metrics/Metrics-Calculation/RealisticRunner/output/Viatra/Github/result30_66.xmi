@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<github:Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:github="sure.ghtorrent.github">
+  <issue/>
+  <issue>
+    <pullrequest commit="//@commits.7"/>
+    <issueevent user="//@projectMembers.1" action="UNSUBSCRIBED"/>
+    <issueevent user="//@projectMembers.3"/>
+  </issue>
+  <issue>
+    <pullrequest commit="//@commits.5"/>
+    <issueevent user="//@projectMembers.3"/>
+    <issueevent user="//@projectMembers.2" action="UNSUBSCRIBED"/>
+    <issueevent user="//@projectMembers.3" action="REOPENED"/>
+  </issue>
+  <issue>
+    <pullrequest commit="//@commits.6"/>
+    <issueevent user="//@projectMembers.3" action="ASSIGNED"/>
+  </issue>
+  <issue>
+    <pullrequest/>
+  </issue>
+  <projectMembers/>
+  <projectMembers/>
+  <projectMembers/>
+  <projectMembers/>
+  <projectMembers/>
+  <commits committer="//@projectMembers.2" parents="//@commits.4 //@commits.5"/>
+  <commits committer="//@projectMembers.2" parents="//@commits.0 //@commits.5"/>
+  <commits committer="//@projectMembers.0" parents="//@commits.5 //@commits.7"/>
+  <commits committer="//@projectMembers.2" parents="//@commits.4 //@commits.5"/>
+  <commits committer="//@projectMembers.2" parents="//@commits.5"/>
+  <commits committer="//@projectMembers.1" parents="//@commits.8" pullrequest="//@issue.2/@pullrequest"/>
+  <commits committer="//@projectMembers.2" parents="//@commits.0 //@commits.4" pullrequest="//@issue.3/@pullrequest"/>
+  <commits committer="//@projectMembers.1" parents="//@commits.4 //@commits.6" pullrequest="//@issue.1/@pullrequest"/>
+  <commits committer="//@projectMembers.4"/>
+</github:Project>

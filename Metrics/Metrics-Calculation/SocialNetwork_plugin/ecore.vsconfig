@@ -6,7 +6,7 @@ generate {
 	metamodel = {package ecore excluding{EClassifier.instanceClass, EClassifier.defaultValue, 
 										 EEnumLiteral.instance, EStructuralFeature.defaultValue, EStructuralFeature.changeable,
 										 EStructuralFeature.derived, ENamedElement.name, EClass.interface, EClass.abstract, EClassifier.instanceTypeName,
-										 EClassifier.instanceClassName, EPackage.nsPrefix, EPackage.nsURI, EAnnotation.source,
+										 EClassifier.instanceClassName, EPackage.nsPrefix, EPackage.nsURI,
 										 EAttribute.iD, EDataType.serializable, EEnumLiteral.literal, EEnumLiteral.value,
 										 EReference.resolveProxies, EReference.container, EReference.containment, EStringToStringMapEntry.key,
 										 EStringToStringMapEntry.value, EStructuralFeature.defaultValueLiteral, EStructuralFeature.transient,
@@ -19,7 +19,7 @@ generate {
 										 EClass. eAllOperations, EClass.eAllStructuralFeatures, EClass.eAttributes, EClass.eIDAttribute, EClass.eReferences,
 										 EAttribute.eAttributeType, EGenericType.eRawType, EReference.eReferenceType,
 										 //Generic Types
-										 EClass.eGenericSuperTypes, ETypedElement.eGenericType, EOperation.eGenericExceptions, EObject, EAnnotation.references, EAnnotation.contents
+										 EClass.eGenericSuperTypes, ETypedElement.eGenericType, EOperation.eGenericExceptions, EObject, EAnnotation, EModelElement.eAnnotations, EAnnotation.details, EAnnotation.contents, EAnnotation.references, EAnnotation.source, EAnnotation.eModelElement
 										 
 										 }}
 	partial-model = { "inputs/ecore.xmi"}
@@ -30,22 +30,22 @@ generate {
 	
 	//median run time
 	scope = {
-		#node = 30  // (warm-up: 10) 30, 50, 80, 100, 120 ....
+		#node = 101  // (warm-up: 10) 30, 50, 80, 100, 120 ....
 	}
 	
 	number = 1
 	runs = 1
 	config = {
 		log-level = none,
-		runtime = 300, // the runtime is in seconds, want to set is to 5 mins
-		"optional-wf" = "false",
+		//runtime = 300, // the runtime is in seconds, want to set is to 5 mins
+		"optional-wf" = "true",
 		"realistic-guidance" = "Composite",
-		"allow-must-violations" = "false",
+		"allow-must-violations" = "true",
 		"domain" = "Ecore",
 		"scopePropagator" = "typeHierarchy"
 	}
 	
 	debug = "debug"
 	statistics = "statistics/Ecore/warmup.csv"  //give different set up different filenames
-	output = "output/Ecore/run_time/"
+	output = "output/Alloy/Ecore/"
 }

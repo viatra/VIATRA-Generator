@@ -11,19 +11,19 @@ from GraphType import GraphCollection
 import DistributionMetrics as metrics
 
 def main():
-    domain = 'github'
+    domain = 'yakindu'
     # read models
-    alloy = GraphCollection('../input/measurement2/{}/Alloy/'.format(domain), 100, 'All')
-    human = GraphCollection('../input/measurement2/{}/Human/'.format(domain), 304, 'Hum')
-    base = GraphCollection('../input/measurement2/{}/BaseViatra/'.format(domain), 100, 'GS')
-    real = GraphCollection('../input/measurement2/{}/RealViatra/'.format(domain), 100, 'Real')
-    random = GraphCollection('../input/measurement2/{}/Random/'.format(domain), 100, 'Rand')
-    na_rep = GraphCollection('../input/measurement2/{}/Human/na_rep/'.format(domain), 1, 'Med')
-    mpc_rep = GraphCollection('../input/measurement2/{}/Human/mpc_rep/'.format(domain), 1, 'Med')
-    od_rep = GraphCollection('../input/measurement2/{}/Human/od_rep/'.format(domain), 1, 'Med')
+    alloy = GraphCollection('../input/{}/Alloy/'.format(domain), 100, 'All')
+    human = GraphCollection('../input/{}/Human/'.format(domain), 304, 'Hum')
+    base = GraphCollection('../input/{}/Base/'.format(domain), 100, 'GS')
+    real = GraphCollection('../input/{}/Real/'.format(domain), 100, 'Real')
+    random = GraphCollection('../input/{}/Random/'.format(domain), 100, 'Rand')
+    na_rep = GraphCollection('../input/{}/Human/na_rep/'.format(domain), 1, 'Med')
+    mpc_rep = GraphCollection('../input/{}/Human/mpc_rep/'.format(domain), 1, 'Med')
+    od_rep = GraphCollection('../input/{}/Human/od_rep/'.format(domain), 1, 'Med')
 
     # a hack to make the node type as the same as an exiting model
-    type_rep = GraphCollection('../input/measurement2/{}/Human/od_rep/'.format(domain), 1, 'Med')
+    type_rep = GraphCollection('../input/{}/Human/od_rep/'.format(domain), 1, 'Med')
     if(domain == 'yakindu'):
         type_rep.nts = [{'Entry': 0.04257802080554814, 'Choice': 0.1267671379034409, 'State': 0.1596092291277674, 'Transition': 0.6138636969858629, 'Statechart': 0.010136036276340358, 'Region': 0.04467858095492131, 'Exit': 0.0018338223526273673, 'FinalState': 0.0005334755934915977}]
     elif (domain == 'ecore'):
@@ -34,17 +34,17 @@ def main():
     types = sorted(type_rep.nts[0].keys())
 
     model_collections = [human, alloy, random, base,  real]
-    for model_collection in model_collections:
-        print(model_collection.name)
-        length = len(model_collection.violations)
-        percentage = sum(map(lambda v: int(v==0), model_collection.violations)) / length
-        print(percentage)
+    # for model_collection in model_collections:
+    #     print(model_collection.name)
+    #     length = len(model_collection.violations)
+    #     percentage = sum(map(lambda v: int(v==0), model_collection.violations)) / length
+    #     print(percentage)
 
 
     models_to_compare_na = [human, alloy, random, base,  real, na_rep]
     models_to_compare_mpc = [human, alloy, random, base,  real, mpc_rep]
     models_to_compare_od = [human, alloy, random, base,  real, od_rep]
-    models_to_compare_nt = [human, alloy, random, base,  real, type_rep]
+    models_to_compare_nt = [human, real]
     for modelCollection in models_to_compare_nt:
         type_dists = []
         for nt in modelCollection.nts:
@@ -59,9 +59,9 @@ def main():
     outputFolder = '../output/{}/'.format(domain)
 
     #calculate metrics
-    metricStat(models_to_compare_na, 'Node_Activity', nodeActivity, 0, outputFolder, calculateKSMatrix)
-    metricStat(models_to_compare_od, 'Out_Degree', outDegree, 1, outputFolder, calculateKSMatrix)
-    metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder, calculateKSMatrix)
+    # metricStat(models_to_compare_na, 'Node_Activity', nodeActivity, 0, outputFolder, calculateKSMatrix)
+    # metricStat(models_to_compare_od, 'Out_Degree', outDegree, 1, outputFolder, calculateKSMatrix)
+    # metricStat(models_to_compare_mpc, 'MPC', mpc, 2, outputFolder, calculateKSMatrix)
     metricStat(models_to_compare_nt, 'Node_Types', nodeType, 3, outputFolder, calculateManualKSMatrix)   
 
 def calculateKSMatrix(dists):
@@ -89,7 +89,7 @@ def calculateManualKSMatrix(dists):
     for i in range(len(dist)):
         matrix[i,i] = 0
         for j in range(i+1, len(dist)):
-            value = metrics.manual_ks(dist[i], dist[j])
+            value = metrics.manhattan(dist[i], dist[j])
             matrix[i, j] = value
             matrix[j, i] = value
     return matrix
@@ -112,9 +112,9 @@ def plot(graphTypes, coords, title='',index = 0, savePath = ''):
         y = (coords[index:index+graphTypes[i].size, 1].tolist())
         index += graphTypes[i].size
         plt.plot(x, y, color=color[i], marker=markers[i], label = graphTypes[i].name, linestyle='', alpha=0.7, fillstyle = fill_styles[i])
-    plt.savefig(fname = savePath+'.png', dpi=500)
+    plt.savefig(fname = savePath+'.jpg', dpi=500)
     plt.legend(loc='upper right')
-    plt.savefig(fname = savePath+'_lengend.png', dpi=500)
+    plt.savefig(fname = savePath+'_lengend.jpg', dpi=500)
 
 def mkdir_p(mypath):
     '''Creates a directory. equivalent to using mkdir -p on the command line'''
@@ -136,7 +136,9 @@ def metricStat(graphTypes, metricName, metric, graphIndex, outputFolder, matrix_
         outputFolder = outputFolder + graph.name + '-'
     print('calculate' + metricName +' for ' + outputFolder)
     mkdir_p(outputFolder)
-    out_d_coords = calculateMDS(matrix_calculator(metrics))
+    matrix = matrix_calculator(metrics)
+    np.savetxt(outputFolder + '/' + metricName + '.csv', matrix, delimiter=',')
+    out_d_coords = calculateMDS(matrix)
     plot(graphTypes, out_d_coords, metricName, graphIndex,outputFolder + '/'+ metricName)
 
 def nodeActivity(graphType):

@@ -59,10 +59,9 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	public NumericSolver numericSolver = null;
 
 	// Running
-	private Queue<TrajectoryWithFitness> trajectoiresToExplore;
+	private PriorityQueue<TrajectoryWithFitness> trajectoiresToExplore;
 	private SolutionStore solutionStore;
 	private SolutionStoreWithCopy solutionStoreWithCopy;
-	private SolutionStoreWithDiversityDescriptor solutionStoreWithDiversityDescriptor;
 	private volatile boolean isInterrupted = false;
 	private ModelResult modelResultByInternalSolver = null;
 	private Random random = new Random();
@@ -102,9 +101,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	public SolutionStoreWithCopy getSolutionStoreWithCopy() {
 		return solutionStoreWithCopy;
 	}
-	public SolutionStoreWithDiversityDescriptor getSolutionStoreWithDiversityDescriptor() {
-		return solutionStoreWithDiversityDescriptor;
-	}
+
 	public int getNumberOfStatecoderFail() {
 		return numberOfStatecoderFail;
 	}
@@ -144,14 +141,14 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 		this.comparator = new Comparator<TrajectoryWithFitness>() {
 			@Override
 			public int compare(TrajectoryWithFitness o1, TrajectoryWithFitness o2) {
-				return objectiveComparatorHelper.compare(o2.fitness, o1.fitness);
+				int diff = Double.compare(o1.fitness.get("violation"), o2.fitness.get("violation"));
+				return diff == 0? objectiveComparatorHelper.compare(o2.fitness, o1.fitness) : diff;
 			}
 		};
 		
 		this.solutionStoreWithCopy = new SolutionStoreWithCopy();
-		this.solutionStoreWithDiversityDescriptor = new SolutionStoreWithDiversityDescriptor(configuration.diversityRequirement);
 		
-		trajectoiresToExplore = new LinkedList<TrajectoryWithFitness>();
+		trajectoiresToExplore = new PriorityQueue<TrajectoryWithFitness>(11, comparator);
 		stateAndActivations = new HashMap<Object, List<Object>>();
 		metricDistance = new PartialInterpretationMetricDistance(domain);
 		
@@ -173,7 +170,8 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 			return;
 		}
 		
-		final Fitness firstFittness = context.calculateFitness();
+		final Fitness firstFittness = calculateFitness();
+		firstFittness.put("violation",  (double) getNumberOfViolations(mayMatchers));
 		
 		//final ObjectiveComparatorHelper objectiveComparatorHelper = context.getObjectiveComparatorHelper();
 		final Object[] firstTrajectory = context.getTrajectory().toArray(new Object[0]);
@@ -205,6 +203,14 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 			}
 			
 			List<Object> activationIds = selectActivation();
+			
+			if (activationIds.size() == 0) {
+                trajectoiresToExplore.remove(currentTrajectoryWithFittness);
+                currentTrajectoryWithFittness = null;
+                stateAndActivations.remove(context.getCurrentStateId());
+                continue mainLoop;
+			}
+			
 			PartialInterpretation model = (PartialInterpretation) context.getModel();
 			System.out.println(model.getNewElements().size());
 			System.out.println("# violations: " + getNumberOfViolations(mayMatchers));
@@ -246,26 +252,26 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFittness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 				
-//				if (context.isCurrentStateAlreadyTraversed()) {
-//					logger.info("The new state is already visited.");
-//					context.backtrack();
-//				} else if (!checkGlobalConstraints()) {
-//					logger.debug("Global contraint is not satisifed.");
-//					context.backtrack();
-//				} 
-				
 				int currentSize = model.getNewElements().size();
 				int targetDiff = targetSize - currentSize;
-				boolean shouldFinish = currentSize >= targetSize;
+				boolean shouldFinish = configuration.isWFOptional && currentSize >= targetSize - 1;
 				
 				// does not allow must violations
 				if((getNumberOfViolations(mustMatchers) > 0|| getNumberOfViolations(mayMatchers) > targetDiff) && !allowMustViolation && !shouldFinish) {
 					context.backtrack();
 				}else {
-					final Fitness nextFitness = calculateFitness();
+					Fitness nextFitness = calculateFitness();
+
+					if (shouldFinish) {
+						nextFitness.setSatisifiesHardObjectives(true);
+						saveSolution();
+					}
 					
+	
 					// the only hard objectives are configured in the config file
 					checkForSolution(nextFitness);
+					
+					nextFitness.put("violation",  (double) getNumberOfViolations(mayMatchers));
 			
 					if (context.getDepth() > configuration.searchSpaceConstraints.maxDepth) {
 						logger.debug("Reached max depth.");
@@ -289,9 +295,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				}
 			}
 			logger.debug("State is fully traversed.");
-			trajectoiresToExplore.remove(currentTrajectoryWithFittness);
 			currentTrajectoryWithFittness = null;
-			context.backtrack();
 		}
 		logger.info("Interrupted.");
 	}
@@ -344,8 +348,8 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 		long start = System.nanoTime();
 		int nodeSize = ((PartialInterpretation) context.getModel()).getNewElements().size();
 		double currentValue = calculateCurrentStateValue(nodeSize,violation);
-		double[] toPredict = metricDistance.calculateFeature(100, violation);
-		if(Math.abs(currentValue - currentStateValue) < 0.001) {
+		double[] toPredict = metricDistance.calculateFeature((configuration.typeScopes.maxNewElements + 2), violation);
+		if(Math.abs(currentValue - currentStateValue) < 0.001 && configuration.realisticGuidance == RealisticGuidance.NodeType) {
 			this.method.getStatistics().addMetricCalculationTime(System.nanoTime() - start);
 			return Double.MAX_VALUE;
 		}
@@ -375,13 +379,13 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				double unfinishFactor = 50 * (1 - (double)factor / targetSize);
 				double nodeTypeFactor = g.getNodeTypeDistance();
 				double normalFactor = 5;
-				if(currentNodeTypeDistance <= 0.05 || numNodesToGenerate == 1) {
+				if(currentNodeTypeDistance <= 0.03 || numNodesToGenerate == 1) {
 					nodeTypeFactor = 0;
 					normalFactor = 100;
 					unfinishFactor = 0; 
 				}
 				
-				return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
+				return 50*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
 			}else if (domain == Domain.Ecore) {
 				double unfinishFactor = 100 * (1 - (double)factor / targetSize);
 				double nodeTypeFactor = g.getNodeTypeDistance();
@@ -392,18 +396,18 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 					unfinishFactor *= 0.5; 
 				}
 				
-				return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
+				return 50*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + 2*g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
 			}else {
-				double unfinishFactor = context.calculateFitness().get("CompositeUnfinishednessObjective");
+				double unfinishFactor = 100 * (1 - (double)factor / targetSize);
 				double nodeTypeFactor = g.getNodeTypeDistance();
 				double normalFactor = 5;
-				if(currentNodeTypeDistance <= 0.05 || numNodesToGenerate == 1) {
+				if(currentNodeTypeDistance <= 0.5 || numNodesToGenerate == 1) {
 					nodeTypeFactor = 0;
 					normalFactor = 100;
 					//unfinishFactor *= 0.5; 
 				}
 				
-				return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + 2*g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
+				return 50*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + 2*g.getMPCDistance() + 2*g.getOutDegreeDistance()) + normalFactor / 5*consistenceWeights + unfinishFactor;
 			}
 
 		}else if(configuration.realisticGuidance == RealisticGuidance.Composite_Without_Violations) {
@@ -411,13 +415,13 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 				double unfinishFactor = 50 * (1 - (double)factor / targetSize);
 				double nodeTypeFactor = g.getNodeTypeDistance();
 				double normalFactor = 5;
-				if(currentNodeTypeDistance <= 0.05 || numNodesToGenerate == 1) {
+				if(currentNodeTypeDistance <= 0.5 || numNodesToGenerate == 1) {
 					nodeTypeFactor = 0;
 					normalFactor = 100;
 					unfinishFactor = 0; 
 				}
 				
-				return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
+				return 50*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + 4 * g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
 			}else if (domain == Domain.Github) {
 				double unfinishFactor = 100 * (1 - (double)factor / targetSize);
 				double nodeTypeFactor = g.getNodeTypeDistance();
@@ -428,7 +432,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 					unfinishFactor *= 0.5; 
 				}
 				
-				return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
+				return 50*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
 			} else {
 				double unfinishFactor = 100 * (1 - (double)factor / targetSize);
 				double nodeTypeFactor = g.getNodeTypeDistance();
@@ -439,10 +443,10 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 					unfinishFactor *= 0.5; 
 				}
 				
-				return 100*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
+				return 50*(nodeTypeFactor) + normalFactor*(2*g.getNADistance() + g.getMPCDistance() + 2*g.getOutDegreeDistance()) + unfinishFactor;
 			}
 		}else {
-			return violation;
+			return getNumberOfViolations(mustMatchers) + getNumberOfViolations(mayMatchers);
 		}
 	}
 	
@@ -491,7 +495,11 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	private List<Object> selectActivation() {
 		List<Object> activationIds;
 		try {
-			activationIds = this.activationSelector.randomizeActivationIDs(context.getUntraversedActivationIds());
+			 activationIds = new ArrayList<Object>(context.getCurrentActivationIds());
+             if(stateAndActivations.containsKey(context.getCurrentStateId())) {
+            	 activationIds.removeAll(stateAndActivations.get(context.getCurrentStateId()));
+             }
+             activationIds = this.activationSelector.randomizeActivationIDs(activationIds);
 		} catch (NullPointerException e) {
 			numberOfStatecoderFail++;
 			activationIds = Collections.emptyList();
@@ -501,17 +509,17 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 
 	private void checkForSolution(final Fitness fittness) {
 		if (fittness.isSatisifiesHardObjectives()) {
-			logger.debug("Solution Found!!");
-			logger.debug("# violations: " + (getNumberOfViolations(mustMatchers)));
-			if (solutionStoreWithDiversityDescriptor.isDifferent(context)) {
-				solutionStoreWithCopy.newSolution(context);
-				solutionStoreWithDiversityDescriptor.newSolution(context);
-				solutionStore.newSolution(context);
-				configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolutions);
-
-				logger.debug("Found a solution.");
-			}
+			saveSolution();
 		}
+	}
+	
+	private void saveSolution() {
+		logger.debug("Solution Found!!");
+		logger.debug("# violations: " + (getNumberOfViolations(mustMatchers)));
+		solutionStoreWithCopy.newSolution(context);
+		solutionStore.newSolution(context);
+		configuration.progressMonitor.workedModelFound(configuration.solutionScope.numberOfRequiredSolutions);
+		logger.debug("Found a solution.");
 	}
 	
 	public List<String> times = new LinkedList<String>();
@@ -634,7 +642,7 @@ public class HillClimbingOnRealisticMetricStrategyForModelGeneration implements 
 	}
 
 	protected void removeSubtreeFromQueue(TrajectoryWithFitness t) {
-		Queue<TrajectoryWithFitness> previous = this.trajectoiresToExplore;
+		PriorityQueue<TrajectoryWithFitness> previous = this.trajectoiresToExplore;
 		this.trajectoiresToExplore = new PriorityQueue<>(this.comparator);
 		for (TrajectoryWithFitness trajectoryWithFitness : previous) {
 			if (!containsAsSubstring(trajectoryWithFitness.trajectory, t.trajectory)) {

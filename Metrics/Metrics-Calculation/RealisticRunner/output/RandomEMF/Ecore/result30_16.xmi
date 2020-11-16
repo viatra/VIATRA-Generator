@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="b">
+  <eClassifiers xsi:type="ecore:EClass" name="67J8flVU3LdHp2BN6ZypDb6W" eSuperTypes="//@eClassifiers.0" interface="true">
+    <eTypeParameters name="YHJY2d856q7i1iQufzh0OSde6qymfQ"/>
+    <eTypeParameters name="pU3nvmshu5E9zYDV8UxLASLSrVF0UrEpJIF0q5FXJnM92ahysGSsYSyUrEdeiHArNS"/>
+    <eTypeParameters/>
+    <eTypeParameters name="54R2KH7Oh7BiPGfn6EJfZskdcBvb9xIi6kWWcDMBXlxkFlBuLOvGvuNrdnQChDrIj7gXztYwRbHrfDs0lHFBduwiWQeN2nDLQfaJY9CBH7qXhr9m2MlzbPWTBV"/>
+    <eTypeParameters name="NS0KalY6chUnLAodMvDWXNqTS9z2JSb1GO9OQZjyVYejTGvf8VJGQnwuY7vRKm9TqMa"/>
+    <eTypeParameters/>
+    <eTypeParameters/>
+    <eTypeParameters/>
+    <eTypeParameters name="cnmW6RGoPlTQOyJenPe0jJBg6M"/>
+    <eTypeParameters/>
+    <eTypeParameters/>
+    <eTypeParameters name="MQhrlyLCuZE0PuwbbqjoOdi3bMqYBFVbK"/>
+    <eTypeParameters name="hef4c42QkDZN5TyMjdOlTxpUToa8GBkcrwYGdqgAc6yK2Kukb15R0m7P7rjSDXmybXWCsaOH6M5tQtBEJINO4aTSEk8AE"/>
+    <eTypeParameters name="I2WhQxVH7XKUZ"/>
+    <eTypeParameters/>
+    <eTypeParameters/>
+    <eOperations name="1K2knn" unique="false" eExceptions="//@eClassifiers.0"/>
+    <eOperations eType="//@eClassifiers.0" unique="false" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="P67pK8axiaxYJ40Yuh72ZCUzpMtOYK6JbSaAgh4OYVVuVzPZt5So4RKrYwPSRfv1qxmeJgMRKKHd0s9Nl9qmIkCTSt7M5n5SYQOQLYG3xSWwpqFYPr93AMYl" upperBound="445837436"/>
+    <eOperations name="Dt" eType="//@eClassifiers.0" lowerBound="1817516630" upperBound="-2004132898" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="qSubwuPr8wYwFF5BP6waVoa1BKKNgnfKXFglK7Uss2jau32gWmv1q8mldzGixgApkFqmyuOaxq" lowerBound="1323633190" unique="false" upperBound="828211633" eExceptions="//@eClassifiers.0"/>
+    <eOperations unique="false" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="ZYOCvqDlUoIZoGvCKbFYEOTJaus4UwByJ6haB8gN63wvw5tOw0zefO35sxgvsDiqnH4FF6tU0NXfbzNQ2" eExceptions="//@eClassifiers.0"/>
+    <eOperations eType="//@eClassifiers.0" lowerBound="147336083" unique="false" upperBound="1464436083" eExceptions="//@eClassifiers.0"/>
+    <eOperations lowerBound="1906704287" upperBound="836065615" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="0ZRTVX52CDSj6m0AnBKSxQhx8KQrwDE3by23fUmY7XvXT8Hx198yxw671UuWMoeiGT099N7A8I6u9oLapAeHU8TFtrU" eType="//@eClassifiers.0" lowerBound="-956450859" upperBound="-1339091256" eExceptions="//@eClassifiers.0"/>
+    <eOperations eType="//@eClassifiers.0" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="eIq6b6w9TTMCnR7OfwZQLImI8AGzdlFPVnY" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="5bRfA3x1ytZTUnEcAE7BSkaOxd2Z1nQ9gf2GjtxZFTYkbRhV3AN5dWLkPGxkvMCuqqpGlTSBN" eType="//@eClassifiers.0" upperBound="2144695044" eExceptions="//@eClassifiers.0"/>
+    <eOperations name="gqg3Za8LlM4VUK5X2bP6BhMsZfnZuDha0So2xot7s7UIYnRe6Gc0kjX" unique="false" upperBound="-1392502922" eExceptions="//@eClassifiers.0"/>
+  </eClassifiers>
+</ecore:EPackage>

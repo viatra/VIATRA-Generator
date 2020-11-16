@@ -1,3 +1,3 @@
 Task,Run,Result,Domain to logic transformation time,Logic to solver transformation time,Solver time,Postprocessing time,Solution0FoundAt,ExplorationInitializationTime,TransformationExecutionTime,ScopePropagationTime,MustRelationPropagationTime,TypeAnalysisTime,StateCoderTime,StateCoderFailCount,SolutionCopyTime,States,ForwardTime,BacktrackingTime,GlobalConstraintEvaluationTime,FitnessCalculationTime,ActivationSelectionTime,Decisions,MetricCalculationTime,Transformations,ScopePropagations,ScopePropagationsSolverCalls
-1,1,ModelResultImpl,1606,10223,12802,105,12895,1128,389,150,0,354,2147,0,8,1911,4420,2032,16,0,2,0,2105,2083,618,0
+1,1,ModelResultImpl,1720,10871,57313,271,57355,1062,840,223,0,383,17405,0,5,7417,12196,4062,13,24,14,0,12282,7657,929,0
 

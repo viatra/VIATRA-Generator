@@ -11,7 +11,7 @@
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ca.mcgill.ecse.socialnetwork.runner.Main"/>
 <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="SocialNetwork_plugin"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="yakinduGeneration.vsconfig"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="ecore.vsconfig"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="SocialNetwork_plugin"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx8G"/>
 </launchConfiguration>

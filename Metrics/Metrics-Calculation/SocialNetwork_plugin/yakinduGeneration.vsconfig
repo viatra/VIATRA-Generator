@@ -9,16 +9,16 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 30
+		#node = 100
 	}
 	
 	number = 1
-	runs = 10
+	runs = 1
 	config = {
 		log-level = none,
-		"optional-wf" = "false",
+		"optional-wf" = "true",
 		"realistic-guidance" = "Composite",
-		"allow-must-violations" = "false",
+		"allow-must-violations" = "true",
 		"domain" = "Yakindumm",
 		"scopePropagator" = "typeHierarchy"
 	}

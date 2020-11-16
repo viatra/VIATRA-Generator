@@ -59,7 +59,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IssueEvent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="user" lowerBound="1" eType="#//User"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" lowerBound="1"
+        eType="#//Action"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="created_at" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="actor_url" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

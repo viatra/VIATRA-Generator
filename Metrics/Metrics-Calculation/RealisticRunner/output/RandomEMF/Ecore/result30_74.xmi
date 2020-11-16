@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="z1Zp4zxCf4W5tf1TDdDeOExNHSJnyKorPGgYLODuZ4dHjP0rr6WC4wCp" nsURI="d2cXFqvB">
+  <eClassifiers xsi:type="ecore:EEnum" name="XBvyhrTbp1ZamHhJMfWD8JRX4MfRakd" instanceTypeName="SNxFKgwSFRrUWIhaUKKcHFts7Ouax6Lw2D8ThGXuQO1uKCKQ2za5ONY7bshEdndpo9w" serializable="false">
+    <eTypeParameters>
+      <eBounds eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1">
+        <eTypeArguments/>
+        <eLowerBound eClassifier="//@eClassifiers.0"/>
+      </eBounds>
+      <eBounds>
+        <eUpperBound eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+        <eTypeArguments/>
+        <eTypeArguments eClassifier="//@eClassifiers.0"/>
+      </eBounds>
+      <eBounds eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+        <eUpperBound eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0"/>
+        <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+      </eBounds>
+      <eBounds eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+        <eUpperBound/>
+        <eTypeArguments eClassifier="//@eClassifiers.0"/>
+        <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+        <eLowerBound eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+      </eBounds>
+      <eBounds eClassifier="//@eClassifiers.0"/>
+      <eBounds eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+      <eBounds eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+      <eBounds/>
+      <eBounds eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+      <eBounds eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+      <eBounds eClassifier="//@eClassifiers.0"/>
+      <eBounds eClassifier="//@eClassifiers.0"/>
+      <eBounds eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+    </eTypeParameters>
+    <eTypeParameters/>
+  </eClassifiers>
+</ecore:EPackage>

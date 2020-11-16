@@ -7,6 +7,6 @@
 	<classpathentry kind="src" path="constraints"/>
 	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/commons-math3-3.6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/commons-math3-3.6.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/weka.jar"/>
+	<classpathentry kind="lib" path="C:/Users/chenp/eclipse-workspace/VIATRA-Generator/Metrics/Metrics-Calculation/ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator/lib/weka.jar" sourcepath="/VIATRA-Generator/Solvers/Alloy-Solver/hu.bme.mit.inf.dlsreasoner.alloy.reasoner/lib/alloy4.2_2015-02-22.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,33 @@
+import epackage "models/github.ecore"
+import viatra "queries/github.vql"
+
+generate {
+	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
+			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
+			IssueEvent.actor_url, Project.deleted}}
+	partial-model = { "inputs/github.xmi"}
+	constraints = { package queries }
+	
+
+	solver = ViatraSolver
+	
+	scope = {
+		#node = 41
+	}
+	
+	number = 1
+	runs = 100
+	config = {
+		log-level = none,
+		//runtime = 300,
+		"optional-wf" = "false",
+		"realistic-guidance" = "Composite",
+		"allow-must-violations" = "false",
+		"domain" = "Github",
+		"scopePropagator" = "typeHierarchy"
+	}
+	
+	debug = "none"
+	statistics = "statistics/Github/warmup.csv"
+	output = "dummyout/"
+}

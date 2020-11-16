@@ -74,9 +74,9 @@ class SolverLoader {
 				if (!objectiveEntries.empty) {
 					throw new IllegalArgumentException("Objectives are not supported by Alloy.")
 				}
-				val c = new SmtSolverConfiguration
-				config.getAsBoolean("fixRandomSeed", console).ifPresent[c.fixRandomSeed = it]
-				config.getAsType("path", console, [it], String).ifPresent[c.solverPath = it]
+				val c = new AlloySolverConfiguration
+				// config.getAsBoolean("fixRandomSeed", console).ifPresent[c.fixRandomSeed = it]
+				// config.getAsType("path", console, [it], String).ifPresent[c.solverPath = it]
 				c
 			}
 			case SMT_SOLVER: {

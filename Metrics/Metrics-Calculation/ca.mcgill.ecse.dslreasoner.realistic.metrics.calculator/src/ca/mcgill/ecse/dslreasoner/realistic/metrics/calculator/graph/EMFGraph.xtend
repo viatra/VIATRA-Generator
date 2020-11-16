@@ -13,10 +13,19 @@ class EMFGraph extends Graph{
 	@Accessors(PUBLIC_GETTER)
 	var EObject root;
 	
-	def void init (EObject root, List<Metric> metrics, String name, List<EReference> referenceTypes){
+	def void init (EObject root, List<Metric> metrics, String name){
 		val otherContents = root.eAllContents.toList();
+		val metaModel = root.eClass.EPackage;
+		val referenceTypes = new ArrayList<EReference>;
 		this.root = root;
 		otherContents.add(root);
+		
+		metaModel.eAllContents.forEach[
+			if(it instanceof EReference){
+				referenceTypes.add(it);
+			}
+		]
+		
 		init(otherContents, metrics, name, referenceTypes);
 	}
 	

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <eClassifiers xsi:type="ecore:EDataType"/>
+  <eClassifiers xsi:type="ecore:EDataType"/>
+  <eClassifiers xsi:type="ecore:EDataType"/>
+  <eClassifiers xsi:type="ecore:EClass">
+    <eTypeParameters>
+      <eBounds>
+        <eTypeArguments/>
+      </eBounds>
+    </eTypeParameters>
+    <eTypeParameters>
+      <eBounds eTypeParameter="//%.3/%"/>
+    </eTypeParameters>
+    <eOperations eType="//%.3" eExceptions="//%.2 //%.3">
+      <eTypeParameters>
+        <eBounds>
+          <eTypeArguments/>
+          <eLowerBound/>
+        </eBounds>
+        <eBounds eTypeParameter="//%.3/%.3/%" eClassifier="//%">
+          <eLowerBound eClassifier="//%"/>
+        </eBounds>
+      </eTypeParameters>
+      <eParameters eType="//%.2"/>
+    </eOperations>
+    <eOperations eType="//%" eExceptions="//% //%.3">
+      <eTypeParameters>
+        <eBounds eTypeParameter="//%.3/%.3/%" eClassifier="//%"/>
+        <eBounds eTypeParameter="//%.3/%.3/%" eClassifier="//%">
+          <eUpperBound eClassifier="//%.3">
+            <eLowerBound eTypeParameter="//%.3/%" eClassifier="//%">
+              <eLowerBound eClassifier="//%.2">
+                <eLowerBound/>
+              </eLowerBound>
+            </eLowerBound>
+          </eUpperBound>
+        </eBounds>
+      </eTypeParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" eType="//%.3" eOpposite="//%.3/%.4" eKeys="//%.3/%.6 //%.3/%.7"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" eType="//%.3" eOpposite="//%.3/%.5"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" eType="//%.3"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" eType="//%.3"/>
+  </eClassifiers>
+</ecore:EPackage>

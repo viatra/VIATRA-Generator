@@ -1,0 +1,2004 @@
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+
+//////////
+// 0. Util
+//////////
+private pattern interpretation(problem:LogicProblem, interpretation:PartialInterpretation) {
+	PartialInterpretation.problem(interpretation,problem);
+}
+	
+/////////////////////////
+// 0.1 Existence
+/////////////////////////
+/** [[exist(element)]]=1 */
+private pattern mustExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	find interpretation(problem,interpretation);
+	LogicProblem.elements(problem,element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+}
+
+/** [[exist(element)]]>=1/2 */
+private pattern mayExist(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+    find mustExist(problem,interpretation,element);
+} or {
+    find interpretation(problem,interpretation);
+    neg find elementCloseWorld(element);
+    PartialInterpretation.openWorldElements(interpretation,element);
+}
+
+private pattern elementCloseWorld(element:DefinedElement) {
+	PartialInterpretation.openWorldElements(i,element);
+	PartialInterpretation.maxNewElements(i,0);
+} or {
+	Scope.targetTypeInterpretation(scope,interpretation);
+	PartialTypeInterpratation.elements(interpretation,element);
+	Scope.maxNewElements(scope,0);
+}
+
+////////////////////////
+// 0.2 Equivalence
+////////////////////////
+pattern mayEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement)
+// For non-primitive type. Boolean types always must equivalent or cannot equivalent
+{
+	find mayExist(problem,interpretation,a);
+	find mayExist(problem,interpretation,b);
+	a == b;
+}
+
+pattern mustEquivalent(problem:LogicProblem, interpretation:PartialInterpretation, a: DefinedElement, b: DefinedElement) {
+// For non-primitive and Boolean primitive type
+	find mustExist(problem,interpretation,a);
+	find mustExist(problem,interpretation,b);
+	a == b;
+}
+
+//////////
+// 1. Problem-Specific Base Indexers
+//////////
+// 1.1 Type Indexers
+//////////
+// 1.1.1 Required Patterns by TypeIndexer
+//////////
+
+private pattern typeInterpretation(problem:LogicProblem, interpretation:PartialInterpretation, type:TypeDeclaration, typeInterpretation:PartialComplexTypeInterpretation) {
+	find interpretation(problem,interpretation);
+	LogicProblem.types(problem,type);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+}
+
+private pattern directInstanceOf(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement, type:Type) {
+	find interpretation(problem,interpretation);
+	LogicProblem.types(problem,type);
+	TypeDefinition.elements(type,element);
+} or {
+	find interpretation(problem,interpretation);
+	find typeInterpretation(problem,interpretation,type,typeInterpretation);
+	PartialComplexTypeInterpretation.elements(typeInterpretation,element);
+}
+
+private pattern isPrimitive(element: PrimitiveElement) {
+	PrimitiveElement(element);
+}
+
+//////////
+// 1.1.2 primitive Type Indexers
+//////////
+// Currently unused. Refer primitive types as:
+// > PrimitiveElement(element)
+// specific types are referred as:
+// > BooleanElement(variableName)
+// > IntegerElement(variableName)
+// > RealElement(variableName)
+// > StringElement(variableName)
+// And their value as
+// > BooleanElement.value(variableName,value)
+// > IntegerElement.value(variableName,value)
+// > RealElement.value(variableName,value)
+// > StringElement.value(variableName,value)
+// Whether a value is set is defined by:
+// > PrimitiveElement.valueSet(variableName,isFilled);
+
+//////////
+// 1.1.3 domain-specific Type Indexers
+//////////
+/**
+ * An element must be an instance of type "User class".
+ */
+private pattern mustInstanceOfUser_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"User class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewUser_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"User class");
+}
+
+/**
+ * An element may be an instance of type "User class".
+ */
+private pattern mayInstanceOfUser_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find scopeDisallowsNewUser_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find scopeDisallowsNewUser_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfUser_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Project class".
+ */
+private pattern mustInstanceOfProject_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Project class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewProject_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Project class");
+}
+
+/**
+ * An element may be an instance of type "Project class".
+ */
+private pattern mayInstanceOfProject_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewProject_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewProject_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfProject_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Commit class".
+ */
+private pattern mustInstanceOfCommit_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Commit class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewCommit_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Commit class");
+}
+
+/**
+ * An element may be an instance of type "Commit class".
+ */
+private pattern mayInstanceOfCommit_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find scopeDisallowsNewCommit_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find scopeDisallowsNewCommit_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfCommit_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Issue class".
+ */
+private pattern mustInstanceOfIssue_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Issue class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewIssue_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Issue class");
+}
+
+/**
+ * An element may be an instance of type "Issue class".
+ */
+private pattern mayInstanceOfIssue_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewIssue_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewIssue_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfIssue_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "PullRequest class".
+ */
+private pattern mustInstanceOfPullRequest_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"PullRequest class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewPullRequest_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"PullRequest class");
+}
+
+/**
+ * An element may be an instance of type "PullRequest class".
+ */
+private pattern mayInstanceOfPullRequest_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewPullRequest_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewPullRequest_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfPullRequest_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "IssueEvent class".
+ */
+private pattern mustInstanceOfIssueEvent_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"IssueEvent class");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewIssueEvent_class(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"IssueEvent class");
+}
+
+/**
+ * An element may be an instance of type "IssueEvent class".
+ */
+private pattern mayInstanceOfIssueEvent_class(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewIssueEvent_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewIssueEvent_class(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfIssueEvent_class(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Action enum".
+ */
+private pattern mustInstanceOfAction_enum(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Action enum");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewAction_enum(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Action enum");
+}
+
+/**
+ * An element may be an instance of type "Action enum".
+ */
+private pattern mayInstanceOfAction_enum(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfAction_enum(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Project class DefinedPart".
+ */
+private pattern mustInstanceOfProject_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Project class DefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewProject_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Project class DefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Project class DefinedPart".
+ */
+private pattern mayInstanceOfProject_class_DefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{ find mustInstanceOfProject_class_DefinedPart(problem,interpretation,element); }
+/**
+ * An element must be an instance of type "Project class UndefinedPart".
+ */
+private pattern mustInstanceOfProject_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement) {
+	Type.name(type,"Project class UndefinedPart");
+	find directInstanceOf(problem,interpretation,element,type);
+}
+private pattern scopeDisallowsNewProject_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.scopes(interpretation,scope);
+	Scope.targetTypeInterpretation(scope,typeInterpretation);
+	Scope.maxNewElements(scope,0);
+	PartialComplexTypeInterpretation.interpretationOf(typeInterpretation,type);
+	Type.name(type,"Project class UndefinedPart");
+}
+
+/**
+ * An element may be an instance of type "Project class UndefinedPart".
+ */
+private pattern mayInstanceOfProject_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewProject_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.openWorldElements(interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find scopeDisallowsNewProject_class_UndefinedPart(problem, interpretation);
+	neg find isPrimitive(element);
+} or
+{ find mustInstanceOfProject_class_UndefinedPart(problem,interpretation,element); }
+
+//////////
+// 1.2 Relation Declaration Indexers
+//////////
+/**
+ * Matcher for detecting tuples t where []issue reference Project(source,target)
+ */
+private pattern mustInRelationissue_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"issue reference Project");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>issue reference Project(source,target)
+ */
+private pattern mayInRelationissue_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfProject_class(problem,interpretation,source);
+	find mayInstanceOfIssue_class(problem,interpretation,target);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationissue_reference_Project(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []projectMembers reference Project(source,target)
+ */
+private pattern mustInRelationprojectMembers_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"projectMembers reference Project");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>projectMembers reference Project(source,target)
+ */
+private pattern mayInRelationprojectMembers_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfProject_class(problem,interpretation,source);
+	find mayInstanceOfUser_class(problem,interpretation,target);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationprojectMembers_reference_Project(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []commits reference Project(source,target)
+ */
+private pattern mustInRelationcommits_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"commits reference Project");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>commits reference Project(source,target)
+ */
+private pattern mayInRelationcommits_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfProject_class(problem,interpretation,source);
+	find mayInstanceOfCommit_class(problem,interpretation,target);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationcommits_reference_Project(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []committer reference Commit(source,target)
+ */
+private pattern mustInRelationcommitter_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"committer reference Commit");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>committer reference Commit(source,target)
+ */
+private pattern mayInRelationcommitter_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfCommit_class(problem,interpretation,source);
+	find mayInstanceOfUser_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationcommitter_reference_Commit(problem,interpretation,source,_);
+	numberOfExistingReferences != 1;
+} or {
+	find mustInRelationcommitter_reference_Commit(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []parents reference Commit(source,target)
+ */
+private pattern mustInRelationparents_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"parents reference Commit");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>parents reference Commit(source,target)
+ */
+private pattern mayInRelationparents_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfCommit_class(problem,interpretation,source);
+	find mayInstanceOfCommit_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationparents_reference_Commit(problem,interpretation,source,_);
+	numberOfExistingReferences != 2;
+} or {
+	find mustInRelationparents_reference_Commit(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []pullrequest reference Commit(source,target)
+ */
+private pattern mustInRelationpullrequest_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"pullrequest reference Commit");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>pullrequest reference Commit(source,target)
+ */
+private pattern mayInRelationpullrequest_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfCommit_class(problem,interpretation,source);
+	find mayInstanceOfPullRequest_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationpullrequest_reference_Commit(problem,interpretation,source,_);
+	numberOfExistingReferences != 1;
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationcommit_reference_PullRequest(problem,interpretation,target,_);
+	numberOfExistingOppositeReferences != 1;
+} or {
+	find mustInRelationpullrequest_reference_Commit(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []pullrequest reference Issue(source,target)
+ */
+private pattern mustInRelationpullrequest_reference_Issue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"pullrequest reference Issue");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>pullrequest reference Issue(source,target)
+ */
+private pattern mayInRelationpullrequest_reference_Issue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfIssue_class(problem,interpretation,source);
+	find mayInstanceOfPullRequest_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationpullrequest_reference_Issue(problem,interpretation,source,_);
+	numberOfExistingReferences != 1;
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationpullrequest_reference_Issue(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []issueevent reference Issue(source,target)
+ */
+private pattern mustInRelationissueevent_reference_Issue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"issueevent reference Issue");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>issueevent reference Issue(source,target)
+ */
+private pattern mayInRelationissueevent_reference_Issue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfIssue_class(problem,interpretation,source);
+	find mayInstanceOfIssueEvent_class(problem,interpretation,target);
+	// The reference is containment, then a new reference cannot be create if:
+	// 1. Multiple parents
+	neg find mustContains4(problem,interpretation,_,target);
+	// 2. Circle in the containment hierarchy
+	neg find mustTransitiveContains(source,target);
+} or {
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []commit reference PullRequest(source,target)
+ */
+private pattern mustInRelationcommit_reference_PullRequest(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"commit reference PullRequest");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>commit reference PullRequest(source,target)
+ */
+private pattern mayInRelationcommit_reference_PullRequest(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfPullRequest_class(problem,interpretation,source);
+	find mayInstanceOfCommit_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationcommit_reference_PullRequest(problem,interpretation,source,_);
+	numberOfExistingReferences != 1;
+	// There are "numberOfExistingReferences" currently existing instances of the reference to the target,
+	// the upper bound of the opposite reference multiplicity should be considered.
+	numberOfExistingOppositeReferences == count find mustInRelationpullrequest_reference_Commit(problem,interpretation,target,_);
+	numberOfExistingOppositeReferences != 1;
+} or {
+	find mustInRelationcommit_reference_PullRequest(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []user reference IssueEvent(source,target)
+ */
+private pattern mustInRelationuser_reference_IssueEvent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"user reference IssueEvent");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>user reference IssueEvent(source,target)
+ */
+private pattern mayInRelationuser_reference_IssueEvent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfIssueEvent_class(problem,interpretation,source);
+	find mayInstanceOfUser_class(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationuser_reference_IssueEvent(problem,interpretation,source,_);
+	numberOfExistingReferences != 1;
+} or {
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,source,target);
+}
+/**
+ * Matcher for detecting tuples t where []action attribute IssueEvent(source,target)
+ */
+private pattern mustInRelationaction_attribute_IssueEvent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"action attribute IssueEvent");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+/**
+ * Matcher for detecting tuples t where <>action attribute IssueEvent(source,target)
+ */
+private pattern mayInRelationaction_attribute_IssueEvent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	// The two endpoint of the link have to exist
+	find mayExist(problem, interpretation, source);
+	find mayExist(problem, interpretation, target);
+	// Type consistency
+	find mayInstanceOfIssueEvent_class(problem,interpretation,source);
+	find mayInstanceOfAction_enum(problem,interpretation,target);
+	// There are "numberOfExistingReferences" currently existing instances of the reference from the source,
+	// the upper bound of the multiplicity should be considered.
+	numberOfExistingReferences == count find mustInRelationaction_attribute_IssueEvent(problem,interpretation,source,_);
+	numberOfExistingReferences != 1;
+} or {
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,source,target);
+}
+
+//////////
+// 1.3 Relation Definition Indexers
+//////////
+// Must, May and Current queries for pattern queries directParent
+private pattern mustInRelation_pattern_queries_directParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	// var_a exported
+	// var_b exported
+	find mustInRelationparents_reference_Commit(problem,interpretation,var_a,var_b);
+	find mustInstanceOfCommit_class(problem,interpretation,var_b);
+}
+private pattern mayInRelation_pattern_queries_directParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	// var_a exported
+	// var_b exported
+	find mayInRelationparents_reference_Commit(problem,interpretation,var_a,var_b);
+	find mayInstanceOfCommit_class(problem,interpretation,var_b);
+}
+private pattern currentInRelation_pattern_queries_directParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a, var_b)
+{
+	find interpretation(problem,interpretation);
+	// var_a exported
+	// var_b exported
+	find mustInRelationparents_reference_Commit(problem,interpretation,var_a,var_b);
+	find mustInstanceOfCommit_class(problem,interpretation,var_b);
+}
+private pattern twoParam_mustInRelation_pattern_queries_directParent(var_a, var_b) {
+	find mustInRelation_pattern_queries_directParent(_,_,var_a, var_b);
+}
+private pattern twoParam_mayInRelation_pattern_queries_directParent(var_a, var_b) {
+	find mayInRelation_pattern_queries_directParent(_,_,var_a, var_b);
+}
+private pattern twoParam_currentInRelation_pattern_queries_directParent(var_a, var_b) {
+	find currentInRelation_pattern_queries_directParent(_,_,var_a, var_b);
+}
+// Must, May and Current queries for pattern queries loopInParent
+private pattern mustInRelation_pattern_queries_loopInParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find interpretation(problem,interpretation);
+	// var_a exported
+	find twoParam_mustInRelation_pattern_queries_directParent+(var_a,var_a);
+}
+private pattern mayInRelation_pattern_queries_loopInParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find interpretation(problem,interpretation);
+	// var_a exported
+	find twoParam_mayInRelation_pattern_queries_directParent+(var_a,var_a);
+}
+private pattern currentInRelation_pattern_queries_loopInParent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find interpretation(problem,interpretation);
+	// var_a exported
+	find twoParam_currentInRelation_pattern_queries_directParent+(var_a,var_a);
+}
+// Must, May and Current queries for pattern queries checkAction
+private pattern mustInRelation_pattern_queries_checkAction(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e, var_t)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	// var_t exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_t);
+}
+private pattern mayInRelation_pattern_queries_checkAction(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e, var_t)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	// var_t exported
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_t);
+}
+private pattern currentInRelation_pattern_queries_checkAction(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e, var_t)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	// var_t exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_t);
+}
+// Must, May and Current queries for pattern queries checkUserAction
+private pattern mustInRelation_pattern_queries_checkUserAction(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e, var_t)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	// var_t exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_t);
+}
+private pattern mayInRelation_pattern_queries_checkUserAction(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e, var_t)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	// var_t exported
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mayInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mayInstanceOfUser_class(problem,interpretation,var_u);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_t);
+}
+private pattern currentInRelation_pattern_queries_checkUserAction(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e, var_t)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	// var_t exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_t);
+}
+// Must, May and Current queries for pattern queries isReopen
+private pattern mustInRelation_pattern_queries_isReopen(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+}
+private pattern mayInRelation_pattern_queries_isReopen(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+}
+private pattern currentInRelation_pattern_queries_isReopen(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+}
+// Must, May and Current queries for pattern queries isClose
+private pattern mustInRelation_pattern_queries_isClose(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+}
+private pattern mayInRelation_pattern_queries_isClose(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+}
+private pattern currentInRelation_pattern_queries_isClose(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+}
+// Must, May and Current queries for pattern queries isUnSubscribe
+private pattern mustInRelation_pattern_queries_isUnSubscribe(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+}
+private pattern mayInRelation_pattern_queries_isUnSubscribe(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mayInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mayInstanceOfUser_class(problem,interpretation,var_u);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+}
+private pattern currentInRelation_pattern_queries_isUnSubscribe(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+}
+// Must, May and Current queries for pattern queries isSubscribe
+private pattern mustInRelation_pattern_queries_isSubscribe(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+}
+private pattern mayInRelation_pattern_queries_isSubscribe(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mayInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mayInstanceOfUser_class(problem,interpretation,var_u);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+}
+private pattern currentInRelation_pattern_queries_isSubscribe(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u, var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	// var_e exported
+	find mustInRelationissueevent_reference_Issue(problem,interpretation,var_i,var_e);
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+	find mustInRelationaction_attribute_IssueEvent(problem,interpretation,var_e,var_a);
+	var_a == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+}
+// Must, May and Current queries for pattern queries pullRequestOfIssue
+private pattern mustInRelation_pattern_queries_pullRequestOfIssue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_pr)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_pr exported
+	find mustInRelationpullrequest_reference_Issue(problem,interpretation,var_i,var_pr);
+	find mustInstanceOfPullRequest_class(problem,interpretation,var_pr);
+}
+private pattern mayInRelation_pattern_queries_pullRequestOfIssue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_pr)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_pr exported
+	find mayInRelationpullrequest_reference_Issue(problem,interpretation,var_i,var_pr);
+	find mayInstanceOfPullRequest_class(problem,interpretation,var_pr);
+}
+private pattern currentInRelation_pattern_queries_pullRequestOfIssue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_pr)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_pr exported
+	find mustInRelationpullrequest_reference_Issue(problem,interpretation,var_i,var_pr);
+	find mustInstanceOfPullRequest_class(problem,interpretation,var_pr);
+}
+// Must, May and Current queries for pattern queries mergedIssueWithoutPr
+private pattern mustInRelation_pattern_queries_mergedIssueWithoutPr(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_MERGED_Action;DefinedElement.name(const_MERGED_Action,"MERGED Action");  //LogicProblem.elements(problem,const_MERGED_Action);
+	find mustInRelation_pattern_queries_checkAction(problem,interpretation,var_i,_var__0,var_virtual0);
+	neg find mayInRelation_pattern_queries_pullRequestOfIssue(problem,interpretation,var_i,_var__1);
+}
+private pattern mayInRelation_pattern_queries_mergedIssueWithoutPr(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_MERGED_Action;DefinedElement.name(const_MERGED_Action,"MERGED Action");  //LogicProblem.elements(problem,const_MERGED_Action);
+	find mayInRelation_pattern_queries_checkAction(problem,interpretation,var_i,_var__0,var_virtual0);
+	neg find mustInRelation_pattern_queries_pullRequestOfIssue(problem,interpretation,var_i,_var__1);
+}
+private pattern currentInRelation_pattern_queries_mergedIssueWithoutPr(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_MERGED_Action;DefinedElement.name(const_MERGED_Action,"MERGED Action");  //LogicProblem.elements(problem,const_MERGED_Action);
+	find currentInRelation_pattern_queries_checkAction(problem,interpretation,var_i,_var__0,var_virtual0);
+	neg find currentInRelation_pattern_queries_pullRequestOfIssue(problem,interpretation,var_i,_var__1);
+}
+// Must, May and Current queries for pattern queries consecutiveClosesWithoutReopen
+private pattern mustInRelation_pattern_queries_consecutiveClosesWithoutReopen(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+	find mustInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a1,var_virtual0);
+	var_virtual1 == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+	find mustInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a2,var_virtual1);
+	neg find mayEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mayInRelation_pattern_queries_isReopen(problem,interpretation,var_i,_var__0);
+}
+private pattern mayInRelation_pattern_queries_consecutiveClosesWithoutReopen(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+	find mayInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a1,var_virtual0);
+	var_virtual1 == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+	find mayInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mustInRelation_pattern_queries_isReopen(problem,interpretation,var_i,_var__0);
+}
+private pattern currentInRelation_pattern_queries_consecutiveClosesWithoutReopen(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+	find currentInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a1,var_virtual0);
+	var_virtual1 == const_CLOSED_Action;DefinedElement.name(const_CLOSED_Action,"CLOSED Action");  //LogicProblem.elements(problem,const_CLOSED_Action);
+	find currentInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find currentInRelation_pattern_queries_isReopen(problem,interpretation,var_i,_var__0);
+}
+// Must, May and Current queries for pattern queries consecutiveReopensWithoutClose
+private pattern mustInRelation_pattern_queries_consecutiveReopensWithoutClose(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+	find mustInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a1,var_virtual0);
+	var_virtual1 == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+	find mustInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a2,var_virtual1);
+	neg find mayEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mayInRelation_pattern_queries_isClose(problem,interpretation,var_i,_var__0);
+}
+private pattern mayInRelation_pattern_queries_consecutiveReopensWithoutClose(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+	find mayInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a1,var_virtual0);
+	var_virtual1 == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+	find mayInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mustInRelation_pattern_queries_isClose(problem,interpretation,var_i,_var__0);
+}
+private pattern currentInRelation_pattern_queries_consecutiveReopensWithoutClose(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	var_virtual0 == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+	find currentInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a1,var_virtual0);
+	var_virtual1 == const_REOPENED_Action;DefinedElement.name(const_REOPENED_Action,"REOPENED Action");  //LogicProblem.elements(problem,const_REOPENED_Action);
+	find currentInRelation_pattern_queries_checkAction(problem,interpretation,var_i,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find currentInRelation_pattern_queries_isClose(problem,interpretation,var_i,_var__0);
+}
+// Must, May and Current queries for pattern queries consecutiveSubWithoutUnSub
+private pattern mustInRelation_pattern_queries_consecutiveSubWithoutUnSub(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	var_virtual0 == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+	find mustInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a1,var_virtual0);
+	var_virtual1 == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+	find mustInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a2,var_virtual1);
+	neg find mayEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mayInRelation_pattern_queries_isUnSubscribe(problem,interpretation,var_i,var_u,_var__0);
+}
+private pattern mayInRelation_pattern_queries_consecutiveSubWithoutUnSub(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	var_virtual0 == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+	find mayInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a1,var_virtual0);
+	var_virtual1 == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+	find mayInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mustInRelation_pattern_queries_isUnSubscribe(problem,interpretation,var_i,var_u,_var__0);
+}
+private pattern currentInRelation_pattern_queries_consecutiveSubWithoutUnSub(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	var_virtual0 == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+	find currentInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a1,var_virtual0);
+	var_virtual1 == const_SUBSCRIBED_Action;DefinedElement.name(const_SUBSCRIBED_Action,"SUBSCRIBED Action");  //LogicProblem.elements(problem,const_SUBSCRIBED_Action);
+	find currentInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find currentInRelation_pattern_queries_isUnSubscribe(problem,interpretation,var_i,var_u,_var__0);
+}
+// Must, May and Current queries for pattern queries consecutiveUnSubWithoutSub
+private pattern mustInRelation_pattern_queries_consecutiveUnSubWithoutSub(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	var_virtual0 == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+	find mustInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a1,var_virtual0);
+	var_virtual1 == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+	find mustInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a2,var_virtual1);
+	neg find mayEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mayInRelation_pattern_queries_isSubscribe(problem,interpretation,var_i,var_u,_var__0);
+}
+private pattern mayInRelation_pattern_queries_consecutiveUnSubWithoutSub(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	var_virtual0 == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+	find mayInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a1,var_virtual0);
+	var_virtual1 == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+	find mayInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find mustInRelation_pattern_queries_isSubscribe(problem,interpretation,var_i,var_u,_var__0);
+}
+private pattern currentInRelation_pattern_queries_consecutiveUnSubWithoutSub(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_i exported
+	// var_u exported
+	var_virtual0 == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+	find currentInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a1,var_virtual0);
+	var_virtual1 == const_UNSUBSCRIBED_Action;DefinedElement.name(const_UNSUBSCRIBED_Action,"UNSUBSCRIBED Action");  //LogicProblem.elements(problem,const_UNSUBSCRIBED_Action);
+	find currentInRelation_pattern_queries_checkUserAction(problem,interpretation,var_i,var_u,var_a2,var_virtual1);
+	neg find mustEquivalent(problem, interpretation, var_a1, var_a2);
+	neg find currentInRelation_pattern_queries_isSubscribe(problem,interpretation,var_i,var_u,_var__0);
+}
+// Must, May and Current queries for pattern queries committer
+private pattern mustInRelation_pattern_queries_committer(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_c exported
+	// var_u exported
+	find mustInRelationcommitter_reference_Commit(problem,interpretation,var_c,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+}
+private pattern mayInRelation_pattern_queries_committer(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_c exported
+	// var_u exported
+	find mayInRelationcommitter_reference_Commit(problem,interpretation,var_c,var_u);
+	find mayInstanceOfUser_class(problem,interpretation,var_u);
+}
+private pattern currentInRelation_pattern_queries_committer(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_c exported
+	// var_u exported
+	find mustInRelationcommitter_reference_Commit(problem,interpretation,var_c,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+}
+// Must, May and Current queries for pattern queries eventUser
+private pattern mustInRelation_pattern_queries_eventUser(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_e exported
+	// var_u exported
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+}
+private pattern mayInRelation_pattern_queries_eventUser(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_e exported
+	// var_u exported
+	find mayInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mayInstanceOfUser_class(problem,interpretation,var_u);
+}
+private pattern currentInRelation_pattern_queries_eventUser(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e, var_u)
+{
+	find interpretation(problem,interpretation);
+	// var_e exported
+	// var_u exported
+	find mustInRelationuser_reference_IssueEvent(problem,interpretation,var_e,var_u);
+	find mustInstanceOfUser_class(problem,interpretation,var_u);
+}
+// Must, May and Current queries for pattern queries noCommitter
+private pattern mustInRelation_pattern_queries_noCommitter(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c)
+{
+	find interpretation(problem,interpretation);
+	// var_c exported
+	find mustInstanceOfCommit_class(problem,interpretation,var_c);
+	neg find mayInRelation_pattern_queries_committer(problem,interpretation,var_c,_var__0);
+}
+private pattern mayInRelation_pattern_queries_noCommitter(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c)
+{
+	find interpretation(problem,interpretation);
+	// var_c exported
+	find mayInstanceOfCommit_class(problem,interpretation,var_c);
+	neg find mustInRelation_pattern_queries_committer(problem,interpretation,var_c,_var__0);
+}
+private pattern currentInRelation_pattern_queries_noCommitter(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c)
+{
+	find interpretation(problem,interpretation);
+	// var_c exported
+	find mustInstanceOfCommit_class(problem,interpretation,var_c);
+	neg find currentInRelation_pattern_queries_committer(problem,interpretation,var_c,_var__0);
+}
+// Must, May and Current queries for pattern queries noUser
+private pattern mustInRelation_pattern_queries_noUser(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_e exported
+	find mustInstanceOfIssueEvent_class(problem,interpretation,var_e);
+	neg find mayInRelation_pattern_queries_eventUser(problem,interpretation,var_e,_var__0);
+}
+private pattern mayInRelation_pattern_queries_noUser(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_e exported
+	find mayInstanceOfIssueEvent_class(problem,interpretation,var_e);
+	neg find mustInRelation_pattern_queries_eventUser(problem,interpretation,var_e,_var__0);
+}
+private pattern currentInRelation_pattern_queries_noUser(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e)
+{
+	find interpretation(problem,interpretation);
+	// var_e exported
+	find mustInstanceOfIssueEvent_class(problem,interpretation,var_e);
+	neg find currentInRelation_pattern_queries_eventUser(problem,interpretation,var_e,_var__0);
+}
+
+//////////
+// 1.4 Containment Indexer
+//////////
+private pattern mustContains2(source: DefinedElement, target: DefinedElement) {
+	find mustContains4(_,_,source,target);
+}
+	
+private pattern mustContains4(problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target: DefinedElement)
+	{ find mustInRelationissue_reference_Project(problem,interpretation,source,target); }or
+	
+	{ find mustInRelationprojectMembers_reference_Project(problem,interpretation,source,target); }or
+	
+	{ find mustInRelationcommits_reference_Project(problem,interpretation,source,target); }or
+	
+	{ find mustInRelationpullrequest_reference_Issue(problem,interpretation,source,target); }or
+	
+	{ find mustInRelationissueevent_reference_Issue(problem,interpretation,source,target); }
+
+private pattern mustTransitiveContains(source,target) {
+	find mustContains2+(source,target);
+}
+
+//////////
+// 2. Invalidation Indexers
+//////////
+// 2.1 Invalidated by WF Queries
+//////////
+pattern invalidatedBy_pattern_queries_loopInParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find mustInRelation_pattern_queries_loopInParent(problem,interpretation,var_a);
+}
+pattern invalidatedBy_pattern_queries_mergedIssueWithoutPr(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find mustInRelation_pattern_queries_mergedIssueWithoutPr(problem,interpretation,var_i);
+}
+pattern invalidatedBy_pattern_queries_consecutiveClosesWithoutReopen(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find mustInRelation_pattern_queries_consecutiveClosesWithoutReopen(problem,interpretation,var_i);
+}
+pattern invalidatedBy_pattern_queries_consecutiveReopensWithoutClose(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find mustInRelation_pattern_queries_consecutiveReopensWithoutClose(problem,interpretation,var_i);
+}
+pattern invalidatedBy_pattern_queries_consecutiveSubWithoutUnSub(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find mustInRelation_pattern_queries_consecutiveSubWithoutUnSub(problem,interpretation,var_i,var_u);
+}
+pattern invalidatedBy_pattern_queries_consecutiveUnSubWithoutSub(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find mustInRelation_pattern_queries_consecutiveUnSubWithoutSub(problem,interpretation,var_i,var_u);
+}
+pattern invalidatedBy_pattern_queries_noCommitter(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c)
+{
+	find mustInRelation_pattern_queries_noCommitter(problem,interpretation,var_c);
+}
+pattern invalidatedBy_pattern_queries_noUser(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e)
+{
+	find mustInRelation_pattern_queries_noUser(problem,interpretation,var_e);
+}
+
+//////////
+// 3. Unfinishedness Indexers
+//////////
+// 3.1 Unfinishedness Measured by Multiplicity
+//////////
+
+
+
+
+
+
+private pattern existingMultiplicity_committer_reference_Commit(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, numberOfExistingReferences:java Integer) {
+	find interpretation(problem,interpretation);
+	find mustExist(problem,interpretation,object);
+	find mustInstanceOfCommit_class(problem,interpretation,object);
+	numberOfExistingReferences == count find mustInRelationcommitter_reference_Commit(problem,interpretation,object,_);
+}
+
+
+
+
+
+
+private pattern existingMultiplicity_user_reference_IssueEvent(problem:LogicProblem, interpretation:PartialInterpretation, object:DefinedElement, numberOfExistingReferences:java Integer) {
+	find interpretation(problem,interpretation);
+	find mustExist(problem,interpretation,object);
+	find mustInstanceOfIssueEvent_class(problem,interpretation,object);
+	numberOfExistingReferences == count find mustInRelationuser_reference_IssueEvent(problem,interpretation,object,_);
+}
+
+
+
+//////////
+// 3.2 Unfinishedness Measured by WF Queries
+//////////
+pattern unfinishedBy_pattern_queries_loopInParent(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_a)
+{
+	find currentInRelation_pattern_queries_loopInParent(problem,interpretation,var_a);
+}
+pattern unfinishedBy_pattern_queries_mergedIssueWithoutPr(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find currentInRelation_pattern_queries_mergedIssueWithoutPr(problem,interpretation,var_i);
+}
+pattern unfinishedBy_pattern_queries_consecutiveClosesWithoutReopen(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find currentInRelation_pattern_queries_consecutiveClosesWithoutReopen(problem,interpretation,var_i);
+}
+pattern unfinishedBy_pattern_queries_consecutiveReopensWithoutClose(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i)
+{
+	find currentInRelation_pattern_queries_consecutiveReopensWithoutClose(problem,interpretation,var_i);
+}
+pattern unfinishedBy_pattern_queries_consecutiveSubWithoutUnSub(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find currentInRelation_pattern_queries_consecutiveSubWithoutUnSub(problem,interpretation,var_i,var_u);
+}
+pattern unfinishedBy_pattern_queries_consecutiveUnSubWithoutSub(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_i, var_u)
+{
+	find currentInRelation_pattern_queries_consecutiveUnSubWithoutSub(problem,interpretation,var_i,var_u);
+}
+pattern unfinishedBy_pattern_queries_noCommitter(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_c)
+{
+	find currentInRelation_pattern_queries_noCommitter(problem,interpretation,var_c);
+}
+pattern unfinishedBy_pattern_queries_noUser(problem:LogicProblem, interpretation:PartialInterpretation,
+	var_e)
+{
+	find currentInRelation_pattern_queries_noUser(problem,interpretation,var_e);
+}
+
+//////////
+// 4. Refinement Indexers
+//////////
+// 4.1 Object constructors
+//////////
+pattern hasElementInContainment(problem:LogicProblem, interpretation:PartialInterpretation)
+{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfUser_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfProject_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfIssueEvent_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfCommit_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfPullRequest_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfIssue_class(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfProject_class_DefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}or{
+	find interpretation(problem,interpretation);
+	find mustInstanceOfProject_class_UndefinedPart(problem,interpretation,root);
+	find mustExist(problem, interpretation, root);
+}
+pattern createObject_IssueEvent_class_by_issueevent_reference_Issue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"IssueEvent class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"issueevent reference Issue");
+	find mustInstanceOfIssue_class(problem,interpretation,container);
+	find mayInstanceOfIssueEvent_class(problem,interpretation,newObject);
+	find mayInRelationissueevent_reference_Issue(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_IssueEvent_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"IssueEvent class");
+	find mayInstanceOfIssueEvent_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_PullRequest_class_by_pullrequest_reference_Issue(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"PullRequest class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"pullrequest reference Issue");
+	find mustInstanceOfIssue_class(problem,interpretation,container);
+	find mayInstanceOfPullRequest_class(problem,interpretation,newObject);
+	find mayInRelationpullrequest_reference_Issue(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_PullRequest_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"PullRequest class");
+	find mayInstanceOfPullRequest_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Project_class_UndefinedPart(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Project class UndefinedPart");
+	find mayInstanceOfProject_class_UndefinedPart(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Commit_class_by_commits_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Commit class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"commits reference Project");
+	find mustInstanceOfProject_class(problem,interpretation,container);
+	find mayInstanceOfCommit_class(problem,interpretation,newObject);
+	find mayInRelationcommits_reference_Project(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Commit_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Commit class");
+	find mayInstanceOfCommit_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_User_class_by_projectMembers_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"User class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"projectMembers reference Project");
+	find mustInstanceOfProject_class(problem,interpretation,container);
+	find mayInstanceOfUser_class(problem,interpretation,newObject);
+	find mayInRelationprojectMembers_reference_Project(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_User_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"User class");
+	find mayInstanceOfUser_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Issue_class_by_issue_reference_Project(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationInterpretation:PartialRelationInterpretation, typeInterpretation:PartialComplexTypeInterpretation,
+	container:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Issue class");
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationInterpretation,"issue reference Project");
+	find mustInstanceOfProject_class(problem,interpretation,container);
+	find mayInstanceOfIssue_class(problem,interpretation,newObject);
+	find mayInRelationissue_reference_Project(problem,interpretation,container,newObject);
+	find mustExist(problem, interpretation, container);
+	neg find mustExist(problem, interpretation, newObject);
+}
+pattern createObject_Issue_class(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	typeInterpretation:PartialComplexTypeInterpretation)
+{
+	find interpretation(problem,interpretation);
+	neg find hasElementInContainment(problem,interpretation);
+	PartialInterpretation.partialtypeinterpratation(interpretation,typeInterpretation);
+	PartialComplexTypeInterpretation.interpretationOf.name(typeInterpretation,"Issue class");
+	find mayInstanceOfIssue_class(problem,interpretation,newObject);
+	find mayExist(problem, interpretation, newObject);
+	neg find mustExist(problem, interpretation, newObject);
+}
+
+//////////
+// 4.2 Type refinement
+//////////
+pattern refineTypeTo_IssueEvent_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+}
+pattern refineTypeTo_PullRequest_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Project_class_UndefinedPart(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfProject_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class_UndefinedPart(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Commit_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+}
+pattern refineTypeTo_User_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfUser_class(problem,interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+}
+pattern refineTypeTo_Issue_class(problem:LogicProblem, interpretation:PartialInterpretation, element: DefinedElement) {
+	find interpretation(problem,interpretation);
+	PartialInterpretation.newElements(interpretation,element);
+	find mayInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfIssueEvent_class(problem,interpretation,element);
+	neg find mustInstanceOfPullRequest_class(problem,interpretation,element);
+	neg find mustInstanceOfProject_class(problem,interpretation,element);
+	neg find mustInstanceOfCommit_class(problem,interpretation,element);
+	neg find mustInstanceOfIssue_class(problem,interpretation,element);
+	neg find mustInstanceOfUser_class(problem,interpretation,element);
+}
+
+//////////
+// 4.3 Relation refinement
+//////////
+pattern refineRelation_committer_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"committer reference Commit");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfCommit_class(problem,interpretation,from);
+	find mustInstanceOfUser_class(problem,interpretation,to);
+	find mayInRelationcommitter_reference_Commit(problem,interpretation,from,to);
+	neg find mustInRelationcommitter_reference_Commit(problem,interpretation,from,to);
+}
+
+pattern refineRelation_parents_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"parents reference Commit");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfCommit_class(problem,interpretation,from);
+	find mustInstanceOfCommit_class(problem,interpretation,to);
+	find mayInRelationparents_reference_Commit(problem,interpretation,from,to);
+	neg find mustInRelationparents_reference_Commit(problem,interpretation,from,to);
+}
+
+pattern refineRelation_commit_reference_PullRequest_and_pullrequest_reference_Commit(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation, oppositeInterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"commit reference PullRequest");
+	PartialInterpretation.partialrelationinterpretation(interpretation,oppositeInterpretation);
+	PartialRelationInterpretation.interpretationOf.name(oppositeInterpretation,"pullrequest reference Commit");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfPullRequest_class(problem,interpretation,from);
+	find mustInstanceOfCommit_class(problem,interpretation,to);
+	find mayInRelationcommit_reference_PullRequest(problem,interpretation,from,to);
+	neg find mustInRelationcommit_reference_PullRequest(problem,interpretation,from,to);
+}
+
+pattern refineRelation_user_reference_IssueEvent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"user reference IssueEvent");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfIssueEvent_class(problem,interpretation,from);
+	find mustInstanceOfUser_class(problem,interpretation,to);
+	find mayInRelationuser_reference_IssueEvent(problem,interpretation,from,to);
+	neg find mustInRelationuser_reference_IssueEvent(problem,interpretation,from,to);
+}
+
+pattern refineRelation_action_attribute_IssueEvent(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	relationIterpretation:PartialRelationInterpretation,
+	from: DefinedElement, to: DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"action attribute IssueEvent");
+	find mustExist(problem, interpretation, from);
+	find mustExist(problem, interpretation, to);
+	find mustInstanceOfIssueEvent_class(problem,interpretation,from);
+	find mustInstanceOfAction_enum(problem,interpretation,to);
+	find mayInRelationaction_attribute_IssueEvent(problem,interpretation,from,to);
+	neg find mustInRelationaction_attribute_IssueEvent(problem,interpretation,from,to);
+}
+
+
+//////////
+// 5 Hints
+//////////
+
+//////////
+// 6 Unit Propagations
+//////////
+
+// Collected propagation preconditions:
+
+

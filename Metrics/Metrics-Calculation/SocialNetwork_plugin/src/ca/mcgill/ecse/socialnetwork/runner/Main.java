@@ -31,14 +31,9 @@ public class Main {
 	private static String fileReadFolder = "output/Ecore_100/";
 	
 	public static void main(String args[]) {
-		String ecoreFile = args[0];
 		System.out.println("Generation Started");
 		
-		System.out.println(System.getProperty("java.library.path"));
-		
-		long begin = System.currentTimeMillis();
-		String message = runWithPath(ecoreFile);
-		long elapsed = System.currentTimeMillis() - begin;
+		String message = runWithPath(args[0]);
 		
 		if(message != null) {
 			System.out.println(message);

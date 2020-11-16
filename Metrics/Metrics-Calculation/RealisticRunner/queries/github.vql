@@ -1,0 +1,121 @@
+package queries
+import epackage "sure.ghtorrent.github"
+
+pattern directParent(a : Commit, b: Commit) {
+	Commit.parents(a,b);
+}
+
+@Constraint(key={a}, severity="error", message="error")
+pattern loopInParent(a: Commit){
+ find directParent+(a,a);
+}
+
+pattern checkAction(i: Issue, e: IssueEvent, t: Action) {
+	Issue.issueevent(i, e);
+	IssueEvent.action(e, a);
+	a == t;
+}
+
+pattern checkUserAction(i: Issue, u: User, e: IssueEvent, t: Action) {
+	Issue.issueevent(i, e);
+	IssueEvent.user(e, u);
+	IssueEvent.action(e, a);
+	a == t;
+}
+
+pattern isReopen(i: Issue, e: IssueEvent) {
+	Issue.issueevent(i, e);
+	IssueEvent.action(e, a);
+	a == Action::REOPENED;
+}
+
+pattern isClose(i: Issue, e: IssueEvent) {
+	Issue.issueevent(i, e);
+	IssueEvent.action(e, a);
+	a == Action::CLOSED;
+}
+
+pattern isUnSubscribe(i: Issue, u: User, e: IssueEvent) {
+	Issue.issueevent(i, e);
+	IssueEvent.user(e, u);
+	IssueEvent.action(e, a);
+	a == Action::UNSUBSCRIBED;
+}
+
+pattern isSubscribe(i: Issue, u: User, e: IssueEvent) {
+	Issue.issueevent(i, e);
+	IssueEvent.user(e, u);
+	IssueEvent.action(e, a);
+	a == Action::SUBSCRIBED;
+}
+
+
+pattern pullRequestOfIssue(i: Issue, pr: PullRequest) {
+	Issue.pullrequest(i, pr);
+}
+
+//@Constraint(key={i}, severity="error", message="error")
+//pattern mergedIssueWithoutPr(i: Issue){
+//	find checkAction(i, _, Action::MERGED);
+//	neg find pullRequestOfIssue(i, _);
+//}
+
+@Constraint(key={i}, severity="error", message="error")
+pattern consecutiveClosesWithoutReopen(i: Issue) {
+	find checkAction(i, a1, Action::CLOSED);
+	find checkAction(i, a2, Action::CLOSED);
+	a1 != a2;
+	neg find isReopen(i, _);
+}
+
+
+@Constraint(key={i}, severity="error", message="error")
+pattern consecutiveReopensWithoutClose(i: Issue) {
+	find checkAction(i, a1, Action::REOPENED);
+	find checkAction(i, a2, Action::REOPENED);
+	a1 != a2;
+	neg find isClose(i, _);
+}
+
+//@Constraint(key={i, u}, severity="error", message="error")
+//pattern consecutiveSubWithoutUnSub(i: Issue, u: User) {
+//	find checkUserAction(i, u, a1, Action::SUBSCRIBED);
+//	find checkUserAction(i, u, a2, Action::SUBSCRIBED);
+//	a1 != a2;
+//	neg find isUnSubscribe(i, u, _);
+//}
+
+@Constraint(key={i, u}, severity="error", message="error")
+pattern consecutiveUnSubWithoutSub(i: Issue, u: User) {
+	find checkUserAction(i, u, a1, Action::UNSUBSCRIBED);
+	find checkUserAction(i, u, a2, Action::UNSUBSCRIBED);
+	a1 != a2;
+	neg find isSubscribe(i, u, _);
+}
+
+//pattern committer(c: Commit, u:User) {
+//	Commit.committer(c, u);
+//}
+//
+//pattern eventUser(e: IssueEvent, u:User){
+//	IssueEvent.user(e, u);
+//}
+//
+//@Constraint(key={c}, severity="error", message="error")
+//pattern noCommitter(c: Commit) {
+//	neg find committer(c, _);
+//}
+//
+//@Constraint(key={e}, severity="error", message="error")
+//pattern noUser(e: IssueEvent) {
+//	neg find eventUser(e, _);
+//}
+
+
+
+//1. issue with MERGED but no PullRequest
+//2. issue with 2 CLOSED events without a REOPENED event
+//3. issue with 2 REOPENED events without a CLOSED event
+//4. user-issue pair with 2 SUBSCRIBED events without an UNSUBSCRIBED event
+//5. user-issue pair with 2 UNSUBSCRIBED events without a SUBSCRIBED event
+//6. User MERGED/CLOSED/REOPENED issue without being a projectMember of the Project (Not possible under this condition)

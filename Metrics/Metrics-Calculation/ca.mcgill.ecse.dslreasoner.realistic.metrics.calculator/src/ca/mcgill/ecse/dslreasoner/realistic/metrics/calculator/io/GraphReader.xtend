@@ -20,9 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
-import org.eclipse.emf.ecore.EGenericType
-import org.eclipse.emf.ecore.EStructuralFeature
-import ca.mcgill.ecse.dslreasoner.realistic.metrics.calculator.metrics.TypedClusteringCoefficientMetric
 
 class GraphReader{
 	val ResourceSet resSet = new ResourceSetImpl();
@@ -64,7 +61,7 @@ class GraphReader{
 			//add a list of metrics
 			val g = new EMFGraph();
 			for(root : roots){
-				g.init(root, metrics, name.replaceFirst(suffix, ""), referenceTypes);
+				g.init(root, metrics, name.replaceFirst(suffix, ""));
 			}
 
 			count ++;
@@ -88,7 +85,7 @@ class GraphReader{
 		//add a list of metrics
 		val g = new EMFGraph();
 		for(root : roots){
-			g.init(root, metrics, filename.replaceFirst(suffix, ""), referenceTypes);
+			g.init(root, metrics, filename.replaceFirst(suffix, ""));
 		}
 		return g
 	}

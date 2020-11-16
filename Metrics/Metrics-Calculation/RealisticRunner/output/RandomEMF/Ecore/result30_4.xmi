@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" nsURI="hFA72ANoEXH3us7mr5yFuifXbROdCiOyeKbxQ0jPtFSF8jrogBYCoUCXKGttagsECjqWLdd4X9RPV6fr6ymjkyJgun35owXeQ6A">
+  <eClassifiers xsi:type="ecore:EClass" instanceTypeName="Au6W3xzslZeJ4L4817q27EME2ZWNv6emXw584HLcokTRmL7GyLfW8MWpZY1b5BhHIBCby3p557d4FogCHVNqncl" abstract="true" eSuperTypes="//@eClassifiers.1 //@eClassifiers.0 //@eClassifiers.2 //@eClassifiers.3" interface="true">
+    <eTypeParameters name="BqDyzjTl1MoRGRw1S1wl">
+      <eBounds eClassifier="//@eClassifiers.6" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+        <eUpperBound eClassifier="//@eClassifiers.3">
+          <eUpperBound eClassifier="//@eClassifiers.4">
+            <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+              <eUpperBound eClassifier="//@eClassifiers.1" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+                <eTypeArguments>
+                  <eTypeArguments>
+                    <eUpperBound>
+                      <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+                        <eUpperBound eClassifier="//@eClassifiers.0">
+                          <eUpperBound>
+                            <eTypeArguments eClassifier="//@eClassifiers.4"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.10" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.6" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments/>
+                            <eLowerBound/>
+                          </eUpperBound>
+                          <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0">
+                            <eUpperBound eClassifier="//@eClassifiers.0"/>
+                            <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.14"/>
+                            <eTypeArguments/>
+                          </eTypeArguments>
+                          <eLowerBound>
+                            <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.1"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.11"/>
+                            <eTypeArguments/>
+                            <eTypeArguments eClassifier="//@eClassifiers.11" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments/>
+                            <eTypeArguments eClassifier="//@eClassifiers.14" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.10"/>
+                            <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                            <eTypeArguments eClassifier="//@eClassifiers.12" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                          </eLowerBound>
+                        </eUpperBound>
+                      </eTypeArguments>
+                      <eTypeArguments eClassifier="//@eClassifiers.5" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                      <eTypeArguments/>
+                      <eTypeArguments eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                      <eTypeArguments eClassifier="//@eClassifiers.3" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                      <eTypeArguments eClassifier="//@eClassifiers.3" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                      <eTypeArguments eClassifier="//@eClassifiers.11" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                      <eTypeArguments eClassifier="//@eClassifiers.5" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                      <eTypeArguments eClassifier="//@eClassifiers.5"/>
+                      <eTypeArguments/>
+                    </eUpperBound>
+                  </eTypeArguments>
+                  <eTypeArguments eClassifier="//@eClassifiers.9"/>
+                  <eTypeArguments eClassifier="//@eClassifiers.5"/>
+                  <eTypeArguments/>
+                  <eTypeArguments eClassifier="//@eClassifiers.9" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                  <eTypeArguments eClassifier="//@eClassifiers.8"/>
+                  <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                </eTypeArguments>
+                <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                <eTypeArguments/>
+                <eTypeArguments/>
+                <eTypeArguments eClassifier="//@eClassifiers.11"/>
+                <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                <eTypeArguments eClassifier="//@eClassifiers.1" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                <eTypeArguments eClassifier="//@eClassifiers.11" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                <eTypeArguments eClassifier="//@eClassifiers.0"/>
+                <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                <eTypeArguments/>
+                <eTypeArguments eClassifier="//@eClassifiers.13" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+                <eTypeArguments eClassifier="//@eClassifiers.14"/>
+              </eUpperBound>
+            </eTypeArguments>
+            <eTypeArguments/>
+            <eTypeArguments/>
+            <eTypeArguments eClassifier="//@eClassifiers.9" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+            <eTypeArguments eClassifier="//@eClassifiers.7"/>
+            <eTypeArguments eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+            <eTypeArguments eClassifier="//@eClassifiers.10"/>
+            <eTypeArguments eClassifier="//@eClassifiers.6" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+          </eUpperBound>
+        </eUpperBound>
+      </eBounds>
+      <eBounds eClassifier="//@eClassifiers.8"/>
+      <eBounds eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+      <eBounds/>
+      <eBounds/>
+      <eBounds eClassifier="//@eClassifiers.2" eTypeParameter="//@eClassifiers.0/@eTypeParameters.0"/>
+      <eBounds/>
+    </eTypeParameters>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" instanceTypeName="tYnr46fBNz9O9hKDGhf9guRnVhIYMlBFd2uVokCWOnXv2Ri0tlNsWX1WpiNU50jvmXYREUiZOmRtLw8dTnugKFXDsARqLaE98UefY2BUUEquqMpk" eSuperTypes="//@eClassifiers.9 //@eClassifiers.1 //@eClassifiers.0 //@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EClass" instanceClassName="AOx6gVajBlR63MSda4IK1" eSuperTypes="//@eClassifiers.1 //@eClassifiers.3 //@eClassifiers.0 //@eClassifiers.2 //@eClassifiers.9"/>
+  <eClassifiers xsi:type="ecore:EClass" name="xuiiccSslBt1EW286GV323IEz0Izbr1DyMfxuKArTwi4WzhyudZkSErdeKjG8f6QLwMLtnguPPDykk5CoHnEVvShjC5" eSuperTypes="//@eClassifiers.2 //@eClassifiers.0 //@eClassifiers.1 //@eClassifiers.9 //@eClassifiers.3"/>
+  <eClassifiers xsi:type="ecore:EEnum" instanceClassName="rAjT50roWlEfN7gaVthbpeMupsS9PESPMEdQT7je35OBZNf8ddysmYw4aH8v0obW24wuZrHaLbECguOQU9F2YAPmkr4WyKDgoxuXwo9qsGKUo" instanceTypeName="voPGz4dOMefefI63lcRBcLqu9YFchfXHy3T6Mo0vumd6hMlFU8ljDSDa2lJvnWk0snGzvTWiZTrJODDHYgFQSXwJO6NgGAGaM96Q79CaW1ZCpytsWKC3MP9kWJBU"/>
+  <eClassifiers xsi:type="ecore:EEnum" instanceTypeName="f4P1VJw7uooJkcUCPyb6vdB6P1r4sOvUFsH6tBW5BybOzXVbApx6P9rgXVDe"/>
+  <eClassifiers xsi:type="ecore:EDataType" instanceClassName="V5WjtFdHyK80U0Qv3mI8KB5IJfza" instanceTypeName="Js2oqc7882MSmSWbtdtcxg2FBMM6p5C8Ul5mUXgBnp9Po0cM"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="hHw0nD0qgOs7Hhdtw8FrOCzBX0qcxMOlVyKEkMPaWzZ6U" instanceClassName="A8gTO5md5XAOdzwhMEGviRtFG4pUzaK80DK" instanceTypeName="eJG1Qfc0m4ykPKseHlNOgkV4bFp60NLviOtjAjo80sNtwNLNUk9Cr8N3Yl7W2cSQ7RFfqZ4b6Y7fSEoMoXMmGWrx54dzwJC6Ezw" serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" instanceClassName="a8wnnMZCzd" instanceTypeName="Jyt9dT9A4MbfwffE3V0tYPnqHtDpGjJ4lTqAle5gHUTwP6q33a01"/>
+  <eClassifiers xsi:type="ecore:EClass" name="atDhJCzxjhYy3cRKhaiBfXyUkQkEqJ1Rq0Dk3u3O43xKzPr3s41gQ8kTmZIUSwB7iDaMTJfV2EcQh2xXRPeImDyzdc1zram5VsLICFIq" instanceClassName="C0TPQ" instanceTypeName="npJ2WLnf0Q3l2Dg5svrRq59P1Dw9Ah3wk4H76KScTqSC4D6pU9T9" eSuperTypes="//@eClassifiers.9 //@eClassifiers.1 //@eClassifiers.0 //@eClassifiers.3 //@eClassifiers.2"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="lDjBX5VyskFOiG4w6AzGcNCdWH4tRp8YQMwtbgx3AFJHm2a6VOGEwwyGXVApUThmTRikeCp3dBU8XXhKlhxnJOegq0WG5TlM6rFi" instanceTypeName="158Ev7GRc3P24mAF0OfXWhw4VKLuRaNuGtVecmFpQS6prCInX3NDJbd2ipmAeo"/>
+  <eClassifiers xsi:type="ecore:EEnum" instanceClassName="Weo4hD9pySKW9Q78L1NeVZe6lzEBiSIAonB7rXtZ6FGbjZwfJ4tIS3xseisElEA7nAGbYWvY4Evk8I1IuFAwDTmHUWvLBr4TQw" instanceTypeName="ngG6kaLoTCcVaLMO3XAR1p2ijlvvrzFDLPxTF6jWUoSCl6Wc1R20Gh9RRO8DAphXinppVlOWFcDa"/>
+  <eClassifiers xsi:type="ecore:EDataType"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="M7SnraC2la0cctMC8Lqd5JjBsvReZognH8smdu7" serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" instanceClassName="OoY7LFsMgDxXrVtW0HQDYKDI43riIxeCNN2muMleEPdnj8KdppnVHRXJFw"/>
+</ecore:EPackage>

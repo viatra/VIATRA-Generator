@@ -4,7 +4,7 @@ import viatra "../../../Domains/github-graph/queries/queries/github.vql"
 generate {
 	metamodel = {package github excluding{ Project.creatd_at, Project.updated_at, Project.url, User.name, User.url,
 			Commit.created_at, Commit.sha, Commit.parents_sha, Issue.created_at, Issue.url, PullRequest.url, IssueEvent.created_at, 
-			IssueEvent.actor_url, Action, IssueEvent.action, Project.deleted}}
+			IssueEvent.actor_url, Project.deleted}}
 	partial-model = { "inputs/github.xmi"}
 	constraints = { package queries }
 	
@@ -12,14 +12,14 @@ generate {
 	solver = ViatraSolver
 	
 	scope = {
-		#node = 30
+		#node = 41
 	}
 	
 	number = 1
-	runs = 5
+	runs = 100
 	config = {
 		log-level = none,
-		runtime = 300,
+		//runtime = 300,
 		"optional-wf" = "false",
 		"realistic-guidance" = "Composite",
 		"allow-must-violations" = "false",
@@ -28,8 +28,8 @@ generate {
 	}
 	
 	debug = "debug"
-	statistics = "statistics/Github/warmup.csv"
-	output = "output/Github/Composite"
+	statistics = "statistics/runtime/Github/statistics.csv"
+	output = "output/Real/Github/"
 }
 
 // generate {

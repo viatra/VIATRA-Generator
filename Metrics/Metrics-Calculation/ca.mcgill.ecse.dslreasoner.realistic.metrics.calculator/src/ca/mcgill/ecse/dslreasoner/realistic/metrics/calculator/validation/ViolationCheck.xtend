@@ -5,25 +5,32 @@ import com.google.common.reflect.ClassPath
 import ecore.Ecore
 import hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu.Patterns
 import java.util.ArrayList
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.viatra.addon.validation.core.api.IConstraintSpecification
+import queries.Github
 
 class ViolationCheck {
 	/**
 	 * Return the total number of violations
 	 */
-	def static int calculateViolationCounts(EObject root, Domain d) {
-		var packageName = '';
+	 var List<IConstraintSpecification> constraints;
+	 
+	 new(Domain d) {
+	 	var packageName = '';
 		if (d == Domain.Yakindumm) {
 			packageName = 'constraints.yakindumm';
 		} else if (d == Domain.Ecore) {
 			packageName = 'constraints.ecore';
 		} else if (d == Domain.Github) {
-			return -1;
+			packageName = 'constraints.github'
 		}
 
-		var constriants = loadConstraints(packageName);
-		var collections = new ConstraintCollection(constriants, Ecore.instance);
+		constraints = loadConstraints(packageName);
+	 }
+	 
+	def int calculateViolationCounts(EObject root) {
+		var collections = new ConstraintCollection(constraints, Ecore.instance);
 		collections.addModel(root);
 		var results = collections.calculateViolations();
 		if (results.size > 0) {
@@ -36,9 +43,8 @@ class ViolationCheck {
 	/**
 	 * return a map contain the count for each type of violation
 	 */
-	def static violationMaps(EObject root) {
-		var constriants = loadConstraints('hu.bme.mit.inf.dslreasoner.partialsnapshot_mavo.yakindu');
-		var collections = new ConstraintCollection(constriants, Patterns.instance);
+	def violationMaps(EObject root) {
+		var collections = new ConstraintCollection(constraints, Ecore.instance);
 		collections.addModel(root);
 		var results = collections.calculateViolationMaps();
 		if (results.size > 0) {
@@ -48,7 +54,7 @@ class ViolationCheck {
 		}
 	}
 
-	def static loadConstraints(String packageName) {
+	def loadConstraints(String packageName) {
 		val constraints = new ArrayList<IConstraintSpecification>();
 
 		val classPath = ClassPath.from(ClassLoader.systemClassLoader);

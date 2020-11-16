@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <eClassifiers xsi:type="ecore:EClass" abstract="true" eSuperTypes="//@eClassifiers.2 //@eClassifiers.4 //@eClassifiers.5 //@eClassifiers.3">
+    <eTypeParameters/>
+    <eTypeParameters/>
+    <eTypeParameters name="vQuE8JS8i1zTZKwVF6pSJQyNRArePG"/>
+    <eTypeParameters/>
+    <eTypeParameters/>
+    <eOperations lowerBound="268687563" ordered="false" eExceptions="//@eClassifiers.3 //@eClassifiers.0 //@eClassifiers.1 //@eClassifiers.5 //@eClassifiers.4 //@eClassifiers.2"/>
+    <eOperations eType="//@eClassifiers.3" unique="false" upperBound="-1494844685" eExceptions="//@eClassifiers.5 //@eClassifiers.3 //@eClassifiers.2 //@eClassifiers.4 //@eClassifiers.1 //@eClassifiers.0"/>
+    <eOperations name="f3VCAFzYIOMrbmLVSVeoMeTqgwDQ3OySV5" lowerBound="-234195066" unique="false" upperBound="-673814005" eExceptions="//@eClassifiers.3 //@eClassifiers.2"/>
+    <eOperations name="MVtAqW0G3EMTwggCHzpo0ERO3nHBLTR6kntN0q2nWy5fvylf95bXzkWPSYyT2wHJs7IKHa4dAv27iHLYl0k35w146w03l3p" lowerBound="1412763975" eExceptions="//@eClassifiers.3 //@eClassifiers.2"/>
+    <eOperations eType="//@eClassifiers.5" lowerBound="320567217" eExceptions="//@eClassifiers.5 //@eClassifiers.1 //@eClassifiers.3 //@eClassifiers.4 //@eClassifiers.2"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="zgjCpO0T3qc3AxTEUepXuFWjOA8oQQFQSWQdUtlcA3oVjCCyilU3x0H2A3YRyC34cTjel0pToMKkxFb" ordered="false" unique="false" defaultValueLiteral="l6CW5p4NddSQeVBZdVm2Nl7V4C8Us3WMOn9707PSl1QWiQktMGr1cVn5zR5V9HJuVwkFnmlAoPYpTY3eY4Ex6RD4leEX" derived="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" lowerBound="97501569" unique="false" upperBound="-1168910394" changeable="false" volatile="true" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" ordered="false" upperBound="-777140978" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="8" defaultValueLiteral="6IrSOCWsTg6SxQj459aTDb27DajVWHeCTZ3PdEFP8Sx5HCSkCxdSg4w9BvWfo2uWouBakuoJpSlkUFWSJlzg4xYfcA4xIU14el1Mhu" unsettable="true" eKeys="//@eClassifiers.0/@eStructuralFeatures.13 //@eClassifiers.0/@eStructuralFeatures.11 //@eClassifiers.0/@eStructuralFeatures.8"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="GNIKAjJLOIMgccJcXJzEcr" lowerBound="1042620934" upperBound="192063069" transient="true" eKeys="//@eClassifiers.0/@eStructuralFeatures.1 //@eClassifiers.0/@eStructuralFeatures.12"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" eType="//@eClassifiers.3" lowerBound="-143366784" unique="false" upperBound="420556002" transient="true" eKeys="//@eClassifiers.0/@eStructuralFeatures.9 //@eClassifiers.0/@eStructuralFeatures.1 //@eClassifiers.0/@eStructuralFeatures.12 //@eClassifiers.0/@eStructuralFeatures.11 //@eClassifiers.0/@eStructuralFeatures.0 //@eClassifiers.0/@eStructuralFeatures.7 //@eClassifiers.0/@eStructuralFeatures.8" eOpposite="//@eClassifiers.0/@eStructuralFeatures.3"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" eType="//@eClassifiers.0" lowerBound="-1771493168" upperBound="250954096" defaultValueLiteral="cyAzw4X0XcB8BXdkG7pkwfDNnQ2YdRouuxsFbd3cfpvLG4KTUK3dc" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" ordered="false" changeable="false" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" unique="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="9zbOtjJBUS6GbG2RslAyD15uYgWJ1g3Obx89TR4gZSpF6SEItWEtkvYCkVxsZmt40M182OAzDCxx9iv3Ise17NwpP3Pk1sGF9PVNifAgK1Pu029qvUW2iXyDF" lowerBound="-825198526" ordered="false" upperBound="2028842618"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jQ2NqSkhjXKnIByDkRZdY1MmJYNpbPo7al2euR" eType="//@eClassifiers.3" defaultValueLiteral="GcCXPPufCElCZBoNcA9KyacjWwaTZCLDLN5bsB6Ndqj2CEj30fM96akjsYC697bFgNoaCr4zsnqJ" eKeys="//@eClassifiers.0/@eStructuralFeatures.12 //@eClassifiers.0/@eStructuralFeatures.0" eOpposite="//@eClassifiers.0/@eStructuralFeatures.10"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" lowerBound="-1766056586" unique="false" upperBound="1658839165" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" lowerBound="1584612250" ordered="false" upperBound="-1534891676" defaultValueLiteral="0qNBfifDrHQ8RPcc1bCtdz2ykqPJjmIhDKFx88z9FTOiCgbvzxBhxj9FlOAQGoGAj2gzPmQ29RhB2nI1hX6qyK5lAVMRj6pmSZ96mCePih"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="I1agBr1eZjrhcKMmWypN4661nm1B68Cl3uSEbhy1pTiY8AFz3UEj0boF1STiCVOJ6SzD5oqWkWUG2Yj4vPAZr" eType="//@eClassifiers.5" defaultValueLiteral="2l7lo9gv4BAPtKYOtclWDhRfXmKyKmhhw56zor1RRHXcpa1VL36qo7c2wLxBaGYE2q00Ne96SozCfiF8b1luG" volatile="true" iD="true"/>
+    <eGenericSuperTypes/>
+    <eGenericSuperTypes/>
+    <eGenericSuperTypes/>
+    <eGenericSuperTypes eClassifier="//@eClassifiers.0" eTypeParameter="//@eClassifiers.0/@eTypeParameters.1"/>
+    <eGenericSuperTypes/>
+    <eGenericSuperTypes eClassifier="//@eClassifiers.3"/>
+    <eGenericSuperTypes/>
+    <eGenericSuperTypes eTypeParameter="//@eClassifiers.0/@eTypeParameters.4"/>
+    <eGenericSuperTypes eClassifier="//@eClassifiers.2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" instanceTypeName="ULqdEsHafERJ5ZoNxe79PMCGinTG5af1" serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WJTEoxHrCWd4CyXpcDiGCH6TVncskDGiEVmpQGzD4CaZ6P5dN6qQ3qIwLEbsWjmTXlS6kXCEEtxUChoP" instanceClassName="qBxTTSdPcQGW6fgVed9pgaKoYnbRy1Bvqx1MzgYN3FTUr7c6wSpalLaLoiUdWfZQSeZBZ" instanceTypeName="RgQc8weYwQfSt7qt772cDiUKXjHg6fU4nfGFY2O9UDp8UTYyUdLPDq5PfIMiLjGWS1syXRC4acWMqgFhv" abstract="true" eSuperTypes="//@eClassifiers.4 //@eClassifiers.3 //@eClassifiers.2 //@eClassifiers.0"/>
+  <eClassifiers xsi:type="ecore:EClass" name="J3MMQKpGeN7PdjlEesqCdOEGZOPaXT15P4pVftKD1qu1OUgi6g0QBtSiwQpcFirutrxntq1kN5kaSkBaIx6Ro8O8TSQCgBP35XbKcMUz" instanceTypeName="BricfIUP7YJhgTaUHJIGfhJPHCys" eSuperTypes="//@eClassifiers.2 //@eClassifiers.3 //@eClassifiers.4 //@eClassifiers.5" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="k3hqst9MtUpU3QyQbznINo6KVV7ZSGIxSXPw8XIBvk9B0uGMEKvqL3kZHDGHSHofBMkdozkslPFDljHFQqKQvdPVgBoxj9wP2k8p1KVqPLUVJBe72t" instanceClassName="KoAL7bY9a0TAXN0HX3WjLSXQQId3nv74ib8SxMFxoXWL2PquWD9qYOguVebNAuZS5KBEncKzoqwoqJuUJBbsa15ympezyAUfVOEc3VgSUGhHwj" eSuperTypes="//@eClassifiers.2 //@eClassifiers.5 //@eClassifiers.4 //@eClassifiers.0 //@eClassifiers.3" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" instanceClassName="lUXl5khgoWTIKOCiQvpiFzCUOuHWqFLtc" eSuperTypes="//@eClassifiers.0"/>
+</ecore:EPackage>
