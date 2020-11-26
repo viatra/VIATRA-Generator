@@ -1,19 +1,17 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic
 
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import java.util.Set
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement
-import java.util.Map
-import com.microsoft.z3.BoolExpr
-import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
-import java.util.Map.Entry
-import org.eclipse.xtext.xbase.XFeatureCall
-import java.util.Comparator
 import java.util.ArrayList
+import java.util.Comparator
 import java.util.HashMap
 import java.util.List
+import java.util.Map
+import java.util.Map.Entry
+import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XFeatureCall
 
 class NumericTranslator {
 	
