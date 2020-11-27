@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl
 import org.eclipse.viatra.query.patternlanguage.emf.EMFPatternLanguageStandaloneSetup
 import org.eclipse.viatra.query.runtime.rete.matcher.ReteEngine
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions
+import org.eclipse.viatra.query.runtime.rete.matcher.ReteBackendFactory
 
 class StandaloneScriptExecutor {
 	def static void main(String[] args) {
@@ -44,7 +46,10 @@ class StandaloneScriptExecutor {
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("xmi",new XMIResourceFactoryImpl)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("logicproblem",new XMIResourceFactoryImpl)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put("partialmodel",new XMIResourceFactoryImpl)
-		ReteEngine.getClass
+		//ReteEngine.getClass
+		
+		ViatraQueryEngineOptions.setSystemDefaultBackends(ReteBackendFactory.INSTANCE, ReteBackendFactory.INSTANCE,
+			ReteBackendFactory.INSTANCE)
 		
 		val ext = path.split("\\.").last
 		if(ext.equals("vsconfig")) {
