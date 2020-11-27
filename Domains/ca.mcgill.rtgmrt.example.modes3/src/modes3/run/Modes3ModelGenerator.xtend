@@ -121,7 +121,7 @@ class Modes3ModelGenerator {
 				maxNewElementsByType => [
 					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.train), modelSize / 5)
 					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.turnout), modelSize / 5)
-					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.simpleSegment), 3 * modelSize / 5)
+//					put(ecore2Logic.TypeofEClass(metamodelLogic.trace, Modes3Package.eINSTANCE.simpleSegment), 3 * modelSize / 5)
 				]
 			]
 			solutionScope => [

@@ -217,7 +217,6 @@ public class Modes3ModelGenerator {
             final Procedure1<Map<Type, Integer>> _function_5 = (Map<Type, Integer> it_2) -> {
               it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTrain()), Integer.valueOf((this.modelSize / 5)));
               it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getTurnout()), Integer.valueOf((this.modelSize / 5)));
-              it_2.put(this.ecore2Logic.TypeofEClass(metamodelLogic.getTrace(), Modes3Package.eINSTANCE.getSimpleSegment()), Integer.valueOf(((3 * this.modelSize) / 5)));
             };
             ObjectExtensions.<Map<Type, Integer>>operator_doubleArrow(
               it_1.maxNewElementsByType, _function_5);
