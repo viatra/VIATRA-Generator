@@ -71,28 +71,29 @@ class ApplicationConfigurationLinkingService extends DefaultLinkingService {
 	}
 	
 	private def getByUri(EObject context, EReference ref, INode node) {
+		val linkedObjects = super.getLinkedObjects(context, ref, node)
+		if (!linkedObjects.empty) {
+			return linkedObjects
+		}
 		val uri = getNSUri(node)
 		if (uri.present) {
 			var URI createdURI
 			try {
 				createdURI = URI.createURI(uri.get)
 			} catch (IllegalArgumentException e) {
-				return super.getLinkedObjects(context, ref, node)
+				return #[]
 			}
 			var Resource res
 			try {
 				res = context.eResource.resourceSet.getResource(createdURI, true);
 			} catch (RuntimeException e) {
-				return super.getLinkedObjects(context, ref, node)
+				return #[]
 			}
 			if (res !== null && res.contents !== null) {
 				return res.contents.filter[ref.EType.isInstance(it)].toList
-			} else {
-				return super.getLinkedObjects(context, ref, node)
 			}
-		} else {
-			return super.getLinkedObjects(context, ref, node)
 		}
+		return #[]
 	}
 
 	private def getNSUri(INode node) {
