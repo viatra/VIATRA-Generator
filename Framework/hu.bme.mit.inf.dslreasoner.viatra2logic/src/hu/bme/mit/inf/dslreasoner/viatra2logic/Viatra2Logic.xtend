@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic
 
+import com.google.inject.Injector
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
@@ -50,7 +51,7 @@ class Viatra2LogicConfiguration {
 	public var normalize = true
 }
 
-class  Viatra2Logic {
+class Viatra2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
 	val extension Viatra2LogicAnnotationsFactory factory = Viatra2LogicAnnotationsFactory.eINSTANCE
 	val normalizer = new PBodyNormalizer(EMFQueryMetaContext.DEFAULT)
@@ -59,10 +60,14 @@ class  Viatra2Logic {
 	val Ecore2Logic ecore2Logic
 	Constraint2Logic constraint2Logic
 	
-	new(Ecore2Logic ecore2Logic) {
+	new(Ecore2Logic ecore2Logic, Injector injector) {
 		this.ecore2Logic = ecore2Logic
-		this.typeInferer = new Viatra2LogicTypeInferer(ecore2Logic)
+		this.typeInferer = new Viatra2LogicTypeInferer(ecore2Logic, injector)
 		this.constraint2Logic = new Constraint2Logic(ecore2Logic)
+	}
+	
+	new(Ecore2Logic ecore2Logic) {
+		this(ecore2Logic, null)
 	}
 	
 	def TracedOutput<LogicProblem,Viatra2LogicTrace> transformQueries(

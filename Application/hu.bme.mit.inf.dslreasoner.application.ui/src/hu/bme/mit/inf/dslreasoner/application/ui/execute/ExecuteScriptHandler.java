@@ -12,14 +12,23 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 import hu.bme.mit.inf.dslreasoner.application.execution.ScriptExecutor;
 
 public class ExecuteScriptHandler extends AbstractHandler implements IHandler {
-
-	ScriptExecutor scriptExecutor = new ScriptExecutor(RuntimeConsoleBasedScriptConsole.FACTORY);
+	
+	ScriptExecutor scriptExecutor;
+	
+	@Inject
+	public void setInjector(Injector injector) {
+		scriptExecutor = new ScriptExecutor(RuntimeConsoleBasedScriptConsole.FACTORY, injector);
+	}
 	
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		assert scriptExecutor != null : "Injector must be set";
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if(selection instanceof StructuredSelection) {
 			StructuredSelection structuredSelection = (StructuredSelection) selection;

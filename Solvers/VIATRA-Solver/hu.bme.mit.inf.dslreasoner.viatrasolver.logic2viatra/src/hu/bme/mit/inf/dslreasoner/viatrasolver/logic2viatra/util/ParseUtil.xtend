@@ -6,7 +6,6 @@ import com.google.inject.Inject
 import com.google.inject.Injector
 import com.google.inject.multibindings.Multibinder
 import com.google.inject.name.Names
-import com.google.inject.util.Modules
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage
 import hu.bme.mit.inf.dslreasoner.logic.model.logicproblem.LogicproblemPackage
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage
@@ -46,7 +45,6 @@ import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.scoping.impl.SimpleScope
-import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
 import org.eclipse.xtext.workspace.IProjectConfigProvider
 
@@ -65,35 +63,32 @@ package class StandaloneParserWithFixedMetamodelProviderModule extends Standalon
 		Multibinder::newSetBinder(binder, IMetamodelProviderInstance);
 	}
 
-}
-
-package class StandaloneParserOverridesModule extends AbstractGenericModule {
-
-	def Class<? extends IMetamodelProvider> bindIMetamodelProvider() {
+	@SingletonBinding
+	override IResourceServiceProvider.Registry bindIResourceServiceProvider$Registry() {
+		new VqlDeactivatedServiceProviderRegistry
+	}
+	
+	override Class<? extends IMetamodelProvider> bindIMetamodelProvider() {
 		FixedMetamodelProvider
 	}
 
-	def Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
+	override Class<? extends IProjectConfigProvider> bindProjectConfigProvider() {
 		NullProjectConfigProvider
 	}
 
 	@SingletonBinding
-	def Class<? extends IResourceServiceProvider.Registry> bindIResourceServiceProvider$Registry() {
-		VqlDeactivatedServiceProviderRegistry
-	}
-
-	def EValidator.Registry bindEValidator$Registry() {
+	override EValidator.Registry bindEValidatorRegistry() {
 		// org.eclipse.xtext.validation.EValidatorRegistrar modifies EValidators already in the registry,
 		// so it is not safe to populate the registry from the EValidator.Registry.INSTANCE singleton.
 		// There is no need to execute any EValiator other than EMFPatternLanguageValidator,
 		// so we can start with a blank registry instead.
-		new EValidatorRegistryImpl()
+		new EValidatorRegistryImpl
 	}
 
-	def EPackage.Registry bindEPackage$Registry() {
+	@SingletonBinding
+	override EPackage.Registry bindEPackageRegistry() {
 		new EPackageRegistryImpl(EPackage.Registry.INSTANCE)
 	}
-
 }
 
 package class NullProjectConfigProvider implements IProjectConfigProvider {
@@ -136,10 +131,8 @@ class ParseUtil {
 
 	def protected Injector internalCreateInjector() {
 		ensureViatraInitialized();
-		val runtimeModulemodule = new StandaloneParserWithFixedMetamodelProviderModule
-		val overridesModule = new StandaloneParserOverridesModule
-		val module = Modules.override(runtimeModulemodule).with(overridesModule)
-		val newInjector = Guice.createInjector(module)
+		val runtimeModule = new StandaloneParserWithFixedMetamodelProviderModule
+		val newInjector = Guice.createInjector(runtimeModule)
 		return newInjector
 	}
 

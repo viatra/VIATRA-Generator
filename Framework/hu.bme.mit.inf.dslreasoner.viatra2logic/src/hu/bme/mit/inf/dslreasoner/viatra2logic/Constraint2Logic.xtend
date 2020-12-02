@@ -1,5 +1,4 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic
-
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
@@ -17,27 +16,27 @@ import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey
 import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey
+import org.eclipse.viatra.query.runtime.matchers.aggregators.DoubleSumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.ExtremumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.ExtremumOperator.Extreme
+import org.eclipse.viatra.query.runtime.matchers.aggregators.IntegerSumOperator
+import org.eclipse.viatra.query.runtime.matchers.aggregators.LongSumOperator
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.AggregatorConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Inequality
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.NegativePatternCall
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.PatternMatchCounter
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.BinaryTransitiveClosure
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.ConstantValue
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.AggregatorConstraint
-import org.eclipse.viatra.query.runtime.matchers.aggregators.DoubleSumOperator
-import org.eclipse.viatra.query.runtime.matchers.aggregators.IntegerSumOperator
-import org.eclipse.viatra.query.runtime.matchers.aggregators.LongSumOperator
-import org.eclipse.viatra.query.runtime.matchers.aggregators.ExtremumOperator
-import org.eclipse.viatra.query.runtime.matchers.aggregators.ExtremumOperator.Extreme
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.PatternMatchCounter
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
 
 class Constraint2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder

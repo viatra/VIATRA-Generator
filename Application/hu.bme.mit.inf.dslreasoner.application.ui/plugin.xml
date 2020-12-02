@@ -410,7 +410,7 @@
  <extension
        point="org.eclipse.ui.commands">
     <command
-          defaultHandler="hu.bme.mit.inf.dslreasoner.application.ui.execute.ExecuteScriptHandler"
+          defaultHandler="org.eclipse.viatra.query.patternlanguage.emf.ui.ReusablePatternLanguageExecutableExtensionFactory:hu.bme.mit.inf.dslreasoner.application.ui.execute.ExecuteScriptHandler"
           id="hu.bme.mit.inf.dslreasoner.application.ui.executescript"
           name="ExecuteScript">
     </command>

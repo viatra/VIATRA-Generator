@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import com.google.inject.Injector
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.GenerationTask
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
@@ -24,7 +25,9 @@ import java.util.LinkedList
 import java.util.Optional
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
+@FinalFieldsConstructor
 class GenerationTaskExecutor {
 	val metamodelLoader = new MetamodelLoader
 	val modelLoader = new ModelLoader
@@ -32,6 +35,7 @@ class GenerationTaskExecutor {
 	val solverLoader = new SolverLoader
 	val scopeLoader = new ScopeLoader
 	val statisticsUtil = new StatisticSections2CSV
+	val Injector injector
 	
 	def executeGenerationTask(
 		GenerationTask task,
@@ -102,7 +106,7 @@ class GenerationTaskExecutor {
 			var domain2LogicTransformationTime = System.nanoTime
 			val Ecore2Logic ecore2Logic = new Ecore2Logic
 			val Logic2Ecore logic2Ecore = new Logic2Ecore(ecore2Logic)
-			val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic)
+			val Viatra2Logic viatra2Logic = new Viatra2Logic(ecore2Logic, injector)
 			val InstanceModel2Logic instanceModel2Logic = new InstanceModel2Logic
 			
 			var modelGeneration = ecore2Logic.transformMetamodel(metamodelDescriptor,new Ecore2LogicConfiguration())

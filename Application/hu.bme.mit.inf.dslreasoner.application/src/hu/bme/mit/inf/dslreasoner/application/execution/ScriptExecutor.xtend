@@ -1,5 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import com.google.inject.Inject
+import com.google.inject.Injector
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigReference
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigSpecification
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigurationScript
@@ -33,11 +35,19 @@ import org.eclipse.core.runtime.jobs.Job
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
-@FinalFieldsConstructor
 class ScriptExecutor {
 	val parser = new ApplicationConfigurationParser
 	
 	val ScriptConsole.Factory scriptConsoleFactory
+	val Injector injector
+	
+	@FinalFieldsConstructor
+	new() {
+	}
+	
+	new(ScriptConsole.Factory scriptConsoleFactory) {
+		this(scriptConsoleFactory, null)
+	}
 	
 	/**
 	 * Executes a script
@@ -101,7 +111,7 @@ class ScriptExecutor {
 	}
 	
 	def dispatch void execute(GenerationTask task, IProgressMonitor monitor) {
-		val generationTaskExecutor = new GenerationTaskExecutor
+		val generationTaskExecutor = new GenerationTaskExecutor(injector)
 		generationTaskExecutor.executeGenerationTask(task,this,scriptConsoleFactory,monitor)
 	}
 	
