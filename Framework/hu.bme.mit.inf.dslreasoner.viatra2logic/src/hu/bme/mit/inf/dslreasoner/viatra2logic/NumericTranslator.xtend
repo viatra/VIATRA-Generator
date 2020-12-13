@@ -50,9 +50,14 @@ class NumericTranslator {
 		return res
 	}
 	
+	def selectProblemSolver() {
+//		return new NumericProblemSolver
+		return new DrealProblemSolver
+	}
+	
 	def delegateIsSatisfiable(Map<PConstraint, Iterable<Object[]>> matches) {
 		val input = formNumericProblemInstance(matches)
-		val solver = new NumericProblemSolver
+		val solver = selectProblemSolver
 		val satisfiability = solver.isSatisfiable(input)
 		solver.updateTimes
 		return satisfiability
@@ -60,13 +65,13 @@ class NumericTranslator {
 	
 	def delegateGetSolution(List<PrimitiveElement> primitiveElements, Map<PConstraint, Iterable<Object[]>> matches) {
 		val input = formNumericProblemInstance(matches)
-		val solver = new NumericProblemSolver
+		val solver = selectProblemSolver
 		val solution = solver.getOneSolution(primitiveElements,input)
 		solver.updateTimes
 		return solution
 	}
 	
-	private def updateTimes(NumericProblemSolver s) {
+	private def updateTimes(DrealProblemSolver s) {
 		this.formingProblemTime += s.getEndformingProblem
 		this.solvingProblemTime += s.getEndSolvingProblem
 		this.formingSolutionTime += s.getEndFormingSolution
