@@ -14,10 +14,10 @@ import org.eclipse.xtext.xbase.XUnaryOperation
 
 class ExpressionEvaluation2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
-	var NumericZ3ProblemSolver _numericSolver = null //new NumericProblemSolver
+	var NumericProblemSolver _numericSolver = null //new NumericProblemSolver
 	def getNumericSolver() {
 		if(_numericSolver === null) {
-			_numericSolver = new NumericZ3ProblemSolver
+			_numericSolver = (new NumericTranslator).selectProblemSolver
 		}
 		return _numericSolver
 	}

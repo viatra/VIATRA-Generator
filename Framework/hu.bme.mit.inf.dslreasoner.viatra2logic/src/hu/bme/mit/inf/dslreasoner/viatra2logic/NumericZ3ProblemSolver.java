@@ -27,7 +27,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement;
 
 
-public class NumericZ3ProblemSolver {
+public class NumericZ3ProblemSolver extends NumericProblemSolver{
 	private static final String N_Base = "org.eclipse.xtext.xbase.lib.";
 	private static final String N_PLUS = "operator_plus";
 	private static final String N_MINUS = "operator_minus";
@@ -49,10 +49,6 @@ public class NumericZ3ProblemSolver {
 	private Solver s;
 	private Map<Object, Expr> varMap;
 
-	long endformingProblem=0;
-	long endSolvingProblem=0;
-	long endFormingSolution=0;
-
 	public NumericZ3ProblemSolver() {
 		HashMap<String, String> cfg = new HashMap<String, String>();
 		cfg.put("model", "true");
@@ -64,18 +60,6 @@ public class NumericZ3ProblemSolver {
 
 	public Context getNumericProblemContext() {
 		return ctx;
-	}
-
-	public long getEndformingProblem() {
-		return endformingProblem;
-	}
-
-	public long getEndSolvingProblem() {
-		return endSolvingProblem;
-	}
-
-	public long getEndFormingSolution() {
-		return endFormingSolution;
 	}
 
 	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {

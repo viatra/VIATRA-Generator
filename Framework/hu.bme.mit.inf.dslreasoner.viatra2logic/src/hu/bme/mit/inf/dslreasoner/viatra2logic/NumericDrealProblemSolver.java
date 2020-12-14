@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
 
-public class NumericDrealProblemSolver {
+public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private static final String N_Base = "org.eclipse.xtext.xbase.lib.";
 	private static final String N_PLUS = "operator_plus";
 	private static final String N_MINUS = "operator_minus";
@@ -39,10 +39,6 @@ public class NumericDrealProblemSolver {
 	private PrintWriter printer;
 	private String containerName;
 	private Map<Object, String> varMap;
-
-	long endformingProblem=0;
-	long endSolvingProblem=0;
-	long endFormingSolution=0;
 
 	public NumericDrealProblemSolver() throws IOException, InterruptedException {
 		//setup smt2 input file
@@ -70,7 +66,7 @@ public class NumericDrealProblemSolver {
 		varMap = new HashMap<Object, String>();
 	}
 	
-	public Process runProcess(List<String> cmd) throws IOException, InterruptedException {
+	private Process runProcess(List<String> cmd) throws IOException, InterruptedException {
 //		println(cmd)
 		ProcessBuilder pb = new ProcessBuilder(cmd);
 		pb.redirectOutput();
@@ -84,17 +80,6 @@ public class NumericDrealProblemSolver {
 		return p;
 	}
 
-	public long getEndformingProblem() {
-		return endformingProblem;
-	}
-
-	public long getEndSolvingProblem() {
-		return endSolvingProblem;
-	}
-
-	public long getEndFormingSolution() {
-		return endFormingSolution;
-	}
 //
 //	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {
 //		ArrayList<JvmIdentifiableElement> allElem = new ArrayList<JvmIdentifiableElement>();
@@ -115,7 +100,7 @@ public class NumericDrealProblemSolver {
 //		}
 //	}
 	
-	public Process callDreal() throws IOException, InterruptedException {
+	private Process callDreal() throws IOException, InterruptedException {
 		List<String> drealCmd = new ArrayList<String>(
 				Arrays.asList("docker", "exec", 
 						containerName,
@@ -125,7 +110,7 @@ public class NumericDrealProblemSolver {
 		return runProcess(drealCmd);
 	}
 	
-	public boolean getDrealResult(Process p) throws IOException {
+	private boolean getDrealResult(Process p) throws IOException {
 		if (p.exitValue() == 1) {return false;}
 		
 		BufferedReader output = new BufferedReader(new InputStreamReader(p.getInputStream()));
