@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
 
-public class DrealProblemSolver {
+public class NumericDrealProblemSolver {
 	private static final String N_Base = "org.eclipse.xtext.xbase.lib.";
 	private static final String N_PLUS = "operator_plus";
 	private static final String N_MINUS = "operator_minus";
@@ -44,7 +44,7 @@ public class DrealProblemSolver {
 	long endSolvingProblem=0;
 	long endFormingSolution=0;
 
-	public DrealProblemSolver() throws IOException, InterruptedException {
+	public NumericDrealProblemSolver() throws IOException, InterruptedException {
 		//setup smt2 input file
 		tempFile = File.createTempFile("smt", ".smt2");
 		printer = new PrintWriter(tempFile);

@@ -27,7 +27,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement;
 
 
-public class NumericProblemSolver {
+public class NumericZ3ProblemSolver {
 	private static final String N_Base = "org.eclipse.xtext.xbase.lib.";
 	private static final String N_PLUS = "operator_plus";
 	private static final String N_MINUS = "operator_minus";
@@ -53,7 +53,7 @@ public class NumericProblemSolver {
 	long endSolvingProblem=0;
 	long endFormingSolution=0;
 
-	public NumericProblemSolver() {
+	public NumericZ3ProblemSolver() {
 		HashMap<String, String> cfg = new HashMap<String, String>();
 		cfg.put("model", "true");
 		ctx = new Context(cfg);	
