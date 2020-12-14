@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,12 +15,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+
+import com.microsoft.z3.IntExpr;
+import com.microsoft.z3.RealExpr;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
@@ -36,6 +40,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	public NumericDrealProblemSolver() throws IOException, InterruptedException {		
 		//setup docker
 		//TODO ENSURE that container name is not already in use????
+		//TODO if dreal/dreal4 image is not downloaded, download it.
 		File tempDir = new File(System.getProperty("java.io.tmpdir"));
 		containerName = UUID.randomUUID().toString().replace("-", "");
 		List<String> startDocker = new ArrayList<String>(
@@ -45,7 +50,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 //						"-p", "8080:80", 
 						"-v", tempDir + ":/mnt",
 						"dreal/dreal4"));
-		Process p = runProcess(startDocker);		
+		runProcess(startDocker);		
 		
 		//setup varmap		
 		varMap = new HashMap<Object, String>();
@@ -63,13 +68,13 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		return p;
 	}
 	
-	private Process callDreal(String tempFileName) throws IOException, InterruptedException {
+	private Process callDreal(String tempFileName, boolean getModel) throws IOException, InterruptedException {
 		List<String> drealCmd = new ArrayList<String>(
 				Arrays.asList("docker", "exec", 
 						containerName,
-						"dreal",
-						"--model",
-						"mnt/" + tempFileName));
+						"dreal"));
+		if (getModel) {drealCmd.add("--model");}
+		drealCmd.add("mnt/" + tempFileName);
 		return runProcess(drealCmd);
 	}
 	
@@ -95,9 +100,6 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		
 		//error at dreal-level
 		if (! outputs.get(1).isEmpty()) {printError(outputs.get(1)); return false;}
-		
-		//print output
-//		printOutput(outputs.get(0));
 		
 		String resultRaw = outputs.get(0).get(0);
 		if (resultRaw.startsWith("unsat")) {return false;}
@@ -244,6 +246,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		return tempFileName;
 	}
 	
+	@SuppressWarnings("unused")
 	private void printFileContent(String path) throws IOException {
 		InputStream input = new BufferedInputStream(new FileInputStream(path));
 		byte[] buffer = new byte[8192];
@@ -274,58 +277,83 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		long startformingProblem = System.nanoTime();
 		String tempFileName = formNumericProblemInstance(matches);
 		endformingProblem = System.nanoTime()-startformingProblem;
-		
-//		printFileContent(System.getProperty("java.io.tmpdir") + tempFileName);
 				
 		//CALL DREAL		
 		long startSolvingProblem = System.nanoTime();
-		Process outputProcess = callDreal(tempFileName);
+		Process outputProcess = callDreal(tempFileName, false);
 		List<List<String>> outputs = getProcessOutput(outputProcess);
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
-		System.out.println(result);
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
-		//CLOSE
+		
+		//DEBUG - Print things
+//		printFileContent(System.getProperty("java.io.tmpdir") + tempFileName);
+//		printOutput(outputs.get(0));
+		System.out.println(result);
+		//END DEBUG
+		
 		return result;
 	}
+	
+	private Map<String, String> parseDrealOutput(List<String> output) {
+		Map<String, String> res = new HashMap<String, String>();
+		String re = "(\\w+) : \\[([0-9\\-.e]+), ([0-9\\-.e]+)\\]";
+		Pattern p = Pattern.compile(re);
+		for (String varVal : output) {
+		    Matcher m = p.matcher(varVal);
+		    if (m.matches()) {
+		        String name = m.group(1);
+		        String lowerB = m.group(2);
+		        String upperB = m.group(2);
+		        res.put(name, lowerB);
+		    }
+		}
+		return res;
+	}
+	
 
 	public Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {		
-//		Map<PrimitiveElement,Number> sol = new HashMap<PrimitiveElement, Number>();
-//		long startformingProblem = System.nanoTime();
-//		BoolExpr problemInstance = formNumericProblemInstance(matches);
-//		endformingProblem = System.nanoTime()-startformingProblem;
-//		//System.out.println("Forming problem: " + (endformingProblem - startformingProblem));
-//		s.add(problemInstance);
-//		long startSolvingProblem = System.nanoTime();
-//		if (s.check() == Status.SATISFIABLE) {
-//			Model m = s.getModel();
-//			endSolvingProblem = System.nanoTime()-startSolvingProblem;
-//			//System.out.println("Solving problem: " + (endSolvingProblem - startSolvingProblem));
-//			long startFormingSolution = System.nanoTime();
-//			for (PrimitiveElement o: objs) {
-//				if(varMap.containsKey(o)) {
-//					if (o instanceof IntegerElement) {
-//						IntExpr val =(IntExpr) m.evaluate(varMap.get(o), false);
-//						Integer oSol = Integer.parseInt(val.toString());
-//						sol.put(o, oSol);
-//					} else {
-//						RealExpr val = (RealExpr) m.evaluate(varMap.get(o), false);
-//						Double oSol = Double.parseDouble(val.toString());
-//						sol.put(o, oSol);
-//					}
-//					//System.out.println("Solution:" + o + "->" + oSol);
-//
-//				} else {
-//					//System.out.println("not used var:" + o);
-//				}
-//			}
-//			endFormingSolution = System.nanoTime()-startFormingSolution;
-//			//System.out.println("Forming solution: " + (endFormingSolution - startFormingSolution));
-//		} else {
-//			System.out.println("Unsatisfiable numerical problem");
-//		}
-//		this.ctx.close();
-//		return sol;
-		return null;
+
+		
+		Map<PrimitiveElement,Number> sol = new HashMap<PrimitiveElement, Number>();
+		//CREATE DREAL STM2 FILE at this.tempfile location
+		long startformingProblem = System.nanoTime();
+		String tempFileName = formNumericProblemInstance(matches);
+		endformingProblem = System.nanoTime()-startformingProblem;
+						
+		//CALL DREAL		
+		long startSolvingProblem = System.nanoTime();
+		Process outputProcess = callDreal(tempFileName, true);
+		List<List<String>> outputs = getProcessOutput(outputProcess);
+		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
+		endSolvingProblem = System.nanoTime()-startSolvingProblem;
+				
+		//GET SOLUTION
+		
+		if (result) {
+			long startFormingSolution = System.nanoTime();
+			Map<String, String> solMap = parseDrealOutput(outputs.get(0));
+			for (PrimitiveElement obj: objs) {
+				if(varMap.containsKey(obj)) {
+					if (obj instanceof IntegerElement) {
+						String varName = varMap.get(obj);
+						String value = solMap.get(varName);
+						sol.put(obj, Integer.parseInt(value));
+					} else {
+						String varName = varMap.get(obj);
+						String value = solMap.get(varName);
+						sol.put(obj, Integer.parseInt(value));
+					}
+
+				} else {
+//					System.out.println(("variable " + obj + " is not used from Dreal");
+				}
+			}
+			endFormingSolution = System.nanoTime() - startFormingSolution;
+		}
+		else {
+			System.out.println("Unsatisfiable numerical problem");
+		}		
+		return sol;
 	}
 	
 	public void teardown() throws IOException, InterruptedException {
