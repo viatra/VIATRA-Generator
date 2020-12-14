@@ -52,7 +52,7 @@ class NumericTranslator {
 	
 	def selectProblemSolver() {
 //		return new NumericProblemSolver
-		return new DrealProblemSolver
+		return new NumericDrealProblemSolver
 	}
 	
 	def delegateIsSatisfiable(Map<PConstraint, Iterable<Object[]>> matches) {
@@ -71,7 +71,7 @@ class NumericTranslator {
 		return solution
 	}
 	
-	private def updateTimes(DrealProblemSolver s) {
+	private def updateTimes(NumericDrealProblemSolver s) {
 		this.formingProblemTime += s.getEndformingProblem
 		this.solvingProblemTime += s.getEndSolvingProblem
 		this.formingSolutionTime += s.getEndFormingSolution
