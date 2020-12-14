@@ -163,6 +163,9 @@ class ViatraReasoner extends LogicReasoner {
 		}
 		val solverTime = System.nanoTime - solverStartTime
 		viatraConfig.progressMonitor.workedSearchFinished
+		
+		//dreal teardown
+		numericSolver.numericDrealSolver.teardown()
 
 		// additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
 		val statistics = createStatistics => [

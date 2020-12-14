@@ -68,6 +68,7 @@ class NumericSolver {
 	def getSolverFormingProblem(){this.t.formingProblemTime}
 	def getSolverSolvingProblem(){this.t.solvingProblemTime}
 	def getSolverSolution(){this.t.formingSolutionTime}
+	def getNumericDrealSolver(){this.t.drealSolver}
 	
 	def boolean maySatisfiable() {
 		if(intermediateConsistencyCheck) {

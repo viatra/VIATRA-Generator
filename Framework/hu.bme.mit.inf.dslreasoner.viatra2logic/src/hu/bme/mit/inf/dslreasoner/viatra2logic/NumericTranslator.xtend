@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XFeatureCall
 class NumericTranslator {
 	
 	private XExpressionExtractor extractor = new XExpressionExtractor();
+	private NumericDrealProblemSolver drealSolver = new NumericDrealProblemSolver();
 	
 	long formingProblemTime=0;
 	long solvingProblemTime=0;
@@ -52,7 +53,7 @@ class NumericTranslator {
 	
 	def NumericProblemSolver selectProblemSolver() {
 //		return new NumericProblemSolver
-		return new NumericDrealProblemSolver
+		return drealSolver;
 	}
 	
 	def delegateIsSatisfiable(Map<PConstraint, Iterable<Object[]>> matches) {
@@ -80,4 +81,5 @@ class NumericTranslator {
 	def getFormingProblemTime() {formingProblemTime}
 	def getSolvingProblemTime() {solvingProblemTime}
 	def getFormingSolutionTime() {formingSolutionTime}
+	def getDrealSolver(){return drealSolver}
 }

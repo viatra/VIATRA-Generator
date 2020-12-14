@@ -28,22 +28,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 
 
 public class NumericZ3ProblemSolver extends NumericProblemSolver{
-	private static final String N_Base = "org.eclipse.xtext.xbase.lib.";
-	private static final String N_PLUS = "operator_plus";
-	private static final String N_MINUS = "operator_minus";
-	private static final String N_POWER = "operator_power";
-	private static final String N_MULTIPLY = "operator_multiply";
-	private static final String N_DIVIDE = "operator_divide";
-	private static final String N_MODULO = "operator_modulo";
-	private static final String N_LESSTHAN = "operator_lessThan";
-	private static final String N_LESSEQUALSTHAN = "operator_lessEqualsThan";
-	private static final String N_GREATERTHAN = "operator_greaterThan";
-	private static final String N_GREATEREQUALTHAN = "operator_greaterEqualsThan";
-	private static final String N_EQUALS = "operator_equals";
-	private static final String N_NOTEQUALS = "operator_notEquals";
-	private static final String N_EQUALS3 = "operator_tripleEquals";
-	private static final String N_NOTEQUALS3 = "operator_tripleNotEquals";
-
 
 	private Context ctx;
 	private Solver s;
