@@ -50,7 +50,7 @@ class NumericTranslator {
 		return res
 	}
 	
-	def selectProblemSolver() {
+	def NumericProblemSolver selectProblemSolver() {
 //		return new NumericProblemSolver
 		return new NumericDrealProblemSolver
 	}
@@ -71,7 +71,7 @@ class NumericTranslator {
 		return solution
 	}
 	
-	private def updateTimes(NumericDrealProblemSolver s) {
+	private def updateTimes(NumericProblemSolver s) {
 		this.formingProblemTime += s.getEndformingProblem
 		this.solvingProblemTime += s.getEndSolvingProblem
 		this.formingSolutionTime += s.getEndFormingSolution
