@@ -12,7 +12,9 @@ generate {
 	
 	config = {
 		runtime = 10000,
-		log-level = normal
+		log-level = normal,
+		"numeric-solver" = "dreal",
+		"scopePropagator" = "typeHierarchy"
 	}
 	
 	runs = 1

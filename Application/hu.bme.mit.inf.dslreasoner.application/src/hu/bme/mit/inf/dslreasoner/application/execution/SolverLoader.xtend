@@ -29,6 +29,7 @@ import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.NumericSolverSelection
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {
@@ -138,6 +139,14 @@ class SolverLoader {
 				if (config.containsKey("fitness-objectCreationCosts")) {
 					val stringValue = config.get("fitness-objectCreationCosts")
 					c.calculateObjectCreationCosts = Boolean.parseBoolean(stringValue)
+				}
+				if (config.containsKey("numeric-solver")) {
+					val stringValue = config.get("numeric-solver")
+					c.numericSolverSelection = switch (stringValue) {
+						case "dreal": NumericSolverSelection.DREAL
+						case "z3": NumericSolverSelection.Z3
+						default: throw new IllegalArgumentException("Unknown numeric solver selection: " + stringValue)
+					}
 				}
 				if (config.containsKey("scopePropagator")) {
 					val stringValue = config.get("scopePropagator")

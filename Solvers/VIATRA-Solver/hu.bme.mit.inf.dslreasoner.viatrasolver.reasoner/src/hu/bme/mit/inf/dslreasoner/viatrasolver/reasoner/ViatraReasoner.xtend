@@ -38,6 +38,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer
 import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
+import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericDrealProblemSolver
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -109,7 +110,7 @@ class ViatraReasoner extends LogicReasoner {
 				new SolutionStore(numberOfRequiredSolutions)
 			}
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val numericSolver = new NumericSolver(method, viatraConfig.runIntermediateNumericalConsistencyChecks, false)
+		val numericSolver = new NumericSolver(method, viatraConfig, false)
 		val solutionSaver = method.solutionSaver
 		solutionSaver.numericSolver = numericSolver
 		val solutionCopier = solutionSaver.solutionCopier
@@ -165,7 +166,9 @@ class ViatraReasoner extends LogicReasoner {
 		viatraConfig.progressMonitor.workedSearchFinished
 		
 		//dreal teardown
-		numericSolver.numericDrealSolver.teardown()
+		if (viatraConfig.numericSolverSelection == NumericSolverSelection.DREAL){
+			(numericSolver.numericSolverSelection as NumericDrealProblemSolver).teardown()
+		}
 
 		// additionalMatches = strategy.solutionStoreWithCopy.additionalMatches
 		val statistics = createStatistics => [

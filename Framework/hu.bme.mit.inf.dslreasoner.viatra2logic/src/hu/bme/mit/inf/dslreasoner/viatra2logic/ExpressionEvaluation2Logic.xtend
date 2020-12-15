@@ -17,7 +17,8 @@ class ExpressionEvaluation2Logic {
 	var NumericProblemSolver _numericSolver = null //new NumericProblemSolver
 	def getNumericSolver() {
 		if(_numericSolver === null) {
-			_numericSolver = (new NumericTranslator).selectProblemSolver
+			// it seems like this getter has no use
+			_numericSolver = (new NumericTranslator(null)).selectProblemSolver
 		}
 		return _numericSolver
 	}

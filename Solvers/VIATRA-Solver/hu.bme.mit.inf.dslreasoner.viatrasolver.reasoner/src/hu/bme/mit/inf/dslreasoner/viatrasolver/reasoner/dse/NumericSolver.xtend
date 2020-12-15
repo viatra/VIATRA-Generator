@@ -1,6 +1,8 @@
 package hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse
 
+import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericDrealProblemSolver
 import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericTranslator
+import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericZ3ProblemSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.BooleanElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
@@ -8,6 +10,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.NumericSolverSelection
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 import java.math.BigDecimal
 import java.util.HashMap
 import java.util.LinkedHashMap
@@ -25,7 +29,7 @@ class NumericSolver {
 	var ThreadContext threadContext
 	val constraint2MustUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
 	val constraint2CurrentUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
-	NumericTranslator t = new NumericTranslator
+	NumericTranslator t
 	
 	val boolean intermediateConsistencyCheck
 	val boolean caching;
@@ -36,10 +40,16 @@ class NumericSolver {
 	var int numberOfSolverCalls = 0
 	var int numberOfCachedSolverCalls = 0
 	
-	new(ModelGenerationMethod method, boolean intermediateConsistencyCheck, boolean caching) {
+	new(ModelGenerationMethod method, ViatraReasonerConfiguration config, boolean caching) {
 		this.method = method
-		this.intermediateConsistencyCheck = intermediateConsistencyCheck
+		this.intermediateConsistencyCheck = config.runIntermediateNumericalConsistencyChecks
+		this.t = new NumericTranslator(createNumericTranslator(config.numericSolverSelection))
 		this.caching = caching
+	}
+	
+	def createNumericTranslator(NumericSolverSelection solverSelection) {
+		if (solverSelection == NumericSolverSelection.DREAL) return new NumericDrealProblemSolver
+		if (solverSelection == NumericSolverSelection.Z3) return new NumericZ3ProblemSolver
 	}
 	
 	def init(ThreadContext context) {
@@ -68,7 +78,7 @@ class NumericSolver {
 	def getSolverFormingProblem(){this.t.formingProblemTime}
 	def getSolverSolvingProblem(){this.t.solvingProblemTime}
 	def getSolverSolution(){this.t.formingSolutionTime}
-	def getNumericDrealSolver(){this.t.drealSolver}
+	def getNumericSolverSelection(){this.t.numericSolver}
 	
 	def boolean maySatisfiable() {
 		if(intermediateConsistencyCheck) {
