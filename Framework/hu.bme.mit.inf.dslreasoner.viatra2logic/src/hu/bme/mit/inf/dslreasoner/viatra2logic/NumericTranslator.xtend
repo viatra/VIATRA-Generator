@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.XFeatureCall
 class NumericTranslator {
 	
 	private XExpressionExtractor extractor = new XExpressionExtractor();
-	private NumericDrealProblemSolver drealSolver = new NumericDrealProblemSolver();
+	private NumericProblemSolver numericSolver;
 	
 	long formingProblemTime=0;
 	long solvingProblemTime=0;
@@ -28,6 +28,11 @@ class NumericTranslator {
 				o1.simpleName.compareTo(o2.simpleName)
 			}
 		}
+		
+	new(NumericProblemSolver numericProblemSolver){
+		this.numericSolver = numericProblemSolver
+	}
+	
 	def Map<JvmIdentifiableElement, PrimitiveElement> arrayToMap(Object[] tuple, ArrayList<JvmIdentifiableElement> variablesInOrder) {
 		val res = new HashMap
 		for(var i=0; i<tuple.length; i++) {
@@ -53,7 +58,9 @@ class NumericTranslator {
 	
 	def NumericProblemSolver selectProblemSolver() {
 //		return new NumericProblemSolver
-		return drealSolver;
+// 		add numeric solver decision procedure here
+		if (numericSolver instanceof NumericZ3ProblemSolver) return new NumericZ3ProblemSolver
+		return numericSolver;
 	}
 	
 	def delegateIsSatisfiable(Map<PConstraint, Iterable<Object[]>> matches) {
@@ -81,5 +88,5 @@ class NumericTranslator {
 	def getFormingProblemTime() {formingProblemTime}
 	def getSolvingProblemTime() {solvingProblemTime}
 	def getFormingSolutionTime() {formingSolutionTime}
-	def getDrealSolver(){return drealSolver}
+	def getNumericSolver(){numericSolver}
 }

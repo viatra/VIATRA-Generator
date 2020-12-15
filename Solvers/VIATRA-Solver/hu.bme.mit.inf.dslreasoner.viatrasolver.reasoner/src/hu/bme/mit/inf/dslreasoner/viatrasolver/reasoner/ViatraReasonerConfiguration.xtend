@@ -33,6 +33,11 @@ enum PunishSizeStrategy {
 	LARGER_IS_BETTER
 }
 
+enum NumericSolverSelection {
+	DREAL,
+	Z3
+}
+
 class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	// public var Iterable<PQuery> existingQueries
 	public var nameNewElements = false
@@ -70,6 +75,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
 	public var calculateObjectCreationCosts = false
+	public var numericSolverSelection = NumericSolverSelection.DREAL //currently defaulted to DREAL
 	
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
