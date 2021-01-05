@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Partnership_Record" separation_cause="DIVORCE" id9="">
+      <individual_A SSNo="" disability_type="E" expenses="  "/>
+      <individual_B SSNo="" disability_type="OTHER" expenses=" "/>
+      <individual_B xsi:type="TaxCardWithRoot:Resident_Tax_Payer" SSNo="" expenses="   ">
+        <from_agent expense=""/>
+        <incomes xsi:type="TaxCardWithRoot:Local_Income">
+          <income_type xsi:type="TaxCardWithRoot:Rentals_and_Leases_Income" id8="" is_periodic="false"/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+        </incomes>
+        <incomes xsi:type="TaxCardWithRoot:Foreign_Income">
+          <income_type xsi:type="TaxCardWithRoot:Agriculture_and_Forestry_Income" id8=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <expenses xsi:type="TaxCardWithRoot:Professional_Expense" expense_purpose="CHILD_CARE" from_agent="//@contains.0/@parents/@individual_B.1/@from_agent" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Spousal_Expense_AC" expense_purpose="HOUSE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Donation" expense_purpose="HOUSE_CARE" id4="" beneficiary="" beneficiary1=""/>
+          <expenses xsi:type="TaxCardWithRoot:Donation" expense_purpose="DEPENDENCE_CARE" id4="" beneficiary="" beneficiary1=""/>
+          <expenses xsi:type="TaxCardWithRoot:Special_Expense_DS" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Special_Expense_DS" expense_purpose="CHILD_CARE" id4=""/>
+          <expenses xsi:type="TaxCardWithRoot:Special_Expense_DS" expense_purpose="ALIMONY" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Travel_Expense_FD" expense_purpose="CHILD_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Travel_Expense_FD" expense_purpose="ALIMONY" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Interest_Expense" expense_purpose="HOUSE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Interest_Expense" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Professional_Expense" expense_purpose="HOUSE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Special_Expense_DS" expense_purpose="CHILD_CARE" id4="" beneficiary=""/>
+        </incomes>
+        <incomes xsi:type="TaxCardWithRoot:Foreign_Income">
+          <income_type xsi:type="TaxCardWithRoot:Agriculture_and_Forestry_Income" id8=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <expenses xsi:type="TaxCardWithRoot:Interest_Expense" expense_purpose="HOUSE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Interest_Expense" expense_purpose="ALIMONY" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Spousal_Expense_AC" expense_purpose="RECURRENT_DEPT" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Donation" id4="" beneficiary="" beneficiary1=""/>
+          <expenses xsi:type="TaxCardWithRoot:Miscellaneous_Expense_FO" expense_purpose="CHILD_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Loss_Carryforward" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Travel_Expense_FD" expense_purpose="RECURRENT_DEPT" id4=""/>
+          <expenses xsi:type="TaxCardWithRoot:Travel_Expense_FD" expense_purpose="DEPENDENCE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Special_Expense_DS" id4="" beneficiary=""/>
+        </incomes>
+        <incomes xsi:type="TaxCardWithRoot:Foreign_Income">
+          <income_type xsi:type="TaxCardWithRoot:Agriculture_and_Forestry_Income" id8=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <details id5=""/>
+          <expenses expense_purpose="DEPENDENCE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Spousal_Expense_AC" expense_purpose="HOUSE_CARE" id4="" beneficiary=""/>
+          <expenses xsi:type="TaxCardWithRoot:Travel_Expense_FD" expense_purpose="CHILD_CARE" id4=""/>
+        </incomes>
+        <from_law id=""/>
+      </individual_B>
+      <individual_B SSNo="" disability_type="A" expenses=" "/>
+      <individual_B SSNo="" expenses="  "/>
+      <individual_B SSNo="" disability_type="C" expenses="     "/>
+      <individual_B SSNo="" expenses=""/>
+      <individual_B SSNo="" disability_type="NONE" expenses=""/>
+      <individual_B SSNo="" disability_type="D"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>

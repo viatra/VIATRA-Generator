@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" separation_cause="DIVORCE" id9="">
+      <individual_A SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="OTHER" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="E" birth_month="1" birth_day="1"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Partnership_Record" start_year="1950" end_year="1951" id9="">
+      <individual_A SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="E" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="OTHER" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="NONE" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="OTHER" birth_month="1" birth_day="1"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" separation_cause="SEPARATION_BY_COURT" id9="">
+      <individual_A SSNo="" birth_year="1918" disability_type="NONE" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="D" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="OTHER" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="B" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="D" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="E" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="B" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="D" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="OTHER" birth_month="1" birth_day="1"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Partnership_Record" start_year="1950" end_year="1951" id9="">
+      <individual_A SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="B" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" start_year="1950" end_year="1951" separation_cause="SEPARATION_BY_COURT" id9="">
+      <individual_A SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="D" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="NONE" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="E" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="C" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="B" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="B" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="D" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="B" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="D" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="OTHER" birth_month="1" birth_day="1"/>
+      <individual_B SSNo="" birth_year="1918" disability_type="A" birth_month="1" birth_day="1"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>

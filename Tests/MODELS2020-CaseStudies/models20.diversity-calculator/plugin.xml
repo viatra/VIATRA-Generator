@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated familytree -->
+      <package
+            uri="http://www.example.org/familytree"
+            class="familytree.FamilytreePackage"
+            genModel="model/familytree.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated satellite -->
+      <package
+            uri="http://www.example.org/satellite"
+            class="satellite.SatellitePackage"
+            genModel="model/satellite.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TaxationWithRoot -->
+      <package
+            uri="http:///TaxCardWithRoot.ecore"
+            class="TaxationWithRoot.TaxationWithRootPackage"
+            genModel="model/TaxationWithRoot.genmodel"/>
+   </extension>
+
+</plugin>
