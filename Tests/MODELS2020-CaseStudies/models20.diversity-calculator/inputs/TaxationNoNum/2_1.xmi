@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ASCII"?>
+<TaxCardWithRoot:Resource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TaxCardWithRoot="http:///TaxCardWithRoot.ecore" xsi:schemaLocation="http:///TaxCardWithRoot.ecore ../case.study.pledge.model/model/TaxationWithRoot.ecore">
+  <contains id1="">
+    <parents xsi:type="TaxCardWithRoot:Marriage_Record" separation_cause="DIVORCE" id9="">
+      <individual_A SSNo=""/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="B"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="B"/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo=""/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="A"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="C"/>
+      <individual_B SSNo=""/>
+      <individual_B SSNo="" disability_type="B"/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo=""/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="C"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="B"/>
+      <individual_B SSNo=""/>
+      <individual_B SSNo="" disability_type="NONE"/>
+      <individual_B SSNo="" disability_type="C"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo=""/>
+      <individual_B SSNo="" disability_type="NONE"/>
+      <individual_B SSNo="" disability_type="B"/>
+      <individual_B SSNo="" disability_type="NONE"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="E"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="D"/>
+      <individual_B SSNo="" disability_type="B"/>
+      <individual_B SSNo=""/>
+      <individual_B SSNo="" disability_type="A"/>
+      <individual_B SSNo="" disability_type="OTHER"/>
+      <individual_B SSNo="" disability_type="C"/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+      <properties id10=""/>
+    </parents>
+  </contains>
+</TaxCardWithRoot:Resource>

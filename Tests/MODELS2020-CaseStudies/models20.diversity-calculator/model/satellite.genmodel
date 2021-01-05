@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/models20.diversity-calculator/src" modelPluginID="models20.diversity-calculator"
+    modelName="Satellite" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>satellite.ecore</foreignModel>
+  <genPackages prefix="Satellite" disposableProviderFactory="true" ecorePackage="satellite.ecore#/">
+    <genClasses image="false" ecoreClass="satellite.ecore#//ConstellationMission">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//ConstellationMission/groundStationNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//ConstellationMission/spacecraft"/>
+    </genClasses>
+    <genClasses ecoreClass="satellite.ecore#//InterferometryMission">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//InterferometryMission/observationTime"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="satellite.ecore#//CommunicatingElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//CommunicatingElement/commSubsystem"/>
+    </genClasses>
+    <genClasses ecoreClass="satellite.ecore#//GroundStationNetwork"/>
+    <genClasses image="false" ecoreClass="satellite.ecore#//Spacecraft">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference satellite.ecore#//Spacecraft/payload"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="satellite.ecore#//CommSubsystem">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference satellite.ecore#//CommSubsystem/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/frequency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute satellite.ecore#//CommSubsystem/pathLength"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="satellite.ecore#//Payload"/>
+    <genClasses ecoreClass="satellite.ecore#//InterferometryPayload"/>
+    <genClasses ecoreClass="satellite.ecore#//CubeSat3U"/>
+    <genClasses ecoreClass="satellite.ecore#//CubeSat6U"/>
+    <genClasses ecoreClass="satellite.ecore#//SmallSat"/>
+    <genClasses image="false" ecoreClass="satellite.ecore#//CubeSat"/>
+    <genClasses ecoreClass="satellite.ecore#//UHFCommSubsystem"/>
+    <genClasses ecoreClass="satellite.ecore#//XCommSubsystem"/>
+    <genClasses ecoreClass="satellite.ecore#//KaCommSubsystem"/>
+  </genPackages>
+</genmodel:GenModel>
