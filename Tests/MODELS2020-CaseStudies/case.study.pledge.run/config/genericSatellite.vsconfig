@@ -12,7 +12,8 @@ generate {
 
 	config = {
 		runtime = 10000,
-		log-level = normal
+		log-level = normal,
+		"scopePropagator" = "typeHierarchy"
 	}
 
 	runs = 1

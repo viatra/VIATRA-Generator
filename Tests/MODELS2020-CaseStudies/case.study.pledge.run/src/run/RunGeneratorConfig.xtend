@@ -38,6 +38,7 @@ class RunGeneratorConfig {
 	static var MODELS = 10
 	static var RUNTIME = 1500
 	static var NUM_SOLVER = "z3"
+	static var SCOPE_PROPAGATOR = "typeHierarchy"
 
 	static var DOMAIN = "FamilyTree" // "FamilyTree", "Satellite", "Taxation"
 	static val QUERIES = true
@@ -69,6 +70,9 @@ class RunGeneratorConfig {
 		
 		val ns = new Option("ns", "numericSolver", true, "what numeric solver to use")
 		options.addOption(ns)
+		
+		val sp = new Option("sp", "scopePropagator", true, "scope Propagator")
+		options.addOption(sp)
 
 		val d = new Option("d", "domain", true, "domain")
 		options.addOption(d)
@@ -100,6 +104,8 @@ class RunGeneratorConfig {
 		if(rtIn !== null) RUNTIME = Integer.parseInt(rtIn)
 		val nsIn = cmd.getOptionValue("numericSolver")
 		if(nsIn !== null && nsIn.equals("dreal")) NUM_SOLVER = "dreal"
+		val spIn = cmd.getOptionValue("scopePropagator")
+		if(spIn !== null ) SCOPE_PROPAGATOR = spIn
 		val dIn = cmd.getOptionValue("domain")
 		if(dIn !== null) DOMAIN = dIn
 		val hhIn = cmd.getOptionValue("household")
@@ -118,11 +124,20 @@ class RunGeneratorConfig {
 		// /////////////////////////
 		// BEGIN RUN
 		println(
-			"<<DOMAIN: " + DOMAIN + ", NumSolver=" + NUM_SOLVER + ", SIZE=" + SIZE_LB + "to" + SIZE_UB + ", Runs=" + RUNS + ", ModelsPerRun=" +
-				MODELS + ", Runtime=" + RUNTIME + ">>")
+			"<<DOMAIN: " + DOMAIN + 
+			", NumSolver=" + NUM_SOLVER + 
+			", scopeProp=" + SCOPE_PROPAGATOR +
+			", SIZE=" + SIZE_LB + "to" + SIZE_UB + 
+			", Runs=" + RUNS + 
+			", ModelsPerRun=" + MODELS + 
+			", Runtime=" + RUNTIME + ">>")
 		if (isTaxation) println("<<Households: " + HOUSEHOLD + ">>")
 
-		var naming = DOMAIN + "/size" + toStr(SIZE_LB) + "to" + toStr(SIZE_UB) + "r" + RUNS + "n" + MODELS + "rt" + RUNTIME
+		var naming = DOMAIN + "/size" + toStr(SIZE_LB) + "to" + toStr(SIZE_UB) +
+					"r" + RUNS + 
+					"n" + MODELS + 
+					"rt" + RUNTIME +
+					"ns" + NUM_SOLVER
 		if (isTaxation) naming = naming + "hh" + HOUSEHOLD
 		val outputPath = "measurements/" + "models/" + naming + "_" + formattedDate
 		val debugPath = "measurements/" + "debug/" + naming + "_" + formattedDate
@@ -188,6 +203,8 @@ class RunGeneratorConfig {
 		runtimeEntry.millisecLimit = RUNTIME
 		val numSolverEntry = configScope.entries.get(1) as CustomEntry
 		numSolverEntry.value = NUM_SOLVER
+		val scopePropEntry = configScope.entries.get(2) as CustomEntry
+		scopePropEntry.value = SCOPE_PROPAGATOR
 
 		// Output locations
 		val debug = genTask.debugFolder as FileSpecification

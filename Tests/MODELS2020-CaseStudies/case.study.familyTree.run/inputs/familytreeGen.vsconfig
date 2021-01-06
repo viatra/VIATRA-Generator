@@ -1,5 +1,5 @@
 import epackage	"inputs/familytree.ecore"
-import viatra	"src/queries/familyTreeConstraints.vql"
+import viatra	"queries/familyTreeConstraints.vql"
 
 generate {
 	metamodel = { package familytree }
