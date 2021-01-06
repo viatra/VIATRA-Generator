@@ -25,6 +25,9 @@ import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 import org.apache.commons.cli.ParseException
 import org.eclipse.core.runtime.NullProgressMonitor
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ConfigEntry
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl.ConfigEntryImpl
+import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CustomEntry
 
 class RunGeneratorConfig {
 	static var SIZE_LB = 20
@@ -34,6 +37,7 @@ class RunGeneratorConfig {
 	static var RUNS = 10
 	static var MODELS = 10
 	static var RUNTIME = 1500
+	static var NUM_SOLVER = "z3"
 
 	static var DOMAIN = "FamilyTree" // "FamilyTree", "Satellite", "Taxation"
 	static val QUERIES = true
@@ -62,6 +66,9 @@ class RunGeneratorConfig {
 
 		val rt = new Option("rt", "runtime", true, "runtime limit")
 		options.addOption(rt)
+		
+		val ns = new Option("ns", "numericSolver", true, "what numeric solver to use")
+		options.addOption(ns)
 
 		val d = new Option("d", "domain", true, "domain")
 		options.addOption(d)
@@ -91,6 +98,8 @@ class RunGeneratorConfig {
 		if(nmIn !== null) MODELS = Integer.parseInt(nmIn)
 		val rtIn = cmd.getOptionValue("runtime")
 		if(rtIn !== null) RUNTIME = Integer.parseInt(rtIn)
+		val nsIn = cmd.getOptionValue("numericSolver")
+		if(nsIn !== null && nsIn.equals("dreal")) NUM_SOLVER = "dreal"
 		val dIn = cmd.getOptionValue("domain")
 		if(dIn !== null) DOMAIN = dIn
 		val hhIn = cmd.getOptionValue("household")
@@ -109,7 +118,7 @@ class RunGeneratorConfig {
 		// /////////////////////////
 		// BEGIN RUN
 		println(
-			"<<DOMAIN: " + DOMAIN + ", SIZE=" + SIZE_LB + "to" + SIZE_UB + ", Runs=" + RUNS + ", ModelsPerRun=" +
+			"<<DOMAIN: " + DOMAIN + ", NumSolver=" + NUM_SOLVER + ", SIZE=" + SIZE_LB + "to" + SIZE_UB + ", Runs=" + RUNS + ", ModelsPerRun=" +
 				MODELS + ", Runtime=" + RUNTIME + ">>")
 		if (isTaxation) println("<<Households: " + HOUSEHOLD + ">>")
 
@@ -173,10 +182,12 @@ class RunGeneratorConfig {
 			}
 		}
 //		workspace.writeModel(config, '''x.xmi''')
-		// Runtime
+		// Config
 		val configScope = genTask.config as ConfigSpecification
 		val runtimeEntry = configScope.entries.get(0) as RuntimeEntry
 		runtimeEntry.millisecLimit = RUNTIME
+		val numSolverEntry = configScope.entries.get(1) as CustomEntry
+		numSolverEntry.value = NUM_SOLVER
 
 		// Output locations
 		val debug = genTask.debugFolder as FileSpecification

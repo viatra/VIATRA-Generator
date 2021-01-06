@@ -74,7 +74,10 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 						containerName,
 						"dreal"));
 		if (getModel) {drealCmd.add("--model");}
-		drealCmd.add("mnt/" + tempFileName);
+		String tmpFileLoc = "mnt/" + tempFileName;
+		//REMOVE LINE BELOW IF USING WINDOWS
+		tmpFileLoc = "../" + tmpFileLoc;//ONLY IF USING LINUX
+		drealCmd.add(tmpFileLoc);		
 		return runProcess(drealCmd);
 	}
 	
@@ -288,7 +291,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//DEBUG - Print things
 //		printFileContent(System.getProperty("java.io.tmpdir") + tempFileName);
 //		printOutput(outputs.get(0));
-		System.out.println(result);
+//		System.out.println(result);
 		//END DEBUG
 		
 		return result;

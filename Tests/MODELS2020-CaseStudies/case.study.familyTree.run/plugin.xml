@@ -5,6 +5,7 @@
       <query-specification fqn="queries.twoMembersHaveNoParent"/>
       <query-specification fqn="queries.memberHasParent"/>
       <query-specification fqn="queries.negativeAge"/>
+      <query-specification fqn="queries.realisticAge"/>
       <query-specification fqn="queries.parentTooYoung"/>
     </group>
   </extension>

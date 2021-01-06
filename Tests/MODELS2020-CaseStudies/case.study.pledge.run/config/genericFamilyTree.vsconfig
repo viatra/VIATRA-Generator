@@ -33,6 +33,7 @@ generate {
 	
 	config = {
 		runtime = 10000,
+		"numeric-solver" = "z3",
 		log-level = normal,
 		"fitness-punishSize" = "false",
 		"fitness-scope" = "3"
