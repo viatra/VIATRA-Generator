@@ -6,7 +6,7 @@ generate {
 	constraints = { package queries}
 	solver = ViatraSolver
 	scope = {
-		#node = 6..15,
+		#node = 10..30,
 		#int = {}
 	}
 	
@@ -20,6 +20,7 @@ generate {
 	runs = 1
 	
 	debug =			"outputs/debug"
-	log =			"outputs/log.txt"
-	output =		"outputs/models"
+	log =			"outputs/debug/log.txt"
+	output =		"outputs/models"	
+	statistics =	"outputs/statistics.csv"
 }

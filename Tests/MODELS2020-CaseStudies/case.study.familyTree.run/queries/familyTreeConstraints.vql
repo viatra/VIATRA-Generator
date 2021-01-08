@@ -26,11 +26,11 @@ pattern negativeAge(m: Member) {
 	check(mage<0);
 }
 
-@Constraint(message="realisticAge", severity="error",key={m})
-pattern realisticAge(m: Member) {
-	Member.age(m,mage);
-	check(mage>120);
-}
+//@Constraint(message="realisticAge", severity="error",key={m})
+//pattern realisticAge(m: Member) {
+//	Member.age(m,mage);
+//	check(mage>120);
+//}
 
 @Constraint(message="parentTooYoung", severity="error", key={c, p})
 pattern parentTooYoung(c: Member, p: Member) = {

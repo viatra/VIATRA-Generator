@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -35,7 +36,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 
 	private final String containerName;
 	private Map<Object, String> varMap;
-	private List<String> curVars;
+	private Map<String, String> curVar2Decl;
 
 	public NumericDrealProblemSolver() throws IOException, InterruptedException {		
 		//setup docker
@@ -64,6 +65,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//TODO timeout if needed
 		if (!p.waitFor(5, TimeUnit.SECONDS)) {
 			p.destroy();
+			System.err.println("TIMEOUT");
 		}
 		return p;
 	}
@@ -171,11 +173,11 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				varMap.put(matchedObj, expr);
 			}
 			//Add variable declarations
-			if(! curVars.contains(expr)) {
+			if(! curVar2Decl.keySet().contains(expr)) {
 				String varDecl = "(declare-fun " + expr + " () ";
 				if (isInt) {varDecl += "Int)";}
 				else {varDecl += "Real)";}
-				curVars.add(varDecl);
+				curVar2Decl.put(expr, varDecl);
 			}
 		} 
 		// Constants
@@ -227,7 +229,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		String tempFileName = tempFile.getName();
 		
 		//STM2 FILE CONTENT CREATION
-		curVars = new ArrayList<String>();
+		curVar2Decl = new HashMap<String, String>();
 		List<String> curConstraints = new ArrayList<String>();
 		
 		PrintWriter printer = new PrintWriter(tempFile);
@@ -242,7 +244,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			}
 		}
 		//Add Content to SMT2 file
-		for (String varDecl : curVars) {printer.println(varDecl);}
+		for (String varDecl : curVar2Decl.values()) {printer.println(varDecl);}
 		for (String negAssert : curConstraints) {printer.println(negAssert);}
 		printer.println("(check-sat)");
 		printer.close();
