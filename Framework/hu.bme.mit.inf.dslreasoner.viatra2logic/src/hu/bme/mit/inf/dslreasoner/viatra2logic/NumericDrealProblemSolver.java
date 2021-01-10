@@ -35,6 +35,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 public class NumericDrealProblemSolver extends NumericProblemSolver{
 
 	private final String containerName;
+	private final String smtFileName = "tmp/smt.smt2";
 	private Map<Object, String> varMap;
 	private Map<String, String> curVar2Decl;
 
@@ -48,8 +49,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				Arrays.asList("docker", "run", 
 						"-id", "--rm", 
 						"--name", containerName, 
-//						"-p", "8080:80", 
-						"-v", tempDir + ":/mnt",
+//						"-p", "8080:80",
 						"dreal/dreal4"));
 		runProcess(startDocker);		
 		
@@ -58,28 +58,31 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	}
 	
 	private Process runProcess(List<String> cmd) throws IOException, InterruptedException {
-//		println(cmd)
-		ProcessBuilder pb = new ProcessBuilder(cmd);
-		Process p = pb.start();
+		String s = String.join(" ", cmd);
+		Process p = Runtime.getRuntime().exec(s);
 //		p.waitFor();
 		//TODO timeout if needed
 		if (!p.waitFor(5, TimeUnit.SECONDS)) {
 			p.destroy();
-			System.err.println("TIMEOUT");
+			System.err.println("TIMEOUT"); //DEBUG
 		}
 		return p;
 	}
 	
-	private Process callDreal(String tempFileName, boolean getModel) throws IOException, InterruptedException {
-		List<String> drealCmd = new ArrayList<String>(
-				Arrays.asList("docker", "exec", 
-						containerName,
+	private Process callDreal(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
+		String numProbContentStr = String.join("\\n", numProbContents);
+		List<String> drealCmd = new ArrayList<String>(Arrays.asList(
+						"docker", "exec", containerName,
+						"bash", "-c",
+						"\""+  "printf", 
+						"\'" + numProbContentStr + "\'",
+						">",
+						smtFileName,
+						"&&",
 						"dreal"));
 		if (getModel) {drealCmd.add("--model");}
-		String tmpFileLoc = "mnt/" + tempFileName;
-		//REMOVE LINE BELOW IF USING WINDOWS
-		tmpFileLoc = "../" + tmpFileLoc;//ONLY IF USING LINUX
-		drealCmd.add(tmpFileLoc);		
+		drealCmd.add(smtFileName + "\"");	
+		
 		return runProcess(drealCmd);
 	}
 	
@@ -223,18 +226,16 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		return name.startsWith(N_Base) && name.endsWith(end);
 	}
 
-	private String formNumericProblemInstance(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
-		//CREATE SMT2 TEMP FILE
-		File tempFile = File.createTempFile("smt", ".smt2");
-		String tempFileName = tempFile.getName();
+	private List<String> formNumericProblemInstance(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
 		
 		//STM2 FILE CONTENT CREATION
 		curVar2Decl = new HashMap<String, String>();
 		List<String> curConstraints = new ArrayList<String>();
 		
-		PrintWriter printer = new PrintWriter(tempFile);
-		printer.println(";Header comment");
-		printer.println("(set-logic QF_NRA)");
+		List<String> contents = new ArrayList<String>();
+		contents.add(";Header comment");
+		contents.add("(set-logic QF_NRA)");
+		//For loop below also populates carVar2Decl
 		for (XExpression e: matches.keySet()) {
 			Iterable<Map<JvmIdentifiableElement, PrimitiveElement>> matchSets = matches.get(e);
 			for (Map<JvmIdentifiableElement, PrimitiveElement> aMatch: matchSets) {
@@ -243,12 +244,11 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				curConstraints.add(negAssert);
 			}
 		}
-		//Add Content to SMT2 file
-		for (String varDecl : curVar2Decl.values()) {printer.println(varDecl);}
-		for (String negAssert : curConstraints) {printer.println(negAssert);}
-		printer.println("(check-sat)");
-		printer.close();
-		return tempFileName;
+		//Add content to file
+		contents.addAll(curVar2Decl.values());
+		contents.addAll(curConstraints);
+		contents.add("(check-sat)");
+		return contents;
 	}
 	
 	@SuppressWarnings("unused")
@@ -278,20 +278,20 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	}
 	
 	public boolean isSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
-		//CREATE DREAL STM2 FILE at this.tempfile location
+		//CREATE DREAL STM2 FILE CONTENTS
 		long startformingProblem = System.nanoTime();
-		String tempFileName = formNumericProblemInstance(matches);
+		List<String> numProbContent = formNumericProblemInstance(matches);
 		endformingProblem = System.nanoTime()-startformingProblem;
 				
-		//CALL DREAL		
+		//CALL DREAL
 		long startSolvingProblem = System.nanoTime();
-		Process outputProcess = callDreal(tempFileName, false);
+		Process outputProcess = callDreal(numProbContent, false);
 		List<List<String>> outputs = getProcessOutput(outputProcess);
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
 		//DEBUG - Print things
-//		printFileContent(System.getProperty("java.io.tmpdir") + tempFileName);
+//		printOutput(numProbContent);
 //		printOutput(outputs.get(0));
 //		System.out.println(result);
 		//END DEBUG
@@ -318,22 +318,26 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 
 	public Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {		
 
-		
 		Map<PrimitiveElement,Number> sol = new HashMap<PrimitiveElement, Number>();
 		//CREATE DREAL STM2 FILE at this.tempfile location
 		long startformingProblem = System.nanoTime();
-		String tempFileName = formNumericProblemInstance(matches);
+		List<String> numProbContent = formNumericProblemInstance(matches);
 		endformingProblem = System.nanoTime()-startformingProblem;
 						
-		//CALL DREAL		
+		//CALL DREAL
 		long startSolvingProblem = System.nanoTime();
-		Process outputProcess = callDreal(tempFileName, true);
+		Process outputProcess = callDreal(numProbContent, true);
 		List<List<String>> outputs = getProcessOutput(outputProcess);
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
-				
-		//GET SOLUTION
 		
+		//DEBUG - Print things
+//		printOutput(numProbContent);
+//		printOutput(outputs.get(0));
+//		System.out.println(result);
+		//END DEBUG
+				
+		//GET SOLUTION		
 		if (result) {
 			long startFormingSolution = System.nanoTime();
 			Map<String, String> solMap = parseDrealOutput(outputs.get(0));
