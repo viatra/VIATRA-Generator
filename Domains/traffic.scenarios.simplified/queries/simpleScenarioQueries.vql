@@ -1,0 +1,78 @@
+package queries
+
+import "http://www.example.com/simpleScenario"
+
+
+//lanes and lane+widths are in simpleScenarioBoundingBox
+
+// actor coords within simpleScenarioBoundingBox
+
+//@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
+//pattern actorOnVerticalLane(a : Actor) {
+//    Actor.placedOn(a, l);
+//    Lane.orientation(l, Orientation::Vertical);
+//    Actor.xPos(a, x);
+//    Lane.referenceCoord(l, r);
+//    check(x <= r);
+//} or {
+//    Actor.placedOn(a, l);
+//    Lane.orientation(l, Orientation::Vertical);
+//    Actor.xPos(a, x);
+//    Lane.referenceCoord(l, r);
+//    Lane.widthNum(l, w);
+//    check(x >= (r + w));
+//}
+//
+//@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for horizontal lanes")
+//pattern actorOnHorizontalLane(a : Actor) {
+//    Actor.placedOn(a, l);
+//    Lane.orientation(l, Orientation::Horizontal);
+//    Actor.yPos(a, y);
+//    Lane.referenceCoord(l, r);
+//    check(y <= r);
+//} or {
+//    Actor.placedOn(a, l);
+//    Lane.orientation(l, Orientation::Horizontal);
+//    Actor.yPos(a, y);
+//    Lane.referenceCoord(l, r);
+//    Lane.widthNum(l, w);
+//    check(y >= (r + w));
+//}
+
+@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation")
+pattern actorOnLane(a : Actor) {
+	find actorOnVerticalLane(a);
+//	neg find actorOnHorizontalLane(a);
+}
+
+private pattern actorOnVerticalLane(a : Actor) {
+    Actor.placedOn(a, l);
+    Lane.orientation(l, Orientation::Vertical);
+    Actor.xPos(a, x);
+    Lane.referenceCoord(l, r);
+    Lane.widthNum(l, w);
+    check(x >= r);
+    check(x <= (r + w));
+}
+
+@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
+pattern widthSpec(l : Lane) {
+	Lane.widthNum(l, w);
+	check(w != 5);
+}
+
+@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
+pattern refSpec(l : Lane) {
+	Lane.referenceCoord(l, w);
+	check(w != 2);
+}
+
+private pattern actorOnHorizontalLane(a : Actor) {
+    Actor.placedOn(a, l);
+    Lane.orientation(l, Orientation::Vertical);
+    Actor.yPos(a, y);
+    Lane.referenceCoord(l, r);
+    Lane.widthNum(l, w);
+    check(y >= r);
+    check(y <= (r + w));
+}

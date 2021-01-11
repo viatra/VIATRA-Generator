@@ -1,0 +1,446 @@
+/**
+ */
+package simpleScenario.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import simpleScenario.Actor;
+import simpleScenario.Lane;
+import simpleScenario.Orientation;
+import simpleScenario.SimpleScenarioPackage;
+import simpleScenario.Size;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Lane</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * </p>
+ * <ul>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getOrientation <em>Orientation</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getWidth <em>Width</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getReferenceCoord <em>Reference Coord</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getAdjacent <em>Adjacent</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getActors <em>Actors</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getWidthNum <em>Width Num</em>}</li>
+ * </ul>
+ *
+ * @generated
+ */
+public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
+	/**
+	 * The default value of the '{@link #getOrientation() <em>Orientation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrientation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Orientation ORIENTATION_EDEFAULT = Orientation.VERTICAL;
+
+	/**
+	 * The cached value of the '{@link #getOrientation() <em>Orientation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrientation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Orientation orientation = ORIENTATION_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Size WIDTH_EDEFAULT = Size.SMALL;
+
+	/**
+	 * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidth()
+	 * @generated
+	 * @ordered
+	 */
+	protected Size width = WIDTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getReferenceCoord() <em>Reference Coord</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferenceCoord()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double REFERENCE_COORD_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getReferenceCoord() <em>Reference Coord</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferenceCoord()
+	 * @generated
+	 * @ordered
+	 */
+	protected double referenceCoord = REFERENCE_COORD_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAdjacent() <em>Adjacent</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdjacent()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Lane> adjacent;
+
+	/**
+	 * The cached value of the '{@link #getActors() <em>Actors</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Actor> actors;
+
+	/**
+	 * The default value of the '{@link #getWidthNum() <em>Width Num</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidthNum()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double WIDTH_NUM_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getWidthNum() <em>Width Num</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWidthNum()
+	 * @generated
+	 * @ordered
+	 */
+	protected double widthNum = WIDTH_NUM_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LaneImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return SimpleScenarioPackage.Literals.LANE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOrientation(Orientation newOrientation) {
+		Orientation oldOrientation = orientation;
+		orientation = newOrientation == null ? ORIENTATION_EDEFAULT : newOrientation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__ORIENTATION, oldOrientation, orientation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Size getWidth() {
+		return width;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setWidth(Size newWidth) {
+		Size oldWidth = width;
+		width = newWidth == null ? WIDTH_EDEFAULT : newWidth;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__WIDTH, oldWidth, width));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public double getReferenceCoord() {
+		return referenceCoord;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReferenceCoord(double newReferenceCoord) {
+		double oldReferenceCoord = referenceCoord;
+		referenceCoord = newReferenceCoord;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__REFERENCE_COORD, oldReferenceCoord, referenceCoord));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Lane> getAdjacent() {
+		if (adjacent == null) {
+			adjacent = new EObjectResolvingEList<Lane>(Lane.class, this, SimpleScenarioPackage.LANE__ADJACENT);
+		}
+		return adjacent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Actor> getActors() {
+		if (actors == null) {
+			actors = new EObjectWithInverseResolvingEList<Actor>(Actor.class, this, SimpleScenarioPackage.LANE__ACTORS, SimpleScenarioPackage.ACTOR__PLACED_ON);
+		}
+		return actors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public double getWidthNum() {
+		return widthNum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setWidthNum(double newWidthNum) {
+		double oldWidthNum = widthNum;
+		widthNum = newWidthNum;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__WIDTH_NUM, oldWidthNum, widthNum));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SimpleScenarioPackage.LANE__ACTORS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getActors()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SimpleScenarioPackage.LANE__ACTORS:
+				return ((InternalEList<?>)getActors()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case SimpleScenarioPackage.LANE__ORIENTATION:
+				return getOrientation();
+			case SimpleScenarioPackage.LANE__WIDTH:
+				return getWidth();
+			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
+				return getReferenceCoord();
+			case SimpleScenarioPackage.LANE__ADJACENT:
+				return getAdjacent();
+			case SimpleScenarioPackage.LANE__ACTORS:
+				return getActors();
+			case SimpleScenarioPackage.LANE__WIDTH_NUM:
+				return getWidthNum();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case SimpleScenarioPackage.LANE__ORIENTATION:
+				setOrientation((Orientation)newValue);
+				return;
+			case SimpleScenarioPackage.LANE__WIDTH:
+				setWidth((Size)newValue);
+				return;
+			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
+				setReferenceCoord((Double)newValue);
+				return;
+			case SimpleScenarioPackage.LANE__ADJACENT:
+				getAdjacent().clear();
+				getAdjacent().addAll((Collection<? extends Lane>)newValue);
+				return;
+			case SimpleScenarioPackage.LANE__ACTORS:
+				getActors().clear();
+				getActors().addAll((Collection<? extends Actor>)newValue);
+				return;
+			case SimpleScenarioPackage.LANE__WIDTH_NUM:
+				setWidthNum((Double)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case SimpleScenarioPackage.LANE__ORIENTATION:
+				setOrientation(ORIENTATION_EDEFAULT);
+				return;
+			case SimpleScenarioPackage.LANE__WIDTH:
+				setWidth(WIDTH_EDEFAULT);
+				return;
+			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
+				setReferenceCoord(REFERENCE_COORD_EDEFAULT);
+				return;
+			case SimpleScenarioPackage.LANE__ADJACENT:
+				getAdjacent().clear();
+				return;
+			case SimpleScenarioPackage.LANE__ACTORS:
+				getActors().clear();
+				return;
+			case SimpleScenarioPackage.LANE__WIDTH_NUM:
+				setWidthNum(WIDTH_NUM_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case SimpleScenarioPackage.LANE__ORIENTATION:
+				return orientation != ORIENTATION_EDEFAULT;
+			case SimpleScenarioPackage.LANE__WIDTH:
+				return width != WIDTH_EDEFAULT;
+			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
+				return referenceCoord != REFERENCE_COORD_EDEFAULT;
+			case SimpleScenarioPackage.LANE__ADJACENT:
+				return adjacent != null && !adjacent.isEmpty();
+			case SimpleScenarioPackage.LANE__ACTORS:
+				return actors != null && !actors.isEmpty();
+			case SimpleScenarioPackage.LANE__WIDTH_NUM:
+				return widthNum != WIDTH_NUM_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (orientation: ");
+		result.append(orientation);
+		result.append(", width: ");
+		result.append(width);
+		result.append(", referenceCoord: ");
+		result.append(referenceCoord);
+		result.append(", widthNum: ");
+		result.append(widthNum);
+		result.append(')');
+		return result.toString();
+	}
+
+} //LaneImpl
