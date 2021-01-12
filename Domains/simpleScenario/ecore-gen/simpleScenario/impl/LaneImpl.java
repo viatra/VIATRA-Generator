@@ -38,7 +38,7 @@ import simpleScenario.Size;
  *   <li>{@link simpleScenario.impl.LaneImpl#getReferenceCoord <em>Reference Coord</em>}</li>
  *   <li>{@link simpleScenario.impl.LaneImpl#getAdjacent <em>Adjacent</em>}</li>
  *   <li>{@link simpleScenario.impl.LaneImpl#getActors <em>Actors</em>}</li>
- *   <li>{@link simpleScenario.impl.LaneImpl#getWidthNum <em>Width Num</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getNumWidth <em>Num Width</em>}</li>
  * </ul>
  *
  * @generated
@@ -125,24 +125,24 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	protected EList<Actor> actors;
 
 	/**
-	 * The default value of the '{@link #getWidthNum() <em>Width Num</em>}' attribute.
+	 * The default value of the '{@link #getNumWidth() <em>Num Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWidthNum()
+	 * @see #getNumWidth()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double WIDTH_NUM_EDEFAULT = 0.0;
+	protected static final double NUM_WIDTH_EDEFAULT = 0.0;
 
 	/**
-	 * The cached value of the '{@link #getWidthNum() <em>Width Num</em>}' attribute.
+	 * The cached value of the '{@link #getNumWidth() <em>Num Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWidthNum()
+	 * @see #getNumWidth()
 	 * @generated
 	 * @ordered
 	 */
-	protected double widthNum = WIDTH_NUM_EDEFAULT;
+	protected double numWidth = NUM_WIDTH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -264,8 +264,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	 * @generated
 	 */
 	@Override
-	public double getWidthNum() {
-		return widthNum;
+	public double getNumWidth() {
+		return numWidth;
 	}
 
 	/**
@@ -274,11 +274,11 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	 * @generated
 	 */
 	@Override
-	public void setWidthNum(double newWidthNum) {
-		double oldWidthNum = widthNum;
-		widthNum = newWidthNum;
+	public void setNumWidth(double newNumWidth) {
+		double oldNumWidth = numWidth;
+		numWidth = newNumWidth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__WIDTH_NUM, oldWidthNum, widthNum));
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__NUM_WIDTH, oldNumWidth, numWidth));
 	}
 
 	/**
@@ -328,8 +328,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 				return getAdjacent();
 			case SimpleScenarioPackage.LANE__ACTORS:
 				return getActors();
-			case SimpleScenarioPackage.LANE__WIDTH_NUM:
-				return getWidthNum();
+			case SimpleScenarioPackage.LANE__NUM_WIDTH:
+				return getNumWidth();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -360,8 +360,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 				getActors().clear();
 				getActors().addAll((Collection<? extends Actor>)newValue);
 				return;
-			case SimpleScenarioPackage.LANE__WIDTH_NUM:
-				setWidthNum((Double)newValue);
+			case SimpleScenarioPackage.LANE__NUM_WIDTH:
+				setNumWidth((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -390,8 +390,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 			case SimpleScenarioPackage.LANE__ACTORS:
 				getActors().clear();
 				return;
-			case SimpleScenarioPackage.LANE__WIDTH_NUM:
-				setWidthNum(WIDTH_NUM_EDEFAULT);
+			case SimpleScenarioPackage.LANE__NUM_WIDTH:
+				setNumWidth(NUM_WIDTH_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -415,8 +415,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 				return adjacent != null && !adjacent.isEmpty();
 			case SimpleScenarioPackage.LANE__ACTORS:
 				return actors != null && !actors.isEmpty();
-			case SimpleScenarioPackage.LANE__WIDTH_NUM:
-				return widthNum != WIDTH_NUM_EDEFAULT;
+			case SimpleScenarioPackage.LANE__NUM_WIDTH:
+				return numWidth != NUM_WIDTH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -437,8 +437,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 		result.append(width);
 		result.append(", referenceCoord: ");
 		result.append(referenceCoord);
-		result.append(", widthNum: ");
-		result.append(widthNum);
+		result.append(", numWidth: ");
+		result.append(numWidth);
 		result.append(')');
 		return result.toString();
 	}

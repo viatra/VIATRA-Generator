@@ -108,6 +108,14 @@ public class SimpleScenarioAdapterFactory extends AdapterFactoryImpl {
 				return createCollisionDoesNotExistAdapter();
 			}
 			@Override
+			public Adapter casePedestrian(Pedestrian object) {
+				return createPedestrianAdapter();
+			}
+			@Override
+			public Adapter caseVehicle(Vehicle object) {
+				return createVehicleAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -264,6 +272,34 @@ public class SimpleScenarioAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollisionDoesNotExistAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link simpleScenario.Pedestrian <em>Pedestrian</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see simpleScenario.Pedestrian
+	 * @generated
+	 */
+	public Adapter createPedestrianAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link simpleScenario.Vehicle <em>Vehicle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see simpleScenario.Vehicle
+	 * @generated
+	 */
+	public Adapter createVehicleAdapter() {
 		return null;
 	}
 

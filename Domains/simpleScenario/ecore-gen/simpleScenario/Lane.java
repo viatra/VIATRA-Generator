@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link simpleScenario.Lane#getReferenceCoord <em>Reference Coord</em>}</li>
  *   <li>{@link simpleScenario.Lane#getAdjacent <em>Adjacent</em>}</li>
  *   <li>{@link simpleScenario.Lane#getActors <em>Actors</em>}</li>
- *   <li>{@link simpleScenario.Lane#getWidthNum <em>Width Num</em>}</li>
+ *   <li>{@link simpleScenario.Lane#getNumWidth <em>Num Width</em>}</li>
  * </ul>
  *
  * @see simpleScenario.SimpleScenarioPackage#getLane()
@@ -127,25 +127,26 @@ public interface Lane extends EObject {
 	EList<Actor> getActors();
 
 	/**
-	 * Returns the value of the '<em><b>Width Num</b></em>' attribute.
+	 * Returns the value of the '<em><b>Num Width</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Width Num</em>' attribute.
-	 * @see #setWidthNum(double)
-	 * @see simpleScenario.SimpleScenarioPackage#getLane_WidthNum()
-	 * @model required="true"
+	 * @return the value of the '<em>Num Width</em>' attribute.
+	 * @see #setNumWidth(double)
+	 * @see simpleScenario.SimpleScenarioPackage#getLane_NumWidth()
+	 * @model default="0.0" required="true" derived="true"
 	 * @generated
 	 */
-	double getWidthNum();
+	double getNumWidth();
 
 	/**
-	 * Sets the value of the '{@link simpleScenario.Lane#getWidthNum <em>Width Num</em>}' attribute.
+	 * Sets the value of the '{@link simpleScenario.Lane#getNumWidth <em>Num Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Width Num</em>' attribute.
-	 * @see #getWidthNum()
+	 * @param value the new value of the '<em>Num Width</em>' attribute.
+	 * @see #getNumWidth()
 	 * @generated
 	 */
-	void setWidthNum(double value);
+	void setNumWidth(double value);
 
 } // Lane

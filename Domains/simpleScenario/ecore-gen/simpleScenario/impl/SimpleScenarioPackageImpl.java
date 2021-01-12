@@ -11,11 +11,12 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import simpleScenario.Actor;
-import simpleScenario.ActorType;
 import simpleScenario.CollisionDoesNotExist;
 import simpleScenario.CollisionExists;
+import simpleScenario.Distance;
 import simpleScenario.Lane;
 import simpleScenario.Orientation;
+import simpleScenario.Pedestrian;
 import simpleScenario.Relation;
 import simpleScenario.SeperationDistance;
 import simpleScenario.SimpleScenario;
@@ -24,6 +25,7 @@ import simpleScenario.SimpleScenarioPackage;
 import simpleScenario.Size;
 import simpleScenario.SpatialRelation;
 import simpleScenario.TemporalRelation;
+import simpleScenario.Vehicle;
 import simpleScenario.VisionBlocked;
 
 /**
@@ -108,6 +110,20 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass pedestrianEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vehicleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum orientationEEnum = null;
 
 	/**
@@ -122,7 +138,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum actorTypeEEnum = null;
+	private EEnum distanceEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -301,7 +317,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLane_WidthNum() {
+	public EAttribute getLane_NumWidth() {
 		return (EAttribute)laneEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -321,7 +337,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_Type() {
+	public EAttribute getActor_XPos() {
 		return (EAttribute)actorEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -331,7 +347,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_XPos() {
+	public EAttribute getActor_YPos() {
 		return (EAttribute)actorEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -341,7 +357,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_YPos() {
+	public EAttribute getActor_Length() {
 		return (EAttribute)actorEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -351,7 +367,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_Length() {
+	public EAttribute getActor_Width() {
 		return (EAttribute)actorEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -361,7 +377,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_Width() {
+	public EAttribute getActor_Speed() {
 		return (EAttribute)actorEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -371,18 +387,8 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_Speed() {
-		return (EAttribute)actorEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getActor_Relations() {
-		return (EReference)actorEClass.getEStructuralFeatures().get(6);
+		return (EReference)actorEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -392,7 +398,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 */
 	@Override
 	public EReference getActor_PlacedOn() {
-		return (EReference)actorEClass.getEStructuralFeatures().get(7);
+		return (EReference)actorEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -481,6 +487,16 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
+	public EAttribute getSeperationDistance_NumDistance() {
+		return (EAttribute)seperationDistanceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCollisionExists() {
 		return collisionExistsEClass;
 	}
@@ -511,6 +527,26 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
+	public EClass getPedestrian() {
+		return pedestrianEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVehicle() {
+		return vehicleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getOrientation() {
 		return orientationEEnum;
 	}
@@ -531,8 +567,8 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EEnum getActorType() {
-		return actorTypeEEnum;
+	public EEnum getDistance() {
+		return distanceEEnum;
 	}
 
 	/**
@@ -576,10 +612,9 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		createEAttribute(laneEClass, LANE__REFERENCE_COORD);
 		createEReference(laneEClass, LANE__ADJACENT);
 		createEReference(laneEClass, LANE__ACTORS);
-		createEAttribute(laneEClass, LANE__WIDTH_NUM);
+		createEAttribute(laneEClass, LANE__NUM_WIDTH);
 
 		actorEClass = createEClass(ACTOR);
-		createEAttribute(actorEClass, ACTOR__TYPE);
 		createEAttribute(actorEClass, ACTOR__XPOS);
 		createEAttribute(actorEClass, ACTOR__YPOS);
 		createEAttribute(actorEClass, ACTOR__LENGTH);
@@ -600,16 +635,21 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 
 		seperationDistanceEClass = createEClass(SEPERATION_DISTANCE);
 		createEAttribute(seperationDistanceEClass, SEPERATION_DISTANCE__DISTANCE);
+		createEAttribute(seperationDistanceEClass, SEPERATION_DISTANCE__NUM_DISTANCE);
 
 		collisionExistsEClass = createEClass(COLLISION_EXISTS);
 		createEAttribute(collisionExistsEClass, COLLISION_EXISTS__COLLISION_TIME);
 
 		collisionDoesNotExistEClass = createEClass(COLLISION_DOES_NOT_EXIST);
 
+		pedestrianEClass = createEClass(PEDESTRIAN);
+
+		vehicleEClass = createEClass(VEHICLE);
+
 		// Create enums
 		orientationEEnum = createEEnum(ORIENTATION);
 		sizeEEnum = createEEnum(SIZE);
-		actorTypeEEnum = createEEnum(ACTOR_TYPE);
+		distanceEEnum = createEEnum(DISTANCE);
 	}
 
 	/**
@@ -646,6 +686,8 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		seperationDistanceEClass.getESuperTypes().add(this.getSpatialRelation());
 		collisionExistsEClass.getESuperTypes().add(this.getTemporalRelation());
 		collisionDoesNotExistEClass.getESuperTypes().add(this.getTemporalRelation());
+		pedestrianEClass.getESuperTypes().add(this.getActor());
+		vehicleEClass.getESuperTypes().add(this.getActor());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(simpleScenarioEClass, SimpleScenario.class, "SimpleScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -660,15 +702,14 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		initEAttribute(getLane_ReferenceCoord(), ecorePackage.getEDouble(), "referenceCoord", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLane_Adjacent(), this.getLane(), null, "adjacent", null, 0, 2, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLane_Actors(), this.getActor(), this.getActor_PlacedOn(), "actors", null, 0, -1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLane_WidthNum(), ecorePackage.getEDouble(), "widthNum", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLane_NumWidth(), ecorePackage.getEDouble(), "numWidth", "0.0", 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(actorEClass, Actor.class, "Actor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getActor_Type(), this.getActorType(), "type", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(actorEClass, Actor.class, "Actor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActor_XPos(), ecorePackage.getEDouble(), "xPos", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_YPos(), ecorePackage.getEDouble(), "yPos", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActor_Length(), ecorePackage.getEDouble(), "length", "0.0", 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActor_Width(), ecorePackage.getEDouble(), "width", null, 0, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActor_Speed(), ecorePackage.getEDouble(), "speed", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_Length(), ecorePackage.getEDouble(), "length", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_Width(), ecorePackage.getEDouble(), "width", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_Speed(), ecorePackage.getEDouble(), "speed", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActor_Relations(), this.getRelation(), null, "relations", null, 0, -1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActor_PlacedOn(), this.getLane(), this.getLane_Actors(), "placedOn", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -683,12 +724,17 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		initEReference(getVisionBlocked_BlockedBy(), this.getActor(), null, "blockedBy", null, 0, 1, VisionBlocked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(seperationDistanceEClass, SeperationDistance.class, "SeperationDistance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSeperationDistance_Distance(), this.getSize(), "distance", null, 1, 1, SeperationDistance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSeperationDistance_Distance(), this.getDistance(), "distance", null, 1, 1, SeperationDistance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSeperationDistance_NumDistance(), ecorePackage.getEDouble(), "numDistance", null, 1, 1, SeperationDistance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(collisionExistsEClass, CollisionExists.class, "CollisionExists", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollisionExists_CollisionTime(), ecorePackage.getEDouble(), "collisionTime", null, 1, 1, CollisionExists.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collisionDoesNotExistEClass, CollisionDoesNotExist.class, "CollisionDoesNotExist", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(pedestrianEClass, Pedestrian.class, "Pedestrian", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(vehicleEClass, Vehicle.class, "Vehicle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(orientationEEnum, Orientation.class, "Orientation");
@@ -700,9 +746,10 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		addEEnumLiteral(sizeEEnum, Size.MEDIUM);
 		addEEnumLiteral(sizeEEnum, Size.LARGE);
 
-		initEEnum(actorTypeEEnum, ActorType.class, "ActorType");
-		addEEnumLiteral(actorTypeEEnum, ActorType.PEDESTRIAN);
-		addEEnumLiteral(actorTypeEEnum, ActorType.VEHICLE);
+		initEEnum(distanceEEnum, Distance.class, "Distance");
+		addEEnumLiteral(distanceEEnum, Distance.NEAR);
+		addEEnumLiteral(distanceEEnum, Distance.MEDIUM);
+		addEEnumLiteral(distanceEEnum, Distance.FAR);
 
 		// Create resource
 		createResource(eNS_URI);

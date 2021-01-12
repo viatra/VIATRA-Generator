@@ -40,15 +40,6 @@ public interface SimpleScenarioFactory extends EFactory {
 	Lane createLane();
 
 	/**
-	 * Returns a new object of class '<em>Actor</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Actor</em>'.
-	 * @generated
-	 */
-	Actor createActor();
-
-	/**
 	 * Returns a new object of class '<em>Vision Blocked</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +74,24 @@ public interface SimpleScenarioFactory extends EFactory {
 	 * @generated
 	 */
 	CollisionDoesNotExist createCollisionDoesNotExist();
+
+	/**
+	 * Returns a new object of class '<em>Pedestrian</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Pedestrian</em>'.
+	 * @generated
+	 */
+	Pedestrian createPedestrian();
+
+	/**
+	 * Returns a new object of class '<em>Vehicle</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Vehicle</em>'.
+	 * @generated
+	 */
+	Vehicle createVehicle();
 
 	/**
 	 * Returns the package supported by this factory.

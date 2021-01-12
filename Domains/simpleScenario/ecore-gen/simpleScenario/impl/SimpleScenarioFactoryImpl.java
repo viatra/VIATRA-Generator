@@ -59,11 +59,12 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 		switch (eClass.getClassifierID()) {
 			case SimpleScenarioPackage.SIMPLE_SCENARIO: return createSimpleScenario();
 			case SimpleScenarioPackage.LANE: return createLane();
-			case SimpleScenarioPackage.ACTOR: return createActor();
 			case SimpleScenarioPackage.VISION_BLOCKED: return createVisionBlocked();
 			case SimpleScenarioPackage.SEPERATION_DISTANCE: return createSeperationDistance();
 			case SimpleScenarioPackage.COLLISION_EXISTS: return createCollisionExists();
 			case SimpleScenarioPackage.COLLISION_DOES_NOT_EXIST: return createCollisionDoesNotExist();
+			case SimpleScenarioPackage.PEDESTRIAN: return createPedestrian();
+			case SimpleScenarioPackage.VEHICLE: return createVehicle();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -81,8 +82,8 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 				return createOrientationFromString(eDataType, initialValue);
 			case SimpleScenarioPackage.SIZE:
 				return createSizeFromString(eDataType, initialValue);
-			case SimpleScenarioPackage.ACTOR_TYPE:
-				return createActorTypeFromString(eDataType, initialValue);
+			case SimpleScenarioPackage.DISTANCE:
+				return createDistanceFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -100,8 +101,8 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 				return convertOrientationToString(eDataType, instanceValue);
 			case SimpleScenarioPackage.SIZE:
 				return convertSizeToString(eDataType, instanceValue);
-			case SimpleScenarioPackage.ACTOR_TYPE:
-				return convertActorTypeToString(eDataType, instanceValue);
+			case SimpleScenarioPackage.DISTANCE:
+				return convertDistanceToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -127,17 +128,6 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 	public Lane createLane() {
 		LaneImpl lane = new LaneImpl();
 		return lane;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Actor createActor() {
-		ActorImpl actor = new ActorImpl();
-		return actor;
 	}
 
 	/**
@@ -189,6 +179,28 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Pedestrian createPedestrian() {
+		PedestrianImpl pedestrian = new PedestrianImpl();
+		return pedestrian;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Vehicle createVehicle() {
+		VehicleImpl vehicle = new VehicleImpl();
+		return vehicle;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Orientation createOrientationFromString(EDataType eDataType, String initialValue) {
 		Orientation result = Orientation.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -229,8 +241,8 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActorType createActorTypeFromString(EDataType eDataType, String initialValue) {
-		ActorType result = ActorType.get(initialValue);
+	public Distance createDistanceFromString(EDataType eDataType, String initialValue) {
+		Distance result = Distance.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -240,7 +252,7 @@ public class SimpleScenarioFactoryImpl extends EFactoryImpl implements SimpleSce
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertActorTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertDistanceToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

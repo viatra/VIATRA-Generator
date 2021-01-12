@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link simpleScenario.Actor#getType <em>Type</em>}</li>
  *   <li>{@link simpleScenario.Actor#getXPos <em>XPos</em>}</li>
  *   <li>{@link simpleScenario.Actor#getYPos <em>YPos</em>}</li>
  *   <li>{@link simpleScenario.Actor#getLength <em>Length</em>}</li>
@@ -26,35 +25,10 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see simpleScenario.SimpleScenarioPackage#getActor()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Actor extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link simpleScenario.ActorType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see simpleScenario.ActorType
-	 * @see #setType(ActorType)
-	 * @see simpleScenario.SimpleScenarioPackage#getActor_Type()
-	 * @model required="true"
-	 * @generated
-	 */
-	ActorType getType();
-
-	/**
-	 * Sets the value of the '{@link simpleScenario.Actor#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see simpleScenario.ActorType
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(ActorType value);
-
 	/**
 	 * Returns the value of the '<em><b>XPos</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -107,7 +81,7 @@ public interface Actor extends EObject {
 	 * @return the value of the '<em>Length</em>' attribute.
 	 * @see #setLength(double)
 	 * @see simpleScenario.SimpleScenarioPackage#getActor_Length()
-	 * @model default="0.0"
+	 * @model default="0.0" required="true" derived="true"
 	 * @generated
 	 */
 	double getLength();
@@ -129,7 +103,7 @@ public interface Actor extends EObject {
 	 * @return the value of the '<em>Width</em>' attribute.
 	 * @see #setWidth(double)
 	 * @see simpleScenario.SimpleScenarioPackage#getActor_Width()
-	 * @model
+	 * @model required="true" derived="true"
 	 * @generated
 	 */
 	double getWidth();
@@ -146,12 +120,13 @@ public interface Actor extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Speed</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Speed</em>' attribute.
 	 * @see #setSpeed(double)
 	 * @see simpleScenario.SimpleScenarioPackage#getActor_Speed()
-	 * @model required="true"
+	 * @model default="0.0" required="true"
 	 * @generated
 	 */
 	double getSpeed();

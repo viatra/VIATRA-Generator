@@ -177,13 +177,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int LANE__ACTORS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Width Num</b></em>' attribute.
+	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__WIDTH_NUM = 5;
+	int LANE__NUM_WIDTH = 5;
 
 	/**
 	 * The number of structural features of the '<em>Lane</em>' class.
@@ -214,22 +214,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int ACTOR = 2;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTOR__TYPE = 0;
-
-	/**
 	 * The feature id for the '<em><b>XPos</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__XPOS = 1;
+	int ACTOR__XPOS = 0;
 
 	/**
 	 * The feature id for the '<em><b>YPos</b></em>' attribute.
@@ -238,7 +229,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__YPOS = 2;
+	int ACTOR__YPOS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Length</b></em>' attribute.
@@ -247,7 +238,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__LENGTH = 3;
+	int ACTOR__LENGTH = 2;
 
 	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
@@ -256,7 +247,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__WIDTH = 4;
+	int ACTOR__WIDTH = 3;
 
 	/**
 	 * The feature id for the '<em><b>Speed</b></em>' attribute.
@@ -265,7 +256,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__SPEED = 5;
+	int ACTOR__SPEED = 4;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -274,7 +265,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__RELATIONS = 6;
+	int ACTOR__RELATIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Placed On</b></em>' reference.
@@ -283,7 +274,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__PLACED_ON = 7;
+	int ACTOR__PLACED_ON = 6;
 
 	/**
 	 * The number of structural features of the '<em>Actor</em>' class.
@@ -292,7 +283,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_FEATURE_COUNT = 8;
+	int ACTOR_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Actor</em>' class.
@@ -489,13 +480,22 @@ public interface SimpleScenarioPackage extends EPackage {
 	int SEPERATION_DISTANCE__DISTANCE = SPATIAL_RELATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Num Distance</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPERATION_DISTANCE__NUM_DISTANCE = SPATIAL_RELATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Seperation Distance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEPERATION_DISTANCE_FEATURE_COUNT = SPATIAL_RELATION_FEATURE_COUNT + 1;
+	int SEPERATION_DISTANCE_FEATURE_COUNT = SPATIAL_RELATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Seperation Distance</em>' class.
@@ -590,6 +590,188 @@ public interface SimpleScenarioPackage extends EPackage {
 	int COLLISION_DOES_NOT_EXIST_OPERATION_COUNT = TEMPORAL_RELATION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link simpleScenario.impl.PedestrianImpl <em>Pedestrian</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see simpleScenario.impl.PedestrianImpl
+	 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getPedestrian()
+	 * @generated
+	 */
+	int PEDESTRIAN = 10;
+
+	/**
+	 * The feature id for the '<em><b>XPos</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__XPOS = ACTOR__XPOS;
+
+	/**
+	 * The feature id for the '<em><b>YPos</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__YPOS = ACTOR__YPOS;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__LENGTH = ACTOR__LENGTH;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__WIDTH = ACTOR__WIDTH;
+
+	/**
+	 * The feature id for the '<em><b>Speed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__SPEED = ACTOR__SPEED;
+
+	/**
+	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__RELATIONS = ACTOR__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Placed On</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__PLACED_ON = ACTOR__PLACED_ON;
+
+	/**
+	 * The number of structural features of the '<em>Pedestrian</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN_FEATURE_COUNT = ACTOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Pedestrian</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN_OPERATION_COUNT = ACTOR_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link simpleScenario.impl.VehicleImpl <em>Vehicle</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see simpleScenario.impl.VehicleImpl
+	 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getVehicle()
+	 * @generated
+	 */
+	int VEHICLE = 11;
+
+	/**
+	 * The feature id for the '<em><b>XPos</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__XPOS = ACTOR__XPOS;
+
+	/**
+	 * The feature id for the '<em><b>YPos</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__YPOS = ACTOR__YPOS;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__LENGTH = ACTOR__LENGTH;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__WIDTH = ACTOR__WIDTH;
+
+	/**
+	 * The feature id for the '<em><b>Speed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__SPEED = ACTOR__SPEED;
+
+	/**
+	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__RELATIONS = ACTOR__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Placed On</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__PLACED_ON = ACTOR__PLACED_ON;
+
+	/**
+	 * The number of structural features of the '<em>Vehicle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE_FEATURE_COUNT = ACTOR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Vehicle</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE_OPERATION_COUNT = ACTOR_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link simpleScenario.Orientation <em>Orientation</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -597,7 +779,7 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getOrientation()
 	 * @generated
 	 */
-	int ORIENTATION = 10;
+	int ORIENTATION = 12;
 
 	/**
 	 * The meta object id for the '{@link simpleScenario.Size <em>Size</em>}' enum.
@@ -607,18 +789,17 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getSize()
 	 * @generated
 	 */
-	int SIZE = 11;
+	int SIZE = 13;
 
 	/**
-	 * The meta object id for the '{@link simpleScenario.ActorType <em>Actor Type</em>}' enum.
+	 * The meta object id for the '{@link simpleScenario.Distance <em>Distance</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see simpleScenario.ActorType
-	 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getActorType()
+	 * @see simpleScenario.Distance
+	 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getDistance()
 	 * @generated
 	 */
-	int ACTOR_TYPE = 12;
-
+	int DISTANCE = 14;
 
 	/**
 	 * Returns the meta object for class '{@link simpleScenario.SimpleScenario <em>Simple Scenario</em>}'.
@@ -740,15 +921,15 @@ public interface SimpleScenarioPackage extends EPackage {
 	EReference getLane_Actors();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simpleScenario.Lane#getWidthNum <em>Width Num</em>}'.
+	 * Returns the meta object for the attribute '{@link simpleScenario.Lane#getNumWidth <em>Num Width</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Width Num</em>'.
-	 * @see simpleScenario.Lane#getWidthNum()
+	 * @return the meta object for the attribute '<em>Num Width</em>'.
+	 * @see simpleScenario.Lane#getNumWidth()
 	 * @see #getLane()
 	 * @generated
 	 */
-	EAttribute getLane_WidthNum();
+	EAttribute getLane_NumWidth();
 
 	/**
 	 * Returns the meta object for class '{@link simpleScenario.Actor <em>Actor</em>}'.
@@ -759,17 +940,6 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getActor();
-
-	/**
-	 * Returns the meta object for the attribute '{@link simpleScenario.Actor#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see simpleScenario.Actor#getType()
-	 * @see #getActor()
-	 * @generated
-	 */
-	EAttribute getActor_Type();
 
 	/**
 	 * Returns the meta object for the attribute '{@link simpleScenario.Actor#getXPos <em>XPos</em>}'.
@@ -932,6 +1102,17 @@ public interface SimpleScenarioPackage extends EPackage {
 	EAttribute getSeperationDistance_Distance();
 
 	/**
+	 * Returns the meta object for the attribute '{@link simpleScenario.SeperationDistance#getNumDistance <em>Num Distance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Num Distance</em>'.
+	 * @see simpleScenario.SeperationDistance#getNumDistance()
+	 * @see #getSeperationDistance()
+	 * @generated
+	 */
+	EAttribute getSeperationDistance_NumDistance();
+
+	/**
 	 * Returns the meta object for class '{@link simpleScenario.CollisionExists <em>Collision Exists</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -963,6 +1144,26 @@ public interface SimpleScenarioPackage extends EPackage {
 	EClass getCollisionDoesNotExist();
 
 	/**
+	 * Returns the meta object for class '{@link simpleScenario.Pedestrian <em>Pedestrian</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Pedestrian</em>'.
+	 * @see simpleScenario.Pedestrian
+	 * @generated
+	 */
+	EClass getPedestrian();
+
+	/**
+	 * Returns the meta object for class '{@link simpleScenario.Vehicle <em>Vehicle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vehicle</em>'.
+	 * @see simpleScenario.Vehicle
+	 * @generated
+	 */
+	EClass getVehicle();
+
+	/**
 	 * Returns the meta object for enum '{@link simpleScenario.Orientation <em>Orientation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -983,14 +1184,14 @@ public interface SimpleScenarioPackage extends EPackage {
 	EEnum getSize();
 
 	/**
-	 * Returns the meta object for enum '{@link simpleScenario.ActorType <em>Actor Type</em>}'.
+	 * Returns the meta object for enum '{@link simpleScenario.Distance <em>Distance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Actor Type</em>'.
-	 * @see simpleScenario.ActorType
+	 * @return the meta object for enum '<em>Distance</em>'.
+	 * @see simpleScenario.Distance
 	 * @generated
 	 */
-	EEnum getActorType();
+	EEnum getDistance();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1108,12 +1309,12 @@ public interface SimpleScenarioPackage extends EPackage {
 		EReference LANE__ACTORS = eINSTANCE.getLane_Actors();
 
 		/**
-		 * The meta object literal for the '<em><b>Width Num</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Num Width</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LANE__WIDTH_NUM = eINSTANCE.getLane_WidthNum();
+		EAttribute LANE__NUM_WIDTH = eINSTANCE.getLane_NumWidth();
 
 		/**
 		 * The meta object literal for the '{@link simpleScenario.impl.ActorImpl <em>Actor</em>}' class.
@@ -1124,14 +1325,6 @@ public interface SimpleScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ACTOR = eINSTANCE.getActor();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTOR__TYPE = eINSTANCE.getActor_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>XPos</b></em>' attribute feature.
@@ -1264,6 +1457,14 @@ public interface SimpleScenarioPackage extends EPackage {
 		EAttribute SEPERATION_DISTANCE__DISTANCE = eINSTANCE.getSeperationDistance_Distance();
 
 		/**
+		 * The meta object literal for the '<em><b>Num Distance</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SEPERATION_DISTANCE__NUM_DISTANCE = eINSTANCE.getSeperationDistance_NumDistance();
+
+		/**
 		 * The meta object literal for the '{@link simpleScenario.impl.CollisionExistsImpl <em>Collision Exists</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1292,6 +1493,26 @@ public interface SimpleScenarioPackage extends EPackage {
 		EClass COLLISION_DOES_NOT_EXIST = eINSTANCE.getCollisionDoesNotExist();
 
 		/**
+		 * The meta object literal for the '{@link simpleScenario.impl.PedestrianImpl <em>Pedestrian</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see simpleScenario.impl.PedestrianImpl
+		 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getPedestrian()
+		 * @generated
+		 */
+		EClass PEDESTRIAN = eINSTANCE.getPedestrian();
+
+		/**
+		 * The meta object literal for the '{@link simpleScenario.impl.VehicleImpl <em>Vehicle</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see simpleScenario.impl.VehicleImpl
+		 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getVehicle()
+		 * @generated
+		 */
+		EClass VEHICLE = eINSTANCE.getVehicle();
+
+		/**
 		 * The meta object literal for the '{@link simpleScenario.Orientation <em>Orientation</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1312,14 +1533,14 @@ public interface SimpleScenarioPackage extends EPackage {
 		EEnum SIZE = eINSTANCE.getSize();
 
 		/**
-		 * The meta object literal for the '{@link simpleScenario.ActorType <em>Actor Type</em>}' enum.
+		 * The meta object literal for the '{@link simpleScenario.Distance <em>Distance</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see simpleScenario.ActorType
-		 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getActorType()
+		 * @see simpleScenario.Distance
+		 * @see simpleScenario.impl.SimpleScenarioPackageImpl#getDistance()
 		 * @generated
 		 */
-		EEnum ACTOR_TYPE = eINSTANCE.getActorType();
+		EEnum DISTANCE = eINSTANCE.getDistance();
 
 	}
 

@@ -136,6 +136,20 @@ public class SimpleScenarioSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SimpleScenarioPackage.PEDESTRIAN: {
+				Pedestrian pedestrian = (Pedestrian)theEObject;
+				T result = casePedestrian(pedestrian);
+				if (result == null) result = caseActor(pedestrian);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SimpleScenarioPackage.VEHICLE: {
+				Vehicle vehicle = (Vehicle)theEObject;
+				T result = caseVehicle(vehicle);
+				if (result == null) result = caseActor(vehicle);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -287,6 +301,36 @@ public class SimpleScenarioSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCollisionDoesNotExist(CollisionDoesNotExist object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Pedestrian</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Pedestrian</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePedestrian(Pedestrian object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Vehicle</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Vehicle</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVehicle(Vehicle object) {
 		return null;
 	}
 
