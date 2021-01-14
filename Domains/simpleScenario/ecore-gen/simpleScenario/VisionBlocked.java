@@ -27,7 +27,7 @@ public interface VisionBlocked extends SpatialRelation {
 	 * @return the value of the '<em>Blocked By</em>' reference.
 	 * @see #setBlockedBy(Actor)
 	 * @see simpleScenario.SimpleScenarioPackage#getVisionBlocked_BlockedBy()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	Actor getBlockedBy();

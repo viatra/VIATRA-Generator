@@ -35,6 +35,7 @@ import simpleScenario.SimpleScenarioPackage;
  *   <li>{@link simpleScenario.impl.SimpleScenarioImpl#getYSize <em>YSize</em>}</li>
  *   <li>{@link simpleScenario.impl.SimpleScenarioImpl#getActors <em>Actors</em>}</li>
  *   <li>{@link simpleScenario.impl.SimpleScenarioImpl#getLanes <em>Lanes</em>}</li>
+ *   <li>{@link simpleScenario.impl.SimpleScenarioImpl#getMaxTime <em>Max Time</em>}</li>
  * </ul>
  *
  * @generated
@@ -99,6 +100,26 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected EList<Lane> lanes;
+
+	/**
+	 * The default value of the '{@link #getMaxTime() <em>Max Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double MAX_TIME_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getMaxTime() <em>Max Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected double maxTime = MAX_TIME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +218,29 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
+	public double getMaxTime() {
+		return maxTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMaxTime(double newMaxTime) {
+		double oldMaxTime = maxTime;
+		maxTime = newMaxTime;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.SIMPLE_SCENARIO__MAX_TIME, oldMaxTime, maxTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SimpleScenarioPackage.SIMPLE_SCENARIO__ACTORS:
@@ -223,6 +267,8 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 				return getActors();
 			case SimpleScenarioPackage.SIMPLE_SCENARIO__LANES:
 				return getLanes();
+			case SimpleScenarioPackage.SIMPLE_SCENARIO__MAX_TIME:
+				return getMaxTime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,6 +296,9 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 				getLanes().clear();
 				getLanes().addAll((Collection<? extends Lane>)newValue);
 				return;
+			case SimpleScenarioPackage.SIMPLE_SCENARIO__MAX_TIME:
+				setMaxTime((Double)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -274,6 +323,9 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 			case SimpleScenarioPackage.SIMPLE_SCENARIO__LANES:
 				getLanes().clear();
 				return;
+			case SimpleScenarioPackage.SIMPLE_SCENARIO__MAX_TIME:
+				setMaxTime(MAX_TIME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -294,6 +346,8 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 				return actors != null && !actors.isEmpty();
 			case SimpleScenarioPackage.SIMPLE_SCENARIO__LANES:
 				return lanes != null && !lanes.isEmpty();
+			case SimpleScenarioPackage.SIMPLE_SCENARIO__MAX_TIME:
+				return maxTime != MAX_TIME_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -312,6 +366,8 @@ public class SimpleScenarioImpl extends MinimalEObjectImpl.Container implements 
 		result.append(xSize);
 		result.append(", ySize: ");
 		result.append(ySize);
+		result.append(", maxTime: ");
+		result.append(maxTime);
 		result.append(')');
 		return result.toString();
 	}

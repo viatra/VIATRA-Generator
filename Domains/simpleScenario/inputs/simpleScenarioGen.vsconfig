@@ -9,7 +9,7 @@ generate {
 	scope = {
 		#node = 10..30,
 		#int = {},
-		#<Actor> = 1
+		#<Lane> = 1
 	}
 	
 	config = {

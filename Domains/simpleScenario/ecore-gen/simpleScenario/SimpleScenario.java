@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link simpleScenario.SimpleScenario#getYSize <em>YSize</em>}</li>
  *   <li>{@link simpleScenario.SimpleScenario#getActors <em>Actors</em>}</li>
  *   <li>{@link simpleScenario.SimpleScenario#getLanes <em>Lanes</em>}</li>
+ *   <li>{@link simpleScenario.SimpleScenario#getMaxTime <em>Max Time</em>}</li>
  * </ul>
  *
  * @see simpleScenario.SimpleScenarioPackage#getSimpleScenario()
@@ -93,5 +94,27 @@ public interface SimpleScenario extends EObject {
 	 * @generated
 	 */
 	EList<Lane> getLanes();
+
+	/**
+	 * Returns the value of the '<em><b>Max Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max Time</em>' attribute.
+	 * @see #setMaxTime(double)
+	 * @see simpleScenario.SimpleScenarioPackage#getSimpleScenario_MaxTime()
+	 * @model
+	 * @generated
+	 */
+	double getMaxTime();
+
+	/**
+	 * Sets the value of the '{@link simpleScenario.SimpleScenario#getMaxTime <em>Max Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max Time</em>' attribute.
+	 * @see #getMaxTime()
+	 * @generated
+	 */
+	void setMaxTime(double value);
 
 } // SimpleScenario

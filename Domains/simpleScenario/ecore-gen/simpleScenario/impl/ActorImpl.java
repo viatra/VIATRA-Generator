@@ -35,9 +35,10 @@ import simpleScenario.SimpleScenarioPackage;
  *   <li>{@link simpleScenario.impl.ActorImpl#getYPos <em>YPos</em>}</li>
  *   <li>{@link simpleScenario.impl.ActorImpl#getLength <em>Length</em>}</li>
  *   <li>{@link simpleScenario.impl.ActorImpl#getWidth <em>Width</em>}</li>
- *   <li>{@link simpleScenario.impl.ActorImpl#getSpeed <em>Speed</em>}</li>
+ *   <li>{@link simpleScenario.impl.ActorImpl#getXSpeed <em>XSpeed</em>}</li>
  *   <li>{@link simpleScenario.impl.ActorImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link simpleScenario.impl.ActorImpl#getPlacedOn <em>Placed On</em>}</li>
+ *   <li>{@link simpleScenario.impl.ActorImpl#getYSpeed <em>YSpeed</em>}</li>
  * </ul>
  *
  * @generated
@@ -124,24 +125,24 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	protected double width = WIDTH_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSpeed() <em>Speed</em>}' attribute.
+	 * The default value of the '{@link #getXSpeed() <em>XSpeed</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSpeed()
+	 * @see #getXSpeed()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double SPEED_EDEFAULT = 0.0;
+	protected static final double XSPEED_EDEFAULT = 0.0;
 
 	/**
-	 * The cached value of the '{@link #getSpeed() <em>Speed</em>}' attribute.
+	 * The cached value of the '{@link #getXSpeed() <em>XSpeed</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSpeed()
+	 * @see #getXSpeed()
 	 * @generated
 	 * @ordered
 	 */
-	protected double speed = SPEED_EDEFAULT;
+	protected double xSpeed = XSPEED_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
@@ -162,6 +163,26 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected Lane placedOn;
+
+	/**
+	 * The default value of the '{@link #getYSpeed() <em>YSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getYSpeed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double YSPEED_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getYSpeed() <em>YSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getYSpeed()
+	 * @generated
+	 * @ordered
+	 */
+	protected double ySpeed = YSPEED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,8 +301,8 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public double getSpeed() {
-		return speed;
+	public double getXSpeed() {
+		return xSpeed;
 	}
 
 	/**
@@ -290,11 +311,11 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public void setSpeed(double newSpeed) {
-		double oldSpeed = speed;
-		speed = newSpeed;
+	public void setXSpeed(double newXSpeed) {
+		double oldXSpeed = xSpeed;
+		xSpeed = newXSpeed;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.ACTOR__SPEED, oldSpeed, speed));
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.ACTOR__XSPEED, oldXSpeed, xSpeed));
 	}
 
 	/**
@@ -378,6 +399,29 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
+	public double getYSpeed() {
+		return ySpeed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setYSpeed(double newYSpeed) {
+		double oldYSpeed = ySpeed;
+		ySpeed = newYSpeed;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.ACTOR__YSPEED, oldYSpeed, ySpeed));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case SimpleScenarioPackage.ACTOR__PLACED_ON:
@@ -420,13 +464,15 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 				return getLength();
 			case SimpleScenarioPackage.ACTOR__WIDTH:
 				return getWidth();
-			case SimpleScenarioPackage.ACTOR__SPEED:
-				return getSpeed();
+			case SimpleScenarioPackage.ACTOR__XSPEED:
+				return getXSpeed();
 			case SimpleScenarioPackage.ACTOR__RELATIONS:
 				return getRelations();
 			case SimpleScenarioPackage.ACTOR__PLACED_ON:
 				if (resolve) return getPlacedOn();
 				return basicGetPlacedOn();
+			case SimpleScenarioPackage.ACTOR__YSPEED:
+				return getYSpeed();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -452,8 +498,8 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 			case SimpleScenarioPackage.ACTOR__WIDTH:
 				setWidth((Double)newValue);
 				return;
-			case SimpleScenarioPackage.ACTOR__SPEED:
-				setSpeed((Double)newValue);
+			case SimpleScenarioPackage.ACTOR__XSPEED:
+				setXSpeed((Double)newValue);
 				return;
 			case SimpleScenarioPackage.ACTOR__RELATIONS:
 				getRelations().clear();
@@ -461,6 +507,9 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 				return;
 			case SimpleScenarioPackage.ACTOR__PLACED_ON:
 				setPlacedOn((Lane)newValue);
+				return;
+			case SimpleScenarioPackage.ACTOR__YSPEED:
+				setYSpeed((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -486,14 +535,17 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 			case SimpleScenarioPackage.ACTOR__WIDTH:
 				setWidth(WIDTH_EDEFAULT);
 				return;
-			case SimpleScenarioPackage.ACTOR__SPEED:
-				setSpeed(SPEED_EDEFAULT);
+			case SimpleScenarioPackage.ACTOR__XSPEED:
+				setXSpeed(XSPEED_EDEFAULT);
 				return;
 			case SimpleScenarioPackage.ACTOR__RELATIONS:
 				getRelations().clear();
 				return;
 			case SimpleScenarioPackage.ACTOR__PLACED_ON:
 				setPlacedOn((Lane)null);
+				return;
+			case SimpleScenarioPackage.ACTOR__YSPEED:
+				setYSpeed(YSPEED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -515,12 +567,14 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 				return length != LENGTH_EDEFAULT;
 			case SimpleScenarioPackage.ACTOR__WIDTH:
 				return width != WIDTH_EDEFAULT;
-			case SimpleScenarioPackage.ACTOR__SPEED:
-				return speed != SPEED_EDEFAULT;
+			case SimpleScenarioPackage.ACTOR__XSPEED:
+				return xSpeed != XSPEED_EDEFAULT;
 			case SimpleScenarioPackage.ACTOR__RELATIONS:
 				return relations != null && !relations.isEmpty();
 			case SimpleScenarioPackage.ACTOR__PLACED_ON:
 				return placedOn != null;
+			case SimpleScenarioPackage.ACTOR__YSPEED:
+				return ySpeed != YSPEED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -543,8 +597,10 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 		result.append(length);
 		result.append(", width: ");
 		result.append(width);
-		result.append(", speed: ");
-		result.append(speed);
+		result.append(", xSpeed: ");
+		result.append(xSpeed);
+		result.append(", ySpeed: ");
+		result.append(ySpeed);
 		result.append(')');
 		return result.toString();
 	}

@@ -13,7 +13,6 @@ package simpleScenario;
  * </p>
  * <ul>
  *   <li>{@link simpleScenario.SeperationDistance#getDistance <em>Distance</em>}</li>
- *   <li>{@link simpleScenario.SeperationDistance#getNumDistance <em>Num Distance</em>}</li>
  * </ul>
  *
  * @see simpleScenario.SimpleScenarioPackage#getSeperationDistance()
@@ -45,27 +44,5 @@ public interface SeperationDistance extends SpatialRelation {
 	 * @generated
 	 */
 	void setDistance(Distance value);
-
-	/**
-	 * Returns the value of the '<em><b>Num Distance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Num Distance</em>' attribute.
-	 * @see #setNumDistance(double)
-	 * @see simpleScenario.SimpleScenarioPackage#getSeperationDistance_NumDistance()
-	 * @model required="true" derived="true"
-	 * @generated
-	 */
-	double getNumDistance();
-
-	/**
-	 * Sets the value of the '{@link simpleScenario.SeperationDistance#getNumDistance <em>Num Distance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Num Distance</em>' attribute.
-	 * @see #getNumDistance()
-	 * @generated
-	 */
-	void setNumDistance(double value);
 
 } // SeperationDistance

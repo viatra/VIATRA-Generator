@@ -19,9 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link simpleScenario.Actor#getYPos <em>YPos</em>}</li>
  *   <li>{@link simpleScenario.Actor#getLength <em>Length</em>}</li>
  *   <li>{@link simpleScenario.Actor#getWidth <em>Width</em>}</li>
- *   <li>{@link simpleScenario.Actor#getSpeed <em>Speed</em>}</li>
+ *   <li>{@link simpleScenario.Actor#getXSpeed <em>XSpeed</em>}</li>
  *   <li>{@link simpleScenario.Actor#getRelations <em>Relations</em>}</li>
  *   <li>{@link simpleScenario.Actor#getPlacedOn <em>Placed On</em>}</li>
+ *   <li>{@link simpleScenario.Actor#getYSpeed <em>YSpeed</em>}</li>
  * </ul>
  *
  * @see simpleScenario.SimpleScenarioPackage#getActor()
@@ -119,27 +120,27 @@ public interface Actor extends EObject {
 	void setWidth(double value);
 
 	/**
-	 * Returns the value of the '<em><b>Speed</b></em>' attribute.
+	 * Returns the value of the '<em><b>XSpeed</b></em>' attribute.
 	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Speed</em>' attribute.
-	 * @see #setSpeed(double)
-	 * @see simpleScenario.SimpleScenarioPackage#getActor_Speed()
+	 * @return the value of the '<em>XSpeed</em>' attribute.
+	 * @see #setXSpeed(double)
+	 * @see simpleScenario.SimpleScenarioPackage#getActor_XSpeed()
 	 * @model default="0.0" required="true"
 	 * @generated
 	 */
-	double getSpeed();
+	double getXSpeed();
 
 	/**
-	 * Sets the value of the '{@link simpleScenario.Actor#getSpeed <em>Speed</em>}' attribute.
+	 * Sets the value of the '{@link simpleScenario.Actor#getXSpeed <em>XSpeed</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Speed</em>' attribute.
-	 * @see #getSpeed()
+	 * @param value the new value of the '<em>XSpeed</em>' attribute.
+	 * @see #getXSpeed()
 	 * @generated
 	 */
-	void setSpeed(double value);
+	void setXSpeed(double value);
 
 	/**
 	 * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
@@ -176,5 +177,27 @@ public interface Actor extends EObject {
 	 * @generated
 	 */
 	void setPlacedOn(Lane value);
+
+	/**
+	 * Returns the value of the '<em><b>YSpeed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>YSpeed</em>' attribute.
+	 * @see #setYSpeed(double)
+	 * @see simpleScenario.SimpleScenarioPackage#getActor_YSpeed()
+	 * @model required="true"
+	 * @generated
+	 */
+	double getYSpeed();
+
+	/**
+	 * Sets the value of the '{@link simpleScenario.Actor#getYSpeed <em>YSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>YSpeed</em>' attribute.
+	 * @see #getYSpeed()
+	 * @generated
+	 */
+	void setYSpeed(double value);
 
 } // Actor

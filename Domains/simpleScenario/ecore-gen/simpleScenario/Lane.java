@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link simpleScenario.Lane#getOrientation <em>Orientation</em>}</li>
  *   <li>{@link simpleScenario.Lane#getWidth <em>Width</em>}</li>
  *   <li>{@link simpleScenario.Lane#getReferenceCoord <em>Reference Coord</em>}</li>
- *   <li>{@link simpleScenario.Lane#getAdjacent <em>Adjacent</em>}</li>
+ *   <li>{@link simpleScenario.Lane#getPrevLane <em>Prev Lane</em>}</li>
  *   <li>{@link simpleScenario.Lane#getActors <em>Actors</em>}</li>
  *   <li>{@link simpleScenario.Lane#getNumWidth <em>Num Width</em>}</li>
  * </ul>
@@ -101,16 +101,26 @@ public interface Lane extends EObject {
 	void setReferenceCoord(double value);
 
 	/**
-	 * Returns the value of the '<em><b>Adjacent</b></em>' reference list.
-	 * The list contents are of type {@link simpleScenario.Lane}.
+	 * Returns the value of the '<em><b>Prev Lane</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Adjacent</em>' reference list.
-	 * @see simpleScenario.SimpleScenarioPackage#getLane_Adjacent()
-	 * @model upper="2"
+	 * @return the value of the '<em>Prev Lane</em>' reference.
+	 * @see #setPrevLane(Lane)
+	 * @see simpleScenario.SimpleScenarioPackage#getLane_PrevLane()
+	 * @model
 	 * @generated
 	 */
-	EList<Lane> getAdjacent();
+	Lane getPrevLane();
+
+	/**
+	 * Sets the value of the '{@link simpleScenario.Lane#getPrevLane <em>Prev Lane</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Prev Lane</em>' reference.
+	 * @see #getPrevLane()
+	 * @generated
+	 */
+	void setPrevLane(Lane value);
 
 	/**
 	 * Returns the value of the '<em><b>Actors</b></em>' reference list.
@@ -134,7 +144,7 @@ public interface Lane extends EObject {
 	 * @return the value of the '<em>Num Width</em>' attribute.
 	 * @see #setNumWidth(double)
 	 * @see simpleScenario.SimpleScenarioPackage#getLane_NumWidth()
-	 * @model default="0.0" required="true" derived="true"
+	 * @model default="0.0" required="true"
 	 * @generated
 	 */
 	double getNumWidth();

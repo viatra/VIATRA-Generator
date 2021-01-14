@@ -104,13 +104,22 @@ public interface SimpleScenarioPackage extends EPackage {
 	int SIMPLE_SCENARIO__LANES = 3;
 
 	/**
+	 * The feature id for the '<em><b>Max Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SCENARIO__MAX_TIME = 4;
+
+	/**
 	 * The number of structural features of the '<em>Simple Scenario</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_SCENARIO_FEATURE_COUNT = 4;
+	int SIMPLE_SCENARIO_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Simple Scenario</em>' class.
@@ -159,13 +168,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int LANE__REFERENCE_COORD = 2;
 
 	/**
-	 * The feature id for the '<em><b>Adjacent</b></em>' reference list.
+	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__ADJACENT = 3;
+	int LANE__PREV_LANE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Actors</b></em>' reference list.
@@ -250,13 +259,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int ACTOR__WIDTH = 3;
 
 	/**
-	 * The feature id for the '<em><b>Speed</b></em>' attribute.
+	 * The feature id for the '<em><b>XSpeed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__SPEED = 4;
+	int ACTOR__XSPEED = 4;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -277,13 +286,22 @@ public interface SimpleScenarioPackage extends EPackage {
 	int ACTOR__PLACED_ON = 6;
 
 	/**
+	 * The feature id for the '<em><b>YSpeed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__YSPEED = 7;
+
+	/**
 	 * The number of structural features of the '<em>Actor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_FEATURE_COUNT = 7;
+	int ACTOR_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Actor</em>' class.
@@ -480,22 +498,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int SEPERATION_DISTANCE__DISTANCE = SPATIAL_RELATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Num Distance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEPERATION_DISTANCE__NUM_DISTANCE = SPATIAL_RELATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Seperation Distance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEPERATION_DISTANCE_FEATURE_COUNT = SPATIAL_RELATION_FEATURE_COUNT + 2;
+	int SEPERATION_DISTANCE_FEATURE_COUNT = SPATIAL_RELATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Seperation Distance</em>' class.
@@ -636,13 +645,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int PEDESTRIAN__WIDTH = ACTOR__WIDTH;
 
 	/**
-	 * The feature id for the '<em><b>Speed</b></em>' attribute.
+	 * The feature id for the '<em><b>XSpeed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PEDESTRIAN__SPEED = ACTOR__SPEED;
+	int PEDESTRIAN__XSPEED = ACTOR__XSPEED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -661,6 +670,15 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int PEDESTRIAN__PLACED_ON = ACTOR__PLACED_ON;
+
+	/**
+	 * The feature id for the '<em><b>YSpeed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__YSPEED = ACTOR__YSPEED;
 
 	/**
 	 * The number of structural features of the '<em>Pedestrian</em>' class.
@@ -727,13 +745,13 @@ public interface SimpleScenarioPackage extends EPackage {
 	int VEHICLE__WIDTH = ACTOR__WIDTH;
 
 	/**
-	 * The feature id for the '<em><b>Speed</b></em>' attribute.
+	 * The feature id for the '<em><b>XSpeed</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VEHICLE__SPEED = ACTOR__SPEED;
+	int VEHICLE__XSPEED = ACTOR__XSPEED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -752,6 +770,15 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int VEHICLE__PLACED_ON = ACTOR__PLACED_ON;
+
+	/**
+	 * The feature id for the '<em><b>YSpeed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__YSPEED = ACTOR__YSPEED;
 
 	/**
 	 * The number of structural features of the '<em>Vehicle</em>' class.
@@ -856,6 +883,17 @@ public interface SimpleScenarioPackage extends EPackage {
 	EReference getSimpleScenario_Lanes();
 
 	/**
+	 * Returns the meta object for the attribute '{@link simpleScenario.SimpleScenario#getMaxTime <em>Max Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max Time</em>'.
+	 * @see simpleScenario.SimpleScenario#getMaxTime()
+	 * @see #getSimpleScenario()
+	 * @generated
+	 */
+	EAttribute getSimpleScenario_MaxTime();
+
+	/**
 	 * Returns the meta object for class '{@link simpleScenario.Lane <em>Lane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -899,15 +937,15 @@ public interface SimpleScenarioPackage extends EPackage {
 	EAttribute getLane_ReferenceCoord();
 
 	/**
-	 * Returns the meta object for the reference list '{@link simpleScenario.Lane#getAdjacent <em>Adjacent</em>}'.
+	 * Returns the meta object for the reference '{@link simpleScenario.Lane#getPrevLane <em>Prev Lane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Adjacent</em>'.
-	 * @see simpleScenario.Lane#getAdjacent()
+	 * @return the meta object for the reference '<em>Prev Lane</em>'.
+	 * @see simpleScenario.Lane#getPrevLane()
 	 * @see #getLane()
 	 * @generated
 	 */
-	EReference getLane_Adjacent();
+	EReference getLane_PrevLane();
 
 	/**
 	 * Returns the meta object for the reference list '{@link simpleScenario.Lane#getActors <em>Actors</em>}'.
@@ -986,15 +1024,15 @@ public interface SimpleScenarioPackage extends EPackage {
 	EAttribute getActor_Width();
 
 	/**
-	 * Returns the meta object for the attribute '{@link simpleScenario.Actor#getSpeed <em>Speed</em>}'.
+	 * Returns the meta object for the attribute '{@link simpleScenario.Actor#getXSpeed <em>XSpeed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Speed</em>'.
-	 * @see simpleScenario.Actor#getSpeed()
+	 * @return the meta object for the attribute '<em>XSpeed</em>'.
+	 * @see simpleScenario.Actor#getXSpeed()
 	 * @see #getActor()
 	 * @generated
 	 */
-	EAttribute getActor_Speed();
+	EAttribute getActor_XSpeed();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link simpleScenario.Actor#getRelations <em>Relations</em>}'.
@@ -1017,6 +1055,17 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getActor_PlacedOn();
+
+	/**
+	 * Returns the meta object for the attribute '{@link simpleScenario.Actor#getYSpeed <em>YSpeed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>YSpeed</em>'.
+	 * @see simpleScenario.Actor#getYSpeed()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EAttribute getActor_YSpeed();
 
 	/**
 	 * Returns the meta object for class '{@link simpleScenario.Relation <em>Relation</em>}'.
@@ -1100,17 +1149,6 @@ public interface SimpleScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSeperationDistance_Distance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link simpleScenario.SeperationDistance#getNumDistance <em>Num Distance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Num Distance</em>'.
-	 * @see simpleScenario.SeperationDistance#getNumDistance()
-	 * @see #getSeperationDistance()
-	 * @generated
-	 */
-	EAttribute getSeperationDistance_NumDistance();
 
 	/**
 	 * Returns the meta object for class '{@link simpleScenario.CollisionExists <em>Collision Exists</em>}'.
@@ -1259,6 +1297,14 @@ public interface SimpleScenarioPackage extends EPackage {
 		EReference SIMPLE_SCENARIO__LANES = eINSTANCE.getSimpleScenario_Lanes();
 
 		/**
+		 * The meta object literal for the '<em><b>Max Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMPLE_SCENARIO__MAX_TIME = eINSTANCE.getSimpleScenario_MaxTime();
+
+		/**
 		 * The meta object literal for the '{@link simpleScenario.impl.LaneImpl <em>Lane</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1293,12 +1339,12 @@ public interface SimpleScenarioPackage extends EPackage {
 		EAttribute LANE__REFERENCE_COORD = eINSTANCE.getLane_ReferenceCoord();
 
 		/**
-		 * The meta object literal for the '<em><b>Adjacent</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Prev Lane</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LANE__ADJACENT = eINSTANCE.getLane_Adjacent();
+		EReference LANE__PREV_LANE = eINSTANCE.getLane_PrevLane();
 
 		/**
 		 * The meta object literal for the '<em><b>Actors</b></em>' reference list feature.
@@ -1359,12 +1405,12 @@ public interface SimpleScenarioPackage extends EPackage {
 		EAttribute ACTOR__WIDTH = eINSTANCE.getActor_Width();
 
 		/**
-		 * The meta object literal for the '<em><b>Speed</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>XSpeed</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ACTOR__SPEED = eINSTANCE.getActor_Speed();
+		EAttribute ACTOR__XSPEED = eINSTANCE.getActor_XSpeed();
 
 		/**
 		 * The meta object literal for the '<em><b>Relations</b></em>' containment reference list feature.
@@ -1381,6 +1427,14 @@ public interface SimpleScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTOR__PLACED_ON = eINSTANCE.getActor_PlacedOn();
+
+		/**
+		 * The meta object literal for the '<em><b>YSpeed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTOR__YSPEED = eINSTANCE.getActor_YSpeed();
 
 		/**
 		 * The meta object literal for the '{@link simpleScenario.impl.RelationImpl <em>Relation</em>}' class.
@@ -1455,14 +1509,6 @@ public interface SimpleScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SEPERATION_DISTANCE__DISTANCE = eINSTANCE.getSeperationDistance_Distance();
-
-		/**
-		 * The meta object literal for the '<em><b>Num Distance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SEPERATION_DISTANCE__NUM_DISTANCE = eINSTANCE.getSeperationDistance_NumDistance();
 
 		/**
 		 * The meta object literal for the '{@link simpleScenario.impl.CollisionExistsImpl <em>Collision Exists</em>}' class.

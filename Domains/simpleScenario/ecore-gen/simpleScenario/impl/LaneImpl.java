@@ -3,7 +3,6 @@
 package simpleScenario.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -14,8 +13,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -36,7 +33,7 @@ import simpleScenario.Size;
  *   <li>{@link simpleScenario.impl.LaneImpl#getOrientation <em>Orientation</em>}</li>
  *   <li>{@link simpleScenario.impl.LaneImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link simpleScenario.impl.LaneImpl#getReferenceCoord <em>Reference Coord</em>}</li>
- *   <li>{@link simpleScenario.impl.LaneImpl#getAdjacent <em>Adjacent</em>}</li>
+ *   <li>{@link simpleScenario.impl.LaneImpl#getPrevLane <em>Prev Lane</em>}</li>
  *   <li>{@link simpleScenario.impl.LaneImpl#getActors <em>Actors</em>}</li>
  *   <li>{@link simpleScenario.impl.LaneImpl#getNumWidth <em>Num Width</em>}</li>
  * </ul>
@@ -105,14 +102,14 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	protected double referenceCoord = REFERENCE_COORD_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getAdjacent() <em>Adjacent</em>}' reference list.
+	 * The cached value of the '{@link #getPrevLane() <em>Prev Lane</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAdjacent()
+	 * @see #getPrevLane()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Lane> adjacent;
+	protected Lane prevLane;
 
 	/**
 	 * The cached value of the '{@link #getActors() <em>Actors</em>}' reference list.
@@ -238,11 +235,38 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	 * @generated
 	 */
 	@Override
-	public EList<Lane> getAdjacent() {
-		if (adjacent == null) {
-			adjacent = new EObjectResolvingEList<Lane>(Lane.class, this, SimpleScenarioPackage.LANE__ADJACENT);
+	public Lane getPrevLane() {
+		if (prevLane != null && prevLane.eIsProxy()) {
+			InternalEObject oldPrevLane = (InternalEObject)prevLane;
+			prevLane = (Lane)eResolveProxy(oldPrevLane);
+			if (prevLane != oldPrevLane) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimpleScenarioPackage.LANE__PREV_LANE, oldPrevLane, prevLane));
+			}
 		}
-		return adjacent;
+		return prevLane;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Lane basicGetPrevLane() {
+		return prevLane;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setPrevLane(Lane newPrevLane) {
+		Lane oldPrevLane = prevLane;
+		prevLane = newPrevLane;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.LANE__PREV_LANE, oldPrevLane, prevLane));
 	}
 
 	/**
@@ -324,8 +348,9 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 				return getWidth();
 			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
 				return getReferenceCoord();
-			case SimpleScenarioPackage.LANE__ADJACENT:
-				return getAdjacent();
+			case SimpleScenarioPackage.LANE__PREV_LANE:
+				if (resolve) return getPrevLane();
+				return basicGetPrevLane();
 			case SimpleScenarioPackage.LANE__ACTORS:
 				return getActors();
 			case SimpleScenarioPackage.LANE__NUM_WIDTH:
@@ -352,9 +377,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
 				setReferenceCoord((Double)newValue);
 				return;
-			case SimpleScenarioPackage.LANE__ADJACENT:
-				getAdjacent().clear();
-				getAdjacent().addAll((Collection<? extends Lane>)newValue);
+			case SimpleScenarioPackage.LANE__PREV_LANE:
+				setPrevLane((Lane)newValue);
 				return;
 			case SimpleScenarioPackage.LANE__ACTORS:
 				getActors().clear();
@@ -384,8 +408,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
 				setReferenceCoord(REFERENCE_COORD_EDEFAULT);
 				return;
-			case SimpleScenarioPackage.LANE__ADJACENT:
-				getAdjacent().clear();
+			case SimpleScenarioPackage.LANE__PREV_LANE:
+				setPrevLane((Lane)null);
 				return;
 			case SimpleScenarioPackage.LANE__ACTORS:
 				getActors().clear();
@@ -411,8 +435,8 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 				return width != WIDTH_EDEFAULT;
 			case SimpleScenarioPackage.LANE__REFERENCE_COORD:
 				return referenceCoord != REFERENCE_COORD_EDEFAULT;
-			case SimpleScenarioPackage.LANE__ADJACENT:
-				return adjacent != null && !adjacent.isEmpty();
+			case SimpleScenarioPackage.LANE__PREV_LANE:
+				return prevLane != null;
 			case SimpleScenarioPackage.LANE__ACTORS:
 				return actors != null && !actors.isEmpty();
 			case SimpleScenarioPackage.LANE__NUM_WIDTH:

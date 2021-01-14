@@ -21,7 +21,6 @@ import simpleScenario.SimpleScenarioPackage;
  * </p>
  * <ul>
  *   <li>{@link simpleScenario.impl.SeperationDistanceImpl#getDistance <em>Distance</em>}</li>
- *   <li>{@link simpleScenario.impl.SeperationDistanceImpl#getNumDistance <em>Num Distance</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,26 +45,6 @@ public class SeperationDistanceImpl extends SpatialRelationImpl implements Seper
 	 * @ordered
 	 */
 	protected Distance distance = DISTANCE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getNumDistance() <em>Num Distance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNumDistance()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double NUM_DISTANCE_EDEFAULT = 0.0;
-
-	/**
-	 * The cached value of the '{@link #getNumDistance() <em>Num Distance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getNumDistance()
-	 * @generated
-	 * @ordered
-	 */
-	protected double numDistance = NUM_DISTANCE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,35 +94,10 @@ public class SeperationDistanceImpl extends SpatialRelationImpl implements Seper
 	 * @generated
 	 */
 	@Override
-	public double getNumDistance() {
-		return numDistance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setNumDistance(double newNumDistance) {
-		double oldNumDistance = numDistance;
-		numDistance = newNumDistance;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimpleScenarioPackage.SEPERATION_DISTANCE__NUM_DISTANCE, oldNumDistance, numDistance));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SimpleScenarioPackage.SEPERATION_DISTANCE__DISTANCE:
 				return getDistance();
-			case SimpleScenarioPackage.SEPERATION_DISTANCE__NUM_DISTANCE:
-				return getNumDistance();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,9 +112,6 @@ public class SeperationDistanceImpl extends SpatialRelationImpl implements Seper
 		switch (featureID) {
 			case SimpleScenarioPackage.SEPERATION_DISTANCE__DISTANCE:
 				setDistance((Distance)newValue);
-				return;
-			case SimpleScenarioPackage.SEPERATION_DISTANCE__NUM_DISTANCE:
-				setNumDistance((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,9 +128,6 @@ public class SeperationDistanceImpl extends SpatialRelationImpl implements Seper
 			case SimpleScenarioPackage.SEPERATION_DISTANCE__DISTANCE:
 				setDistance(DISTANCE_EDEFAULT);
 				return;
-			case SimpleScenarioPackage.SEPERATION_DISTANCE__NUM_DISTANCE:
-				setNumDistance(NUM_DISTANCE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -194,8 +142,6 @@ public class SeperationDistanceImpl extends SpatialRelationImpl implements Seper
 		switch (featureID) {
 			case SimpleScenarioPackage.SEPERATION_DISTANCE__DISTANCE:
 				return distance != DISTANCE_EDEFAULT;
-			case SimpleScenarioPackage.SEPERATION_DISTANCE__NUM_DISTANCE:
-				return numDistance != NUM_DISTANCE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,8 +158,6 @@ public class SeperationDistanceImpl extends SpatialRelationImpl implements Seper
 		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (distance: ");
 		result.append(distance);
-		result.append(", numDistance: ");
-		result.append(numDistance);
 		result.append(')');
 		return result.toString();
 	}

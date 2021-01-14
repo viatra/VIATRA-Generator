@@ -257,6 +257,16 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
+	public EAttribute getSimpleScenario_MaxTime() {
+		return (EAttribute)simpleScenarioEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getLane() {
 		return laneEClass;
 	}
@@ -297,7 +307,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EReference getLane_Adjacent() {
+	public EReference getLane_PrevLane() {
 		return (EReference)laneEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -377,7 +387,7 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_Speed() {
+	public EAttribute getActor_XSpeed() {
 		return (EAttribute)actorEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -399,6 +409,16 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	@Override
 	public EReference getActor_PlacedOn() {
 		return (EReference)actorEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getActor_YSpeed() {
+		return (EAttribute)actorEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -479,16 +499,6 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 	@Override
 	public EAttribute getSeperationDistance_Distance() {
 		return (EAttribute)seperationDistanceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getSeperationDistance_NumDistance() {
-		return (EAttribute)seperationDistanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -605,12 +615,13 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		createEAttribute(simpleScenarioEClass, SIMPLE_SCENARIO__YSIZE);
 		createEReference(simpleScenarioEClass, SIMPLE_SCENARIO__ACTORS);
 		createEReference(simpleScenarioEClass, SIMPLE_SCENARIO__LANES);
+		createEAttribute(simpleScenarioEClass, SIMPLE_SCENARIO__MAX_TIME);
 
 		laneEClass = createEClass(LANE);
 		createEAttribute(laneEClass, LANE__ORIENTATION);
 		createEAttribute(laneEClass, LANE__WIDTH);
 		createEAttribute(laneEClass, LANE__REFERENCE_COORD);
-		createEReference(laneEClass, LANE__ADJACENT);
+		createEReference(laneEClass, LANE__PREV_LANE);
 		createEReference(laneEClass, LANE__ACTORS);
 		createEAttribute(laneEClass, LANE__NUM_WIDTH);
 
@@ -619,9 +630,10 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		createEAttribute(actorEClass, ACTOR__YPOS);
 		createEAttribute(actorEClass, ACTOR__LENGTH);
 		createEAttribute(actorEClass, ACTOR__WIDTH);
-		createEAttribute(actorEClass, ACTOR__SPEED);
+		createEAttribute(actorEClass, ACTOR__XSPEED);
 		createEReference(actorEClass, ACTOR__RELATIONS);
 		createEReference(actorEClass, ACTOR__PLACED_ON);
+		createEAttribute(actorEClass, ACTOR__YSPEED);
 
 		relationEClass = createEClass(RELATION);
 		createEReference(relationEClass, RELATION__TARGET);
@@ -635,7 +647,6 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 
 		seperationDistanceEClass = createEClass(SEPERATION_DISTANCE);
 		createEAttribute(seperationDistanceEClass, SEPERATION_DISTANCE__DISTANCE);
-		createEAttribute(seperationDistanceEClass, SEPERATION_DISTANCE__NUM_DISTANCE);
 
 		collisionExistsEClass = createEClass(COLLISION_EXISTS);
 		createEAttribute(collisionExistsEClass, COLLISION_EXISTS__COLLISION_TIME);
@@ -695,23 +706,25 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		initEAttribute(getSimpleScenario_YSize(), ecorePackage.getEDouble(), "ySize", null, 0, 1, SimpleScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimpleScenario_Actors(), this.getActor(), null, "actors", null, 0, -1, SimpleScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimpleScenario_Lanes(), this.getLane(), null, "lanes", null, 0, -1, SimpleScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimpleScenario_MaxTime(), ecorePackage.getEDouble(), "maxTime", null, 0, 1, SimpleScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(laneEClass, Lane.class, "Lane", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLane_Orientation(), this.getOrientation(), "orientation", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLane_Width(), this.getSize(), "width", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLane_ReferenceCoord(), ecorePackage.getEDouble(), "referenceCoord", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLane_Adjacent(), this.getLane(), null, "adjacent", null, 0, 2, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLane_PrevLane(), this.getLane(), null, "prevLane", null, 0, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLane_Actors(), this.getActor(), this.getActor_PlacedOn(), "actors", null, 0, -1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLane_NumWidth(), ecorePackage.getEDouble(), "numWidth", "0.0", 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLane_NumWidth(), ecorePackage.getEDouble(), "numWidth", "0.0", 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actorEClass, Actor.class, "Actor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActor_XPos(), ecorePackage.getEDouble(), "xPos", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_YPos(), ecorePackage.getEDouble(), "yPos", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_Length(), ecorePackage.getEDouble(), "length", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_Width(), ecorePackage.getEDouble(), "width", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActor_Speed(), ecorePackage.getEDouble(), "speed", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_XSpeed(), ecorePackage.getEDouble(), "xSpeed", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActor_Relations(), this.getRelation(), null, "relations", null, 0, -1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActor_PlacedOn(), this.getLane(), this.getLane_Actors(), "placedOn", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActor_YSpeed(), ecorePackage.getEDouble(), "ySpeed", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelation_Target(), this.getActor(), null, "target", null, 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -721,11 +734,10 @@ public class SimpleScenarioPackageImpl extends EPackageImpl implements SimpleSce
 		initEClass(temporalRelationEClass, TemporalRelation.class, "TemporalRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(visionBlockedEClass, VisionBlocked.class, "VisionBlocked", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVisionBlocked_BlockedBy(), this.getActor(), null, "blockedBy", null, 0, 1, VisionBlocked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisionBlocked_BlockedBy(), this.getActor(), null, "blockedBy", null, 1, 1, VisionBlocked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(seperationDistanceEClass, SeperationDistance.class, "SeperationDistance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSeperationDistance_Distance(), this.getDistance(), "distance", null, 1, 1, SeperationDistance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSeperationDistance_NumDistance(), ecorePackage.getEDouble(), "numDistance", null, 1, 1, SeperationDistance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(collisionExistsEClass, CollisionExists.class, "CollisionExists", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollisionExists_CollisionTime(), ecorePackage.getEDouble(), "collisionTime", null, 1, 1, CollisionExists.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

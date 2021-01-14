@@ -25,12 +25,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//SimpleScenario/ySize"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//SimpleScenario/actors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//SimpleScenario/lanes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//SimpleScenario/maxTime"/>
     </genClasses>
     <genClasses ecoreClass="simpleScenario.ecore#//Lane">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Lane/orientation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Lane/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Lane/referenceCoord"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//Lane/adjacent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//Lane/prevLane"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//Lane/actors"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Lane/numWidth"/>
     </genClasses>
@@ -39,9 +40,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Actor/yPos"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Actor/length"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Actor/width"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Actor/speed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Actor/xSpeed"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//Actor/relations"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//Actor/placedOn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//Actor/ySpeed"/>
     </genClasses>
     <genClasses ecoreClass="simpleScenario.ecore#//Relation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//Relation/target"/>
@@ -51,9 +53,8 @@
     <genClasses ecoreClass="simpleScenario.ecore#//VisionBlocked">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simpleScenario.ecore#//VisionBlocked/blockedBy"/>
     </genClasses>
-    <genClasses ecoreClass="simpleScenario.ecore#//SeperationDistance">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//SeperationDistance/distance"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//SeperationDistance/numDistance"/>
+    <genClasses ecoreClass="simpleScenario.ecore#//SeparationDistance">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//SeparationDistance/distance"/>
     </genClasses>
     <genClasses ecoreClass="simpleScenario.ecore#//CollisionExists">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simpleScenario.ecore#//CollisionExists/collisionTime"/>

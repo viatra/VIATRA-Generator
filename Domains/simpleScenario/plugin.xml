@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
 --><plugin>
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated simpleScenario -->
-      <package
-            uri="http://www.example.com/simpleScenario"
-            class="simpleScenario.SimpleScenarioPackage"
-            genModel="model/simpleScenario.genmodel"/>
-   </extension>
-</plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated simpleScenario -->
+    <package class="simpleScenario.SimpleScenarioPackage" genModel="model/simpleScenario.genmodel" uri="http://www.example.com/simpleScenario"/>
+  </extension>
+</plugin>
