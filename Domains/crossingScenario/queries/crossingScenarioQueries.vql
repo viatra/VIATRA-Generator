@@ -1,0 +1,402 @@
+package queries
+
+import "http://www.example.com/crossingScenario"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+//Minimal Failing Example
+@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
+pattern patterThatOnlyWorksWithInt(l : Lane) {
+	Lane.referenceCoord(l, w);
+	check(w <= 2.0);
+}
+
+////////////////
+////Lane
+////////////////
+//
+///////////width, numWidth
+//@Constraint(severity="error", key={l}, message="x")
+//pattern define_numWidth_small(l : Lane) { 
+//	Lane.width(l, Size::Small);
+//	Lane.numWidth(l, nw);
+//	check(nw <= 5);
+//} or {
+//	Lane.width(l, Size::Small);
+//	Lane.numWidth(l, nw);
+//	check(nw >= 10);
+//}
+//
+//@Constraint(severity="error", key={l}, message="x")
+//pattern define_numWidth_medium(l : Lane) { 
+//	Lane.width(l, Size::Medium);
+//	Lane.numWidth(l, nw);
+//	check(nw <= 10);
+//} or {
+//	Lane.width(l, Size::Medium);
+//	Lane.numWidth(l, nw);
+//	check(nw >= 15);
+//}
+//
+//@Constraint(severity="error", key={l}, message="x")
+//pattern define_numWidth_large(l : Lane) { 
+//	Lane.width(l, Size::Large);
+//	Lane.numWidth(l, nw);
+//	check(nw <= 15);
+//} or {
+//	Lane.width(l, Size::Large);
+//	Lane.numWidth(l, nw);
+//	check(nw >= 20);
+//}
+//
+///////////referenceCoord
+//@Constraint(severity="error", key={l}, message="x")
+//pattern define_referenceCoord_horizontalAtOrigin(l:Lane) {
+//	1 == count find find_horizontalLaneAtOrigin(l);
+//}
+//
+//private pattern find_horizontalLaneAtOrigin(l:Lane){
+//	Lane.orientation(l, Orientation::Horizontal);
+//	Lane.referenceCoord(l, rc);
+//	Lane.prevLane(l, _);
+//	rc != 0.0;	
+//}
+//
+//@Constraint(severity="error", key={l}, message="x")
+//pattern define_referenceCoord_verticalAtOrigin(l:Lane) {
+//	1 == count find find_verticalLaneAtOrigin(l);
+//}
+//
+//private pattern find_verticalLaneAtOrigin(l:Lane){
+//	Lane.orientation(l, Orientation::Vertical);
+//	Lane.referenceCoord(l, rc);
+//	rc == 0.0;	
+//}
+//
+//pattern define_referenceCoord_VerticalifMultipleLanes(l1:Lane, l2:Lane) {
+//	//calculated risk???
+//	Lane.orientation(l1, Orientation::Vertical);
+//	Lane.orientation(l2, Orientation::Vertical);
+//	Lane.referenceCoord(l1, rc1);
+//	Lane.numWidth(l1, nw1);
+//	Lane.referenceCoord(l2, rc2);
+//	check(rc2 == rc1 + nw1);
+//}
+//
+//
+////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
+////pattern actorOnVerticalLane(a : Actor) {
+////    Actor.placedOn(a, l);
+////    Lane.orientation(l, Orientation::Vertical);
+////    Actor.xPos(a, x);
+////    Lane.referenceCoord(l, r);
+////    check(x <= r);
+////} or {
+////    Actor.placedOn(a, l);
+////    Lane.orientation(l, Orientation::Vertical);
+////    Actor.xPos(a, x);
+////    Lane.referenceCoord(l, r);
+////    Lane.numWidth(l, w);
+////    check(x >= (r + w));
+////}
+////
+////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for horizontal lanes")
+////pattern actorOnHorizontalLane(a : Actor) {
+////    Actor.placedOn(a, l);
+////    Lane.orientation(l, Orientation::Horizontal);
+////    Actor.yPos(a, y);
+////    Lane.referenceCoord(l, r);
+////    check(y <= r);
+////} or {
+////    Actor.placedOn(a, l);
+////    Lane.orientation(l, Orientation::Horizontal);
+////    Actor.yPos(a, y);
+////    Lane.referenceCoord(l, r);
+////    Lane.numWidth(l, w);
+////    check(y >= (r + w));
+////}
+//
+////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation")
+////pattern actorOnLane(a : Actor) {
+////	find actorOnVerticalLane(a);
+//////	neg find actorOnHorizontalLane(a);
+////}
+////
+////private pattern actorOnVerticalLane(a : Actor) {
+////    Actor.placedOn(a, l);
+////    Lane.orientation(l, Orientation::Vertical);
+////    Actor.xPos(a, x);
+////    Lane.referenceCoord(l, r);
+////    Lane.numWidth(l, w);
+////    check(x >= r);
+////    check(x <= (r + w));
+////}
+//
+////@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
+////pattern widthSpec(l : Lane) {
+////	Lane.numWidth(l, w);
+////	check(w != 5);
+////}
+//
+////private pattern actorOnHorizontalLane(a : Actor) {
+////    Actor.placedOn(a, l);
+////    Lane.orientation(l, Orientation::Vertical);
+////    Actor.yPos(a, y);
+////    Lane.referenceCoord(l, r);
+////    Lane.widthNum(l, w);
+////    check(y >= r);
+////    check(y <= (r + w));
+////}
+//
+////////////////
+////CollisionExists
+////////////////
+//
+//@Constraint(severity="error", key={c}, message="x")
+//pattern collisionExists_timeWithinBound(ss:CrossingScenario, c:CollisionExists) {
+//	CrossingScenario.actors.relations(ss, c);
+//	CrossingScenario.maxTime(ss, maxTime);
+//	CollisionExists. collisionTime(c, cTime);
+//	check(cTime >= maxTime);}
+//
+//@Constraint(severity="error", key={c}, message="x")
+//pattern collisionExists_timeNotNegative(c:CollisionExists) {
+//	CollisionExists. collisionTime(c, cTime);
+//	check(cTime <= 0);}
+//
+//@Constraint(severity="error", key={a1, c}, message="x")
+//pattern collisionExists_defineCollision_y1(a1:Actor, a2:Actor, c:CollisionExists) {
+//	Actor.relations(a1, c);
+//	CollisionExists.target(c, a2);
+//	
+//	Actor.length(a1, l1);
+//	Actor.yPos(a1, yPos1);
+//	Actor.ySpeed(a1, ySpeed1);
+//	Actor.length(a2, l2);
+//	Actor.yPos(a2, yPos2);
+//	Actor.ySpeed(a2, ySpeed2);
+//	CollisionExists. collisionTime(c, cTime);
+//	//check(y_1_bottom > y_2_top
+//	check((yPos1 + (ySpeed1 * cTime)) - (l1/2) > (yPos2 + (ySpeed2 * cTime)) + (l2/2));	
+//}
+//
+//@Constraint(severity="error", key={a1, c}, message="x")
+//pattern collisionExists_defineCollision_y2(a1:Actor, a2:Actor, c:CollisionExists) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, c);
+//	CollisionExists.target(c, a2);
+//	
+//	Actor.length(a1, l1);
+//	Actor.yPos(a1, yPos1);
+//	Actor.ySpeed(a1, ySpeed1);
+//	Actor.length(a2, l2);
+//	Actor.yPos(a2, yPos2);
+//	Actor.ySpeed(a2, ySpeed2);
+//	CollisionExists. collisionTime(c, cTime);
+//	//check(y_1_top < y_2_bottom)
+//	check((yPos1 + (ySpeed1 * cTime)) + (l1/2) < (yPos2 + (ySpeed2 * cTime)) - (l2/2));	
+//}
+//
+//@Constraint(severity="error", key={a1, c}, message="x")
+//pattern collisionExists_defineCollision_x1(a1:Actor, a2:Actor, c:CollisionExists) {
+//	Actor.relations(a1, c);
+//	CollisionExists.target(c, a2);
+//	
+//	Actor.width(a1, w1);
+//	Actor.xPos(a1, xPos1);
+//	Actor.xSpeed(a1, xSpeed1);
+//	Actor.width(a2, w2);
+//	Actor.xPos(a2, xPos2);
+//	Actor.xSpeed(a2, xSpeed2);
+//	CollisionExists. collisionTime(c, cTime);
+//	//check(x_1_left > x_2_right)
+//	check((xPos1 + (xSpeed1 * cTime)) - (w1/2) > (xPos2 + (xSpeed2 * cTime)) + (w2/2));	
+//}
+//
+//@Constraint(severity="error", key={a1, c}, message="x")
+//pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor, c:CollisionExists) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, c);
+//	CollisionExists.target(c, a2);
+//	
+//	Actor.width(a1, w1);
+//	Actor.xPos(a1, xPos1);
+//	Actor.xSpeed(a1, xSpeed1);
+//	Actor.width(a2, w2);
+//	Actor.xPos(a2, xPos2);
+//	Actor.xSpeed(a2, xSpeed2);
+//	CollisionExists. collisionTime(c, cTime);
+//	//check(x_1_right < x_2_left)
+//	check((xPos1 + (xSpeed1 * cTime)) + (w1/2) < (xPos2 + (xSpeed2 * cTime)) - (w2/2));	
+//}
+//
+////////////////
+////SeparationDistance
+////////////////
+//@Constraint(severity="error", key={a1, sd}, message="x")
+//pattern SeparationDistance_near_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, sd);
+//	SeparationDistance.target(sd, a2);
+//	SeparationDistance.distance(sd, Distance::Near);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	//check(dx^2 + dy^2 < 5^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 5*5);	
+//}
+//
+//@Constraint(severity="error", key={a1, sd}, message="x")
+//pattern SeparationDistance_near_ub(a1:Actor, a2:Actor, sd:SeparationDistance) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, sd);
+//	SeparationDistance.target(sd, a2);
+//	SeparationDistance.distance(sd, Distance::Near);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	//check(dx^2 + dy^2 > 10^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);	
+//}
+//
+//@Constraint(severity="error", key={a1, sd}, message="x")
+//pattern SeparationDistance_medium_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, sd);
+//	SeparationDistance.target(sd, a2);
+//	SeparationDistance.distance(sd, Distance::Medium);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	//check(dx^2 + dy^2 < 10^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
+//}
+//
+//@Constraint(severity="error", key={a1, sd}, message="x")
+//pattern SeparationDistance_medium_ub(a1:Actor, a2:Actor, sd:SeparationDistance) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, sd);
+//	SeparationDistance.target(sd, a2);
+//	SeparationDistance.distance(sd, Distance::Medium);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	//check(dx^2 + dy^2 > 1^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 15*15);	
+//}
+//
+//@Constraint(severity="error", key={a1, sd}, message="x")
+//pattern SeparationDistance_far_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, sd);
+//	SeparationDistance.target(sd, a2);
+//	SeparationDistance.distance(sd, Distance::Far);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	//check(dx^2 + dy^2 < 15^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);	
+//}
+//
+////////////////
+////CollisionDoesNotExist
+////////////////
+//
+////@Constraint(severity="error", key={a1, cdne}, message="x")
+////pattern collisionDoesNotExist(a1:Actor, a2:Actor, ss:CrossingScenario, cdne:CollisionDoesNotExist) {
+////	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+////	
+////	CrossingScenario.actors(ss, a1);
+////	CrossingScenario.actors(ss, a2);
+////	Actor.relations(a1, cdne);
+////	CollisionDoesNotExist.target(cdne, a2);
+////	CrossingScenario.maxTime(ss, maxTime);
+////	
+////	Actor.width(a1, w1);
+////	Actor.length(a1, l1);
+////	Actor.xPos(a1, xPos1);
+////	Actor.yPos(a1, yPos1);
+////	Actor.xSpeed(a1, xSpeed1);
+////	Actor.ySpeed(a1, ySpeed1);
+////	
+////	Actor.width(a2, w2);
+////	Actor.length(a2, l2);
+////	Actor.xPos(a2, xPos2);
+////	Actor.yPos(a2, yPos2);
+////	Actor.xSpeed(a2, xSpeed2);
+////	Actor.ySpeed(a2, ySpeed2);
+////	//check(dx^2 + dy^2 < 15^2)
+////	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);	
+////}
+//
+////////////////
+////VisionBlocked
+////////////////
+//
+////OPTIONS 1: everything is from a single check expression containing ITEs
+////Currently unhandled bygenerator
+//@Constraint(severity="error", key={a1, vb}, message="x")
+//pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, vb);
+//	VisionBlocked.target(vb, a2);
+//	VisionBlocked.blockedBy(vb, aBlocker);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	Actor.xPos(aBlocker, xBlocker);
+//	Actor.yPos(aBlocker, yBlocker);
+//	Actor.length(aBlocker, lenBlocker);
+//	Actor.width(aBlocker, widBlocker);
+//	
+//	//check(slope of a1-to-BlockerTop < slope of a1-to-a2)
+//	check(
+//		( yBlocker - y1 + (if(xBlocker > x1){lenBlocker/2}else{0-lenBlocker/2})) / 
+//		( xBlocker - x1 + (if(yBlocker > y1){0-widBlocker/2}else{widBlocker/2}))
+//		< ((y1-y2)/(x1-x2)));	
+//}
+//
+//@Constraint(severity="error", key={a1, vb}, message="x")
+//pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
+//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+//	Actor.relations(a1, vb);
+//	VisionBlocked.target(vb, a2);
+//	VisionBlocked.blockedBy(vb, aBlocker);
+//	
+//	Actor.xPos(a1, x1);
+//	Actor.yPos(a1, y1);
+//	Actor.xPos(a2, x2);
+//	Actor.yPos(a2, y2);
+//	Actor.xPos(aBlocker, xBlocker);
+//	Actor.yPos(aBlocker, yBlocker);
+//	Actor.length(aBlocker, lenBlocker);
+//	Actor.width(aBlocker, widBlocker);
+//	
+//	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
+//	check(
+//		( yBlocker - y1 + (if(xBlocker > x1){0-lenBlocker/2}else{lenBlocker/2})) / 
+//		( xBlocker - x1 + (if(yBlocker > y1){widBlocker/2}else{0-widBlocker/2}))
+//		> ((y1-y2)/(x1-x2)));	
+//}
+//
+////OPTION 2: 
+////we handle ITE by seperating the constraints
+//
+////This will involve 1 constarint for each decision path, but will require multiple check expressions within the same pattern
+//
+////OPTION 3: 
+////If this is nott working still, we will have to add some strctural components to the MM
+////to differentiate the different cases and reduce the requirements of if, then, else
+//
+////This will involve more patterns, and some that are pstructural as well.

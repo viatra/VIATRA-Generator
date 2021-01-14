@@ -1,0 +1,28 @@
+import epackage	"model/crossingScenario.ecore"
+import viatra	"queries/crossingScenarioQueries.vql"
+
+generate {
+	metamodel = { package crossingScenario }
+	constraints = { package queries}
+	partial-model = { "inputs/CrossingScenarioInit.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node = 10..30,
+		#int = {},
+		#<Lane> = 1
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = normal,
+		"numeric-solver" = "dreal",
+		"scopePropagator" = "typeHierarchy"
+	}
+	
+	runs = 1
+	
+	debug =			"outputs/debug"
+	log =			"outputs/debug/log.txt"
+	output =		"outputs/models"	
+	statistics =	"outputs/statistics.csv"
+}
