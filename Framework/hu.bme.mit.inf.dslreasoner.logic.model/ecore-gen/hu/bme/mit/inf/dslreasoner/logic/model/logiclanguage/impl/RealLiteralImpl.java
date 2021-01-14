@@ -4,9 +4,6 @@ package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.impl;
 
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage;
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral;
-
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -35,7 +32,7 @@ public class RealLiteralImpl extends AtomicTermImpl implements RealLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal VALUE_EDEFAULT = null;
+	protected static final double VALUE_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -45,7 +42,7 @@ public class RealLiteralImpl extends AtomicTermImpl implements RealLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal value = VALUE_EDEFAULT;
+	protected double value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +69,7 @@ public class RealLiteralImpl extends AtomicTermImpl implements RealLiteral {
 	 * @generated
 	 */
 	@Override
-	public BigDecimal getValue() {
+	public double getValue() {
 		return value;
 	}
 
@@ -82,8 +79,8 @@ public class RealLiteralImpl extends AtomicTermImpl implements RealLiteral {
 	 * @generated
 	 */
 	@Override
-	public void setValue(BigDecimal newValue) {
-		BigDecimal oldValue = value;
+	public void setValue(double newValue) {
+		double oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, LogiclanguagePackage.REAL_LITERAL__VALUE, oldValue, value));
@@ -112,7 +109,7 @@ public class RealLiteralImpl extends AtomicTermImpl implements RealLiteral {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case LogiclanguagePackage.REAL_LITERAL__VALUE:
-				setValue((BigDecimal)newValue);
+				setValue((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -142,7 +139,7 @@ public class RealLiteralImpl extends AtomicTermImpl implements RealLiteral {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case LogiclanguagePackage.REAL_LITERAL__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

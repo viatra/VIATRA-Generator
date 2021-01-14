@@ -481,9 +481,9 @@ class LogicProblemBuilder{
 	def Pow(TermDescription left, TermDescription right) {createPow => [leftOperand = left.toTerm rightOperand = right.toTerm]}
 	def asTerm(boolean value) { createBoolLiteral => [x|x.value = value]  }
 	def asTerm(int value) { createIntLiteral => [x|x.value = value] }
-	def asTerm(double value) { BigDecimal.valueOf(value).asTerm }
-	def asTerm(float value) { BigDecimal.valueOf(value).asTerm }
-	def asTerm(BigDecimal value) { createRealLiteral => [x|x.value = value]	}
+	def asTerm(double value) { createRealLiteral => [x|x.value = value] }
+	def asTerm(float value) { createRealLiteral => [x|x.value = value] }
+//	def asTerm(BigDecimal value) { createRealLiteral => [x|x.value = value]	}
 	def asTerm(String value) { createStringLiteral => [x|x.value = value]}
 	def InstanceOf(TermDescription term, TypeDescriptor type) {
 		createInstanceOf => [

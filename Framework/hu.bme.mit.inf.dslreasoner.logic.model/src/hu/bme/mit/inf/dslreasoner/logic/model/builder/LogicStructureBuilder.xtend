@@ -146,7 +146,7 @@ class LogicStructureBuilder{
 	}
 	
 	def protected dispatch Term toTerm(Integer o)  { createIntLiteral=>[value = o] }
-	def protected dispatch Term toTerm(BigDecimal o) { createRealLiteral=>[value = o]}
+	def protected dispatch Term toTerm(Double o) { createRealLiteral=>[value = o]}
 	def protected dispatch Term toTerm(Boolean o) { createBoolLiteral=>[value = o]}
 	def protected dispatch Term toTerm(SymbolicDeclaration o) { createSymbolicValue=>[symbolicReference = o]}
 	def public Term termDescriptiontoTerm(TermDescription term) {
@@ -171,7 +171,7 @@ class LogicStructureBuilder{
 	// Atomic resoulutions
 	def protected dispatch Object resolve(IntLiteral literal,  LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value as Integer }
 	def protected dispatch Object resolve(BoolLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value }
-	def protected dispatch Object resolve(RealLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value as BigDecimal }
+	def protected dispatch Object resolve(RealLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value as Double }
 	def protected dispatch Object resolve(StringLiteral literal, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) { return literal.value }
 	
 	def protected dispatch Object resolve(Not not, LogicModelInterpretation interpretation, Map<Variable,Object> variableBinding) {

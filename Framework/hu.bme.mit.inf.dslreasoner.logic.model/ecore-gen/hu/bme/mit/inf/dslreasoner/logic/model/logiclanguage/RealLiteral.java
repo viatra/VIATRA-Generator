@@ -2,8 +2,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage;
 
-import java.math.BigDecimal;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Real Literal</b></em>'.
@@ -30,12 +28,12 @@ public interface RealLiteral extends AtomicTerm {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(BigDecimal)
+	 * @see #setValue(double)
 	 * @see hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguagePackage#getRealLiteral_Value()
 	 * @model required="true"
 	 * @generated
 	 */
-	BigDecimal getValue();
+	double getValue();
 
 	/**
 	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral#getValue <em>Value</em>}' attribute.
@@ -45,6 +43,6 @@ public interface RealLiteral extends AtomicTerm {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(BigDecimal value);
+	void setValue(double value);
 
 } // RealLiteral

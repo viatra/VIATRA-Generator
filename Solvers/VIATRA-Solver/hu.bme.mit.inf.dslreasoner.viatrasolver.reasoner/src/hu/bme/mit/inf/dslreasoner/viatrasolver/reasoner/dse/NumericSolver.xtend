@@ -98,11 +98,12 @@ class NumericSolver {
 			finalResult=true
 		} else {
 			val propagatedConstraints = new HashMap
+			println("------ Any matches?")
 			for(entry : matches.entrySet) {
 				val constraint = entry.key
-				//println(constraint)
+				println("------ " + constraint)
 				val allMatches = entry.value.allMatches.map[it.toArray]
-				//println(allMatches.toList)
+				println("------ " + allMatches.toList)
 				propagatedConstraints.put(constraint,allMatches)
 			}
 			if(propagatedConstraints.values.forall[empty]) {
@@ -198,6 +199,6 @@ class NumericSolver {
 	
 	def protected dispatch fillWithValue(BooleanElement e, Object value) {e.valueSet=true e.value=value as Boolean}
 	def protected dispatch fillWithValue(IntegerElement e, Object value) {e.valueSet=true e.value=value as Integer}
-	def protected dispatch fillWithValue(RealElement e, Object value) {e.valueSet=true e.value=BigDecimal.valueOf(value as Double) }
+	def protected dispatch fillWithValue(RealElement e, Object value) {e.valueSet=true e.value=value as Double }
 	def protected dispatch fillWithValue(StringElement e, Object value) {e.valueSet=true e.value=value as String}
 }

@@ -109,13 +109,14 @@ class Logic2Ecore {
 	}
 	
 	def translateType(EDataType type, Object value) {
-		if(type == EcorePackage.eINSTANCE.EFloat) {
-			val bd = value as BigDecimal
-			return bd.floatValue
-		} else if( type  == EcorePackage.eINSTANCE.EDouble ) {
-			val bd = value as BigDecimal
-			return bd.doubleValue
-		} else return value
+//		if(type == EcorePackage.eINSTANCE.EFloat) {
+//			val bd = value as BigDecimal
+//			return bd.floatValue
+//		} else if( type  == EcorePackage.eINSTANCE.EDouble ) {
+//			val bd = value as BigDecimal
+//			return bd.doubleValue
+//		} else 
+		return value
 	}
 	
 	protected dispatch def Map<? extends TermDescription, ? extends Object> getAllElementsOfDatatype(EEnum type, Ecore2Logic_Trace forwardTrace, LogicModelInterpretation interpretation) {

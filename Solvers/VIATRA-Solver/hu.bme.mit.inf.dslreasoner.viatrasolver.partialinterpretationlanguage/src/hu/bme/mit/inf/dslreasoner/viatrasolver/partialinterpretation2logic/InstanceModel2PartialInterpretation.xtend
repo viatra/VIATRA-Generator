@@ -13,7 +13,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.Par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.Problem2PartialInterpretationTrace
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialRelationInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
-import java.math.BigDecimal
 import java.util.HashMap
 import java.util.HashSet
 import java.util.List
@@ -148,7 +147,7 @@ class InstanceModel2PartialInterpretation {
 	
 	private def createTypeScopesFromKnownAttributeValues(List<EObject> objects, Set<EAttribute> attributesUsed) {
 		val Set<Integer> integers = new HashSet
-		val Set<BigDecimal> reals = new HashSet
+		val Set<Double> reals = new HashSet
 		val Set<String> strings = new HashSet
 		for(object: objects) {
 			for(attribute : object.eClass.EAllAttributes.filter[attributesUsed.contains(it)]) {
@@ -170,28 +169,28 @@ class InstanceModel2PartialInterpretation {
 			it.knownStrings += strings
 		]
 	}
-	private def dispatch shortValue(Boolean value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+	private def dispatch shortValue(Boolean value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		// Do nothing
 	}
-	private def dispatch shortValue(Integer value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+	private def dispatch shortValue(Integer value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		integers += value
 	}
-	private def dispatch shortValue(Short value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+	private def dispatch shortValue(Short value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		integers += Integer.valueOf(value)
 	}
-	private def dispatch shortValue(Float value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
-		reals += BigDecimal.valueOf(value)
+	private def dispatch shortValue(Float value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
+		reals += Double.valueOf(value)
 	}
-	private def dispatch shortValue(Double value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
-		reals += BigDecimal.valueOf(value)
+	private def dispatch shortValue(Double value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
+		reals += value
 	}
-	private def dispatch shortValue(String value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+	private def dispatch shortValue(String value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		strings += value
 	}
-	private def dispatch shortValue(Void value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+	private def dispatch shortValue(Void value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		// Do nothing
 	}
-	private def dispatch shortValue(Object value, Set<Integer> integers, Set<BigDecimal> reals, Set<String> strings) {
+	private def dispatch shortValue(Object value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		// Do nothing
 	}
 	
@@ -220,11 +219,11 @@ class InstanceModel2PartialInterpretation {
 	}
 	
 	dispatch protected def translateValue(Double value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
-		BigDecimal.valueOf(value).lookup(partialInterpretationTrace.primitiveValues.realMap)
+		value.lookup(partialInterpretationTrace.primitiveValues.realMap)
 	}
 	
 	dispatch protected def translateValue(Float value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
-		BigDecimal.valueOf(value).lookup(partialInterpretationTrace.primitiveValues.realMap)
+		Double.valueOf(value).lookup(partialInterpretationTrace.primitiveValues.realMap)
 	}
 	
 	dispatch protected def translateValue(String value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {

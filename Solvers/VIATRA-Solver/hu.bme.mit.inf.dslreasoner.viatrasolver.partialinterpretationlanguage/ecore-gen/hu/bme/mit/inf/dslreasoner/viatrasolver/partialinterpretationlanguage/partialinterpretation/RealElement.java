@@ -2,8 +2,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation;
 
-import java.math.BigDecimal;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Real Element</b></em>'.
@@ -30,12 +28,12 @@ public interface RealElement extends PrimitiveElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(BigDecimal)
+	 * @see #setValue(double)
 	 * @see hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage#getRealElement_Value()
 	 * @model required="true"
 	 * @generated
 	 */
-	BigDecimal getValue();
+	double getValue();
 
 	/**
 	 * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement#getValue <em>Value</em>}' attribute.
@@ -45,6 +43,6 @@ public interface RealElement extends PrimitiveElement {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(BigDecimal value);
+	void setValue(double value);
 
 } // RealElement

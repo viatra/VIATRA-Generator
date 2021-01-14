@@ -52,7 +52,7 @@ import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
 	PartialIntegerInterpretation integerInterpretation
 	Map<Integer,IntegerElement> integerMap
 	PartialRealInterpretation realInterpretation
-	Map<BigDecimal,RealElement> realMap
+	Map<Double,RealElement> realMap
 	PartialStringInterpretation stringInterpretation
 	Map<String,StringElement> stringMap
 }
@@ -146,7 +146,7 @@ class PartialInterpretationInitialiser {
 		return integerInterpretation
 	}
 	
-	def protected initReals(PartialInterpretation partialInterpretation, SortedSet<BigDecimal> knownReals, int minNewReals, int maxNewReals) {
+	def protected initReals(PartialInterpretation partialInterpretation, SortedSet<Double> knownReals, int minNewReals, int maxNewReals) {
 		val realInterpretation = createPartialRealInterpretation
 		partialInterpretation.partialtypeinterpratation += realInterpretation
 		

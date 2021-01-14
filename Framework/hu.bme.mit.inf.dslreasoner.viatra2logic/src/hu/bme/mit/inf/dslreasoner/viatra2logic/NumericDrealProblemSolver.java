@@ -171,7 +171,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				if (isInt) {
 					expr = Integer.toString(((IntegerElement) matchedObj).getValue());
 				} else {
-					expr = Double.toString(((RealElement) matchedObj).getValue().doubleValue());
+					expr = Double.toString(((RealElement) matchedObj).getValue());
+//					expr = Double.toString(((RealElement) matchedObj).getValue().doubleValue());
 				}
 				varMap.put(matchedObj, expr);
 			}
@@ -301,7 +302,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	
 	private Map<String, String> parseDrealOutput(List<String> output) {
 		Map<String, String> res = new HashMap<String, String>();
-		String re = "(\\w+) : \\[([0-9\\-.e]+), ([0-9\\-.e]+)\\]";
+		String re = "(\\w+) : \\[([0-9\\-+.e]+), ([0-9\\-+.e]+)\\]";
 		Pattern p = Pattern.compile(re);
 		for (String varVal : output) {
 		    Matcher m = p.matcher(varVal);
@@ -350,7 +351,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 					} else {
 						String varName = varMap.get(obj);
 						String value = solMap.get(varName);
-						sol.put(obj, Integer.parseInt(value));
+						sol.put(obj, Double.parseDouble(value));
 					}
 
 				} else {

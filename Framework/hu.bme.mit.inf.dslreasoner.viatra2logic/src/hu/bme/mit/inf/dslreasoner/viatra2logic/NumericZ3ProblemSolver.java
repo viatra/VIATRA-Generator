@@ -174,7 +174,7 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 					int value = ((IntegerElement) matchedObj).getValue();
 					expr = (ArithExpr) ctx.mkInt(value);
 				} else {
-					double value = ((RealElement) matchedObj).getValue().doubleValue();
+					double value = ((RealElement) matchedObj).getValue();
 					expr = (ArithExpr) ctx.mkReal(String.valueOf(value));
 				}
 				varMap.put(matchedObj, expr);

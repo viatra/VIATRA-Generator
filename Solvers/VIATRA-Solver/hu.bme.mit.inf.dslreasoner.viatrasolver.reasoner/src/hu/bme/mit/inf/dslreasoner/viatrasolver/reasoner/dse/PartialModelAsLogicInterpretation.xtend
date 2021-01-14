@@ -36,7 +36,7 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 	val Map<DefinedElement,DefinedElement> elementBackwardTrace
 	val Map<Boolean, BooleanElement> booleanForwardTrace
 	val Map<Integer, IntegerElement> integerForwardTrace
-	val Map<BigDecimal, RealElement> realForwardTrace
+	val Map<Double, RealElement> realForwardTrace
 	val Map<String, StringElement> stringForwardTrace
 	
 	new(PartialInterpretation partialInterpretation, Map<EObject, EObject> forwardMap) {
@@ -51,7 +51,9 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 		integerForwardTrace = initialisePrimitiveElementTrace(
 			0,[it+1],[it],partialInterpretation.newElements.filter(IntegerElement),[it.value])
 		realForwardTrace = initialisePrimitiveElementTrace(
-			BigDecimal::ZERO,[it.add(BigDecimal.ONE)],[it],partialInterpretation.newElements.filter(RealElement),[it.value])
+			0.0,[it+1.0],[it],partialInterpretation.newElements.filter(RealElement),[it.value])
+//		realForwardTrace = initialisePrimitiveElementTrace(
+//			BigDecimal::ZERO,[it.add(BigDecimal.ONE)],[it],partialInterpretation.newElements.filter(RealElement),[it.value])
 		stringForwardTrace = initialisePrimitiveElementTrace(
 			0,[it+1],['''String«it»'''],partialInterpretation.newElements.filter(StringElement),[it.value])
 	}
@@ -116,7 +118,7 @@ class PartialModelAsLogicInterpretation implements LogicModelInterpretation{
 	def dispatch elementLookupForward(Integer e) {
 		this.integerForwardTrace.get(e)
 	}
-	def dispatch elementLookupForward(BigDecimal e) {
+	def dispatch elementLookupForward(Double e) {
 		this.realForwardTrace.get(e)
 	}
 	def dispatch elementLookupForward(String e) {

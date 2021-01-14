@@ -85,9 +85,9 @@ interface LogicModelInterpretation {
 	/**
 	 * Returns all real numbers relevant to the logic structure. Not all integer is necessarily used.
 	 */
-	def SortedSet<BigDecimal> getAllRealsInStructure()
+	def SortedSet<Double> getAllRealsInStructure()
 
-	def Map<TermDescription, BigDecimal> getAllRealsWithInterpretation() {
+	def Map<TermDescription, Double> getAllRealsWithInterpretation() {
 		allRealsInStructure.toMap [ real |
 			(LogiclanguageFactory.eINSTANCE.createRealLiteral => [value = real]) as TermDescription
 		]

@@ -4,9 +4,6 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.pa
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationPackage;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement;
-
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -35,7 +32,7 @@ public class RealElementImpl extends PrimitiveElementImpl implements RealElement
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal VALUE_EDEFAULT = null;
+	protected static final double VALUE_EDEFAULT = 0.0;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -45,7 +42,7 @@ public class RealElementImpl extends PrimitiveElementImpl implements RealElement
 	 * @generated
 	 * @ordered
 	 */
-	protected BigDecimal value = VALUE_EDEFAULT;
+	protected double value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +69,7 @@ public class RealElementImpl extends PrimitiveElementImpl implements RealElement
 	 * @generated
 	 */
 	@Override
-	public BigDecimal getValue() {
+	public double getValue() {
 		return value;
 	}
 
@@ -82,8 +79,8 @@ public class RealElementImpl extends PrimitiveElementImpl implements RealElement
 	 * @generated
 	 */
 	@Override
-	public void setValue(BigDecimal newValue) {
-		BigDecimal oldValue = value;
+	public void setValue(double newValue) {
+		double oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, PartialinterpretationPackage.REAL_ELEMENT__VALUE, oldValue, value));
@@ -112,7 +109,7 @@ public class RealElementImpl extends PrimitiveElementImpl implements RealElement
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case PartialinterpretationPackage.REAL_ELEMENT__VALUE:
-				setValue((BigDecimal)newValue);
+				setValue((Double)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -142,7 +139,7 @@ public class RealElementImpl extends PrimitiveElementImpl implements RealElement
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case PartialinterpretationPackage.REAL_ELEMENT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

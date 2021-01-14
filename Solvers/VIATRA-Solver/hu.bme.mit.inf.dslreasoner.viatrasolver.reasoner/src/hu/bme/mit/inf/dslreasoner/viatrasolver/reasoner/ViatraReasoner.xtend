@@ -110,7 +110,7 @@ class ViatraReasoner extends LogicReasoner {
 				new SolutionStore(numberOfRequiredSolutions)
 			}
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val numericSolver = new NumericSolver(method, viatraConfig, false)
+		val numericSolver = new NumericSolver(method, viatraConfig, true)//was formerly hard-coded to false for caching
 		val solutionSaver = method.solutionSaver
 		solutionSaver.numericSolver = numericSolver
 		val solutionCopier = solutionSaver.solutionCopier

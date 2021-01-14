@@ -96,7 +96,7 @@ public class TypeScopes {
 	public var minNewIntegers = 0
 	public var maxNewIntegers = Unlimited
 	
-	public var SortedSet<BigDecimal> knownReals = new TreeSet
+	public var SortedSet<Double> knownReals = new TreeSet
 	/**
 	 * Sets the number of Reals that has to be used to solve the problem.
 	 */
