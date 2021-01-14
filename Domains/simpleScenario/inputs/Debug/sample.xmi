@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simpleScenario:SimpleScenario
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:simpleScenario="http://www.example.com/simpleScenario">
+  <lanes/>
+</simpleScenario:SimpleScenario>

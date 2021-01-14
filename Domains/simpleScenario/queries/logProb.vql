@@ -1,0 +1,41 @@
+package queries
+
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" 
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+
+pattern UPMUSTPropagateConstraint0_pattern_queries_refSpec(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_l) 
+{
+// Original Constraints
+// var_l exported
+find mustInRelationreferenceCoord_attribute_Lane(problem,interpretation,var_l,var_w);
+// Propagation for constraint
+PrimitiveElement.valueSet(var_w,setted_var_w); 
+IntegerElement.value(var_w,value_var_w);
+// Matching variables 
+//var_w==up_1;
+}
+
+/**
+ * Matcher for detecting tuples t where []referenceCoord attribute Lane(source,target)
+ */
+pattern mustInRelationreferenceCoord_attribute_Lane(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"referenceCoord attribute Lane");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+
+//////////
+// 0. Util
+//////////
+pattern interpretation(problem:LogicProblem, interpretation:PartialInterpretation) {
+	PartialInterpretation.problem(interpretation,problem); 
+}
