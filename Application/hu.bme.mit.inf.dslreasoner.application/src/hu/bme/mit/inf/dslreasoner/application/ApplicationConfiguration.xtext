@@ -14,7 +14,7 @@ Command:
 QualifiedName returns ecore::EString:
 	ID ('.' ID)*;
 
-REALLiteral returns ecore::EBigDecimal:
+REALLiteral returns ecore::EDouble:
 	'-'? INT '.' INT;
 
 INTLiteral returns ecore::EInt:

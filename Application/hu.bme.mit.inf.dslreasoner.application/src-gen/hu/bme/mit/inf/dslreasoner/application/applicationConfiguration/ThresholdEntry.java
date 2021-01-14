@@ -3,7 +3,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration;
 
-import java.math.BigDecimal;
 
 /**
  * <!-- begin-user-doc -->
@@ -54,12 +53,12 @@ public interface ThresholdEntry extends ObjectiveEntry
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Threshold</em>' attribute.
-   * @see #setThreshold(BigDecimal)
+   * @see #setThreshold(double)
    * @see hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage#getThresholdEntry_Threshold()
    * @model
    * @generated
    */
-  BigDecimal getThreshold();
+  double getThreshold();
 
   /**
    * Sets the value of the '{@link hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ThresholdEntry#getThreshold <em>Threshold</em>}' attribute.
@@ -69,6 +68,6 @@ public interface ThresholdEntry extends ObjectiveEntry
    * @see #getThreshold()
    * @generated
    */
-  void setThreshold(BigDecimal value);
+  void setThreshold(double value);
 
 } // ThresholdEntry

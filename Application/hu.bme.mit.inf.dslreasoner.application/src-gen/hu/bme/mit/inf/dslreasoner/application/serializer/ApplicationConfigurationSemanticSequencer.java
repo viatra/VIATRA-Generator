@@ -579,8 +579,8 @@ public class ApplicationConfigurationSemanticSequencer extends AbstractDelegatin
 	 *             targetStatisticsFile=File | 
 	 *             tagetFolder=File
 	 *         )? 
-	 *         (runSpecified?='runs' runs=INT)? 
-	 *         (numberSpecified?='number' number=INT)?
+	 *         (numberSpecified?='number' number=INT)? 
+	 *         (runSpecified?='runs' runs=INT)?
 	 *     )+
 	 */
 	protected void sequence_GenerationTask(ISerializationContext context, GenerationTask semanticObject) {

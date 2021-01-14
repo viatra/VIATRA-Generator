@@ -148,8 +148,7 @@ class ScopeLoader {
 	def dispatch setSpecification(RealTypeScope scope, TypeScopes aggregated, Map<Type, Set<DefinedElement>> knownElements, Ecore2Logic ecore2Logic, Ecore2Logic_Trace trace, List<String> inconsistencies) {
 		val number = scope.number
 		if(number instanceof RealEnumeration) {
-			val x = number.entry;
-			<BigDecimal>addToKnownCollection(aggregated.knownReals,x,scope.isSetsNew,inconsistencies)
+			addToKnownCollection(aggregated.knownReals,number.entry,scope.isSetsNew,inconsistencies)
 			if(!scope.isSetsNew) {
 				aggregated.maxNewReals = 0
 			}

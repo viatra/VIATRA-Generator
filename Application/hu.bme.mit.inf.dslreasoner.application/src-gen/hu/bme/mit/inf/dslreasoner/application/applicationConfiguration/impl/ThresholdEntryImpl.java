@@ -7,8 +7,6 @@ import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.Applicati
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ComparisonOperator;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ThresholdEntry;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -59,7 +57,7 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
    * @generated
    * @ordered
    */
-  protected static final BigDecimal THRESHOLD_EDEFAULT = null;
+  protected static final double THRESHOLD_EDEFAULT = 0.0;
 
   /**
    * The cached value of the '{@link #getThreshold() <em>Threshold</em>}' attribute.
@@ -69,7 +67,7 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
    * @generated
    * @ordered
    */
-  protected BigDecimal threshold = THRESHOLD_EDEFAULT;
+  protected double threshold = THRESHOLD_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -123,7 +121,7 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
    * @generated
    */
   @Override
-  public BigDecimal getThreshold()
+  public double getThreshold()
   {
     return threshold;
   }
@@ -134,9 +132,9 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
    * @generated
    */
   @Override
-  public void setThreshold(BigDecimal newThreshold)
+  public void setThreshold(double newThreshold)
   {
-    BigDecimal oldThreshold = threshold;
+    double oldThreshold = threshold;
     threshold = newThreshold;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ApplicationConfigurationPackage.THRESHOLD_ENTRY__THRESHOLD, oldThreshold, threshold));
@@ -174,7 +172,7 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
         setOperator((ComparisonOperator)newValue);
         return;
       case ApplicationConfigurationPackage.THRESHOLD_ENTRY__THRESHOLD:
-        setThreshold((BigDecimal)newValue);
+        setThreshold((Double)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -213,7 +211,7 @@ public class ThresholdEntryImpl extends ObjectiveEntryImpl implements ThresholdE
       case ApplicationConfigurationPackage.THRESHOLD_ENTRY__OPERATOR:
         return operator != OPERATOR_EDEFAULT;
       case ApplicationConfigurationPackage.THRESHOLD_ENTRY__THRESHOLD:
-        return THRESHOLD_EDEFAULT == null ? threshold != null : !THRESHOLD_EDEFAULT.equals(threshold);
+        return threshold != THRESHOLD_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }

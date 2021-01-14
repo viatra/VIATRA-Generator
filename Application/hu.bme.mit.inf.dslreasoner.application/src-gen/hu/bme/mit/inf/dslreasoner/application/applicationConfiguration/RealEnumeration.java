@@ -3,8 +3,6 @@
  */
 package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -27,7 +25,7 @@ public interface RealEnumeration extends NumberSpecification
 {
   /**
    * Returns the value of the '<em><b>Entry</b></em>' attribute list.
-   * The list contents are of type {@link java.math.BigDecimal}.
+   * The list contents are of type {@link java.lang.Double}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Entry</em>' attribute list.
@@ -35,6 +33,6 @@ public interface RealEnumeration extends NumberSpecification
    * @model unique="false"
    * @generated
    */
-  EList<BigDecimal> getEntry();
+  EList<Double> getEntry();
 
 } // RealEnumeration

@@ -118,7 +118,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThresholdEntry" eSuperTypes="#//ObjectiveEntry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//ComparisonOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectiveFunction"/>
   <eClassifiers xsi:type="ecore:EClass" name="CostObjectiveFunction" eSuperTypes="#//ObjectiveFunction">
@@ -229,7 +229,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealEnumeration" eSuperTypes="#//NumberSpecification">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry" unique="false" upperBound="-1"
-        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBigDecimal"/>
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringEnumeration" eSuperTypes="#//NumberSpecification">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry" unique="false" upperBound="-1"

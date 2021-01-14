@@ -2971,7 +2971,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
 
     initEClass(thresholdEntryEClass, ThresholdEntry.class, "ThresholdEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getThresholdEntry_Operator(), this.getComparisonOperator(), "operator", null, 0, 1, ThresholdEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getThresholdEntry_Threshold(), theEcorePackage.getEBigDecimal(), "threshold", null, 0, 1, ThresholdEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getThresholdEntry_Threshold(), theEcorePackage.getEDouble(), "threshold", null, 0, 1, ThresholdEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(objectiveFunctionEClass, ObjectiveFunction.class, "ObjectiveFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3067,7 +3067,7 @@ public class ApplicationConfigurationPackageImpl extends EPackageImpl implements
     initEAttribute(getIntEnumberation_Entry(), theEcorePackage.getEInt(), "entry", null, 0, -1, IntEnumberation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(realEnumerationEClass, RealEnumeration.class, "RealEnumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRealEnumeration_Entry(), theEcorePackage.getEBigDecimal(), "entry", null, 0, -1, RealEnumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRealEnumeration_Entry(), theEcorePackage.getEDouble(), "entry", null, 0, -1, RealEnumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stringEnumerationEClass, StringEnumeration.class, "StringEnumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStringEnumeration_Entry(), theEcorePackage.getEString(), "entry", null, 0, -1, StringEnumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

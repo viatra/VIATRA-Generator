@@ -110,7 +110,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final RuleCall cINTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//REALLiteral ecore::EBigDecimal:
+		//REALLiteral ecore::EDouble:
 		//	'-'? INT '.' INT;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -3226,7 +3226,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 		return getQualifiedNameAccess().getRule();
 	}
 	
-	//REALLiteral ecore::EBigDecimal:
+	//REALLiteral ecore::EDouble:
 	//	'-'? INT '.' INT;
 	public REALLiteralElements getREALLiteralAccess() {
 		return pREALLiteral;
@@ -4061,8 +4061,7 @@ public class ApplicationConfigurationGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//terminal STRING:
-	//	'"' ('\\' . | !('\\' | '"'))* '"' |
-	//	"'" ('\\' . | !('\\' | "'"))* "'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' | "'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	}

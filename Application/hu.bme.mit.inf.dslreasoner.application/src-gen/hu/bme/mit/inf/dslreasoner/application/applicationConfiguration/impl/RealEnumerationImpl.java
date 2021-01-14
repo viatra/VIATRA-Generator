@@ -6,8 +6,6 @@ package hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.impl;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.ApplicationConfigurationPackage;
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.RealEnumeration;
 
-import java.math.BigDecimal;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
@@ -39,7 +37,7 @@ public class RealEnumerationImpl extends NumberSpecificationImpl implements Real
    * @generated
    * @ordered
    */
-  protected EList<BigDecimal> entry;
+  protected EList<Double> entry;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,11 +66,11 @@ public class RealEnumerationImpl extends NumberSpecificationImpl implements Real
    * @generated
    */
   @Override
-  public EList<BigDecimal> getEntry()
+  public EList<Double> getEntry()
   {
     if (entry == null)
     {
-      entry = new EDataTypeEList<BigDecimal>(BigDecimal.class, this, ApplicationConfigurationPackage.REAL_ENUMERATION__ENTRY);
+      entry = new EDataTypeEList<Double>(Double.class, this, ApplicationConfigurationPackage.REAL_ENUMERATION__ENTRY);
     }
     return entry;
   }
@@ -106,7 +104,7 @@ public class RealEnumerationImpl extends NumberSpecificationImpl implements Real
     {
       case ApplicationConfigurationPackage.REAL_ENUMERATION__ENTRY:
         getEntry().clear();
-        getEntry().addAll((Collection<? extends BigDecimal>)newValue);
+        getEntry().addAll((Collection<? extends Double>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
