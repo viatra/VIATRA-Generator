@@ -34,7 +34,7 @@ public class SeparationDistanceImpl extends SpatialRelationImpl implements Separ
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Distance DISTANCE_EDEFAULT = Distance.NEAR;
+	protected static final Distance DISTANCE_EDEFAULT = Distance.DNEAR;
 
 	/**
 	 * The cached value of the '{@link #getDistance() <em>Distance</em>}' attribute.

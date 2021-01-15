@@ -19,67 +19,63 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Distance implements Enumerator {
 	/**
-	 * The '<em><b>Near</b></em>' literal object.
+	 * The '<em><b>DNear</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NEAR_VALUE
+	 * @see #DNEAR_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NEAR(0, "Near", "Near"),
+	DNEAR(0, "D_Near", "D_Near"), /**
+	 * The '<em><b>DMed</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DMED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DMED(1, "D_Med", "D_Med"), /**
+	 * The '<em><b>DFar</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DFAR_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DFAR(2, "D_Far", "D_Far");
 
 	/**
-	 * The '<em><b>Medium</b></em>' literal object.
+	 * The '<em><b>DNear</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #MEDIUM_VALUE
+	 * @see #DNEAR
+	 * @model name="D_Near"
 	 * @generated
 	 * @ordered
 	 */
-	MEDIUM(1, "Medium", "Medium"),
+	public static final int DNEAR_VALUE = 0;
 
 	/**
-	 * The '<em><b>Far</b></em>' literal object.
+	 * The '<em><b>DMed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FAR_VALUE
+	 * @see #DMED
+	 * @model name="D_Med"
 	 * @generated
 	 * @ordered
 	 */
-	FAR(2, "Far", "Far");
+	public static final int DMED_VALUE = 1;
 
 	/**
-	 * The '<em><b>Near</b></em>' literal value.
+	 * The '<em><b>DFar</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NEAR
-	 * @model name="Near"
+	 * @see #DFAR
+	 * @model name="D_Far"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NEAR_VALUE = 0;
-
-	/**
-	 * The '<em><b>Medium</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MEDIUM
-	 * @model name="Medium"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int MEDIUM_VALUE = 1;
-
-	/**
-	 * The '<em><b>Far</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #FAR
-	 * @model name="Far"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int FAR_VALUE = 2;
+	public static final int DFAR_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Distance</b></em>' enumerators.
@@ -89,9 +85,9 @@ public enum Distance implements Enumerator {
 	 */
 	private static final Distance[] VALUES_ARRAY =
 		new Distance[] {
-			NEAR,
-			MEDIUM,
-			FAR,
+			DNEAR,
+			DMED,
+			DFAR,
 		};
 
 	/**
@@ -148,9 +144,9 @@ public enum Distance implements Enumerator {
 	 */
 	public static Distance get(int value) {
 		switch (value) {
-			case NEAR_VALUE: return NEAR;
-			case MEDIUM_VALUE: return MEDIUM;
-			case FAR_VALUE: return FAR;
+			case DNEAR_VALUE: return DNEAR;
+			case DMED_VALUE: return DMED;
+			case DFAR_VALUE: return DFAR;
 		}
 		return null;
 	}

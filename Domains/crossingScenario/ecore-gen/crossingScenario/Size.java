@@ -19,67 +19,63 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum Size implements Enumerator {
 	/**
-	 * The '<em><b>Small</b></em>' literal object.
+	 * The '<em><b>SSmall</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SMALL_VALUE
+	 * @see #SSMALL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SMALL(0, "Small", "Small"),
+	SSMALL(0, "S_Small", "S_Small"), /**
+	 * The '<em><b>SMed</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SMED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SMED(1, "S_Med", "S_Med"), /**
+	 * The '<em><b>SLarge</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SLARGE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SLARGE(2, "S_Large", "S_Large");
 
 	/**
-	 * The '<em><b>Medium</b></em>' literal object.
+	 * The '<em><b>SSmall</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #MEDIUM_VALUE
+	 * @see #SSMALL
+	 * @model name="S_Small"
 	 * @generated
 	 * @ordered
 	 */
-	MEDIUM(1, "Medium", "Medium"),
+	public static final int SSMALL_VALUE = 0;
 
 	/**
-	 * The '<em><b>Large</b></em>' literal object.
+	 * The '<em><b>SMed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LARGE_VALUE
+	 * @see #SMED
+	 * @model name="S_Med"
 	 * @generated
 	 * @ordered
 	 */
-	LARGE(2, "Large", "Large");
+	public static final int SMED_VALUE = 1;
 
 	/**
-	 * The '<em><b>Small</b></em>' literal value.
+	 * The '<em><b>SLarge</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SMALL
-	 * @model name="Small"
+	 * @see #SLARGE
+	 * @model name="S_Large"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SMALL_VALUE = 0;
-
-	/**
-	 * The '<em><b>Medium</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MEDIUM
-	 * @model name="Medium"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int MEDIUM_VALUE = 1;
-
-	/**
-	 * The '<em><b>Large</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #LARGE
-	 * @model name="Large"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int LARGE_VALUE = 2;
+	public static final int SLARGE_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Size</b></em>' enumerators.
@@ -89,9 +85,9 @@ public enum Size implements Enumerator {
 	 */
 	private static final Size[] VALUES_ARRAY =
 		new Size[] {
-			SMALL,
-			MEDIUM,
-			LARGE,
+			SSMALL,
+			SMED,
+			SLARGE,
 		};
 
 	/**
@@ -148,9 +144,9 @@ public enum Size implements Enumerator {
 	 */
 	public static Size get(int value) {
 		switch (value) {
-			case SMALL_VALUE: return SMALL;
-			case MEDIUM_VALUE: return MEDIUM;
-			case LARGE_VALUE: return LARGE;
+			case SSMALL_VALUE: return SSMALL;
+			case SMED_VALUE: return SMED;
+			case SLARGE_VALUE: return SLARGE;
 		}
 		return null;
 	}

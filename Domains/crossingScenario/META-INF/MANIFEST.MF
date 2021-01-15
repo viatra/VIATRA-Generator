@@ -6,10 +6,10 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: queries,
- crossingScenario,
+Export-Package: crossingScenario,
  crossingScenario.impl,
- crossingScenario.util
+ crossingScenario.util,
+ queries
 Require-Bundle: org.eclipse.viatra.query.runtime,
  org.eclipse.viatra.query.runtime.rete,
  org.eclipse.viatra.query.runtime.localsearch,

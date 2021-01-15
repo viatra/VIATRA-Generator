@@ -71,7 +71,7 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Size WIDTH_EDEFAULT = Size.SMALL;
+	protected static final Size WIDTH_EDEFAULT = Size.SSMALL;
 
 	/**
 	 * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.

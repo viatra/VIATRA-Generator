@@ -754,14 +754,14 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		addEEnumLiteral(orientationEEnum, Orientation.HORIZONTAL);
 
 		initEEnum(sizeEEnum, Size.class, "Size");
-		addEEnumLiteral(sizeEEnum, Size.SMALL);
-		addEEnumLiteral(sizeEEnum, Size.MEDIUM);
-		addEEnumLiteral(sizeEEnum, Size.LARGE);
+		addEEnumLiteral(sizeEEnum, Size.SSMALL);
+		addEEnumLiteral(sizeEEnum, Size.SMED);
+		addEEnumLiteral(sizeEEnum, Size.SLARGE);
 
 		initEEnum(distanceEEnum, Distance.class, "Distance");
-		addEEnumLiteral(distanceEEnum, Distance.NEAR);
-		addEEnumLiteral(distanceEEnum, Distance.MEDIUM);
-		addEEnumLiteral(distanceEEnum, Distance.FAR);
+		addEEnumLiteral(distanceEEnum, Distance.DNEAR);
+		addEEnumLiteral(distanceEEnum, Distance.DMED);
+		addEEnumLiteral(distanceEEnum, Distance.DFAR);
 
 		// Create resource
 		createResource(eNS_URI);

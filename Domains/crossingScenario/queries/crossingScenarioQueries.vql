@@ -3,51 +3,60 @@ package queries
 import "http://www.example.com/crossingScenario"
 import "http://www.eclipse.org/emf/2002/Ecore"
 
-//Minimal Failing Example
+////Minimal Failing Example
 @Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
 pattern patterThatOnlyWorksWithInt(l : Lane) {
 	Lane.referenceCoord(l, w);
-	check(w <= 2.0);
+	check(w <= 0-10.0);
 }
 
-////////////////
-////Lane
-////////////////
-//
-///////////width, numWidth
+//////////////
+//Lane
+//////////////
+
+/////////width, numWidth
 //@Constraint(severity="error", key={l}, message="x")
-//pattern define_numWidth_small(l : Lane) { 
-//	Lane.width(l, Size::Small);
+//pattern define_numWidth_small1(l : Lane) {
+//	Lane.width(l, Size::S_Small);
 //	Lane.numWidth(l, nw);
-//	check(nw <= 5);
-//} or {
-//	Lane.width(l, Size::Small);
-//	Lane.numWidth(l, nw);
-//	check(nw >= 10);
+//	check(nw >= 5.0);
 //}
-//
-//@Constraint(severity="error", key={l}, message="x")
-//pattern define_numWidth_medium(l : Lane) { 
-//	Lane.width(l, Size::Medium);
-//	Lane.numWidth(l, nw);
-//	check(nw <= 10);
-//} or {
-//	Lane.width(l, Size::Medium);
-//	Lane.numWidth(l, nw);
-//	check(nw >= 15);
-//}
-//
-//@Constraint(severity="error", key={l}, message="x")
-//pattern define_numWidth_large(l : Lane) { 
-//	Lane.width(l, Size::Large);
-//	Lane.numWidth(l, nw);
-//	check(nw <= 15);
-//} or {
-//	Lane.width(l, Size::Large);
-//	Lane.numWidth(l, nw);
-//	check(nw >= 20);
-//}
-//
+
+@Constraint(severity="error", key={l}, message="x")
+pattern define_numWidth_small(l : Lane) {
+	Lane.width(l, Size::S_Small);
+	Lane.numWidth(l, nw);
+	check(nw <= 5.0);
+} or {
+	Lane.width(l, Size::S_Small);
+	Lane.numWidth(l, nw);
+	check(nw >= 10.0);
+}
+
+@Constraint(severity="error", key={l}, message="x")
+pattern define_numWidth_medium(l : Lane) { 
+	Lane.width(l, ::S_Med);
+	Lane.numWidth(l, nw);
+	check(nw <= 10.0);
+}
+or {
+	Lane.width(l, Size::S_Med);
+	Lane.numWidth(l, nw);
+	check(nw >= 15.0);
+}
+
+@Constraint(severity="error", key={l}, message="x")
+pattern define_numWidth_large(l : Lane) { 
+	Lane.width(l, Size::S_Large);
+	Lane.numWidth(l, nw);
+	check(nw <= 15.0);
+}
+or {
+	Lane.width(l, Size::S_Large);
+	Lane.numWidth(l, nw);
+	check(nw >= 20.0);
+}
+
 ///////////referenceCoord
 //@Constraint(severity="error", key={l}, message="x")
 //pattern define_referenceCoord_horizontalAtOrigin(l:Lane) {

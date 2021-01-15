@@ -28,9 +28,9 @@
     <eLiterals name="Horizontal" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Size">
-    <eLiterals name="Small"/>
-    <eLiterals name="Medium" value="1"/>
-    <eLiterals name="Large" value="2"/>
+    <eLiterals name="S_Small"/>
+    <eLiterals name="S_Med" value="1"/>
+    <eLiterals name="S_Large" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Actor" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPos" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
@@ -69,9 +69,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollisionDoesNotExist" eSuperTypes="#//TemporalRelation"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Distance">
-    <eLiterals name="Near"/>
-    <eLiterals name="Medium" value="1"/>
-    <eLiterals name="Far" value="2"/>
+    <eLiterals name="D_Near"/>
+    <eLiterals name="D_Med" value="1"/>
+    <eLiterals name="D_Far" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pedestrian" eSuperTypes="#//Actor"/>
   <eClassifiers xsi:type="ecore:EClass" name="Vehicle" eSuperTypes="#//Actor"/>

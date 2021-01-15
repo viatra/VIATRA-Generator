@@ -159,7 +159,7 @@ class PConstraintTransformer {
 		var String additionalDefinition;
 		if(target instanceof EEnumLiteral) {
 			targetString = '''const_«target.name»_«target.EEnum.name»'''
-			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
+			additionalDefinition = '''DefinedElement.name(«targetString»,"«target.name» literal «target.EEnum.name»");  //LogicProblem.elements(problem,«targetString»);'''
 		} else if(target instanceof Integer) {
 			targetString = '''const_«target»_Integer'''
 			additionalDefinition = '''PrimitiveElement.valueSet(«targetString»,true); IntegerElement.value(«targetString»,«target»);'''

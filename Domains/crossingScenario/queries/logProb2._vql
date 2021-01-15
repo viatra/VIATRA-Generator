@@ -1,0 +1,55 @@
+package queries
+
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/viatrasolver/partialinterpretationlanguage" 
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/problem"
+import epackage "http://www.bme.hu/mit/inf/dslreasoner/logic/model/language"
+
+pattern UPMUSTPropagateConstraint1_pattern_queries_define_numWidth_small1(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	var_l,
+	up_1)
+{
+// Original Constraints
+// var_l exported
+find mustInRelationnumWidth_attribute_Lane(problem,interpretation,var_l,var_nw);
+var_virtual1 == const_S_Small_Size;
+DefinedElement.name(const_S_Small_Size,"S_Small literal Size");  //LogicProblem.elements(problem,const_S_Small_Size);
+find mustInRelationwidth_attribute_Lane(problem,interpretation,var_l,var_virtual1);
+// Propagation for constraint
+PrimitiveElement.valueSet(var_nw,setted_var_nw); RealElement.value(var_nw,value_var_nw);
+// Matching variables
+var_nw==up_1;
+}
+
+/**
+ * Matcher for detecting tuples t where []referenceCoord attribute Lane(source,target)
+ */pattern mustInRelationwidth_attribute_Lane(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"width attribute Lane");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+pattern mustInRelationnumWidth_attribute_Lane(
+	problem:LogicProblem, interpretation:PartialInterpretation,
+	source: DefinedElement, target:DefinedElement)
+{
+	find interpretation(problem,interpretation);
+	PartialInterpretation.partialrelationinterpretation(interpretation,relationIterpretation);
+	PartialRelationInterpretation.interpretationOf.name(relationIterpretation,"numWidth attribute Lane");
+	PartialRelationInterpretation.relationlinks(relationIterpretation,link);
+	BinaryElementRelationLink.param1(link,source);
+	BinaryElementRelationLink.param2(link,target);
+}
+
+//////////
+// 0. Util
+//////////
+pattern interpretation(problem:LogicProblem, interpretation:PartialInterpretation) {
+	PartialInterpretation.problem(interpretation,problem); 
+}
+

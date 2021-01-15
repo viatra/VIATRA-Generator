@@ -11,14 +11,14 @@
       <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Orientation/Horizontal"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="crossingScenario.ecore#//Size">
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/Small"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/Medium"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/Large"/>
+      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/S_Small"/>
+      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/S_Med"/>
+      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/S_Large"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="crossingScenario.ecore#//Distance">
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/Near"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/Medium"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/Far"/>
+      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Near"/>
+      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Med"/>
+      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Far"/>
     </genEnums>
     <genClasses ecoreClass="crossingScenario.ecore#//CrossingScenario">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/xSize"/>
