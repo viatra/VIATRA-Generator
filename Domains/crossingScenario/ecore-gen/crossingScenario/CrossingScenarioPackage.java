@@ -113,13 +113,31 @@ public interface CrossingScenarioPackage extends EPackage {
 	int CROSSING_SCENARIO__MAX_TIME = 4;
 
 	/**
+	 * The feature id for the '<em><b>Horizontal head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSSING_SCENARIO__HORIZONTAL_HEAD = 5;
+
+	/**
+	 * The feature id for the '<em><b>Vertical head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSSING_SCENARIO__VERTICAL_HEAD = 6;
+
+	/**
 	 * The number of structural features of the '<em>Crossing Scenario</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CROSSING_SCENARIO_FEATURE_COUNT = 5;
+	int CROSSING_SCENARIO_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Crossing Scenario</em>' class.
@@ -141,22 +159,13 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Orientation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__ORIENTATION = 0;
-
-	/**
 	 * The feature id for the '<em><b>Width</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__WIDTH = 1;
+	int LANE__WIDTH = 0;
 
 	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
@@ -165,7 +174,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__REFERENCE_COORD = 2;
+	int LANE__REFERENCE_COORD = 1;
 
 	/**
 	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
@@ -174,7 +183,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__PREV_LANE = 3;
+	int LANE__PREV_LANE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Actors</b></em>' reference list.
@@ -183,7 +192,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__ACTORS = 4;
+	int LANE__ACTORS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
@@ -192,7 +201,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__NUM_WIDTH = 5;
+	int LANE__NUM_WIDTH = 4;
 
 	/**
 	 * The number of structural features of the '<em>Lane</em>' class.
@@ -201,7 +210,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE_FEATURE_COUNT = 6;
+	int LANE_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Lane</em>' class.
@@ -799,14 +808,150 @@ public interface CrossingScenarioPackage extends EPackage {
 	int VEHICLE_OPERATION_COUNT = ACTOR_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link crossingScenario.Orientation <em>Orientation</em>}' enum.
+	 * The meta object id for the '{@link crossingScenario.impl.Lane_HorizontalImpl <em>Lane Horizontal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see crossingScenario.Orientation
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getOrientation()
+	 * @see crossingScenario.impl.Lane_HorizontalImpl
+	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Horizontal()
 	 * @generated
 	 */
-	int ORIENTATION = 12;
+	int LANE_HORIZONTAL = 12;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL__WIDTH = LANE__WIDTH;
+
+	/**
+	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL__REFERENCE_COORD = LANE__REFERENCE_COORD;
+
+	/**
+	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL__PREV_LANE = LANE__PREV_LANE;
+
+	/**
+	 * The feature id for the '<em><b>Actors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL__ACTORS = LANE__ACTORS;
+
+	/**
+	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL__NUM_WIDTH = LANE__NUM_WIDTH;
+
+	/**
+	 * The number of structural features of the '<em>Lane Horizontal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL_FEATURE_COUNT = LANE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Lane Horizontal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_HORIZONTAL_OPERATION_COUNT = LANE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link crossingScenario.impl.Lane_VerticalImpl <em>Lane Vertical</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see crossingScenario.impl.Lane_VerticalImpl
+	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Vertical()
+	 * @generated
+	 */
+	int LANE_VERTICAL = 13;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL__WIDTH = LANE__WIDTH;
+
+	/**
+	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL__REFERENCE_COORD = LANE__REFERENCE_COORD;
+
+	/**
+	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL__PREV_LANE = LANE__PREV_LANE;
+
+	/**
+	 * The feature id for the '<em><b>Actors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL__ACTORS = LANE__ACTORS;
+
+	/**
+	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL__NUM_WIDTH = LANE__NUM_WIDTH;
+
+	/**
+	 * The number of structural features of the '<em>Lane Vertical</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL_FEATURE_COUNT = LANE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Lane Vertical</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_VERTICAL_OPERATION_COUNT = LANE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link crossingScenario.Size <em>Size</em>}' enum.
@@ -816,7 +961,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSize()
 	 * @generated
 	 */
-	int SIZE = 13;
+	int SIZE = 14;
 
 	/**
 	 * The meta object id for the '{@link crossingScenario.Distance <em>Distance</em>}' enum.
@@ -826,7 +971,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getDistance()
 	 * @generated
 	 */
-	int DISTANCE = 14;
+	int DISTANCE = 15;
 
 
 	/**
@@ -895,6 +1040,28 @@ public interface CrossingScenarioPackage extends EPackage {
 	EAttribute getCrossingScenario_MaxTime();
 
 	/**
+	 * Returns the meta object for the reference '{@link crossingScenario.CrossingScenario#getHorizontal_head <em>Horizontal head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Horizontal head</em>'.
+	 * @see crossingScenario.CrossingScenario#getHorizontal_head()
+	 * @see #getCrossingScenario()
+	 * @generated
+	 */
+	EReference getCrossingScenario_Horizontal_head();
+
+	/**
+	 * Returns the meta object for the reference '{@link crossingScenario.CrossingScenario#getVertical_head <em>Vertical head</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Vertical head</em>'.
+	 * @see crossingScenario.CrossingScenario#getVertical_head()
+	 * @see #getCrossingScenario()
+	 * @generated
+	 */
+	EReference getCrossingScenario_Vertical_head();
+
+	/**
 	 * Returns the meta object for class '{@link crossingScenario.Lane <em>Lane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -903,17 +1070,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLane();
-
-	/**
-	 * Returns the meta object for the attribute '{@link crossingScenario.Lane#getOrientation <em>Orientation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Orientation</em>'.
-	 * @see crossingScenario.Lane#getOrientation()
-	 * @see #getLane()
-	 * @generated
-	 */
-	EAttribute getLane_Orientation();
 
 	/**
 	 * Returns the meta object for the attribute '{@link crossingScenario.Lane#getWidth <em>Width</em>}'.
@@ -1203,14 +1359,24 @@ public interface CrossingScenarioPackage extends EPackage {
 	EClass getVehicle();
 
 	/**
-	 * Returns the meta object for enum '{@link crossingScenario.Orientation <em>Orientation</em>}'.
+	 * Returns the meta object for class '{@link crossingScenario.Lane_Horizontal <em>Lane Horizontal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Orientation</em>'.
-	 * @see crossingScenario.Orientation
+	 * @return the meta object for class '<em>Lane Horizontal</em>'.
+	 * @see crossingScenario.Lane_Horizontal
 	 * @generated
 	 */
-	EEnum getOrientation();
+	EClass getLane_Horizontal();
+
+	/**
+	 * Returns the meta object for class '{@link crossingScenario.Lane_Vertical <em>Lane Vertical</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lane Vertical</em>'.
+	 * @see crossingScenario.Lane_Vertical
+	 * @generated
+	 */
+	EClass getLane_Vertical();
 
 	/**
 	 * Returns the meta object for enum '{@link crossingScenario.Size <em>Size</em>}'.
@@ -1306,6 +1472,22 @@ public interface CrossingScenarioPackage extends EPackage {
 		EAttribute CROSSING_SCENARIO__MAX_TIME = eINSTANCE.getCrossingScenario_MaxTime();
 
 		/**
+		 * The meta object literal for the '<em><b>Horizontal head</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CROSSING_SCENARIO__HORIZONTAL_HEAD = eINSTANCE.getCrossingScenario_Horizontal_head();
+
+		/**
+		 * The meta object literal for the '<em><b>Vertical head</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CROSSING_SCENARIO__VERTICAL_HEAD = eINSTANCE.getCrossingScenario_Vertical_head();
+
+		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.LaneImpl <em>Lane</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1314,14 +1496,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LANE = eINSTANCE.getLane();
-
-		/**
-		 * The meta object literal for the '<em><b>Orientation</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LANE__ORIENTATION = eINSTANCE.getLane_Orientation();
 
 		/**
 		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
@@ -1560,14 +1734,24 @@ public interface CrossingScenarioPackage extends EPackage {
 		EClass VEHICLE = eINSTANCE.getVehicle();
 
 		/**
-		 * The meta object literal for the '{@link crossingScenario.Orientation <em>Orientation</em>}' enum.
+		 * The meta object literal for the '{@link crossingScenario.impl.Lane_HorizontalImpl <em>Lane Horizontal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see crossingScenario.Orientation
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getOrientation()
+		 * @see crossingScenario.impl.Lane_HorizontalImpl
+		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Horizontal()
 		 * @generated
 		 */
-		EEnum ORIENTATION = eINSTANCE.getOrientation();
+		EClass LANE_HORIZONTAL = eINSTANCE.getLane_Horizontal();
+
+		/**
+		 * The meta object literal for the '{@link crossingScenario.impl.Lane_VerticalImpl <em>Lane Vertical</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see crossingScenario.impl.Lane_VerticalImpl
+		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Vertical()
+		 * @generated
+		 */
+		EClass LANE_VERTICAL = eINSTANCE.getLane_Vertical();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.Size <em>Size</em>}' enum.

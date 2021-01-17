@@ -10,7 +10,8 @@ import crossingScenario.CrossingScenarioFactory;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Distance;
 import crossingScenario.Lane;
-import crossingScenario.Orientation;
+import crossingScenario.Lane_Horizontal;
+import crossingScenario.Lane_Vertical;
 import crossingScenario.Pedestrian;
 import crossingScenario.Relation;
 import crossingScenario.SeparationDistance;
@@ -124,7 +125,14 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum orientationEEnum = null;
+	private EClass lane_HorizontalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lane_VerticalEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -267,6 +275,26 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
+	public EReference getCrossingScenario_Horizontal_head() {
+		return (EReference)crossingScenarioEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCrossingScenario_Vertical_head() {
+		return (EReference)crossingScenarioEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getLane() {
 		return laneEClass;
 	}
@@ -277,7 +305,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLane_Orientation() {
+	public EAttribute getLane_Width() {
 		return (EAttribute)laneEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -287,7 +315,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLane_Width() {
+	public EAttribute getLane_ReferenceCoord() {
 		return (EAttribute)laneEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -297,18 +325,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLane_ReferenceCoord() {
-		return (EAttribute)laneEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getLane_PrevLane() {
-		return (EReference)laneEClass.getEStructuralFeatures().get(3);
+		return (EReference)laneEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -318,7 +336,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 */
 	@Override
 	public EReference getLane_Actors() {
-		return (EReference)laneEClass.getEStructuralFeatures().get(4);
+		return (EReference)laneEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -328,7 +346,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 */
 	@Override
 	public EAttribute getLane_NumWidth() {
-		return (EAttribute)laneEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)laneEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -557,8 +575,18 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EEnum getOrientation() {
-		return orientationEEnum;
+	public EClass getLane_Horizontal() {
+		return lane_HorizontalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLane_Vertical() {
+		return lane_VerticalEClass;
 	}
 
 	/**
@@ -616,9 +644,10 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__ACTORS);
 		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__LANES);
 		createEAttribute(crossingScenarioEClass, CROSSING_SCENARIO__MAX_TIME);
+		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__HORIZONTAL_HEAD);
+		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__VERTICAL_HEAD);
 
 		laneEClass = createEClass(LANE);
-		createEAttribute(laneEClass, LANE__ORIENTATION);
 		createEAttribute(laneEClass, LANE__WIDTH);
 		createEAttribute(laneEClass, LANE__REFERENCE_COORD);
 		createEReference(laneEClass, LANE__PREV_LANE);
@@ -657,8 +686,11 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 
 		vehicleEClass = createEClass(VEHICLE);
 
+		lane_HorizontalEClass = createEClass(LANE_HORIZONTAL);
+
+		lane_VerticalEClass = createEClass(LANE_VERTICAL);
+
 		// Create enums
-		orientationEEnum = createEEnum(ORIENTATION);
 		sizeEEnum = createEEnum(SIZE);
 		distanceEEnum = createEEnum(DISTANCE);
 	}
@@ -699,6 +731,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		collisionDoesNotExistEClass.getESuperTypes().add(this.getTemporalRelation());
 		pedestrianEClass.getESuperTypes().add(this.getActor());
 		vehicleEClass.getESuperTypes().add(this.getActor());
+		lane_HorizontalEClass.getESuperTypes().add(this.getLane());
+		lane_VerticalEClass.getESuperTypes().add(this.getLane());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(crossingScenarioEClass, CrossingScenario.class, "CrossingScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -707,9 +741,10 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEReference(getCrossingScenario_Actors(), this.getActor(), null, "actors", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCrossingScenario_Lanes(), this.getLane(), null, "lanes", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCrossingScenario_MaxTime(), ecorePackage.getEDouble(), "maxTime", null, 0, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCrossingScenario_Horizontal_head(), this.getLane_Horizontal(), null, "horizontal_head", null, 1, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCrossingScenario_Vertical_head(), this.getLane_Vertical(), null, "vertical_head", null, 1, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(laneEClass, Lane.class, "Lane", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLane_Orientation(), this.getOrientation(), "orientation", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(laneEClass, Lane.class, "Lane", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLane_Width(), this.getSize(), "width", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLane_ReferenceCoord(), ecorePackage.getEDouble(), "referenceCoord", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLane_PrevLane(), this.getLane(), null, "prevLane", null, 0, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -748,11 +783,11 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 
 		initEClass(vehicleEClass, Vehicle.class, "Vehicle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		// Initialize enums and add enum literals
-		initEEnum(orientationEEnum, Orientation.class, "Orientation");
-		addEEnumLiteral(orientationEEnum, Orientation.VERTICAL);
-		addEEnumLiteral(orientationEEnum, Orientation.HORIZONTAL);
+		initEClass(lane_HorizontalEClass, Lane_Horizontal.class, "Lane_Horizontal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(lane_VerticalEClass, Lane_Vertical.class, "Lane_Vertical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Initialize enums and add enum literals
 		initEEnum(sizeEEnum, Size.class, "Size");
 		addEEnumLiteral(sizeEEnum, Size.SSMALL);
 		addEEnumLiteral(sizeEEnum, Size.SMED);

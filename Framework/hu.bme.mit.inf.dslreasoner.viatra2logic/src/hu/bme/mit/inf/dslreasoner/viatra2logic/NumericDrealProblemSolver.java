@@ -7,13 +7,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -24,9 +22,6 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
-
-import com.microsoft.z3.IntExpr;
-import com.microsoft.z3.RealExpr;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
@@ -168,6 +163,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				}
 			} else {
 				//TODO unsure what it means if something gets in here
+				System.err.println("Reached weird place");
 				if (isInt) {
 					expr = Integer.toString(((IntegerElement) matchedObj).getValue());
 				} else {
@@ -342,20 +338,28 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		if (result) {
 			long startFormingSolution = System.nanoTime();
 			Map<String, String> solMap = parseDrealOutput(outputs.get(0));
+			
+//			//DEBUG
+//			System.out.println("RESULT");
+//			solMap.entrySet().forEach(System.out::println);
+//			System.out.println("SOLMAP");
+//			varMap.forEach((k, v) -> System.out.println(v + "=" + k));
+//			//END DEBUG
+			
 			for (PrimitiveElement obj: objs) {
 				if(varMap.containsKey(obj)) {
-					if (obj instanceof IntegerElement) {
-						String varName = varMap.get(obj);
-						String value = solMap.get(varName);
-						sol.put(obj, Integer.parseInt(value));
-					} else {
-						String varName = varMap.get(obj);
-						String value = solMap.get(varName);
-						sol.put(obj, Double.parseDouble(value));
+					String varName = varMap.get(obj);
+					String value = solMap.get(varName);
+					if (value != null) {
+						//this means that dreal actually worked on this and found a value for it
+						if (obj instanceof IntegerElement) {
+							sol.put(obj, Integer.parseInt(value));
+						} else {
+							sol.put(obj, Double.parseDouble(value));
+						}
 					}
-
 				} else {
-//					System.out.println(("variable " + obj + " is not used from Dreal");
+//					System.err.println("variable " + obj + " is not used from Dreal");
 				}
 			}
 			endFormingSolution = System.nanoTime() - startFormingSolution;

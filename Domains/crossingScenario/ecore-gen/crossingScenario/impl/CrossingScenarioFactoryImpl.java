@@ -58,13 +58,14 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case CrossingScenarioPackage.CROSSING_SCENARIO: return createCrossingScenario();
-			case CrossingScenarioPackage.LANE: return createLane();
 			case CrossingScenarioPackage.VISION_BLOCKED: return createVisionBlocked();
 			case CrossingScenarioPackage.SEPARATION_DISTANCE: return createSeparationDistance();
 			case CrossingScenarioPackage.COLLISION_EXISTS: return createCollisionExists();
 			case CrossingScenarioPackage.COLLISION_DOES_NOT_EXIST: return createCollisionDoesNotExist();
 			case CrossingScenarioPackage.PEDESTRIAN: return createPedestrian();
 			case CrossingScenarioPackage.VEHICLE: return createVehicle();
+			case CrossingScenarioPackage.LANE_HORIZONTAL: return createLane_Horizontal();
+			case CrossingScenarioPackage.LANE_VERTICAL: return createLane_Vertical();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -78,8 +79,6 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case CrossingScenarioPackage.ORIENTATION:
-				return createOrientationFromString(eDataType, initialValue);
 			case CrossingScenarioPackage.SIZE:
 				return createSizeFromString(eDataType, initialValue);
 			case CrossingScenarioPackage.DISTANCE:
@@ -97,8 +96,6 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case CrossingScenarioPackage.ORIENTATION:
-				return convertOrientationToString(eDataType, instanceValue);
 			case CrossingScenarioPackage.SIZE:
 				return convertSizeToString(eDataType, instanceValue);
 			case CrossingScenarioPackage.DISTANCE:
@@ -117,17 +114,6 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	public CrossingScenario createCrossingScenario() {
 		CrossingScenarioImpl crossingScenario = new CrossingScenarioImpl();
 		return crossingScenario;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Lane createLane() {
-		LaneImpl lane = new LaneImpl();
-		return lane;
 	}
 
 	/**
@@ -201,10 +187,10 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Orientation createOrientationFromString(EDataType eDataType, String initialValue) {
-		Orientation result = Orientation.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
+	@Override
+	public Lane_Horizontal createLane_Horizontal() {
+		Lane_HorizontalImpl lane_Horizontal = new Lane_HorizontalImpl();
+		return lane_Horizontal;
 	}
 
 	/**
@@ -212,8 +198,10 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertOrientationToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
+	@Override
+	public Lane_Vertical createLane_Vertical() {
+		Lane_VerticalImpl lane_Vertical = new Lane_VerticalImpl();
+		return lane_Vertical;
 	}
 
 	/**

@@ -7,16 +7,17 @@ generate {
 	partial-model = { "inputs/CrossingScenarioInit.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 20..30,
+		#node = 15..100,
 		#int = {},
-		#<Lane> = 1..10,
-		#<Actor> = 1..10,
-		#<Relation> = 1..10}
+		#<Lane> = 20..25//,
+		//#<Actor> = 1..10,
+		//#<Relation> = 1..10
+		}
 	
 	config = {
 		runtime = 10000,
 		log-level = normal,
-		"numeric-solver" = "dreal",
+		"numeric-solver" = "z3",
 		"scopePropagator" = "typeHierarchy"}
 	
 	runs = 1	

@@ -10,10 +10,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="lanes" upperBound="-1"
         eType="#//Lane" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="horizontal_head" lowerBound="1"
+        eType="#//Lane_Horizontal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertical_head" lowerBound="1"
+        eType="#//Lane_Vertical"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Lane">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" lowerBound="1"
-        eType="#//Orientation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Lane" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="#//Size"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceCoord" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
@@ -22,10 +24,6 @@
         eType="#//Actor" eOpposite="#//Actor/placedOn"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="numWidth" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="0.0"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Orientation">
-    <eLiterals name="Vertical"/>
-    <eLiterals name="Horizontal" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Size">
     <eLiterals name="S_Small"/>
@@ -75,4 +73,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pedestrian" eSuperTypes="#//Actor"/>
   <eClassifiers xsi:type="ecore:EClass" name="Vehicle" eSuperTypes="#//Actor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Lane_Horizontal" eSuperTypes="#//Lane"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Lane_Vertical" eSuperTypes="#//Lane"/>
 </ecore:EPackage>

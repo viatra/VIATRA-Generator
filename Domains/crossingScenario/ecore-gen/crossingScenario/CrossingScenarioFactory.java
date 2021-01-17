@@ -31,15 +31,6 @@ public interface CrossingScenarioFactory extends EFactory {
 	CrossingScenario createCrossingScenario();
 
 	/**
-	 * Returns a new object of class '<em>Lane</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Lane</em>'.
-	 * @generated
-	 */
-	Lane createLane();
-
-	/**
 	 * Returns a new object of class '<em>Vision Blocked</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,6 +83,24 @@ public interface CrossingScenarioFactory extends EFactory {
 	 * @generated
 	 */
 	Vehicle createVehicle();
+
+	/**
+	 * Returns a new object of class '<em>Lane Horizontal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lane Horizontal</em>'.
+	 * @generated
+	 */
+	Lane_Horizontal createLane_Horizontal();
+
+	/**
+	 * Returns a new object of class '<em>Lane Vertical</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lane Vertical</em>'.
+	 * @generated
+	 */
+	Lane_Vertical createLane_Vertical();
 
 	/**
 	 * Returns the package supported by this factory.

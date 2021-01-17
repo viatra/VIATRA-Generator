@@ -5,7 +5,6 @@ package crossingScenario.impl;
 import crossingScenario.Actor;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
-import crossingScenario.Orientation;
 import crossingScenario.Size;
 
 import java.util.Collection;
@@ -32,7 +31,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link crossingScenario.impl.LaneImpl#getOrientation <em>Orientation</em>}</li>
  *   <li>{@link crossingScenario.impl.LaneImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link crossingScenario.impl.LaneImpl#getReferenceCoord <em>Reference Coord</em>}</li>
  *   <li>{@link crossingScenario.impl.LaneImpl#getPrevLane <em>Prev Lane</em>}</li>
@@ -42,27 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
-	/**
-	 * The default value of the '{@link #getOrientation() <em>Orientation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOrientation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Orientation ORIENTATION_EDEFAULT = Orientation.VERTICAL;
-
-	/**
-	 * The cached value of the '{@link #getOrientation() <em>Orientation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOrientation()
-	 * @generated
-	 * @ordered
-	 */
-	protected Orientation orientation = ORIENTATION_EDEFAULT;
-
+public abstract class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	/**
 	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -160,29 +138,6 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	@Override
 	protected EClass eStaticClass() {
 		return CrossingScenarioPackage.Literals.LANE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Orientation getOrientation() {
-		return orientation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOrientation(Orientation newOrientation) {
-		Orientation oldOrientation = orientation;
-		orientation = newOrientation == null ? ORIENTATION_EDEFAULT : newOrientation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CrossingScenarioPackage.LANE__ORIENTATION, oldOrientation, orientation));
 	}
 
 	/**
@@ -344,8 +299,6 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CrossingScenarioPackage.LANE__ORIENTATION:
-				return getOrientation();
 			case CrossingScenarioPackage.LANE__WIDTH:
 				return getWidth();
 			case CrossingScenarioPackage.LANE__REFERENCE_COORD:
@@ -370,9 +323,6 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CrossingScenarioPackage.LANE__ORIENTATION:
-				setOrientation((Orientation)newValue);
-				return;
 			case CrossingScenarioPackage.LANE__WIDTH:
 				setWidth((Size)newValue);
 				return;
@@ -401,9 +351,6 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CrossingScenarioPackage.LANE__ORIENTATION:
-				setOrientation(ORIENTATION_EDEFAULT);
-				return;
 			case CrossingScenarioPackage.LANE__WIDTH:
 				setWidth(WIDTH_EDEFAULT);
 				return;
@@ -431,8 +378,6 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CrossingScenarioPackage.LANE__ORIENTATION:
-				return orientation != ORIENTATION_EDEFAULT;
 			case CrossingScenarioPackage.LANE__WIDTH:
 				return width != WIDTH_EDEFAULT;
 			case CrossingScenarioPackage.LANE__REFERENCE_COORD:
@@ -457,9 +402,7 @@ public class LaneImpl extends MinimalEObjectImpl.Container implements Lane {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (orientation: ");
-		result.append(orientation);
-		result.append(", width: ");
+		result.append(" (width: ");
 		result.append(width);
 		result.append(", referenceCoord: ");
 		result.append(referenceCoord);

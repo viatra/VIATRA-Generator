@@ -1,5 +1,7 @@
 package crossingScenario.run;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +35,10 @@ public class CrossingScenarioMain {
 		System.out.println("postprocessing -> " + t4);
 		
 		System.out.println("TOTAL -> " + tot);
-
+		
+		String p1 = "outputs/models/1.xmi";
+		String p2 = "outputs/simplePrevLane.tgf";
+		QueryDebug.checkPrevLanes(p1, p2);
+		Desktop.getDesktop().open(new File(p2));  
 	}
 }

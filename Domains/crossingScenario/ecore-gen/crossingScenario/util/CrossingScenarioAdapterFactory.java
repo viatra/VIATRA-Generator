@@ -116,6 +116,14 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 				return createVehicleAdapter();
 			}
 			@Override
+			public Adapter caseLane_Horizontal(Lane_Horizontal object) {
+				return createLane_HorizontalAdapter();
+			}
+			@Override
+			public Adapter caseLane_Vertical(Lane_Vertical object) {
+				return createLane_VerticalAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -300,6 +308,34 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVehicleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link crossingScenario.Lane_Horizontal <em>Lane Horizontal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see crossingScenario.Lane_Horizontal
+	 * @generated
+	 */
+	public Adapter createLane_HorizontalAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link crossingScenario.Lane_Vertical <em>Lane Vertical</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see crossingScenario.Lane_Vertical
+	 * @generated
+	 */
+	public Adapter createLane_VerticalAdapter() {
 		return null;
 	}
 

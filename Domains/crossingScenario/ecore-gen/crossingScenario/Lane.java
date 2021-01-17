@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link crossingScenario.Lane#getOrientation <em>Orientation</em>}</li>
  *   <li>{@link crossingScenario.Lane#getWidth <em>Width</em>}</li>
  *   <li>{@link crossingScenario.Lane#getReferenceCoord <em>Reference Coord</em>}</li>
  *   <li>{@link crossingScenario.Lane#getPrevLane <em>Prev Lane</em>}</li>
@@ -24,35 +23,10 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see crossingScenario.CrossingScenarioPackage#getLane()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Lane extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Orientation</b></em>' attribute.
-	 * The literals are from the enumeration {@link crossingScenario.Orientation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Orientation</em>' attribute.
-	 * @see crossingScenario.Orientation
-	 * @see #setOrientation(Orientation)
-	 * @see crossingScenario.CrossingScenarioPackage#getLane_Orientation()
-	 * @model required="true"
-	 * @generated
-	 */
-	Orientation getOrientation();
-
-	/**
-	 * Sets the value of the '{@link crossingScenario.Lane#getOrientation <em>Orientation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Orientation</em>' attribute.
-	 * @see crossingScenario.Orientation
-	 * @see #getOrientation()
-	 * @generated
-	 */
-	void setOrientation(Orientation value);
-
 	/**
 	 * Returns the value of the '<em><b>Width</b></em>' attribute.
 	 * The literals are from the enumeration {@link crossingScenario.Size}.

@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link crossingScenario.CrossingScenario#getActors <em>Actors</em>}</li>
  *   <li>{@link crossingScenario.CrossingScenario#getLanes <em>Lanes</em>}</li>
  *   <li>{@link crossingScenario.CrossingScenario#getMaxTime <em>Max Time</em>}</li>
+ *   <li>{@link crossingScenario.CrossingScenario#getHorizontal_head <em>Horizontal head</em>}</li>
+ *   <li>{@link crossingScenario.CrossingScenario#getVertical_head <em>Vertical head</em>}</li>
  * </ul>
  *
  * @see crossingScenario.CrossingScenarioPackage#getCrossingScenario()
@@ -116,5 +118,49 @@ public interface CrossingScenario extends EObject {
 	 * @generated
 	 */
 	void setMaxTime(double value);
+
+	/**
+	 * Returns the value of the '<em><b>Horizontal head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Horizontal head</em>' reference.
+	 * @see #setHorizontal_head(Lane_Horizontal)
+	 * @see crossingScenario.CrossingScenarioPackage#getCrossingScenario_Horizontal_head()
+	 * @model required="true"
+	 * @generated
+	 */
+	Lane_Horizontal getHorizontal_head();
+
+	/**
+	 * Sets the value of the '{@link crossingScenario.CrossingScenario#getHorizontal_head <em>Horizontal head</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Horizontal head</em>' reference.
+	 * @see #getHorizontal_head()
+	 * @generated
+	 */
+	void setHorizontal_head(Lane_Horizontal value);
+
+	/**
+	 * Returns the value of the '<em><b>Vertical head</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Vertical head</em>' reference.
+	 * @see #setVertical_head(Lane_Vertical)
+	 * @see crossingScenario.CrossingScenarioPackage#getCrossingScenario_Vertical_head()
+	 * @model required="true"
+	 * @generated
+	 */
+	Lane_Vertical getVertical_head();
+
+	/**
+	 * Sets the value of the '{@link crossingScenario.CrossingScenario#getVertical_head <em>Vertical head</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Vertical head</em>' reference.
+	 * @see #getVertical_head()
+	 * @generated
+	 */
+	void setVertical_head(Lane_Vertical value);
 
 } // CrossingScenario

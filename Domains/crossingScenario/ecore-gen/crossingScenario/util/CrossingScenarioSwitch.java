@@ -150,6 +150,20 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case CrossingScenarioPackage.LANE_HORIZONTAL: {
+				Lane_Horizontal lane_Horizontal = (Lane_Horizontal)theEObject;
+				T result = caseLane_Horizontal(lane_Horizontal);
+				if (result == null) result = caseLane(lane_Horizontal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case CrossingScenarioPackage.LANE_VERTICAL: {
+				Lane_Vertical lane_Vertical = (Lane_Vertical)theEObject;
+				T result = caseLane_Vertical(lane_Vertical);
+				if (result == null) result = caseLane(lane_Vertical);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -331,6 +345,36 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVehicle(Vehicle object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Lane Horizontal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Lane Horizontal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLane_Horizontal(Lane_Horizontal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Lane Vertical</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Lane Vertical</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLane_Vertical(Lane_Vertical object) {
 		return null;
 	}
 

@@ -3,26 +3,18 @@ package queries
 import "http://www.example.com/crossingScenario"
 import "http://www.eclipse.org/emf/2002/Ecore"
 
-////Minimal Failing Example
-@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
-pattern patterThatOnlyWorksWithInt(l : Lane) {
-	Lane.referenceCoord(l, w);
-	check(w <= 0-10.0);
-}
+//////Minimal Failing Example
+//@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
+//pattern patterThatOnlyWorksWithInt(l : Lane) {
+//	Lane.referenceCoord(l, w);
+//	check(w <= 0-10.0);
+//}
 
 //////////////
 //Lane
 //////////////
 
-/////////width, numWidth
-//@Constraint(severity="error", key={l}, message="x")
-//pattern define_numWidth_small1(l : Lane) {
-//	Lane.width(l, Size::S_Small);
-//	Lane.numWidth(l, nw);
-//	check(nw >= 5.0);
-//}
-
-@Constraint(severity="error", key={l}, message="x")
+@Constraint(severity="error", key={l}, message="1 Lane")
 pattern define_numWidth_small(l : Lane) {
 	Lane.width(l, Size::S_Small);
 	Lane.numWidth(l, nw);
@@ -33,7 +25,7 @@ pattern define_numWidth_small(l : Lane) {
 	check(nw >= 10.0);
 }
 
-@Constraint(severity="error", key={l}, message="x")
+@Constraint(severity="error", key={l}, message="2 Lane")
 pattern define_numWidth_medium(l : Lane) { 
 	Lane.width(l, ::S_Med);
 	Lane.numWidth(l, nw);
@@ -45,7 +37,7 @@ or {
 	check(nw >= 15.0);
 }
 
-@Constraint(severity="error", key={l}, message="x")
+@Constraint(severity="error", key={l}, message="3 Lane")
 pattern define_numWidth_large(l : Lane) { 
 	Lane.width(l, Size::S_Large);
 	Lane.numWidth(l, nw);
@@ -57,41 +49,112 @@ or {
 	check(nw >= 20.0);
 }
 
-///////////referenceCoord
-//@Constraint(severity="error", key={l}, message="x")
-//pattern define_referenceCoord_horizontalAtOrigin(l:Lane) {
-//	1 == count find find_horizontalLaneAtOrigin(l);
-//}
-//
-//private pattern find_horizontalLaneAtOrigin(l:Lane){
-//	Lane.orientation(l, Orientation::Horizontal);
-//	Lane.referenceCoord(l, rc);
-//	Lane.prevLane(l, _);
-//	rc != 0.0;	
-//}
-//
-//@Constraint(severity="error", key={l}, message="x")
-//pattern define_referenceCoord_verticalAtOrigin(l:Lane) {
-//	1 == count find find_verticalLaneAtOrigin(l);
-//}
-//
-//private pattern find_verticalLaneAtOrigin(l:Lane){
-//	Lane.orientation(l, Orientation::Vertical);
-//	Lane.referenceCoord(l, rc);
-//	rc == 0.0;	
-//}
-//
-//pattern define_referenceCoord_VerticalifMultipleLanes(l1:Lane, l2:Lane) {
-//	//calculated risk???
-//	Lane.orientation(l1, Orientation::Vertical);
-//	Lane.orientation(l2, Orientation::Vertical);
-//	Lane.referenceCoord(l1, rc1);
-//	Lane.numWidth(l1, nw1);
-//	Lane.referenceCoord(l2, rc2);
-//	check(rc2 == rc1 + nw1);
-//}
-//
-//
+/////////////Prevlane
+
+////////head lanes do not have prevLane
+@Constraint(severity="error", key={l}, message="6.1 Lane")
+pattern define_prevLane_headVertLaneDoesNotHavePrevLane(cs:CrossingScenario, l:Lane_Vertical) {
+	CrossingScenario.vertical_head(cs, l);
+	Lane.prevLane(l, _);
+}
+
+@Constraint(severity="error", key={l}, message="6.2 Lane")
+pattern define_prevLane_headHoriLaneDoesNotHavePrevLane(cs:CrossingScenario, l:Lane_Horizontal) {
+	CrossingScenario.horizontal_head(cs, l);
+	Lane.prevLane(l, _);
+}
+
+////////Non-head lanes must have prevLane
+@Constraint(severity="error", key={l}, message="6.1 Lane")
+pattern define_prevLane_nonheadVertLaneHasPrevLane(l:Lane_Vertical) {
+	neg find find_headVertLane(l);
+	neg find find_laneWithPrevLane(l);
+}
+
+@Constraint(severity="error", key={l}, message="6.1 Lane")
+pattern define_prevLane_nonheadHoriLaneHasPrevLane(l:Lane_Horizontal) {
+	neg find find_headHoriLane(l);
+	neg find find_laneWithPrevLane(l);
+}
+
+private pattern find_headVertLane(l:Lane_Vertical) {
+	CrossingScenario.vertical_head(_, l);
+}
+private pattern find_headHoriLane(l:Lane_Horizontal) {
+	CrossingScenario.horizontal_head(_, l);
+}
+private pattern find_laneWithPrevLane(l:Lane) {
+	Lane.prevLane(l, _);
+}
+
+/////////Lane cannot be its own recursive prevLane
+@Constraint(severity="error", key={l}, message="6.1 Lane")
+pattern define_prevLane_lanecannotBeItsOwnPrevLane(l:Lane) {
+	Lane.prevLane(l, l);
+}
+
+@Constraint(severity="error", key={l}, message="6.2 Lane")
+pattern define_prevLane_lanecannotBeItsOwnRecursivePrevLane(l:Lane) {
+	find find_prevLane+(l, l);
+}
+private pattern find_prevLane(l1:Lane, l2:Lane) {
+	Lane.prevLane(l1, l2);
+}
+
+//////Lane cannot be prevLane of >1 other lane
+@Constraint(severity="error", key={l1, l2}, message="7 Lane")
+pattern define_prevLane_lanecannotbeprevLaneof2lanes(l1:Lane, l2:Lane) {
+	Lane.prevLane(l1, l);
+	Lane.prevLane(l2, l);
+	l1 != l2;
+}
+
+//////consecutive lanes must have same orientation
+@Constraint(severity="error", key={l1, l2}, message="8 Lane")
+pattern define_prevLane_consecutiveLanesMustHaveSameOrientation1(l1:Lane_Horizontal, l2:Lane_Vertical) {
+	Lane.prevLane(l1, l2);
+}
+
+@Constraint(severity="error", key={l1, l2}, message="8 Lane")
+pattern define_prevLane_consecutiveLanesMustHaveSameOrientation2(l1:Lane_Vertical, l2:Lane_Horizontal) {
+	Lane.prevLane(l1, l2);
+}
+
+/////////////ReferenceCoord
+
+/////refCoord of head lanes must be 0
+@Constraint(severity="error", key={l}, message="6.2 Lane")
+pattern define_prevLane_headHoriLaneHas0RefCoord(cs:CrossingScenario, l:Lane_Horizontal) {
+	CrossingScenario.horizontal_head(cs, l);
+	Lane.referenceCoord(l, rc);
+	check(rc != 0.0);
+}
+
+@Constraint(severity="error", key={l}, message="6.2 Lane")
+pattern define_prevLane_headVertLaneHas0RefCoord(cs:CrossingScenario, l:Lane_Vertical) {
+	CrossingScenario.vertical_head(cs, l);
+	Lane.referenceCoord(l, rc);
+	check(rc != 0.0);
+}
+
+//////refCoord of a lane is prevLane.rc + curLane.numWidth
+
+@Constraint(severity="error", key={l}, message="6.2 Lane")
+pattern define_referenceCoord_laneWithPrevHasCorrectRefCoord(l:Lane) {
+	Lane.prevLane(l, prev);
+	Lane.referenceCoord(l, rcCur);
+	
+	Lane.numWidth(prev, wPrev);
+	Lane.referenceCoord(prev, rcPrev);
+	check(rcCur != rcPrev + wPrev);
+}
+
+
+//////////////
+//Lane+Actor
+//////////////
+
+
 ////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
 ////pattern actorOnVerticalLane(a : Actor) {
 ////    Actor.placedOn(a, l);
