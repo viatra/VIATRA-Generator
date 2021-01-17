@@ -9,8 +9,8 @@ generate {
 	scope = {
 		#node = 15..100,
 		#int = {},
-		#<Lane> = 20..25//,
-		//#<Actor> = 1..10,
+		#<Lane> = 10..25,
+		#<Actor> = 10..25//,
 		//#<Relation> = 1..10
 		}
 	

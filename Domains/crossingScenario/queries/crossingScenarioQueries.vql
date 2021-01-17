@@ -11,6 +11,14 @@ import "http://www.eclipse.org/emf/2002/Ecore"
 //}
 
 //////////////
+//CrossingScenario
+/////////////
+
+//TODO Hard-code xSize?
+//TODO Hard-code ySize?
+//TODO Hard-code maxTime?
+
+//////////////
 //Lane
 //////////////
 
@@ -154,71 +162,103 @@ pattern define_referenceCoord_laneWithPrevHasCorrectRefCoord(l:Lane) {
 //Lane+Actor
 //////////////
 
+/////////Actor (a) on vertical lane (l) must have a.xPos=[l.rc, l.rc + l.nw]
+@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
+pattern define_placedOn_actorOnVerticalLane(a : Actor, vl:Lane_Vertical) {
+    Actor.placedOn(a, vl);
+    Actor.xPos(a, x);
+    Lane.referenceCoord(vl, r);
+    check(x <= r);
+} or {
+    Actor.placedOn(a, vl);
+    Actor.xPos(a, x);
+    Lane.referenceCoord(vl, r);
+    Lane.numWidth(vl, w);
+    check(x >= (r + w));
+}
 
-////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
-////pattern actorOnVerticalLane(a : Actor) {
-////    Actor.placedOn(a, l);
-////    Lane.orientation(l, Orientation::Vertical);
-////    Actor.xPos(a, x);
-////    Lane.referenceCoord(l, r);
-////    check(x <= r);
-////} or {
-////    Actor.placedOn(a, l);
-////    Lane.orientation(l, Orientation::Vertical);
-////    Actor.xPos(a, x);
-////    Lane.referenceCoord(l, r);
-////    Lane.numWidth(l, w);
-////    check(x >= (r + w));
-////}
-////
-////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for horizontal lanes")
-////pattern actorOnHorizontalLane(a : Actor) {
-////    Actor.placedOn(a, l);
-////    Lane.orientation(l, Orientation::Horizontal);
-////    Actor.yPos(a, y);
-////    Lane.referenceCoord(l, r);
-////    check(y <= r);
-////} or {
-////    Actor.placedOn(a, l);
-////    Lane.orientation(l, Orientation::Horizontal);
-////    Actor.yPos(a, y);
-////    Lane.referenceCoord(l, r);
-////    Lane.numWidth(l, w);
-////    check(y >= (r + w));
-////}
+@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
+pattern define_placedOn_actorOnHorizLane(a : Actor, hl:Lane_Horizontal) {
+    Actor.placedOn(a, hl);
+    Actor.yPos(a, y);
+    Lane.referenceCoord(hl, r);
+    check(y <= r);
+} or {
+    Actor.placedOn(a, hl);
+    Actor.yPos(a, y);
+    Lane.referenceCoord(hl, r);
+    Lane.numWidth(hl, w);
+    check(y >= (r + w));
+}
+
+//////////////
+//Actor
+//////////////
+
+////TODO
+/////////xPos of every actor mmust be within bounds defined in CS
+//@Constraint(severity="error", key={l}, message="1 Actor")
+//pattern define_actor_xPosWithinCSbounds(cs:CrossingScenario, a:Actor) {
+//	
+//}
 //
-////@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation")
-////pattern actorOnLane(a : Actor) {
-////	find actorOnVerticalLane(a);
-//////	neg find actorOnHorizontalLane(a);
-////}
-////
-////private pattern actorOnVerticalLane(a : Actor) {
-////    Actor.placedOn(a, l);
-////    Lane.orientation(l, Orientation::Vertical);
-////    Actor.xPos(a, x);
-////    Lane.referenceCoord(l, r);
-////    Lane.numWidth(l, w);
-////    check(x >= r);
-////    check(x <= (r + w));
-////}
-//
-////@Constraint(severity = "error", key = {l}, message = "this defines the placedOn relation")
-////pattern widthSpec(l : Lane) {
-////	Lane.numWidth(l, w);
-////	check(w != 5);
-////}
-//
-////private pattern actorOnHorizontalLane(a : Actor) {
-////    Actor.placedOn(a, l);
-////    Lane.orientation(l, Orientation::Vertical);
-////    Actor.yPos(a, y);
-////    Lane.referenceCoord(l, r);
-////    Lane.widthNum(l, w);
-////    check(y >= r);
-////    check(y <= (r + w));
-////}
-//
+////TODO
+/////////yPos of every actor mmust be within bounds defined in CS
+//@Constraint(severity="error", key={l}, message="2 Actor")
+//pattern define_actor_yPosWithinCSbounds(cs:CrossingScenario, a:Actor) {
+//	
+//}
+
+
+/////////pedestrian-width (3)
+pattern define_actor_pedestrianWidth(p:Pedestrian) {
+    Pedestrian.width(p, 1.0);
+}
+
+/////////pedestrian-width (4)
+pattern define_actor_pedestrianLength(p:Pedestrian) {
+    Pedestrian.length(p, 1.0);
+}
+
+/////////actor-width (5)
+pattern define_actor_actorWidth(a:Actor) {
+	Actor.placedOn(a, l);
+	Lane_Vertical(l);
+    Actor.width(p, 1.0);
+} or {
+	Actor.placedOn(a, l);
+	Lane_Horizontal(l);
+    Actor.width(p, 3.0);
+}
+
+/////////actor-width (6)
+pattern define_actor_actorLength(a:Actor) {
+	Actor.placedOn(a, l);
+	Lane_Vertical(l);
+    Actor.length(p, 3.0);
+} or {
+	Actor.placedOn(a, l);
+	Lane_Horizontal(l);
+    Actor.length(p, 1.0);
+}
+
+
+/////////xSpeed of actor on verticalLane is 0
+@Constraint(severity="error", key={a}, message="7 Actor")
+pattern define_actor_actorOnVertLaneHasxSpeed0(a:Actor, vl:Lane_Vertical) {
+	Actor.placedOn(a, vl);
+    Actor.xSpeed(a, xSpeed);
+    check(xSpeed != 0);
+}
+
+/////////ySpeed of actor on horizontalLane is 0
+@Constraint(severity="error", key={a}, message="8 Actor")
+pattern define_actor_actorOnHoriLaneHasySpeed0(a:Actor, hl:Lane_Horizontal) {
+	Actor.placedOn(a, hl);
+    Actor.ySpeed(a, ySpeed);
+    check(ySpeed != 0);
+}
+
 ////////////////
 ////CollisionExists
 ////////////////

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -98,7 +100,21 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 						sol.put(o, oSol);
 					} else {
 						RealExpr val = (RealExpr) m.evaluate(varMap.get(o), false);
-						Double oSol = Double.parseDouble(val.toString());
+						Double oSol = 0.0;
+						if (val.toString().contains("/")) {
+							String re = "([0-9]+)/([0-9]+)";
+							Pattern p = Pattern.compile(re);
+							Matcher ma = p.matcher(val.toString());
+							if (ma.matches()) {
+								int numerator = Integer.parseInt(ma.group(1));
+								int denominator = Integer.parseInt(ma.group(2));
+								oSol = (double) numerator / denominator;
+							} else {
+								System.err.println("Problem converting string: " + val.toString());
+							}
+						} else {
+							oSol = Double.parseDouble(val.toString());
+						}
 						sol.put(o, oSol);
 					}
 					//System.out.println("Solution:" + o + "->" + oSol);

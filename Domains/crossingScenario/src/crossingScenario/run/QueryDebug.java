@@ -16,14 +16,16 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import crossingScenario.Actor;
 import crossingScenario.CrossingScenario;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
 
 public class QueryDebug {
 	public static void main(String[] args) throws FileNotFoundException {
-//		checkPrevLanes("outputs/models/1.xmi", "outputs/simplePrevLane.tgf");
-		testOnInstance();
+		checkPrevLanes("outputs/models/1.xmi", "outputs/simplePrevLane.tgf");
+//		testOnInstance();
+//		miniRETest("21/2");
 	}
 	
 	public static void checkPrevLanes(String pathSrc, String pathTgt) throws FileNotFoundException {
@@ -35,6 +37,12 @@ public class QueryDebug {
 		PrintWriter printer = new PrintWriter(pathTgt);
 		
 		CrossingScenario cs = ((CrossingScenario) res.getContents().get(0));
+		
+		for (Actor o : cs.getActors()) {
+			String nodeName = "(" + o.getXPos()+","+o.getYPos() + ")";
+			printer.println(o.hashCode() + " " + nodeName);
+		}
+		
 		for (Lane o : cs.getLanes()) {
 			String prefix = "";
 			if (cs.getHorizontal_head().equals(o) || cs.getVertical_head().equals(o)) {
@@ -53,6 +61,13 @@ public class QueryDebug {
 				printer.println(curName + " " + curPrev + " " + edgeLabel);
 			}
 		}
+		
+		for (Actor o : cs.getActors()) {
+			int actName = o.hashCode();
+			int lanName = o.getPlacedOn().hashCode();
+			printer.println(actName + " " + lanName );
+		}
+		
 		printer.flush();
 		printer.close();
 		System.out.println("TGF CREATED");
@@ -167,6 +182,21 @@ public class QueryDebug {
 		    }
 		}
 		return res;
+	}
+	
+	public static void miniRETest(String in) {
+		Double oSol = 0.0;
+		String re = "([0-9]+)/([0-9]+)";
+		Pattern p = Pattern.compile(re);
+		Matcher ma = p.matcher(in);
+		if (ma.matches()) {
+			int numerator = Integer.parseInt(ma.group(1));
+			int denominator = Integer.parseInt(ma.group(2));
+			oSol = (double) numerator / denominator;
+			System.out.println(oSol);
+		} else {
+			System.err.println("Problem converting string: " + in);
+		}
 	}
 
 }
