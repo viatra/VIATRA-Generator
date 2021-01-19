@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
+import org.eclipse.xtext.xbase.XUnaryOperation;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.IntegerElement;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
@@ -35,6 +36,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private String containerName = "<container-name-here>";
 	private String drealLocalPath = "<path-to-dreal-here>";
 	private final String smtFileName = "tmp/smt.smt2";
+	private final File localTempFile = File.createTempFile("smt", ".smt2");
 	private Map<Object, String> varMap;
 	private Map<String, String> curVar2Decl;
 	
@@ -76,11 +78,12 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	}
 	
 	private Process callDrealDocker(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
+		//TODO currently not working for Linux
 		String numProbContentStr = String.join("\\n", numProbContents);
 		List<String> drealCmd = new ArrayList<String>(Arrays.asList(
 						"docker", "exec", containerName,
 						"bash", "-c",
-						"\""+  "printf", 
+						"\"printf " +
 						"\'" + numProbContentStr + "\'",
 						">",
 						smtFileName,
@@ -89,14 +92,14 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		if (getModel) {drealCmd.add("--model");}
 		drealCmd.add(smtFileName + "\"");	
 		
+//		System.out.println(drealCmd);
+//		
 		return runProcess(drealCmd, TIMEOUT_DOCKER);
 	}
 	
 	private Process callDrealLocal(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
 		//print numProbConents to temp file
-		File tempFile = File.createTempFile("smt", ".smt2");
-		
-		PrintWriter printer = new PrintWriter(tempFile);
+		PrintWriter printer = new PrintWriter(localTempFile);
 		for (String s : numProbContents) {
 			printer.println(s);
 		}
@@ -106,9 +109,9 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		List<String> drealCmd = new ArrayList<String>();
 		drealCmd.add(drealLocalPath);
 		if (getModel) {drealCmd.add("--model");}
-		drealCmd.add(tempFile.getAbsolutePath());
+		drealCmd.add(localTempFile.getAbsolutePath());
 		
-		System.out.println(drealCmd);
+//		System.out.println(drealCmd);
 		
 		return runProcess(drealCmd, TIMEOUT_LOCAL);
 	}
@@ -244,6 +247,13 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			}
 
 			expr = "(" + operator + " " + left_operand + " " + right_operand + ")";			
+		} 
+		else if (e instanceof XUnaryOperation){
+			String name = ((XUnaryOperation) e).getFeature().getQualifiedName();
+			System.out.println(name);
+			String op = ((XUnaryOperation) e).getOperand().toString();			
+			System.out.println(op);
+			throw new Exception ("Unsupported expression " + e.getClass().getSimpleName());
 		} else {
 			throw new Exception ("Unsupported expression " + e.getClass().getSimpleName());
 		}
@@ -327,7 +337,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//DEBUG - Print things
 //		printOutput(numProbContent);
 //		printOutput(outputs.get(0));
-//		System.out.println(result);
+		System.out.println(result);
 		//END DEBUG
 		
 		return result;
@@ -335,15 +345,25 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	
 	private Map<String, String> parseDrealOutput(List<String> output) {
 		Map<String, String> res = new HashMap<String, String>();
-		String re = "(\\w+) : \\[([0-9\\-+.e]+), ([0-9\\-+.e]+)\\]";
-		Pattern p = Pattern.compile(re);
+		String re1 = "(\\w+) : \\[([0-9\\-+.e]+), ([0-9\\-+.e]+)\\]";
+		Pattern p1 = Pattern.compile(re1);
+		String re2 = "(\\w+) : <([0-9\\-+.e]+), ([0-9\\-+.e]+)>";
+		Pattern p2 = Pattern.compile(re2);
 		for (String varVal : output) {
-		    Matcher m = p.matcher(varVal);
-		    if (m.matches()) {
-		        String name = m.group(1);
-		        String lowerB = m.group(2);
-		        String upperB = m.group(2);
+		    Matcher m1 = p1.matcher(varVal);
+		    Matcher m2 = p2.matcher(varVal);		    
+		    if (m1.matches()) {
+		        String name = m1.group(1);
+		        String lowerB = m1.group(2);
+		        String upperB = m1.group(3);
 		        res.put(name, lowerB);
+		    } else {
+			    if (m2.matches()) {
+			        String name = m2.group(1);
+			        String lowerB = m2.group(2);
+			        String upperB = m2.group(3);
+			        res.put(name, lowerB);
+			    }
 		    }
 		}
 		return res;
@@ -363,8 +383,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		long startSolvingProblem = System.nanoTime();
 		
 		Process outputProcess;
-		if (this.useDocker) outputProcess = callDrealDocker(numProbContent, false);
-		else outputProcess = callDrealLocal(numProbContent, false);
+		if (this.useDocker) outputProcess = callDrealDocker(numProbContent, true);
+		else outputProcess = callDrealLocal(numProbContent, true);
 			
 		List<List<String>> outputs = getProcessOutput(outputProcess);
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);

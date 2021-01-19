@@ -15,7 +15,13 @@ public class CrossingScenarioMain {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly.");
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
+//		System.out.println(System.getProperty("java.library.path"));
+////		System.setProperty("java.library.path", 
+////				"/home/models/VIATRA-Generator/Solvers/SMT-Solver/com.microsoft.z3/lib");
+//		Thread.sleep(2000);
+//		System.out.println(System.getProperty("java.library.path"));
+//		System.loadLibrary("z3java");
 		String errorMessages = StandaloneScriptExecutor.executeScript("inputs/crossingScenarioGen.vsconfig");
 		if (errorMessages != null) {
 			System.out.println(errorMessages);
@@ -28,10 +34,11 @@ public class CrossingScenarioMain {
 		int t2 = Integer.parseInt(times[4]);
 		int t3 = Integer.parseInt(times[5]);
 		int t4 = Integer.parseInt(times[6]);
+		int t5 = Integer.parseInt(times[7]);
 		int tot = t1+t2+t3+t4;
-		System.out.println("domain2logic -> " + t1);
-		System.out.println("logic2solver -> " + t2);
-		System.out.println("solver -> " + t3);
+		System.out.println("preprocessingTime -> ~" + (t1+t2));
+		System.out.println("sol0FoundAt -> " + (t5));
+		System.out.println("solver -> ~" + t3);
 		System.out.println("postprocessing -> " + t4);
 		
 		System.out.println("TOTAL -> " + tot);
@@ -39,6 +46,6 @@ public class CrossingScenarioMain {
 		String p1 = "outputs/models/1.xmi";
 		String p2 = "outputs/simplePrevLane.tgf";
 		QueryDebug.checkPrevLanes(p1, p2);
-		Desktop.getDesktop().open(new File(p2));  
+//		Desktop.getDesktop().open(new File(p2));  
 	}
 }

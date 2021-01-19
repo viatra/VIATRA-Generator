@@ -37,6 +37,7 @@ import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.LogicResult;
 import hu.bme.mit.inf.dslreasoner.logic.model.logicresult.ModelResult;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.PartialInterpretation2Logic;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation;
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.statecoder.NeighbourhoodBasedPartialInterpretationStateCoder;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualisation;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretationVisualiser;
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod;
@@ -304,6 +305,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 	
 	public List<String> times = new LinkedList<String>();
 	private void saveTimes() {
+		long statecoderTime = ((NeighbourhoodBasedPartialInterpretationStateCoder)this.context.getStateCoder()).getStatecoderRuntime()/1000000;
 		long forwardTime = context.getDesignSpaceManager().getForwardTime()/1000000;
 		long backtrackingTime = context.getDesignSpaceManager().getBacktrackingTime()/1000000;
 		long activationSelection = this.activationSelector.getRuntime()/1000000;
@@ -314,6 +316,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 		long numericalSolverInterpreting = this.numericSolver.getSolverSolution()/1000000;
 		this.times.add(
 			"(TransformationExecutionTime"+method.getStatistics().transformationExecutionTime/1000000+
+			"|StateCoderTime:"+statecoderTime+
 			"|ForwardTime:"+forwardTime+
 			"|Backtrackingtime:"+backtrackingTime+
 			"|GlobalConstraintEvaluationTime:"+(globalConstraintEvaluationTime/1000000)+

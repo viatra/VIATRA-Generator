@@ -23,9 +23,14 @@ import crossingScenario.Lane;
 
 public class QueryDebug {
 	public static void main(String[] args) throws FileNotFoundException {
-		checkPrevLanes("outputs/models/1.xmi", "outputs/simplePrevLane.tgf");
-//		testOnInstance();
+//		checkPrevLanes("outputs/models/1.xmi", "outputs/simplePrevLane.tgf");
+		testOnInstance();
 //		miniRETest("21/2");
+	}
+	
+	private static Double rndbl(Double in, int places) {
+	    double scale = Math.pow(10, places);
+	    return Math.round(in * scale) / scale;		
 	}
 	
 	public static void checkPrevLanes(String pathSrc, String pathTgt) throws FileNotFoundException {
@@ -39,7 +44,7 @@ public class QueryDebug {
 		CrossingScenario cs = ((CrossingScenario) res.getContents().get(0));
 		
 		for (Actor o : cs.getActors()) {
-			String nodeName = "(" + o.getXPos()+","+o.getYPos() + ")";
+			String nodeName = "A(" + rndbl(o.getXPos(), 1)+","+rndbl(o.getYPos(), 1) + ")";
 			printer.println(o.hashCode() + " " + nodeName);
 		}
 		
@@ -48,7 +53,7 @@ public class QueryDebug {
 			if (cs.getHorizontal_head().equals(o) || cs.getVertical_head().equals(o)) {
 				prefix = "HEAD";
 			}
-			String nodeName = prefix + "(" + o.getReferenceCoord() + ")" + 
+			String nodeName = prefix + "L(" + rndbl(o.getReferenceCoord(), 3) + ")" + 
 					o.eClass().getName().substring(5, 9);
 			printer.println(o.hashCode() + " " + nodeName);
 		}
@@ -57,7 +62,7 @@ public class QueryDebug {
 			if (o.getPrevLane() != null){
 				int curName = o.hashCode();
 				int curPrev = o.getPrevLane().hashCode();
-				double edgeLabel = o.getPrevLane().getNumWidth();
+				double edgeLabel = rndbl(o.getPrevLane().getNumWidth(), 1);
 				printer.println(curName + " " + curPrev + " " + edgeLabel);
 			}
 		}
@@ -82,14 +87,14 @@ public class QueryDebug {
 		
 //		ViatraQueryEngine engine = ViatraQueryEngine.on(new EMFScope(rs));		
 //		// Access pattern matcher
-//		CrossingScenarioQueries.instance().prepare(engine);
+//		Queries.instance().prepare(engine);
 //		
-//		Define_referenceCoord_laneWithPrevHasCorrectRefCoord.Matcher matcher = Define_referenceCoord_laneWithPrevHasCorrectRefCoord.Matcher.on(engine);
+//		X.Matcher matcher = X.Matcher.on(engine);
 //		// Get and iterate over all matches
 //		System.out.println("MATCHES:");
-//		for (Define_referenceCoord_laneWithPrevHasCorrectRefCoord.Match match : matcher.getAllMatches()) {
+//		for (X.Match match : matcher.getAllMatches()) {
 //			// Print all the matches to the standard output
-//			System.out.println(match.getL());
+//			System.out.println(match.getP());
 //		}
 	}
 	

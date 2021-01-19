@@ -7,21 +7,23 @@ generate {
 	partial-model = { "inputs/crossingScenarioInit.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 15..100,
+		#node = 10..100,
 		#int = {},
 		#<Lane> = 10..25,
-		#<Actor> = 10..25//,
+		#<Actor> = 10..25,
+		#<CollisionExists> = 1..10//,
 		//#<Relation> = 1..10
 		}
 	
 	config = {
 		runtime = 10000,
-		log-level = normal,
-		"numeric-solver" = "z3",
+		log-level = none,
+		"numeric-solver" = "dreal-local",
 		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
 		"scopePropagator" = "typeHierarchy"}
 	
-	runs = 1	
+	runs = 1
+	number = 10
 	debug =			"outputs/debug"
 	log =			"outputs/debug/log.txt"
 	output =		"outputs/models"	

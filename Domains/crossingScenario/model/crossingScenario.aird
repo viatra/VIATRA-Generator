@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis uid="_LYTfEFZ_Eeugh9dythfu8g" selectedViews="_LaDLgFZ_Eeugh9dythfu8g _LaVfYFZ_Eeugh9dythfu8g _LaWGcFZ_Eeugh9dythfu8g _Laa-8FZ_Eeugh9dythfu8g" version="14.3.0.201909031200">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
+  <viewpoint:DAnalysis uid="_LYTfEFZ_Eeugh9dythfu8g" selectedViews="_LaDLgFZ_Eeugh9dythfu8g _LaVfYFZ_Eeugh9dythfu8g _LaWGcFZ_Eeugh9dythfu8g _Laa-8FZ_Eeugh9dythfu8g" version="14.3.1.202003261200">
     <semanticResources>crossingScenario.ecore</semanticResources>
     <semanticResources>crossingScenario.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_LaDLgFZ_Eeugh9dythfu8g">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_MXYWcFZ_Eeugh9dythfu8g" name="crossingScenario class diagram" repPath="#_MV4hoFZ_Eeugh9dythfu8g" changeId="727f8c7c-fc2b-4ee7-ba43-baea41994c39">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_MXYWcFZ_Eeugh9dythfu8g" name="crossingScenario class diagram" repPath="#_MV4hoFZ_Eeugh9dythfu8g" changeId="4eabaeda-42e7-42e2-a865-c4dd91b6f627">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']"/>
         <target xmi:type="ecore:EPackage" href="crossingScenario.ecore#/"/>
       </ownedRepresentationDescriptors>
@@ -27,12 +27,6 @@
           <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           <labelFormat>bold</labelFormat>
           <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-        </computedStyleDescriptions>
-        <computedStyleDescriptions xmi:type="style:BundledImageDescription" xmi:id="_Nay7QFZ_Eeugh9dythfu8g" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
-          <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-          <labelFormat>bold</labelFormat>
-          <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
           <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
         </computedStyleDescriptions>
         <computedStyleDescriptions xmi:type="style:EdgeStyleDescription" xmi:id="_NbA9sFZ_Eeugh9dythfu8g" sourceArrow="FillDiamond" routingStyle="manhattan">
@@ -860,18 +854,18 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_NayUMVZ_Eeugh9dythfu8g" name="/length : EDouble = 0.0" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_NayUMVZ_Eeugh9dythfu8g" name="length : EDouble = 0.0" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="crossingScenario.ecore#//Actor/length"/>
         <semanticElements xmi:type="ecore:EAttribute" href="crossingScenario.ecore#//Actor/length"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_Nay7QVZ_Eeugh9dythfu8g" labelColor="39,76,114" labelAlignment="LEFT" description="_Nay7QFZ_Eeugh9dythfu8g">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_9P5DUVo2Eeuf2I9QZKj3tw" labelAlignment="LEFT" description="_NatbsFZ_Eeugh9dythfu8g">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" uid="_Nay7QlZ_Eeugh9dythfu8g" name="/width : EDouble = 0.0" tooltipText="">
+      <ownedElements xmi:type="diagram:DNodeListElement" uid="_Nay7QlZ_Eeugh9dythfu8g" name="width : EDouble = 0.0" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="crossingScenario.ecore#//Actor/width"/>
         <semanticElements xmi:type="ecore:EAttribute" href="crossingScenario.ecore#//Actor/width"/>
-        <ownedStyle xmi:type="diagram:BundledImage" uid="_NaziUFZ_Eeugh9dythfu8g" labelColor="39,76,114" labelAlignment="LEFT" description="_Nay7QFZ_Eeugh9dythfu8g">
+        <ownedStyle xmi:type="diagram:BundledImage" uid="_910a4Vo2Eeuf2I9QZKj3tw" labelAlignment="LEFT" description="_NatbsFZ_Eeugh9dythfu8g">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>

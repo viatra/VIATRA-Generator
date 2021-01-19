@@ -82,7 +82,7 @@ public interface Actor extends EObject {
 	 * @return the value of the '<em>Length</em>' attribute.
 	 * @see #setLength(double)
 	 * @see crossingScenario.CrossingScenarioPackage#getActor_Length()
-	 * @model default="0.0" required="true" derived="true"
+	 * @model default="0.0" required="true"
 	 * @generated
 	 */
 	double getLength();
@@ -104,7 +104,7 @@ public interface Actor extends EObject {
 	 * @return the value of the '<em>Width</em>' attribute.
 	 * @see #setWidth(double)
 	 * @see crossingScenario.CrossingScenarioPackage#getActor_Width()
-	 * @model required="true" derived="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	double getWidth();
