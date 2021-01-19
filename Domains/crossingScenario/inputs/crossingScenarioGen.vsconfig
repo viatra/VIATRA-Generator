@@ -4,7 +4,7 @@ import viatra	"queries/crossingScenarioQueries.vql"
 generate {
 	metamodel = { package crossingScenario }
 	constraints = { package queries}
-	partial-model = { "inputs/CrossingScenarioInit.xmi"}
+	partial-model = { "inputs/crossingScenarioInit.xmi"}
 	solver = ViatraSolver
 	scope = {
 		#node = 15..100,
@@ -18,6 +18,7 @@ generate {
 		runtime = 10000,
 		log-level = normal,
 		"numeric-solver" = "z3",
+		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
 		"scopePropagator" = "typeHierarchy"}
 	
 	runs = 1	

@@ -143,9 +143,16 @@ class SolverLoader {
 				if (config.containsKey("numeric-solver")) {
 					val stringValue = config.get("numeric-solver")
 					c.numericSolverSelection = switch (stringValue) {
-						case "dreal": NumericSolverSelection.DREAL
+						case "dreal-docker": NumericSolverSelection.DREAL_DOCKER
+						case "dreal-local": NumericSolverSelection.DREAL_LOCAL
 						case "z3": NumericSolverSelection.Z3
 						default: throw new IllegalArgumentException("Unknown numeric solver selection: " + stringValue)
+					}
+				}
+				if (config.containsKey("dreal-local-path")) {
+					val stringValue = config.get("dreal-local-path")
+					if (!stringValue.equals("")){
+						c.drealLocalPath = stringValue;	
 					}
 				}
 				if (config.containsKey("scopePropagator")) {

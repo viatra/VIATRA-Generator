@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,43 +29,53 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement;
 
 public class NumericDrealProblemSolver extends NumericProblemSolver{
+	
+	private final boolean useDocker;
 
-	private final String containerName;
+	private String containerName = "<container-name-here>";
+	private String drealLocalPath = "<path-to-dreal-here>";
 	private final String smtFileName = "tmp/smt.smt2";
 	private Map<Object, String> varMap;
 	private Map<String, String> curVar2Decl;
+	
+	private final int TIMEOUT_DOCKER = 5;
+	private final int TIMEOUT_LOCAL = 2;
 
-	public NumericDrealProblemSolver() throws IOException, InterruptedException {		
+	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath) throws IOException, InterruptedException {
+		this.useDocker = useDocker;
+		this.varMap = new HashMap<Object, String>();
+		this.drealLocalPath = drealLocalPath;
+		
+		if (useDocker) setupDocker();
+	}
+	
+	private void setupDocker() throws IOException, InterruptedException {
 		//setup docker
 		//TODO ENSURE that container name is not already in use????
 		//TODO if dreal/dreal4 image is not downloaded, download it.
-		File tempDir = new File(System.getProperty("java.io.tmpdir"));
-		containerName = UUID.randomUUID().toString().replace("-", "");
+		this.containerName = UUID.randomUUID().toString().replace("-", "");
 		List<String> startDocker = new ArrayList<String>(
 				Arrays.asList("docker", "run", 
 						"-id", "--rm", 
 						"--name", containerName, 
 //						"-p", "8080:80",
 						"dreal/dreal4"));
-		runProcess(startDocker);		
-		
-		//setup varmap		
-		varMap = new HashMap<Object, String>();
+		runProcess(startDocker, TIMEOUT_DOCKER);	
 	}
 	
-	private Process runProcess(List<String> cmd) throws IOException, InterruptedException {
+	private Process runProcess(List<String> cmd, int timeout) throws IOException, InterruptedException {
 		String s = String.join(" ", cmd);
 		Process p = Runtime.getRuntime().exec(s);
 //		p.waitFor();
 		//TODO timeout if needed
-		if (!p.waitFor(5, TimeUnit.SECONDS)) {
+		if (!p.waitFor(timeout, TimeUnit.SECONDS)) {
 			p.destroy();
 			System.err.println("TIMEOUT"); //DEBUG
 		}
 		return p;
 	}
 	
-	private Process callDreal(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
+	private Process callDrealDocker(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
 		String numProbContentStr = String.join("\\n", numProbContents);
 		List<String> drealCmd = new ArrayList<String>(Arrays.asList(
 						"docker", "exec", containerName,
@@ -78,7 +89,28 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		if (getModel) {drealCmd.add("--model");}
 		drealCmd.add(smtFileName + "\"");	
 		
-		return runProcess(drealCmd);
+		return runProcess(drealCmd, TIMEOUT_DOCKER);
+	}
+	
+	private Process callDrealLocal(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
+		//print numProbConents to temp file
+		File tempFile = File.createTempFile("smt", ".smt2");
+		
+		PrintWriter printer = new PrintWriter(tempFile);
+		for (String s : numProbContents) {
+			printer.println(s);
+		}
+		printer.close();
+		
+		//call local dreal with path to temp file
+		List<String> drealCmd = new ArrayList<String>();
+		drealCmd.add(drealLocalPath);
+		if (getModel) {drealCmd.add("--model");}
+		drealCmd.add(tempFile.getAbsolutePath());
+		
+		System.out.println(drealCmd);
+		
+		return runProcess(drealCmd, TIMEOUT_LOCAL);
 	}
 	
 	private List<String> getDrealStream(InputStream stream) throws IOException {
@@ -262,6 +294,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void printOutput(List<String> list) {
 		for (String line : list) {
 			System.out.println(line);
@@ -282,7 +315,11 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				
 		//CALL DREAL
 		long startSolvingProblem = System.nanoTime();
-		Process outputProcess = callDreal(numProbContent, false);
+		
+		Process outputProcess;
+		if (this.useDocker) outputProcess = callDrealDocker(numProbContent, false);
+		else outputProcess = callDrealLocal(numProbContent, false);
+			
 		List<List<String>> outputs = getProcessOutput(outputProcess);
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
@@ -320,10 +357,15 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		long startformingProblem = System.nanoTime();
 		List<String> numProbContent = formNumericProblemInstance(matches);
 		endformingProblem = System.nanoTime()-startformingProblem;
-						
+		
+		
 		//CALL DREAL
 		long startSolvingProblem = System.nanoTime();
-		Process outputProcess = callDreal(numProbContent, true);
+		
+		Process outputProcess;
+		if (this.useDocker) outputProcess = callDrealDocker(numProbContent, false);
+		else outputProcess = callDrealLocal(numProbContent, false);
+			
 		List<List<String>> outputs = getProcessOutput(outputProcess);
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
@@ -373,7 +415,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	public void teardown() throws IOException, InterruptedException {
 		List<String> stopDocker = new ArrayList<String>(
 				Arrays.asList("docker", "stop", containerName));
-		runProcess(stopDocker);
+		runProcess(stopDocker, TIMEOUT_DOCKER);
 		//TODO Check if above went well?
 	}
 

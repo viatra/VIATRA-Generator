@@ -34,6 +34,7 @@ class NumericSolver {
 	val boolean intermediateConsistencyCheck
 	val boolean caching;
 	Map<LinkedHashMap<PConstraint, Iterable<List<Integer>>>,Boolean> satisfiabilityCache = new HashMap
+	val String drealLocalPath;
 	
 	var long runtime = 0
 	var long cachingTime = 0 
@@ -43,12 +44,16 @@ class NumericSolver {
 	new(ModelGenerationMethod method, ViatraReasonerConfiguration config, boolean caching) {
 		this.method = method
 		this.intermediateConsistencyCheck = config.runIntermediateNumericalConsistencyChecks
-		this.t = new NumericTranslator(createNumericTranslator(config.numericSolverSelection))
 		this.caching = caching
+		this.drealLocalPath = config.drealLocalPath
+		this.t = new NumericTranslator(createNumericTranslator(config.numericSolverSelection))
 	}
 	
 	def createNumericTranslator(NumericSolverSelection solverSelection) {
-		if (solverSelection == NumericSolverSelection.DREAL) return new NumericDrealProblemSolver
+		if (solverSelection == NumericSolverSelection.DREAL_DOCKER) 
+			return new NumericDrealProblemSolver(true, null)
+		if (solverSelection == NumericSolverSelection.DREAL_LOCAL)
+			return new NumericDrealProblemSolver(false, drealLocalPath)
 		if (solverSelection == NumericSolverSelection.Z3) return new NumericZ3ProblemSolver
 	}
 	
@@ -98,12 +103,12 @@ class NumericSolver {
 			finalResult=true
 		} else {
 			val propagatedConstraints = new HashMap
-			println("------ Any matches?")
+			println("<<<<START-STEP>>>>")
 			for(entry : matches.entrySet) {
 				val constraint = entry.key
-				println("------ " + constraint)
+//				println("--match?-- " + constraint)
 				val allMatches = entry.value.allMatches.map[it.toArray]
-				println("------ " + allMatches.toList)
+//				println("---------- " + entry.value.allMatches)
 				propagatedConstraints.put(constraint,allMatches)
 			}
 			if(propagatedConstraints.values.forall[empty]) {

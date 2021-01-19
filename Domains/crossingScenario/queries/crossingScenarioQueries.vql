@@ -211,36 +211,36 @@ pattern define_placedOn_actorOnHorizLane(a : Actor, hl:Lane_Horizontal) {
 
 
 /////////pedestrian-width (3)
-pattern define_actor_pedestrianWidth(p:Pedestrian) {
-    Pedestrian.width(p, 1.0);
-}
+//pattern define_actor_pedestrianWidth(p:Pedestrian) {
+//    Pedestrian.width(p, 1.0);
+//}
+//
+///////////pedestrian-width (4)
+//pattern define_actor_pedestrianLength(p:Pedestrian) {
+//    Pedestrian.length(p, 1.0);
+//}
 
-/////////pedestrian-width (4)
-pattern define_actor_pedestrianLength(p:Pedestrian) {
-    Pedestrian.length(p, 1.0);
-}
-
-/////////actor-width (5)
-pattern define_actor_actorWidth(a:Actor) {
-	Actor.placedOn(a, l);
-	Lane_Vertical(l);
-    Actor.width(p, 1.0);
-} or {
-	Actor.placedOn(a, l);
-	Lane_Horizontal(l);
-    Actor.width(p, 3.0);
-}
-
-/////////actor-width (6)
-pattern define_actor_actorLength(a:Actor) {
-	Actor.placedOn(a, l);
-	Lane_Vertical(l);
-    Actor.length(p, 3.0);
-} or {
-	Actor.placedOn(a, l);
-	Lane_Horizontal(l);
-    Actor.length(p, 1.0);
-}
+///////////actor-width (5)
+//pattern define_actor_actorWidth(a:Actor) {
+//	Actor.placedOn(a, l);
+//	Lane_Vertical(l);
+//    Actor.width(p, 1.0);
+//} or {
+//	Actor.placedOn(a, l);
+//	Lane_Horizontal(l);
+//    Actor.width(p, 3.0);
+//}
+//
+///////////actor-width (6)
+//pattern define_actor_actorLength(a:Actor) {
+//	Actor.placedOn(a, l);
+//	Lane_Vertical(l);
+//    Actor.length(p, 3.0);
+//} or {
+//	Actor.placedOn(a, l);
+//	Lane_Horizontal(l);
+//    Actor.length(p, 1.0);
+//}
 
 
 /////////xSpeed of actor on verticalLane is 0

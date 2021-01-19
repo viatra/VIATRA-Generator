@@ -165,8 +165,8 @@ class ViatraReasoner extends LogicReasoner {
 		val solverTime = System.nanoTime - solverStartTime
 		viatraConfig.progressMonitor.workedSearchFinished
 		
-		//dreal teardown
-		if (viatraConfig.numericSolverSelection == NumericSolverSelection.DREAL){
+		//dreal docker teardown
+		if (viatraConfig.numericSolverSelection == NumericSolverSelection.DREAL_DOCKER){
 			(numericSolver.numericSolverSelection as NumericDrealProblemSolver).teardown()
 		}
 

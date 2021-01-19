@@ -34,7 +34,8 @@ enum PunishSizeStrategy {
 }
 
 enum NumericSolverSelection {
-	DREAL,
+	DREAL_DOCKER,
+	DREAL_LOCAL,
 	Z3
 }
 
@@ -75,7 +76,8 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
 	public var calculateObjectCreationCosts = false
-	public var numericSolverSelection = NumericSolverSelection.DREAL //currently defaulted to DREAL
+	public var numericSolverSelection = NumericSolverSelection.DREAL_DOCKER //currently defaulted to DREAL
+	public var drealLocalPath = "<path-to-dreal>";
 	
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
