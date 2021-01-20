@@ -12,7 +12,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ModelGenerationMethod
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.NumericSolverSelection
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
-import java.math.BigDecimal
 import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
@@ -103,7 +102,7 @@ class NumericSolver {
 			finalResult=true
 		} else {
 			val propagatedConstraints = new HashMap
-			println("<<<<START-STEP>>>>")
+//			println("<<<<START-STEP>>>>")
 			for(entry : matches.entrySet) {
 				val constraint = entry.key
 //				println("--match?-- " + constraint)

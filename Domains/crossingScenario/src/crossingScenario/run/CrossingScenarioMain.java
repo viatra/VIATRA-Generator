@@ -3,9 +3,11 @@ package crossingScenario.run;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import hu.bme.mit.inf.dslreasoner.application.execution.StandaloneScriptExecutor;
@@ -26,7 +28,12 @@ public class CrossingScenarioMain {
 		if (errorMessages != null) {
 			System.out.println(errorMessages);
 		}
-		Path path = Paths.get("outputs/statistics.csv");		
+		
+		
+		Path path = Paths.get("outputs/statistics.csv");
+		Path target = Paths.get("../..//Tests/MODELS2020-CaseStudies/case.study.pledge.run/measurements1/stats.csv");
+		Files.copy(path, target, StandardCopyOption.REPLACE_EXISTING);
+		
 		List<String> content = Files.readAllLines(path);
 		String[] times = content.get(1).split(",");
 		System.out.println("STATISTICS");
@@ -45,7 +52,10 @@ public class CrossingScenarioMain {
 		
 		String p1 = "outputs/models/1.xmi";
 		String p2 = "outputs/simplePrevLane.tgf";
-		QueryDebug.checkPrevLanes(p1, p2);
+//		QueryDebug.checkPrevLanes(p1, p2);
 //		Desktop.getDesktop().open(new File(p2));  
+		System.gc();
+		System.gc();
+		System.gc();
 	}
 }

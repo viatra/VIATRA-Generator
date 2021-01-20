@@ -7,12 +7,14 @@ generate {
 	partial-model = { "inputs/crossingScenarioInit.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node = 10..100,
-		#int = {},
-		#<Lane> = 10..25,
-		#<Actor> = 10..25,
-		#<CollisionExists> = 1..10//,
-		//#<Relation> = 1..10
+		#node = 2..*
+		//,
+		//#<Lane> = 25..*
+		//,#<Actor> = 25..*
+		//,#<CollisionExists> = 1..10
+		//,#<SeparationDistance> = 1..10
+		//,#<VisionBlocked> = 1..10		
+		//,#<Relation> = 1..10
 		}
 	
 	config = {

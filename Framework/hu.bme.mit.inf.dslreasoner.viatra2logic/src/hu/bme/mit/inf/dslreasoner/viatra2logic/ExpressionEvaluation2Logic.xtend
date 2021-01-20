@@ -1,6 +1,7 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic
 
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicProblemBuilder
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IfThenElse
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Term
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Variable
 import java.util.Map
@@ -8,9 +9,11 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable
 import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XFeatureCall
+import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
+import org.eclipse.xtext.xbase.XBlockExpression
 
 class ExpressionEvaluation2Logic {
 	val extension LogicProblemBuilder builder = new LogicProblemBuilder
@@ -138,6 +141,41 @@ class ExpressionEvaluation2Logic {
 		try{ return Float.parseFloat(s).asTerm } catch(NumberFormatException e){}
 		throw new UnsupportedOperationException('''Unsupported numeric type: "«s»"''')
 	}
+	
+	def protected dispatch Term transform(XIfExpression i, Map<PVariable, Variable> variable2Variable) {
+		
+		val cond_op = i.^if.transform(variable2Variable)
+		val then_op = i.then.transform(variable2Variable)
+		val else_op = i.^else.transform(variable2Variable)
+		
+		if (cond_op === null) {
+			println("-> " + i.^if)
+			println("-> " + i.then)
+			println("-> " + i.^else)
+			throw new UnsupportedOperationException('''Your ITE statement has a null condition.''')
+		}
+		if (then_op === null) {
+			println("-> " + i.^if)
+			println("-> " + i.then)
+			println("-> " + i.^else)
+			throw new UnsupportedOperationException('''Your ITE statement has a null "then" statement"".''')
+		}
+		return ITE(cond_op, then_op, else_op)
+	}
+	
+		def protected dispatch Term transform(XBlockExpression b, Map<PVariable, Variable> variable2Variable) {
+		val exprs = newArrayList
+		for(e:b.expressions){ exprs.add(transform(e, variable2Variable)) }
+		
+		if (exprs.size > 1)
+			throw new UnsupportedOperationException('''blocks with more than 1 statement are not currently supportes: "«exprs»"''')
+		if (exprs.isEmpty)
+			throw new UnsupportedOperationException('''blocks is empty: "«exprs»"''')
+
+		return exprs.get(0)
+	}
+	
+	
 	
 	def protected dispatch Term transform(XExpression e, Map<PVariable, Variable> variable2Variable) {
 		throw new UnsupportedOperationException('''Unsupported expression: "«e.class.simpleName»" - «e»''')

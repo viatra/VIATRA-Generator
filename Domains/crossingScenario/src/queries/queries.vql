@@ -1,0 +1,10 @@
+package queries
+
+import "http://www.example.com/crossingScenario"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+/////////pedestrian-width (4) //TODO Derived?
+pattern x(p:Pedestrian) {
+    Pedestrian.length(p, l);
+    check(l != 1.0);
+}

@@ -424,88 +424,88 @@ pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor, c:CollisionExists
 	check((xPos1 + (xSpeed1 * cTime)) + (w1/2) < (xPos2 + (xSpeed2 * cTime)) - (w2/2));	
 }
 
-////////////////
-////SeparationDistance
-////////////////
-//@Constraint(severity="error", key={a1, sd}, message="x")
-//pattern SeparationDistance_near_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, sd);
-//	SeparationDistance.target(sd, a2);
-//	SeparationDistance.distance(sd, Distance::Near);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	//check(dx^2 + dy^2 < 5^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 5*5);	
-//}
-//
-//@Constraint(severity="error", key={a1, sd}, message="x")
-//pattern SeparationDistance_near_ub(a1:Actor, a2:Actor, sd:SeparationDistance) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, sd);
-//	SeparationDistance.target(sd, a2);
-//	SeparationDistance.distance(sd, Distance::Near);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	//check(dx^2 + dy^2 > 10^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);	
-//}
-//
-//@Constraint(severity="error", key={a1, sd}, message="x")
-//pattern SeparationDistance_medium_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, sd);
-//	SeparationDistance.target(sd, a2);
-//	SeparationDistance.distance(sd, Distance::Medium);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	//check(dx^2 + dy^2 < 10^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
-//}
-//
-//@Constraint(severity="error", key={a1, sd}, message="x")
-//pattern SeparationDistance_medium_ub(a1:Actor, a2:Actor, sd:SeparationDistance) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, sd);
-//	SeparationDistance.target(sd, a2);
-//	SeparationDistance.distance(sd, Distance::Medium);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	//check(dx^2 + dy^2 > 1^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 15*15);	
-//}
-//
-//@Constraint(severity="error", key={a1, sd}, message="x")
-//pattern SeparationDistance_far_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, sd);
-//	SeparationDistance.target(sd, a2);
-//	SeparationDistance.distance(sd, Distance::Far);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	//check(dx^2 + dy^2 < 15^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);	
-//}
-//
+//////////////
+//SeparationDistance
+//////////////
+@Constraint(severity="error", key={a1, sd}, message="x")
+pattern SeparationDistance_near_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, sd);
+	SeparationDistance.target(sd, a2);
+	SeparationDistance.distance(sd, Distance::D_Near);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	//check(dx^2 + dy^2 < 5^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 5*5);	
+}
+
+@Constraint(severity="error", key={a1, sd}, message="x")
+pattern SeparationDistance_near_ub(a1:Actor, a2:Actor, sd:SeparationDistance) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, sd);
+	SeparationDistance.target(sd, a2);
+	SeparationDistance.distance(sd, Distance::D_Near);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	//check(dx^2 + dy^2 > 10^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);	
+}
+
+@Constraint(severity="error", key={a1, sd}, message="x")
+pattern SeparationDistance_medium_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, sd);
+	SeparationDistance.target(sd, a2);
+	SeparationDistance.distance(sd, Distance::D_Med);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	//check(dx^2 + dy^2 < 10^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
+}
+
+@Constraint(severity="error", key={a1, sd}, message="x")
+pattern SeparationDistance_medium_ub(a1:Actor, a2:Actor, sd:SeparationDistance) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, sd);
+	SeparationDistance.target(sd, a2);
+	SeparationDistance.distance(sd, Distance::D_Med);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	//check(dx^2 + dy^2 > 1^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 15*15);	
+}
+
+@Constraint(severity="error", key={a1, sd}, message="x")
+pattern SeparationDistance_far_lb(a1:Actor, a2:Actor, sd:SeparationDistance) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, sd);
+	SeparationDistance.target(sd, a2);
+	SeparationDistance.distance(sd, Distance::D_Far);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	//check(dx^2 + dy^2 < 15^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);	
+}
+
 ////////////////
 ////CollisionDoesNotExist
 ////////////////
-//
+//TODO
 ////@Constraint(severity="error", key={a1, cdne}, message="x")
 ////pattern collisionDoesNotExist(a1:Actor, a2:Actor, ss:CrossingScenario, cdne:CollisionDoesNotExist) {
 ////	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
@@ -532,59 +532,72 @@ pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor, c:CollisionExists
 ////	//check(dx^2 + dy^2 < 15^2)
 ////	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);	
 ////}
-//
-////////////////
-////VisionBlocked
-////////////////
-//
-////OPTIONS 1: everything is from a single check expression containing ITEs
-////Currently unhandled bygenerator
-//@Constraint(severity="error", key={a1, vb}, message="x")
-//pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, vb);
-//	VisionBlocked.target(vb, a2);
-//	VisionBlocked.blockedBy(vb, aBlocker);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	Actor.xPos(aBlocker, xBlocker);
-//	Actor.yPos(aBlocker, yBlocker);
-//	Actor.length(aBlocker, lenBlocker);
-//	Actor.width(aBlocker, widBlocker);
-//	
-//	//check(slope of a1-to-BlockerTop < slope of a1-to-a2)
-//	check(
-//		( yBlocker - y1 + (if(xBlocker > x1){lenBlocker/2}else{0-lenBlocker/2})) / 
-//		( xBlocker - x1 + (if(yBlocker > y1){0-widBlocker/2}else{widBlocker/2}))
-//		< ((y1-y2)/(x1-x2)));	
-//}
-//
-//@Constraint(severity="error", key={a1, vb}, message="x")
-//pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//	Actor.relations(a1, vb);
-//	VisionBlocked.target(vb, a2);
-//	VisionBlocked.blockedBy(vb, aBlocker);
-//	
-//	Actor.xPos(a1, x1);
-//	Actor.yPos(a1, y1);
-//	Actor.xPos(a2, x2);
-//	Actor.yPos(a2, y2);
-//	Actor.xPos(aBlocker, xBlocker);
-//	Actor.yPos(aBlocker, yBlocker);
-//	Actor.length(aBlocker, lenBlocker);
-//	Actor.width(aBlocker, widBlocker);
-//	
-//	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
-//	check(
-//		( yBlocker - y1 + (if(xBlocker > x1){0-lenBlocker/2}else{lenBlocker/2})) / 
-//		( xBlocker - x1 + (if(yBlocker > y1){widBlocker/2}else{0-widBlocker/2}))
-//		> ((y1-y2)/(x1-x2)));	
-//}
-//
+
+//////////////
+//VisionBlocked
+//////////////
+
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern visionBlocked_invalidBlocker(a1:Actor, a2:Actor) {
+	Actor.relations(a1, vb);
+	VisionBlocked.target(vb, a2);
+	VisionBlocked.blockedBy(vb, a1);
+} or {	
+	Actor.relations(a1, vb);
+	VisionBlocked.target(vb, a2);
+	VisionBlocked.blockedBy(vb, a1);
+}
+
+//OPTIONS 1: everything is from a single check expression containing ITEs
+//Currently unhandled bygenerator
+@Constraint(severity="error", key={a1, vb}, message="x")
+pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, vb);
+	VisionBlocked.target(vb, a2);
+	VisionBlocked.blockedBy(vb, aBlocker);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	Actor.xPos(aBlocker, xBlocker);
+	Actor.yPos(aBlocker, yBlocker);
+	Actor.length(aBlocker, lenBlocker);
+	Actor.width(aBlocker, widBlocker);
+	
+	//check(slope of a1-to-BlockerTop < slope of a1-to-a2)
+	check(
+		( yBlocker - y1 + (if(xBlocker > x1){lenBlocker/2}else{0-lenBlocker/2})) / 
+		( xBlocker - x1 + (if(yBlocker > y1){0-widBlocker/2}else{widBlocker/2}))
+		< ((y1-y2)/(x1-x2)));	
+}
+
+@Constraint(severity="error", key={a1, vb}, message="x")
+pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	Actor.relations(a1, vb);
+	VisionBlocked.target(vb, a2);
+	VisionBlocked.blockedBy(vb, aBlocker);
+	
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+	Actor.xPos(aBlocker, xBlocker);
+	Actor.yPos(aBlocker, yBlocker);
+	Actor.length(aBlocker, lenBlocker);
+	Actor.width(aBlocker, widBlocker);
+	
+	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
+	check(
+		( yBlocker - y1 + (if(xBlocker > x1){0-lenBlocker/2}else{lenBlocker/2})) / 
+		( xBlocker - x1 + (if(yBlocker > y1){widBlocker/2}else{0-widBlocker/2}))
+		> ((y1-y2)/(x1-x2)));	
+}
+
+
+
 ////OPTION 2: 
 ////we handle ITE by seperating the constraints
 //

@@ -20,8 +20,10 @@ import java.util.regex.Pattern;
 
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 
@@ -72,7 +74,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//TODO timeout if needed
 		if (!p.waitFor(timeout, TimeUnit.SECONDS)) {
 			p.destroy();
-			System.err.println("TIMEOUT"); //DEBUG
+			return null;
 		}
 		return p;
 	}
@@ -147,7 +149,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	}	
 	
 	private String formNumericConstraint(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch) throws Exception {
-		//The check equation MUST be a binary operation
+		//The check equation MUST be a binary operation of the listed types (comparisons)
 		if (!(e instanceof XBinaryOperation)) {
 			throw new Exception ("error in check expression!!!");
 		}
@@ -159,19 +161,20 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		String left_operand = formNumericConstraintHelper(((XBinaryOperation) e).getLeftOperand(), aMatch);
 		String right_operand = formNumericConstraintHelper(((XBinaryOperation) e).getRightOperand(), aMatch);
 
+		//NOTE that everything  is inverted, due to how the MG handles vql constraints
 		if (nameEndsWith(name, N_LESSTHAN)) {
-			operator = "<";
-		} else if (nameEndsWith(name, N_LESSEQUALSTHAN)) {
-			operator = "<=";
-		} else if (nameEndsWith(name, N_GREATERTHAN)) {
 			operator = ">";
-		} else if (nameEndsWith(name, N_GREATEREQUALTHAN)) {
+		} else if (nameEndsWith(name, N_LESSEQUALSTHAN)) {
 			operator = ">=";
-		} else if (nameEndsWith(name, N_EQUALS)) {
+		} else if (nameEndsWith(name, N_GREATERTHAN)) {
 			operator = "<";
-		} else if (nameEndsWith(name, N_NOTEQUALS)) {
+		} else if (nameEndsWith(name, N_GREATEREQUALTHAN)) {
+			operator = "<=";
+		} else if (nameEndsWith(name, N_EQUALS)) {
 			//Exceptional case
 			return "(not (="  + " " + left_operand + " " + right_operand + "))";
+		} else if (nameEndsWith(name, N_NOTEQUALS)) {
+			operator = "=";
 //		} else if (nameEndsWith(name, N_EQUALS3)) {
 //			operator = "<";
 //		} else if (nameEndsWith(name, N_NOTEQUALS3)) {
@@ -240,6 +243,19 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 				operator = "*";
 			} else if (nameEndsWith(name, N_DIVIDE)) {
 				operator = "/";
+			} else if (nameEndsWith(name, N_LESSTHAN)) {
+				operator = "<";
+			} else if (nameEndsWith(name, N_LESSEQUALSTHAN)) {
+				operator = "<=";
+			} else if (nameEndsWith(name, N_GREATERTHAN)) {
+				operator = ">";
+			} else if (nameEndsWith(name, N_GREATEREQUALTHAN)) {
+				operator = ">=";
+			} else if (nameEndsWith(name, N_EQUALS)) {
+				operator = "<";
+			} else if (nameEndsWith(name, N_NOTEQUALS)) {
+				//Exceptional case
+				return "(not (="  + " " + left_operand + " " + right_operand + "))";
 //			} else if (nameEndsWith(name, N_MODULO)) {
 //				expr = ctx.mkMod((IntExpr)left_operand, (IntExpr)right_operand);
 			} else {
@@ -249,12 +265,30 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			expr = "(" + operator + " " + left_operand + " " + right_operand + ")";			
 		} 
 		else if (e instanceof XUnaryOperation){
-			String name = ((XUnaryOperation) e).getFeature().getQualifiedName();
-			System.out.println(name);
-			String op = ((XUnaryOperation) e).getOperand().toString();			
-			System.out.println(op);
+			//TODO
+			//This is, for example, "-1000"
 			throw new Exception ("Unsupported expression " + e.getClass().getSimpleName());
-		} else {
+		}
+		else if (e instanceof XIfExpression) {
+			
+			String if_operand = formNumericConstraintHelper(((XIfExpression) e).getIf(), aMatch);
+			String then_operand = formNumericConstraintHelper(((XIfExpression) e).getThen(), aMatch);
+			String else_operand = formNumericConstraintHelper(((XIfExpression) e).getElse(), aMatch);
+			
+			expr = "(ite " + if_operand + " " + then_operand + " " + else_operand + ")";
+		}
+		else if (e instanceof XBlockExpression) {
+			XBlockExpression ebl = (XBlockExpression) e;
+			
+			if (ebl.getExpressions().size() > 1)
+				throw new Exception("Unsupported: blocks with more than 1 statement are not currently supportes: " + ebl);
+			if (ebl.getExpressions().isEmpty())
+				throw new Exception("Unsupported: blocks is empty:" + ebl);
+			
+			//TODO make this more general
+			expr = formNumericConstraintHelper(ebl.getExpressions().get(0), aMatch);
+		}
+		else {
 			throw new Exception ("Unsupported expression " + e.getClass().getSimpleName());
 		}
 		return expr;
@@ -279,7 +313,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			Iterable<Map<JvmIdentifiableElement, PrimitiveElement>> matchSets = matches.get(e);
 			for (Map<JvmIdentifiableElement, PrimitiveElement> aMatch: matchSets) {
 				String constraint = formNumericConstraint(e, aMatch);
-				String negAssert = "(assert (not " + constraint +  "))";
+				String negAssert = "(assert " + constraint +  ")";
 				curConstraints.add(negAssert);
 			}
 		}
@@ -329,16 +363,24 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		Process outputProcess;
 		if (this.useDocker) outputProcess = callDrealDocker(numProbContent, false);
 		else outputProcess = callDrealLocal(numProbContent, false);
-			
-		List<List<String>> outputs = getProcessOutput(outputProcess);
-		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
+		
+		boolean result = false;
+		List<List<String>> outputs = null;
+		if (outputProcess != null) { 
+			outputs = getProcessOutput(outputProcess);
+			result = getDrealResult(outputProcess.exitValue(), outputs);
+		}
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
 		//DEBUG - Print things
+		if (outputProcess == null) {
+			System.err.println("TIMEOUT");
+//			printOutput(numProbContent);
+		}
 //		printOutput(numProbContent);
-//		printOutput(outputs.get(0));
-		System.out.println(result);
-		//END DEBUG
+//		if (outputs != null) printOutput(outputs.get(0));
+//		System.out.println(result);
+//		END DEBUG
 		
 		return result;
 	}
@@ -391,6 +433,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
 		//DEBUG - Print things
+		System.out.println("Getting Solution!");
 //		printOutput(numProbContent);
 //		printOutput(outputs.get(0));
 //		System.out.println(result);
