@@ -79,8 +79,6 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case CrossingScenarioPackage.SIZE:
-				return createSizeFromString(eDataType, initialValue);
 			case CrossingScenarioPackage.DISTANCE:
 				return createDistanceFromString(eDataType, initialValue);
 			default:
@@ -96,8 +94,6 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case CrossingScenarioPackage.SIZE:
-				return convertSizeToString(eDataType, instanceValue);
 			case CrossingScenarioPackage.DISTANCE:
 				return convertDistanceToString(eDataType, instanceValue);
 			default:
@@ -202,26 +198,6 @@ public class CrossingScenarioFactoryImpl extends EFactoryImpl implements Crossin
 	public Lane_Vertical createLane_Vertical() {
 		Lane_VerticalImpl lane_Vertical = new Lane_VerticalImpl();
 		return lane_Vertical;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Size createSizeFromString(EDataType eDataType, String initialValue) {
-		Size result = Size.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertSizeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

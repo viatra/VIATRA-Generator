@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link crossingScenario.Relation#getTarget <em>Target</em>}</li>
+ *   <li>{@link crossingScenario.Relation#getSource <em>Source</em>}</li>
  * </ul>
  *
  * @see crossingScenario.CrossingScenarioPackage#getRelation()
@@ -42,5 +43,27 @@ public interface Relation extends EObject {
 	 * @generated
 	 */
 	void setTarget(Actor value);
+
+	/**
+	 * Returns the value of the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source</em>' reference.
+	 * @see #setSource(Actor)
+	 * @see crossingScenario.CrossingScenarioPackage#getRelation_Source()
+	 * @model required="true"
+	 * @generated
+	 */
+	Actor getSource();
+
+	/**
+	 * Sets the value of the '{@link crossingScenario.Relation#getSource <em>Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source</em>' reference.
+	 * @see #getSource()
+	 * @generated
+	 */
+	void setSource(Actor value);
 
 } // Relation

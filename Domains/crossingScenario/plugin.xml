@@ -4,9 +4,4 @@
     <!-- @generated crossingScenario -->
     <package class="crossingScenario.CrossingScenarioPackage" genModel="model/crossingScenario.genmodel" uri="http://www.example.com/crossingScenario"/>
   </extension>
-  <extension id="queries.Queries" point="org.eclipse.viatra.query.runtime.queryspecification">
-    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Queries" id="queries.Queries">
-      <query-specification fqn="queries.x"/>
-    </group>
-  </extension>
 </plugin>

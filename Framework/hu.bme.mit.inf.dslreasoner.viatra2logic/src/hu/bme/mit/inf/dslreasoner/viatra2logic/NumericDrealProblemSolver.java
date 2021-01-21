@@ -193,15 +193,24 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			PrimitiveElement matchedObj = aMatch.get(((XFeatureCall) e).getFeature());
 			boolean isInt = matchedObj instanceof IntegerElement;
 			if (!matchedObj.isValueSet()) {
+				//e is UNDEFINED term
 				if (varMap.get(matchedObj) == null) {
+					//define and store the name of the matchedObj
 					expr = ((XFeatureCall) e).getFeature().getQualifiedName() + matchedObj.hashCode(); //TODO ISSUE
 					varMap.put(matchedObj, expr);
 				} else {
+					//get name if already seen
 					expr = varMap.get(matchedObj);
 				}
+				//Add variable declarations, only for UNDEFINED
+				if(! curVar2Decl.keySet().contains(expr)) {
+					String varDecl = "(declare-fun " + expr + " () ";
+					if (isInt) {varDecl += "Int)";}
+					else {varDecl += "Real)";}
+					curVar2Decl.put(expr, varDecl);
+				}
 			} else {
-				//TODO unsure what it means if something gets in here
-				System.err.println("Reached weird place");
+				//e is DEFINED term (has a value)
 				if (isInt) {
 					expr = Integer.toString(((IntegerElement) matchedObj).getValue());
 				} else {
@@ -209,13 +218,6 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 //					expr = Double.toString(((RealElement) matchedObj).getValue().doubleValue());
 				}
 				varMap.put(matchedObj, expr);
-			}
-			//Add variable declarations
-			if(! curVar2Decl.keySet().contains(expr)) {
-				String varDecl = "(declare-fun " + expr + " () ";
-				if (isInt) {varDecl += "Int)";}
-				else {varDecl += "Real)";}
-				curVar2Decl.put(expr, varDecl);
 			}
 		} 
 		// Constants
@@ -375,8 +377,9 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//DEBUG - Print things
 		if (outputProcess == null) {
 			System.err.println("TIMEOUT");
-//			printOutput(numProbContent);
+			printOutput(numProbContent);
 		}
+		
 //		printOutput(numProbContent);
 //		if (outputs != null) printOutput(outputs.get(0));
 //		System.out.println(result);
@@ -434,8 +437,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		
 		//DEBUG - Print things
 		System.out.println("Getting Solution!");
-//		printOutput(numProbContent);
-//		printOutput(outputs.get(0));
+		printOutput(numProbContent);
+		printOutput(outputs.get(0));
 //		System.out.println(result);
 		//END DEBUG
 				

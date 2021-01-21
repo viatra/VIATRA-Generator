@@ -6,9 +6,7 @@ import crossingScenario.Actor;
 import crossingScenario.CrossingScenario;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
-
-import crossingScenario.Lane_Horizontal;
-import crossingScenario.Lane_Vertical;
+import crossingScenario.Relation;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -38,8 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getActors <em>Actors</em>}</li>
  *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getLanes <em>Lanes</em>}</li>
  *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getMaxTime <em>Max Time</em>}</li>
- *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getHorizontal_head <em>Horizontal head</em>}</li>
- *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getVertical_head <em>Vertical head</em>}</li>
+ *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getRelations <em>Relations</em>}</li>
  * </ul>
  *
  * @generated
@@ -126,24 +123,14 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 	protected double maxTime = MAX_TIME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getHorizontal_head() <em>Horizontal head</em>}' reference.
+	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getHorizontal_head()
+	 * @see #getRelations()
 	 * @generated
 	 * @ordered
 	 */
-	protected Lane_Horizontal horizontal_head;
-
-	/**
-	 * The cached value of the '{@link #getVertical_head() <em>Vertical head</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVertical_head()
-	 * @generated
-	 * @ordered
-	 */
-	protected Lane_Vertical vertical_head;
+	protected EList<Relation> relations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -265,78 +252,11 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
-	public Lane_Horizontal getHorizontal_head() {
-		if (horizontal_head != null && horizontal_head.eIsProxy()) {
-			InternalEObject oldHorizontal_head = (InternalEObject)horizontal_head;
-			horizontal_head = (Lane_Horizontal)eResolveProxy(oldHorizontal_head);
-			if (horizontal_head != oldHorizontal_head) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CrossingScenarioPackage.CROSSING_SCENARIO__HORIZONTAL_HEAD, oldHorizontal_head, horizontal_head));
-			}
+	public EList<Relation> getRelations() {
+		if (relations == null) {
+			relations = new EObjectContainmentEList<Relation>(Relation.class, this, CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS);
 		}
-		return horizontal_head;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Lane_Horizontal basicGetHorizontal_head() {
-		return horizontal_head;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setHorizontal_head(Lane_Horizontal newHorizontal_head) {
-		Lane_Horizontal oldHorizontal_head = horizontal_head;
-		horizontal_head = newHorizontal_head;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CrossingScenarioPackage.CROSSING_SCENARIO__HORIZONTAL_HEAD, oldHorizontal_head, horizontal_head));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Lane_Vertical getVertical_head() {
-		if (vertical_head != null && vertical_head.eIsProxy()) {
-			InternalEObject oldVertical_head = (InternalEObject)vertical_head;
-			vertical_head = (Lane_Vertical)eResolveProxy(oldVertical_head);
-			if (vertical_head != oldVertical_head) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CrossingScenarioPackage.CROSSING_SCENARIO__VERTICAL_HEAD, oldVertical_head, vertical_head));
-			}
-		}
-		return vertical_head;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Lane_Vertical basicGetVertical_head() {
-		return vertical_head;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setVertical_head(Lane_Vertical newVertical_head) {
-		Lane_Vertical oldVertical_head = vertical_head;
-		vertical_head = newVertical_head;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CrossingScenarioPackage.CROSSING_SCENARIO__VERTICAL_HEAD, oldVertical_head, vertical_head));
+		return relations;
 	}
 
 	/**
@@ -351,6 +271,8 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 				return ((InternalEList<?>)getActors()).basicRemove(otherEnd, msgs);
 			case CrossingScenarioPackage.CROSSING_SCENARIO__LANES:
 				return ((InternalEList<?>)getLanes()).basicRemove(otherEnd, msgs);
+			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
+				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -373,12 +295,8 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 				return getLanes();
 			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_TIME:
 				return getMaxTime();
-			case CrossingScenarioPackage.CROSSING_SCENARIO__HORIZONTAL_HEAD:
-				if (resolve) return getHorizontal_head();
-				return basicGetHorizontal_head();
-			case CrossingScenarioPackage.CROSSING_SCENARIO__VERTICAL_HEAD:
-				if (resolve) return getVertical_head();
-				return basicGetVertical_head();
+			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
+				return getRelations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -409,11 +327,9 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_TIME:
 				setMaxTime((Double)newValue);
 				return;
-			case CrossingScenarioPackage.CROSSING_SCENARIO__HORIZONTAL_HEAD:
-				setHorizontal_head((Lane_Horizontal)newValue);
-				return;
-			case CrossingScenarioPackage.CROSSING_SCENARIO__VERTICAL_HEAD:
-				setVertical_head((Lane_Vertical)newValue);
+			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
+				getRelations().clear();
+				getRelations().addAll((Collection<? extends Relation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -442,11 +358,8 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_TIME:
 				setMaxTime(MAX_TIME_EDEFAULT);
 				return;
-			case CrossingScenarioPackage.CROSSING_SCENARIO__HORIZONTAL_HEAD:
-				setHorizontal_head((Lane_Horizontal)null);
-				return;
-			case CrossingScenarioPackage.CROSSING_SCENARIO__VERTICAL_HEAD:
-				setVertical_head((Lane_Vertical)null);
+			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
+				getRelations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -470,10 +383,8 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 				return lanes != null && !lanes.isEmpty();
 			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_TIME:
 				return maxTime != MAX_TIME_EDEFAULT;
-			case CrossingScenarioPackage.CROSSING_SCENARIO__HORIZONTAL_HEAD:
-				return horizontal_head != null;
-			case CrossingScenarioPackage.CROSSING_SCENARIO__VERTICAL_HEAD:
-				return vertical_head != null;
+			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
+				return relations != null && !relations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

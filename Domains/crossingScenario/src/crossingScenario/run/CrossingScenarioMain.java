@@ -29,12 +29,25 @@ public class CrossingScenarioMain {
 			System.out.println(errorMessages);
 		}
 		
+		Path pathStats = Paths.get("outputs/statistics.csv");
+		String pathXmi = "outputs/models/1.xmi";
+//		Path target = Paths.get("../..//Tests/MODELS2020-CaseStudies/case.study.pledge.run/measurements1/stats.csv");
+//		Files.copy(path, target, StandardCopyOption.REPLACE_EXISTING);
 		
-		Path path = Paths.get("outputs/statistics.csv");
-		Path target = Paths.get("../..//Tests/MODELS2020-CaseStudies/case.study.pledge.run/measurements1/stats.csv");
-		Files.copy(path, target, StandardCopyOption.REPLACE_EXISTING);
+		printStats(pathStats);
+		DrawScenario.drawScenario(pathXmi);
 		
-		List<String> content = Files.readAllLines(path);
+//		String p1 = "outputs/models/1.xmi";
+//		String p2 = "outputs/simplePrevLane.tgf";
+//		QueryDebug.checkPrevLanes(p1, p2);
+//		Desktop.getDesktop().open(new File(p2));  
+		System.gc();
+		System.gc();
+		System.gc();
+	}
+	
+	public static void printStats(Path pathToStats) throws IOException {
+		List<String> content = Files.readAllLines(pathToStats);
 		String[] times = content.get(1).split(",");
 		System.out.println("STATISTICS");
 		int t1 = Integer.parseInt(times[3]);
@@ -49,13 +62,5 @@ public class CrossingScenarioMain {
 		System.out.println("postprocessing -> " + t4);
 		
 		System.out.println("TOTAL -> " + tot);
-		
-		String p1 = "outputs/models/1.xmi";
-		String p2 = "outputs/simplePrevLane.tgf";
-//		QueryDebug.checkPrevLanes(p1, p2);
-//		Desktop.getDesktop().open(new File(p2));  
-		System.gc();
-		System.gc();
-		System.gc();
 	}
 }

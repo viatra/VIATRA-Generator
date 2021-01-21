@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<crossingScenario:CrossingScenario
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:crossingScenario="http://www.example.com/crossingScenario"
+    xsi:schemaLocation="http://www.example.com/crossingScenario ../model/crossingScenario.ecore"
+    xSize="100.0"
+    ySize="100.0"
+    maxTime="60.0">
+  <lanes xsi:type="crossingScenario:Lane_Horizontal"/>
+  <lanes xsi:type="crossingScenario:Lane_Horizontal"
+      referenceCoord="5.0"/>
+  <lanes xsi:type="crossingScenario:Lane_Horizontal"
+      referenceCoord="10.0"/>
+  <lanes xsi:type="crossingScenario:Lane_Horizontal"
+      referenceCoord="15.0"/>
+  <lanes xsi:type="crossingScenario:Lane_Vertical"/>
+  <lanes xsi:type="crossingScenario:Lane_Vertical"
+      referenceCoord="5.0"/>
+  <lanes xsi:type="crossingScenario:Lane_Vertical"
+      referenceCoord="10.0"/>
+  <lanes xsi:type="crossingScenario:Lane_Vertical"
+      referenceCoord="15.0"/>
+  <relations
+      xsi:type="crossingScenario:VisionBlocked"/>
+</crossingScenario:CrossingScenario>

@@ -20,9 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link crossingScenario.Actor#getLength <em>Length</em>}</li>
  *   <li>{@link crossingScenario.Actor#getWidth <em>Width</em>}</li>
  *   <li>{@link crossingScenario.Actor#getXSpeed <em>XSpeed</em>}</li>
- *   <li>{@link crossingScenario.Actor#getRelations <em>Relations</em>}</li>
  *   <li>{@link crossingScenario.Actor#getPlacedOn <em>Placed On</em>}</li>
  *   <li>{@link crossingScenario.Actor#getYSpeed <em>YSpeed</em>}</li>
+ *   <li>{@link crossingScenario.Actor#getDist_near <em>Dist near</em>}</li>
+ *   <li>{@link crossingScenario.Actor#getDist_med <em>Dist med</em>}</li>
+ *   <li>{@link crossingScenario.Actor#getDist_far <em>Dist far</em>}</li>
  * </ul>
  *
  * @see crossingScenario.CrossingScenarioPackage#getActor()
@@ -143,18 +145,6 @@ public interface Actor extends EObject {
 	void setXSpeed(double value);
 
 	/**
-	 * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
-	 * The list contents are of type {@link crossingScenario.Relation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Relations</em>' containment reference list.
-	 * @see crossingScenario.CrossingScenarioPackage#getActor_Relations()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Relation> getRelations();
-
-	/**
 	 * Returns the value of the '<em><b>Placed On</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link crossingScenario.Lane#getActors <em>Actors</em>}'.
 	 * <!-- begin-user-doc -->
@@ -199,5 +189,41 @@ public interface Actor extends EObject {
 	 * @generated
 	 */
 	void setYSpeed(double value);
+
+	/**
+	 * Returns the value of the '<em><b>Dist near</b></em>' reference list.
+	 * The list contents are of type {@link crossingScenario.Actor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dist near</em>' reference list.
+	 * @see crossingScenario.CrossingScenarioPackage#getActor_Dist_near()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<Actor> getDist_near();
+
+	/**
+	 * Returns the value of the '<em><b>Dist med</b></em>' reference list.
+	 * The list contents are of type {@link crossingScenario.Actor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dist med</em>' reference list.
+	 * @see crossingScenario.CrossingScenarioPackage#getActor_Dist_med()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<Actor> getDist_med();
+
+	/**
+	 * Returns the value of the '<em><b>Dist far</b></em>' reference list.
+	 * The list contents are of type {@link crossingScenario.Actor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dist far</em>' reference list.
+	 * @see crossingScenario.CrossingScenarioPackage#getActor_Dist_far()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<Actor> getDist_far();
 
 } // Actor

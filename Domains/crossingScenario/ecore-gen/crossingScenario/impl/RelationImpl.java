@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link crossingScenario.impl.RelationImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link crossingScenario.impl.RelationImpl#getSource <em>Source</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,6 +38,16 @@ public abstract class RelationImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected Actor target;
+
+	/**
+	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSource()
+	 * @generated
+	 * @ordered
+	 */
+	protected Actor source;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,11 +114,54 @@ public abstract class RelationImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 */
 	@Override
+	public Actor getSource() {
+		if (source != null && source.eIsProxy()) {
+			InternalEObject oldSource = (InternalEObject)source;
+			source = (Actor)eResolveProxy(oldSource);
+			if (source != oldSource) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CrossingScenarioPackage.RELATION__SOURCE, oldSource, source));
+			}
+		}
+		return source;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Actor basicGetSource() {
+		return source;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setSource(Actor newSource) {
+		Actor oldSource = source;
+		source = newSource;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CrossingScenarioPackage.RELATION__SOURCE, oldSource, source));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case CrossingScenarioPackage.RELATION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
+			case CrossingScenarioPackage.RELATION__SOURCE:
+				if (resolve) return getSource();
+				return basicGetSource();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -122,6 +176,9 @@ public abstract class RelationImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case CrossingScenarioPackage.RELATION__TARGET:
 				setTarget((Actor)newValue);
+				return;
+			case CrossingScenarioPackage.RELATION__SOURCE:
+				setSource((Actor)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,6 +195,9 @@ public abstract class RelationImpl extends MinimalEObjectImpl.Container implemen
 			case CrossingScenarioPackage.RELATION__TARGET:
 				setTarget((Actor)null);
 				return;
+			case CrossingScenarioPackage.RELATION__SOURCE:
+				setSource((Actor)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -152,6 +212,8 @@ public abstract class RelationImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case CrossingScenarioPackage.RELATION__TARGET:
 				return target != null;
+			case CrossingScenarioPackage.RELATION__SOURCE:
+				return source != null;
 		}
 		return super.eIsSet(featureID);
 	}

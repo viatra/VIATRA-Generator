@@ -5,8 +5,6 @@ package crossingScenario.impl;
 import crossingScenario.Actor;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
-import crossingScenario.Relation;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -19,9 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,9 +31,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link crossingScenario.impl.ActorImpl#getLength <em>Length</em>}</li>
  *   <li>{@link crossingScenario.impl.ActorImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link crossingScenario.impl.ActorImpl#getXSpeed <em>XSpeed</em>}</li>
- *   <li>{@link crossingScenario.impl.ActorImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link crossingScenario.impl.ActorImpl#getPlacedOn <em>Placed On</em>}</li>
  *   <li>{@link crossingScenario.impl.ActorImpl#getYSpeed <em>YSpeed</em>}</li>
+ *   <li>{@link crossingScenario.impl.ActorImpl#getDist_near <em>Dist near</em>}</li>
+ *   <li>{@link crossingScenario.impl.ActorImpl#getDist_med <em>Dist med</em>}</li>
+ *   <li>{@link crossingScenario.impl.ActorImpl#getDist_far <em>Dist far</em>}</li>
  * </ul>
  *
  * @generated
@@ -143,16 +140,6 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @ordered
 	 */
 	protected double xSpeed = XSPEED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRelations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Relation> relations;
 
 	/**
 	 * The cached value of the '{@link #getPlacedOn() <em>Placed On</em>}' reference.
@@ -324,19 +311,6 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public EList<Relation> getRelations() {
-		if (relations == null) {
-			relations = new EObjectContainmentEList<Relation>(Relation.class, this, CrossingScenarioPackage.ACTOR__RELATIONS);
-		}
-		return relations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Lane getPlacedOn() {
 		if (placedOn != null && placedOn.eIsProxy()) {
 			InternalEObject oldPlacedOn = (InternalEObject)placedOn;
@@ -422,6 +396,48 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
+	public EList<Actor> getDist_near() {
+		// TODO: implement this method to return the 'Dist near' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Actor> getDist_med() {
+		// TODO: implement this method to return the 'Dist med' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Actor> getDist_far() {
+		// TODO: implement this method to return the 'Dist far' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CrossingScenarioPackage.ACTOR__PLACED_ON:
@@ -440,8 +456,6 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CrossingScenarioPackage.ACTOR__RELATIONS:
-				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 			case CrossingScenarioPackage.ACTOR__PLACED_ON:
 				return basicSetPlacedOn(null, msgs);
 		}
@@ -466,13 +480,17 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 				return getWidth();
 			case CrossingScenarioPackage.ACTOR__XSPEED:
 				return getXSpeed();
-			case CrossingScenarioPackage.ACTOR__RELATIONS:
-				return getRelations();
 			case CrossingScenarioPackage.ACTOR__PLACED_ON:
 				if (resolve) return getPlacedOn();
 				return basicGetPlacedOn();
 			case CrossingScenarioPackage.ACTOR__YSPEED:
 				return getYSpeed();
+			case CrossingScenarioPackage.ACTOR__DIST_NEAR:
+				return getDist_near();
+			case CrossingScenarioPackage.ACTOR__DIST_MED:
+				return getDist_med();
+			case CrossingScenarioPackage.ACTOR__DIST_FAR:
+				return getDist_far();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -501,15 +519,23 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 			case CrossingScenarioPackage.ACTOR__XSPEED:
 				setXSpeed((Double)newValue);
 				return;
-			case CrossingScenarioPackage.ACTOR__RELATIONS:
-				getRelations().clear();
-				getRelations().addAll((Collection<? extends Relation>)newValue);
-				return;
 			case CrossingScenarioPackage.ACTOR__PLACED_ON:
 				setPlacedOn((Lane)newValue);
 				return;
 			case CrossingScenarioPackage.ACTOR__YSPEED:
 				setYSpeed((Double)newValue);
+				return;
+			case CrossingScenarioPackage.ACTOR__DIST_NEAR:
+				getDist_near().clear();
+				getDist_near().addAll((Collection<? extends Actor>)newValue);
+				return;
+			case CrossingScenarioPackage.ACTOR__DIST_MED:
+				getDist_med().clear();
+				getDist_med().addAll((Collection<? extends Actor>)newValue);
+				return;
+			case CrossingScenarioPackage.ACTOR__DIST_FAR:
+				getDist_far().clear();
+				getDist_far().addAll((Collection<? extends Actor>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -538,14 +564,20 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 			case CrossingScenarioPackage.ACTOR__XSPEED:
 				setXSpeed(XSPEED_EDEFAULT);
 				return;
-			case CrossingScenarioPackage.ACTOR__RELATIONS:
-				getRelations().clear();
-				return;
 			case CrossingScenarioPackage.ACTOR__PLACED_ON:
 				setPlacedOn((Lane)null);
 				return;
 			case CrossingScenarioPackage.ACTOR__YSPEED:
 				setYSpeed(YSPEED_EDEFAULT);
+				return;
+			case CrossingScenarioPackage.ACTOR__DIST_NEAR:
+				getDist_near().clear();
+				return;
+			case CrossingScenarioPackage.ACTOR__DIST_MED:
+				getDist_med().clear();
+				return;
+			case CrossingScenarioPackage.ACTOR__DIST_FAR:
+				getDist_far().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -569,12 +601,16 @@ public abstract class ActorImpl extends MinimalEObjectImpl.Container implements 
 				return width != WIDTH_EDEFAULT;
 			case CrossingScenarioPackage.ACTOR__XSPEED:
 				return xSpeed != XSPEED_EDEFAULT;
-			case CrossingScenarioPackage.ACTOR__RELATIONS:
-				return relations != null && !relations.isEmpty();
 			case CrossingScenarioPackage.ACTOR__PLACED_ON:
 				return placedOn != null;
 			case CrossingScenarioPackage.ACTOR__YSPEED:
 				return ySpeed != YSPEED_EDEFAULT;
+			case CrossingScenarioPackage.ACTOR__DIST_NEAR:
+				return !getDist_near().isEmpty();
+			case CrossingScenarioPackage.ACTOR__DIST_MED:
+				return !getDist_med().isEmpty();
+			case CrossingScenarioPackage.ACTOR__DIST_FAR:
+				return !getDist_far().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

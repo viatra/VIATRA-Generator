@@ -6,11 +6,6 @@
     operationReflection="true" importOrganizing="true">
   <foreignModel>crossingScenario.ecore</foreignModel>
   <genPackages prefix="CrossingScenario" disposableProviderFactory="true" ecorePackage="crossingScenario.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="crossingScenario.ecore#//Size">
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/S_Small"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/S_Med"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Size/S_Large"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="crossingScenario.ecore#//Distance">
       <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Near"/>
       <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Med"/>
@@ -22,15 +17,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/actors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/lanes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/maxTime"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/horizontal_head"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/vertical_head"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/relations"/>
     </genClasses>
     <genClasses ecoreClass="crossingScenario.ecore#//Lane">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Lane/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Lane/referenceCoord"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Lane/prevLane"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Lane/actors"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Lane/numWidth"/>
     </genClasses>
     <genClasses image="false" ecoreClass="crossingScenario.ecore#//Actor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/xPos"/>
@@ -38,12 +29,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/length"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/width"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/xSpeed"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/relations"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/placedOn"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/ySpeed"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/dist_near"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/dist_med"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/dist_far"/>
     </genClasses>
     <genClasses image="false" ecoreClass="crossingScenario.ecore#//Relation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Relation/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Relation/source"/>
     </genClasses>
     <genClasses image="false" ecoreClass="crossingScenario.ecore#//SpatialRelation"/>
     <genClasses image="false" ecoreClass="crossingScenario.ecore#//TemporalRelation"/>

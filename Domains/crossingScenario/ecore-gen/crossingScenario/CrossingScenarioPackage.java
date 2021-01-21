@@ -113,22 +113,13 @@ public interface CrossingScenarioPackage extends EPackage {
 	int CROSSING_SCENARIO__MAX_TIME = 4;
 
 	/**
-	 * The feature id for the '<em><b>Horizontal head</b></em>' reference.
+	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CROSSING_SCENARIO__HORIZONTAL_HEAD = 5;
-
-	/**
-	 * The feature id for the '<em><b>Vertical head</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CROSSING_SCENARIO__VERTICAL_HEAD = 6;
+	int CROSSING_SCENARIO__RELATIONS = 5;
 
 	/**
 	 * The number of structural features of the '<em>Crossing Scenario</em>' class.
@@ -137,7 +128,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CROSSING_SCENARIO_FEATURE_COUNT = 7;
+	int CROSSING_SCENARIO_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Crossing Scenario</em>' class.
@@ -159,31 +150,13 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__WIDTH = 0;
-
-	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__REFERENCE_COORD = 1;
-
-	/**
-	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__PREV_LANE = 2;
+	int LANE__REFERENCE_COORD = 0;
 
 	/**
 	 * The feature id for the '<em><b>Actors</b></em>' reference list.
@@ -192,16 +165,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE__ACTORS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__NUM_WIDTH = 4;
+	int LANE__ACTORS = 1;
 
 	/**
 	 * The number of structural features of the '<em>Lane</em>' class.
@@ -210,7 +174,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LANE_FEATURE_COUNT = 5;
+	int LANE_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Lane</em>' class.
@@ -277,22 +241,13 @@ public interface CrossingScenarioPackage extends EPackage {
 	int ACTOR__XSPEED = 4;
 
 	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTOR__RELATIONS = 5;
-
-	/**
 	 * The feature id for the '<em><b>Placed On</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__PLACED_ON = 6;
+	int ACTOR__PLACED_ON = 5;
 
 	/**
 	 * The feature id for the '<em><b>YSpeed</b></em>' attribute.
@@ -301,7 +256,34 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR__YSPEED = 7;
+	int ACTOR__YSPEED = 6;
+
+	/**
+	 * The feature id for the '<em><b>Dist near</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__DIST_NEAR = 7;
+
+	/**
+	 * The feature id for the '<em><b>Dist med</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__DIST_MED = 8;
+
+	/**
+	 * The feature id for the '<em><b>Dist far</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR__DIST_FAR = 9;
 
 	/**
 	 * The number of structural features of the '<em>Actor</em>' class.
@@ -310,7 +292,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_FEATURE_COUNT = 8;
+	int ACTOR_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Actor</em>' class.
@@ -341,13 +323,22 @@ public interface CrossingScenarioPackage extends EPackage {
 	int RELATION__TARGET = 0;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION__SOURCE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_FEATURE_COUNT = 1;
+	int RELATION_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Relation</em>' class.
@@ -376,6 +367,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPATIAL_RELATION__TARGET = RELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPATIAL_RELATION__SOURCE = RELATION__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Spatial Relation</em>' class.
@@ -415,6 +415,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	int TEMPORAL_RELATION__TARGET = RELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPORAL_RELATION__SOURCE = RELATION__SOURCE;
+
+	/**
 	 * The number of structural features of the '<em>Temporal Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -450,6 +459,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int VISION_BLOCKED__TARGET = SPATIAL_RELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISION_BLOCKED__SOURCE = SPATIAL_RELATION__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Blocked By</b></em>' reference.
@@ -498,6 +516,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	int SEPARATION_DISTANCE__TARGET = SPATIAL_RELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEPARATION_DISTANCE__SOURCE = SPATIAL_RELATION__SOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Distance</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -544,6 +571,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	int COLLISION_EXISTS__TARGET = TEMPORAL_RELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLISION_EXISTS__SOURCE = TEMPORAL_RELATION__SOURCE;
+
+	/**
 	 * The feature id for the '<em><b>Collision Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -588,6 +624,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLISION_DOES_NOT_EXIST__TARGET = TEMPORAL_RELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLISION_DOES_NOT_EXIST__SOURCE = TEMPORAL_RELATION__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Collision Does Not Exist</em>' class.
@@ -663,15 +708,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int PEDESTRIAN__XSPEED = ACTOR__XSPEED;
 
 	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PEDESTRIAN__RELATIONS = ACTOR__RELATIONS;
-
-	/**
 	 * The feature id for the '<em><b>Placed On</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -688,6 +724,33 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int PEDESTRIAN__YSPEED = ACTOR__YSPEED;
+
+	/**
+	 * The feature id for the '<em><b>Dist near</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__DIST_NEAR = ACTOR__DIST_NEAR;
+
+	/**
+	 * The feature id for the '<em><b>Dist med</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__DIST_MED = ACTOR__DIST_MED;
+
+	/**
+	 * The feature id for the '<em><b>Dist far</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PEDESTRIAN__DIST_FAR = ACTOR__DIST_FAR;
 
 	/**
 	 * The number of structural features of the '<em>Pedestrian</em>' class.
@@ -763,15 +826,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int VEHICLE__XSPEED = ACTOR__XSPEED;
 
 	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VEHICLE__RELATIONS = ACTOR__RELATIONS;
-
-	/**
 	 * The feature id for the '<em><b>Placed On</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -788,6 +842,33 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int VEHICLE__YSPEED = ACTOR__YSPEED;
+
+	/**
+	 * The feature id for the '<em><b>Dist near</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__DIST_NEAR = ACTOR__DIST_NEAR;
+
+	/**
+	 * The feature id for the '<em><b>Dist med</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__DIST_MED = ACTOR__DIST_MED;
+
+	/**
+	 * The feature id for the '<em><b>Dist far</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VEHICLE__DIST_FAR = ACTOR__DIST_FAR;
 
 	/**
 	 * The number of structural features of the '<em>Vehicle</em>' class.
@@ -818,15 +899,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE_HORIZONTAL = 12;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_HORIZONTAL__WIDTH = LANE__WIDTH;
-
-	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -836,15 +908,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE_HORIZONTAL__REFERENCE_COORD = LANE__REFERENCE_COORD;
 
 	/**
-	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_HORIZONTAL__PREV_LANE = LANE__PREV_LANE;
-
-	/**
 	 * The feature id for the '<em><b>Actors</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -852,15 +915,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int LANE_HORIZONTAL__ACTORS = LANE__ACTORS;
-
-	/**
-	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_HORIZONTAL__NUM_WIDTH = LANE__NUM_WIDTH;
 
 	/**
 	 * The number of structural features of the '<em>Lane Horizontal</em>' class.
@@ -891,15 +945,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE_VERTICAL = 13;
 
 	/**
-	 * The feature id for the '<em><b>Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_VERTICAL__WIDTH = LANE__WIDTH;
-
-	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -909,15 +954,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE_VERTICAL__REFERENCE_COORD = LANE__REFERENCE_COORD;
 
 	/**
-	 * The feature id for the '<em><b>Prev Lane</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_VERTICAL__PREV_LANE = LANE__PREV_LANE;
-
-	/**
 	 * The feature id for the '<em><b>Actors</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -925,15 +961,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int LANE_VERTICAL__ACTORS = LANE__ACTORS;
-
-	/**
-	 * The feature id for the '<em><b>Num Width</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_VERTICAL__NUM_WIDTH = LANE__NUM_WIDTH;
 
 	/**
 	 * The number of structural features of the '<em>Lane Vertical</em>' class.
@@ -954,16 +981,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int LANE_VERTICAL_OPERATION_COUNT = LANE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link crossingScenario.Size <em>Size</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see crossingScenario.Size
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSize()
-	 * @generated
-	 */
-	int SIZE = 14;
-
-	/**
 	 * The meta object id for the '{@link crossingScenario.Distance <em>Distance</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -971,7 +988,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getDistance()
 	 * @generated
 	 */
-	int DISTANCE = 15;
+	int DISTANCE = 14;
 
 
 	/**
@@ -1040,26 +1057,15 @@ public interface CrossingScenarioPackage extends EPackage {
 	EAttribute getCrossingScenario_MaxTime();
 
 	/**
-	 * Returns the meta object for the reference '{@link crossingScenario.CrossingScenario#getHorizontal_head <em>Horizontal head</em>}'.
+	 * Returns the meta object for the containment reference list '{@link crossingScenario.CrossingScenario#getRelations <em>Relations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Horizontal head</em>'.
-	 * @see crossingScenario.CrossingScenario#getHorizontal_head()
+	 * @return the meta object for the containment reference list '<em>Relations</em>'.
+	 * @see crossingScenario.CrossingScenario#getRelations()
 	 * @see #getCrossingScenario()
 	 * @generated
 	 */
-	EReference getCrossingScenario_Horizontal_head();
-
-	/**
-	 * Returns the meta object for the reference '{@link crossingScenario.CrossingScenario#getVertical_head <em>Vertical head</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Vertical head</em>'.
-	 * @see crossingScenario.CrossingScenario#getVertical_head()
-	 * @see #getCrossingScenario()
-	 * @generated
-	 */
-	EReference getCrossingScenario_Vertical_head();
+	EReference getCrossingScenario_Relations();
 
 	/**
 	 * Returns the meta object for class '{@link crossingScenario.Lane <em>Lane</em>}'.
@@ -1070,17 +1076,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLane();
-
-	/**
-	 * Returns the meta object for the attribute '{@link crossingScenario.Lane#getWidth <em>Width</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Width</em>'.
-	 * @see crossingScenario.Lane#getWidth()
-	 * @see #getLane()
-	 * @generated
-	 */
-	EAttribute getLane_Width();
 
 	/**
 	 * Returns the meta object for the attribute '{@link crossingScenario.Lane#getReferenceCoord <em>Reference Coord</em>}'.
@@ -1094,17 +1089,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	EAttribute getLane_ReferenceCoord();
 
 	/**
-	 * Returns the meta object for the reference '{@link crossingScenario.Lane#getPrevLane <em>Prev Lane</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Prev Lane</em>'.
-	 * @see crossingScenario.Lane#getPrevLane()
-	 * @see #getLane()
-	 * @generated
-	 */
-	EReference getLane_PrevLane();
-
-	/**
 	 * Returns the meta object for the reference list '{@link crossingScenario.Lane#getActors <em>Actors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1114,17 +1098,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLane_Actors();
-
-	/**
-	 * Returns the meta object for the attribute '{@link crossingScenario.Lane#getNumWidth <em>Num Width</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Num Width</em>'.
-	 * @see crossingScenario.Lane#getNumWidth()
-	 * @see #getLane()
-	 * @generated
-	 */
-	EAttribute getLane_NumWidth();
 
 	/**
 	 * Returns the meta object for class '{@link crossingScenario.Actor <em>Actor</em>}'.
@@ -1192,17 +1165,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	EAttribute getActor_XSpeed();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link crossingScenario.Actor#getRelations <em>Relations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Relations</em>'.
-	 * @see crossingScenario.Actor#getRelations()
-	 * @see #getActor()
-	 * @generated
-	 */
-	EReference getActor_Relations();
-
-	/**
 	 * Returns the meta object for the reference '{@link crossingScenario.Actor#getPlacedOn <em>Placed On</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1225,6 +1187,39 @@ public interface CrossingScenarioPackage extends EPackage {
 	EAttribute getActor_YSpeed();
 
 	/**
+	 * Returns the meta object for the reference list '{@link crossingScenario.Actor#getDist_near <em>Dist near</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Dist near</em>'.
+	 * @see crossingScenario.Actor#getDist_near()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EReference getActor_Dist_near();
+
+	/**
+	 * Returns the meta object for the reference list '{@link crossingScenario.Actor#getDist_med <em>Dist med</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Dist med</em>'.
+	 * @see crossingScenario.Actor#getDist_med()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EReference getActor_Dist_med();
+
+	/**
+	 * Returns the meta object for the reference list '{@link crossingScenario.Actor#getDist_far <em>Dist far</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Dist far</em>'.
+	 * @see crossingScenario.Actor#getDist_far()
+	 * @see #getActor()
+	 * @generated
+	 */
+	EReference getActor_Dist_far();
+
+	/**
 	 * Returns the meta object for class '{@link crossingScenario.Relation <em>Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1244,6 +1239,17 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRelation_Target();
+
+	/**
+	 * Returns the meta object for the reference '{@link crossingScenario.Relation#getSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @see crossingScenario.Relation#getSource()
+	 * @see #getRelation()
+	 * @generated
+	 */
+	EReference getRelation_Source();
 
 	/**
 	 * Returns the meta object for class '{@link crossingScenario.SpatialRelation <em>Spatial Relation</em>}'.
@@ -1379,16 +1385,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	EClass getLane_Vertical();
 
 	/**
-	 * Returns the meta object for enum '{@link crossingScenario.Size <em>Size</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Size</em>'.
-	 * @see crossingScenario.Size
-	 * @generated
-	 */
-	EEnum getSize();
-
-	/**
 	 * Returns the meta object for enum '{@link crossingScenario.Distance <em>Distance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1472,20 +1468,12 @@ public interface CrossingScenarioPackage extends EPackage {
 		EAttribute CROSSING_SCENARIO__MAX_TIME = eINSTANCE.getCrossingScenario_MaxTime();
 
 		/**
-		 * The meta object literal for the '<em><b>Horizontal head</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Relations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CROSSING_SCENARIO__HORIZONTAL_HEAD = eINSTANCE.getCrossingScenario_Horizontal_head();
-
-		/**
-		 * The meta object literal for the '<em><b>Vertical head</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CROSSING_SCENARIO__VERTICAL_HEAD = eINSTANCE.getCrossingScenario_Vertical_head();
+		EReference CROSSING_SCENARIO__RELATIONS = eINSTANCE.getCrossingScenario_Relations();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.LaneImpl <em>Lane</em>}' class.
@@ -1498,14 +1486,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		EClass LANE = eINSTANCE.getLane();
 
 		/**
-		 * The meta object literal for the '<em><b>Width</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LANE__WIDTH = eINSTANCE.getLane_Width();
-
-		/**
 		 * The meta object literal for the '<em><b>Reference Coord</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1514,28 +1494,12 @@ public interface CrossingScenarioPackage extends EPackage {
 		EAttribute LANE__REFERENCE_COORD = eINSTANCE.getLane_ReferenceCoord();
 
 		/**
-		 * The meta object literal for the '<em><b>Prev Lane</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LANE__PREV_LANE = eINSTANCE.getLane_PrevLane();
-
-		/**
 		 * The meta object literal for the '<em><b>Actors</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference LANE__ACTORS = eINSTANCE.getLane_Actors();
-
-		/**
-		 * The meta object literal for the '<em><b>Num Width</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LANE__NUM_WIDTH = eINSTANCE.getLane_NumWidth();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.ActorImpl <em>Actor</em>}' class.
@@ -1588,14 +1552,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		EAttribute ACTOR__XSPEED = eINSTANCE.getActor_XSpeed();
 
 		/**
-		 * The meta object literal for the '<em><b>Relations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTOR__RELATIONS = eINSTANCE.getActor_Relations();
-
-		/**
 		 * The meta object literal for the '<em><b>Placed On</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1610,6 +1566,30 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTOR__YSPEED = eINSTANCE.getActor_YSpeed();
+
+		/**
+		 * The meta object literal for the '<em><b>Dist near</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR__DIST_NEAR = eINSTANCE.getActor_Dist_near();
+
+		/**
+		 * The meta object literal for the '<em><b>Dist med</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR__DIST_MED = eINSTANCE.getActor_Dist_med();
+
+		/**
+		 * The meta object literal for the '<em><b>Dist far</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR__DIST_FAR = eINSTANCE.getActor_Dist_far();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.RelationImpl <em>Relation</em>}' class.
@@ -1628,6 +1608,14 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATION__TARGET = eINSTANCE.getRelation_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATION__SOURCE = eINSTANCE.getRelation_Source();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.SpatialRelationImpl <em>Spatial Relation</em>}' class.
@@ -1752,16 +1740,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LANE_VERTICAL = eINSTANCE.getLane_Vertical();
-
-		/**
-		 * The meta object literal for the '{@link crossingScenario.Size <em>Size</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see crossingScenario.Size
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSize()
-		 * @generated
-		 */
-		EEnum SIZE = eINSTANCE.getSize();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.Distance <em>Distance</em>}' enum.

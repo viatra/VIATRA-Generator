@@ -34,48 +34,48 @@ public class QueryDebug {
 	}
 	
 	public static void checkPrevLanes(String pathSrc, String pathTgt) throws FileNotFoundException {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("*", new XMIResourceFactoryImpl());
-		EPackage.Registry.INSTANCE.put(CrossingScenarioPackage.eNS_URI, CrossingScenarioPackage.eINSTANCE);
-		ResourceSet rs = new ResourceSetImpl();
-		Resource res = rs.getResource(URI.createFileURI(pathSrc), true);
-		
-		PrintWriter printer = new PrintWriter(pathTgt);
-		
-		CrossingScenario cs = ((CrossingScenario) res.getContents().get(0));
-		
-		for (Actor o : cs.getActors()) {
-			String nodeName = "A(" + rndbl(o.getXPos(), 1)+","+rndbl(o.getYPos(), 1) + ")";
-			printer.println(o.hashCode() + " " + nodeName);
-		}
-		
-		for (Lane o : cs.getLanes()) {
-			String prefix = "";
-			if (cs.getHorizontal_head().equals(o) || cs.getVertical_head().equals(o)) {
-				prefix = "HEAD";
-			}
-			String nodeName = prefix + "L(" + rndbl(o.getReferenceCoord(), 3) + ")" + 
-					o.eClass().getName().substring(5, 9);
-			printer.println(o.hashCode() + " " + nodeName);
-		}
-		printer.println("#");
-		for (Lane o : cs.getLanes()) {
-			if (o.getPrevLane() != null){
-				int curName = o.hashCode();
-				int curPrev = o.getPrevLane().hashCode();
-				double edgeLabel = rndbl(o.getPrevLane().getNumWidth(), 1);
-				printer.println(curName + " " + curPrev + " " + edgeLabel);
-			}
-		}
-		
-		for (Actor o : cs.getActors()) {
-			int actName = o.hashCode();
-			int lanName = o.getPlacedOn().hashCode();
-			printer.println(actName + " " + lanName );
-		}
-		
-		printer.flush();
-		printer.close();
-		System.out.println("TGF CREATED");
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("*", new XMIResourceFactoryImpl());
+//		EPackage.Registry.INSTANCE.put(CrossingScenarioPackage.eNS_URI, CrossingScenarioPackage.eINSTANCE);
+//		ResourceSet rs = new ResourceSetImpl();
+//		Resource res = rs.getResource(URI.createFileURI(pathSrc), true);
+//		
+//		PrintWriter printer = new PrintWriter(pathTgt);
+//		
+//		CrossingScenario cs = ((CrossingScenario) res.getContents().get(0));
+//		
+//		for (Actor o : cs.getActors()) {
+//			String nodeName = "A(" + rndbl(o.getXPos(), 1)+","+rndbl(o.getYPos(), 1) + ")";
+//			printer.println(o.hashCode() + " " + nodeName);
+//		}
+//		
+//		for (Lane o : cs.getLanes()) {
+//			String prefix = "";
+//			if (cs.getHorizontal_head().equals(o) || cs.getVertical_head().equals(o)) {
+//				prefix = "HEAD";
+//			}
+//			String nodeName = prefix + "L(" + rndbl(o.getReferenceCoord(), 3) + ")" + 
+//					o.eClass().getName().substring(5, 9);
+//			printer.println(o.hashCode() + " " + nodeName);
+//		}
+//		printer.println("#");
+//		for (Lane o : cs.getLanes()) {
+//			if (o.getPrevLane() != null){
+//				int curName = o.hashCode();
+//				int curPrev = o.getPrevLane().hashCode();
+//				double edgeLabel = rndbl(o.getPrevLane().getNumWidth(), 1);
+//				printer.println(curName + " " + curPrev + " " + edgeLabel);
+//			}
+//		}
+//		
+//		for (Actor o : cs.getActors()) {
+//			int actName = o.hashCode();
+//			int lanName = o.getPlacedOn().hashCode();
+//			printer.println(actName + " " + lanName );
+//		}
+//		
+//		printer.flush();
+//		printer.close();
+//		System.out.println("TGF CREATED");
 		
 	}
 

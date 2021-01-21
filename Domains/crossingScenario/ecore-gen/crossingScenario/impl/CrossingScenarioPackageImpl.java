@@ -15,7 +15,6 @@ import crossingScenario.Lane_Vertical;
 import crossingScenario.Pedestrian;
 import crossingScenario.Relation;
 import crossingScenario.SeparationDistance;
-import crossingScenario.Size;
 import crossingScenario.SpatialRelation;
 import crossingScenario.TemporalRelation;
 import crossingScenario.Vehicle;
@@ -133,13 +132,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	private EClass lane_VerticalEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum sizeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,18 +267,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EReference getCrossingScenario_Horizontal_head() {
+	public EReference getCrossingScenario_Relations() {
 		return (EReference)crossingScenarioEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getCrossingScenario_Vertical_head() {
-		return (EReference)crossingScenarioEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -305,7 +287,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLane_Width() {
+	public EAttribute getLane_ReferenceCoord() {
 		return (EAttribute)laneEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -315,38 +297,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EAttribute getLane_ReferenceCoord() {
-		return (EAttribute)laneEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getLane_PrevLane() {
-		return (EReference)laneEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getLane_Actors() {
-		return (EReference)laneEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getLane_NumWidth() {
-		return (EAttribute)laneEClass.getEStructuralFeatures().get(4);
+		return (EReference)laneEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -415,7 +367,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EReference getActor_Relations() {
+	public EReference getActor_PlacedOn() {
 		return (EReference)actorEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -425,8 +377,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EReference getActor_PlacedOn() {
-		return (EReference)actorEClass.getEStructuralFeatures().get(6);
+	public EAttribute getActor_YSpeed() {
+		return (EAttribute)actorEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -435,8 +387,28 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EAttribute getActor_YSpeed() {
-		return (EAttribute)actorEClass.getEStructuralFeatures().get(7);
+	public EReference getActor_Dist_near() {
+		return (EReference)actorEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getActor_Dist_med() {
+		return (EReference)actorEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getActor_Dist_far() {
+		return (EReference)actorEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -457,6 +429,16 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	@Override
 	public EReference getRelation_Target() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelation_Source() {
+		return (EReference)relationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -595,16 +577,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EEnum getSize() {
-		return sizeEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EEnum getDistance() {
 		return distanceEEnum;
 	}
@@ -644,15 +616,11 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__ACTORS);
 		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__LANES);
 		createEAttribute(crossingScenarioEClass, CROSSING_SCENARIO__MAX_TIME);
-		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__HORIZONTAL_HEAD);
-		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__VERTICAL_HEAD);
+		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__RELATIONS);
 
 		laneEClass = createEClass(LANE);
-		createEAttribute(laneEClass, LANE__WIDTH);
 		createEAttribute(laneEClass, LANE__REFERENCE_COORD);
-		createEReference(laneEClass, LANE__PREV_LANE);
 		createEReference(laneEClass, LANE__ACTORS);
-		createEAttribute(laneEClass, LANE__NUM_WIDTH);
 
 		actorEClass = createEClass(ACTOR);
 		createEAttribute(actorEClass, ACTOR__XPOS);
@@ -660,12 +628,15 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		createEAttribute(actorEClass, ACTOR__LENGTH);
 		createEAttribute(actorEClass, ACTOR__WIDTH);
 		createEAttribute(actorEClass, ACTOR__XSPEED);
-		createEReference(actorEClass, ACTOR__RELATIONS);
 		createEReference(actorEClass, ACTOR__PLACED_ON);
 		createEAttribute(actorEClass, ACTOR__YSPEED);
+		createEReference(actorEClass, ACTOR__DIST_NEAR);
+		createEReference(actorEClass, ACTOR__DIST_MED);
+		createEReference(actorEClass, ACTOR__DIST_FAR);
 
 		relationEClass = createEClass(RELATION);
 		createEReference(relationEClass, RELATION__TARGET);
+		createEReference(relationEClass, RELATION__SOURCE);
 
 		spatialRelationEClass = createEClass(SPATIAL_RELATION);
 
@@ -691,7 +662,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		lane_VerticalEClass = createEClass(LANE_VERTICAL);
 
 		// Create enums
-		sizeEEnum = createEEnum(SIZE);
 		distanceEEnum = createEEnum(DISTANCE);
 	}
 
@@ -741,15 +711,11 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEReference(getCrossingScenario_Actors(), this.getActor(), null, "actors", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCrossingScenario_Lanes(), this.getLane(), null, "lanes", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCrossingScenario_MaxTime(), ecorePackage.getEDouble(), "maxTime", null, 0, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCrossingScenario_Horizontal_head(), this.getLane_Horizontal(), null, "horizontal_head", null, 1, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCrossingScenario_Vertical_head(), this.getLane_Vertical(), null, "vertical_head", null, 1, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCrossingScenario_Relations(), this.getRelation(), null, "relations", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(laneEClass, Lane.class, "Lane", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLane_Width(), this.getSize(), "width", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLane_ReferenceCoord(), ecorePackage.getEDouble(), "referenceCoord", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLane_PrevLane(), this.getLane(), null, "prevLane", null, 0, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLane_Actors(), this.getActor(), this.getActor_PlacedOn(), "actors", null, 0, -1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLane_NumWidth(), ecorePackage.getEDouble(), "numWidth", "0.0", 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actorEClass, Actor.class, "Actor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getActor_XPos(), ecorePackage.getEDouble(), "xPos", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -757,12 +723,15 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEAttribute(getActor_Length(), ecorePackage.getEDouble(), "length", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_Width(), ecorePackage.getEDouble(), "width", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_XSpeed(), ecorePackage.getEDouble(), "xSpeed", "0.0", 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActor_Relations(), this.getRelation(), null, "relations", null, 0, -1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActor_PlacedOn(), this.getLane(), this.getLane_Actors(), "placedOn", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActor_YSpeed(), ecorePackage.getEDouble(), "ySpeed", null, 1, 1, Actor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActor_Dist_near(), this.getActor(), null, "dist_near", null, 0, -1, Actor.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getActor_Dist_med(), this.getActor(), null, "dist_med", null, 0, -1, Actor.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getActor_Dist_far(), this.getActor(), null, "dist_far", null, 0, -1, Actor.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelation_Target(), this.getActor(), null, "target", null, 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelation_Source(), this.getActor(), null, "source", null, 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(spatialRelationEClass, SpatialRelation.class, "SpatialRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -788,11 +757,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEClass(lane_VerticalEClass, Lane_Vertical.class, "Lane_Vertical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
-		initEEnum(sizeEEnum, Size.class, "Size");
-		addEEnumLiteral(sizeEEnum, Size.SSMALL);
-		addEEnumLiteral(sizeEEnum, Size.SMED);
-		addEEnumLiteral(sizeEEnum, Size.SLARGE);
-
 		initEEnum(distanceEEnum, Distance.class, "Distance");
 		addEEnumLiteral(distanceEEnum, Distance.DNEAR);
 		addEEnumLiteral(distanceEEnum, Distance.DMED);

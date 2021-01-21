@@ -10,25 +10,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="lanes" upperBound="-1"
         eType="#//Lane" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="horizontal_head" lowerBound="1"
-        eType="#//Lane_Horizontal"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="vertical_head" lowerBound="1"
-        eType="#//Lane_Vertical"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//Relation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Lane" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="#//Size"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceCoord" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="prevLane" eType="#//Lane"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actors" upperBound="-1"
         eType="#//Actor" eOpposite="#//Actor/placedOn"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numWidth" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="0.0"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Size">
-    <eLiterals name="S_Small"/>
-    <eLiterals name="S_Med" value="1"/>
-    <eLiterals name="S_Large" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Actor" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPos" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
@@ -38,15 +27,21 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="xSpeed" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="0.0"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
-        eType="#//Relation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="placedOn" lowerBound="1"
         eType="#//Lane" eOpposite="#//Lane/actors"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ySpeed" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dist_near" upperBound="-1"
+        eType="#//Actor" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dist_med" upperBound="-1"
+        eType="#//Actor" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dist_far" upperBound="-1"
+        eType="#//Actor" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relation" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Actor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//Actor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SpatialRelation" abstract="true" eSuperTypes="#//Relation"/>
