@@ -3,6 +3,7 @@ package hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic
 import com.google.common.collect.ImmutableList
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic
 import hu.bme.mit.inf.dslreasoner.ecore2logic.Ecore2Logic_Trace
+import hu.bme.mit.inf.dslreasoner.logic.model.builder.LogicSolverConfiguration
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
@@ -33,7 +34,8 @@ class InstanceModel2PartialInterpretation {
 	
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
-		Resource resource,
+		Map<String, Map<String, String>> ignoredAttribs,
+		Resource resource, 
 		boolean withID) 
 	{
 		val objectsBuilder = ImmutableList.builder
@@ -49,11 +51,12 @@ class InstanceModel2PartialInterpretation {
 			}
 		}
 		val objects = objectsBuilder.build
-		return transform(metamodelTranslationResult,objects,withID)
+		return transform(metamodelTranslationResult, ignoredAttribs, objects, withID)
 	}
 	
 	public def transform(
 		TracedOutput<LogicProblem, Ecore2Logic_Trace> metamodelTranslationResult,
+		Map<String, Map<String, String>> ignoredAttribs, 
 		List<EObject> objects,
 		boolean withID) 
 	{
@@ -63,7 +66,7 @@ class InstanceModel2PartialInterpretation {
 		val referencesUsed = ecore2Logic.allReferencesInScope(ecore2LogicTrace).toSet
 		val attributesUsed = ecore2Logic.allAttributesInScope(ecore2LogicTrace).toSet
 		
-		val typeScope = createTypeScopesFromKnownAttributeValues(objects,attributesUsed)
+		val typeScope = createTypeScopesFromKnownAttributeValues(objects,attributesUsed, ignoredAttribs)
 		val tracedOutput = partialInterpretationInitialiser.initialisePartialInterpretation(problem, typeScope)
 		val partialInterpretation = tracedOutput.output
 		val partialInterpretationTrace = tracedOutput.trace
@@ -119,23 +122,26 @@ class InstanceModel2PartialInterpretation {
 			
 			// Transforming the attributes
 			for(attribute : source.eClass.EAllAttributes.filter[attributesUsed.contains(it) && !it.derived]) {
-				val type = ecore2Logic.relationOfAttribute(ecore2LogicTrace,attribute)
-				val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
-				val sourceElement = source.lookup(object2DefinedElement)
-				if(attribute.isMany) {
-					val listOfTargets = source.eGet(attribute) as List<? extends EObject>
-					for(target : listOfTargets) {
-						val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
-						if(value !== null) {
-							translateLink(interpretation,sourceElement,value)
+				val isIgnored = checkIfIgnored(source, attribute, ignoredAttribs)
+				if (!isIgnored) {
+					val type = ecore2Logic.relationOfAttribute(ecore2LogicTrace,attribute)
+					val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
+					val sourceElement = source.lookup(object2DefinedElement)
+					if(attribute.isMany) {
+						val listOfTargets = source.eGet(attribute) as List<? extends EObject>
+						for(target : listOfTargets) {
+							val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
+							if(value !== null) {
+								translateLink(interpretation,sourceElement,value)
+							}
 						}
-					}
-				} else {
-					val target = source.eGet(attribute)
-					if(target !== null) {
-						val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
-						if(value !== null) {
-							translateLink(interpretation,sourceElement,value)
+					} else {
+						val target = source.eGet(attribute)
+						if(target !== null) {
+							val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
+							if(value !== null) {
+								translateLink(interpretation,sourceElement,value)
+							}
 						}
 					}
 				}
@@ -144,21 +150,29 @@ class InstanceModel2PartialInterpretation {
 		
 		return partialInterpretation
 	}
-	
-	private def createTypeScopesFromKnownAttributeValues(List<EObject> objects, Set<EAttribute> attributesUsed) {
+
+	private def createTypeScopesFromKnownAttributeValues(
+		List<EObject> objects,
+		Set<EAttribute> attributesUsed, 
+		Map<String, Map<String, String>> ignoredAttribs)
+	{
 		val Set<Integer> integers = new HashSet
 		val Set<Double> reals = new HashSet
 		val Set<String> strings = new HashSet
-		for(object: objects) {
-			for(attribute : object.eClass.EAllAttributes.filter[attributesUsed.contains(it)]) {
-				val value = object.eGet(attribute)
-				if(value !== null) {
-					if(value instanceof List<?>) {
-						for(v : value) {
-							shortValue(v,integers,reals,strings)
+		for (object : objects) {
+			for (attribute : object.eClass.EAllAttributes.filter[attributesUsed.contains(it)]) {
+				val isIgnored = checkIfIgnored(object, attribute, ignoredAttribs)
+				
+				if(!isIgnored) {
+					val value = object.eGet(attribute)
+					if(value !== null) {
+						if(value instanceof List<?>) {
+							for(v : value) {
+								shortValue(v,integers,reals,strings)
+							}
+						} else {
+							shortValue(value,integers,reals,strings)
 						}
-					} else {
-						shortValue(value,integers,reals,strings)
 					}
 				}
 			}
@@ -168,6 +182,40 @@ class InstanceModel2PartialInterpretation {
 			it.knownReals += reals
 			it.knownStrings += strings
 		]
+	}
+	private def boolean checkIfIgnored(
+		EObject object, 
+		EAttribute attribute,
+		Map<String, Map<String, String>> ignoredAttribs
+	) {
+		val classInIgnored = ignoredAttribs.get(object.eClass.name)
+		val mayIgnored = (
+					classInIgnored !== null && classInIgnored.containsKey(attribute.name))
+
+		var isIgnored = false
+		if (mayIgnored) {
+			val specificIgnoredValue = classInIgnored.get(attribute.name)
+			if (specificIgnoredValue.equals("*"))
+				isIgnored = true
+			else {
+				val value = object.eGet(attribute)
+				if (typeof(Number).isAssignableFrom(value.class)) {
+					isIgnored = (Double.valueOf(specificIgnoredValue) == value)
+				} else {
+					isIgnored = specificIgnoredValue.equals(value)
+				}
+			}
+		}
+		// DEBUG
+//		println("DEBUG BEGINNING")
+//		println(object)
+//		println(attribute)
+//		println(value)
+//		
+//		println("MAYIGNORE " + mayIgnored)
+//		println("ISIGNORED " + isIgnored)
+		// END DEBUG
+		return isIgnored
 	}
 	private def dispatch shortValue(Boolean value, Set<Integer> integers, Set<Double> reals, Set<String> strings) {
 		// Do nothing

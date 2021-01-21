@@ -16,6 +16,7 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveKi
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.optimization.ObjectiveThreshold
 import java.util.LinkedList
 import java.util.List
+import java.util.Map
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 
@@ -78,6 +79,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public var calculateObjectCreationCosts = false
 	public NumericSolverSelection numericSolverSelection = NumericSolverSelection.DREAL_DOCKER //currently defaulted to DREAL
 	public var drealLocalPath = "<path-to-dreal>";
+	public var Map<String, Map<String, String>> ignoredAttributesMap = null;
 	
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)

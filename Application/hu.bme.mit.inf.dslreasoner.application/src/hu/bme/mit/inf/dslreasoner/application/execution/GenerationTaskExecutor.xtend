@@ -17,11 +17,13 @@ import hu.bme.mit.inf.dslreasoner.viatra2logic.Viatra2LogicConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretation2logic.InstanceModel2Logic
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.visualisation.PartialInterpretation2Gml
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
 import hu.bme.mit.inf.dslreasoner.visualisation.pi2graphviz.GraphvizVisualiser
 import hu.bme.mit.inf.dslreasoner.workspace.URIBasedWorkspace
 import java.io.File
 import java.util.LinkedHashMap
 import java.util.LinkedList
+import java.util.Map
 import java.util.Optional
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.emf.common.util.URI
@@ -101,6 +103,13 @@ class GenerationTaskExecutor {
 			}
 			monitor.worked(50)
 			
+			// 5. create a solver and a configuration
+			// 5.1 initialize
+			val solver = solverLoader.loadSolver(task.solver,configurationMap)
+			val objectiveSpecification = scriptExecutor.getObjectiveSpecification(task.objectives)
+			val objectiveEntries = objectiveSpecification?.entries ?: emptyList
+			val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,objectiveEntries,console)
+					
 			// 4. translate all description to a logic problem
 			monitor.subTask('''Translating all resources to logic''')
 			var domain2LogicTransformationTime = System.nanoTime
@@ -112,9 +121,15 @@ class GenerationTaskExecutor {
 			var modelGeneration = ecore2Logic.transformMetamodel(metamodelDescriptor,new Ecore2LogicConfiguration())
 			var problem = modelGeneration.output
 			if(partialModelDescriptor !== null) {
+				//get ignored attributes
+				var Map<String, Map<String, String>>ignoredAttributes = null
+				if (solverConfig instanceof ViatraReasonerConfiguration)
+					ignoredAttributes = (solverConfig as ViatraReasonerConfiguration).ignoredAttributesMap
+
 				problem = instanceModel2Logic.transform(
 					modelGeneration,
-					partialModelDescriptor
+					partialModelDescriptor,
+					ignoredAttributes
 				).output
 			}
 			if(queryDescriptor !== null){
@@ -128,13 +143,8 @@ class GenerationTaskExecutor {
 			if(documentationLevel.atLeastNormal) {
 				reasonerWorkspace.writeModel(problem,"generation.logicproblem")
 			}
+			// END 4
 			
-			// 5. create a solver and a configuration
-			// 5.1 initialize
-			val solver = solverLoader.loadSolver(task.solver,configurationMap)
-			val objectiveSpecification = scriptExecutor.getObjectiveSpecification(task.objectives)
-			val objectiveEntries = objectiveSpecification?.entries ?: emptyList
-			val solverConfig = solverLoader.loadSolverConfig(task.solver,configurationMap,objectiveEntries,console)
 			// 5.2 set values that defined directly 
 			solverConfig.solutionScope = new SolutionScope => [
 				it.numberOfRequiredSolutions = if(task.numberSpecified) {

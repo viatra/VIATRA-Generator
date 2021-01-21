@@ -429,97 +429,97 @@ pattern define_relation_noSelfRelation(a1:Actor, a2:Actor) {
 //CollisionExists
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 	
-//@Constraint(severity="error", key={c}, message="x")
-//pattern collisionExists_timeWithinBound(ss:CrossingScenario, c:CollisionExists) {
-//	CrossingScenario.relations(ss, c);
-//	CrossingScenario.maxTime(ss, maxTime);
-//	CollisionExists.collisionTime(c, cTime);
-//	check(cTime >= maxTime);}
-//
-//@Constraint(severity="error", key={c}, message="x")
-//pattern collisionExists_timeNotNegative(c:CollisionExists) {
-//	CollisionExists. collisionTime(c, cTime);
-//	check(cTime <= 0.0);}
-//
-//private pattern helper_getCollExistsTime(a1:Actor, a2: Actor, cTime:java Double) {
-//	CollisionExists.source(c, a1);
-//	CollisionExists.target(c, a2);
-//	CollisionExists. collisionTime(c, cTime);
-//}
-//
-//private pattern helper_getYCoords(a:Actor, l:java Double, 
-//	yPos:java Double, ySpeed:java Double) {
-//
-//	Actor.length(a, l);
-//	Actor.yPos(a, yPos);
-//	Actor.ySpeed(a, ySpeed);
-//}
-//
-//private pattern helper_getAllYCoords(a1:Actor, a2: Actor, 
-//	l1:java Double, l2:java Double, yPos1:java Double, yPos2:java Double,
-//	ySpeed1:java Double, ySpeed2:java Double) {
-//
-//	find helper_getYCoords(a1, l1, yPos1, ySpeed1);
-//	find helper_getYCoords(a2, l2, yPos2, ySpeed2);
-//}
-//
-//private pattern helper_getXCoords(a:Actor, l:java Double, 
-//	xPos:java Double, xSpeed:java Double) {
-//
-//	Actor.length(a, l);
-//	Actor.xPos(a, xPos);
-//	Actor.xSpeed(a, xSpeed);
-//}
-//
-//private pattern helper_getAllXCoords(a1:Actor, a2: Actor, 
-//	w1:java Double, w2:java Double, xPos1:java Double, xPos2:java Double,
-//	xSpeed1:java Double, xSpeed2:java Double) {
-//
-//	find helper_getYCoords(a1, w1, xPos1, xSpeed1);
-//	find helper_getYCoords(a2, w2, xPos2, xSpeed2);
-//}
-//
-//@Constraint(severity="error", key={a1}, message="x")
-//pattern collisionExists_defineCollision_y1(a1:Actor, a2:Actor) {
-//
-//	find helper_getCollExistsTime(a1, a2, cTime);
-//	find helper_getAllYCoords(a1, a2, l1, l2, yPos1, yPos2, ySpeed1, ySpeed2);
-//	
-//	//check(y_1_bottom > y_2_top
-//	check((yPos1 + (ySpeed1 * cTime)) - (l1/2) > (yPos2 + (ySpeed2 * cTime)) + (l2/2));	
-//}
-//
-//@Constraint(severity="error", key={a1}, message="x")
-//pattern collisionExists_defineCollision_y2(a1:Actor, a2:Actor) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//
-//	find helper_getCollExistsTime(a1, a2, cTime);
-//	find helper_getAllYCoords(a1, a2, l1, l2, yPos1, yPos2, ySpeed1, ySpeed2);
-//	
-//	//check(y_1_top < y_2_bottom)
-//	check((yPos1 + (ySpeed1 * cTime)) + (l1/2) < (yPos2 + (ySpeed2 * cTime)) - (l2/2));	
-//}
-//
-//@Constraint(severity="error", key={a1}, message="x")
-//pattern collisionExists_defineCollision_x1(a1:Actor, a2:Actor) {
-//
-//	find helper_getCollExistsTime(a1, a2, cTime);
-//	find helper_getAllYCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
-//	
-//	//check(x_1_left > x_2_right)
-//	check((xPos1 + (xSpeed1 * cTime)) - (w1/2) > (xPos2 + (xSpeed2 * cTime)) + (w2/2));	
-//}
-//
-//@Constraint(severity="error", key={a1}, message="x")
-//pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor) {
-//	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-//
-//	find helper_getCollExistsTime(a1, a2, cTime);
-//	find helper_getAllYCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
-//	
-//	//check(x_1_right < x_2_left)
-//	check((xPos1 + (xSpeed1 * cTime)) + (w1/2) < (xPos2 + (xSpeed2 * cTime)) - (w2/2));	
-//}
+@Constraint(severity="error", key={c}, message="x")
+pattern collisionExists_timeWithinBound(ss:CrossingScenario, c:CollisionExists) {
+	CrossingScenario.relations(ss, c);
+	CrossingScenario.maxTime(ss, maxTime);
+	CollisionExists.collisionTime(c, cTime);
+	check(cTime >= maxTime);}
+
+@Constraint(severity="error", key={c}, message="x")
+pattern collisionExists_timeNotNegative(c:CollisionExists) {
+	CollisionExists. collisionTime(c, cTime);
+	check(cTime <= 0.0);}
+
+private pattern helper_getCollExistsTime(a1:Actor, a2: Actor, cTime:java Double) {
+	CollisionExists.source(c, a1);
+	CollisionExists.target(c, a2);
+	CollisionExists. collisionTime(c, cTime);
+}
+
+private pattern helper_getYCoords(a:Actor, l:java Double, 
+	yPos:java Double, ySpeed:java Double) {
+
+	Actor.length(a, l);
+	Actor.yPos(a, yPos);
+	Actor.ySpeed(a, ySpeed);
+}
+
+private pattern helper_getAllYCoords(a1:Actor, a2: Actor, 
+	l1:java Double, l2:java Double, yPos1:java Double, yPos2:java Double,
+	ySpeed1:java Double, ySpeed2:java Double) {
+
+	find helper_getYCoords(a1, l1, yPos1, ySpeed1);
+	find helper_getYCoords(a2, l2, yPos2, ySpeed2);
+}
+
+private pattern helper_getXCoords(a:Actor, l:java Double, 
+	xPos:java Double, xSpeed:java Double) {
+
+	Actor.length(a, l);
+	Actor.xPos(a, xPos);
+	Actor.xSpeed(a, xSpeed);
+}
+
+private pattern helper_getAllXCoords(a1:Actor, a2: Actor, 
+	w1:java Double, w2:java Double, xPos1:java Double, xPos2:java Double,
+	xSpeed1:java Double, xSpeed2:java Double) {
+
+	find helper_getYCoords(a1, w1, xPos1, xSpeed1);
+	find helper_getYCoords(a2, w2, xPos2, xSpeed2);
+}
+
+@Constraint(severity="error", key={a1}, message="x")
+pattern collisionExists_defineCollision_y1(a1:Actor, a2:Actor) {
+
+	find helper_getCollExistsTime(a1, a2, cTime);
+	find helper_getAllYCoords(a1, a2, l1, l2, yPos1, yPos2, ySpeed1, ySpeed2);
+	
+	//check(y_1_bottom > y_2_top
+	check((yPos1 + (ySpeed1 * cTime)) - (l1/2) > (yPos2 + (ySpeed2 * cTime)) + (l2/2));	
+}
+
+@Constraint(severity="error", key={a1}, message="x")
+pattern collisionExists_defineCollision_y2(a1:Actor, a2:Actor) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+
+	find helper_getCollExistsTime(a1, a2, cTime);
+	find helper_getAllYCoords(a1, a2, l1, l2, yPos1, yPos2, ySpeed1, ySpeed2);
+	
+	//check(y_1_top < y_2_bottom)
+	check((yPos1 + (ySpeed1 * cTime)) + (l1/2) < (yPos2 + (ySpeed2 * cTime)) - (l2/2));	
+}
+
+@Constraint(severity="error", key={a1}, message="x")
+pattern collisionExists_defineCollision_x1(a1:Actor, a2:Actor) {
+
+	find helper_getCollExistsTime(a1, a2, cTime);
+	find helper_getAllYCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
+	
+	//check(x_1_left > x_2_right)
+	check((xPos1 + (xSpeed1 * cTime)) - (w1/2) > (xPos2 + (xSpeed2 * cTime)) + (w2/2));	
+}
+
+@Constraint(severity="error", key={a1}, message="x")
+pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+
+	find helper_getCollExistsTime(a1, a2, cTime);
+	find helper_getAllYCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
+	
+	//check(x_1_right < x_2_left)
+	check((xPos1 + (xSpeed1 * cTime)) + (w1/2) < (xPos2 + (xSpeed2 * cTime)) - (w2/2));	
+}
 
 
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////

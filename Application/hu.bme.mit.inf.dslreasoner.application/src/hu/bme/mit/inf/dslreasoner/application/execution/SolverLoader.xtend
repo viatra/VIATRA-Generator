@@ -30,6 +30,7 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.xbase.lib.Functions.Function1
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.NumericSolverSelection
+import java.util.HashMap
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {
@@ -166,6 +167,10 @@ class SolverLoader {
 						default: throw new IllegalArgumentException("Unknown scope propagator: " + stringValue)
 					}
 				}
+				if (config.containsKey("ignored-attributes")) {
+					val stringValue = config.get("ignored-attributes")
+					c.ignoredAttributesMap = parseIgnoredAttributes(stringValue) 
+				}
 				for (objectiveEntry : objectiveEntries) {
 					val costObjectiveConfig = new CostObjectiveConfiguration
 					switch (objectiveEntry) {
@@ -231,6 +236,34 @@ class SolverLoader {
 			default:
 				throw new UnsupportedOperationException('''Unknown solver: «solver»''')
 		}
+	}
+	
+	def Map<String, Map<String, String>> parseIgnoredAttributes(String input) {
+		val Map<String, Map<String, String>>  clAttVal = newHashMap
+		val List<String> entries = input.split(",")
+		//TODO add some validation here
+		for (entry : entries) {
+			val List<String> components = entry.split("=")
+			if (components.size != 2)
+				throw new IllegalArgumentException("Invalid ignoredAttributes Specification: \"" + entry + "\"")
+
+			val clAtt = components.get(0)
+			val List<String> clAttArray = clAtt.split("\\.")
+			if (clAttArray.size != 2)
+				throw new IllegalArgumentException("Invalid attribute specification : \"" + clAtt + "\"")
+			
+			val c = clAttArray.get(0).strip
+			val a = clAttArray.get(1).strip	
+			val v = components.get(1).strip
+			
+			val clInMap = clAttVal.get(c)
+			if (clInMap === null) {
+				clAttVal.put(c, newHashMap(a -> v))
+			} else {
+				clInMap.put(a, v)
+			}
+		}
+		return clAttVal
 	}
 
 	def dispatch void setRunIndex(AlloySolverConfiguration config, Map<String, String> parameters, int runIndex,
