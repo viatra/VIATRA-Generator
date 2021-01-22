@@ -497,7 +497,7 @@ pattern collisionExists_vsVisionBlocked(a1:Actor) {
 }
 */
 //<<END QUALITATIF ABSTRACTION>>
-/*
+
 ////
 //CollisionExists - Time
 ////
