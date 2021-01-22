@@ -18,18 +18,20 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import crossingScenario.Actor;
+import crossingScenario.CollisionExists;
 import crossingScenario.CrossingScenario;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
 import crossingScenario.Lane_Horizontal;
 import crossingScenario.Lane_Vertical;
+import crossingScenario.Relation;
 import crossingScenario.VisionBlocked;
 
 public class DrawScenario {
 	public static final int SIZE = 1000;
 	
 	public static void main(String[] args) throws IOException {
-		drawScenario("outputs/models/1.xmi");
+		drawScenario("outputs/models/4.xmi");
 	}
 
 	public static File drawScenario(String pathToXmi) throws IOException {
@@ -100,68 +102,36 @@ public class DrawScenario {
 				g.setPaint(Color.GREEN);
 
 			g.drawRect(left, bot, width, length);
-			
-			//Draw Speed?
-			
-			//Draw location at collision?
 		}
 
-//		int numVars = vals.size();
-//		final int numActors = (numVars - 1) / 4;
-//
-//		double time = 0;
-//		if (!is3)
-//			time = vals.get(numVars - 1);
-//		else
-//			time = vals.get(numVars / 2);
-//
-//		for (int i = 0; i < numActors; i++) {
-//
-//			int x = 0, y = 0, vx = 0, vy = 0;
-//			if (!is3) {
-//				int first = i * 4;
-//				x = (int) (vals.get(first) * 100);
-//				y = (int) (vals.get(first + 1) * 100);
-//				vx = (int) (vals.get(first + 2) * 100);
-//				vy = (int) (vals.get(first + 3) * 100);
-//			} else {
-//				int first = i * 2;
-//				x = (int) (vals.get(first) * 100);
-//				y = (int) (vals.get(first + 1) * 100);
-//				vx = (int) (vals.get(first + 1 + numVars / 2) * 100);
-//				vy = (int) (vals.get(first + 2 + numVars / 2) * 100);
-//			}
-//			g.setStroke(new BasicStroke(10));
-//			g.setPaint(Color.BLACK);
-//			g.drawOval(x - 2, y - 2, 4, 4);
-//			boolean isEGO = (!is3 && i == 0) || (is3 && i == numActors - 2);
-//			boolean isPED = (i == numActors - 1);
-//			if (isEGO) {
-//				// EGO
-//				g.drawRect(x - 50, y - 150, 100, 300);
-//				g.setPaint(Color.PINK);
-//				if (acceleration)
-//					g.drawRect((int) (x + (vx * time * time) - 50), (int) (y + (vy * time * time) - 150), 100, 300);
-//				else
-//					g.drawRect((int) (x + (vx * time) - 50), (int) (y + (vy * time) - 150), 100, 300);
-//			} else if (isPED) {
-//				// PED
-//				g.drawRect(x - 50, y - 50, 100, 100);
-//				g.setPaint(Color.PINK);
-//				if (acceleration)
-//					g.drawRect((int) (x + (vx * time * time) - 50), (int) (y + (vy * time * time) - 50), 100, 100);
-//				else
-//					g.drawRect((int) (x + (vx * time) - 50), (int) (y + (vy * time) - 50), 100, 100);
-//			} else {
-//				// CAR
-//				g.drawRect(x - 50, y - 150, 100, 300);
-//			}
-//
-//			g.setStroke(new BasicStroke(4));
-//			g.setPaint(Color.GREEN);
-//			g.drawLine(x, y, x + vx, y + vy);
-//
-//		}
+		g.setPaint(Color.BLUE);
+		for (Relation ce : cs.getRelations().stream().
+				filter(r -> r instanceof CollisionExists).collect(Collectors.toList())) {
+			Actor a1 = ce.getSource();
+			Actor a2 = ce.getTarget();
+			Double t = ((CollisionExists) ce).getCollisionTime();
+			
+			for (Actor a : new Actor[] {a1, a2}) {
+				//Draw final pos
+				g.setStroke(new BasicStroke(3));
+				int left = (int) (((a.getXPos() + (t * a.getXSpeed()))-a.getWidth()/2) * multiplier);
+				int bot = (int) (((a.getYPos() + (t * a.getYSpeed()))-a.getLength()/2) * multiplier);
+				int width = (int) (a.getWidth() * multiplier);
+				int length = (int) (a.getLength() * multiplier);
+
+				
+			
+				//Draw line
+				g.drawRect(left, bot, width, length);
+				g.setStroke(new BasicStroke(1));
+				int x1 = (int) (a.getXPos() * multiplier);
+				int y1 = (int) (a.getYPos() * multiplier);
+				int x2 = (int) ((a.getXPos() + (t * a.getXSpeed())) * multiplier);
+				int y2 = (int) ((a.getYPos() + (t * a.getYSpeed())) * multiplier);
+				g.drawLine(x1, y1, x2, y2);
+			
+			}			
+		}
 		g.dispose();
 		
 		File f = new File("outputs/drawnModel.png");
@@ -174,42 +144,5 @@ public class DrawScenario {
 //		Desktop.getDesktop().open(f);
 		System.out.println("finished!");
 		return f;
-
-//		CrossingScenario cs = ((CrossingScenario) res.getContents().get(0));
-//
-//		for (Actor o : cs.getActors()) {
-//			String nodeName = "A(" + rndbl(o.getXPos(), 1) + "," + rndbl(o.getYPos(), 1) + ")";
-//			printer.println(o.hashCode() + " " + nodeName);
-//		}
-//
-//		for (Lane o : cs.getLanes()) {
-//			String prefix = "";
-//			if (cs.getHorizontal_head().equals(o) || cs.getVertical_head().equals(o)) {
-//				prefix = "HEAD";
-//			}
-//			String nodeName = prefix + "L(" + rndbl(o.getReferenceCoord(), 3) + ")"
-//					+ o.eClass().getName().substring(5, 9);
-//			printer.println(o.hashCode() + " " + nodeName);
-//		}
-//		printer.println("#");
-//		for (Lane o : cs.getLanes()) {
-//			if (o.getPrevLane() != null) {
-//				int curName = o.hashCode();
-//				int curPrev = o.getPrevLane().hashCode();
-//				double edgeLabel = rndbl(o.getPrevLane().getNumWidth(), 1);
-//				printer.println(curName + " " + curPrev + " " + edgeLabel);
-//			}
-//		}
-//
-//		for (Actor o : cs.getActors()) {
-//			int actName = o.hashCode();
-//			int lanName = o.getPlacedOn().hashCode();
-//			printer.println(actName + " " + lanName);
-//		}
-//
-//		printer.flush();
-//		printer.close();
-//		System.out.println("TGF CREATED");
-
 	}
 }

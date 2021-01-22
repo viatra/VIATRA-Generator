@@ -463,30 +463,41 @@ pattern collisionExists_qualAbstr(a1:Actor, a2:Actor) {
 }
 
 //<<END QUALITATIF ABSTRACTION>>
-/*
+
 ////
 //VS VisionBlocked
 ////
 //TODO Very prone to corner cases
-
-@Constraint(severity="error", key={a1, a2}, message="x")
-pattern collisionExists_vsVisionBlocked(a1:Actor, a2:Actor) {	
+/*
+@Constraint(severity="error", key={a1}, message="x")
+pattern collisionExists_vsVisionBlocked(a1:Actor) {	
 	VisionBlocked.source(vb, a1);
 	VisionBlocked.target(vb, a2);
-	neg find helper_collidingActors(a1, a2);
+	CollisionExists.source(ce, a1);
+	CollisionExists.target(ce, a3);
+	a2 != a3;
 } or {
 	VisionBlocked.source(vb, a1);
 	VisionBlocked.target(vb, a2);
-	neg find helper_collidingActors(a2, a1);
+	CollisionExists.source(ce, a3);
+	CollisionExists.target(ce, a1);
+	a2 != a3;
+} or {
+	VisionBlocked.source(vb, a2);
+	VisionBlocked.target(vb, a1);
+	CollisionExists.source(ce, a3);
+	CollisionExists.target(ce, a1);
+	a2 != a3;
+} or {
+	VisionBlocked.source(vb, a2);
+	VisionBlocked.target(vb, a1);
+	CollisionExists.source(ce, a1);
+	CollisionExists.target(ce, a3);
+	a2 != a3;
 }
-
-private pattern helper_collidingActors(a1:Actor, a2:Actor){
-	CollisionExists.source(vb, a1);
-	CollisionExists.target(vb, a2);
-}
-
+*/
 //<<END QUALITATIF ABSTRACTION>>
-
+/*
 ////
 //CollisionExists - Time
 ////
@@ -592,7 +603,7 @@ pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor) {
 	check((xPos1 + (xSpeed1 * cTime)) + (w1/2) < (xPos2 + (xSpeed2 * cTime)) - (w2/2));	
 }
 
-*/
+
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //VisionBlocked
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
@@ -708,8 +719,10 @@ pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
 		> ((y1-y2)/(x1-x2)));	
 }
 
-@Constraint(severity="error", key={a1, a2}, message="x")
-pattern visionBlocked_blockerNotToRightOfBoth(a1:Actor, a2:Actor) {
+//TODO refactor?
+//TODO CORNER CASES
+@Constraint(severity="error", key={a1, vb}, message="x")
+pattern visionBlocked_xdistBSlargerThanxdistTS(a1:Actor, a2:Actor, vb:VisionBlocked) {
 	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
 	VisionBlocked.source(vb, a1);
 	VisionBlocked.target(vb, a2);
@@ -719,23 +732,31 @@ pattern visionBlocked_blockerNotToRightOfBoth(a1:Actor, a2:Actor) {
 	Actor.xPos(a2, x2);
 	Actor.xPos(aBlocker, xBlocker);
 	
-	check( x1 < xBlocker && x2 < xBlocker);
+	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
+	//TODO implement ABSOLUTE VALUE or MULTI-CHECK
+	check((x1-xBlocker)*(x1-xBlocker) > (x1-x2)*(x1-x2));
 }
 
-@Constraint(severity="error", key={a1, a2}, message="x")
-pattern visionBlocked_blockerNotToLeftOfBoth(a1:Actor, a2:Actor) {
+//TODO refactor?
+//TODO CORNER CASES
+@Constraint(severity="error", key={a1, vb}, message="x")
+pattern visionBlocked_xdistBTlargerThanxdistST(a1:Actor, a2:Actor, vb:VisionBlocked) {
 	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-	VisionBlocked.source(vb, a1);
-	VisionBlocked.target(vb, a2);
+	VisionBlocked.source(vb, a2);
+	VisionBlocked.target(vb, a1);
 	VisionBlocked.blockedBy(vb, aBlocker);
 	
 	Actor.xPos(a1, x1);
 	Actor.xPos(a2, x2);
 	Actor.xPos(aBlocker, xBlocker);
 	
-	check( x1 > xBlocker && x2 > xBlocker);
+	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
+	//TODO implement ABSOLUTE VALUE or MULTI-CHECK
+	check((x1-xBlocker)*(x1-xBlocker) > (x1-x2)*(x1-x2));
 }
 
+//TODO same as above for Y???
+//TODO same as above for Y ????
 
 /////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //SeparationDistance

@@ -437,8 +437,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		
 		//DEBUG - Print things
 		System.out.println("Getting Solution!");
-		printOutput(numProbContent);
-		printOutput(outputs.get(0));
+//		printOutput(numProbContent);
+//		printOutput(outputs.get(0));
 //		System.out.println(result);
 		//END DEBUG
 				
