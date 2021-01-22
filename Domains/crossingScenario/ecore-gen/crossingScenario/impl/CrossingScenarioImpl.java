@@ -37,6 +37,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getLanes <em>Lanes</em>}</li>
  *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getMaxTime <em>Max Time</em>}</li>
  *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getRelations <em>Relations</em>}</li>
+ *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getMaxXSpeed <em>Max XSpeed</em>}</li>
+ *   <li>{@link crossingScenario.impl.CrossingScenarioImpl#getMaxYSpeed <em>Max YSpeed</em>}</li>
  * </ul>
  *
  * @generated
@@ -131,6 +133,46 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected EList<Relation> relations;
+
+	/**
+	 * The default value of the '{@link #getMaxXSpeed() <em>Max XSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxXSpeed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double MAX_XSPEED_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getMaxXSpeed() <em>Max XSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxXSpeed()
+	 * @generated
+	 * @ordered
+	 */
+	protected double maxXSpeed = MAX_XSPEED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMaxYSpeed() <em>Max YSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxYSpeed()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final double MAX_YSPEED_EDEFAULT = 0.0;
+
+	/**
+	 * The cached value of the '{@link #getMaxYSpeed() <em>Max YSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaxYSpeed()
+	 * @generated
+	 * @ordered
+	 */
+	protected double maxYSpeed = MAX_YSPEED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -265,6 +307,52 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
+	public double getMaxXSpeed() {
+		return maxXSpeed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMaxXSpeed(double newMaxXSpeed) {
+		double oldMaxXSpeed = maxXSpeed;
+		maxXSpeed = newMaxXSpeed;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CrossingScenarioPackage.CROSSING_SCENARIO__MAX_XSPEED, oldMaxXSpeed, maxXSpeed));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public double getMaxYSpeed() {
+		return maxYSpeed;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setMaxYSpeed(double newMaxYSpeed) {
+		double oldMaxYSpeed = maxYSpeed;
+		maxYSpeed = newMaxYSpeed;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CrossingScenarioPackage.CROSSING_SCENARIO__MAX_YSPEED, oldMaxYSpeed, maxYSpeed));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case CrossingScenarioPackage.CROSSING_SCENARIO__ACTORS:
@@ -297,6 +385,10 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 				return getMaxTime();
 			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
 				return getRelations();
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_XSPEED:
+				return getMaxXSpeed();
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_YSPEED:
+				return getMaxYSpeed();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -331,6 +423,12 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 				getRelations().clear();
 				getRelations().addAll((Collection<? extends Relation>)newValue);
 				return;
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_XSPEED:
+				setMaxXSpeed((Double)newValue);
+				return;
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_YSPEED:
+				setMaxYSpeed((Double)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -361,6 +459,12 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
 				getRelations().clear();
 				return;
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_XSPEED:
+				setMaxXSpeed(MAX_XSPEED_EDEFAULT);
+				return;
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_YSPEED:
+				setMaxYSpeed(MAX_YSPEED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -385,6 +489,10 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 				return maxTime != MAX_TIME_EDEFAULT;
 			case CrossingScenarioPackage.CROSSING_SCENARIO__RELATIONS:
 				return relations != null && !relations.isEmpty();
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_XSPEED:
+				return maxXSpeed != MAX_XSPEED_EDEFAULT;
+			case CrossingScenarioPackage.CROSSING_SCENARIO__MAX_YSPEED:
+				return maxYSpeed != MAX_YSPEED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -405,6 +513,10 @@ public class CrossingScenarioImpl extends MinimalEObjectImpl.Container implement
 		result.append(ySize);
 		result.append(", maxTime: ");
 		result.append(maxTime);
+		result.append(", maxXSpeed: ");
+		result.append(maxXSpeed);
+		result.append(", maxYSpeed: ");
+		result.append(maxYSpeed);
 		result.append(')');
 		return result.toString();
 	}

@@ -18,6 +18,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/lanes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/maxTime"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//CrossingScenario/relations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/maxXSpeed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/maxYSpeed"/>
     </genClasses>
     <genClasses ecoreClass="crossingScenario.ecore#//Lane">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Lane/referenceCoord"/>

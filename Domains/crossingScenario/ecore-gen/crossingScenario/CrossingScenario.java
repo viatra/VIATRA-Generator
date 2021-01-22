@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link crossingScenario.CrossingScenario#getLanes <em>Lanes</em>}</li>
  *   <li>{@link crossingScenario.CrossingScenario#getMaxTime <em>Max Time</em>}</li>
  *   <li>{@link crossingScenario.CrossingScenario#getRelations <em>Relations</em>}</li>
+ *   <li>{@link crossingScenario.CrossingScenario#getMaxXSpeed <em>Max XSpeed</em>}</li>
+ *   <li>{@link crossingScenario.CrossingScenario#getMaxYSpeed <em>Max YSpeed</em>}</li>
  * </ul>
  *
  * @see crossingScenario.CrossingScenarioPackage#getCrossingScenario()
@@ -129,5 +131,51 @@ public interface CrossingScenario extends EObject {
 	 * @generated
 	 */
 	EList<Relation> getRelations();
+
+	/**
+	 * Returns the value of the '<em><b>Max XSpeed</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max XSpeed</em>' attribute.
+	 * @see #setMaxXSpeed(double)
+	 * @see crossingScenario.CrossingScenarioPackage#getCrossingScenario_MaxXSpeed()
+	 * @model default="0.0"
+	 * @generated
+	 */
+	double getMaxXSpeed();
+
+	/**
+	 * Sets the value of the '{@link crossingScenario.CrossingScenario#getMaxXSpeed <em>Max XSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max XSpeed</em>' attribute.
+	 * @see #getMaxXSpeed()
+	 * @generated
+	 */
+	void setMaxXSpeed(double value);
+
+	/**
+	 * Returns the value of the '<em><b>Max YSpeed</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Max YSpeed</em>' attribute.
+	 * @see #setMaxYSpeed(double)
+	 * @see crossingScenario.CrossingScenarioPackage#getCrossingScenario_MaxYSpeed()
+	 * @model default="0.0"
+	 * @generated
+	 */
+	double getMaxYSpeed();
+
+	/**
+	 * Sets the value of the '{@link crossingScenario.CrossingScenario#getMaxYSpeed <em>Max YSpeed</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Max YSpeed</em>' attribute.
+	 * @see #getMaxYSpeed()
+	 * @generated
+	 */
+	void setMaxYSpeed(double value);
 
 } // CrossingScenario

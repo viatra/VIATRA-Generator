@@ -23,7 +23,7 @@ generate {
 		log-level = none,
 		"numeric-solver" = "dreal-local",
 		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
-		"ignored-attributes" = "CrossingScenario.maxTime=60",
+		"ignored-attributes" = "CollisionExists.collisionTime=*",
 		"scopePropagator" = "polyhedral"}
 	
 	runs = 1

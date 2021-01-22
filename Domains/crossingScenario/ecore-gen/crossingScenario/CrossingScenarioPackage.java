@@ -122,13 +122,31 @@ public interface CrossingScenarioPackage extends EPackage {
 	int CROSSING_SCENARIO__RELATIONS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Max XSpeed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSSING_SCENARIO__MAX_XSPEED = 6;
+
+	/**
+	 * The feature id for the '<em><b>Max YSpeed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSSING_SCENARIO__MAX_YSPEED = 7;
+
+	/**
 	 * The number of structural features of the '<em>Crossing Scenario</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CROSSING_SCENARIO_FEATURE_COUNT = 6;
+	int CROSSING_SCENARIO_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Crossing Scenario</em>' class.
@@ -1068,6 +1086,28 @@ public interface CrossingScenarioPackage extends EPackage {
 	EReference getCrossingScenario_Relations();
 
 	/**
+	 * Returns the meta object for the attribute '{@link crossingScenario.CrossingScenario#getMaxXSpeed <em>Max XSpeed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max XSpeed</em>'.
+	 * @see crossingScenario.CrossingScenario#getMaxXSpeed()
+	 * @see #getCrossingScenario()
+	 * @generated
+	 */
+	EAttribute getCrossingScenario_MaxXSpeed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link crossingScenario.CrossingScenario#getMaxYSpeed <em>Max YSpeed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max YSpeed</em>'.
+	 * @see crossingScenario.CrossingScenario#getMaxYSpeed()
+	 * @see #getCrossingScenario()
+	 * @generated
+	 */
+	EAttribute getCrossingScenario_MaxYSpeed();
+
+	/**
 	 * Returns the meta object for class '{@link crossingScenario.Lane <em>Lane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1474,6 +1514,22 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CROSSING_SCENARIO__RELATIONS = eINSTANCE.getCrossingScenario_Relations();
+
+		/**
+		 * The meta object literal for the '<em><b>Max XSpeed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CROSSING_SCENARIO__MAX_XSPEED = eINSTANCE.getCrossingScenario_MaxXSpeed();
+
+		/**
+		 * The meta object literal for the '<em><b>Max YSpeed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CROSSING_SCENARIO__MAX_YSPEED = eINSTANCE.getCrossingScenario_MaxYSpeed();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.LaneImpl <em>Lane</em>}' class.

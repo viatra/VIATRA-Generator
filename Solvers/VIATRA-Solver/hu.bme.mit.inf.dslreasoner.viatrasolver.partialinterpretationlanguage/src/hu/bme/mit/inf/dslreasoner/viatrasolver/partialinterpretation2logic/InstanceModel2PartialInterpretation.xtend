@@ -207,13 +207,12 @@ class InstanceModel2PartialInterpretation {
 			}
 		}
 		// DEBUG
-//		println("DEBUG BEGINNING")
-//		println(object)
-//		println(attribute)
-//		println(value)
-//		
-//		println("MAYIGNORE " + mayIgnored)
-//		println("ISIGNORED " + isIgnored)
+		if (isIgnored) {
+		println("IGNORED")
+		println(object)
+		println(attribute)
+		println(object.eGet(attribute))
+		}
 		// END DEBUG
 		return isIgnored
 	}

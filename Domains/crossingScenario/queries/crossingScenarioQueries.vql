@@ -223,17 +223,23 @@ pattern define_placedOn_actorOnHorizLane(a : Actor, hl:Lane_Horizontal) {
 //Actor
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 
+/////----------------
 //Xpos and Ypos Bounds
+/////----------------
 
-private pattern helper_getXAndBounds(cs:CrossingScenario, a:Actor,
+private pattern helper_horiz_getXAndBounds(cs:CrossingScenario, a:Actor,
 	xMax:java Double, xP:java Double) {
+	Actor.placedOn(a, hl);
+	Lane_Horizontal(hl);
 	CrossingScenario.actors(cs, a);
 	CrossingScenario.xSize(cs, xMax);
 	Actor.xPos(a, xP);
 }
 
-private pattern helper_getYAndBounds(cs:CrossingScenario, a:Actor,
+private pattern helper_vert_getYAndBounds(cs:CrossingScenario, a:Actor,
 	yMax:java Double, yP:java Double) {
+	Actor.placedOn(a, vl);
+	Lane_Vertical(vl);
 	CrossingScenario.actors(cs, a);
 	CrossingScenario.ySize(cs, yMax);
 	Actor.yPos(a, yP);
@@ -241,87 +247,109 @@ private pattern helper_getYAndBounds(cs:CrossingScenario, a:Actor,
 
 @Constraint(severity="error", key={cs}, message="x")
 pattern define_actor_maxXp(cs:CrossingScenario, a:Actor) {
-	Actor.placedOn(a, hl);
-	Lane_Horizontal(hl);
-	find helper_getXAndBounds(cs, a, xMax, xP); 
+	find helper_horiz_getXAndBounds(cs, a, xMax, xP); 
 	check(xP >= xMax);}
 
 @Constraint(severity="error", key={cs}, message="x")
 pattern define_actor_minXp(cs:CrossingScenario, a:Actor) {
-	Actor.placedOn(a, hl);
-	Lane_Horizontal(hl);
-	find helper_getXAndBounds(cs, a, xMax, xP); 
+	find helper_horiz_getXAndBounds(cs, a, xMax, xP); 
 	check(xP <= 0-xMax);}
 	
 @Constraint(severity="error", key={cs}, message="x")
 pattern define_actor_maxYp(cs:CrossingScenario, a:Actor) {
-	Actor.placedOn(a, vl);
-	Lane_Vertical(vl);
-	find helper_getYAndBounds(cs, a, yMax, yP); 
+	find helper_vert_getYAndBounds(cs, a, yMax, yP); 
 	check(yP >= yMax);}
 
 @Constraint(severity="error", key={cs}, message="x")
 pattern define_actor_minYp(cs:CrossingScenario, a:Actor) {
-	Actor.placedOn(a, vl);
-	Lane_Vertical(vl);
-	find helper_getYAndBounds(cs, a, yMax, yP); 
+	find helper_vert_getYAndBounds(cs, a, yMax, yP); 
 	check(yP <= 0-yMax);}
-	
+
+/////----------------	
 //Xspeed and Yspeed bounds
+/////----------------
 	
 //TODO THIS IS HARD_CODED
-//@Constraint(severity="error", key={a}, message="x")
-//pattern define_actor_maxXs(a:Actor) {
-//	Actor.xSpeed(a, xS);
-//	check(xS >= 100.0);}
-//	
-//@Constraint(severity="error", key={a}, message="x")
-//pattern define_actor_minXs(a:Actor) {
-//	Actor.xSpeed(a, xS);
-//	check(xS <= 0-100.0);}
-//	
-////TODO THIS IS HARD_CODED
-//@Constraint(severity="error", key={a}, message="x")
-//pattern define_actor_maxYs(a:Actor) {
-//	Actor.ySpeed(a, yS);
-//	check(yS >= 100.0);}
-//
-//@Constraint(severity="error", key={a}, message="x")
-//pattern define_actor_minYs(a:Actor) {
-//	Actor.ySpeed(a, yS);
-//	check(yS <= 0-100.0);}
-//END Hard-coded stuff
 
-////TODO May be required
-/////////xPos of every actor mmust be within bounds defined in CS
-//@Constraint(severity="error", key={l}, message="1 Actor")
-//pattern define_actor_xPosWithinCSbounds(cs:CrossingScenario, a:Actor) {
-//	
-//}
-//
-////TODO May be required
-/////////yPos of every actor mmust be within bounds defined in CS
-//@Constraint(severity="error", key={l}, message="2 Actor")
-//pattern define_actor_yPosWithinCSbounds(cs:CrossingScenario, a:Actor) {
-//	
-//}
+/////////VERTICAL LANE
+@Constraint(severity="error", key={a}, message="7 Actor")
+pattern define_actor_actorOnVertLaneHasxSpeed0(a:Actor) {
+	Actor.placedOn(a, vl);
+	Lane_Vertical(vl);
+    Actor.xSpeed(a, xSpeed);
+    check(xSpeed != 0);
+}
 
+private pattern helper_vert_getYSpeedAndBounds(cs:CrossingScenario, a:Actor,
+	ySpeedMax:java Double, ySpeed:java Double) {
+	Actor.placedOn(a, vl);
+	Lane_Vertical(vl);
+	CrossingScenario.actors(cs, a);
+	CrossingScenario.maxYSpeed(cs, ySpeedMax);
+	Actor.ySpeed(a, ySpeed);
+}
 
-///////pedestrian-width (3) //TODO Derived?
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnVertLaneMinYs(cs:CrossingScenario, a:Actor) {
+	find helper_vert_getYSpeedAndBounds(cs, a, ySMax, yS); 
+	check(yS <= 0-ySMax);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnVertLaneMaxYs(cs:CrossingScenario, a:Actor) {
+	find helper_vert_getYSpeedAndBounds(cs, a, ySMax, yS); 
+	check(yS >= ySMax);
+}
+
+/////////HORIZONTAL LANE
+@Constraint(severity="error", key={a}, message="7 Actor")
+pattern define_actor_actorOnHorizLaneHasySpeed0(a:Actor) {
+	Actor.placedOn(a, hl);
+	Lane_Horizontal(hl);
+    Actor.ySpeed(a, ySpeed);
+    check(ySpeed != 0);
+}
+
+private pattern helper_horiz_getXSpeedAndBounds(cs:CrossingScenario, a:Actor,
+	xSpeedMax:java Double, xSpeed:java Double) {
+	Actor.placedOn(a, hl);
+	Lane_Horizontal(hl);
+	CrossingScenario.actors(cs, a);
+	CrossingScenario.maxXSpeed(cs, xSpeedMax);
+	Actor.xSpeed(a, xSpeed);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnHorizLaneMinXs(cs:CrossingScenario, a:Actor) {
+	find helper_horiz_getXSpeedAndBounds(cs, a, xSMax, xS); 
+	check(xS <= 0-xSMax);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnHorizLaneMaxXs(cs:CrossingScenario, a:Actor) {
+	find helper_horiz_getXSpeedAndBounds(cs, a, xSMax, xS); 
+	check(xS >= xSMax);
+}
+
+/////----------------
+/////WIDTH and LENGTH
+/////----------------
+
+///////pedestrian-width (3)
 @Constraint(severity="error", key={p}, message="3 Actor")
 pattern define_actor_pedestrianWidth(p:Pedestrian) {
     Pedestrian.width(p, w);
     check(w != 1.0);
 }
 
-/////////pedestrian-width (4) //TODO Derived?
+/////////pedestrian-width (4)
 @Constraint(severity="error", key={p}, message="4 Actor")
 pattern define_actor_pedestrianLength(p:Pedestrian) {
     Pedestrian.length(p, l);
     check(l != 1.0);
 }
 
-/////////actor-width (5) //TODO Derived?
+/////////actor-width (5)
 @Constraint(severity="error", key={v}, message="5 Actor")
 pattern define_actor_vehicleWidth(v:Vehicle) {
 	Vehicle.placedOn(v, lane);
@@ -335,7 +363,7 @@ pattern define_actor_vehicleWidth(v:Vehicle) {
     check(w != 3.0);
 }
 
-/////////actor-width (6) //TODO Derived?
+/////////actor-width (6)
 @Constraint(severity="error", key={v}, message="6 Actor")
 pattern define_actor_vehicleLength(v:Vehicle) {
 	Vehicle.placedOn(v, lane);
@@ -349,23 +377,10 @@ pattern define_actor_vehicleLength(v:Vehicle) {
     check(l != 1.0);
 }
 
-/////////xSpeed of actor on verticalLane is 0
-@Constraint(severity="error", key={a}, message="7 Actor")
-pattern define_actor_actorOnVertLaneHasxSpeed0(a:Actor, vl:Lane_Vertical) {
-	Actor.placedOn(a, vl);
-    Actor.xSpeed(a, xSpeed);
-    check(xSpeed != 0);
-}
+/////----------------
+/////DERIVED FEATURES
+/////----------------
 
-/////////ySpeed of actor on horizontalLane is 0
-@Constraint(severity="error", key={a}, message="8 Actor")
-pattern define_actor_actorOnHoriLaneHasySpeed0(a:Actor, hl:Lane_Horizontal) {
-	Actor.placedOn(a, hl);
-    Actor.ySpeed(a, ySpeed);
-    check(ySpeed != 0);
-}
-
-//<<NEW>> Derived Features
 private pattern helper_getCoords(a1:Actor, 
 	a2: Actor, x1:java Double, x2:java Double, y1:java Double, y2:java Double) {
 	Actor.xPos(a1, x1);
@@ -411,8 +426,6 @@ private pattern helper_actorsAreFar(a1: Actor, a2: Actor) {
 	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 20*20);	
 }
 
-//<<END NEW>> 
-
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //Relation
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
@@ -428,7 +441,57 @@ pattern define_relation_noSelfRelation(a1:Actor, a2:Actor) {
 //////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //CollisionExists
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
-	
+
+
+//<<QUALTATIF ABSTRACTION>>
+
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern collisionExists_qualAbstr(a1:Actor, a2:Actor) {
+	CollisionExists.source(ce, a1);
+	CollisionExists.target(ce, a2);
+	Actor.placedOn(a1, vl1);
+	Lane_Vertical(vl1);
+	Actor.placedOn(a2, vl2);
+	Lane_Vertical(vl2);
+} or {
+	CollisionExists.source(ce, a1);
+	CollisionExists.target(ce, a2);
+	Actor.placedOn(a1, hl1);
+	Lane_Horizontal(hl1);
+	Actor.placedOn(a2, hl2);
+	Lane_Horizontal(hl2);
+}
+
+//<<END QUALITATIF ABSTRACTION>>
+/*
+////
+//VS VisionBlocked
+////
+//TODO Very prone to corner cases
+
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern collisionExists_vsVisionBlocked(a1:Actor, a2:Actor) {	
+	VisionBlocked.source(vb, a1);
+	VisionBlocked.target(vb, a2);
+	neg find helper_collidingActors(a1, a2);
+} or {
+	VisionBlocked.source(vb, a1);
+	VisionBlocked.target(vb, a2);
+	neg find helper_collidingActors(a2, a1);
+}
+
+private pattern helper_collidingActors(a1:Actor, a2:Actor){
+	CollisionExists.source(vb, a1);
+	CollisionExists.target(vb, a2);
+}
+
+//<<END QUALITATIF ABSTRACTION>>
+
+////
+//CollisionExists - Time
+////
+
+
 @Constraint(severity="error", key={c}, message="x")
 pattern collisionExists_timeWithinBound(ss:CrossingScenario, c:CollisionExists) {
 	CrossingScenario.relations(ss, c);
@@ -440,6 +503,10 @@ pattern collisionExists_timeWithinBound(ss:CrossingScenario, c:CollisionExists) 
 pattern collisionExists_timeNotNegative(c:CollisionExists) {
 	CollisionExists. collisionTime(c, cTime);
 	check(cTime <= 0.0);}
+
+////
+//CollisionExists - Physical Positioniung
+////
 
 private pattern helper_getCollExistsTime(a1:Actor, a2: Actor, cTime:java Double) {
 	CollisionExists.source(c, a1);
@@ -459,6 +526,8 @@ private pattern helper_getAllYCoords(a1:Actor, a2: Actor,
 	l1:java Double, l2:java Double, yPos1:java Double, yPos2:java Double,
 	ySpeed1:java Double, ySpeed2:java Double) {
 
+	CollisionExists.source(c, a1);
+	CollisionExists.target(c, a2);
 	find helper_getYCoords(a1, l1, yPos1, ySpeed1);
 	find helper_getYCoords(a2, l2, yPos2, ySpeed2);
 }
@@ -474,9 +543,11 @@ private pattern helper_getXCoords(a:Actor, l:java Double,
 private pattern helper_getAllXCoords(a1:Actor, a2: Actor, 
 	w1:java Double, w2:java Double, xPos1:java Double, xPos2:java Double,
 	xSpeed1:java Double, xSpeed2:java Double) {
-
-	find helper_getYCoords(a1, w1, xPos1, xSpeed1);
-	find helper_getYCoords(a2, w2, xPos2, xSpeed2);
+	
+	CollisionExists.source(c, a1);
+	CollisionExists.target(c, a2);
+	find helper_getXCoords(a1, w1, xPos1, xSpeed1);
+	find helper_getXCoords(a2, w2, xPos2, xSpeed2);
 }
 
 @Constraint(severity="error", key={a1}, message="x")
@@ -504,7 +575,7 @@ pattern collisionExists_defineCollision_y2(a1:Actor, a2:Actor) {
 pattern collisionExists_defineCollision_x1(a1:Actor, a2:Actor) {
 
 	find helper_getCollExistsTime(a1, a2, cTime);
-	find helper_getAllYCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
+	find helper_getAllXCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
 	
 	//check(x_1_left > x_2_right)
 	check((xPos1 + (xSpeed1 * cTime)) - (w1/2) > (xPos2 + (xSpeed2 * cTime)) + (w2/2));	
@@ -515,13 +586,13 @@ pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor) {
 	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
 
 	find helper_getCollExistsTime(a1, a2, cTime);
-	find helper_getAllYCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
+	find helper_getAllXCoords(a1, a2, w1, w2, xPos1, xPos2, xSpeed1, xSpeed2);
 	
 	//check(x_1_right < x_2_left)
 	check((xPos1 + (xSpeed1 * cTime)) + (w1/2) < (xPos2 + (xSpeed2 * cTime)) - (w2/2));	
 }
 
-
+*/
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //VisionBlocked
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
@@ -545,6 +616,24 @@ pattern visionBlocked_qualAbstr(a1:Actor, a2:Actor) {
 	Actor.placedOn(a1, l);
 	Actor.placedOn(a2, l);
 }
+
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern visionBlocked_qualAbstr2(a1:Actor, a2:Actor) {
+	VisionBlocked.source(ce, a1);
+	VisionBlocked.target(ce, a2);
+	Actor.placedOn(a1, vl1);
+	Lane_Vertical(vl1);
+	Actor.placedOn(a2, vl2);
+	Lane_Vertical(vl2);
+} or {
+	VisionBlocked.source(ce, a1);
+	VisionBlocked.target(ce, a2);
+	Actor.placedOn(a1, hl1);
+	Lane_Horizontal(hl1);
+	Actor.placedOn(a2, hl2);
+	Lane_Horizontal(hl2);
+}
+
 //<<END QUALITATIF ABSTRACTION>>
 
 @Constraint(severity="error", key={a1, a2}, message="x")
@@ -571,8 +660,7 @@ pattern visionBlocked_ites_notOnSameVertLine(a1:Actor, a2:Actor, vb:VisionBlocke
 	check(x1 == x2);	
 }
 
-//OPTIONS 1: everything is from a single check expression containing ITEs
-//Currently unhandled bygenerator
+//TODO refactor?
 @Constraint(severity="error", key={a1, vb}, message="x")
 pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
 	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
@@ -596,6 +684,7 @@ pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
 		< ((y1-y2)/(x1-x2)));	
 }
 
+//TODO refactor?
 @Constraint(severity="error", key={a1, vb}, message="x")
 pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
 	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
@@ -618,6 +707,35 @@ pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
 		( xBlocker - x1 + (if(yBlocker > y1){widBlocker/2}else{0-widBlocker/2}))
 		> ((y1-y2)/(x1-x2)));	
 }
+
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern visionBlocked_blockerNotToRightOfBoth(a1:Actor, a2:Actor) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	VisionBlocked.source(vb, a1);
+	VisionBlocked.target(vb, a2);
+	VisionBlocked.blockedBy(vb, aBlocker);
+	
+	Actor.xPos(a1, x1);
+	Actor.xPos(a2, x2);
+	Actor.xPos(aBlocker, xBlocker);
+	
+	check( x1 < xBlocker && x2 < xBlocker);
+}
+
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern visionBlocked_blockerNotToLeftOfBoth(a1:Actor, a2:Actor) {
+	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+	VisionBlocked.source(vb, a1);
+	VisionBlocked.target(vb, a2);
+	VisionBlocked.blockedBy(vb, aBlocker);
+	
+	Actor.xPos(a1, x1);
+	Actor.xPos(a2, x2);
+	Actor.xPos(aBlocker, xBlocker);
+	
+	check( x1 > xBlocker && x2 > xBlocker);
+}
+
 
 /////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //SeparationDistance

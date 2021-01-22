@@ -7,7 +7,9 @@
     xsi:schemaLocation="http://www.example.com/crossingScenario ../model/crossingScenario.ecore"
     xSize="100.0"
     ySize="100.0"
-    maxTime="60.0">
+    maxTime="60.0"
+    maxXSpeed="100.0"
+    maxYSpeed="100.0">
   <lanes xsi:type="crossingScenario:Lane_Horizontal"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"
       referenceCoord="5.0"/>
@@ -24,4 +26,7 @@
       referenceCoord="15.0"/>
   <relations
       xsi:type="crossingScenario:VisionBlocked"/>
+  <relations
+      xsi:type="crossingScenario:CollisionExists"
+      collisionTime="-1.0"/>
 </crossingScenario:CrossingScenario>

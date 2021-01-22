@@ -2,17 +2,11 @@ package crossingScenario.run;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
@@ -29,6 +23,7 @@ import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
 import crossingScenario.Lane_Horizontal;
 import crossingScenario.Lane_Vertical;
+import crossingScenario.VisionBlocked;
 
 public class DrawScenario {
 	public static final int SIZE = 1000;
@@ -71,9 +66,13 @@ public class DrawScenario {
 
 		//lanes
 		g.setPaint(Color.RED);
+		//origin
 		g.drawRect(-5, -5, 10, 10);
+		//Axes
+		g.drawLine(-xSize/2, 0, xSize/2, 0);
+		g.drawLine(0, -ySize/2, 0, ySize/2);
 		for (Lane l : cs.getLanes()) {
-			int ref = (int) (l.getReferenceCoord() * multiplier);
+			int ref = (int) ((l.getReferenceCoord() +5)* multiplier);
 			if (l instanceof Lane_Horizontal) {
 				g.drawLine(-xSize/2, ref, xSize/2, ref);
 			}
@@ -82,7 +81,6 @@ public class DrawScenario {
 			}
 		}
 		
-		g.setPaint(Color.GREEN);
 		for (Actor a : cs.getActors()) {
 			//Draw actor
 			int left = (int) ((a.getXPos()-a.getWidth()/2) * multiplier);
@@ -94,6 +92,13 @@ public class DrawScenario {
 //			System.out.println(width);
 //			System.out.println(length);
 //			System.out.println();
+			if (!cs.getRelations().stream().filter(r -> r instanceof VisionBlocked)
+					.filter(r -> ((VisionBlocked) r).getBlockedBy().equals(a)).
+					collect(Collectors.toList()).isEmpty())
+				g.setPaint(Color.BLACK);
+			else
+				g.setPaint(Color.GREEN);
+
 			g.drawRect(left, bot, width, length);
 			
 			//Draw Speed?

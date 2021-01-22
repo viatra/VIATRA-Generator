@@ -277,6 +277,26 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
+	public EAttribute getCrossingScenario_MaxXSpeed() {
+		return (EAttribute)crossingScenarioEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getCrossingScenario_MaxYSpeed() {
+		return (EAttribute)crossingScenarioEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getLane() {
 		return laneEClass;
 	}
@@ -617,6 +637,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__LANES);
 		createEAttribute(crossingScenarioEClass, CROSSING_SCENARIO__MAX_TIME);
 		createEReference(crossingScenarioEClass, CROSSING_SCENARIO__RELATIONS);
+		createEAttribute(crossingScenarioEClass, CROSSING_SCENARIO__MAX_XSPEED);
+		createEAttribute(crossingScenarioEClass, CROSSING_SCENARIO__MAX_YSPEED);
 
 		laneEClass = createEClass(LANE);
 		createEAttribute(laneEClass, LANE__REFERENCE_COORD);
@@ -712,6 +734,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEReference(getCrossingScenario_Lanes(), this.getLane(), null, "lanes", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCrossingScenario_MaxTime(), ecorePackage.getEDouble(), "maxTime", null, 0, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCrossingScenario_Relations(), this.getRelation(), null, "relations", null, 0, -1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCrossingScenario_MaxXSpeed(), ecorePackage.getEDouble(), "maxXSpeed", "0.0", 0, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCrossingScenario_MaxYSpeed(), ecorePackage.getEDouble(), "maxYSpeed", "0.0", 0, 1, CrossingScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(laneEClass, Lane.class, "Lane", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLane_ReferenceCoord(), ecorePackage.getEDouble(), "referenceCoord", null, 1, 1, Lane.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
