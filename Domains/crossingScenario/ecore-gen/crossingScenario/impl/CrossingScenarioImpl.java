@@ -7,6 +7,7 @@ import crossingScenario.CrossingScenario;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
 import crossingScenario.Relation;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

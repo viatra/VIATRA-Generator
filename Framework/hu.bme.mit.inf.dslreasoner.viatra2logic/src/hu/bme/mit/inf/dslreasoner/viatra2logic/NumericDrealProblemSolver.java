@@ -377,7 +377,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//DEBUG - Print things
 		if (outputProcess == null) {
 			System.err.println("TIMEOUT");
-			printOutput(numProbContent);
+//			printOutput(numProbContent);
 		}
 		
 //		printOutput(numProbContent);

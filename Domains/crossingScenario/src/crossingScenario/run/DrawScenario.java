@@ -31,10 +31,13 @@ public class DrawScenario {
 	public static final int SIZE = 1000;
 	
 	public static void main(String[] args) throws IOException {
-		drawScenario("outputs/models/4.xmi");
+		for (int i = 1; i <= 10; i++) {
+			drawScenario("outputs/models/"+i+".xmi", "outputs/drawnModel"+i+".png");
+			System.out.println("DONE " + i);
+		}
 	}
 
-	public static File drawScenario(String pathToXmi) throws IOException {
+	public static File drawScenario(String pathToXmi, String saveToPath) throws IOException {
 
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
 		EPackage.Registry.INSTANCE.put(CrossingScenarioPackage.eNS_URI, CrossingScenarioPackage.eINSTANCE);
@@ -134,7 +137,7 @@ public class DrawScenario {
 		}
 		g.dispose();
 		
-		File f = new File("outputs/drawnModel.png");
+		File f = new File(saveToPath);
 		try {
 			ImageIO.write(image, "png", f);
 		} catch (IOException e) {
@@ -142,7 +145,6 @@ public class DrawScenario {
 		}
 
 //		Desktop.getDesktop().open(f);
-		System.out.println("finished!");
 		return f;
 	}
 }

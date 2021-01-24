@@ -3,18 +3,15 @@
 package crossingScenario.impl;
 
 import crossingScenario.Actor;
-import crossingScenario.CollisionDoesNotExist;
 import crossingScenario.CollisionExists;
 import crossingScenario.CrossingScenario;
 import crossingScenario.CrossingScenarioFactory;
 import crossingScenario.CrossingScenarioPackage;
-import crossingScenario.Distance;
 import crossingScenario.Lane;
 import crossingScenario.Lane_Horizontal;
 import crossingScenario.Lane_Vertical;
 import crossingScenario.Pedestrian;
 import crossingScenario.Relation;
-import crossingScenario.SeparationDistance;
 import crossingScenario.SpatialRelation;
 import crossingScenario.TemporalRelation;
 import crossingScenario.Vehicle;
@@ -22,7 +19,6 @@ import crossingScenario.VisionBlocked;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -89,21 +85,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass separationDistanceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass collisionExistsEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass collisionDoesNotExistEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,13 +114,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	private EClass lane_VerticalEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum distanceEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -507,26 +482,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EClass getSeparationDistance() {
-		return separationDistanceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getSeparationDistance_Distance() {
-		return (EAttribute)separationDistanceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getCollisionExists() {
 		return collisionExistsEClass;
 	}
@@ -539,16 +494,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	@Override
 	public EAttribute getCollisionExists_CollisionTime() {
 		return (EAttribute)collisionExistsEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getCollisionDoesNotExist() {
-		return collisionDoesNotExistEClass;
 	}
 
 	/**
@@ -589,16 +534,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	@Override
 	public EClass getLane_Vertical() {
 		return lane_VerticalEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EEnum getDistance() {
-		return distanceEEnum;
 	}
 
 	/**
@@ -667,13 +602,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		visionBlockedEClass = createEClass(VISION_BLOCKED);
 		createEReference(visionBlockedEClass, VISION_BLOCKED__BLOCKED_BY);
 
-		separationDistanceEClass = createEClass(SEPARATION_DISTANCE);
-		createEAttribute(separationDistanceEClass, SEPARATION_DISTANCE__DISTANCE);
-
 		collisionExistsEClass = createEClass(COLLISION_EXISTS);
 		createEAttribute(collisionExistsEClass, COLLISION_EXISTS__COLLISION_TIME);
-
-		collisionDoesNotExistEClass = createEClass(COLLISION_DOES_NOT_EXIST);
 
 		pedestrianEClass = createEClass(PEDESTRIAN);
 
@@ -682,9 +612,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		lane_HorizontalEClass = createEClass(LANE_HORIZONTAL);
 
 		lane_VerticalEClass = createEClass(LANE_VERTICAL);
-
-		// Create enums
-		distanceEEnum = createEEnum(DISTANCE);
 	}
 
 	/**
@@ -718,9 +645,7 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		spatialRelationEClass.getESuperTypes().add(this.getRelation());
 		temporalRelationEClass.getESuperTypes().add(this.getRelation());
 		visionBlockedEClass.getESuperTypes().add(this.getSpatialRelation());
-		separationDistanceEClass.getESuperTypes().add(this.getSpatialRelation());
 		collisionExistsEClass.getESuperTypes().add(this.getTemporalRelation());
-		collisionDoesNotExistEClass.getESuperTypes().add(this.getTemporalRelation());
 		pedestrianEClass.getESuperTypes().add(this.getActor());
 		vehicleEClass.getESuperTypes().add(this.getActor());
 		lane_HorizontalEClass.getESuperTypes().add(this.getLane());
@@ -764,13 +689,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEClass(visionBlockedEClass, VisionBlocked.class, "VisionBlocked", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVisionBlocked_BlockedBy(), this.getActor(), null, "blockedBy", null, 1, 1, VisionBlocked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(separationDistanceEClass, SeparationDistance.class, "SeparationDistance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSeparationDistance_Distance(), this.getDistance(), "distance", null, 1, 1, SeparationDistance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(collisionExistsEClass, CollisionExists.class, "CollisionExists", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollisionExists_CollisionTime(), ecorePackage.getEDouble(), "collisionTime", null, 1, 1, CollisionExists.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(collisionDoesNotExistEClass, CollisionDoesNotExist.class, "CollisionDoesNotExist", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(pedestrianEClass, Pedestrian.class, "Pedestrian", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -779,12 +699,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEClass(lane_HorizontalEClass, Lane_Horizontal.class, "Lane_Horizontal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(lane_VerticalEClass, Lane_Vertical.class, "Lane_Vertical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Initialize enums and add enum literals
-		initEEnum(distanceEEnum, Distance.class, "Distance");
-		addEEnumLiteral(distanceEEnum, Distance.DNEAR);
-		addEEnumLiteral(distanceEEnum, Distance.DMED);
-		addEEnumLiteral(distanceEEnum, Distance.DFAR);
 
 		// Create resource
 		createResource(eNS_URI);

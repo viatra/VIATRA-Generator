@@ -96,16 +96,8 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 				return createVisionBlockedAdapter();
 			}
 			@Override
-			public Adapter caseSeparationDistance(SeparationDistance object) {
-				return createSeparationDistanceAdapter();
-			}
-			@Override
 			public Adapter caseCollisionExists(CollisionExists object) {
 				return createCollisionExistsAdapter();
-			}
-			@Override
-			public Adapter caseCollisionDoesNotExist(CollisionDoesNotExist object) {
-				return createCollisionDoesNotExistAdapter();
 			}
 			@Override
 			public Adapter casePedestrian(Pedestrian object) {
@@ -242,20 +234,6 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link crossingScenario.SeparationDistance <em>Separation Distance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see crossingScenario.SeparationDistance
-	 * @generated
-	 */
-	public Adapter createSeparationDistanceAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link crossingScenario.CollisionExists <em>Collision Exists</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -266,20 +244,6 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollisionExistsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link crossingScenario.CollisionDoesNotExist <em>Collision Does Not Exist</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see crossingScenario.CollisionDoesNotExist
-	 * @generated
-	 */
-	public Adapter createCollisionDoesNotExistAdapter() {
 		return null;
 	}
 

@@ -10,6 +10,8 @@
     maxTime="60.0"
     maxXSpeed="100.0"
     maxYSpeed="100.0">
+  <actors xsi:type="crossingScenario:Pedestrian"/>
+  <actors xsi:type="crossingScenario:Vehicle"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"
       referenceCoord="5.0"/>
@@ -25,8 +27,12 @@
   <lanes xsi:type="crossingScenario:Lane_Vertical"
       referenceCoord="15.0"/>
   <relations
-      xsi:type="crossingScenario:VisionBlocked"/>
-  <relations
       xsi:type="crossingScenario:CollisionExists"
+      target="//@actors.0"
+      source="//@actors.1"
       collisionTime="-1.0"/>
+  <relations
+      xsi:type="crossingScenario:VisionBlocked"
+      target="//@actors.0"
+      source="//@actors.1"/>
 </crossingScenario:CrossingScenario>

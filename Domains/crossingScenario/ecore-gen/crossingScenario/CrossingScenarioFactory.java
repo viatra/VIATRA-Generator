@@ -40,15 +40,6 @@ public interface CrossingScenarioFactory extends EFactory {
 	VisionBlocked createVisionBlocked();
 
 	/**
-	 * Returns a new object of class '<em>Separation Distance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Separation Distance</em>'.
-	 * @generated
-	 */
-	SeparationDistance createSeparationDistance();
-
-	/**
 	 * Returns a new object of class '<em>Collision Exists</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,15 +47,6 @@ public interface CrossingScenarioFactory extends EFactory {
 	 * @generated
 	 */
 	CollisionExists createCollisionExists();
-
-	/**
-	 * Returns a new object of class '<em>Collision Does Not Exist</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Collision Does Not Exist</em>'.
-	 * @generated
-	 */
-	CollisionDoesNotExist createCollisionDoesNotExist();
 
 	/**
 	 * Returns a new object of class '<em>Pedestrian</em>'.

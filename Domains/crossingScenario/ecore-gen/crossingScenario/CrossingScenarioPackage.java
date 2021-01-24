@@ -4,7 +4,6 @@ package crossingScenario;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -515,61 +514,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int VISION_BLOCKED_OPERATION_COUNT = SPATIAL_RELATION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link crossingScenario.impl.SeparationDistanceImpl <em>Separation Distance</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see crossingScenario.impl.SeparationDistanceImpl
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSeparationDistance()
-	 * @generated
-	 */
-	int SEPARATION_DISTANCE = 7;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEPARATION_DISTANCE__TARGET = SPATIAL_RELATION__TARGET;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEPARATION_DISTANCE__SOURCE = SPATIAL_RELATION__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Distance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEPARATION_DISTANCE__DISTANCE = SPATIAL_RELATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Separation Distance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEPARATION_DISTANCE_FEATURE_COUNT = SPATIAL_RELATION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Separation Distance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEPARATION_DISTANCE_OPERATION_COUNT = SPATIAL_RELATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link crossingScenario.impl.CollisionExistsImpl <em>Collision Exists</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -577,7 +521,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getCollisionExists()
 	 * @generated
 	 */
-	int COLLISION_EXISTS = 8;
+	int COLLISION_EXISTS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -625,52 +569,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int COLLISION_EXISTS_OPERATION_COUNT = TEMPORAL_RELATION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link crossingScenario.impl.CollisionDoesNotExistImpl <em>Collision Does Not Exist</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see crossingScenario.impl.CollisionDoesNotExistImpl
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getCollisionDoesNotExist()
-	 * @generated
-	 */
-	int COLLISION_DOES_NOT_EXIST = 9;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLISION_DOES_NOT_EXIST__TARGET = TEMPORAL_RELATION__TARGET;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLISION_DOES_NOT_EXIST__SOURCE = TEMPORAL_RELATION__SOURCE;
-
-	/**
-	 * The number of structural features of the '<em>Collision Does Not Exist</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLISION_DOES_NOT_EXIST_FEATURE_COUNT = TEMPORAL_RELATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Collision Does Not Exist</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLISION_DOES_NOT_EXIST_OPERATION_COUNT = TEMPORAL_RELATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link crossingScenario.impl.PedestrianImpl <em>Pedestrian</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -678,7 +576,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getPedestrian()
 	 * @generated
 	 */
-	int PEDESTRIAN = 10;
+	int PEDESTRIAN = 8;
 
 	/**
 	 * The feature id for the '<em><b>XPos</b></em>' attribute.
@@ -796,7 +694,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getVehicle()
 	 * @generated
 	 */
-	int VEHICLE = 11;
+	int VEHICLE = 9;
 
 	/**
 	 * The feature id for the '<em><b>XPos</b></em>' attribute.
@@ -914,7 +812,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Horizontal()
 	 * @generated
 	 */
-	int LANE_HORIZONTAL = 12;
+	int LANE_HORIZONTAL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
@@ -960,7 +858,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Vertical()
 	 * @generated
 	 */
-	int LANE_VERTICAL = 13;
+	int LANE_VERTICAL = 11;
 
 	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
@@ -997,16 +895,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int LANE_VERTICAL_OPERATION_COUNT = LANE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link crossingScenario.Distance <em>Distance</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see crossingScenario.Distance
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getDistance()
-	 * @generated
-	 */
-	int DISTANCE = 14;
 
 
 	/**
@@ -1333,27 +1221,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	EReference getVisionBlocked_BlockedBy();
 
 	/**
-	 * Returns the meta object for class '{@link crossingScenario.SeparationDistance <em>Separation Distance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Separation Distance</em>'.
-	 * @see crossingScenario.SeparationDistance
-	 * @generated
-	 */
-	EClass getSeparationDistance();
-
-	/**
-	 * Returns the meta object for the attribute '{@link crossingScenario.SeparationDistance#getDistance <em>Distance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Distance</em>'.
-	 * @see crossingScenario.SeparationDistance#getDistance()
-	 * @see #getSeparationDistance()
-	 * @generated
-	 */
-	EAttribute getSeparationDistance_Distance();
-
-	/**
 	 * Returns the meta object for class '{@link crossingScenario.CollisionExists <em>Collision Exists</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1373,16 +1240,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCollisionExists_CollisionTime();
-
-	/**
-	 * Returns the meta object for class '{@link crossingScenario.CollisionDoesNotExist <em>Collision Does Not Exist</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Collision Does Not Exist</em>'.
-	 * @see crossingScenario.CollisionDoesNotExist
-	 * @generated
-	 */
-	EClass getCollisionDoesNotExist();
 
 	/**
 	 * Returns the meta object for class '{@link crossingScenario.Pedestrian <em>Pedestrian</em>}'.
@@ -1423,16 +1280,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLane_Vertical();
-
-	/**
-	 * Returns the meta object for enum '{@link crossingScenario.Distance <em>Distance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Distance</em>'.
-	 * @see crossingScenario.Distance
-	 * @generated
-	 */
-	EEnum getDistance();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1712,24 +1559,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		EReference VISION_BLOCKED__BLOCKED_BY = eINSTANCE.getVisionBlocked_BlockedBy();
 
 		/**
-		 * The meta object literal for the '{@link crossingScenario.impl.SeparationDistanceImpl <em>Separation Distance</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see crossingScenario.impl.SeparationDistanceImpl
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSeparationDistance()
-		 * @generated
-		 */
-		EClass SEPARATION_DISTANCE = eINSTANCE.getSeparationDistance();
-
-		/**
-		 * The meta object literal for the '<em><b>Distance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SEPARATION_DISTANCE__DISTANCE = eINSTANCE.getSeparationDistance_Distance();
-
-		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.CollisionExistsImpl <em>Collision Exists</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1746,16 +1575,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute COLLISION_EXISTS__COLLISION_TIME = eINSTANCE.getCollisionExists_CollisionTime();
-
-		/**
-		 * The meta object literal for the '{@link crossingScenario.impl.CollisionDoesNotExistImpl <em>Collision Does Not Exist</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see crossingScenario.impl.CollisionDoesNotExistImpl
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getCollisionDoesNotExist()
-		 * @generated
-		 */
-		EClass COLLISION_DOES_NOT_EXIST = eINSTANCE.getCollisionDoesNotExist();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.PedestrianImpl <em>Pedestrian</em>}' class.
@@ -1796,16 +1615,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LANE_VERTICAL = eINSTANCE.getLane_Vertical();
-
-		/**
-		 * The meta object literal for the '{@link crossingScenario.Distance <em>Distance</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see crossingScenario.Distance
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getDistance()
-		 * @generated
-		 */
-		EEnum DISTANCE = eINSTANCE.getDistance();
 
 	}
 

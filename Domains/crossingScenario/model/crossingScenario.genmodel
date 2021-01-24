@@ -6,11 +6,6 @@
     operationReflection="true" importOrganizing="true">
   <foreignModel>crossingScenario.ecore</foreignModel>
   <genPackages prefix="CrossingScenario" disposableProviderFactory="true" ecorePackage="crossingScenario.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="crossingScenario.ecore#//Distance">
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Near"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Med"/>
-      <genEnumLiterals ecoreEnumLiteral="crossingScenario.ecore#//Distance/D_Far"/>
-    </genEnums>
     <genClasses ecoreClass="crossingScenario.ecore#//CrossingScenario">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/xSize"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CrossingScenario/ySize"/>
@@ -46,13 +41,9 @@
     <genClasses ecoreClass="crossingScenario.ecore#//VisionBlocked">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//VisionBlocked/blockedBy"/>
     </genClasses>
-    <genClasses ecoreClass="crossingScenario.ecore#//SeparationDistance">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//SeparationDistance/distance"/>
-    </genClasses>
     <genClasses ecoreClass="crossingScenario.ecore#//CollisionExists">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//CollisionExists/collisionTime"/>
     </genClasses>
-    <genClasses ecoreClass="crossingScenario.ecore#//CollisionDoesNotExist"/>
     <genClasses ecoreClass="crossingScenario.ecore#//Pedestrian"/>
     <genClasses ecoreClass="crossingScenario.ecore#//Vehicle"/>
     <genClasses ecoreClass="crossingScenario.ecore#//Lane_Horizontal"/>

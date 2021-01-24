@@ -5,6 +5,7 @@ package crossingScenario.impl;
 import crossingScenario.Actor;
 import crossingScenario.CrossingScenarioPackage;
 import crossingScenario.Lane;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;

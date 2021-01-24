@@ -54,19 +54,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="blockedBy" lowerBound="1"
         eType="#//Actor"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SeparationDistance" eSuperTypes="#//SpatialRelation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" lowerBound="1"
-        eType="#//Distance"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CollisionExists" eSuperTypes="#//TemporalRelation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="collisionTime" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CollisionDoesNotExist" eSuperTypes="#//TemporalRelation"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="Distance">
-    <eLiterals name="D_Near"/>
-    <eLiterals name="D_Med" value="1"/>
-    <eLiterals name="D_Far" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pedestrian" eSuperTypes="#//Actor"/>
   <eClassifiers xsi:type="ecore:EClass" name="Vehicle" eSuperTypes="#//Actor"/>

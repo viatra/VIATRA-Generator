@@ -8,7 +8,7 @@ generate {
 	partial-model = { "inputs/cSinit4x4.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node += 2..*
+		#node += 0..*
 		,#<Lane> += 0
 		//,#<Actor> = 25..*
 		,#<Relation> += 0
@@ -23,7 +23,20 @@ generate {
 		log-level = none,
 		"numeric-solver" = "dreal-local",
 		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
-		"ignored-attributes" = "CollisionExists.collisionTime=*",
+		"ignored-attributes" = "
+			Pedestrian.xPos=*, 
+			Pedestrian.yPos=*, 
+			Pedestrian.length=*,
+			Pedestrian.width=*, 
+			Pedestrian.xSpeed=*, 
+			Pedestrian.ySpeed=*, 
+			Vehicle.xPos=*, 
+			Vehicle.yPos=*, 
+			Vehicle.length=*,
+			Vehicle.width=*, 
+			Vehicle.xSpeed=*, 
+			Vehicle.ySpeed=*, 
+			CollisionExists.collisionTime=*",
 		"scopePropagator" = "polyhedral"}
 	
 	runs = 1

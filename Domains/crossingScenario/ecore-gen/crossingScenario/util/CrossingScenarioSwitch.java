@@ -112,27 +112,11 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CrossingScenarioPackage.SEPARATION_DISTANCE: {
-				SeparationDistance separationDistance = (SeparationDistance)theEObject;
-				T result = caseSeparationDistance(separationDistance);
-				if (result == null) result = caseSpatialRelation(separationDistance);
-				if (result == null) result = caseRelation(separationDistance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CrossingScenarioPackage.COLLISION_EXISTS: {
 				CollisionExists collisionExists = (CollisionExists)theEObject;
 				T result = caseCollisionExists(collisionExists);
 				if (result == null) result = caseTemporalRelation(collisionExists);
 				if (result == null) result = caseRelation(collisionExists);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CrossingScenarioPackage.COLLISION_DOES_NOT_EXIST: {
-				CollisionDoesNotExist collisionDoesNotExist = (CollisionDoesNotExist)theEObject;
-				T result = caseCollisionDoesNotExist(collisionDoesNotExist);
-				if (result == null) result = caseTemporalRelation(collisionDoesNotExist);
-				if (result == null) result = caseRelation(collisionDoesNotExist);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -274,21 +258,6 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Separation Distance</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Separation Distance</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSeparationDistance(SeparationDistance object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Collision Exists</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -300,21 +269,6 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCollisionExists(CollisionExists object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Collision Does Not Exist</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Collision Does Not Exist</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCollisionDoesNotExist(CollisionDoesNotExist object) {
 		return null;
 	}
 
