@@ -162,12 +162,22 @@ class PartialInterpretation2Logic {
 	
 	def private createLink(RelationLink link, SymbolicDeclaration relationDeclaration) {
 		if(link instanceof BinaryElementRelationLink) {
-			if((link.param1 !== null) && (link.param2 !== null)) {
-				return createSymbolicValue=>[
-					it.symbolicReference=relationDeclaration
-					it.parameterSubstitutions += createValueInLink(link.param1)
-					it.parameterSubstitutions += createValueInLink(link.param2)
-				]
+			if ((link.param1 !== null) && (link.param2 !== null)) {
+				if (typeof(PrimitiveElement).isAssignableFrom(link.param2.class) &&
+					!(link.param2 as PrimitiveElement).valueSet) {
+					return createSymbolicValue => [
+						it.symbolicReference = relationDeclaration
+						it.parameterSubstitutions += createValueInLink(link.param1)
+						it.parameterSubstitutions += createUnkownValueInLink(link.param2)
+					]
+				} else {
+					return createSymbolicValue => [
+						it.symbolicReference = relationDeclaration
+						it.parameterSubstitutions += createValueInLink(link.param1)
+						it.parameterSubstitutions += createValueInLink(link.param2)
+					]
+				}
+
 			} else {
 				throw new IllegalArgumentException
 			}
@@ -188,5 +198,21 @@ class PartialInterpretation2Logic {
 	}
 	def private dispatch createValueInLink(DefinedElement element) {
 		return createSymbolicValue => [it.symbolicReference = element]
+	}
+	
+	def private dispatch createUnkownValueInLink(BooleanElement element) {
+		Exists[addVar(createBoolTypeReference)]
+	}
+	def private dispatch createUnkownValueInLink(IntegerElement element) {
+		Exists[addVar(createIntTypeReference)]
+	}
+	def private dispatch createUnkownValueInLink(RealElement element) {
+		Exists[addVar(createRealTypeReference)]
+	}
+	def private dispatch createUnkownValueInLink(StringElement element) {
+		throw new UnsupportedOperationException("Currently cannot create an unknown String")
+	}
+	def private dispatch createUnkownValueInLink(DefinedElement element) {
+		Exists[addVar(createComplexTypeReference => [it.referred = element.definedInType.get(0)])]
 	}
 }

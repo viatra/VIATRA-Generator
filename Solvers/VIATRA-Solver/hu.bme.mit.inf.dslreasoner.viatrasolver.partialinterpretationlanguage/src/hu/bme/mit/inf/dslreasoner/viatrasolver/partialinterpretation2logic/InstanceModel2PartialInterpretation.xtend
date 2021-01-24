@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.emf.ecore.EClass
+import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialInterpretation
 
 class InstanceModel2PartialInterpretation {
 	val extension LogiclanguageFactory factory = LogiclanguageFactory.eINSTANCE
@@ -123,26 +125,31 @@ class InstanceModel2PartialInterpretation {
 			// Transforming the attributes
 			for(attribute : source.eClass.EAllAttributes.filter[attributesUsed.contains(it) && !it.derived]) {
 				val isIgnored = checkIfIgnored(source, attribute, ignoredAttribs)
-				if (!isIgnored) {
-					val type = ecore2Logic.relationOfAttribute(ecore2LogicTrace,attribute)
-					val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
-					val sourceElement = source.lookup(object2DefinedElement)
-					if(attribute.isMany) {
-						val listOfTargets = source.eGet(attribute) as List<? extends EObject>
-						for(target : listOfTargets) {
-							val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
-							if(value !== null) {
-								translateLink(interpretation,sourceElement,value)
+				val type = ecore2Logic.relationOfAttribute(ecore2LogicTrace, attribute)
+				val interpretation = type.lookup(partialInterpretationTrace.relation2Interpretation)
+				val sourceElement = source.lookup(object2DefinedElement)
+				if (attribute.isMany) {
+					val listOfTargets = source.eGet(attribute) as List<? extends EObject>
+					for (target : listOfTargets) {
+						var DefinedElement value = null
+						if (!isIgnored) value = translateValue(target, ecore2LogicTrace, partialInterpretationTrace)
+						else value = createUnknownElement(partialInterpretation, target)
+						if (value !== null) {
+							translateLink(interpretation, sourceElement, value)
+						}
+					}
+				} else {
+					val target = source.eGet(attribute)
+					if (target !== null) {
+						if (!isIgnored) {
+							val value = translateValue(target, ecore2LogicTrace, partialInterpretationTrace)
+							if (value !== null) {
+								translateLink(interpretation, sourceElement, value)
 							}
 						}
-					} else {
-						val target = source.eGet(attribute)
-						if(target !== null) {
-							val value = translateValue(target,ecore2LogicTrace,partialInterpretationTrace)
-							if(value !== null) {
-								translateLink(interpretation,sourceElement,value)
-							}
-						}
+						else translateLink(interpretation, sourceElement, createUnknownElement(partialInterpretation, target))
+//						else value = null
+
 					}
 				}
 			}
@@ -190,11 +197,18 @@ class InstanceModel2PartialInterpretation {
 	) {
 		val classInIgnored = ignoredAttribs.get(object.eClass.name)
 		val mayIgnored = (
+					classInIgnored !== null && classInIgnored.containsKey("*")
+					||
 					classInIgnored !== null && classInIgnored.containsKey(attribute.name))
 
 		var isIgnored = false
 		if (mayIgnored) {
-			val specificIgnoredValue = classInIgnored.get(attribute.name)
+			var String specificIgnoredValue = null
+			if (classInIgnored.containsKey("*")) 
+				specificIgnoredValue = classInIgnored.get("*")
+			else
+				specificIgnoredValue = classInIgnored.get(attribute.name)
+				
 			if (specificIgnoredValue.equals("*"))
 				isIgnored = true
 			else {
@@ -208,10 +222,10 @@ class InstanceModel2PartialInterpretation {
 		}
 		// DEBUG
 		if (isIgnored) {
-		println("IGNORED")
-		println(object)
-		println(attribute)
-		println(object.eGet(attribute))
+//		println("IGNORED")
+//		println(object)
+//		println(attribute)
+//		println(object.eGet(attribute))
 		}
 		// END DEBUG
 		return isIgnored
@@ -275,5 +289,46 @@ class InstanceModel2PartialInterpretation {
 	
 	dispatch protected def translateValue(String value, Ecore2Logic_Trace ecore2LogicTrace, Problem2PartialInterpretationTrace partialInterpretationTrace) {
 		value.lookup(partialInterpretationTrace.primitiveValues.stringMap)
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, Enumerator value) {
+		throw new UnsupportedOperationException("Currently we do not support ignored Enums")
+		//TODO Unsure about this
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, Boolean value) {
+		val e = createBooleanElement => [valueSet = false]
+		p.newElements += e
+		return e
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, Integer value) {
+		val e = createIntegerElement => [valueSet = false]
+		p.newElements += e
+		return e
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, Short value) {
+		val e = createIntegerElement => [valueSet = false]
+		p.newElements += e
+		return e
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, Double value) {
+		val e = createRealElement => [it.valueSet = false]
+		p.newElements += e
+		return e
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, Float value) {
+		val e = createRealElement => [valueSet = false]
+		p.newElements += e
+		return e
+	}
+	
+	dispatch protected def createUnknownElement(PartialInterpretation p, String value) {
+		val e = createStringElement => [valueSet = false]
+		p.newElements += e
+		return e
 	}
 }

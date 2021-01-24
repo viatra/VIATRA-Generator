@@ -4,10 +4,15 @@ import hu.bme.mit.inf.dslreasoner.logic.model.builder.TracedOutput
 import hu.bme.mit.inf.dslreasoner.logic.model.builder.TypeScopes
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.And
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.BoolTypeReference
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.ComplexTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.DefinedElement
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.Exists
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.IntTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.LogiclanguageFactory
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealLiteral
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDeclaration
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RelationDefinition
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.StringLiteral
@@ -31,7 +36,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.par
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PartialinterpretationFactory
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.RealElement
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.StringElement
-import java.math.BigDecimal
 import java.util.HashMap
 import java.util.Map
 import java.util.SortedSet
@@ -40,6 +44,7 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.xtend.lib.annotations.Data
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.TypeReference
 
 @Data class Problem2PartialInterpretationTrace {
 	Map<TypeDeclaration, PartialComplexTypeInterpretation> type2Interpretation
@@ -253,7 +258,7 @@ class PartialInterpretationInitialiser {
 				throw new UnsupportedOperationException('''Assertion describing partial model of "«r.interpretationOf.name»" contains unsupported constructs''')
 			}
 			for(link:links) {
-				r.relationlinks += createLink(link,trace)
+				r.relationlinks += createLink(interpretation, link,trace)
 			}
 		}
 		
@@ -264,8 +269,8 @@ class PartialInterpretationInitialiser {
 
 		return relation2Interpretation
 	}
-	def private createLink(SymbolicValue v, PrimitiveValueTrace trace) {
-		val translatedValues = v.parameterSubstitutions.map[getElement(trace)].toList
+	def private createLink(PartialInterpretation interpretation, SymbolicValue v, PrimitiveValueTrace trace) {
+		val translatedValues = v.parameterSubstitutions.map[getElement(interpretation, trace)].toList
 		if(translatedValues.size == 1) {
 			return createUnaryElementRelationLink => [it.param1 = translatedValues.get(0)]
 		} else if(translatedValues.size == 2) {
@@ -282,20 +287,26 @@ class PartialInterpretationInitialiser {
 		}
 	}
 
-	def private dispatch getElement(SymbolicValue element, PrimitiveValueTrace trace) {
+	def private dispatch getElement(SymbolicValue element, PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		return element.symbolicReference as DefinedElement
 	}
-	def private dispatch getElement(BoolLiteral element, PrimitiveValueTrace trace) {
+	def private dispatch getElement(BoolLiteral element, PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		element.value.lookup(trace.booleanMap)
 	}
-	def private dispatch getElement(IntLiteral element, PrimitiveValueTrace trace) {
+	def private dispatch getElement(IntLiteral element, PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		element.value.lookup(trace.integerMap)
 	}
-	def private dispatch getElement(RealLiteral element, PrimitiveValueTrace trace) {
+	def private dispatch getElement(RealLiteral element, PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		element.value.lookup(trace.realMap)
 	}
-	def private dispatch getElement(StringLiteral element, PrimitiveValueTrace trace) {
+	def private dispatch getElement(StringLiteral element, PartialInterpretation interpretation, PrimitiveValueTrace trace) {
 		element.value.lookup(trace.stringMap)
+	}
+	def private dispatch getElement(Exists element, PartialInterpretation interpretation, PrimitiveValueTrace trace) {
+		val type = element.quantifiedVariables.get(0).range
+		val e = createUnknownValueElement(type)
+		interpretation.newElements += e
+		return e
 	}
 	
 	def private initialisePartialTypeInterpretation(TypeDeclaration t, ViatraQueryEngine engine) {
@@ -319,4 +330,18 @@ class PartialInterpretationInitialiser {
 		]
 		return res
 	}
+		
+	def private dispatch createUnknownValueElement(BoolTypeReference element) {
+		createRealElement => [it.valueSet = false]
+	}
+	def private dispatch createUnknownValueElement(IntTypeReference element) {
+		createRealElement => [it.valueSet = false]
+	}
+	def private dispatch createUnknownValueElement(RealTypeReference element) {
+		createRealElement => [it.valueSet = false]
+	}
+	def private dispatch createUnknownValueElement(ComplexTypeReference element) {
+		//TODO Enum handling
+	}
+	
 }
