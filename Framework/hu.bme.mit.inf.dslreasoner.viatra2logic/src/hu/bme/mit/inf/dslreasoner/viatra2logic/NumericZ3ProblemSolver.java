@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,13 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 	private Map<Object, Expr> varMap;
 
 	public NumericZ3ProblemSolver() {
+		//FOR LINUX VM
+		//Not Elegant, but this is working for now
+		String root = (new File(System.getProperty("user.dir"))).getParentFile().getParent();
+        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3.so");
+        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
+        //End non-elegance
+        
 		HashMap<String, String> cfg = new HashMap<String, String>();
 		cfg.put("model", "true");
 		ctx = new Context(cfg);	
