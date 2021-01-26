@@ -135,6 +135,25 @@ public class DrawScenario {
 			
 			}			
 		}
+		
+		g.setPaint(Color.GREEN);
+		for (Relation ce : cs.getRelations().stream().
+				filter(r -> r instanceof VisionBlocked).collect(Collectors.toList())) {
+			Actor a1 = ce.getSource();
+			Actor a2 = ce.getTarget();
+			Actor b = ((VisionBlocked) ce).getBlockedBy();
+			
+
+			int x1 = (int) (a1.getXPos() * multiplier);
+			int y1 = (int) (a1.getYPos() * multiplier);
+			int x2 = (int) (a2.getXPos() * multiplier);
+			int y2 = (int) (a2.getYPos() * multiplier);
+			int xb = (int) (b.getXPos() * multiplier);
+			int yb = (int) (b.getYPos() * multiplier);
+			
+			g.drawLine(x1, y1, xb, yb);
+			g.drawLine(x2, y2, xb, yb);
+		}
 		g.dispose();
 		
 		File f = new File(saveToPath);

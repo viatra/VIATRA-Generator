@@ -90,12 +90,28 @@ pattern define_actor_maxYp(cs:CrossingScenario, a:Actor) {
 pattern define_actor_minYp(cs:CrossingScenario, a:Actor) {
 	find helper_vert_getYAndBounds(cs, a, yMax, yP); 
 	check(yP <= 0-yMax);}
+	
+//Minimum Distances
+private pattern helper_getCoords(a1:Actor, 
+	a2: Actor, x1:java Double, x2:java Double, y1:java Double, y2:java Double) {
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+}
+
+//INFO may remove?
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern define_actor_minimumDistance(a1: Actor, a2: Actor) {
+	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+	a1 != a2;
+	//check(dx^2 + dy^2 < 5^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 5*5);
+}
 
 /////----------------	
 //Xspeed and Yspeed bounds
 /////----------------
-	
-//TODO THIS IS HARD_CODED
 
 /////////VERTICAL LANE
 @Constraint(severity="error", key={a}, message="7 Actor")
@@ -103,7 +119,7 @@ pattern define_actor_actorOnVertLaneHasxSpeed0(a:Actor) {
 	Actor.placedOn(a, vl);
 	Lane_Vertical(vl);
     Actor.xSpeed(a, xSpeed);
-    check(xSpeed != 0);
+    check(xSpeed != 0.0);
 }
 
 private pattern helper_vert_getYSpeedAndBounds(cs:CrossingScenario, a:Actor,
@@ -118,7 +134,7 @@ private pattern helper_vert_getYSpeedAndBounds(cs:CrossingScenario, a:Actor,
 @Constraint(severity="error", key={cs}, message="x")
 pattern define_actor_actorOnVertLaneMinYs(cs:CrossingScenario, a:Actor) {
 	find helper_vert_getYSpeedAndBounds(cs, a, ySMax, yS); 
-	check(yS <= 0-ySMax);
+	check(yS <= 0.0-ySMax);
 }
 
 @Constraint(severity="error", key={cs}, message="x")
@@ -133,7 +149,7 @@ pattern define_actor_actorOnHorizLaneHasySpeed0(a:Actor) {
 	Actor.placedOn(a, hl);
 	Lane_Horizontal(hl);
     Actor.ySpeed(a, ySpeed);
-    check(ySpeed != 0);
+    check(ySpeed != 0.0);
 }
 
 private pattern helper_horiz_getXSpeedAndBounds(cs:CrossingScenario, a:Actor,
@@ -148,7 +164,7 @@ private pattern helper_horiz_getXSpeedAndBounds(cs:CrossingScenario, a:Actor,
 @Constraint(severity="error", key={cs}, message="x")
 pattern define_actor_actorOnHorizLaneMinXs(cs:CrossingScenario, a:Actor) {
 	find helper_horiz_getXSpeedAndBounds(cs, a, xSMax, xS); 
-	check(xS <= 0-xSMax);
+	check(xS <= 0.0-xSMax);
 }
 
 @Constraint(severity="error", key={cs}, message="x")
@@ -203,54 +219,46 @@ pattern define_actor_vehicleLength(v:Vehicle) {
     check(l != 1.0);
 }
 
-/////----------------
-/////DERIVED FEATURES
-/////----------------
-
-private pattern helper_getCoords(a1:Actor, 
-	a2: Actor, x1:java Double, x2:java Double, y1:java Double, y2:java Double) {
-	Actor.xPos(a1, x1);
-	Actor.yPos(a1, y1);
-	Actor.xPos(a2, x2);
-	Actor.yPos(a2, y2);
-}
-
-@QueryBasedFeature 
-pattern dist_near(a1: Actor, a2: Actor) {
-	find helper_actorsAreNear(a1, a2);
-	Actor.dist_near(a1, a2);
-}
-
-private pattern helper_actorsAreNear(a1: Actor, a2: Actor) {
-	find helper_getCoords(a1, a2, x1, x2, y1, y2);
-	//check(dx^2 + dy^2 < 10^2)
-	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
-}
-
-@QueryBasedFeature
-pattern dist_med(a1: Actor, a2: Actor) {
-	find helper_actorsAreMed(a1, a2);
-	Actor.dist_med(a1, a2);
-}
-
-private pattern helper_actorsAreMed(a1: Actor, a2: Actor) {
-	find helper_getCoords(a1, a2, x1, x2, y1, y2);
-	//check(10^2 < dx^2 + dy^2 < 15^2)
-	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);
-	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);
-}
-
-@QueryBasedFeature
-pattern dist_far(a1: Actor, a2: Actor) {
-	find helper_actorsAreFar(a1, a2);
-	Actor.dist_far(a1, a2);
-}
-
-private pattern helper_actorsAreFar(a1: Actor, a2: Actor) {
-	find helper_getCoords(a1, a2, x1, x2, y1, y2);
-	//check(dx^2 + dy^2 > 20^2)
-	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 20*20);	
-}
+///////----------------
+///////DERIVED FEATURES
+///////----------------
+//
+//@QueryBasedFeature 
+//pattern dist_near(a1: Actor, a2: Actor) {
+//	find helper_actorsAreNear(a1, a2);
+//	Actor.dist_near(a1, a2);
+//}
+//
+//private pattern helper_actorsAreNear(a1: Actor, a2: Actor) {
+//	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+//	//check(dx^2 + dy^2 < 10^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
+//}
+//
+//@QueryBasedFeature
+//pattern dist_med(a1: Actor, a2: Actor) {
+//	find helper_actorsAreMed(a1, a2);
+//	Actor.dist_med(a1, a2);
+//}
+//
+//private pattern helper_actorsAreMed(a1: Actor, a2: Actor) {
+//	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+//	//check(10^2 < dx^2 + dy^2 < 15^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);
+//}
+//
+//@QueryBasedFeature
+//pattern dist_far(a1: Actor, a2: Actor) {
+//	find helper_actorsAreFar(a1, a2);
+//	Actor.dist_far(a1, a2);
+//}
+//
+//private pattern helper_actorsAreFar(a1: Actor, a2: Actor) {
+//	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+//	//check(dx^2 + dy^2 > 20^2)
+//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 20*20);	
+//}
 
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //Relation
@@ -527,10 +535,12 @@ pattern visionBlocked_ites_notOnSameVertLine(a1:Actor, a2:Actor, vb:VisionBlocke
 	check(x1 == x2);	
 }
 
-//TODO refactor?
-@Constraint(severity="error", key={a1, vb}, message="x")
-pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
-	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+private pattern helper_VB_getAllCoords(a1:Actor, a2: Actor,
+	x1:java Double, y1:java Double, 
+	x2:java Double, y2:java Double,
+	xBlocker:java Double, yBlocker:java Double,
+	lenBlocker:java Double, widBlocker:java Double) {
+	
 	VisionBlocked.source(vb, a1);
 	VisionBlocked.target(vb, a2);
 	VisionBlocked.blockedBy(vb, aBlocker);
@@ -543,6 +553,13 @@ pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
 	Actor.yPos(aBlocker, yBlocker);
 	Actor.length(aBlocker, lenBlocker);
 	Actor.width(aBlocker, widBlocker);
+}
+
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_ites_top(a1:Actor, a2:Actor) {
+	
+	find helper_VB_getAllCoords(a1, a2,
+	x1, y1, x2, y2,	xBlocker, yBlocker, lenBlocker, widBlocker);
 	
 	//check(slope of a1-to-BlockerTop < slope of a1-to-a2)
 	check(
@@ -551,22 +568,12 @@ pattern visionBlocked_ites_top(a1:Actor, a2:Actor, vb:VisionBlocked) {
 		< ((y1-y2)/(x1-x2)));	
 }
 
-//TODO refactor?
-@Constraint(severity="error", key={a1, vb}, message="x")
-pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
-	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-	VisionBlocked.source(vb, a1);
-	VisionBlocked.target(vb, a2);
-	VisionBlocked.blockedBy(vb, aBlocker);
-	
-	Actor.xPos(a1, x1);
-	Actor.yPos(a1, y1);
-	Actor.xPos(a2, x2);
-	Actor.yPos(a2, y2);
-	Actor.xPos(aBlocker, xBlocker);
-	Actor.yPos(aBlocker, yBlocker);
-	Actor.length(aBlocker, lenBlocker);
-	Actor.width(aBlocker, widBlocker);
+
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor) {	
+
+	find helper_VB_getAllCoords(a1, a2, 
+	x1, y1, x2, y2,	xBlocker, yBlocker, lenBlocker, widBlocker);
 	
 	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
 	check(
@@ -575,44 +582,43 @@ pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor, vb:VisionBlocked) {
 		> ((y1-y2)/(x1-x2)));	
 }
 
-//TODO refactor?
-//TODO CORNER CASES
-@Constraint(severity="error", key={a1, vb}, message="x")
-pattern visionBlocked_xdistBSlargerThanxdistTS(a1:Actor, a2:Actor, vb:VisionBlocked) {
-	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
+
+private pattern helper_VB_getJustCoords(a1:Actor, a2: Actor,
+	x1:java Double, y1:java Double, 
+	x2:java Double, y2:java Double,
+	xBlocker:java Double, yBlocker:java Double) {
+	
 	VisionBlocked.source(vb, a1);
 	VisionBlocked.target(vb, a2);
 	VisionBlocked.blockedBy(vb, aBlocker);
 	
 	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
 	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2); 
 	Actor.xPos(aBlocker, xBlocker);
-	
-	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
-	//TODO implement ABSOLUTE VALUE or MULTI-CHECK
-	//TODO do pythagoras
-	check((x1-xBlocker)*(x1-xBlocker) > (x1-x2)*(x1-x2));
+	Actor.yPos(aBlocker, yBlocker);
 }
 
-//TODO refactor?
-//TODO CORNER CASES
-@Constraint(severity="error", key={a1, vb}, message="x")
-pattern visionBlocked_xdistBTlargerThanxdistST(a1:Actor, a2:Actor, vb:VisionBlocked) {
-	//This second one is required because we do not want to enforce both a1->c->a2 and a2->c->a1
-	VisionBlocked.source(vb, a2);
-	VisionBlocked.target(vb, a1);
-	VisionBlocked.blockedBy(vb, aBlocker);
+//INFO may use approximation instead
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_xdistBSlargerThanxdistTS(a1:Actor, a2:Actor) {
+
+	find helper_VB_getJustCoords(a1, a2, 
+	x1, y1, x2, y2,	xBlocker, yBlocker);
 	
-	Actor.xPos(a1, x1);
-	Actor.xPos(a2, x2);
-	Actor.xPos(aBlocker, xBlocker);
-	
-	//check(slope of a1-to-BlockerBottom > slope of a1-to-a2)
-	//TODO implement ABSOLUTE VALUE or MULTI-CHECK
-	//TODO do pythagoras
-	check((x1-xBlocker)*(x1-xBlocker) > (x1-x2)*(x1-x2));
+	//check(dist(A1, ABlocker) > dist(A1, A2))
+	check((x1-xBlocker)*(x1-xBlocker) + (y1-yBlocker)*(y1-yBlocker) > (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 }
 
-//TODO same as above for Y???
-//TODO same as above for Y ????
+//INFO may use approximation instead
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_xdistBTlargerThanxdistST(a1:Actor, a2:Actor) {
+
+	find helper_VB_getJustCoords(a1, a2, 
+	x1, y1, x2, y2,	xBlocker, yBlocker);
+	
+	//check(dist(A2, ABlocker) > dist(A2, A1))
+	check((x2-xBlocker)*(x2-xBlocker) + (y2-yBlocker)*(y2-yBlocker) > (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+}
 

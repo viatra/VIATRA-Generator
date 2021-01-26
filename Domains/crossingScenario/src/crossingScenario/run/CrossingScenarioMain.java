@@ -30,13 +30,16 @@ public class CrossingScenarioMain {
 		}
 		
 		Path pathStats = Paths.get("outputs/statistics.csv");
-		String pathXmi = "outputs/models/1.xmi";
-		String savePath = "outputs/drawnModel1.png";
+//		String pathXmi = "outputs/models/1.xmi";
+//		String savePath = "outputs/drawnModel1.png";
 //		Path target = Paths.get("../..//Tests/MODELS2020-CaseStudies/case.study.pledge.run/measurements1/stats.csv");
 //		Files.copy(path, target, StandardCopyOption.REPLACE_EXISTING);
 		
 		printStats(pathStats);
-		DrawScenario.drawScenario(pathXmi, savePath);
+		for (int i = 1; i <= 10; i++) {
+			DrawScenario.drawScenario("outputs/models/"+i+".xmi", "outputs/drawnModel"+i+".png");
+			System.out.println("DONE " + i);
+		}
 		
 //		String p1 = "outputs/models/1.xmi";
 //		String p2 = "outputs/simplePrevLane.tgf";
