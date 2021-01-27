@@ -28,6 +28,7 @@ import crossingScenario.Relation;
 import crossingScenario.VisionBlocked;
 
 public class DrawScenario {
+	final static int WIDTH = 3;
 	public static final int SIZE = 1000;
 	
 	public static void main(String[] args) throws IOException {
@@ -77,7 +78,7 @@ public class DrawScenario {
 		g.drawLine(-xSize/2, 0, xSize/2, 0);
 		g.drawLine(0, -ySize/2, 0, ySize/2);
 		for (Lane l : cs.getLanes()) {
-			int ref = (int) ((l.getReferenceCoord() +5)* multiplier);
+			int ref = (int) ((l.getReferenceCoord() +WIDTH)* multiplier);
 			if (l instanceof Lane_Horizontal) {
 				g.drawLine(-xSize/2, ref, xSize/2, ref);
 			}

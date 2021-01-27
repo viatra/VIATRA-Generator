@@ -22,8 +22,8 @@ pattern define_placedOn_actorOnVerticalLane(a : Actor, vl:Lane_Vertical) {
 //    Lane.numWidth(vl, w);
 //    check(x >= (r + w));
     
-    //<<<<NEW>>>>: lanes all have width=5
-    check(x >= (r + 5.0));
+    //<<<<NEW>>>>: lanes all have width=3
+    check(x >= (r + 3.0));
 }
 
 @Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
@@ -40,8 +40,8 @@ pattern define_placedOn_actorOnHorizLane(a : Actor, hl:Lane_Horizontal) {
 //    Lane.numWidth(hl, w);
 //    check(y >= (r + w));
     
-    //<<NEW>>
-    check(y >= (r + 5.0));
+    //<<NEW>>: lanes all have width=3
+    check(y >= (r + 3.0));
     
 }
 
@@ -197,7 +197,7 @@ pattern define_actor_vehicleWidth(v:Vehicle) {
 	Vehicle.placedOn(v, lane);
 	Lane_Vertical(lane);
     Vehicle.width(v, w);
-    check(w != 1.0);
+    check(w != 2.0);
 } or {
 	Vehicle.placedOn(v, lane);
 	Lane_Horizontal(lane);
@@ -216,7 +216,7 @@ pattern define_actor_vehicleLength(v:Vehicle) {
 	Vehicle.placedOn(v, lane);
 	Lane_Horizontal(lane);
     Vehicle.length(v, l);
-    check(l != 1.0);
+    check(l != 2.0);
 }
 
 ///////----------------

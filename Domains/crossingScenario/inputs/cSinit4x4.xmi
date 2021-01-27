@@ -5,8 +5,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:crossingScenario="http://www.example.com/crossingScenario"
     xsi:schemaLocation="http://www.example.com/crossingScenario ../model/crossingScenario.ecore"
-    xSize="100.0"
-    ySize="100.0"
+    xSize="30.0"
+    ySize="30.0"
     maxTime="60.0"
     maxXSpeed="100.0"
     maxYSpeed="100.0">
@@ -14,18 +14,18 @@
   <actors xsi:type="crossingScenario:Vehicle"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"
-      referenceCoord="5.0"/>
+      referenceCoord="3.0"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"
-      referenceCoord="10.0"/>
+      referenceCoord="6.0"/>
   <lanes xsi:type="crossingScenario:Lane_Horizontal"
-      referenceCoord="15.0"/>
+      referenceCoord="9.0"/>
   <lanes xsi:type="crossingScenario:Lane_Vertical"/>
   <lanes xsi:type="crossingScenario:Lane_Vertical"
-      referenceCoord="5.0"/>
+      referenceCoord="3.0"/>
   <lanes xsi:type="crossingScenario:Lane_Vertical"
-      referenceCoord="10.0"/>
+      referenceCoord="6.0"/>
   <lanes xsi:type="crossingScenario:Lane_Vertical"
-      referenceCoord="15.0"/>
+      referenceCoord="9.0"/>
   <relations
       xsi:type="crossingScenario:CollisionExists"
       target="//@actors.0"
