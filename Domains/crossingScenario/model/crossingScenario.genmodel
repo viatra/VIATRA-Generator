@@ -36,8 +36,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Relation/target"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Relation/source"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="crossingScenario.ecore#//SpatialRelation"/>
-    <genClasses image="false" ecoreClass="crossingScenario.ecore#//TemporalRelation"/>
     <genClasses ecoreClass="crossingScenario.ecore#//VisionBlocked">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//VisionBlocked/blockedBy"/>
     </genClasses>

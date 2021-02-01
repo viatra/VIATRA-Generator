@@ -12,8 +12,6 @@ import crossingScenario.Lane_Horizontal;
 import crossingScenario.Lane_Vertical;
 import crossingScenario.Pedestrian;
 import crossingScenario.Relation;
-import crossingScenario.SpatialRelation;
-import crossingScenario.TemporalRelation;
 import crossingScenario.Vehicle;
 import crossingScenario.VisionBlocked;
 
@@ -58,20 +56,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	private EClass relationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass spatialRelationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass temporalRelationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -442,26 +426,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 	 * @generated
 	 */
 	@Override
-	public EClass getSpatialRelation() {
-		return spatialRelationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getTemporalRelation() {
-		return temporalRelationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getVisionBlocked() {
 		return visionBlockedEClass;
 	}
@@ -595,10 +559,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		createEReference(relationEClass, RELATION__TARGET);
 		createEReference(relationEClass, RELATION__SOURCE);
 
-		spatialRelationEClass = createEClass(SPATIAL_RELATION);
-
-		temporalRelationEClass = createEClass(TEMPORAL_RELATION);
-
 		visionBlockedEClass = createEClass(VISION_BLOCKED);
 		createEReference(visionBlockedEClass, VISION_BLOCKED__BLOCKED_BY);
 
@@ -642,10 +602,8 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		spatialRelationEClass.getESuperTypes().add(this.getRelation());
-		temporalRelationEClass.getESuperTypes().add(this.getRelation());
-		visionBlockedEClass.getESuperTypes().add(this.getSpatialRelation());
-		collisionExistsEClass.getESuperTypes().add(this.getTemporalRelation());
+		visionBlockedEClass.getESuperTypes().add(this.getRelation());
+		collisionExistsEClass.getESuperTypes().add(this.getRelation());
 		pedestrianEClass.getESuperTypes().add(this.getActor());
 		vehicleEClass.getESuperTypes().add(this.getActor());
 		lane_HorizontalEClass.getESuperTypes().add(this.getLane());
@@ -681,10 +639,6 @@ public class CrossingScenarioPackageImpl extends EPackageImpl implements Crossin
 		initEClass(relationEClass, Relation.class, "Relation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelation_Target(), this.getActor(), null, "target", null, 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelation_Source(), this.getActor(), null, "source", null, 1, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(spatialRelationEClass, SpatialRelation.class, "SpatialRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(temporalRelationEClass, TemporalRelation.class, "TemporalRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(visionBlockedEClass, VisionBlocked.class, "VisionBlocked", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVisionBlocked_BlockedBy(), this.getActor(), null, "blockedBy", null, 1, 1, VisionBlocked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

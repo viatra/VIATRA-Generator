@@ -48,13 +48,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//Actor"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SpatialRelation" abstract="true" eSuperTypes="#//Relation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TemporalRelation" abstract="true" eSuperTypes="#//Relation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VisionBlocked" eSuperTypes="#//SpatialRelation">
+  <eClassifiers xsi:type="ecore:EClass" name="VisionBlocked" eSuperTypes="#//Relation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="blockedBy" lowerBound="1"
         eType="#//Actor"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CollisionExists" eSuperTypes="#//TemporalRelation">
+  <eClassifiers xsi:type="ecore:EClass" name="CollisionExists" eSuperTypes="#//Relation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="collisionTime" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>

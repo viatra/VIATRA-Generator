@@ -367,98 +367,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int RELATION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link crossingScenario.impl.SpatialRelationImpl <em>Spatial Relation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see crossingScenario.impl.SpatialRelationImpl
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSpatialRelation()
-	 * @generated
-	 */
-	int SPATIAL_RELATION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPATIAL_RELATION__TARGET = RELATION__TARGET;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPATIAL_RELATION__SOURCE = RELATION__SOURCE;
-
-	/**
-	 * The number of structural features of the '<em>Spatial Relation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPATIAL_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Spatial Relation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPATIAL_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link crossingScenario.impl.TemporalRelationImpl <em>Temporal Relation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see crossingScenario.impl.TemporalRelationImpl
-	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getTemporalRelation()
-	 * @generated
-	 */
-	int TEMPORAL_RELATION = 5;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPORAL_RELATION__TARGET = RELATION__TARGET;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPORAL_RELATION__SOURCE = RELATION__SOURCE;
-
-	/**
-	 * The number of structural features of the '<em>Temporal Relation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPORAL_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Temporal Relation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPORAL_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link crossingScenario.impl.VisionBlockedImpl <em>Vision Blocked</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -466,7 +374,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getVisionBlocked()
 	 * @generated
 	 */
-	int VISION_BLOCKED = 6;
+	int VISION_BLOCKED = 4;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -475,7 +383,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISION_BLOCKED__TARGET = SPATIAL_RELATION__TARGET;
+	int VISION_BLOCKED__TARGET = RELATION__TARGET;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -484,7 +392,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISION_BLOCKED__SOURCE = SPATIAL_RELATION__SOURCE;
+	int VISION_BLOCKED__SOURCE = RELATION__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Blocked By</b></em>' reference.
@@ -493,7 +401,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISION_BLOCKED__BLOCKED_BY = SPATIAL_RELATION_FEATURE_COUNT + 0;
+	int VISION_BLOCKED__BLOCKED_BY = RELATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Vision Blocked</em>' class.
@@ -502,7 +410,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISION_BLOCKED_FEATURE_COUNT = SPATIAL_RELATION_FEATURE_COUNT + 1;
+	int VISION_BLOCKED_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Vision Blocked</em>' class.
@@ -511,7 +419,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISION_BLOCKED_OPERATION_COUNT = SPATIAL_RELATION_OPERATION_COUNT + 0;
+	int VISION_BLOCKED_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link crossingScenario.impl.CollisionExistsImpl <em>Collision Exists</em>}' class.
@@ -521,7 +429,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getCollisionExists()
 	 * @generated
 	 */
-	int COLLISION_EXISTS = 7;
+	int COLLISION_EXISTS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -530,7 +438,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION_EXISTS__TARGET = TEMPORAL_RELATION__TARGET;
+	int COLLISION_EXISTS__TARGET = RELATION__TARGET;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -539,7 +447,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION_EXISTS__SOURCE = TEMPORAL_RELATION__SOURCE;
+	int COLLISION_EXISTS__SOURCE = RELATION__SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Collision Time</b></em>' attribute.
@@ -548,7 +456,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION_EXISTS__COLLISION_TIME = TEMPORAL_RELATION_FEATURE_COUNT + 0;
+	int COLLISION_EXISTS__COLLISION_TIME = RELATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Collision Exists</em>' class.
@@ -557,7 +465,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION_EXISTS_FEATURE_COUNT = TEMPORAL_RELATION_FEATURE_COUNT + 1;
+	int COLLISION_EXISTS_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Collision Exists</em>' class.
@@ -566,7 +474,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION_EXISTS_OPERATION_COUNT = TEMPORAL_RELATION_OPERATION_COUNT + 0;
+	int COLLISION_EXISTS_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link crossingScenario.impl.PedestrianImpl <em>Pedestrian</em>}' class.
@@ -576,7 +484,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getPedestrian()
 	 * @generated
 	 */
-	int PEDESTRIAN = 8;
+	int PEDESTRIAN = 6;
 
 	/**
 	 * The feature id for the '<em><b>XPos</b></em>' attribute.
@@ -694,7 +602,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getVehicle()
 	 * @generated
 	 */
-	int VEHICLE = 9;
+	int VEHICLE = 7;
 
 	/**
 	 * The feature id for the '<em><b>XPos</b></em>' attribute.
@@ -812,7 +720,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Horizontal()
 	 * @generated
 	 */
-	int LANE_HORIZONTAL = 10;
+	int LANE_HORIZONTAL = 8;
 
 	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
@@ -858,7 +766,7 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getLane_Vertical()
 	 * @generated
 	 */
-	int LANE_VERTICAL = 11;
+	int LANE_VERTICAL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Reference Coord</b></em>' attribute.
@@ -1180,26 +1088,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	EReference getRelation_Source();
 
 	/**
-	 * Returns the meta object for class '{@link crossingScenario.SpatialRelation <em>Spatial Relation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Spatial Relation</em>'.
-	 * @see crossingScenario.SpatialRelation
-	 * @generated
-	 */
-	EClass getSpatialRelation();
-
-	/**
-	 * Returns the meta object for class '{@link crossingScenario.TemporalRelation <em>Temporal Relation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Temporal Relation</em>'.
-	 * @see crossingScenario.TemporalRelation
-	 * @generated
-	 */
-	EClass getTemporalRelation();
-
-	/**
 	 * Returns the meta object for class '{@link crossingScenario.VisionBlocked <em>Vision Blocked</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1519,26 +1407,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATION__SOURCE = eINSTANCE.getRelation_Source();
-
-		/**
-		 * The meta object literal for the '{@link crossingScenario.impl.SpatialRelationImpl <em>Spatial Relation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see crossingScenario.impl.SpatialRelationImpl
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getSpatialRelation()
-		 * @generated
-		 */
-		EClass SPATIAL_RELATION = eINSTANCE.getSpatialRelation();
-
-		/**
-		 * The meta object literal for the '{@link crossingScenario.impl.TemporalRelationImpl <em>Temporal Relation</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see crossingScenario.impl.TemporalRelationImpl
-		 * @see crossingScenario.impl.CrossingScenarioPackageImpl#getTemporalRelation()
-		 * @generated
-		 */
-		EClass TEMPORAL_RELATION = eINSTANCE.getTemporalRelation();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.VisionBlockedImpl <em>Vision Blocked</em>}' class.

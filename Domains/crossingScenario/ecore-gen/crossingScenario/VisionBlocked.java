@@ -19,7 +19,7 @@ package crossingScenario;
  * @model
  * @generated
  */
-public interface VisionBlocked extends SpatialRelation {
+public interface VisionBlocked extends Relation {
 	/**
 	 * Returns the value of the '<em><b>Blocked By</b></em>' reference.
 	 * <!-- begin-user-doc -->

@@ -19,7 +19,7 @@ package crossingScenario;
  * @model
  * @generated
  */
-public interface CollisionExists extends TemporalRelation {
+public interface CollisionExists extends Relation {
 	/**
 	 * Returns the value of the '<em><b>Collision Time</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -90,24 +90,9 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CrossingScenarioPackage.SPATIAL_RELATION: {
-				SpatialRelation spatialRelation = (SpatialRelation)theEObject;
-				T result = caseSpatialRelation(spatialRelation);
-				if (result == null) result = caseRelation(spatialRelation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case CrossingScenarioPackage.TEMPORAL_RELATION: {
-				TemporalRelation temporalRelation = (TemporalRelation)theEObject;
-				T result = caseTemporalRelation(temporalRelation);
-				if (result == null) result = caseRelation(temporalRelation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CrossingScenarioPackage.VISION_BLOCKED: {
 				VisionBlocked visionBlocked = (VisionBlocked)theEObject;
 				T result = caseVisionBlocked(visionBlocked);
-				if (result == null) result = caseSpatialRelation(visionBlocked);
 				if (result == null) result = caseRelation(visionBlocked);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -115,7 +100,6 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 			case CrossingScenarioPackage.COLLISION_EXISTS: {
 				CollisionExists collisionExists = (CollisionExists)theEObject;
 				T result = caseCollisionExists(collisionExists);
-				if (result == null) result = caseTemporalRelation(collisionExists);
 				if (result == null) result = caseRelation(collisionExists);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -209,36 +193,6 @@ public class CrossingScenarioSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRelation(Relation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Spatial Relation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Spatial Relation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSpatialRelation(SpatialRelation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Temporal Relation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Temporal Relation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTemporalRelation(TemporalRelation object) {
 		return null;
 	}
 

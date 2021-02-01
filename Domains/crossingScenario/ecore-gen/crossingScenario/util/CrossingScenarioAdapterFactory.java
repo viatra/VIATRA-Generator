@@ -84,14 +84,6 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 				return createRelationAdapter();
 			}
 			@Override
-			public Adapter caseSpatialRelation(SpatialRelation object) {
-				return createSpatialRelationAdapter();
-			}
-			@Override
-			public Adapter caseTemporalRelation(TemporalRelation object) {
-				return createTemporalRelationAdapter();
-			}
-			@Override
 			public Adapter caseVisionBlocked(VisionBlocked object) {
 				return createVisionBlockedAdapter();
 			}
@@ -188,34 +180,6 @@ public class CrossingScenarioAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link crossingScenario.SpatialRelation <em>Spatial Relation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see crossingScenario.SpatialRelation
-	 * @generated
-	 */
-	public Adapter createSpatialRelationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link crossingScenario.TemporalRelation <em>Temporal Relation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see crossingScenario.TemporalRelation
-	 * @generated
-	 */
-	public Adapter createTemporalRelationAdapter() {
 		return null;
 	}
 

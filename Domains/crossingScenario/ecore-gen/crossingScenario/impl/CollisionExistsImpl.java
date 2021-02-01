@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class CollisionExistsImpl extends TemporalRelationImpl implements CollisionExists {
+public class CollisionExistsImpl extends RelationImpl implements CollisionExists {
 	/**
 	 * The default value of the '{@link #getCollisionTime() <em>Collision Time</em>}' attribute.
 	 * <!-- begin-user-doc -->

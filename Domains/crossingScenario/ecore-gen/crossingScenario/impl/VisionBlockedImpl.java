@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VisionBlockedImpl extends SpatialRelationImpl implements VisionBlocked {
+public class VisionBlockedImpl extends RelationImpl implements VisionBlocked {
 	/**
 	 * The cached value of the '{@link #getBlockedBy() <em>Blocked By</em>}' reference.
 	 * <!-- begin-user-doc -->
