@@ -1,0 +1,3 @@
+rcsD
+bazel-out/k8-opt/bin/dreal/api/libapi.lo
+bazel-out/k8-opt/bin/dreal/api/_objs/api/api.pic.o

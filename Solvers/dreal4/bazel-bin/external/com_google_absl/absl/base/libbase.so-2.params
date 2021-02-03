@@ -1,0 +1,17 @@
+-shared
+-o
+bazel-out/k8-opt/bin/external/com_google_absl/absl/base/libbase.so
+-fuse-ld=gold
+-Wl,-no-as-needed
+-Wl,-z,relro,-z,now
+-B/usr/bin
+-pass-exit-codes
+-lstdc++
+-lm
+-Wl,--gc-sections
+bazel-out/k8-opt/bin/external/com_google_absl/absl/base/_objs/base/cycleclock.pic.o
+bazel-out/k8-opt/bin/external/com_google_absl/absl/base/_objs/base/spinlock.pic.o
+bazel-out/k8-opt/bin/external/com_google_absl/absl/base/_objs/base/sysinfo.pic.o
+bazel-out/k8-opt/bin/external/com_google_absl/absl/base/_objs/base/thread_identity.pic.o
+bazel-out/k8-opt/bin/external/com_google_absl/absl/base/_objs/base/unscaledcycleclock.pic.o
+-pthread

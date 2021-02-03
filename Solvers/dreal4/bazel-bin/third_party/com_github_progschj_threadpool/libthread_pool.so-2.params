@@ -1,0 +1,13 @@
+-shared
+-o
+bazel-out/k8-opt/bin/third_party/com_github_progschj_threadpool/libthread_pool.so
+-fuse-ld=gold
+-Wl,-no-as-needed
+-Wl,-z,relro,-z,now
+-B/usr/bin
+-pass-exit-codes
+-lstdc++
+-lm
+-Wl,--gc-sections
+bazel-out/k8-opt/bin/third_party/com_github_progschj_threadpool/_objs/thread_pool/ThreadPool.pic.o
+-pthread
