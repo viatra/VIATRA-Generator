@@ -51,7 +51,8 @@ class QueryLoader {
 			.map[lookup(pattern2Specification)]
 			.toSet
 		val derivedFeatures = calculateDerivedFeatures(patterns.referredEcoreModels,patterns.map[it.lookup(pattern2Specification)])
-		
+//		patternsToTranslate.forEach[println(it.fullyQualifiedName)]
+//		if (true) throw new Exception
 		return new ViatraQuerySetDescriptor(
 			patternsToTranslate,
 			validationPatterns,
@@ -130,6 +131,7 @@ class QueryLoader {
 		val features = packages.map[EClassifiers].flatten.filter(EClass).map[it.EStructuralFeatures].flatten
 		val res = new HashMap
 		for(feature : features) {
+/*
 			val QBFAnnotation = feature.EAnnotations.filter[it.source.equals("org.eclipse.viatra.query.querybasedfeature")].head
 			if(QBFAnnotation !== null) {
 				val targetFQN =	QBFAnnotation.details.get("patternFQN")
@@ -141,7 +143,24 @@ class QueryLoader {
 					res.put(referredPattern, feature)
 				}
 			}
+*/
+			if (feature.derived){
+				//TODO we can check if feature is not from the ECORE MM
+				//TODO we can check that the found pattern has a "@QueryBasedFeature" annotation
+				val referredPattern = patterns.filter[
+					val fqnSplit = it.fullyQualifiedName.split("\\.")
+					val patName = fqnSplit.get(fqnSplit.length - 1)
+					patName.equals(feature.name)
+				].head
+				if(referredPattern!== null) {
+					res.put(referredPattern, feature)
+				}
+			}
 		}
+//		if (!res.empty) {
+//			println("Derived Features")
+//			res.entrySet.forEach[println(it)]
+//		}
 		return res
 	}
 }

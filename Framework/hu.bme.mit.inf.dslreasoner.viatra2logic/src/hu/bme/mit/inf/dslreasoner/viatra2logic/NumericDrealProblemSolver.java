@@ -42,8 +42,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private Map<Object, String> varMap;
 	private Map<String, String> curVar2Decl;
 	
-	private final int TIMEOUT_DOCKER = 5;
-	private final int TIMEOUT_LOCAL = 2;
+	private final int TIMEOUT_DOCKER = 5000;
+	private final int TIMEOUT_LOCAL = 20000;
 
 	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath) throws IOException, InterruptedException {
 		this.useDocker = useDocker;
@@ -68,14 +68,26 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	}
 	
 	private Process runProcess(List<String> cmd, int timeout) throws IOException, InterruptedException {
-		String s = String.join(" ", cmd);
-		Process p = Runtime.getRuntime().exec(s);
+//		String s = String.join(" ", cmd);
+//		Process p = Runtime.getRuntime().exec(s);
+		Process p = (new ProcessBuilder(cmd)).start();
 //		p.waitFor();
 		//TODO timeout if needed
-		if (!p.waitFor(timeout, TimeUnit.SECONDS)) {
+		long startTime = System.nanoTime();
+		if (!p.waitFor(timeout, TimeUnit.MILLISECONDS)) {
 			p.destroy();
+			if (p.isAlive()) {
+			    p.destroyForcibly();
+			    if (p.isAlive()) {
+					//Platform-specific but fine for now
+				    Runtime.getRuntime().exec("killall -9 dreal").waitFor();
+				    if (p.isAlive()) System.out.println("dreal process not closed");
+			    }
+			}
 			return null;
 		}
+		double duration = (double) (System.nanoTime() - startTime) / 1000000000;
+		System.out.println("Dur = " + duration + " : ");
 		return p;
 	}
 	
@@ -371,18 +383,30 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		if (outputProcess != null) { 
 			outputs = getProcessOutput(outputProcess);
 			result = getDrealResult(outputProcess.exitValue(), outputs);
+//		} else {
+//			System.err.print("Timeout, RETRYING...");
+//			if (this.useDocker) outputProcess = callDrealDocker(numProbContent, false);
+//			else outputProcess = callDrealLocal(numProbContent, false);
+//			if (outputProcess != null) { 
+//				outputs = getProcessOutput(outputProcess);
+//				result = getDrealResult(outputProcess.exitValue(), outputs);
+//				System.out.println("pass");
+//			} else {
+//				System.out.println("fail");
+//			}
 		}
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
 		//DEBUG - Print things
 		if (outputProcess == null) {
+			
 			System.err.println("TIMEOUT");
 //			printOutput(numProbContent);
 		}
 		
 //		printOutput(numProbContent);
 //		if (outputs != null) printOutput(outputs.get(0));
-//		System.out.println(result);
+		System.out.println(result);
 //		END DEBUG
 		
 		return result;
