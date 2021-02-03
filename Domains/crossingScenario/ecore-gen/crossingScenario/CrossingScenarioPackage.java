@@ -276,40 +276,13 @@ public interface CrossingScenarioPackage extends EPackage {
 	int ACTOR__YSPEED = 6;
 
 	/**
-	 * The feature id for the '<em><b>Dist near</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTOR__DIST_NEAR = 7;
-
-	/**
-	 * The feature id for the '<em><b>Dist med</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTOR__DIST_MED = 8;
-
-	/**
-	 * The feature id for the '<em><b>Dist far</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTOR__DIST_FAR = 9;
-
-	/**
 	 * The number of structural features of the '<em>Actor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTOR_FEATURE_COUNT = 10;
+	int ACTOR_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Actor</em>' class.
@@ -550,33 +523,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	int PEDESTRIAN__YSPEED = ACTOR__YSPEED;
 
 	/**
-	 * The feature id for the '<em><b>Dist near</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PEDESTRIAN__DIST_NEAR = ACTOR__DIST_NEAR;
-
-	/**
-	 * The feature id for the '<em><b>Dist med</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PEDESTRIAN__DIST_MED = ACTOR__DIST_MED;
-
-	/**
-	 * The feature id for the '<em><b>Dist far</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PEDESTRIAN__DIST_FAR = ACTOR__DIST_FAR;
-
-	/**
 	 * The number of structural features of the '<em>Pedestrian</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -666,33 +612,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	 * @ordered
 	 */
 	int VEHICLE__YSPEED = ACTOR__YSPEED;
-
-	/**
-	 * The feature id for the '<em><b>Dist near</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VEHICLE__DIST_NEAR = ACTOR__DIST_NEAR;
-
-	/**
-	 * The feature id for the '<em><b>Dist med</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VEHICLE__DIST_MED = ACTOR__DIST_MED;
-
-	/**
-	 * The feature id for the '<em><b>Dist far</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VEHICLE__DIST_FAR = ACTOR__DIST_FAR;
 
 	/**
 	 * The number of structural features of the '<em>Vehicle</em>' class.
@@ -1023,39 +942,6 @@ public interface CrossingScenarioPackage extends EPackage {
 	EAttribute getActor_YSpeed();
 
 	/**
-	 * Returns the meta object for the reference list '{@link crossingScenario.Actor#getDist_near <em>Dist near</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dist near</em>'.
-	 * @see crossingScenario.Actor#getDist_near()
-	 * @see #getActor()
-	 * @generated
-	 */
-	EReference getActor_Dist_near();
-
-	/**
-	 * Returns the meta object for the reference list '{@link crossingScenario.Actor#getDist_med <em>Dist med</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dist med</em>'.
-	 * @see crossingScenario.Actor#getDist_med()
-	 * @see #getActor()
-	 * @generated
-	 */
-	EReference getActor_Dist_med();
-
-	/**
-	 * Returns the meta object for the reference list '{@link crossingScenario.Actor#getDist_far <em>Dist far</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dist far</em>'.
-	 * @see crossingScenario.Actor#getDist_far()
-	 * @see #getActor()
-	 * @generated
-	 */
-	EReference getActor_Dist_far();
-
-	/**
 	 * Returns the meta object for class '{@link crossingScenario.Relation <em>Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1357,30 +1243,6 @@ public interface CrossingScenarioPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTOR__YSPEED = eINSTANCE.getActor_YSpeed();
-
-		/**
-		 * The meta object literal for the '<em><b>Dist near</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTOR__DIST_NEAR = eINSTANCE.getActor_Dist_near();
-
-		/**
-		 * The meta object literal for the '<em><b>Dist med</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTOR__DIST_MED = eINSTANCE.getActor_Dist_med();
-
-		/**
-		 * The meta object literal for the '<em><b>Dist far</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTOR__DIST_FAR = eINSTANCE.getActor_Dist_far();
 
 		/**
 		 * The meta object literal for the '{@link crossingScenario.impl.RelationImpl <em>Relation</em>}' class.

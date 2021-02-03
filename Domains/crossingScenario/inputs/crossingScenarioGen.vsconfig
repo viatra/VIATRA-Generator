@@ -10,7 +10,6 @@ generate {
 	scope = {
 		#node += 0..*
 		,#<Lane> += 0
-		//,#<Actor> = 25..*
 		,#<Relation> += 0
 		//,#<CollisionExists> = 1
 		//,#<SeparationDistance> = 0
@@ -22,7 +21,7 @@ generate {
 		runtime = 10000,
 		log-level = none,
 		"numeric-solver" = "dreal-local",
-		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
+		"dreal-local-path" = "../../Solvers/dreal4/bazel-bin/dreal/dreal",
 		"ignored-attributes" = "
 			Pedestrian.xPos=*, 
 			Pedestrian.yPos=*, 
@@ -40,7 +39,7 @@ generate {
 		"scopePropagator" = "polyhedral"}
 	
 	runs = 1
-	number = 10
+	number = 3
 	debug =			"outputs/debug"
 	log =			"outputs/debug/log.txt"
 	output =		"outputs/models"	

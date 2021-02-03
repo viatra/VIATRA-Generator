@@ -1,7 +1,6 @@
 package crossingScenario.run;
 
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +15,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import crossingScenario.Actor;
-import crossingScenario.CrossingScenario;
 import crossingScenario.CrossingScenarioPackage;
-import crossingScenario.Lane;
 
 public class QueryDebug {
 	public static void main(String[] args) throws FileNotFoundException {
@@ -84,18 +80,22 @@ public class QueryDebug {
 		EPackage.Registry.INSTANCE.put(CrossingScenarioPackage.eNS_URI, CrossingScenarioPackage.eINSTANCE);
 		ResourceSet rs = new ResourceSetImpl();
 		rs.getResource(URI.createFileURI("outputs/models/1.xmi"), true);
+		/*
+		ViatraQueryEngine engine = ViatraQueryEngine.on(new EMFScope(rs));		
+		// Access pattern matcher
+		Queries.instance().prepare(engine);
 		
-//		ViatraQueryEngine engine = ViatraQueryEngine.on(new EMFScope(rs));		
-//		// Access pattern matcher
-//		Queries.instance().prepare(engine);
-//		
-//		X.Matcher matcher = X.Matcher.on(engine);
-//		// Get and iterate over all matches
-//		System.out.println("MATCHES:");
-//		for (X.Match match : matcher.getAllMatches()) {
-//			// Print all the matches to the standard output
-//			System.out.println(match.getP());
-//		}
+		for (IQuerySpecification q : Queries.instance().getSpecifications()) {
+			ViatraQueryMatcher matcher = q.getMatcher(engine);
+			System.out.println("MATCHES for " + matcher.getPatternName());
+			for (Object match : matcher.getAllMatches()) {
+				// Print all the matches to the standard output
+				System.out.println(((IPatternMatch)match).get(0));
+				System.out.println(((IPatternMatch)match).get(1));
+				System.out.println("------");
+			}
+		}
+		*/
 	}
 	
 	

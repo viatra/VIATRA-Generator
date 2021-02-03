@@ -2,8 +2,6 @@
  */
 package crossingScenario;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,9 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link crossingScenario.Actor#getXSpeed <em>XSpeed</em>}</li>
  *   <li>{@link crossingScenario.Actor#getPlacedOn <em>Placed On</em>}</li>
  *   <li>{@link crossingScenario.Actor#getYSpeed <em>YSpeed</em>}</li>
- *   <li>{@link crossingScenario.Actor#getDist_near <em>Dist near</em>}</li>
- *   <li>{@link crossingScenario.Actor#getDist_med <em>Dist med</em>}</li>
- *   <li>{@link crossingScenario.Actor#getDist_far <em>Dist far</em>}</li>
  * </ul>
  *
  * @see crossingScenario.CrossingScenarioPackage#getActor()
@@ -189,41 +184,5 @@ public interface Actor extends EObject {
 	 * @generated
 	 */
 	void setYSpeed(double value);
-
-	/**
-	 * Returns the value of the '<em><b>Dist near</b></em>' reference list.
-	 * The list contents are of type {@link crossingScenario.Actor}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dist near</em>' reference list.
-	 * @see crossingScenario.CrossingScenarioPackage#getActor_Dist_near()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	EList<Actor> getDist_near();
-
-	/**
-	 * Returns the value of the '<em><b>Dist med</b></em>' reference list.
-	 * The list contents are of type {@link crossingScenario.Actor}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dist med</em>' reference list.
-	 * @see crossingScenario.CrossingScenarioPackage#getActor_Dist_med()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	EList<Actor> getDist_med();
-
-	/**
-	 * Returns the value of the '<em><b>Dist far</b></em>' reference list.
-	 * The list contents are of type {@link crossingScenario.Actor}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dist far</em>' reference list.
-	 * @see crossingScenario.CrossingScenarioPackage#getActor_Dist_far()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	EList<Actor> getDist_far();
 
 } // Actor

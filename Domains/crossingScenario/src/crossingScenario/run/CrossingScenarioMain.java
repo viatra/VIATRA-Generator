@@ -36,7 +36,7 @@ public class CrossingScenarioMain {
 //		Files.copy(path, target, StandardCopyOption.REPLACE_EXISTING);
 		
 		printStats(pathStats);
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 3; i++) {
 			DrawScenario.drawScenario("outputs/models/"+i+".xmi", "outputs/drawnModel"+i+".png");
 			System.out.println("DONE " + i);
 		}

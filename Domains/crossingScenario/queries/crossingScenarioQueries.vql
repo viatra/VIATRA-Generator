@@ -91,6 +91,23 @@ pattern define_actor_minYp(cs:CrossingScenario, a:Actor) {
 	find helper_vert_getYAndBounds(cs, a, yMax, yP); 
 	check(yP <= 0-yMax);}
 	
+////////////ADDED
+//to reduce overlap
+//NEEDED
+@Constraint(severity="error", key={a}, message="5 Actor")
+pattern define_actor_wrtLane(a:Actor) {
+	Actor.placedOn(a, lane);
+	Lane_Vertical(lane);
+    Actor.yPos(a, yP);
+    check(yP > 0.0-1.0);
+} or {
+	Actor.placedOn(a, lane);
+	Lane_Horizontal(lane);
+    Actor.xPos(a, xP);
+    check(xP > 0.0-1.0);
+}
+////////////ADDED
+	
 //Minimum Distances
 private pattern helper_getCoords(a1:Actor, 
 	a2: Actor, x1:java Double, x2:java Double, y1:java Double, y2:java Double) {
@@ -105,8 +122,8 @@ private pattern helper_getCoords(a1:Actor,
 pattern define_actor_minimumDistance(a1: Actor, a2: Actor) {
 	find helper_getCoords(a1, a2, x1, x2, y1, y2);
 	a1 != a2;
-	//check(dx^2 + dy^2 < 5^2)
-	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 5*5);
+	//check(dx^2 + dy^2 < 3^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 3*3);
 }
 
 /////----------------	
@@ -219,47 +236,38 @@ pattern define_actor_vehicleLength(v:Vehicle) {
     check(l != 2.0);
 }
 
-///////----------------
-///////DERIVED FEATURES
-///////----------------
-//
-//@QueryBasedFeature 
-//pattern dist_near(a1: Actor, a2: Actor) {
-//	find helper_actorsAreNear(a1, a2);
-//	Actor.dist_near(a1, a2);
-//}
-//
-//private pattern helper_actorsAreNear(a1: Actor, a2: Actor) {
-//	find helper_getCoords(a1, a2, x1, x2, y1, y2);
-//	//check(dx^2 + dy^2 < 10^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
-//}
-//
-//@QueryBasedFeature
-//pattern dist_med(a1: Actor, a2: Actor) {
-//	find helper_actorsAreMed(a1, a2);
-//	Actor.dist_med(a1, a2);
-//}
-//
-//private pattern helper_actorsAreMed(a1: Actor, a2: Actor) {
-//	find helper_getCoords(a1, a2, x1, x2, y1, y2);
-//	//check(10^2 < dx^2 + dy^2 < 15^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);
-//}
-//
-//@QueryBasedFeature
-//pattern dist_far(a1: Actor, a2: Actor) {
-//	find helper_actorsAreFar(a1, a2);
-//	Actor.dist_far(a1, a2);
-//}
-//
-//private pattern helper_actorsAreFar(a1: Actor, a2: Actor) {
-//	find helper_getCoords(a1, a2, x1, x2, y1, y2);
-//	//check(dx^2 + dy^2 > 20^2)
-//	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 20*20);	
-//}
+/////----------------
+/////DERIVED FEATURES
+/////----------------
+/*
+@QueryBasedFeature 
+pattern dist_near(a1: Actor, a2: Actor) {
+	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+	
+	//check(dx^2 + dy^2 < 10^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 10*10);	
+	Actor.dist_near(a1, a2);
+}
 
+@QueryBasedFeature
+pattern dist_med(a1: Actor, a2: Actor) {
+	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+	
+	//check(10^2 < dx^2 + dy^2 < 15^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 10*10);
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 15*15);
+	Actor.dist_med(a1, a2);
+}
+
+@QueryBasedFeature
+pattern dist_far(a1: Actor, a2: Actor) {
+	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+	
+	//check(dx^2 + dy^2 > 20^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) > 20*20);	
+	Actor.dist_far(a1, a2);
+}
+*/
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 //Relation
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
@@ -278,7 +286,7 @@ pattern define_actor_vehicleLength(v:Vehicle) {
 
 
 //<<QUALTATIF ABSTRACTION>>
-
+/*
 @Constraint(severity="error", key={a1, a2}, message="x")
 pattern collisionExists_qualAbstr(a1:Actor, a2:Actor) {
 	CollisionExists.source(ce, a1);
@@ -295,72 +303,9 @@ pattern collisionExists_qualAbstr(a1:Actor, a2:Actor) {
 	Actor.placedOn(a2, hl2);
 	Lane_Horizontal(hl2);
 }
-
+*/
 //<<END TEMP QUALITATIF ABSTRACTION>>
 
-////
-//VS VisionBlocked
-////
-//TODO Very prone to corner cases
-/*
-@Constraint(severity="error", key={a1}, message="x")
-pattern collisionExists_vsVisionBlockedX1(a1:Actor) {	
-	VisionBlocked.blockedBy(_, a1);
-	CollisionExists.target(_, a1);
-}
-@Constraint(severity="error", key={a1}, message="x")
-pattern collisionExists_vsVisionBlockedX2(a1:Actor) {	
-	VisionBlocked.blockedBy(_, a1);
-	CollisionExists.source(_, a1);
-}
-
-@Constraint(severity="error", key={a1}, message="x")
-pattern collisionExists_vsVisionBlocked1(a1:Actor) {	
-	VisionBlocked.source(_, a1);
-	neg find helper_source(a1);
-}
-private pattern helper_source(a1:Actor) {
-	CollisionExists.source(_, a1);
-}
-
-@Constraint(severity="error", key={a1}, message="x")
-pattern collisionExists_vsVisionBlocked2(a1:Actor) {	
-	VisionBlocked.target(_, a1);
-	neg find helper_target(a1);
-}
-private pattern helper_target(a1:Actor) {
-	CollisionExists.target(_, a1);
-}
-*/
-/*
-@Constraint(severity="error", key={a1}, message="x")
-pattern collisionExists_vsVisionBlocked(a1:Actor) {	
-	VisionBlocked.source(vb, a1);
-	VisionBlocked.target(vb, a2);
-	CollisionExists.source(ce, a1);
-	CollisionExists.target(ce, a3);
-	a2 != a3;
-} or {
-	VisionBlocked.source(vb, a1);
-	VisionBlocked.target(vb, a2);
-	CollisionExists.source(ce, a3);
-	CollisionExists.target(ce, a1);
-	a2 != a3;
-} or {
-	VisionBlocked.source(vb, a2);
-	VisionBlocked.target(vb, a1);
-	CollisionExists.source(ce, a3);
-	CollisionExists.target(ce, a1);
-	a2 != a3;
-} or {
-	VisionBlocked.source(vb, a2);
-	VisionBlocked.target(vb, a1);
-	CollisionExists.source(ce, a1);
-	CollisionExists.target(ce, a3);
-	a2 != a3;
-}
-*/
-//<<END QUALITATIF ABSTRACTION>>
 
 ////
 //CollisionExists - Time
@@ -407,10 +352,10 @@ private pattern helper_getAllYCoords(a1:Actor, a2: Actor,
 	find helper_getYCoords(a2, l2, yPos2, ySpeed2);
 }
 
-private pattern helper_getXCoords(a:Actor, l:java Double, 
+private pattern helper_getXCoords(a:Actor, w:java Double, 
 	xPos:java Double, xSpeed:java Double) {
 
-	Actor.length(a, l);
+	Actor.width(a, w);
 	Actor.xPos(a, xPos);
 	Actor.xSpeed(a, xSpeed);
 }
@@ -473,7 +418,7 @@ pattern collisionExists_defineCollision_x2(a1:Actor, a2:Actor) {
 ///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
 
 //<<QUALTATIF ABSTRACTION>>
-
+/*
 @Constraint(severity="error", key={a1, a2}, message="on 3 different lanes")
 pattern visionBlocked_qualAbstr(a1:Actor, a2:Actor) {
 	VisionBlocked.source(vb, a1);
@@ -491,7 +436,7 @@ pattern visionBlocked_qualAbstr(a1:Actor, a2:Actor) {
 	Actor.placedOn(a1, l);
 	Actor.placedOn(a2, l);
 }
-
+*/
 @Constraint(severity="error", key={a1, a2}, message="on lanes with different orientation")
 pattern visionBlocked_qualAbstr2(a1:Actor, a2:Actor) {
 	VisionBlocked.source(ce, a1);
@@ -509,6 +454,30 @@ pattern visionBlocked_qualAbstr2(a1:Actor, a2:Actor) {
 	Lane_Horizontal(hl2);
 }
 
+////////////ADDED
+//to make decision for ITE
+//NOT NEEDED
+/*
+@Constraint(severity="error", key={a}, message="5 Actor")
+pattern define_vb_blvssrc(a:Actor) {
+	VisionBlocked.source(vb, a);
+	VisionBlocked.blockedBy(vb, b);
+	Actor.placedOn(a, lane);
+	Lane_Vertical(lane);
+    Actor.yPos(a, yPa);
+    Actor.yPos(b, yPb);
+    check(yPb <= yPa);
+} or {
+	VisionBlocked.source(vb, a);
+	VisionBlocked.blockedBy(vb, b);
+	Actor.placedOn(a, lane);
+	Lane_Horizontal(lane);
+    Actor.xPos(a, xPa);
+    Actor.xPos(a, xPb);
+    check(xPb <= xPa);
+}
+*/
+////////////ADDED
 //<<END QUALITATIF ABSTRACTION>>
 
 @Constraint(severity="error", key={a1, a2}, message="x")
@@ -582,6 +551,9 @@ pattern visionBlocked_ites_bottom(a1:Actor, a2:Actor) {
 		> ((y1-y2)/(x1-x2)));	
 }
 
+///////
+//BLOCKER IN BETWEEN
+///////
 
 private pattern helper_VB_getJustCoords(a1:Actor, a2: Actor,
 	x1:java Double, y1:java Double, 
@@ -600,6 +572,7 @@ private pattern helper_VB_getJustCoords(a1:Actor, a2: Actor,
 	Actor.yPos(aBlocker, yBlocker);
 }
 
+/*
 //INFO may use approximation instead
 @Constraint(severity="error", key={a1}, message="x")
 pattern visionBlocked_xdistBSlargerThanxdistTS(a1:Actor, a2:Actor) {
@@ -620,5 +593,50 @@ pattern visionBlocked_xdistBTlargerThanxdistST(a1:Actor, a2:Actor) {
 	
 	//check(dist(A2, ABlocker) > dist(A2, A1))
 	check((x2-xBlocker)*(x2-xBlocker) + (y2-yBlocker)*(y2-yBlocker) > (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+}
+*/
+
+//INFO may use approximation instead
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_xdistBSlargerThanxdistTS(a1:Actor, a2:Actor) {
+
+	find helper_VB_getJustCoords(a1, a2, 
+	x1, _, x2, _,	xBlocker, _);
+	
+	//check(dist(A1, ABlocker) > dist(A1, A2))
+	check((x1-xBlocker)*(x1-xBlocker) > (x1-x2)*(x1-x2));
+}
+
+//INFO may use approximation instead
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_xdistBTlargerThanxdistST(a1:Actor, a2:Actor) {
+
+	find helper_VB_getJustCoords(a1, a2, 
+	x1, _, x2, _,	xBlocker, _);
+	
+	//check(dist(A2, ABlocker) > dist(A2, A1))
+	check((x2-xBlocker)*(x2-xBlocker) > (x2-x1)*(x2-x1));
+}
+
+//INFO may use approximation instead
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_ydistBSlargerThanydistTS(a1:Actor, a2:Actor) {
+
+	find helper_VB_getJustCoords(a1, a2, 
+	_, y1, _, y2, _, yBlocker);
+	
+	//check(dist(A1, ABlocker) > dist(A1, A2))
+	check((y1-yBlocker)*(y1-yBlocker) > (y1-y2)*(y1-y2));
+}
+
+//INFO may use approximation instead
+@Constraint(severity="error", key={a1}, message="x")
+pattern visionBlocked_ydistBTlargerThanydistST(a1:Actor, a2:Actor) {
+
+	find helper_VB_getJustCoords(a1, a2, 
+	_, y1, _, y2, _, yBlocker);
+	
+	//check(dist(A2, ABlocker) > dist(A2, A1))
+	check((y2-yBlocker)*(y2-yBlocker) > (y2-y1)*(y2-y1));
 }
 

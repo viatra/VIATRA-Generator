@@ -28,9 +28,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/xSpeed"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/placedOn"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute crossingScenario.ecore#//Actor/ySpeed"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/dist_near"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/dist_med"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Actor/dist_far"/>
     </genClasses>
     <genClasses image="false" ecoreClass="crossingScenario.ecore#//Relation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference crossingScenario.ecore#//Relation/target"/>

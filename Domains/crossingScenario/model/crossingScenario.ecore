@@ -35,12 +35,6 @@
         eType="#//Lane" eOpposite="#//Lane/actors"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ySpeed" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dist_near" upperBound="-1"
-        eType="#//Actor" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dist_med" upperBound="-1"
-        eType="#//Actor" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dist_far" upperBound="-1"
-        eType="#//Actor" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relation" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
