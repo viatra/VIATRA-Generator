@@ -1,8 +1,0 @@
-dreal/dreal/__init__.py 
-dreal/dreal/dreal /home/models/.cache/bazel/_bazel_models/d2bcb0d79fb4abe5ea9078c2027c2fc8/execroot/dreal/bazel-out/k8-opt/bin/dreal/dreal
-dreal/dreal/test/__init__.py 
-dreal/dreal/test/smt2/07 /home/models/.cache/bazel/_bazel_models/d2bcb0d79fb4abe5ea9078c2027c2fc8/execroot/dreal/bazel-out/k8-opt/bin/dreal/test/smt2/07
-dreal/dreal/test/smt2/07.smt2 /home/models/dreal4/dreal/test/smt2/07.smt2
-dreal/dreal/test/smt2/07.smt2.expected /home/models/dreal4/dreal/test/smt2/07.smt2.expected
-dreal/dreal/test/smt2/__init__.py 
-dreal/dreal/test/smt2/test.py /home/models/dreal4/dreal/test/smt2/test.py

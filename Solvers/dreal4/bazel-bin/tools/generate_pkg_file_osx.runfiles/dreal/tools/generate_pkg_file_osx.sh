@@ -1,1 +1,0 @@
-/home/models/dreal4/tools/generate_pkg_file_osx.sh
