@@ -43,7 +43,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private Map<String, String> curVar2Decl;
 	
 	private final int TIMEOUT_DOCKER = 5000;
-	private final int TIMEOUT_LOCAL = 20000;
+	private final int TIMEOUT_LOCAL = 10000;
+	private final boolean DEBUG_PRINT = false;
 
 	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath) throws IOException, InterruptedException {
 		this.useDocker = useDocker;
@@ -86,8 +87,10 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			}
 			return null;
 		}
-		double duration = (double) (System.nanoTime() - startTime) / 1000000000;
-		System.out.println("Dur = " + duration + " : ");
+		if (DEBUG_PRINT) {
+			double duration = (double) (System.nanoTime() - startTime) / 1000000000;
+			System.out.println("Dur = " + duration + " : ");
+		}
 		return p;
 	}
 	
@@ -397,17 +400,15 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		}
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
-		//DEBUG - Print things
-		if (outputProcess == null) {
-			
+		if (outputProcess == null) {	
 			System.err.println("TIMEOUT");
 //			printOutput(numProbContent);
 		}
-		
-//		printOutput(numProbContent);
-//		if (outputs != null) printOutput(outputs.get(0));
-		System.out.println(result);
-//		END DEBUG
+		if (DEBUG_PRINT) {
+	//		printOutput(numProbContent);
+	//		if (outputs != null) printOutput(outputs.get(0));
+			System.out.println(result);
+		}
 		
 		return result;
 	}
@@ -459,12 +460,12 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
-		//DEBUG - Print things
-		System.out.println("Getting Solution!");
-//		printOutput(numProbContent);
-//		printOutput(outputs.get(0));
-//		System.out.println(result);
-		//END DEBUG
+		if (DEBUG_PRINT) {
+			System.out.println("Getting Solution!");
+	//		printOutput(numProbContent);
+	//		printOutput(outputs.get(0));
+	//		System.out.println(result);
+		}
 				
 		//GET SOLUTION		
 		if (result) {

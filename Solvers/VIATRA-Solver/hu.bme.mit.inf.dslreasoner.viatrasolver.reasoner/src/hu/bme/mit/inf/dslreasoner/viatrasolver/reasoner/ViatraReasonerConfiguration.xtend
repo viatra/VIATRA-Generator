@@ -77,7 +77,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public var nonContainmentWeight = 1
 	public var unfinishedWFWeight = 1
 	public var calculateObjectCreationCosts = false
-	public NumericSolverSelection numericSolverSelection = NumericSolverSelection.DREAL_DOCKER //currently defaulted to DREAL
+	public NumericSolverSelection numericSolverSelection = NumericSolverSelection.Z3 //currently defaulted to Z3
 	public var drealLocalPath = "<path-to-dreal>";
 	public var Map<String, Map<String, String>> ignoredAttributesMap = null;
 	

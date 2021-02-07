@@ -39,9 +39,10 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 	public NumericZ3ProblemSolver() {
 		//FOR LINUX VM
 		//Not Elegant, but this is working for now
-		String root = (new File(System.getProperty("user.dir"))).getParentFile().getParent();
-        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3.so");
-        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
+//		String root = "/home/models/VIATRA-Generator";
+//		String root = (new File(System.getProperty("user.dir"))).getParentFile().getParent();
+//        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3.so");
+//        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
         //End non-elegance
         
 		HashMap<String, String> cfg = new HashMap<String, String>();

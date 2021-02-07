@@ -53,7 +53,17 @@ class NumericSolver {
 			return new NumericDrealProblemSolver(true, null)
 		if (solverSelection == NumericSolverSelection.DREAL_LOCAL)
 			return new NumericDrealProblemSolver(false, drealLocalPath)
-		if (solverSelection == NumericSolverSelection.Z3) return new NumericZ3ProblemSolver
+		if (solverSelection == NumericSolverSelection.Z3) {
+			//TODO THIS IS HARD-CODED for now
+			val root = "/data/viatra/VIATRA-Generator";
+			//END HARD-CODED
+//			String root = (new File(System.getProperty("user.dir"))).getParentFile().getParent();
+	        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3.so");
+	        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
+//	        System.load("libz3.so");
+//	        System.load("libz3java.so");
+			return new NumericZ3ProblemSolver
+		}
 	}
 	
 	def init(ThreadContext context) {

@@ -195,6 +195,7 @@ class InstanceModel2PartialInterpretation {
 		EAttribute attribute,
 		Map<String, Map<String, String>> ignoredAttribs
 	) {
+		if (ignoredAttribs === null || ignoredAttribs.isEmpty) return false;
 		val classInIgnored = ignoredAttribs.get(object.eClass.name)
 		val mayIgnored = (
 					classInIgnored !== null && classInIgnored.containsKey("*")
