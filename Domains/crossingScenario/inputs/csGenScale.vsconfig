@@ -1,0 +1,33 @@
+import epackage	"model/crossingScenario.ecore"
+import viatra	"queries/csQueriesScale.vql"
+
+generate {
+	metamodel = { package crossingScenario }
+	constraints = { package queries}
+	partial-model = { "inputs/csInitScale.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node += 15..*
+		,#<Lane> += 0
+		,#<Relation> += 0
+		//,#<CollisionExists> = 1
+		//,#<SeparationDistance> = 0
+		//,#<VisionBlocked> += 0	
+		//,#<CollisionDoesNotExist> += 0	
+	}
+	
+	config = {
+		runtime = 10000,
+		log-level = none,
+		"numeric-solver" = "z3",
+		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
+		//"strategy" = "crossingScenario",
+		"scopePropagator" = "polyhedral"}
+	
+	runs = 1
+	number = 3
+	debug =			"outputs/debug"
+	log =			"outputs/debug/log.txt"
+	output =		"outputs/models"	
+	statistics =	"outputs/statistics.csv"
+}
