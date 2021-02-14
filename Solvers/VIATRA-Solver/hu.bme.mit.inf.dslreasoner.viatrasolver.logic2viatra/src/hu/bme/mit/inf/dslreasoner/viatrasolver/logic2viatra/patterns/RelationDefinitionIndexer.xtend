@@ -11,6 +11,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PDisjunction
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
 
 class RelationDefinitionIndexer {
 	public val PatternGenerator base;
@@ -70,6 +71,19 @@ class RelationDefinitionIndexer {
 	private def transformPattern(RelationDefinition relation, PQuery p, Modality modality) {
 		try {
 		val bodies = (relation.annotations.filter(TransfomedViatraQuery).head.optimizedDisjunction as PDisjunction).bodies
+		
+		//TODO ISSUE if a structural and numeric constraint are ORed in the same pattern
+		var boolean isCheck = false
+		for (body : bodies) {
+			for (constraint : body.constraints) {
+				if (constraint instanceof ExpressionEvaluation) {
+					// below not working
+//					return ""
+					isCheck = true
+				}
+			}
+		}
+		
 		return '''
 			private pattern «relationDefinitionName(relation,modality)»(
 				problem:LogicProblem, interpretation:PartialInterpretation,
@@ -79,6 +93,7 @@ class RelationDefinitionIndexer {
 				«FOR constraint : body.constraints»
 					«this.constraintTransformer.transformConstraint(constraint,modality,relation.annotations.filter(TransfomedViatraQuery).head.variableTrace)»
 				«ENDFOR»
+				«IF isCheck»1 == 0;«ENDIF»
 			}«ENDFOR»
 		'''
 		} catch(UnsupportedOperationException e) {

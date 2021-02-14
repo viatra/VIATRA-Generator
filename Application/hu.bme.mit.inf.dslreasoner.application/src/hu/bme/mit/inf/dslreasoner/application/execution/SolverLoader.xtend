@@ -1,5 +1,6 @@
 package hu.bme.mit.inf.dslreasoner.application.execution
 
+import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolver
 import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloySolverConfiguration
 import hu.bme.mit.inf.dslreasoner.application.applicationConfiguration.CostObjectiveFunction
@@ -16,6 +17,8 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.logic2viatra.cardinality.ScopePro
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.CostObjectiveElementConfiguration
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.DiversityDescriptor
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ExplorationStrategy
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.NumericSolverSelection
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.PunishSizeStrategy
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasoner
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.ViatraReasonerConfiguration
@@ -28,9 +31,6 @@ import java.util.Optional
 import org.eclipse.viatra.query.patternlanguage.emf.vql.PatternModel
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.xbase.lib.Functions.Function1
-import hu.bme.mit.inf.dlsreasoner.alloy.reasoner.AlloyBackendSolver
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.NumericSolverSelection
-import java.util.HashMap
 
 class SolverLoader {
 	def loadSolver(Solver solver, Map<String, String> config) {
@@ -171,6 +171,16 @@ class SolverLoader {
 					val stringValue = config.get("ignored-attributes")
 					c.ignoredAttributesMap = parseIgnoredAttributes(stringValue) 
 				}
+				if (config.containsKey("strategy")) {
+					val stringValue = config.get("strategy")
+					c.strategy = switch (stringValue) {
+						case "none": ExplorationStrategy.None 
+						case "crossingScenario": ExplorationStrategy.CrossingScenario
+						case "cs-hacker": ExplorationStrategy.CSHacker
+						default: throw new IllegalArgumentException("Unknown strategy: " + stringValue)
+					}
+				}
+				
 				for (objectiveEntry : objectiveEntries) {
 					val costObjectiveConfig = new CostObjectiveConfiguration
 					switch (objectiveEntry) {

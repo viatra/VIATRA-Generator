@@ -43,8 +43,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private Map<String, String> curVar2Decl;
 	
 	private final int TIMEOUT_DOCKER = 5000;
-	private final int TIMEOUT_LOCAL = 10000;
-	private final boolean DEBUG_PRINT = false;
+	private final int TIMEOUT_LOCAL = 100000;
+	private final int DEBUG_PRINT = 3;
 
 	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath) throws IOException, InterruptedException {
 		this.useDocker = useDocker;
@@ -87,7 +87,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			}
 			return null;
 		}
-		if (DEBUG_PRINT) {
+		if (DEBUG_PRINT > 1) {
 			double duration = (double) (System.nanoTime() - startTime) / 1000000000;
 			System.out.println("Dur = " + duration + " : ");
 		}
@@ -404,10 +404,12 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			System.err.println("TIMEOUT");
 //			printOutput(numProbContent);
 		}
-		if (DEBUG_PRINT) {
-	//		printOutput(numProbContent);
-	//		if (outputs != null) printOutput(outputs.get(0));
+		if (DEBUG_PRINT > 1) {
 			System.out.println(result);
+		}
+		if (DEBUG_PRINT > 2) {
+			printOutput(numProbContent);
+			if (outputs != null) printOutput(outputs.get(0));
 		}
 		
 		return result;
@@ -455,16 +457,30 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		Process outputProcess;
 		if (this.useDocker) outputProcess = callDrealDocker(numProbContent, true);
 		else outputProcess = callDrealLocal(numProbContent, true);
-			
-		List<List<String>> outputs = getProcessOutput(outputProcess);
-		boolean result = getDrealResult(outputProcess.exitValue(), outputs);
+		
+		boolean result = false;
+		List<List<String>> outputs = null;
+		if (outputProcess != null) { 
+			outputs = getProcessOutput(outputProcess);
+			result = getDrealResult(outputProcess.exitValue(), outputs);
+		}
+		
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		
-		if (DEBUG_PRINT) {
-			System.out.println("Getting Solution!");
-	//		printOutput(numProbContent);
-	//		printOutput(outputs.get(0));
-	//		System.out.println(result);
+		if (outputProcess == null) {	
+			System.err.println("TIMEOUT");
+//			printOutput(numProbContent);
+		} else {
+			if (DEBUG_PRINT > 0) {
+				System.out.println("Getting Solution!");
+			}
+		}
+		if (DEBUG_PRINT > 1) {
+			System.out.println(result);
+		}
+		if (DEBUG_PRINT > 2) {
+			printOutput(numProbContent);
+			if (outputs != null) printOutput(outputs.get(0));
 		}
 				
 		//GET SOLUTION		
@@ -498,7 +514,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			endFormingSolution = System.nanoTime() - startFormingSolution;
 		}
 		else {
-			System.out.println("Unsatisfiable numerical problem");
+			System.out.println("Unsatisfiable numerical problem (trying to get solution...)");
 		}		
 		return sol;
 	}

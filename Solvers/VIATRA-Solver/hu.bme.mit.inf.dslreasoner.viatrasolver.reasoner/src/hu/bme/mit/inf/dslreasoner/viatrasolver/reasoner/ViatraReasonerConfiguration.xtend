@@ -40,6 +40,12 @@ enum NumericSolverSelection {
 	Z3
 }
 
+enum ExplorationStrategy {
+	None,
+	CrossingScenario,
+	CSHacker
+}
+
 class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	// public var Iterable<PQuery> existingQueries
 	public var nameNewElements = false
@@ -80,6 +86,7 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public NumericSolverSelection numericSolverSelection = NumericSolverSelection.Z3 //currently defaulted to Z3
 	public var drealLocalPath = "<path-to-dreal>";
 	public var Map<String, Map<String, String>> ignoredAttributesMap = null;
+	public var ExplorationStrategy strategy = ExplorationStrategy.None
 	
 	public var ScopePropagatorStrategy scopePropagatorStrategy = new ScopePropagatorStrategy.Polyhedral(
 		PolyhedralScopePropagatorConstraints.Relational, PolyhedralScopePropagatorSolver.Clp)
