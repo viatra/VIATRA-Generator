@@ -148,8 +148,14 @@ class NumericSolver {
 			val propagatedConstraints = new HashMap
 			//Filter constraints if there are phase-related restricutions
 			//null whitelist means accept everything
-			val whitelist = getConstraintWhitelist(phase)
+			
 			println("<<<<START-STEP>>>> (" + phase + ")")
+			if (phase == -2) {
+				println("Skipping numeric check")
+				//TODO Big assumption
+				return true
+			}
+			val whitelist = getConstraintWhitelist(phase)
 			for(entry : matches.entrySet) {
 				if (entry.value !== null){
 					val name = (entry.key as ExpressionEvaluation).body.pattern.simpleName
@@ -182,8 +188,11 @@ class NumericSolver {
 							//TODO ASSUME Always True
 							//GET LIST OF VARS TO FILL
 							val fillMap = t.delegateGetSolution(dataObjects, propagatedConstraints, selectSolver(phase))
-							fillWithPartialSolutionsDirectly(dataObjects, fillMap)
-							res = true
+							if (fillMap === null) res = false
+							else {
+								fillWithPartialSolutionsDirectly(dataObjects, fillMap)
+								res = true
+							}
 						} else {
 							res = t.delegateIsSatisfiable(propagatedConstraints, selectSolver(phase))
 						}
@@ -201,8 +210,11 @@ class NumericSolver {
 						//TODO ASSUME Always True
 						//GET LIST OF VARS TO FILL
 						val fillMap = t.delegateGetSolution(dataObjects, propagatedConstraints, selectSolver(phase))
-						fillWithPartialSolutionsDirectly(dataObjects, fillMap)
-						finalResult = true
+						if (fillMap === null) finalResult = false
+						else {
+							fillWithPartialSolutionsDirectly(dataObjects, fillMap)
+							finalResult = true
+						}
 					} else {
 						finalResult = t.delegateIsSatisfiable(propagatedConstraints, selectSolver(phase))
 					}
@@ -211,6 +223,7 @@ class NumericSolver {
 			}
 		}	
 		this.runtime+=System.nanoTime-start
+		if (phase == 2) finalResult = isSatisfiable(matches, 3)
 		return finalResult
 	}
 	
@@ -230,27 +243,43 @@ class NumericSolver {
 			//assumikng standard input, w/ visinBlocked and CollisionExists between pre-included actors
 			val PartialInterpretation head = threadContext.getModel() as PartialInterpretation;
 			val List<PartialRelationInterpretation> relations = head.getPartialrelationinterpretation();
-			var boolean foundActorWithDefinedPos = false;
+			var boolean foundBlockedBy = false;
+			
+			var int numActors;
+			var int numPlacedOn;
+			var int numPlacements = 0;
+			
 			for (PartialRelationInterpretation rel : relations) {
+				if(rel.getInterpretationOf().getName().equals("actors reference CrossingScenario")) {
+					numActors = rel.relationlinks.size
+				}
+				
+				if(rel.getInterpretationOf().getName().equals("placedOn reference Actor")) {
+					numPlacedOn = rel.relationlinks.size
+				}
+				
 				if(rel.getInterpretationOf().getName().equals("xPos attribute Actor")) {
 					for (RelationLink link : rel.getRelationlinks()) {
 						val PrimitiveElement param2 = (link as BinaryElementRelationLink).getParam2() as PrimitiveElement;
 						if (param2.isValueSet()) {
-							foundActorWithDefinedPos = true;
+							numPlacements++
 						}
 					}
 				}
 				
 				if(rel.getInterpretationOf().getName().equals("blockedBy reference VisionBlocked")) {
 					if (!rel.getRelationlinks().isEmpty()) {
-						return 3;
+						foundBlockedBy = true
 					}
 				}
 			}
+			val boolean unplacedActorExists = numPlacements < numActors
 			//it means that there is no blockedBy
 			//so we are at most at phase 2
-			if (foundActorWithDefinedPos) return 2;
-			return 1;			
+			if (numPlacedOn == 1 && numPlacements == 0) return 1
+			if (foundBlockedBy && unplacedActorExists) return 2
+			if (numPlacements == numActors) return 3;
+			return -2;			
 		}
 		return -1;
 	}
@@ -418,6 +447,8 @@ class NumericSolver {
 	}
 	
 	def fillSolutionCopy(Map<EObject, EObject> trace) {
+		//No need to do a final check to fill if we are using a strategy
+		if (strategy === ExplorationStrategy.CrossingScenario) return
 		val model = threadContext.getModel as PartialInterpretation
 		val dataObjects = model.newElements.filter(PrimitiveElement).filter[!model.openWorldElements.contains(it)].toList
 		if(constraint2CurrentUnitPropagationPrecondition.empty) {
@@ -481,9 +512,6 @@ class NumericSolver {
 				val value = solution.get(element)
 				if (value !== null){
 					element.fillWithValue(value)
-					println("<" + element + "> is filled")
-				} else {
-					println("<" + element + "> is unfilled")
 				}
 			}
 		}

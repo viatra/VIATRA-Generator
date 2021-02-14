@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -504,7 +505,9 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 						if (obj instanceof IntegerElement) {
 							sol.put(obj, Integer.parseInt(value));
 						} else {
-							sol.put(obj, Double.parseDouble(value));
+							double fullVal = Double.parseDouble(value);
+							double trimmed = Math.round(fullVal * 1000.0) / 1000.0;
+							sol.put(obj, trimmed);
 						}
 					}
 				} else {
@@ -515,6 +518,8 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		}
 		else {
 			System.out.println("Unsatisfiable numerical problem (trying to get solution...)");
+			//null means no soln found
+			return null;
 		}		
 		return sol;
 	}

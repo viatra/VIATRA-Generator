@@ -156,6 +156,7 @@ class ViatraReasoner extends LogicReasoner {
 		val transformationTime = transformationFinished - transformationStartTime
 		val solverStartTime = System.nanoTime
 
+		println(">>begin exploration")
 		var boolean stoppedByTimeout
 		try {
 			stoppedByTimeout = dse.startExplorationWithTimeout(strategy, configuration.runtimeLimit * 1000);
