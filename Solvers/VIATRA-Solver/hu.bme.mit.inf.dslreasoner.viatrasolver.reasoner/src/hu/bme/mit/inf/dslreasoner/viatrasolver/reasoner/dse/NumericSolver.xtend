@@ -131,7 +131,6 @@ class NumericSolver {
 	}
 	def boolean currentSatisfiable() {
 		val int phase = determinePhase()
-		//TODO generalize this
 		isSatisfiable(this.constraint2CurrentUnitPropagationPrecondition, phase)
 	}
 	
@@ -223,7 +222,11 @@ class NumericSolver {
 			}
 		}	
 		this.runtime+=System.nanoTime-start
-		if (phase == 2) finalResult = isSatisfiable(matches, 3)
+		//STRATEGY
+		if (phase == 2) {
+			if (!finalResult) return finalResult
+			else finalResult = isSatisfiable(matches, 3)
+		}
 		return finalResult
 	}
 	

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -96,7 +95,6 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	}
 	
 	private Process callDrealDocker(List<String> numProbContents, boolean getModel) throws IOException, InterruptedException {
-		//TODO currently not working for Linux
 		String numProbContentStr = String.join("\\n", numProbContents);
 		List<String> drealCmd = new ArrayList<String>(Arrays.asList(
 						"docker", "exec", containerName,
@@ -169,6 +167,11 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		if (!(e instanceof XBinaryOperation)) {
 			throw new Exception ("error in check expression!!!");
 		}
+		
+		//should only make a difference if we are filling in variables during generation
+		//basically, if we are using a strategy
+		//TODO do this for z3
+		if (! hasUnfilledVariable(e, aMatch)) return null;
 
 		String name = ((XBinaryOperation) e).getFeature().getQualifiedName();
 
@@ -200,6 +203,33 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		}
 
 		return "(" + operator + " " + left_operand + " " + right_operand + ")";
+	}
+	
+	private boolean hasUnfilledVariable(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> m) throws Exception {
+		
+		if (e instanceof XFeatureCall) {
+			PrimitiveElement obj = m.get(((XFeatureCall) e).getFeature());
+			return !obj.isValueSet();
+		}
+		if (e instanceof XNumberLiteral) return false;
+		if (e instanceof XBinaryOperation) {
+			XBinaryOperation ebo = (XBinaryOperation) e;
+			boolean l = hasUnfilledVariable(ebo.getLeftOperand(), m);
+			boolean r = hasUnfilledVariable(ebo.getRightOperand(), m);
+			return (l || r);
+		}
+		if (e instanceof XIfExpression) {
+			XIfExpression ebo = (XIfExpression) e;
+			boolean i = hasUnfilledVariable(ebo.getIf(), m);
+			boolean t = hasUnfilledVariable(ebo.getThen(), m);
+			boolean el = hasUnfilledVariable(ebo.getElse(), m);
+			return (i || t || el);
+		}
+		if (e instanceof XBlockExpression) {
+			XExpression expr = ((XBlockExpression) e).getExpressions().get(0);
+			return hasUnfilledVariable(expr, m);
+		}
+		throw new Exception();
 	}
 
 	private String formNumericConstraintHelper(XExpression e, Map<JvmIdentifiableElement, PrimitiveElement> aMatch) throws Exception {
@@ -331,10 +361,13 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			Iterable<Map<JvmIdentifiableElement, PrimitiveElement>> matchSets = matches.get(e);
 			for (Map<JvmIdentifiableElement, PrimitiveElement> aMatch: matchSets) {
 				String constraint = formNumericConstraint(e, aMatch);
-				String negAssert = "(assert " + constraint +  ")";
-				curConstraints.add(negAssert);
+				if (constraint != null) {
+					String negAssert = "(assert " + constraint +  ")";
+					curConstraints.add(negAssert);
+				}
 			}
 		}
+		if (curConstraints.isEmpty()) return null;
 		//Add content to file
 		contents.addAll(curVar2Decl.values());
 		contents.addAll(curConstraints);
@@ -374,7 +407,11 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		long startformingProblem = System.nanoTime();
 		List<String> numProbContent = formNumericProblemInstance(matches);
 		endformingProblem = System.nanoTime()-startformingProblem;
-				
+		
+		if (numProbContent == null) {
+			endSolvingProblem = 0;
+			return true;
+		}
 		//CALL DREAL
 		long startSolvingProblem = System.nanoTime();
 		
@@ -451,7 +488,10 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		List<String> numProbContent = formNumericProblemInstance(matches);
 		endformingProblem = System.nanoTime()-startformingProblem;
 		
-		
+		if (numProbContent == null) {
+			endSolvingProblem = 0;
+			return new HashMap<PrimitiveElement, Number>();
+		}
 		//CALL DREAL
 		long startSolvingProblem = System.nanoTime();
 		
@@ -505,9 +545,9 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 						if (obj instanceof IntegerElement) {
 							sol.put(obj, Integer.parseInt(value));
 						} else {
-							double fullVal = Double.parseDouble(value);
-							double trimmed = Math.round(fullVal * 1000.0) / 1000.0;
-							sol.put(obj, trimmed);
+//							double fullVal = Double.parseDouble(value) + 0.0005;
+//							double trimmed = Math.round(fullVal * 10000.0) / 10000.0;
+							sol.put(obj, Double.parseDouble(value));
 						}
 					}
 				} else {
