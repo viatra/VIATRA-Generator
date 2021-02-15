@@ -12,9 +12,11 @@ generate {
 	
 	config = {
 		runtime = 10000,
-		log-level = normal,
-		"numeric-solver" = "dreal",
-		"scopePropagator" = "typeHierarchy"
+		log-level = full,
+		"numeric-solver" = "dreal-local",
+		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
+		"scopePropagator" = "typeHierarchy",
+		"strategy" = "crossingScenario"
 	}
 	
 	runs = 1

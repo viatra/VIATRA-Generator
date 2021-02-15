@@ -7,7 +7,7 @@ generate {
 	partial-model = { "inputs/csInitScale.xmi"}
 	solver = ViatraSolver
 	scope = {
-		#node += 15..*
+		#node += 3..*
 		,#<Lane> += 0
 		,#<Relation> += 0
 		//,#<CollisionExists> = 1

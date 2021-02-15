@@ -24,6 +24,7 @@ public class CrossingScenarioMain {
 //		Thread.sleep(2000);
 //		System.out.println(System.getProperty("java.library.path"));
 //		System.loadLibrary("z3java");
+//		String errorMessages = StandaloneScriptExecutor.executeScript("inputs/csGenScale.vsconfig");
 		String errorMessages = StandaloneScriptExecutor.executeScript("inputs/crossingScenarioGen.vsconfig");
 		if (errorMessages != null) {
 			System.out.println(errorMessages);

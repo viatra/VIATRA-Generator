@@ -21,7 +21,8 @@ generate {
 		runtime = 10000,
 		log-level = none,
 		"numeric-solver" = "dreal-local",
-		"dreal-local-path" = "../../Solvers/dreal4/bazel-bin/dreal/dreal",
+		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
+		"strategy" = "crossingScenario",
 		"ignored-attributes" = "
 			Pedestrian.xPos=*, 
 			Pedestrian.yPos=*, 
@@ -35,11 +36,12 @@ generate {
 			Vehicle.width=*, 
 			Vehicle.xSpeed=*, 
 			Vehicle.ySpeed=*, 
-			CollisionExists.collisionTime=*",
-		"scopePropagator" = "polyhedral"}
+			CollisionExists.collisionTime=*"
+			//,"scopePropagator" = "polyhedral"
+			}
 	
 	runs = 1
-	number = 3
+	number = 1
 	debug =			"outputs/debug"
 	log =			"outputs/debug/log.txt"
 	output =		"outputs/models"	

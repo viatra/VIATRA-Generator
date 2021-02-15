@@ -94,6 +94,7 @@ pattern define_actor_minYp(cs:CrossingScenario, a:Actor) {
 ////////////ADDED
 //to reduce overlap
 //NEEDED
+/*
 @Constraint(severity="error", key={a}, message="5 Actor")
 pattern define_actor_wrtLane(a:Actor) {
 	Actor.placedOn(a, lane);
@@ -106,6 +107,7 @@ pattern define_actor_wrtLane(a:Actor) {
     Actor.xPos(a, xP);
     check(xP > 0.0-1.0);
 }
+*/
 ////////////ADDED
 	
 //Minimum Distances
@@ -437,6 +439,7 @@ pattern visionBlocked_qualAbstr(a1:Actor, a2:Actor) {
 	Actor.placedOn(a2, l);
 }
 */
+/*
 @Constraint(severity="error", key={a1, a2}, message="on lanes with different orientation")
 pattern visionBlocked_qualAbstr2(a1:Actor, a2:Actor) {
 	VisionBlocked.source(ce, a1);
@@ -453,6 +456,7 @@ pattern visionBlocked_qualAbstr2(a1:Actor, a2:Actor) {
 	Actor.placedOn(a2, hl2);
 	Lane_Horizontal(hl2);
 }
+*/
 
 ////////////ADDED
 //to make decision for ITE
