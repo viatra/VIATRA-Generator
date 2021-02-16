@@ -64,9 +64,9 @@ class NumericSolver {
 		if (strategy == ExplorationStrategy.None) {
 			//initialise the specified
 			if (solverSelection == NumericSolverSelection.DREAL_DOCKER) 
-				return new NumericDrealProblemSolver(true, null)
+				return new NumericDrealProblemSolver(true, null, config.drealTimeout)
 			if (solverSelection == NumericSolverSelection.DREAL_LOCAL)
-				return new NumericDrealProblemSolver(false, drealLocalPath)
+				return new NumericDrealProblemSolver(false, drealLocalPath, config.drealTimeout)
 			if (solverSelection == NumericSolverSelection.Z3) {
 				//TODO THIS IS HARD-CODED for now
 //			val root = "/data/viatra/VIATRA-Generator";
@@ -90,7 +90,7 @@ class NumericSolver {
 //			String root = (new File(System.getProperty("user.dir"))).getParentFile().getParent();
 	        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3.so");
 	        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
-			return new NumericDynamicProblemSolver(drealLocalPath)
+			return new NumericDynamicProblemSolver(drealLocalPath, config.drealTimeout)
 		}
 	}
 	

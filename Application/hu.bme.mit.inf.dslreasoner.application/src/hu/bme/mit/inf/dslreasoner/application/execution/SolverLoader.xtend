@@ -156,6 +156,10 @@ class SolverLoader {
 						c.drealLocalPath = stringValue;	
 					}
 				}
+				if (config.containsKey("dreal-timeout")) {
+					val stringValue = config.get("dreal-timeout")
+						c.drealTimeout = Integer.parseInt(stringValue)
+				}
 				if (config.containsKey("scopePropagator")) {
 					val stringValue = config.get("scopePropagator")
 					c.scopePropagatorStrategy = switch (stringValue) {

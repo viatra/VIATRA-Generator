@@ -14,9 +14,9 @@ public class NumericDynamicProblemSolver extends NumericProblemSolver{
 //	private NumericZ3ProblemSolver z3Solver;
 	private NumericDrealProblemSolver drealSolver;
 	
-	public NumericDynamicProblemSolver(String drealLocalPath) throws IOException, InterruptedException {
+	public NumericDynamicProblemSolver(String drealLocalPath, int drealTimeout) throws IOException, InterruptedException {
 //		this.z3Solver = new NumericZ3ProblemSolver();
-		this.drealSolver = new NumericDrealProblemSolver(false, drealLocalPath);
+		this.drealSolver = new NumericDrealProblemSolver(false, drealLocalPath, drealTimeout);
 	}
 	
 	public NumericProblemSolver selectSolver(String selection) {

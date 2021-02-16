@@ -43,13 +43,14 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private Map<String, String> curVar2Decl;
 	
 	private final int TIMEOUT_DOCKER = 5000;
-	private final int TIMEOUT_LOCAL = -1;
-	private final int DEBUG_PRINT = 3;
+	private int TIMEOUT_LOCAL = -1;
+	private final int DEBUG_PRINT = 2;
 
-	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath) throws IOException, InterruptedException {
+	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath, int drealTimeout) throws IOException, InterruptedException {
 		this.useDocker = useDocker;
 		this.varMap = new HashMap<Object, String>();
 		this.drealLocalPath = drealLocalPath;
+		this.TIMEOUT_LOCAL = drealTimeout;
 		
 		if (useDocker) setupDocker();
 	}

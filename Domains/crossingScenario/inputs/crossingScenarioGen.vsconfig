@@ -22,6 +22,7 @@ generate {
 		log-level = none,
 		"numeric-solver" = "dreal-local",
 		"dreal-local-path" = "/home/models/dreal4/bazel-bin/dreal/dreal",
+		"dreal-timeout" = "10000",
 		"strategy" = "crossingScenario",
 		"ignored-attributes" = "
 			Pedestrian.xPos=*, 
