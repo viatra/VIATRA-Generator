@@ -44,7 +44,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	
 	private final int TIMEOUT_DOCKER = 5000;
 	private int TIMEOUT_LOCAL = -1;
-	private final int DEBUG_PRINT = 2;
+	private final int DEBUG_PRINT = 0;
 
 	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath, int drealTimeout) throws IOException, InterruptedException {
 		this.useDocker = useDocker;
@@ -72,6 +72,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private Process runProcess(List<String> cmd, int timeout) throws IOException, InterruptedException {
 //		String s = String.join(" ", cmd);
 //		Process p = Runtime.getRuntime().exec(s);
+		Runtime.getRuntime().exec("killall -9 dreal").waitFor();
 		Process p = (new ProcessBuilder(cmd)).start();
 //		p.waitFor();
 		//TODO timeout if needed

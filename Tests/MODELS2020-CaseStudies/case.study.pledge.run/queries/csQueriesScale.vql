@@ -1,0 +1,220 @@
+package queries
+
+import "http://www.example.com/crossingScenario"
+import "http://www.eclipse.org/emf/2002/Ecore"
+
+///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
+//Lane+Actor
+///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
+
+/////////Actor (a) on vertical lane (l) must have a.xPos=[l.rc, l.rc + l.nw]
+@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
+pattern define_placedOn_actorOnVerticalLane(a : Actor, vl:Lane_Vertical) {
+    Actor.placedOn(a, vl);
+    Actor.xPos(a, x);
+    Lane.referenceCoord(vl, r);
+    check(x <= r);
+} or {
+    Actor.placedOn(a, vl);
+    Actor.xPos(a, x);
+    Lane.referenceCoord(vl, r);
+//     //<<<<OLD>>>>
+//    Lane.numWidth(vl, w);
+//    check(x >= (r + w));
+    
+    //<<<<NEW>>>>: lanes all have width=3
+    check(x >= (r + 3.0));
+}
+
+@Constraint(severity = "error", key = {a}, message = "this defines the placedOn relation for vertical lanes")
+pattern define_placedOn_actorOnHorizLane(a : Actor, hl:Lane_Horizontal) {
+    Actor.placedOn(a, hl);
+    Actor.yPos(a, y);
+    Lane.referenceCoord(hl, r);
+    check(y <= r);
+} or {
+    Actor.placedOn(a, hl);
+    Actor.yPos(a, y);
+    Lane.referenceCoord(hl, r);
+//    //<<OLD>>
+//    Lane.numWidth(hl, w);
+//    check(y >= (r + w));
+    
+    //<<NEW>>: lanes all have width=3
+    check(y >= (r + 3.0));
+    
+}
+
+///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
+//Actor
+///////*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*-_-*//////
+
+/////----------------
+//Xpos and Ypos Bounds
+/////----------------
+
+private pattern helper_horiz_getXAndBounds(cs:CrossingScenario, a:Actor,
+	xMax:java Double, xP:java Double) {
+	Actor.placedOn(a, hl);
+	Lane_Horizontal(hl);
+	CrossingScenario.actors(cs, a);
+	CrossingScenario.xSize(cs, xMax);
+	Actor.xPos(a, xP);
+}
+
+private pattern helper_vert_getYAndBounds(cs:CrossingScenario, a:Actor,
+	yMax:java Double, yP:java Double) {
+	Actor.placedOn(a, vl);
+	Lane_Vertical(vl);
+	CrossingScenario.actors(cs, a);
+	CrossingScenario.ySize(cs, yMax);
+	Actor.yPos(a, yP);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_maxXp(cs:CrossingScenario, a:Actor) {
+	find helper_horiz_getXAndBounds(cs, a, xMax, xP); 
+	check(xP >= xMax);}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_minXp(cs:CrossingScenario, a:Actor) {
+	find helper_horiz_getXAndBounds(cs, a, xMax, xP); 
+	check(xP <= 0-xMax);}
+	
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_maxYp(cs:CrossingScenario, a:Actor) {
+	find helper_vert_getYAndBounds(cs, a, yMax, yP); 
+	check(yP >= yMax);}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_minYp(cs:CrossingScenario, a:Actor) {
+	find helper_vert_getYAndBounds(cs, a, yMax, yP); 
+	check(yP <= 0-yMax);}
+	
+//Minimum Distances
+private pattern helper_getCoords(a1:Actor, 
+	a2: Actor, x1:java Double, x2:java Double, y1:java Double, y2:java Double) {
+	Actor.xPos(a1, x1);
+	Actor.yPos(a1, y1);
+	Actor.xPos(a2, x2);
+	Actor.yPos(a2, y2);
+}
+
+//INFO may remove?
+@Constraint(severity="error", key={a1, a2}, message="x")
+pattern define_actor_minimumDistance(a1: Actor, a2: Actor) {
+	find helper_getCoords(a1, a2, x1, x2, y1, y2);
+	a1 != a2;
+	//check(dx^2 + dy^2 < 4^2)
+	check((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2) < 4*4);
+}
+
+/////----------------	
+//Xspeed and Yspeed bounds
+/////----------------
+/*
+/////////VERTICAL LANE
+@Constraint(severity="error", key={a}, message="7 Actor")
+pattern define_actor_actorOnVertLaneHasxSpeed0(a:Actor) {
+	Actor.placedOn(a, vl);
+	Lane_Vertical(vl);
+    Actor.xSpeed(a, xSpeed);
+    check(xSpeed != 0.0);
+}
+
+private pattern helper_vert_getYSpeedAndBounds(cs:CrossingScenario, a:Actor,
+	ySpeedMax:java Double, ySpeed:java Double) {
+	Actor.placedOn(a, vl);
+	Lane_Vertical(vl);
+	CrossingScenario.actors(cs, a);
+	CrossingScenario.maxYSpeed(cs, ySpeedMax);
+	Actor.ySpeed(a, ySpeed);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnVertLaneMinYs(cs:CrossingScenario, a:Actor) {
+	find helper_vert_getYSpeedAndBounds(cs, a, ySMax, yS); 
+	check(yS <= 0.0-ySMax);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnVertLaneMaxYs(cs:CrossingScenario, a:Actor) {
+	find helper_vert_getYSpeedAndBounds(cs, a, ySMax, yS); 
+	check(yS >= ySMax);
+}
+
+/////////HORIZONTAL LANE
+@Constraint(severity="error", key={a}, message="7 Actor")
+pattern define_actor_actorOnHorizLaneHasySpeed0(a:Actor) {
+	Actor.placedOn(a, hl);
+	Lane_Horizontal(hl);
+    Actor.ySpeed(a, ySpeed);
+    check(ySpeed != 0.0);
+}
+
+private pattern helper_horiz_getXSpeedAndBounds(cs:CrossingScenario, a:Actor,
+	xSpeedMax:java Double, xSpeed:java Double) {
+	Actor.placedOn(a, hl);
+	Lane_Horizontal(hl);
+	CrossingScenario.actors(cs, a);
+	CrossingScenario.maxXSpeed(cs, xSpeedMax);
+	Actor.xSpeed(a, xSpeed);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnHorizLaneMinXs(cs:CrossingScenario, a:Actor) {
+	find helper_horiz_getXSpeedAndBounds(cs, a, xSMax, xS); 
+	check(xS <= 0.0-xSMax);
+}
+
+@Constraint(severity="error", key={cs}, message="x")
+pattern define_actor_actorOnHorizLaneMaxXs(cs:CrossingScenario, a:Actor) {
+	find helper_horiz_getXSpeedAndBounds(cs, a, xSMax, xS); 
+	check(xS >= xSMax);
+}
+*/
+/////----------------
+/////WIDTH and LENGTH
+/////----------------
+
+///////pedestrian-width (3)
+@Constraint(severity="error", key={p}, message="3 Actor")
+pattern define_actor_pedestrianWidth(p:Pedestrian) {
+    Pedestrian.width(p, w);
+    check(w != 1.0);
+}
+
+/////////pedestrian-width (4)
+@Constraint(severity="error", key={p}, message="4 Actor")
+pattern define_actor_pedestrianLength(p:Pedestrian) {
+    Pedestrian.length(p, l);
+    check(l != 1.0);
+}
+
+/////////actor-width (5)
+@Constraint(severity="error", key={v}, message="5 Actor")
+pattern define_actor_vehicleWidth(v:Vehicle) {
+	Vehicle.placedOn(v, lane);
+	Lane_Vertical(lane);
+    Vehicle.width(v, w);
+    check(w != 2.0);
+} or {
+	Vehicle.placedOn(v, lane);
+	Lane_Horizontal(lane);
+    Vehicle.width(v, w);
+    check(w != 3.0);
+}
+
+/////////actor-width (6)
+@Constraint(severity="error", key={v}, message="6 Actor")
+pattern define_actor_vehicleLength(v:Vehicle) {
+	Vehicle.placedOn(v, lane);
+	Lane_Vertical(lane);
+    Vehicle.length(v, l);
+    check(l != 3.0);
+} or {
+	Vehicle.placedOn(v, lane);
+	Lane_Horizontal(lane);
+    Vehicle.length(v, l);
+    check(l != 2.0);
+}

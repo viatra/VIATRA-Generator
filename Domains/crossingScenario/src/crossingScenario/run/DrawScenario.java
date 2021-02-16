@@ -32,10 +32,12 @@ public class DrawScenario {
 	public static final int SIZE = 1000;
 	
 	public static void main(String[] args) throws IOException {
-		for (int i = 1; i <= 10; i++) {
-			drawScenario("outputs/models/"+i+".xmi", "outputs/drawnModel"+i+".png");
-			System.out.println("DONE " + i);
-		}
+		drawScenario("/home/models/VIATRA-Generator/Tests/MODELS2020-CaseStudies/case.study.pledge.run/measurements/models/StrategyNo/size01to-1r1n1rt300nsdreal-localdrto10000_16-0823/1.xmi"
+				, "outputs/drawnModelMisc.png");
+//		for (int i = 1; i <= 10; i++) {
+//			drawScenario("outputs/models/"+i+".xmi", "outputs/drawnModel"+i+".png");
+//			System.out.println("DONE " + i);
+//		}
 	}
 
 	public static File drawScenario(String pathToXmi, String saveToPath) throws IOException {

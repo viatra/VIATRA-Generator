@@ -208,10 +208,11 @@ public class SolutionStore {
         solutionTrajectory.setFitness(fitness);
 
         if (acceptOnlyGoalSolutions && !fitness.isSatisifiesHardObjectives()) {
+//        	System.out.println("NOT SAVING");
             unsavedSolutionCallbacks(context, solutionTrajectory);
             return;
         }
-
+        System.out.println("SAVING SOLUTION");
         boolean solutionSaved = solutionSaver.saveSolution(context, id, solutionTrajectory);
 
         if (solutionSaved) {

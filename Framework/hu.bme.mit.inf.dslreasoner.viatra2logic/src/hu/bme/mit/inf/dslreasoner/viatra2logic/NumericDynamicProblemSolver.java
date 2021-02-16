@@ -13,16 +13,18 @@ public class NumericDynamicProblemSolver extends NumericProblemSolver{
 	
 //	private NumericZ3ProblemSolver z3Solver;
 	private NumericDrealProblemSolver drealSolver;
+	private int timeout;
 	
 	public NumericDynamicProblemSolver(String drealLocalPath, int drealTimeout) throws IOException, InterruptedException {
 //		this.z3Solver = new NumericZ3ProblemSolver();
 		this.drealSolver = new NumericDrealProblemSolver(false, drealLocalPath, drealTimeout);
+		this.timeout = drealTimeout;
 	}
 	
 	public NumericProblemSolver selectSolver(String selection) {
 		switch (selection) {
 		case "z3":
-			return new NumericZ3ProblemSolver();
+			return new NumericZ3ProblemSolver(timeout);
 		case "dreal":
 			return this.drealSolver;
 		default:

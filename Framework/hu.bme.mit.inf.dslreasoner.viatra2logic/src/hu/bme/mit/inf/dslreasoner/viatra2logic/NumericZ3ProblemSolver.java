@@ -1,6 +1,5 @@
 package hu.bme.mit.inf.dslreasoner.viatra2logic;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +19,7 @@ import com.microsoft.z3.Context;
 import com.microsoft.z3.Expr;
 import com.microsoft.z3.IntExpr;
 import com.microsoft.z3.Model;
+import com.microsoft.z3.Params;
 import com.microsoft.z3.RealExpr;
 import com.microsoft.z3.Solver;
 import com.microsoft.z3.Status;
@@ -36,7 +36,7 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 	private Solver s;
 	private Map<Object, Expr> varMap;
 
-	public NumericZ3ProblemSolver() {
+	public NumericZ3ProblemSolver(int timeout) {
 		//FOR LINUX VM
 		//Not Elegant, but this is working for now
 //		String root = "/home/models/VIATRA-Generator";
@@ -50,6 +50,11 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 		ctx = new Context(cfg);	
 		ctx.setPrintMode(Z3_ast_print_mode.Z3_PRINT_SMTLIB_FULL);
 		s = ctx.mkSolver();
+		if (timeout != -1) {
+			Params p = ctx.mkParams();
+		    p.add("timeout", timeout);
+		    s.setParameters(p);
+		}
 		varMap = new HashMap<Object, Expr>();
 	}
 
@@ -82,7 +87,11 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 		s.add(problemInstance);
 		endformingProblem = System.nanoTime()-startformingProblem;
 		long startSolvingProblem = System.nanoTime();
-		boolean result = (s.check() == Status.SATISFIABLE);
+//		System.out.print("start - ");
+		Status soln = s.check();
+		boolean result = (soln == Status.SATISFIABLE);
+		if (soln == Status.UNKNOWN) System.err.println("TIMEOUT");
+//		System.out.println("end");
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		this.ctx.close();
 		return result;

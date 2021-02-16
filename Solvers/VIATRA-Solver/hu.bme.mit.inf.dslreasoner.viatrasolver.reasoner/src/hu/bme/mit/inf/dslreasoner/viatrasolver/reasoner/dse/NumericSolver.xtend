@@ -55,7 +55,7 @@ class NumericSolver {
 		this.caching = caching
 		this.drealLocalPath = config.drealLocalPath
 		this.strategy = config.strategy
-		this.t = new NumericTranslator(createNumericTranslator(config))
+		this.t = new NumericTranslator(createNumericTranslator(config), config.drealTimeout)
 	}
 	
 	def createNumericTranslator(ViatraReasonerConfiguration config) {
@@ -77,7 +77,7 @@ class NumericSolver {
 		        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
 	//	        System.load("libz3.so");
 	//	        System.load("libz3java.so");
-				return new NumericZ3ProblemSolver
+				return new NumericZ3ProblemSolver(config.drealTimeout)
 			}
 		}
 		else {
@@ -150,9 +150,9 @@ class NumericSolver {
 			//Filter constraints if there are phase-related restricutions
 			//null whitelist means accept everything
 			
-			println("<<<<START-STEP>>>> (" + phase + ")")
+//			println("<<<<START-STEP>>>> (" + phase + ")")
 			if (phase == -2) {
-				println("Skipping numeric check")
+//				println("Skipping numeric check")
 				//TODO Big assumption
 				return true
 			}
@@ -235,7 +235,7 @@ class NumericSolver {
 	
 	def selectSolver(int phase) {
 		if (strategy === ExplorationStrategy.CrossingScenario){
-			if (phase == 1) return "dreal"
+			if (phase == 1) return "z3"
 			else return "dreal"
 		}
 		return "irrelevant"

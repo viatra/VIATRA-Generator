@@ -39,6 +39,7 @@ class RunGeneratorConfig {
 	static var RUNTIME = 1500
 	static var NUM_SOLVER = "z3"
 	static var DREAL_PATH = ""
+	static var DREAL_TIMEOUT = "-2"
 //	static var SCOPE_PROPAGATOR = "typeHierarchy"
 
 	static var DOMAIN = "FamilyTree" // "FamilyTree", "Satellite", "Taxation"
@@ -75,6 +76,9 @@ class RunGeneratorConfig {
 		val drp = new Option("drp", "drealPath", true, "path to dreal executeable")
 		options.addOption(drp)
 		
+		val drto = new Option("drto", "drealTimeout", true, "drealTimeout")
+		options.addOption(drto)
+		
 //		val sp = new Option("sp", "scopePropagator", true, "scope Propagator")
 //		options.addOption(sp)
 //
@@ -82,7 +86,7 @@ class RunGeneratorConfig {
 		options.addOption(d)
 
 		val hh = new Option("hh", "household", true, "number of households")
-		options.addOption(hh)
+		options.addOption(hh) 
 
 		val CommandLineParser parser = new BasicParser
 		val formatter = new HelpFormatter()
@@ -110,6 +114,8 @@ class RunGeneratorConfig {
 		if(nsIn !== null && nsIn.equals("dreal")) NUM_SOLVER = "dreal-local"
 		val drpIn = cmd.getOptionValue("drealPath")
 		if(drpIn !== null) DREAL_PATH = drpIn
+		val drtoIn = cmd.getOptionValue("drealTimeout")
+		if(drtoIn !== null) DREAL_TIMEOUT = drtoIn
 //		val spIn = cmd.getOptionValue("scopePropagator")
 //		if(spIn !== null ) SCOPE_PROPAGATOR = spIn
 		val dIn = cmd.getOptionValue("domain")
@@ -136,14 +142,16 @@ class RunGeneratorConfig {
 			", SIZE=" + SIZE_LB + "to" + SIZE_UB + 
 			", Runs=" + RUNS + 
 			", ModelsPerRun=" + MODELS + 
-			", Runtime=" + RUNTIME + ">>")
+			", Runtime=" + RUNTIME + 
+			", dreal-timeout=" + DREAL_TIMEOUT + ">>")
 		if (isTaxation) println("<<Households: " + HOUSEHOLD + ">>")
 
 		var naming = DOMAIN + "/size" + toStr(SIZE_LB) + "to" + toStr(SIZE_UB) +
 					"r" + RUNS + 
 					"n" + MODELS + 
 					"rt" + RUNTIME +
-					"ns" + NUM_SOLVER
+					"ns" + NUM_SOLVER +
+					"drto" + DREAL_TIMEOUT
 		if (isTaxation) naming = naming + "hh" + HOUSEHOLD
 		val outputPath = "measurements/" + "models/" + naming + "_" + formattedDate
 		val debugPath = "measurements/" + "debug/" + naming + "_" + formattedDate
@@ -211,6 +219,10 @@ class RunGeneratorConfig {
 		numSolverEntry.value = NUM_SOLVER
 		val drealPathEntry = configScope.entries.get(2) as CustomEntry
 		drealPathEntry.value = DREAL_PATH
+		if (DREAL_TIMEOUT != "-2") {			
+			val drealTimeoutEntry = configScope.entries.get(3) as CustomEntry
+			drealTimeoutEntry.value = DREAL_TIMEOUT
+		}
 //		val scopePropEntry = configScope.entries.get(3) as CustomEntry
 //		scopePropEntry.value = SCOPE_PROPAGATOR
 

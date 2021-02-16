@@ -222,6 +222,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //					}	
 //				}
 				
+//				System.out.println("--------NEXT");
 				boolean consistencyCheckResult = checkConsistency(currentTrajectoryWithFitness);
 				if(consistencyCheckResult == true) { continue mainLoop; }
 

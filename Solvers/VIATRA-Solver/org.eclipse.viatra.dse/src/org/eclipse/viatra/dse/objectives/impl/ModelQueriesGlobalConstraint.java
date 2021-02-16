@@ -87,6 +87,8 @@ public class ModelQueriesGlobalConstraint implements IGlobalConstraint {
         for (ViatraQueryMatcher<? extends IPatternMatch> matcher : matchers) {
             if ((type.equals(ModelQueryType.NO_MATCH) && matcher.countMatches() > 0)
                     || (type.equals(ModelQueryType.MUST_HAVE_MATCH) && matcher.countMatches() == 0)) {
+//            	System.out.println(type + " " + matcher.countMatches());
+//            	System.out.println(matcher.getSpecification().getSimpleName());
                 return false;
             }
         }

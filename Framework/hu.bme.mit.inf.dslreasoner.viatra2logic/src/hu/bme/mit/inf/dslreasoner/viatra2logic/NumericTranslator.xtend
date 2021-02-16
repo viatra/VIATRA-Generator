@@ -17,6 +17,7 @@ class NumericTranslator {
 	
 	private XExpressionExtractor extractor = new XExpressionExtractor();
 	private NumericProblemSolver numericSolver;
+	private int timeout;
 	
 	long formingProblemTime=0;
 	long solvingProblemTime=0;
@@ -29,8 +30,9 @@ class NumericTranslator {
 			}
 		}
 		
-	new(NumericProblemSolver numericProblemSolver){
+	new(NumericProblemSolver numericProblemSolver, int timeout){
 		this.numericSolver = numericProblemSolver
+		this.timeout = timeout;
 	}
 	
 	def Map<JvmIdentifiableElement, PrimitiveElement> arrayToMap(Object[] tuple, ArrayList<JvmIdentifiableElement> variablesInOrder) {
@@ -63,7 +65,7 @@ class NumericTranslator {
 			val NumericDynamicProblemSolver dynamicSolver = numericSolver as NumericDynamicProblemSolver
 			return dynamicSolver.selectSolver(selection);
 		} else{
-			if (numericSolver instanceof NumericZ3ProblemSolver) return new NumericZ3ProblemSolver
+			if (numericSolver instanceof NumericZ3ProblemSolver) return new NumericZ3ProblemSolver(this.timeout)
 			return numericSolver;
 		}
 	}

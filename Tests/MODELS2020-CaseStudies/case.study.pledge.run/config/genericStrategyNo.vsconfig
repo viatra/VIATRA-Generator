@@ -1,0 +1,64 @@
+import epackage	"../../../Domains/crossingScenario/model/crossingScenario.ecore"
+import viatra	"queries/csQueriesStrategy.vql"
+import epackage "../../../Domains/hu.bme.mit.inf.dslreasoner.domains.satellite/model/satellite.ecore"
+import viatra "queries/SatelliteQueries.vql"
+
+generate {
+	metamodel = { package satellite }
+	constraints = { package hu.bme.mit.inf.dslreasoner.domains.satellite.queries }
+	partial-model = { "inputs/SatelliteInstance.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node += 10..*
+	}
+
+	config = {
+		runtime = 10000,
+		"numeric-solver" = "z3",
+		log-level = none
+	}
+
+	runs = 1
+
+	output = "measurements/debug/warmup"
+}
+
+generate {
+	metamodel = { package crossingScenario }
+	constraints = { package queries}
+	partial-model = { "inputs/crossScen4Strat.xmi"}
+	solver = ViatraSolver
+	scope = {
+		#node += 0..*
+		,#<Lane> += 0
+		,#<Relation> += 0
+	}
+	
+	config = {
+		runtime = 10000,
+		"numeric-solver" = "z3",
+		"dreal-local-path" = "enterPathHere",
+		"dreal-timeout" = "10000",
+		log-level = none,
+		"ignored-attributes" = "
+			Pedestrian.xPos=*, 
+			Pedestrian.yPos=*, 
+			Pedestrian.length=*,
+			Pedestrian.width=*, 
+			Pedestrian.xSpeed=*, 
+			Pedestrian.ySpeed=*, 
+			Vehicle.xPos=*, 
+			Vehicle.yPos=*, 
+			Vehicle.length=*,
+			Vehicle.width=*, 
+			Vehicle.xSpeed=*, 
+			Vehicle.ySpeed=*, 
+			CollisionExists.collisionTime=*"}
+	
+	runs = 1
+	number = 10
+	debug =			"outputs/debug"
+	log =			"outputs/debug/log.txt"
+	output =		"outputs/models"	
+	statistics =	"outputs/debug/statistics.csv"
+}
