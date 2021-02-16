@@ -10,6 +10,8 @@ import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XUnaryOperation
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.PrimitiveTypeReference
 import hu.bme.mit.inf.dslreasoner.logic.model.logiclanguage.RealTypeReference
+import org.eclipse.xtext.xbase.XIfExpression
+import org.eclipse.xtext.xbase.XBlockExpression
 
 class PExpressionGenerator {
 	static val N_Base = "org.eclipse.xtext.xbase.lib."
@@ -112,5 +114,18 @@ class PExpressionGenerator {
 	
 	def dispatch CharSequence translateExpression(XExpression expression, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
 		throw new UnsupportedOperationException('''Unsupported expression in check or eval: «expression.class.name», «expression»"''')
+	}
+	
+	def dispatch CharSequence translateExpression(XIfExpression e, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
+		val i = e.^if.translateExpression(valueName,variable2Type)
+		val t = e.then.translateExpression(valueName,variable2Type)
+		val el = e.^else.translateExpression(valueName,variable2Type)
+		
+		return '''(if(«i»){«t»}else{«el»})'''
+	}
+	
+	def dispatch CharSequence translateExpression(XBlockExpression e, Map<PVariable,String> valueName, Map<PVariable, PrimitiveTypeReference> variable2Type) {
+		//Assuming 1-item blocks only
+		return (e as XBlockExpression).expressions.get(0).translateExpression(valueName,variable2Type)
 	}
 }

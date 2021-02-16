@@ -43,7 +43,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 	private Map<String, String> curVar2Decl;
 	
 	private final int TIMEOUT_DOCKER = 5000;
-	private final int TIMEOUT_LOCAL = 100000;
+	private final int TIMEOUT_LOCAL = -1;
 	private final int DEBUG_PRINT = 3;
 
 	public NumericDrealProblemSolver(boolean useDocker, String drealLocalPath) throws IOException, InterruptedException {
@@ -75,7 +75,9 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 //		p.waitFor();
 		//TODO timeout if needed
 		long startTime = System.nanoTime();
-		if (!p.waitFor(timeout, TimeUnit.MILLISECONDS)) {
+		if (timeout == -1) {
+			p.waitFor();
+		} else if (!p.waitFor(timeout, TimeUnit.MILLISECONDS)) {
 			p.destroy();
 			if (p.isAlive()) {
 			    p.destroyForcibly();
@@ -406,6 +408,7 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//CREATE DREAL STM2 FILE CONTENTS
 		long startformingProblem = System.nanoTime();
 		List<String> numProbContent = formNumericProblemInstance(matches);
+		if (DEBUG_PRINT > 2) printOutput(numProbContent);
 		endformingProblem = System.nanoTime()-startformingProblem;
 		
 		if (numProbContent == null) {
@@ -446,7 +449,6 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 			System.out.println(result);
 		}
 		if (DEBUG_PRINT > 2) {
-			printOutput(numProbContent);
 			if (outputs != null) printOutput(outputs.get(0));
 		}
 		

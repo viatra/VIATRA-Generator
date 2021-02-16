@@ -24,10 +24,12 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.viatra.dse.base.ThreadContext
+import org.eclipse.viatra.dse.objectives.Fitness
 import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation
+import org.eclipse.viatra.dse.objectives.IObjective
 
 class NumericSolver {
 	val ModelGenerationMethod method
@@ -206,7 +208,6 @@ class NumericSolver {
 					}
 				} else {
 					if (needsFilling){
-						//TODO ASSUME Always True
 						//GET LIST OF VARS TO FILL
 						val fillMap = t.delegateGetSolution(dataObjects, propagatedConstraints, selectSolver(phase))
 						if (fillMap === null) finalResult = false
@@ -225,7 +226,9 @@ class NumericSolver {
 		//STRATEGY
 		if (phase == 2) {
 			if (!finalResult) return finalResult
-			else finalResult = isSatisfiable(matches, 3)
+			else {
+				finalResult = isSatisfiable(matches, 3)
+			}
 		}
 		return finalResult
 	}
@@ -243,6 +246,14 @@ class NumericSolver {
 		// -1 : take all numeric constraints
 		// -2 : SKIP (take no numeric constraints)
 		if (strategy == ExplorationStrategy.CrossingScenario) {
+//			//if has structural (non-WF) fitness issues, skip numeric handling
+//			val IObjective ob = threadContext.objectives.filter[it instanceof ModelGenerationCompositeObjective].get(0)
+//			val compo = ob as ModelGenerationCompositeObjective
+//			if (compo.getNonWFFitness(threadContext) > 0) {
+//				println("bootleg numeric-skip")
+//				return -2;
+//			}
+			
 			//assumikng standard input, w/ visinBlocked and CollisionExists between pre-included actors
 			val PartialInterpretation head = threadContext.getModel() as PartialInterpretation;
 			val List<PartialRelationInterpretation> relations = head.getPartialrelationinterpretation();

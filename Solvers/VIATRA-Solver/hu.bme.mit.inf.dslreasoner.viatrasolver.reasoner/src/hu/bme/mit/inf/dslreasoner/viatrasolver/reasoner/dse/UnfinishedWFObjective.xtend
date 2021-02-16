@@ -37,6 +37,12 @@ class UnfinishedWFObjective implements IObjective {
 	override getComparator() { Comparators.LOWER_IS_BETTER }
 
 	override getFitness(ThreadContext context) {
+//		//MEGA ASSUMPTION Below TODO
+//		//if has no unfilled variables, return 0
+//		val model = context.getModel as PartialInterpretation
+//		val unfilledDataObjects = model.newElements.filter(PrimitiveElement).filter[!model.openWorldElements.contains(it)].filter[!it.isValueSet].toList
+//		if (unfilledDataObjects.isEmpty) return 0.0
+		
 		var sumOfMatches = 0
 		for (matcher : matchers) {
 			val number = matcher.countMatches
