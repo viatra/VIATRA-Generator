@@ -308,16 +308,16 @@
                 <path d="M311 319 L322 319 L322 330 L311 330 L311 319 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath89">
-                <path d="M271 83 L346 83 L346 98 L271 98 L271 83 Z"/>
+                <path d="M356 89 L431 89 L431 104 L356 104 L356 89 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath90">
-                <path d="M270 160 L331 160 L331 175 L270 175 L270 160 Z"/>
+                <path d="M298 160 L359 160 L359 175 L298 175 L298 160 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath91">
-                <path d="M262 66 L271 66 L271 76 L262 76 L262 66 Z"/>
+                <path d="M346 66 L355 66 L355 76 L346 76 L346 66 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath92">
-                <path d="M262 187 L271 187 L271 197 L262 197 L262 187 Z"/>
+                <path d="M290 187 L299 187 L299 197 L290 197 L290 187 Z"/>
             </clipPath>
             <clipPath clipPathUnits="userSpaceOnUse" id="clipPath93">
                 <path d="M410 66 L421 66 L421 77 L410 77 L410 66 Z"/>
@@ -471,13 +471,15 @@
             <line clip-path="url(#clipPath77)" fill="none" x1="316" x2="316" y1="338" y2="320" stroke="rgb(136,136,136)"/>
             <polygon fill="white" clip-path="url(#clipPath88)" points=" 316 320 320 328 312 328" stroke="none"/>
             <polygon fill="none" clip-path="url(#clipPath88)" points=" 316 320 320 328 312 328" stroke="rgb(136,136,136)"/>
-            <line clip-path="url(#clipPath77)" fill="none" x1="266" x2="266" y1="67" y2="195"/>
-            <text xml:space="preserve" x="272" y="94" clip-path="url(#clipPath89)" stroke="none">[1..1] placedOn</text>
-            <text xml:space="preserve" x="271" y="171" clip-path="url(#clipPath90)" stroke="none">[0..*] actors</text>
-            <line clip-path="url(#clipPath91)" fill="none" x1="269" x2="266" y1="74" y2="67"/>
-            <line clip-path="url(#clipPath91)" fill="none" x1="266" x2="263" y1="67" y2="74"/>
-            <line clip-path="url(#clipPath92)" fill="none" x1="263" x2="266" y1="188" y2="195"/>
-            <line clip-path="url(#clipPath92)" fill="none" x1="266" x2="269" y1="195" y2="188"/>
+            <line clip-path="url(#clipPath77)" fill="none" x1="350" x2="350" y1="67" y2="131"/>
+            <line clip-path="url(#clipPath77)" fill="none" x1="350" x2="294" y1="131" y2="131"/>
+            <line clip-path="url(#clipPath77)" fill="none" x1="294" x2="294" y1="131" y2="195"/>
+            <text xml:space="preserve" x="357" y="100" clip-path="url(#clipPath89)" stroke="none">[1..1] placedOn</text>
+            <text xml:space="preserve" x="299" y="171" clip-path="url(#clipPath90)" stroke="none">[0..*] actors</text>
+            <line clip-path="url(#clipPath91)" fill="none" x1="353" x2="350" y1="74" y2="67"/>
+            <line clip-path="url(#clipPath91)" fill="none" x1="350" x2="347" y1="67" y2="74"/>
+            <line clip-path="url(#clipPath92)" fill="none" x1="291" x2="294" y1="188" y2="195"/>
+            <line clip-path="url(#clipPath92)" fill="none" x1="294" x2="297" y1="195" y2="188"/>
             <line clip-path="url(#clipPath77)" fill="none" x1="431" x2="431" y1="152" y2="85" stroke="rgb(136,136,136)"/>
             <line clip-path="url(#clipPath77)" fill="none" x1="431" x2="415" y1="85" y2="85" stroke="rgb(136,136,136)"/>
             <line clip-path="url(#clipPath77)" fill="none" x1="415" x2="415" y1="85" y2="67" stroke="rgb(136,136,136)"/>
