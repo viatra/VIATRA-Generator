@@ -20,6 +20,7 @@ import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTFunctionDeclaration
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTIntLiteral
 import java.util.TreeSet
 import hu.bme.mit.inf.dslreasoner.smtLanguage.SMTRealLiteral
+import java.math.BigDecimal
 
 @Data
 class ValueType {
@@ -171,8 +172,8 @@ class SmtModelInterpretation implements LogicModelInterpretation {
 	override getAllRealsInStructure() {
 		val res = new TreeSet
 		for(literal : document.eAllContents.filter(SMTRealLiteral).toIterable) {
-			res += literal.value
-			res += -literal.value
+			res += literal.value.doubleValue
+			res += -literal.value.doubleValue
 		}
 		res
 	}

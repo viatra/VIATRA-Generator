@@ -80,6 +80,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1
 import org.eclipse.xtext.xbase.lib.Functions.Function2
 
 import static extension hu.bme.mit.inf.dslreasoner.util.CollectionsUtil.*
+import java.math.BigDecimal
 
 class Logic2SmtMapper{
 	val extension SmtLanguageFactory factory = SmtLanguageFactory.eINSTANCE
@@ -525,7 +526,7 @@ class Logic2SmtMapper{
 		if(literal.value>=0) { new NumericSubterm(#[],#[],createSMTIntLiteral  => [value = literal.value])}
 		else {new NumericSubterm(#[],#[],createSMTMinus => [ leftOperand = (createSMTIntLiteral => [value = - (literal.value) ] ) ]) } }
 	def dispatch protected TransformedSubterm transformTerm(RealLiteral literal, Logic2SmtMapperTrace trace, Map<Variable, SMTSortedVariable> variables) {
-		new NumericSubterm(#[],#[],createSMTRealLiteral => [value = literal.value])	}
+		new NumericSubterm(#[],#[],createSMTRealLiteral => [value = BigDecimal.valueOf(literal.value)])	}
 	
 	///////////////////////////////////////////////////////
 	// NumericOperators
