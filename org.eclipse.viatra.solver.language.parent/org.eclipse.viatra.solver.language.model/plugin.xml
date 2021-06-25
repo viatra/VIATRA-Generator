@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated problem -->
+      <package
+            uri="http://www.eclipse.org/viatra/solver/language/model/Problem"
+            class="org.eclipse.viatra.solver.language.model.problem.ProblemPackage"
+            genModel="src/main/resources/model/problem.genmodel"/>
+   </extension>
+
+</plugin>

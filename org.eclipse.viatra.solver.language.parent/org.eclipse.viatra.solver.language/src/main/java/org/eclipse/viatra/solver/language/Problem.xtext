@@ -1,0 +1,88 @@
+grammar org.eclipse.viatra.solver.language.Problem with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "http://www.eclipse.org/viatra/solver/language/model/Problem"
+
+Problem:
+	statements+=Statement*;
+
+Statement:
+	ClassDeclaration | PredicateDefinition | Assertion | ScopeDeclaration;
+
+ClassDeclaration:
+	abstract?="abstract"? "class"
+	name=ID
+	("extends" (superTypes+=[ClassDeclaration] |
+	"[" (superTypes+=[ClassDeclaration] ("," superTypes+=[ClassDeclaration])*)? "]") |
+	referenceDeclarations+=ReferenceDeclaration)?
+	("," referenceDeclarations+=ReferenceDeclaration)*
+	".";
+
+ReferenceDeclaration:
+	(containment?="contains" | "refers")
+	referenceType=[ClassDeclaration]
+	"[" multiplicity=Multiplicity "]"
+	name=ID
+	("opposite" opposite=[ReferenceDeclaration|QualifiedName])?;
+
+PredicateDefinition:
+	(error?="error" "pred"? | "pred")
+	name=ID
+	"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")"
+	(":=" bodies+=Conjunction (";" bodies+=Conjunction)*)?
+	".";
+
+Parameter:
+	parameterType=[ClassDeclaration] name=ID;
+
+Conjunction:
+	literals+=Literal ("," literals+=Literal)*;
+
+Literal:
+	Atom | NegativeLiteral;
+
+NegativeLiteral:
+	"!" atom=Atom;
+
+Atom:
+	relation=[Relation|QualifiedName]
+	transitiveClosure?="+"?
+	"(" (arguments+=[Variable] ("," arguments+=[Variable])*)? ")";
+
+Assertion:
+	(relation=[Relation|QualifiedName]
+	"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+	":" value=LogicValue |
+	value=ShortLogicValue?
+	relation=[Relation|QualifiedName]
+	"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")")
+	".";
+
+enum LogicValue:
+	TRUE="true" | FALSE="false" | UNKNOWN="unknown";
+
+enum ShortLogicValue returns LogicValue:
+	FALSE="!" | UNKNOWN="?";
+
+ScopeDeclaration:
+	"scope" typeScopes+=TypeScope ("," typeScopes+=TypeScope)* ".";
+
+TypeScope:
+	targetType=[ClassDeclaration]
+	(increment?="+=" | "=")
+	multiplicity=Multiplicity;
+
+Multiplicity:
+	RangeMultiplicity | ExactMultiplicity;
+
+RangeMultiplicity:
+	lowerBound=INT ".." upperBound=UpperBound;
+
+ExactMultiplicity:
+	exactValue=INT;
+
+UpperBound returns ecore::EInt:
+	INT | "*";
+
+QualifiedName:
+	ID ("::" ID)*;

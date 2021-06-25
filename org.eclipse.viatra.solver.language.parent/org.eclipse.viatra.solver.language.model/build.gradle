@@ -1,0 +1,9 @@
+dependencies {
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore'
+}
+
+sourceSets {
+	main {
+		java.srcDirs += ['src/main/emf-gen']
+	}
+}

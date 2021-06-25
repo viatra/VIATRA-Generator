@@ -1,0 +1,7 @@
+bin/
+xtend-gen/
+.gradle/
+build/
+*._trace
+*.xtendbin
+org.eclipse.buildship.core.prefs

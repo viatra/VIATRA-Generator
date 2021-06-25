@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<title>Example Web Editor</title>
+<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.41.0/lib/codemirror.css" />
+<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.41.0/addon/hint/show-hint.css" />
+<link rel="stylesheet" type="text/css" href="xtext/2.26.0.M1/xtext-codemirror.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Example Problem Web Editor</h1>
+        </div>
+        <div class="content">
+            <div class="xtext-editor"
+                 data-editor-xtext-lang="problem"
+                 data-editor-enable-formatting-action="true"
+                 data-editor-send-full-text="false"
+            ><pre>class Family
+    contains Person[0..*] members.
+
+class Person
+    refers Person[0..*] children opposite parent,
+    refers Person[0..1] parent opposite children.
+
+error loop(Person p) := children+(p, p).
+
+error multipleRoots(Person p, Person q) :=
+    !equals(p, q), !parent(p, _), !parent(q, _).
+
+Family(family).
+members(family, anne).
+members(family, bob).
+members(family, ciri).
+children(anne, ciri).
+?children(bob, ciri).
+
+scope Family = 1, Person += 5..10.</pre></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="webjars/requirejs/2.3.6/require.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>

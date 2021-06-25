@@ -1,0 +1,4 @@
+abstract class node
+	refers node[0..*] equals opposite equals.
+
+predicate exists(node node).
