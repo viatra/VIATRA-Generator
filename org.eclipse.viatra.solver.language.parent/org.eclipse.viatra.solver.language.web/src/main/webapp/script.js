@@ -11,7 +11,7 @@ require.config({
     },
     packages: [{
         name: "codemirror",
-        location: "webjars/codemirror/5.41.0",
+        location: "webjars/codemirror/5.52.2",
         main: "lib/codemirror"
     }]
 });

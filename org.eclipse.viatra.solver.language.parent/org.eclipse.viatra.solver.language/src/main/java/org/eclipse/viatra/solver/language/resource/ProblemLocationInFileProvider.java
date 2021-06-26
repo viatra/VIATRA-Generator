@@ -3,6 +3,8 @@ package org.eclipse.viatra.solver.language.resource;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.viatra.solver.language.ProblemUtil;
+import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
@@ -14,23 +16,10 @@ import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.Statement;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.ITextRegion;
 
-import com.google.inject.Inject;
-
 public class ProblemLocationInFileProvider extends DefaultLocationInFileProvider {
-	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
-
-	@Inject
-	private IScopeProvider scopeProvider;
-
 	@Override
 	protected ITextRegion doGetTextRegion(EObject obj, RegionDescription query) {
 		if (obj instanceof Node) {
@@ -51,21 +40,9 @@ public class ProblemLocationInFileProvider extends DefaultLocationInFileProvider
 	}
 	
 	protected ITextRegion getNewNodeTextRegion(Node node, RegionDescription query) {
-		QualifiedName nodeName = qualifiedNameProvider.getFullyQualifiedName(node);
-		if (nodeName == null || nodeName.getSegmentCount() <= 1) {
-			return null;
-		}
-		if (ProblemDerivedStateComputer.NEW_NODE.equals(nodeName.getLastSegment())) {
-			QualifiedName className = nodeName.skipLast(1);
-			IScope classScope = scopeProvider.getScope(node, ProblemPackage.Literals.ASSERTION__RELATION);
-			IEObjectDescription description = classScope.getSingleElement(className);
-			if (description == null) {
-				return null;
-			}
-			EObject classDeclaration = description.getEObjectOrProxy();
-			if (!classDeclaration.eIsProxy()) {
-				return doGetTextRegion(classDeclaration, query);
-			}
+		if (ProblemUtil.isNewNode(node)) {
+			EObject container = node.eContainer();
+			return doGetTextRegion(container, query);
 		}
 		return null;
 	}
@@ -90,6 +67,9 @@ public class ProblemLocationInFileProvider extends DefaultLocationInFileProvider
 
 	protected ITextRegion getVariableTextRegion(ImplicitVariable variable, RegionDescription query) {
 		EObject container = variable.eContainer();
+		if (container instanceof Argument) {
+			return getArgumentTextRegion((Argument) container, query);
+		}
 		if (container instanceof Conjunction) {
 			return getFirstReferenceToVariableInConjunction(variable, (Conjunction) container, query);
 		}
@@ -121,10 +101,15 @@ public class ProblemLocationInFileProvider extends DefaultLocationInFileProvider
 
 	protected ITextRegion getFirstReferenceToVariableInAtom(ImplicitVariable variable, Atom atom,
 			RegionDescription query) {
-		int index = atom.getArguments().indexOf(variable);
-		if (index >= 0) {
-			return doGetLocationOfFeature(atom, ProblemPackage.Literals.ATOM__ARGUMENTS, index, query);
+		for (Argument argument : atom.getArguments()) {
+			if (argument.getVariable().equals(variable)) {
+				return getArgumentTextRegion(argument, query);
+			}
 		}
 		return ITextRegion.EMPTY_REGION;
+	}
+	
+	protected ITextRegion getArgumentTextRegion(Argument argument, RegionDescription query) {
+		return doGetLocationOfFeature(argument, ProblemPackage.Literals.ARGUMENT__VARIABLE, 0, query);
 	}
 }

@@ -157,6 +157,24 @@ public interface ProblemFactory extends EFactory {
 	ExactMultiplicity createExactMultiplicity();
 
 	/**
+	 * Returns a new object of class '<em>Unbounded Multiplicity</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unbounded Multiplicity</em>'.
+	 * @generated
+	 */
+	UnboundedMultiplicity createUnboundedMultiplicity();
+
+	/**
+	 * Returns a new object of class '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Argument</em>'.
+	 * @generated
+	 */
+	Argument createArgument();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

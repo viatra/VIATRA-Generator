@@ -47,6 +47,7 @@ public class NegativeLiteralImpl extends MinimalEObjectImpl.Container implements
 	 * @ordered
 	 */
 	protected EList<ImplicitVariable> implicitVariables;
+
 	/**
 	 * The cached value of the '{@link #getAtom() <em>Atom</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -11,7 +11,9 @@ dependencies {
 	compile "org.webjars:requirejs:2.3.6"
 	compile "org.webjars:requirejs-text:2.0.15"
 	compile "org.webjars:jquery:3.6.0"
-	compile "org.webjars:codemirror:5.41.0"
+	// CodeMirror 5.53.0 and later is incompatible with Xtext due to
+	// https://github.com/codemirror/CodeMirror/commit/b2d26b4ccb1d0994ae84d18ad8b84018de176da9#commitcomment-41525744
+	compile "org.webjars.npm:codemirror:5.52.2"
 	providedCompile "org.eclipse.jetty:jetty-annotations:9.4.42.v20210604"
 	providedCompile "org.eclipse.jetty:jetty-rewrite:9.4.42.v20210604"
 	providedCompile "org.slf4j:slf4j-simple:1.7.31"

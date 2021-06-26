@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.Parameter;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighlightingCalculator {
@@ -33,8 +35,11 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 	private static final String PREDICATE_CLASS = "problem-predicate";
 	private static final String ERROR_CLASS = "problem-error";
 	private static final String NODE_CLASS = "problem-node";
+	private static final String ENUM_NODE_CLASS = "problem-enum-node";
+	private static final String NEW_NODE_CLASS = "problem-new-node";
 	private static final String PARAMETER_CLASS = "problem-parameter";
 	private static final String VARIABLE_CLASS = "problem-variable";
+	private static final String SINGLETON_VARIABLE_CLASS = "problem-singleton-variable";
 
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
@@ -49,8 +54,8 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 	
 	protected void highlightName(EObject object, IHighlightedPositionAcceptor acceptor,
 			CancelIndicator cancelIndicator) {
-		String highlightClass = getHighlightClass(object);
-		if (highlightClass != null) {
+		String[] highlightClass = getHighlightClass(object);
+		if (highlightClass.length > 0) {
 			EAttribute nameAttribute = SimpleAttributeResolver.NAME_RESOLVER.getAttribute(object);
 			if (nameAttribute != null) {
 				highlightFeature(acceptor, object, nameAttribute, highlightClass);
@@ -65,72 +70,84 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 				continue;
 			}
 			operationCanceledManager.checkCanceled(cancelIndicator);
-			Object value = object.eGet(reference);
-			if (value instanceof EList) {
+			if (reference.isMany()) {
 				@SuppressWarnings("unchecked")
-				EList<? extends EObject> values = (EList<? extends EObject>) value;
+				EList<? extends EObject> values = (EList<? extends EObject>) object.eGet(reference);
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(object, reference);
 				int size = Math.min(values.size(), nodes.size());
 				for (int i = 0; i < size; i++) {
 					EObject valueInList = values.get(i);
 					INode node = nodes.get(i);
-					String highlightClass = getHighlightClass(valueInList);
-					if (highlightClass != null) {
+					String[] highlightClass = getHighlightClass(valueInList);
+					if (highlightClass.length > 0) {
 						highlightNode(acceptor, node, highlightClass);
 					}
 				}
-			} else if (value instanceof EObject) {
-				EObject valueObj = (EObject) value;
-				String highlightClass = getHighlightClass(valueObj);
-				if (highlightClass != null) {
+			} else {
+				EObject valueObj = (EObject) object.eGet(reference);
+				String[] highlightClass = getHighlightClass(valueObj);
+				if (highlightClass.length > 0) {
 					highlightFeature(acceptor, object, reference, highlightClass);
 				}
 			}
 		}
 	}
 
-	protected String getHighlightClass(EObject eObject) {
+	protected String[] getHighlightClass(EObject eObject) {
 		if (isBuiltIn(eObject)) {
-			return BUILTIN_CLASS;
+			return new String[] { BUILTIN_CLASS };
 		}
+		ImmutableList.Builder<String> classesBuilder = ImmutableList.builder();
 		if (eObject instanceof ClassDeclaration) {
+			classesBuilder.add(CLASS_CLASS);
 			ClassDeclaration classDeclaration = (ClassDeclaration) eObject;
 			if (classDeclaration.isAbstract()) {
-				return ABSTRACT_CLASS;
+				classesBuilder.add(ABSTRACT_CLASS);
 			}
-			return CLASS_CLASS;
 		}
 		if (eObject instanceof ReferenceDeclaration) {
+			classesBuilder.add(REFERENCE_CLASS);
 			ReferenceDeclaration referenceDeclaration = (ReferenceDeclaration) eObject;
 			if (referenceDeclaration.isContainment()) {
-				return CONTAINMENT_CLASS;
+				classesBuilder.add(CONTAINMENT_CLASS);
 			}
-			return REFERENCE_CLASS;
 		}
 		if (eObject instanceof PredicateDefinition) {
+			classesBuilder.add(PREDICATE_CLASS);
 			PredicateDefinition predicateDefinition = (PredicateDefinition) eObject;
 			if (predicateDefinition.isError()) {
-				return ERROR_CLASS;
+				classesBuilder.add(ERROR_CLASS);
 			}
-			return PREDICATE_CLASS;
 		}
 		if (eObject instanceof Node) {
-			return NODE_CLASS;
+			classesBuilder.add(NODE_CLASS);
+			Node node = (Node) eObject;
+			if (ProblemUtil.isEnumNode(node)) {
+				classesBuilder.add(ENUM_NODE_CLASS);
+			}
+			if (ProblemUtil.isNewNode(node)) {
+				classesBuilder.add(NEW_NODE_CLASS);
+			}
 		}
 		if (eObject instanceof Parameter) {
-			return PARAMETER_CLASS;
+			classesBuilder.add(PARAMETER_CLASS);
 		}
 		if (eObject instanceof Variable) {
-			return VARIABLE_CLASS;
+			classesBuilder.add(VARIABLE_CLASS);
+			Variable variable = (Variable) eObject;
+			if (ProblemUtil.isSingletonVariable(variable)) {
+				classesBuilder.add(SINGLETON_VARIABLE_CLASS);
+			}
 		}
-		return null;
+		List<String> classes = classesBuilder.build();
+		return classes.toArray(new String[0]);
 	}
 
 	protected boolean isBuiltIn(EObject eObject) {
 		if (eObject != null) {
 			Resource eResource = eObject.eResource();
 			if (eResource != null) {
-				return ProblemGlobalScopeProvider.LIBRARY_URI.equals(eResource.getURI());
+				return ProblemGlobalScopeProvider.BULTIN_LIBRARY_URI.equals(eResource.getURI());
 			}
 		}
 		return false;

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
@@ -34,6 +35,7 @@ import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.ScopeDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Statement;
 import org.eclipse.viatra.solver.language.model.problem.TypeScope;
+import org.eclipse.viatra.solver.language.model.problem.UnboundedMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
 
 /**
@@ -202,6 +204,20 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass unboundedMultiplicityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass argumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum logicValueEEnum = null;
 
 	/**
@@ -338,6 +354,15 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 */
 	public EReference getClassDeclaration_ReferenceDeclarations() {
 		return (EReference) classDeclarationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDeclaration_NewNode() {
+		return (EReference) classDeclarationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -517,7 +542,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * @generated
 	 */
 	public EReference getAtom_Arguments() {
-		return (EReference) atomEClass.getEStructuralFeatures().get(1);
+		return (EReference) atomEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -526,7 +551,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * @generated
 	 */
 	public EAttribute getAtom_TransitiveClosure() {
-		return (EAttribute) atomEClass.getEStructuralFeatures().get(2);
+		return (EAttribute) atomEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -741,6 +766,42 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnboundedMultiplicity() {
+		return unboundedMultiplicityEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getArgument() {
+		return argumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArgument_Variable() {
+		return (EReference) argumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArgument_SingletonVariable() {
+		return (EReference) argumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getLogicValue() {
 		return logicValueEEnum;
 	}
@@ -784,6 +845,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		createEAttribute(classDeclarationEClass, CLASS_DECLARATION__ABSTRACT);
 		createEReference(classDeclarationEClass, CLASS_DECLARATION__SUPER_TYPES);
 		createEReference(classDeclarationEClass, CLASS_DECLARATION__REFERENCE_DECLARATIONS);
+		createEReference(classDeclarationEClass, CLASS_DECLARATION__NEW_NODE);
 
 		referenceDeclarationEClass = createEClass(REFERENCE_DECLARATION);
 		createEReference(referenceDeclarationEClass, REFERENCE_DECLARATION__REFERENCE_TYPE);
@@ -811,8 +873,8 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		atomEClass = createEClass(ATOM);
 		createEReference(atomEClass, ATOM__RELATION);
-		createEReference(atomEClass, ATOM__ARGUMENTS);
 		createEAttribute(atomEClass, ATOM__TRANSITIVE_CLOSURE);
+		createEReference(atomEClass, ATOM__ARGUMENTS);
 
 		implicitVariableEClass = createEClass(IMPLICIT_VARIABLE);
 
@@ -848,6 +910,12 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		exactMultiplicityEClass = createEClass(EXACT_MULTIPLICITY);
 		createEAttribute(exactMultiplicityEClass, EXACT_MULTIPLICITY__EXACT_VALUE);
 
+		unboundedMultiplicityEClass = createEClass(UNBOUNDED_MULTIPLICITY);
+
+		argumentEClass = createEClass(ARGUMENT);
+		createEReference(argumentEClass, ARGUMENT__VARIABLE);
+		createEReference(argumentEClass, ARGUMENT__SINGLETON_VARIABLE);
+
 		// Create enums
 		logicValueEEnum = createEEnum(LOGIC_VALUE);
 	}
@@ -881,6 +949,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		problemEClass.getESuperTypes().add(this.getNamedElement());
 		relationEClass.getESuperTypes().add(this.getNamedElement());
 		classDeclarationEClass.getESuperTypes().add(this.getRelation());
 		classDeclarationEClass.getESuperTypes().add(this.getStatement());
@@ -899,6 +968,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		scopeDeclarationEClass.getESuperTypes().add(this.getStatement());
 		rangeMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
 		exactMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
+		unboundedMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -922,6 +992,9 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		initEReference(getClassDeclaration_ReferenceDeclarations(), this.getReferenceDeclaration(), null,
 				"referenceDeclarations", null, 0, -1, ClassDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDeclaration_NewNode(), this.getNode(), null, "newNode", null, 0, 1,
+				ClassDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceDeclarationEClass, ReferenceDeclaration.class, "ReferenceDeclaration", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -975,12 +1048,12 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		initEReference(getAtom_Relation(), this.getRelation(), null, "relation", null, 0, 1, Atom.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
-		initEReference(getAtom_Arguments(), this.getVariable(), null, "arguments", null, 0, -1, Atom.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAtom_TransitiveClosure(), ecorePackage.getEBoolean(), "transitiveClosure", null, 0, 1,
 				Atom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
+		initEReference(getAtom_Arguments(), this.getArgument(), null, "arguments", null, 0, -1, Atom.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(implicitVariableEClass, ImplicitVariable.class, "ImplicitVariable", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1047,6 +1120,18 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		initEAttribute(getExactMultiplicity_ExactValue(), ecorePackage.getEInt(), "exactValue", "1", 0, 1,
 				ExactMultiplicity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(unboundedMultiplicityEClass, UnboundedMultiplicity.class, "UnboundedMultiplicity", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArgument_Variable(), this.getVariable(), null, "variable", null, 0, 1, Argument.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgument_SingletonVariable(), this.getImplicitVariable(), null, "singletonVariable", null, 0,
+				1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(logicValueEEnum, LogicValue.class, "LogicValue");

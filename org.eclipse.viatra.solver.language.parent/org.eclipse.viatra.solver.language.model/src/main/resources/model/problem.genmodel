@@ -25,6 +25,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//ClassDeclaration/abstract"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//ClassDeclaration/superTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//ClassDeclaration/referenceDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//ClassDeclaration/newNode"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//ReferenceDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//ReferenceDeclaration/referenceType"/>
@@ -50,8 +51,8 @@
     <genClasses ecoreClass="problem.ecore#//Literal"/>
     <genClasses ecoreClass="problem.ecore#//Atom">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Atom/relation"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Atom/arguments"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//Atom/transitiveClosure"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Atom/arguments"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//ImplicitVariable"/>
     <genClasses ecoreClass="problem.ecore#//NegativeLiteral">
@@ -82,6 +83,11 @@
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//ExactMultiplicity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//ExactMultiplicity/exactValue"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//UnboundedMultiplicity"/>
+    <genClasses ecoreClass="problem.ecore#//Argument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/variable"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/singletonVariable"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

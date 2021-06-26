@@ -58,52 +58,6 @@ public interface ProblemPackage extends EPackage {
 	ProblemPackage eINSTANCE = org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ProblemImpl <em>Problem</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemImpl
-	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getProblem()
-	 * @generated
-	 */
-	int PROBLEM = 0;
-
-	/**
-	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROBLEM__NODES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROBLEM__STATEMENTS = 1;
-
-	/**
-	 * The number of structural features of the '<em>Problem</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROBLEM_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Problem</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROBLEM_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.NamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,6 +93,61 @@ public interface ProblemPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ProblemImpl <em>Problem</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getProblem()
+	 * @generated
+	 */
+	int PROBLEM = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__NODES = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM__STATEMENTS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Problem</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Problem</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROBLEM_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.RelationImpl <em>Relation</em>}' class.
@@ -224,13 +233,22 @@ public interface ProblemPackage extends EPackage {
 	int CLASS_DECLARATION__REFERENCE_DECLARATIONS = RELATION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>New Node</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION__NEW_NODE = RELATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Class Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DECLARATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 3;
+	int CLASS_DECLARATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Class Declaration</em>' class.
@@ -592,22 +610,22 @@ public interface ProblemPackage extends EPackage {
 	int ATOM__RELATION = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATOM__ARGUMENTS = LITERAL_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Transitive Closure</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATOM__TRANSITIVE_CLOSURE = LITERAL_FEATURE_COUNT + 2;
+	int ATOM__TRANSITIVE_CLOSURE = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATOM__ARGUMENTS = LITERAL_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Atom</em>' class.
@@ -1034,6 +1052,80 @@ public interface ProblemPackage extends EPackage {
 	int EXACT_MULTIPLICITY_OPERATION_COUNT = MULTIPLICITY_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.UnboundedMultiplicityImpl <em>Unbounded Multiplicity</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.UnboundedMultiplicityImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getUnboundedMultiplicity()
+	 * @generated
+	 */
+	int UNBOUNDED_MULTIPLICITY = 22;
+
+	/**
+	 * The number of structural features of the '<em>Unbounded Multiplicity</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNBOUNDED_MULTIPLICITY_FEATURE_COUNT = MULTIPLICITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Unbounded Multiplicity</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNBOUNDED_MULTIPLICITY_OPERATION_COUNT = MULTIPLICITY_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl <em>Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getArgument()
+	 * @generated
+	 */
+	int ARGUMENT = 23;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__VARIABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Singleton Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__SINGLETON_VARIABLE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1041,7 +1133,7 @@ public interface ProblemPackage extends EPackage {
 	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getLogicValue()
 	 * @generated
 	 */
-	int LOGIC_VALUE = 22;
+	int LOGIC_VALUE = 24;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.Problem <em>Problem</em>}'.
@@ -1127,6 +1219,17 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassDeclaration_ReferenceDeclarations();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#getNewNode <em>New Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>New Node</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#getNewNode()
+	 * @see #getClassDeclaration()
+	 * @generated
+	 */
+	EReference getClassDeclaration_NewNode();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration <em>Reference Declaration</em>}'.
@@ -1330,10 +1433,10 @@ public interface ProblemPackage extends EPackage {
 	EReference getAtom_Relation();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.viatra.solver.language.model.problem.Atom#getArguments <em>Arguments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.viatra.solver.language.model.problem.Atom#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Arguments</em>'.
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
 	 * @see org.eclipse.viatra.solver.language.model.problem.Atom#getArguments()
 	 * @see #getAtom()
 	 * @generated
@@ -1594,6 +1697,48 @@ public interface ProblemPackage extends EPackage {
 	EAttribute getExactMultiplicity_ExactValue();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.UnboundedMultiplicity <em>Unbounded Multiplicity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unbounded Multiplicity</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.UnboundedMultiplicity
+	 * @generated
+	 */
+	EClass getUnboundedMultiplicity();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.Argument <em>Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Argument</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.Argument
+	 * @generated
+	 */
+	EClass getArgument();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.Argument#getVariable()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EReference getArgument_Variable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getSingletonVariable <em>Singleton Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Singleton Variable</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.Argument#getSingletonVariable()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EReference getArgument_SingletonVariable();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1695,6 +1840,14 @@ public interface ProblemPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_DECLARATION__REFERENCE_DECLARATIONS = eINSTANCE.getClassDeclaration_ReferenceDeclarations();
+
+		/**
+		 * The meta object literal for the '<em><b>New Node</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DECLARATION__NEW_NODE = eINSTANCE.getClassDeclaration_NewNode();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ReferenceDeclarationImpl <em>Reference Declaration</em>}' class.
@@ -1865,7 +2018,7 @@ public interface ProblemPackage extends EPackage {
 		EReference ATOM__RELATION = eINSTANCE.getAtom_Relation();
 
 		/**
-		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2085,6 +2238,42 @@ public interface ProblemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXACT_MULTIPLICITY__EXACT_VALUE = eINSTANCE.getExactMultiplicity_ExactValue();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.UnboundedMultiplicityImpl <em>Unbounded Multiplicity</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.UnboundedMultiplicityImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getUnboundedMultiplicity()
+		 * @generated
+		 */
+		EClass UNBOUNDED_MULTIPLICITY = eINSTANCE.getUnboundedMultiplicity();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl <em>Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getArgument()
+		 * @generated
+		 */
+		EClass ARGUMENT = eINSTANCE.getArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARGUMENT__VARIABLE = eINSTANCE.getArgument_Variable();
+
+		/**
+		 * The meta object literal for the '<em><b>Singleton Variable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARGUMENT__SINGLETON_VARIABLE = eINSTANCE.getArgument_SingletonVariable();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}' enum.

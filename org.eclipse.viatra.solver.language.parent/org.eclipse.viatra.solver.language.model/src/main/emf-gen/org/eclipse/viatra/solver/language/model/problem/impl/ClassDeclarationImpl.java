@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
+import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 
@@ -33,6 +34,7 @@ import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ClassDeclarationImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ClassDeclarationImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ClassDeclarationImpl#getReferenceDeclarations <em>Reference Declarations</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ClassDeclarationImpl#getNewNode <em>New Node</em>}</li>
  * </ul>
  *
  * @generated
@@ -77,6 +79,16 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 	 * @ordered
 	 */
 	protected EList<ReferenceDeclaration> referenceDeclarations;
+
+	/**
+	 * The cached value of the '{@link #getNewNode() <em>New Node</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNewNode()
+	 * @generated
+	 * @ordered
+	 */
+	protected Node newNode;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,11 +162,63 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Node getNewNode() {
+		return newNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetNewNode(Node newNewNode, NotificationChain msgs) {
+		Node oldNewNode = newNode;
+		newNode = newNewNode;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					ProblemPackage.CLASS_DECLARATION__NEW_NODE, oldNewNode, newNewNode);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNewNode(Node newNewNode) {
+		if (newNewNode != newNode) {
+			NotificationChain msgs = null;
+			if (newNode != null)
+				msgs = ((InternalEObject) newNode).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - ProblemPackage.CLASS_DECLARATION__NEW_NODE, null, msgs);
+			if (newNewNode != null)
+				msgs = ((InternalEObject) newNewNode).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - ProblemPackage.CLASS_DECLARATION__NEW_NODE, null, msgs);
+			msgs = basicSetNewNode(newNewNode, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ProblemPackage.CLASS_DECLARATION__NEW_NODE,
+					newNewNode, newNewNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ProblemPackage.CLASS_DECLARATION__REFERENCE_DECLARATIONS:
 			return ((InternalEList<?>) getReferenceDeclarations()).basicRemove(otherEnd, msgs);
+		case ProblemPackage.CLASS_DECLARATION__NEW_NODE:
+			return basicSetNewNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,6 +237,8 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 			return getSuperTypes();
 		case ProblemPackage.CLASS_DECLARATION__REFERENCE_DECLARATIONS:
 			return getReferenceDeclarations();
+		case ProblemPackage.CLASS_DECLARATION__NEW_NODE:
+			return getNewNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,6 +263,9 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 			getReferenceDeclarations().clear();
 			getReferenceDeclarations().addAll((Collection<? extends ReferenceDeclaration>) newValue);
 			return;
+		case ProblemPackage.CLASS_DECLARATION__NEW_NODE:
+			setNewNode((Node) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -218,6 +287,9 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 		case ProblemPackage.CLASS_DECLARATION__REFERENCE_DECLARATIONS:
 			getReferenceDeclarations().clear();
 			return;
+		case ProblemPackage.CLASS_DECLARATION__NEW_NODE:
+			setNewNode((Node) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -236,6 +308,8 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 			return superTypes != null && !superTypes.isEmpty();
 		case ProblemPackage.CLASS_DECLARATION__REFERENCE_DECLARATIONS:
 			return referenceDeclarations != null && !referenceDeclarations.isEmpty();
+		case ProblemPackage.CLASS_DECLARATION__NEW_NODE:
+			return newNode != null;
 		}
 		return super.eIsSet(featureID);
 	}

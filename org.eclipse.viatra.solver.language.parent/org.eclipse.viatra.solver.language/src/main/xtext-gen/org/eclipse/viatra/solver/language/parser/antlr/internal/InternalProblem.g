@@ -78,23 +78,53 @@ ruleProblem returns [EObject current=null]
 }:
 	(
 		(
+			otherlv_0='problem'
 			{
-				newCompositeNode(grammarAccess.getProblemAccess().getStatementsStatementParserRuleCall_0());
+				newLeafNode(otherlv_0, grammarAccess.getProblemAccess().getProblemKeyword_0_0());
 			}
-			lv_statements_0_0=ruleStatement
+			(
+				(
+					lv_name_1_0=RULE_ID
+					{
+						newLeafNode(lv_name_1_0, grammarAccess.getProblemAccess().getNameIDTerminalRuleCall_0_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getProblemRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"name",
+							lv_name_1_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+			otherlv_2='.'
 			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getProblemRule());
+				newLeafNode(otherlv_2, grammarAccess.getProblemAccess().getFullStopKeyword_0_2());
+			}
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getProblemAccess().getStatementsStatementParserRuleCall_1_0());
 				}
-				add(
-					$current,
-					"statements",
-					lv_statements_0_0,
-					"org.eclipse.viatra.solver.language.Problem.Statement");
-				afterParserOrEnumRuleCall();
-			}
-		)
-	)*
+				lv_statements_3_0=ruleStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getProblemRule());
+					}
+					add(
+						$current,
+						"statements",
+						lv_statements_3_0,
+						"org.eclipse.viatra.solver.language.Problem.Statement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
 ;
 
 // Entry rule entryRuleStatement
@@ -204,122 +234,93 @@ ruleClassDeclaration returns [EObject current=null]
 			)
 		)
 		(
+			otherlv_3='extends'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getClassDeclarationAccess().getExtendsKeyword_3_0());
+			}
 			(
-				otherlv_3='extends'
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getClassDeclarationRule());
+						}
+					}
+					{
+						newCompositeNode(grammarAccess.getClassDeclarationAccess().getSuperTypesClassDeclarationCrossReference_3_1_0());
+					}
+					ruleQualifiedName
+					{
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			(
+				otherlv_5=','
 				{
-					newLeafNode(otherlv_3, grammarAccess.getClassDeclarationAccess().getExtendsKeyword_3_0_0());
+					newLeafNode(otherlv_5, grammarAccess.getClassDeclarationAccess().getCommaKeyword_3_2_0());
+				}
+				(
+					(
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getClassDeclarationRule());
+							}
+						}
+						{
+							newCompositeNode(grammarAccess.getClassDeclarationAccess().getSuperTypesClassDeclarationCrossReference_3_2_1_0());
+						}
+						ruleQualifiedName
+						{
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)*
+		)?
+		(
+			(
+				otherlv_7='{'
+				{
+					newLeafNode(otherlv_7, grammarAccess.getClassDeclarationAccess().getLeftCurlyBracketKeyword_4_0_0());
 				}
 				(
 					(
 						(
 							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getClassDeclarationRule());
-								}
+								newCompositeNode(grammarAccess.getClassDeclarationAccess().getReferenceDeclarationsReferenceDeclarationParserRuleCall_4_0_1_0_0());
 							}
-							otherlv_4=RULE_ID
+							lv_referenceDeclarations_8_0=ruleReferenceDeclaration
 							{
-								newLeafNode(otherlv_4, grammarAccess.getClassDeclarationAccess().getSuperTypesClassDeclarationCrossReference_3_0_1_0_0());
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getClassDeclarationRule());
+								}
+								add(
+									$current,
+									"referenceDeclarations",
+									lv_referenceDeclarations_8_0,
+									"org.eclipse.viatra.solver.language.Problem.ReferenceDeclaration");
+								afterParserOrEnumRuleCall();
 							}
 						)
 					)
-					    |
 					(
-						otherlv_5='['
+						otherlv_9=';'
 						{
-							newLeafNode(otherlv_5, grammarAccess.getClassDeclarationAccess().getLeftSquareBracketKeyword_3_0_1_1_0());
+							newLeafNode(otherlv_9, grammarAccess.getClassDeclarationAccess().getSemicolonKeyword_4_0_1_1());
 						}
-						(
-							(
-								(
-									{
-										if ($current==null) {
-											$current = createModelElement(grammarAccess.getClassDeclarationRule());
-										}
-									}
-									otherlv_6=RULE_ID
-									{
-										newLeafNode(otherlv_6, grammarAccess.getClassDeclarationAccess().getSuperTypesClassDeclarationCrossReference_3_0_1_1_1_0_0());
-									}
-								)
-							)
-							(
-								otherlv_7=','
-								{
-									newLeafNode(otherlv_7, grammarAccess.getClassDeclarationAccess().getCommaKeyword_3_0_1_1_1_1_0());
-								}
-								(
-									(
-										{
-											if ($current==null) {
-												$current = createModelElement(grammarAccess.getClassDeclarationRule());
-											}
-										}
-										otherlv_8=RULE_ID
-										{
-											newLeafNode(otherlv_8, grammarAccess.getClassDeclarationAccess().getSuperTypesClassDeclarationCrossReference_3_0_1_1_1_1_1_0());
-										}
-									)
-								)
-							)*
-						)?
-						otherlv_9=']'
-						{
-							newLeafNode(otherlv_9, grammarAccess.getClassDeclarationAccess().getRightSquareBracketKeyword_3_0_1_1_2());
-						}
-					)
-				)
+					)?
+				)*
+				otherlv_10='}'
+				{
+					newLeafNode(otherlv_10, grammarAccess.getClassDeclarationAccess().getRightCurlyBracketKeyword_4_0_2());
+				}
 			)
 			    |
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getClassDeclarationAccess().getReferenceDeclarationsReferenceDeclarationParserRuleCall_3_1_0());
-					}
-					lv_referenceDeclarations_10_0=ruleReferenceDeclaration
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getClassDeclarationRule());
-						}
-						add(
-							$current,
-							"referenceDeclarations",
-							lv_referenceDeclarations_10_0,
-							"org.eclipse.viatra.solver.language.Problem.ReferenceDeclaration");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_11=','
+			otherlv_11='.'
 			{
-				newLeafNode(otherlv_11, grammarAccess.getClassDeclarationAccess().getCommaKeyword_4_0());
+				newLeafNode(otherlv_11, grammarAccess.getClassDeclarationAccess().getFullStopKeyword_4_1());
 			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getClassDeclarationAccess().getReferenceDeclarationsReferenceDeclarationParserRuleCall_4_1_0());
-					}
-					lv_referenceDeclarations_12_0=ruleReferenceDeclaration
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getClassDeclarationRule());
-						}
-						add(
-							$current,
-							"referenceDeclarations",
-							lv_referenceDeclarations_12_0,
-							"org.eclipse.viatra.solver.language.Problem.ReferenceDeclaration");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)*
-		otherlv_13='.'
-		{
-			newLeafNode(otherlv_13, grammarAccess.getClassDeclarationAccess().getFullStopKeyword_5());
-		}
+		)
 	)
 ;
 
@@ -367,44 +368,49 @@ ruleReferenceDeclaration returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getReferenceDeclarationRule());
 					}
 				}
-				otherlv_2=RULE_ID
 				{
-					newLeafNode(otherlv_2, grammarAccess.getReferenceDeclarationAccess().getReferenceTypeClassDeclarationCrossReference_1_0());
+					newCompositeNode(grammarAccess.getReferenceDeclarationAccess().getReferenceTypeClassDeclarationCrossReference_1_0());
 				}
-			)
-		)
-		otherlv_3='['
-		{
-			newLeafNode(otherlv_3, grammarAccess.getReferenceDeclarationAccess().getLeftSquareBracketKeyword_2());
-		}
-		(
-			(
+				ruleQualifiedName
 				{
-					newCompositeNode(grammarAccess.getReferenceDeclarationAccess().getMultiplicityMultiplicityParserRuleCall_3_0());
-				}
-				lv_multiplicity_4_0=ruleMultiplicity
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getReferenceDeclarationRule());
-					}
-					set(
-						$current,
-						"multiplicity",
-						lv_multiplicity_4_0,
-						"org.eclipse.viatra.solver.language.Problem.Multiplicity");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_5=']'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getReferenceDeclarationAccess().getRightSquareBracketKeyword_4());
-		}
+		(
+			otherlv_3='['
+			{
+				newLeafNode(otherlv_3, grammarAccess.getReferenceDeclarationAccess().getLeftSquareBracketKeyword_2_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getReferenceDeclarationAccess().getMultiplicityMultiplicityParserRuleCall_2_1_0());
+					}
+					lv_multiplicity_4_0=ruleMultiplicity
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getReferenceDeclarationRule());
+						}
+						set(
+							$current,
+							"multiplicity",
+							lv_multiplicity_4_0,
+							"org.eclipse.viatra.solver.language.Problem.Multiplicity");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			otherlv_5=']'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getReferenceDeclarationAccess().getRightSquareBracketKeyword_2_2());
+			}
+		)?
 		(
 			(
 				lv_name_6_0=RULE_ID
 				{
-					newLeafNode(lv_name_6_0, grammarAccess.getReferenceDeclarationAccess().getNameIDTerminalRuleCall_5_0());
+					newLeafNode(lv_name_6_0, grammarAccess.getReferenceDeclarationAccess().getNameIDTerminalRuleCall_3_0());
 				}
 				{
 					if ($current==null) {
@@ -421,7 +427,7 @@ ruleReferenceDeclaration returns [EObject current=null]
 		(
 			otherlv_7='opposite'
 			{
-				newLeafNode(otherlv_7, grammarAccess.getReferenceDeclarationAccess().getOppositeKeyword_6_0());
+				newLeafNode(otherlv_7, grammarAccess.getReferenceDeclarationAccess().getOppositeKeyword_4_0());
 			}
 			(
 				(
@@ -431,7 +437,7 @@ ruleReferenceDeclaration returns [EObject current=null]
 						}
 					}
 					{
-						newCompositeNode(grammarAccess.getReferenceDeclarationAccess().getOppositeReferenceDeclarationCrossReference_6_1_0());
+						newCompositeNode(grammarAccess.getReferenceDeclarationAccess().getOppositeReferenceDeclarationCrossReference_4_1_0());
 					}
 					ruleQualifiedName
 					{
@@ -561,9 +567,9 @@ rulePredicateDefinition returns [EObject current=null]
 			newLeafNode(otherlv_8, grammarAccess.getPredicateDefinitionAccess().getRightParenthesisKeyword_4());
 		}
 		(
-			otherlv_9=':='
+			otherlv_9=':-'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getPredicateDefinitionAccess().getColonEqualsSignKeyword_5_0());
+				newLeafNode(otherlv_9, grammarAccess.getPredicateDefinitionAccess().getColonHyphenMinusKeyword_5_0());
 			}
 			(
 				(
@@ -862,13 +868,19 @@ ruleAtom returns [EObject current=null]
 			(
 				(
 					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getAtomRule());
-						}
+						newCompositeNode(grammarAccess.getAtomAccess().getArgumentsArgumentParserRuleCall_3_0_0());
 					}
-					otherlv_3=RULE_ID
+					lv_arguments_3_0=ruleArgument
 					{
-						newLeafNode(otherlv_3, grammarAccess.getAtomAccess().getArgumentsVariableCrossReference_3_0_0());
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAtomRule());
+						}
+						add(
+							$current,
+							"arguments",
+							lv_arguments_3_0,
+							"org.eclipse.viatra.solver.language.Problem.Argument");
+						afterParserOrEnumRuleCall();
 					}
 				)
 			)
@@ -880,13 +892,19 @@ ruleAtom returns [EObject current=null]
 				(
 					(
 						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getAtomRule());
-							}
+							newCompositeNode(grammarAccess.getAtomAccess().getArgumentsArgumentParserRuleCall_3_1_1_0());
 						}
-						otherlv_5=RULE_ID
+						lv_arguments_5_0=ruleArgument
 						{
-							newLeafNode(otherlv_5, grammarAccess.getAtomAccess().getArgumentsVariableCrossReference_3_1_1_0());
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getAtomRule());
+							}
+							add(
+								$current,
+								"arguments",
+								lv_arguments_5_0,
+								"org.eclipse.viatra.solver.language.Problem.Argument");
+							afterParserOrEnumRuleCall();
 						}
 					)
 				)
@@ -896,6 +914,36 @@ ruleAtom returns [EObject current=null]
 		{
 			newLeafNode(otherlv_6, grammarAccess.getAtomAccess().getRightParenthesisKeyword_4());
 		}
+	)
+;
+
+// Entry rule entryRuleArgument
+entryRuleArgument returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getArgumentRule()); }
+	iv_ruleArgument=ruleArgument
+	{ $current=$iv_ruleArgument.current; }
+	EOF;
+
+// Rule Argument
+ruleArgument returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getArgumentRule());
+				}
+			}
+			otherlv_0=RULE_ID
+			{
+				newLeafNode(otherlv_0, grammarAccess.getArgumentAccess().getVariableVariableCrossReference_0());
+			}
+		)
 	)
 ;
 
@@ -1223,9 +1271,9 @@ ruleTypeScope returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTypeScopeAccess().getMultiplicityMultiplicityParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getTypeScopeAccess().getMultiplicityDefiniteMultiplicityParserRuleCall_2_0());
 				}
-				lv_multiplicity_3_0=ruleMultiplicity
+				lv_multiplicity_3_0=ruleDefiniteMultiplicity
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTypeScopeRule());
@@ -1234,7 +1282,7 @@ ruleTypeScope returns [EObject current=null]
 						$current,
 						"multiplicity",
 						lv_multiplicity_3_0,
-						"org.eclipse.viatra.solver.language.Problem.Multiplicity");
+						"org.eclipse.viatra.solver.language.Problem.DefiniteMultiplicity");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -1259,7 +1307,43 @@ ruleMultiplicity returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getMultiplicityAccess().getRangeMultiplicityParserRuleCall_0());
+			newCompositeNode(grammarAccess.getMultiplicityAccess().getUnboundedMultiplicityParserRuleCall_0());
+		}
+		this_UnboundedMultiplicity_0=ruleUnboundedMultiplicity
+		{
+			$current = $this_UnboundedMultiplicity_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getMultiplicityAccess().getDefiniteMultiplicityParserRuleCall_1());
+		}
+		this_DefiniteMultiplicity_1=ruleDefiniteMultiplicity
+		{
+			$current = $this_DefiniteMultiplicity_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleDefiniteMultiplicity
+entryRuleDefiniteMultiplicity returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDefiniteMultiplicityRule()); }
+	iv_ruleDefiniteMultiplicity=ruleDefiniteMultiplicity
+	{ $current=$iv_ruleDefiniteMultiplicity.current; }
+	EOF;
+
+// Rule DefiniteMultiplicity
+ruleDefiniteMultiplicity returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getDefiniteMultiplicityAccess().getRangeMultiplicityParserRuleCall_0());
 		}
 		this_RangeMultiplicity_0=ruleRangeMultiplicity
 		{
@@ -1268,12 +1352,36 @@ ruleMultiplicity returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getMultiplicityAccess().getExactMultiplicityParserRuleCall_1());
+			newCompositeNode(grammarAccess.getDefiniteMultiplicityAccess().getExactMultiplicityParserRuleCall_1());
 		}
 		this_ExactMultiplicity_1=ruleExactMultiplicity
 		{
 			$current = $this_ExactMultiplicity_1.current;
 			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleUnboundedMultiplicity
+entryRuleUnboundedMultiplicity returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getUnboundedMultiplicityRule()); }
+	iv_ruleUnboundedMultiplicity=ruleUnboundedMultiplicity
+	{ $current=$iv_ruleUnboundedMultiplicity.current; }
+	EOF;
+
+// Rule UnboundedMultiplicity
+ruleUnboundedMultiplicity returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			$current = forceCreateModelElement(
+				grammarAccess.getUnboundedMultiplicityAccess().getUnboundedMultiplicityAction(),
+				$current);
 		}
 	)
 ;
@@ -1421,27 +1529,51 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	leaveRule();
 }:
 	(
-		this_ID_0=RULE_ID
+		this_QUOTED_ID_0=RULE_QUOTED_ID
 		{
-			$current.merge(this_ID_0);
+			$current.merge(this_QUOTED_ID_0);
 		}
 		{
-			newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0());
+			newLeafNode(this_QUOTED_ID_0, grammarAccess.getQualifiedNameAccess().getQUOTED_IDTerminalRuleCall_0());
 		}
+		    |
 		(
-			kw='::'
+			this_ID_1=RULE_ID
 			{
-				$current.merge(kw);
-				newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_0());
-			}
-			this_ID_2=RULE_ID
-			{
-				$current.merge(this_ID_2);
+				$current.merge(this_ID_1);
 			}
 			{
-				newLeafNode(this_ID_2, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1());
+				newLeafNode(this_ID_1, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_0());
 			}
-		)*
+			(
+				kw=':'
+				{
+					$current.merge(kw);
+					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonKeyword_1_1_0());
+				}
+				this_ID_3=RULE_ID
+				{
+					$current.merge(this_ID_3);
+				}
+				{
+					newLeafNode(this_ID_3, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1_1());
+				}
+			)*
+			(
+				kw=':'
+				{
+					$current.merge(kw);
+					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonKeyword_1_2_0());
+				}
+				this_QUOTED_ID_5=RULE_QUOTED_ID
+				{
+					$current.merge(this_QUOTED_ID_5);
+				}
+				{
+					newLeafNode(this_QUOTED_ID_5, grammarAccess.getQualifiedNameAccess().getQUOTED_IDTerminalRuleCall_1_2_1());
+				}
+			)?
+		)
 	)
 ;
 
@@ -1507,11 +1639,13 @@ ruleShortLogicValue returns [Enumerator current=null]
 	)
 ;
 
+RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
+
+RULE_QUOTED_ID : '\'' ('\\' .|~(('\\'|'\'')))* '\'';
+
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
-
-RULE_STRING : ('"' ('\\' .|~(('\\'|'"')))* '"'|'\'' ('\\' .|~(('\\'|'\'')))* '\'');
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 

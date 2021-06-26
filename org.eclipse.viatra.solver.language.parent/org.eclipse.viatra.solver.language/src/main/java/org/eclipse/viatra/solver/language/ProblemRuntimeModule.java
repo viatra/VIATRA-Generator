@@ -5,14 +5,13 @@ package org.eclipse.viatra.solver.language;
 
 import org.eclipse.viatra.solver.language.conversion.ProblemValueConverterService;
 import org.eclipse.viatra.solver.language.naming.ProblemQualifiedNameConverter;
-import org.eclipse.viatra.solver.language.naming.ProblemQualifiedNameProvider;
 import org.eclipse.viatra.solver.language.resource.ProblemDerivedStateComputer;
 import org.eclipse.viatra.solver.language.resource.ProblemLocationInFileProvider;
 import org.eclipse.viatra.solver.language.resource.ProblemResourceDescriptionStrategy;
 import org.eclipse.viatra.solver.language.scoping.ProblemGlobalScopeProvider;
+import org.eclipse.viatra.solver.language.scoping.ProblemLocalScopeProvider;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 
@@ -39,10 +37,6 @@ public class ProblemRuntimeModule extends AbstractProblemRuntimeModule {
 		return ProblemQualifiedNameConverter.class;
 	}
 
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return ProblemQualifiedNameProvider.class;
-	}
-
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return ProblemResourceDescriptionStrategy.class;
 	}
@@ -51,16 +45,16 @@ public class ProblemRuntimeModule extends AbstractProblemRuntimeModule {
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return ProblemValueConverterService.class;
 	}
-	
-	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(SimpleLocalScopeProvider.class);
-	}
-	
+
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return ProblemGlobalScopeProvider.class;
+	}
+
+	@Override
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(ProblemLocalScopeProvider.class);
 	}
 
 	@Override

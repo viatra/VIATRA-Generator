@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -13,12 +14,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
-import org.eclipse.viatra.solver.language.model.problem.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,8 +30,8 @@ import org.eclipse.viatra.solver.language.model.problem.Variable;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AtomImpl#getRelation <em>Relation</em>}</li>
- *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AtomImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AtomImpl#isTransitiveClosure <em>Transitive Closure</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AtomImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,16 +46,6 @@ public class AtomImpl extends LiteralImpl implements Atom {
 	 * @ordered
 	 */
 	protected Relation relation;
-
-	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Variable> arguments;
 
 	/**
 	 * The default value of the '{@link #isTransitiveClosure() <em>Transitive Closure</em>}' attribute.
@@ -75,6 +66,16 @@ public class AtomImpl extends LiteralImpl implements Atom {
 	 * @ordered
 	 */
 	protected boolean transitiveClosure = TRANSITIVE_CLOSURE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Argument> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,9 +141,9 @@ public class AtomImpl extends LiteralImpl implements Atom {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getArguments() {
+	public EList<Argument> getArguments() {
 		if (arguments == null) {
-			arguments = new EObjectResolvingEList<Variable>(Variable.class, this, ProblemPackage.ATOM__ARGUMENTS);
+			arguments = new EObjectContainmentEList<Argument>(Argument.class, this, ProblemPackage.ATOM__ARGUMENTS);
 		}
 		return arguments;
 	}
@@ -175,16 +176,30 @@ public class AtomImpl extends LiteralImpl implements Atom {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ProblemPackage.ATOM__ARGUMENTS:
+			return ((InternalEList<?>) getArguments()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case ProblemPackage.ATOM__RELATION:
 			if (resolve)
 				return getRelation();
 			return basicGetRelation();
-		case ProblemPackage.ATOM__ARGUMENTS:
-			return getArguments();
 		case ProblemPackage.ATOM__TRANSITIVE_CLOSURE:
 			return isTransitiveClosure();
+		case ProblemPackage.ATOM__ARGUMENTS:
+			return getArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,12 +216,12 @@ public class AtomImpl extends LiteralImpl implements Atom {
 		case ProblemPackage.ATOM__RELATION:
 			setRelation((Relation) newValue);
 			return;
-		case ProblemPackage.ATOM__ARGUMENTS:
-			getArguments().clear();
-			getArguments().addAll((Collection<? extends Variable>) newValue);
-			return;
 		case ProblemPackage.ATOM__TRANSITIVE_CLOSURE:
 			setTransitiveClosure((Boolean) newValue);
+			return;
+		case ProblemPackage.ATOM__ARGUMENTS:
+			getArguments().clear();
+			getArguments().addAll((Collection<? extends Argument>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,11 +238,11 @@ public class AtomImpl extends LiteralImpl implements Atom {
 		case ProblemPackage.ATOM__RELATION:
 			setRelation((Relation) null);
 			return;
-		case ProblemPackage.ATOM__ARGUMENTS:
-			getArguments().clear();
-			return;
 		case ProblemPackage.ATOM__TRANSITIVE_CLOSURE:
 			setTransitiveClosure(TRANSITIVE_CLOSURE_EDEFAULT);
+			return;
+		case ProblemPackage.ATOM__ARGUMENTS:
+			getArguments().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -243,10 +258,10 @@ public class AtomImpl extends LiteralImpl implements Atom {
 		switch (featureID) {
 		case ProblemPackage.ATOM__RELATION:
 			return relation != null;
-		case ProblemPackage.ATOM__ARGUMENTS:
-			return arguments != null && !arguments.isEmpty();
 		case ProblemPackage.ATOM__TRANSITIVE_CLOSURE:
 			return transitiveClosure != TRANSITIVE_CLOSURE_EDEFAULT;
+		case ProblemPackage.ATOM__ARGUMENTS:
+			return arguments != null && !arguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

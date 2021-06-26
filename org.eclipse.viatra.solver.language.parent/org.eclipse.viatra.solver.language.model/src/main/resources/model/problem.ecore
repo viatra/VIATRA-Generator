@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="problem" nsURI="http://www.eclipse.org/viatra/solver/language/model/Problem"
     nsPrefix="problem">
-  <eClassifiers xsi:type="ecore:EClass" name="Problem">
+  <eClassifiers xsi:type="ecore:EClass" name="Problem" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//Node" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
@@ -15,6 +15,8 @@
         eType="#//ClassDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenceDeclarations"
         upperBound="-1" eType="#//ReferenceDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newNode" eType="#//Node"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceDeclaration" eSuperTypes="#//Relation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenceType" eType="#//ClassDeclaration"/>
@@ -44,9 +46,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="#//Literal">
     <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#//Relation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transitiveClosure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//Argument" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImplicitVariable" eSuperTypes="#//Variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="NegativeLiteral" eSuperTypes="#//ExistentialQuantifier #//Literal">
@@ -90,5 +92,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExactMultiplicity" eSuperTypes="#//Multiplicity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="exactValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnboundedMultiplicity" eSuperTypes="#//Multiplicity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Argument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singletonVariable" eType="#//ImplicitVariable"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

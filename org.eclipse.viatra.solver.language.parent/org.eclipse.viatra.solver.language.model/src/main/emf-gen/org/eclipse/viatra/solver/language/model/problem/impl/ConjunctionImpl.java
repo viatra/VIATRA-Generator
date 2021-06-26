@@ -45,6 +45,7 @@ public class ConjunctionImpl extends MinimalEObjectImpl.Container implements Con
 	 * @ordered
 	 */
 	protected EList<ImplicitVariable> implicitVariables;
+
 	/**
 	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

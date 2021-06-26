@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#getReferenceDeclarations <em>Reference Declarations</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#getNewNode <em>New Node</em>}</li>
  * </ul>
  *
  * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getClassDeclaration()
@@ -68,5 +69,27 @@ public interface ClassDeclaration extends Relation, Statement {
 	 * @generated
 	 */
 	EList<ReferenceDeclaration> getReferenceDeclarations();
+
+	/**
+	 * Returns the value of the '<em><b>New Node</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>New Node</em>' containment reference.
+	 * @see #setNewNode(Node)
+	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getClassDeclaration_NewNode()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Node getNewNode();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration#getNewNode <em>New Node</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>New Node</em>' containment reference.
+	 * @see #getNewNode()
+	 * @generated
+	 */
+	void setNewNode(Node value);
 
 } // ClassDeclaration

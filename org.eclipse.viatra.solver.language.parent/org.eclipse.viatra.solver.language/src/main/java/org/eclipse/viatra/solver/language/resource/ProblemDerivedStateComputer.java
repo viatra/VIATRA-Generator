@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.viatra.solver.language.ProblemUtil;
+import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
@@ -39,12 +41,7 @@ import com.google.inject.Singleton;
 public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	public static final String NEW_NODE = "new";
 
-	private static final String ID_REGEX_STRING = "[_a-zA-Z][_0-9a-zA-Z]*";
-
-	private static final Pattern ID_REGEX = Pattern.compile(ID_REGEX_STRING);
-
-	private static final Pattern QUALIFIED_NAME_REGEX = Pattern
-			.compile(ID_REGEX_STRING + "(::" + ID_REGEX_STRING + ")*");
+	private static final Pattern ID_REGEX = Pattern.compile("[_a-zA-Z][_0-9a-zA-Z]*|'(\\\\.|[^\\'])*'");
 
 	@Inject
 	private LinkingHelper linkingHelper;
@@ -65,7 +62,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	}
 
 	protected void installDerivedProblemState(Problem problem, boolean preLinkingPhase) {
-		Set<String> nodeNames = new HashSet<>();
+		installNewNodes(problem);
 		if (!preLinkingPhase) {
 			installDerivedNodes(problem);
 		}
@@ -75,11 +72,17 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 				installDerivedPredicateDefinitionState(definition);
 			}
 		}
-		List<Node> grapNodes = problem.getNodes();
-		for (String nodeName : nodeNames) {
-			Node graphNode = ProblemFactory.eINSTANCE.createNode();
-			graphNode.setName(nodeName);
-			grapNodes.add(graphNode);
+	}
+
+	protected void installNewNodes(Problem problem) {
+		for (Statement statement : problem.getStatements()) {
+			if (statement instanceof ClassDeclaration) {
+				ClassDeclaration declaration = (ClassDeclaration) statement;
+				if (!declaration.isAbstract()) {
+					Node newNode = createNode(NEW_NODE);
+					declaration.setNewNode(newNode);
+				}
+			}
 		}
 	}
 
@@ -88,28 +91,15 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 				Predicates.alwaysTrue());
 		Set<String> nodeNames = new HashSet<>();
 		for (Statement statement : problem.getStatements()) {
-			if (statement instanceof ClassDeclaration) {
-				ClassDeclaration declaration = (ClassDeclaration) statement;
-				if (!declaration.isAbstract()) {
-					String className = declaration.getName();
-					if (validId(className)) {
-						QualifiedName qualifiedName = QualifiedName.create(className, NEW_NODE);
-						String nodeName = qualifiedNameConverter.toString(qualifiedName);
-						nodeNames.add(nodeName);
-					}
-				}
-			}
-		}
-		for (Statement statement : problem.getStatements()) {
 			if (statement instanceof Assertion) {
 				Assertion assertion = (Assertion) statement;
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(assertion,
 						ProblemPackage.Literals.ASSERTION__ARGUMENTS);
 				for (INode node : nodes) {
 					String nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
-					if (validQualifiedName(nodeName)) {
+					if (validId(nodeName)) {
 						QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
-						if (nodeScope.getSingleElement(qualifiedName) == null) {
+						if (!nodeNames.contains(nodeName) && nodeScope.getSingleElement(qualifiedName) == null) {
 							nodeNames.add(nodeName);
 						}
 					}
@@ -118,10 +108,15 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		}
 		List<Node> grapNodes = problem.getNodes();
 		for (String nodeName : nodeNames) {
-			Node graphNode = ProblemFactory.eINSTANCE.createNode();
-			graphNode.setName(nodeName);
+			Node graphNode = createNode(nodeName);
 			grapNodes.add(graphNode);
 		}
+	}
+
+	protected Node createNode(String name) {
+		Node node = ProblemFactory.eINSTANCE.createNode();
+		node.setName(name);
+		return node;
 	}
 
 	protected void installDerivedPredicateDefinitionState(PredicateDefinition definition) {
@@ -142,7 +137,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		for (Literal literal : conjunction.getLiterals()) {
 			if (literal instanceof Atom) {
 				Atom atom = (Atom) literal;
-				collectVariables(atom, knownVariables, newVariables);
+				createSigletonVariablesAndCollectVariables(atom, knownVariables, newVariables);
 			}
 		}
 		createVariables(conjunction, newVariables);
@@ -157,14 +152,25 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected void installDeriveNegativeLiteralState(NegativeLiteral negativeLiteral, Set<String> knownVariables) {
 		Set<String> newVariables = new HashSet<>();
-		collectVariables(negativeLiteral.getAtom(), knownVariables, newVariables);
+		createSigletonVariablesAndCollectVariables(negativeLiteral.getAtom(), knownVariables, newVariables);
 		createVariables(negativeLiteral, newVariables);
 	}
 
-	protected void collectVariables(Atom atom, Set<String> knownVariables, Set<String> newVariables) {
+	protected void createSigletonVariablesAndCollectVariables(Atom atom, Set<String> knownVariables,
+			Set<String> newVariables) {
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(atom, ProblemPackage.Literals.ATOM__ARGUMENTS);
-		for (INode node : nodes) {
+		int nodesSize = nodes.size();
+		List<Argument> arguments = atom.getArguments();
+		int argumentsSize = arguments.size();
+		for (int i = 0; i < nodesSize; i++) {
+			INode node = nodes.get(i);
 			String variableName = linkingHelper.getCrossRefNodeAsString(node, true);
+			if (ProblemUtil.isSingletonVariableName(variableName)) {
+				if (i < argumentsSize) {
+					createSingletonVariable(arguments.get(i), variableName);
+				}
+				continue;
+			}
 			if (!knownVariables.contains(variableName)) {
 				newVariables.add(variableName);
 			}
@@ -173,12 +179,28 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected void createVariables(ExistentialQuantifier quantifier, Set<String> newVariables) {
 		for (String variableName : newVariables) {
-			if (validId(variableName)) {
-				ImplicitVariable variable = ProblemFactory.eINSTANCE.createImplicitVariable();
-				variable.setName(variableName);
-				quantifier.getImplicitVariables().add(variable);
-			}
+			createVariable(quantifier, variableName);
 		}
+	}
+
+	protected void createVariable(ExistentialQuantifier quantifier, String variableName) {
+		if (validId(variableName)) {
+			ImplicitVariable variable = createNamedVariable(variableName);
+			quantifier.getImplicitVariables().add(variable);
+		}
+	}
+
+	protected void createSingletonVariable(Argument argument, String variableName) {
+		if (validId(variableName)) {
+			ImplicitVariable variable = createNamedVariable(variableName);
+			argument.setSingletonVariable(variable);
+		}
+	}
+
+	protected ImplicitVariable createNamedVariable(String variableName) {
+		ImplicitVariable variable = ProblemFactory.eINSTANCE.createImplicitVariable();
+		variable.setName(variableName);
+		return variable;
 	}
 
 	@Override
@@ -193,7 +215,10 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	protected void discardDerivedProblemState(Problem problem) {
 		problem.getNodes().clear();
 		for (Statement statement : problem.getStatements()) {
-			if (statement instanceof PredicateDefinition) {
+			if (statement instanceof ClassDeclaration) {
+				ClassDeclaration classDeclaration = (ClassDeclaration) statement;
+				classDeclaration.setNewNode(null);
+			} else if (statement instanceof PredicateDefinition) {
 				PredicateDefinition definition = (PredicateDefinition) statement;
 				for (Conjunction body : definition.getBodies()) {
 					body.getImplicitVariables().clear();
@@ -210,9 +235,5 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected static boolean validId(String name) {
 		return name != null && ID_REGEX.matcher(name).matches();
-	}
-	
-	protected static boolean validQualifiedName(String name) {
-		return name != null && QUALIFIED_NAME_REGEX.matcher(name).matches();
 	}
 }

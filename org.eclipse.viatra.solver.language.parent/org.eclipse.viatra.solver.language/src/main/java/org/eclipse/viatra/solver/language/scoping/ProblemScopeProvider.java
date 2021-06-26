@@ -8,20 +8,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
+import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.ExistentialQuantifier;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
-import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
-import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
-import org.eclipse.viatra.solver.language.model.problem.Statement;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * This class contains custom scoping description.
@@ -35,22 +28,8 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope scope = super.getScope(context, reference);
-		if (reference == ProblemPackage.Literals.ATOM__ARGUMENTS) {
+		if (reference == ProblemPackage.Literals.ARGUMENT__VARIABLE) {
 			return getVariableScope(context, scope);
-		} else if (EcoreUtil2.isAssignableFrom(reference.getEReferenceType(),
-				ProblemPackage.Literals.REFERENCE_DECLARATION)) {
-			Problem problem = EcoreUtil2.getContainerOfType(context, Problem.class);
-			if (problem == null) {
-				return scope;
-			}
-			ImmutableList.Builder<ReferenceDeclaration> builder = ImmutableList.builder();
-			for (Statement statement : problem.getStatements()) {
-				if (statement instanceof ClassDeclaration) {
-					ClassDeclaration classDeclaration = (ClassDeclaration) statement;
-					builder.addAll(classDeclaration.getReferenceDeclarations());
-				}
-			}
-			return Scopes.scopeFor(builder.build(), scope);
 		}
 		return scope;
 	}
@@ -58,6 +37,13 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	protected IScope getVariableScope(EObject context, IScope delegateScope) {
 		List<Variable> variables = new ArrayList<>();
 		EObject currentContext = context;
+		if (context instanceof Argument) {
+			Argument argument = (Argument) context;
+			Variable singletonVariable = argument.getSingletonVariable();
+			if (singletonVariable != null) {
+				variables.add(singletonVariable);
+			}
+		}
 		while (currentContext != null && !(currentContext instanceof PredicateDefinition)) {
 			if (currentContext instanceof ExistentialQuantifier) {
 				ExistentialQuantifier quantifier = (ExistentialQuantifier) currentContext;

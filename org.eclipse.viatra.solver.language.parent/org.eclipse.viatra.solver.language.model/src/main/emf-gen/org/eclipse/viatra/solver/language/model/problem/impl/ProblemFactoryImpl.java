@@ -87,6 +87,10 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 			return createRangeMultiplicity();
 		case ProblemPackage.EXACT_MULTIPLICITY:
 			return createExactMultiplicity();
+		case ProblemPackage.UNBOUNDED_MULTIPLICITY:
+			return createUnboundedMultiplicity();
+		case ProblemPackage.ARGUMENT:
+			return createArgument();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -270,6 +274,26 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 	public ExactMultiplicity createExactMultiplicity() {
 		ExactMultiplicityImpl exactMultiplicity = new ExactMultiplicityImpl();
 		return exactMultiplicity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnboundedMultiplicity createUnboundedMultiplicity() {
+		UnboundedMultiplicityImpl unboundedMultiplicity = new UnboundedMultiplicityImpl();
+		return unboundedMultiplicity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Argument createArgument() {
+		ArgumentImpl argument = new ArgumentImpl();
+		return argument;
 	}
 
 	/**

@@ -11,8 +11,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -35,7 +33,7 @@ import org.eclipse.viatra.solver.language.model.problem.Statement;
  *
  * @generated
  */
-public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem {
+public class ProblemImpl extends NamedElementImpl implements Problem {
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -45,6 +43,7 @@ public class ProblemImpl extends MinimalEObjectImpl.Container implements Problem
 	 * @ordered
 	 */
 	protected EList<Node> nodes;
+
 	/**
 	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

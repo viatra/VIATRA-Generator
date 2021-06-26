@@ -4,6 +4,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/viatra/solver/language/model/Problem"
 
 Problem:
+	("problem" name=ID ".")?
 	statements+=Statement*;
 
 Statement:
@@ -12,16 +13,13 @@ Statement:
 ClassDeclaration:
 	abstract?="abstract"? "class"
 	name=ID
-	("extends" (superTypes+=[ClassDeclaration] |
-	"[" (superTypes+=[ClassDeclaration] ("," superTypes+=[ClassDeclaration])*)? "]") |
-	referenceDeclarations+=ReferenceDeclaration)?
-	("," referenceDeclarations+=ReferenceDeclaration)*
-	".";
+	("extends" superTypes+=[ClassDeclaration|QualifiedName] ("," superTypes+=[ClassDeclaration|QualifiedName])*)?
+	("{" (referenceDeclarations+=ReferenceDeclaration ";"?)* "}" | ".");
 
 ReferenceDeclaration:
 	(containment?="contains" | "refers")
-	referenceType=[ClassDeclaration]
-	"[" multiplicity=Multiplicity "]"
+	referenceType=[ClassDeclaration|QualifiedName]
+	("[" multiplicity=Multiplicity "]")?
 	name=ID
 	("opposite" opposite=[ReferenceDeclaration|QualifiedName])?;
 
@@ -29,7 +27,7 @@ PredicateDefinition:
 	(error?="error" "pred"? | "pred")
 	name=ID
 	"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")"
-	(":=" bodies+=Conjunction (";" bodies+=Conjunction)*)?
+	(":-" bodies+=Conjunction (";" bodies+=Conjunction)*)?
 	".";
 
 Parameter:
@@ -47,7 +45,10 @@ NegativeLiteral:
 Atom:
 	relation=[Relation|QualifiedName]
 	transitiveClosure?="+"?
-	"(" (arguments+=[Variable] ("," arguments+=[Variable])*)? ")";
+	"(" (arguments+=Argument ("," arguments+=Argument)*)? ")";
+
+Argument:
+	variable=[Variable];
 
 Assertion:
 	(relation=[Relation|QualifiedName]
@@ -70,10 +71,16 @@ ScopeDeclaration:
 TypeScope:
 	targetType=[ClassDeclaration]
 	(increment?="+=" | "=")
-	multiplicity=Multiplicity;
+	multiplicity=DefiniteMultiplicity;
 
 Multiplicity:
+	UnboundedMultiplicity | DefiniteMultiplicity;
+
+DefiniteMultiplicity returns Multiplicity:
 	RangeMultiplicity | ExactMultiplicity;
+
+UnboundedMultiplicity:
+	{UnboundedMultiplicity};
 
 RangeMultiplicity:
 	lowerBound=INT ".." upperBound=UpperBound;
@@ -85,4 +92,9 @@ UpperBound returns ecore::EInt:
 	INT | "*";
 
 QualifiedName:
-	ID ("::" ID)*;
+	QUOTED_ID | ID (":" ID)* (":" QUOTED_ID)?;
+
+@Override
+terminal STRING: '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"';
+
+terminal QUOTED_ID: "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'";

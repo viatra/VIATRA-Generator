@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Atom#getRelation <em>Relation</em>}</li>
- *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Atom#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Atom#isTransitiveClosure <em>Transitive Closure</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Atom#getArguments <em>Arguments</em>}</li>
  * </ul>
  *
  * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getAtom()
@@ -46,16 +46,16 @@ public interface Atom extends Literal {
 	void setRelation(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>Arguments</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.Variable}.
+	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.Argument}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arguments</em>' reference list.
+	 * @return the value of the '<em>Arguments</em>' containment reference list.
 	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getAtom_Arguments()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Variable> getArguments();
+	EList<Argument> getArguments();
 
 	/**
 	 * Returns the value of the '<em><b>Transitive Closure</b></em>' attribute.

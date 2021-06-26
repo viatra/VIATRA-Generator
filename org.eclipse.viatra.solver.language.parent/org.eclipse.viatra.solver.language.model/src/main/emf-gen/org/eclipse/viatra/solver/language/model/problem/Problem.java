@@ -4,8 +4,6 @@ package org.eclipse.viatra.solver.language.model.problem;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Problem</b></em>'.
@@ -23,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Problem extends EObject {
+public interface Problem extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.Node}.

@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
@@ -20,6 +21,7 @@ import org.eclipse.viatra.solver.language.model.problem.RangeMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ScopeDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.TypeScope;
+import org.eclipse.viatra.solver.language.model.problem.UnboundedMultiplicity;
 import org.eclipse.viatra.solver.language.services.ProblemGrammarAccess;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
@@ -43,6 +45,9 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == ProblemPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case ProblemPackage.ARGUMENT:
+				sequence_Argument(context, (Argument) semanticObject); 
+				return; 
 			case ProblemPackage.ASSERTION:
 				sequence_Assertion(context, (Assertion) semanticObject); 
 				return; 
@@ -82,10 +87,31 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case ProblemPackage.TYPE_SCOPE:
 				sequence_TypeScope(context, (TypeScope) semanticObject); 
 				return; 
+			case ProblemPackage.UNBOUNDED_MULTIPLICITY:
+				sequence_UnboundedMultiplicity(context, (UnboundedMultiplicity) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Contexts:
+	 *     Argument returns Argument
+	 *
+	 * Constraint:
+	 *     variable=[Variable|ID]
+	 */
+	protected void sequence_Argument(ISerializationContext context, Argument semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ProblemPackage.Literals.ARGUMENT__VARIABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.ARGUMENT__VARIABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getArgumentAccess().getVariableVariableIDTerminalRuleCall_0_1(), semanticObject.eGet(ProblemPackage.Literals.ARGUMENT__VARIABLE, false));
+		feeder.finish();
+	}
+	
 	
 	/**
 	 * Contexts:
@@ -109,7 +135,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Atom returns Atom
 	 *
 	 * Constraint:
-	 *     (relation=[Relation|QualifiedName] transitiveClosure?='+'? (arguments+=[Variable|ID] arguments+=[Variable|ID]*)?)
+	 *     (relation=[Relation|QualifiedName] transitiveClosure?='+'? (arguments+=Argument arguments+=Argument*)?)
 	 */
 	protected void sequence_Atom(ISerializationContext context, Atom semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -125,11 +151,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     (
 	 *         abstract?='abstract'? 
 	 *         name=ID 
-	 *         (
-	 *             superTypes+=[ClassDeclaration|ID] | 
-	 *             (superTypes+=[ClassDeclaration|ID] superTypes+=[ClassDeclaration|ID]*) | 
-	 *             referenceDeclarations+=ReferenceDeclaration
-	 *         )? 
+	 *         (superTypes+=[ClassDeclaration|QualifiedName] superTypes+=[ClassDeclaration|QualifiedName]*)? 
 	 *         referenceDeclarations+=ReferenceDeclaration*
 	 *     )
 	 */
@@ -153,6 +175,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	/**
 	 * Contexts:
 	 *     Multiplicity returns ExactMultiplicity
+	 *     DefiniteMultiplicity returns ExactMultiplicity
 	 *     ExactMultiplicity returns ExactMultiplicity
 	 *
 	 * Constraint:
@@ -227,7 +250,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Problem returns Problem
 	 *
 	 * Constraint:
-	 *     statements+=Statement+
+	 *     ((name=ID statements+=Statement+) | statements+=Statement+)?
 	 */
 	protected void sequence_Problem(ISerializationContext context, Problem semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -237,6 +260,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	/**
 	 * Contexts:
 	 *     Multiplicity returns RangeMultiplicity
+	 *     DefiniteMultiplicity returns RangeMultiplicity
 	 *     RangeMultiplicity returns RangeMultiplicity
 	 *
 	 * Constraint:
@@ -261,7 +285,13 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     ReferenceDeclaration returns ReferenceDeclaration
 	 *
 	 * Constraint:
-	 *     (containment?='contains'? referenceType=[ClassDeclaration|ID] multiplicity=Multiplicity name=ID opposite=[ReferenceDeclaration|QualifiedName]?)
+	 *     (
+	 *         containment?='contains'? 
+	 *         referenceType=[ClassDeclaration|QualifiedName] 
+	 *         multiplicity=Multiplicity? 
+	 *         name=ID 
+	 *         opposite=[ReferenceDeclaration|QualifiedName]?
+	 *     )
 	 */
 	protected void sequence_ReferenceDeclaration(ISerializationContext context, ReferenceDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -286,9 +316,22 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     TypeScope returns TypeScope
 	 *
 	 * Constraint:
-	 *     (targetType=[ClassDeclaration|ID] increment?='+='? multiplicity=Multiplicity)
+	 *     (targetType=[ClassDeclaration|ID] increment?='+='? multiplicity=DefiniteMultiplicity)
 	 */
 	protected void sequence_TypeScope(ISerializationContext context, TypeScope semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Multiplicity returns UnboundedMultiplicity
+	 *     UnboundedMultiplicity returns UnboundedMultiplicity
+	 *
+	 * Constraint:
+	 *     {UnboundedMultiplicity}
+	 */
+	protected void sequence_UnboundedMultiplicity(ISerializationContext context, UnboundedMultiplicity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

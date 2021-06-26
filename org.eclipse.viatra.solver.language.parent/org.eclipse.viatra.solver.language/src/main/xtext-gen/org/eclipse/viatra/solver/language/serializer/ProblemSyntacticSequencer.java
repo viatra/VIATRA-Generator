@@ -11,6 +11,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -21,13 +22,15 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ProblemGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_ClassDeclaration___ExtendsKeyword_3_0_0_LeftSquareBracketKeyword_3_0_1_1_0_RightSquareBracketKeyword_3_0_1_1_2__q;
+	protected AbstractElementAlias match_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__;
+	protected AbstractElementAlias match_ClassDeclaration_SemicolonKeyword_4_0_1_1_q;
 	protected AbstractElementAlias match_PredicateDefinition_PredKeyword_0_0_1_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ProblemGrammarAccess) access;
-		match_ClassDeclaration___ExtendsKeyword_3_0_0_LeftSquareBracketKeyword_3_0_1_1_0_RightSquareBracketKeyword_3_0_1_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getExtendsKeyword_3_0_0()), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getLeftSquareBracketKeyword_3_0_1_1_0()), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getRightSquareBracketKeyword_3_0_1_1_2()));
+		match_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getLeftCurlyBracketKeyword_4_0_0()), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getRightCurlyBracketKeyword_4_0_2())), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getFullStopKeyword_4_1()));
+		match_ClassDeclaration_SemicolonKeyword_4_0_1_1_q = new TokenAlias(false, true, grammarAccess.getClassDeclarationAccess().getSemicolonKeyword_4_0_1_1());
 		match_PredicateDefinition_PredKeyword_0_0_1_q = new TokenAlias(false, true, grammarAccess.getPredicateDefinitionAccess().getPredKeyword_0_0_1());
 	}
 	
@@ -43,8 +46,10 @@ public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_ClassDeclaration___ExtendsKeyword_3_0_0_LeftSquareBracketKeyword_3_0_1_1_0_RightSquareBracketKeyword_3_0_1_1_2__q.equals(syntax))
-				emit_ClassDeclaration___ExtendsKeyword_3_0_0_LeftSquareBracketKeyword_3_0_1_1_0_RightSquareBracketKeyword_3_0_1_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__.equals(syntax))
+				emit_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ClassDeclaration_SemicolonKeyword_4_0_1_1_q.equals(syntax))
+				emit_ClassDeclaration_SemicolonKeyword_4_0_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_PredicateDefinition_PredKeyword_0_0_1_q.equals(syntax))
 				emit_PredicateDefinition_PredKeyword_0_0_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -53,13 +58,25 @@ public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	/**
 	 * Ambiguous syntax:
-	 *     ('extends' '[' ']')?
+	 *     ('{' '}') | '.'
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID (ambiguity) ',' referenceDeclarations+=ReferenceDeclaration
-	 *     name=ID (ambiguity) '.' (rule end)
+	 *     name=ID (ambiguity) (rule end)
+	 *     superTypes+=[ClassDeclaration|QualifiedName] (ambiguity) (rule end)
 	 */
-	protected void emit_ClassDeclaration___ExtendsKeyword_3_0_0_LeftSquareBracketKeyword_3_0_1_1_0_RightSquareBracketKeyword_3_0_1_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     referenceDeclarations+=ReferenceDeclaration (ambiguity) '}' (rule end)
+	 *     referenceDeclarations+=ReferenceDeclaration (ambiguity) referenceDeclarations+=ReferenceDeclaration
+	 */
+	protected void emit_ClassDeclaration_SemicolonKeyword_4_0_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -70,6 +70,8 @@ public class ProblemSwitch<T> extends Switch<T> {
 			Problem problem = (Problem) theEObject;
 			T result = caseProblem(problem);
 			if (result == null)
+				result = caseNamedElement(problem);
+			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
@@ -262,6 +264,22 @@ public class ProblemSwitch<T> extends Switch<T> {
 			T result = caseExactMultiplicity(exactMultiplicity);
 			if (result == null)
 				result = caseMultiplicity(exactMultiplicity);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.UNBOUNDED_MULTIPLICITY: {
+			UnboundedMultiplicity unboundedMultiplicity = (UnboundedMultiplicity) theEObject;
+			T result = caseUnboundedMultiplicity(unboundedMultiplicity);
+			if (result == null)
+				result = caseMultiplicity(unboundedMultiplicity);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.ARGUMENT: {
+			Argument argument = (Argument) theEObject;
+			T result = caseArgument(argument);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -598,6 +616,36 @@ public class ProblemSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExactMultiplicity(ExactMultiplicity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unbounded Multiplicity</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unbounded Multiplicity</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnboundedMultiplicity(UnboundedMultiplicity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgument(Argument object) {
 		return null;
 	}
 
