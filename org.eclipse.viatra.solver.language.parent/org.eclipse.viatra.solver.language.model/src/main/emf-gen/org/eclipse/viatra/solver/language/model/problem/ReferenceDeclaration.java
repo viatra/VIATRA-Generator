@@ -27,12 +27,12 @@ public interface ReferenceDeclaration extends Relation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Reference Type</em>' reference.
-	 * @see #setReferenceType(ClassDeclaration)
+	 * @see #setReferenceType(Relation)
 	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getReferenceDeclaration_ReferenceType()
 	 * @model
 	 * @generated
 	 */
-	ClassDeclaration getReferenceType();
+	Relation getReferenceType();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration#getReferenceType <em>Reference Type</em>}' reference.
@@ -42,7 +42,7 @@ public interface ReferenceDeclaration extends Relation {
 	 * @see #getReferenceType()
 	 * @generated
 	 */
-	void setReferenceType(ClassDeclaration value);
+	void setReferenceType(Relation value);
 
 	/**
 	 * Returns the value of the '<em><b>Opposite</b></em>' reference.

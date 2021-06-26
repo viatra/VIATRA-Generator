@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.ImplicitVariable;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
-import org.eclipse.viatra.solver.language.model.problem.Variable;
+import org.eclipse.viatra.solver.language.model.problem.VariableOrNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +24,7 @@ import org.eclipse.viatra.solver.language.model.problem.Variable;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl#getVariableOrNode <em>Variable Or Node</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl#getSingletonVariable <em>Singleton Variable</em>}</li>
  * </ul>
  *
@@ -32,14 +32,14 @@ import org.eclipse.viatra.solver.language.model.problem.Variable;
  */
 public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argument {
 	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
+	 * The cached value of the '{@link #getVariableOrNode() <em>Variable Or Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable()
+	 * @see #getVariableOrNode()
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable variable;
+	protected VariableOrNode variableOrNode;
 
 	/**
 	 * The cached value of the '{@link #getSingletonVariable() <em>Singleton Variable</em>}' containment reference.
@@ -75,17 +75,17 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable getVariable() {
-		if (variable != null && variable.eIsProxy()) {
-			InternalEObject oldVariable = (InternalEObject) variable;
-			variable = (Variable) eResolveProxy(oldVariable);
-			if (variable != oldVariable) {
+	public VariableOrNode getVariableOrNode() {
+		if (variableOrNode != null && variableOrNode.eIsProxy()) {
+			InternalEObject oldVariableOrNode = (InternalEObject) variableOrNode;
+			variableOrNode = (VariableOrNode) eResolveProxy(oldVariableOrNode);
+			if (variableOrNode != oldVariableOrNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ProblemPackage.ARGUMENT__VARIABLE,
-							oldVariable, variable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ProblemPackage.ARGUMENT__VARIABLE_OR_NODE,
+							oldVariableOrNode, variableOrNode));
 			}
 		}
-		return variable;
+		return variableOrNode;
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable basicGetVariable() {
-		return variable;
+	public VariableOrNode basicGetVariableOrNode() {
+		return variableOrNode;
 	}
 
 	/**
@@ -102,12 +102,12 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVariable(Variable newVariable) {
-		Variable oldVariable = variable;
-		variable = newVariable;
+	public void setVariableOrNode(VariableOrNode newVariableOrNode) {
+		VariableOrNode oldVariableOrNode = variableOrNode;
+		variableOrNode = newVariableOrNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProblemPackage.ARGUMENT__VARIABLE, oldVariable,
-					variable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ProblemPackage.ARGUMENT__VARIABLE_OR_NODE,
+					oldVariableOrNode, variableOrNode));
 	}
 
 	/**
@@ -182,10 +182,10 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case ProblemPackage.ARGUMENT__VARIABLE:
+		case ProblemPackage.ARGUMENT__VARIABLE_OR_NODE:
 			if (resolve)
-				return getVariable();
-			return basicGetVariable();
+				return getVariableOrNode();
+			return basicGetVariableOrNode();
 		case ProblemPackage.ARGUMENT__SINGLETON_VARIABLE:
 			return getSingletonVariable();
 		}
@@ -200,8 +200,8 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case ProblemPackage.ARGUMENT__VARIABLE:
-			setVariable((Variable) newValue);
+		case ProblemPackage.ARGUMENT__VARIABLE_OR_NODE:
+			setVariableOrNode((VariableOrNode) newValue);
 			return;
 		case ProblemPackage.ARGUMENT__SINGLETON_VARIABLE:
 			setSingletonVariable((ImplicitVariable) newValue);
@@ -218,8 +218,8 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case ProblemPackage.ARGUMENT__VARIABLE:
-			setVariable((Variable) null);
+		case ProblemPackage.ARGUMENT__VARIABLE_OR_NODE:
+			setVariableOrNode((VariableOrNode) null);
 			return;
 		case ProblemPackage.ARGUMENT__SINGLETON_VARIABLE:
 			setSingletonVariable((ImplicitVariable) null);
@@ -236,8 +236,8 @@ public class ArgumentImpl extends MinimalEObjectImpl.Container implements Argume
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case ProblemPackage.ARGUMENT__VARIABLE:
-			return variable != null;
+		case ProblemPackage.ARGUMENT__VARIABLE_OR_NODE:
+			return variableOrNode != null;
 		case ProblemPackage.ARGUMENT__SINGLETON_VARIABLE:
 			return singletonVariable != null;
 		}

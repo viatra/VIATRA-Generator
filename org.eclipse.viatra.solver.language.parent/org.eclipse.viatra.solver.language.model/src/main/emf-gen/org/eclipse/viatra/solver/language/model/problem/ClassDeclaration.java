@@ -48,7 +48,7 @@ public interface ClassDeclaration extends Relation, Statement {
 
 	/**
 	 * Returns the value of the '<em><b>Super Types</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.ClassDeclaration}.
+	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.Relation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Types</em>' reference list.
@@ -56,7 +56,7 @@ public interface ClassDeclaration extends Relation, Statement {
 	 * @model
 	 * @generated
 	 */
-	EList<ClassDeclaration> getSuperTypes();
+	EList<Relation> getSuperTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Reference Declarations</b></em>' containment reference list.

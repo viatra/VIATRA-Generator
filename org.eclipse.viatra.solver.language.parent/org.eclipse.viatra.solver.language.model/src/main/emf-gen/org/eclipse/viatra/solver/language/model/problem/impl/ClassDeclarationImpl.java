@@ -22,6 +22,7 @@ import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
+import org.eclipse.viatra.solver.language.model.problem.Relation;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,7 +69,7 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ClassDeclaration> superTypes;
+	protected EList<Relation> superTypes;
 
 	/**
 	 * The cached value of the '{@link #getReferenceDeclarations() <em>Reference Declarations</em>}' containment reference list.
@@ -136,9 +137,9 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ClassDeclaration> getSuperTypes() {
+	public EList<Relation> getSuperTypes() {
 		if (superTypes == null) {
-			superTypes = new EObjectResolvingEList<ClassDeclaration>(ClassDeclaration.class, this,
+			superTypes = new EObjectResolvingEList<Relation>(Relation.class, this,
 					ProblemPackage.CLASS_DECLARATION__SUPER_TYPES);
 		}
 		return superTypes;
@@ -257,7 +258,7 @@ public class ClassDeclarationImpl extends RelationImpl implements ClassDeclarati
 			return;
 		case ProblemPackage.CLASS_DECLARATION__SUPER_TYPES:
 			getSuperTypes().clear();
-			getSuperTypes().addAll((Collection<? extends ClassDeclaration>) newValue);
+			getSuperTypes().addAll((Collection<? extends Relation>) newValue);
 			return;
 		case ProblemPackage.CLASS_DECLARATION__REFERENCE_DECLARATIONS:
 			getReferenceDeclarations().clear();

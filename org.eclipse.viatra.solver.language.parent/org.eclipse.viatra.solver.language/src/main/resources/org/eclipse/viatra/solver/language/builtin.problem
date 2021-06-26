@@ -1,7 +1,17 @@
 problem builtin.
 
 abstract class node {
-	refers node[0..*] equals opposite equals
+	node[] equals opposite equals
 }
 
-predicate exists(node node).
+pred exists(node node).
+
+enum bool {
+	true, false
+}
+
+class double.
+
+class int extends double.
+
+class string.

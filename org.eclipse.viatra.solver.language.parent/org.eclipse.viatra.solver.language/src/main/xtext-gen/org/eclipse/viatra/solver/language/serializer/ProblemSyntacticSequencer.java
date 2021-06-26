@@ -24,14 +24,20 @@ public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected ProblemGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__;
 	protected AbstractElementAlias match_ClassDeclaration_SemicolonKeyword_4_0_1_1_q;
+	protected AbstractElementAlias match_EnumDeclaration_FullStopKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__;
+	protected AbstractElementAlias match_EnumDeclaration___CommaKeyword_2_0_1_2_0_or_SemicolonKeyword_2_0_1_2_1__q;
 	protected AbstractElementAlias match_PredicateDefinition_PredKeyword_0_0_1_q;
+	protected AbstractElementAlias match_ReferenceDeclaration_RefersKeyword_0_1_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ProblemGrammarAccess) access;
 		match_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getLeftCurlyBracketKeyword_4_0_0()), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getRightCurlyBracketKeyword_4_0_2())), new TokenAlias(false, false, grammarAccess.getClassDeclarationAccess().getFullStopKeyword_4_1()));
 		match_ClassDeclaration_SemicolonKeyword_4_0_1_1_q = new TokenAlias(false, true, grammarAccess.getClassDeclarationAccess().getSemicolonKeyword_4_0_1_1());
+		match_EnumDeclaration_FullStopKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getLeftCurlyBracketKeyword_2_0_0()), new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getRightCurlyBracketKeyword_2_0_2())), new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getFullStopKeyword_2_1()));
+		match_EnumDeclaration___CommaKeyword_2_0_1_2_0_or_SemicolonKeyword_2_0_1_2_1__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getCommaKeyword_2_0_1_2_0()), new TokenAlias(false, false, grammarAccess.getEnumDeclarationAccess().getSemicolonKeyword_2_0_1_2_1()));
 		match_PredicateDefinition_PredKeyword_0_0_1_q = new TokenAlias(false, true, grammarAccess.getPredicateDefinitionAccess().getPredKeyword_0_0_1());
+		match_ReferenceDeclaration_RefersKeyword_0_1_q = new TokenAlias(false, true, grammarAccess.getReferenceDeclarationAccess().getRefersKeyword_0_1());
 	}
 	
 	@Override
@@ -50,8 +56,14 @@ public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ClassDeclaration_SemicolonKeyword_4_0_1_1_q.equals(syntax))
 				emit_ClassDeclaration_SemicolonKeyword_4_0_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EnumDeclaration_FullStopKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__.equals(syntax))
+				emit_EnumDeclaration_FullStopKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_EnumDeclaration___CommaKeyword_2_0_1_2_0_or_SemicolonKeyword_2_0_1_2_1__q.equals(syntax))
+				emit_EnumDeclaration___CommaKeyword_2_0_1_2_0_or_SemicolonKeyword_2_0_1_2_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_PredicateDefinition_PredKeyword_0_0_1_q.equals(syntax))
 				emit_PredicateDefinition_PredKeyword_0_0_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ReferenceDeclaration_RefersKeyword_0_1_q.equals(syntax))
+				emit_ReferenceDeclaration_RefersKeyword_0_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -61,8 +73,8 @@ public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('{' '}') | '.'
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     name=ID (ambiguity) (rule end)
-	 *     superTypes+=[ClassDeclaration|QualifiedName] (ambiguity) (rule end)
+	 *     name=Identifier (ambiguity) (rule end)
+	 *     superTypes+=[Relation|QualifiedName] (ambiguity) (rule end)
 	 */
 	protected void emit_ClassDeclaration_FullStopKeyword_4_1_or___LeftCurlyBracketKeyword_4_0_0_RightCurlyBracketKeyword_4_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -82,12 +94,45 @@ public class ProblemSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Ambiguous syntax:
+	 *     ('{' '}') | '.'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=Identifier (ambiguity) (rule end)
+	 */
+	protected void emit_EnumDeclaration_FullStopKeyword_2_1_or___LeftCurlyBracketKeyword_2_0_0_RightCurlyBracketKeyword_2_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     (',' | ';')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     literals+=EnumLiteral (ambiguity) '}' (rule end)
+	 */
+	protected void emit_EnumDeclaration___CommaKeyword_2_0_1_2_0_or_SemicolonKeyword_2_0_1_2_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
 	 *     'pred'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     error?='error' (ambiguity) name=ID
+	 *     error?='error' (ambiguity) name=Identifier
 	 */
 	protected void emit_PredicateDefinition_PredKeyword_0_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     'refers'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) referenceType=[Relation|QualifiedName]
+	 */
+	protected void emit_ReferenceDeclaration_RefersKeyword_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

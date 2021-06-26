@@ -1,5 +1,5 @@
 define(["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
-	var keywords = "abstract|class|contains|error|extends|false|opposite|pred|problem|refers|scope|true|unknown";
+	var keywords = "abstract|class|contains|enum|error|extends|false|opposite|pred|problem|refers|scope|true|unknown";
 	CodeMirror.defineSimpleMode("xtext/problem", {
 		start: [
 			{token: "comment", regex: "\\/\\/.*$"},

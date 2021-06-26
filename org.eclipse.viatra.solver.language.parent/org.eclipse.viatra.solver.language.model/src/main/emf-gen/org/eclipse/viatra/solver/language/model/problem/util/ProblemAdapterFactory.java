@@ -187,6 +187,16 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseEnumDeclaration(EnumDeclaration object) {
+			return createEnumDeclarationAdapter();
+		}
+
+		@Override
+		public Adapter caseVariableOrNode(VariableOrNode object) {
+			return createVariableOrNodeAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -538,6 +548,34 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.EnumDeclaration <em>Enum Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.EnumDeclaration
+	 * @generated
+	 */
+	public Adapter createEnumDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.VariableOrNode <em>Variable Or Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.VariableOrNode
+	 * @generated
+	 */
+	public Adapter createVariableOrNodeAdapter() {
 		return null;
 	}
 

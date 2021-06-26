@@ -15,6 +15,7 @@ import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
+import org.eclipse.viatra.solver.language.model.problem.EnumDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ExactMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.ExistentialQuantifier;
 import org.eclipse.viatra.solver.language.model.problem.ImplicitVariable;
@@ -37,6 +38,7 @@ import org.eclipse.viatra.solver.language.model.problem.Statement;
 import org.eclipse.viatra.solver.language.model.problem.TypeScope;
 import org.eclipse.viatra.solver.language.model.problem.UnboundedMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
+import org.eclipse.viatra.solver.language.model.problem.VariableOrNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -212,6 +214,20 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * @generated
 	 */
 	private EClass argumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass enumDeclarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableOrNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -784,7 +800,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArgument_Variable() {
+	public EReference getArgument_VariableOrNode() {
 		return (EReference) argumentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -795,6 +811,33 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 */
 	public EReference getArgument_SingletonVariable() {
 		return (EReference) argumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEnumDeclaration() {
+		return enumDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEnumDeclaration_Literals() {
+		return (EReference) enumDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVariableOrNode() {
+		return variableOrNodeEClass;
 	}
 
 	/**
@@ -913,8 +956,13 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		unboundedMultiplicityEClass = createEClass(UNBOUNDED_MULTIPLICITY);
 
 		argumentEClass = createEClass(ARGUMENT);
-		createEReference(argumentEClass, ARGUMENT__VARIABLE);
+		createEReference(argumentEClass, ARGUMENT__VARIABLE_OR_NODE);
 		createEReference(argumentEClass, ARGUMENT__SINGLETON_VARIABLE);
+
+		enumDeclarationEClass = createEClass(ENUM_DECLARATION);
+		createEReference(enumDeclarationEClass, ENUM_DECLARATION__LITERALS);
+
+		variableOrNodeEClass = createEClass(VARIABLE_OR_NODE);
 
 		// Create enums
 		logicValueEEnum = createEEnum(LOGIC_VALUE);
@@ -957,18 +1005,21 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		predicateDefinitionEClass.getESuperTypes().add(this.getRelation());
 		predicateDefinitionEClass.getESuperTypes().add(this.getStatement());
 		parameterEClass.getESuperTypes().add(this.getVariable());
-		variableEClass.getESuperTypes().add(this.getNamedElement());
+		variableEClass.getESuperTypes().add(this.getVariableOrNode());
 		conjunctionEClass.getESuperTypes().add(this.getExistentialQuantifier());
 		atomEClass.getESuperTypes().add(this.getLiteral());
 		implicitVariableEClass.getESuperTypes().add(this.getVariable());
 		negativeLiteralEClass.getESuperTypes().add(this.getExistentialQuantifier());
 		negativeLiteralEClass.getESuperTypes().add(this.getLiteral());
 		assertionEClass.getESuperTypes().add(this.getStatement());
-		nodeEClass.getESuperTypes().add(this.getNamedElement());
+		nodeEClass.getESuperTypes().add(this.getVariableOrNode());
 		scopeDeclarationEClass.getESuperTypes().add(this.getStatement());
 		rangeMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
 		exactMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
 		unboundedMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
+		enumDeclarationEClass.getESuperTypes().add(this.getRelation());
+		enumDeclarationEClass.getESuperTypes().add(this.getStatement());
+		variableOrNodeEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -986,7 +1037,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		initEAttribute(getClassDeclaration_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1,
 				ClassDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
-		initEReference(getClassDeclaration_SuperTypes(), this.getClassDeclaration(), null, "superTypes", null, 0, -1,
+		initEReference(getClassDeclaration_SuperTypes(), this.getRelation(), null, "superTypes", null, 0, -1,
 				ClassDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDeclaration_ReferenceDeclarations(), this.getReferenceDeclaration(), null,
@@ -998,8 +1049,8 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		initEClass(referenceDeclarationEClass, ReferenceDeclaration.class, "ReferenceDeclaration", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReferenceDeclaration_ReferenceType(), this.getClassDeclaration(), null, "referenceType", null,
-				0, 1, ReferenceDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+		initEReference(getReferenceDeclaration_ReferenceType(), this.getRelation(), null, "referenceType", null, 0, 1,
+				ReferenceDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getReferenceDeclaration_Opposite(), this.getReferenceDeclaration(), null, "opposite", null, 0, 1,
 				ReferenceDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
@@ -1030,7 +1081,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameter_ParameterType(), this.getClassDeclaration(), null, "parameterType", null, 0, 1,
+		initEReference(getParameter_ParameterType(), this.getRelation(), null, "parameterType", null, 0, 1,
 				Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1126,12 +1177,21 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArgument_Variable(), this.getVariable(), null, "variable", null, 0, 1, Argument.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgument_VariableOrNode(), this.getVariableOrNode(), null, "variableOrNode", null, 0, 1,
+				Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArgument_SingletonVariable(), this.getImplicitVariable(), null, "singletonVariable", null, 0,
 				1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(enumDeclarationEClass, EnumDeclaration.class, "EnumDeclaration", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumDeclaration_Literals(), this.getNode(), null, "literals", null, 0, -1,
+				EnumDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableOrNodeEClass, VariableOrNode.class, "VariableOrNode", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(logicValueEEnum, LogicValue.class, "LogicValue");

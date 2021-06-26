@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
+import org.eclipse.viatra.solver.language.model.problem.EnumDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.Parameter;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
@@ -30,6 +31,7 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 	private static final String BUILTIN_CLASS = "cm-keyword";
 	private static final String CLASS_CLASS = "problem-class";
 	private static final String ABSTRACT_CLASS = "problem-abstract";
+	private static final String ENUM_CLASS = "problem-enum";
 	private static final String REFERENCE_CLASS = "problem-reference";
 	private static final String CONTAINMENT_CLASS = "problem-containment";
 	private static final String PREDICATE_CLASS = "problem-predicate";
@@ -104,6 +106,9 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 			if (classDeclaration.isAbstract()) {
 				classesBuilder.add(ABSTRACT_CLASS);
 			}
+		}
+		if (eObject instanceof EnumDeclaration) {
+			classesBuilder.add(ENUM_CLASS);
 		}
 		if (eObject instanceof ReferenceDeclaration) {
 			classesBuilder.add(REFERENCE_CLASS);

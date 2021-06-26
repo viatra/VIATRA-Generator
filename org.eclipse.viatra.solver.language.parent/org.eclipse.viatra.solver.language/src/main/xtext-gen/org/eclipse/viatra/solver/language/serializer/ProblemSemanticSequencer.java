@@ -12,8 +12,10 @@ import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
+import org.eclipse.viatra.solver.language.model.problem.EnumDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ExactMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.NegativeLiteral;
+import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
@@ -60,11 +62,17 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 			case ProblemPackage.CONJUNCTION:
 				sequence_Conjunction(context, (Conjunction) semanticObject); 
 				return; 
+			case ProblemPackage.ENUM_DECLARATION:
+				sequence_EnumDeclaration(context, (EnumDeclaration) semanticObject); 
+				return; 
 			case ProblemPackage.EXACT_MULTIPLICITY:
 				sequence_ExactMultiplicity(context, (ExactMultiplicity) semanticObject); 
 				return; 
 			case ProblemPackage.NEGATIVE_LITERAL:
 				sequence_NegativeLiteral(context, (NegativeLiteral) semanticObject); 
+				return; 
+			case ProblemPackage.NODE:
+				sequence_EnumLiteral(context, (Node) semanticObject); 
 				return; 
 			case ProblemPackage.PARAMETER:
 				sequence_Parameter(context, (org.eclipse.viatra.solver.language.model.problem.Parameter) semanticObject); 
@@ -100,15 +108,15 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Argument returns Argument
 	 *
 	 * Constraint:
-	 *     variable=[Variable|ID]
+	 *     variableOrNode=[VariableOrNode|QualifiedName]
 	 */
 	protected void sequence_Argument(ISerializationContext context, Argument semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ProblemPackage.Literals.ARGUMENT__VARIABLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.ARGUMENT__VARIABLE));
+			if (transientValues.isValueTransient(semanticObject, ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getArgumentAccess().getVariableVariableIDTerminalRuleCall_0_1(), semanticObject.eGet(ProblemPackage.Literals.ARGUMENT__VARIABLE, false));
+		feeder.accept(grammarAccess.getArgumentAccess().getVariableOrNodeVariableOrNodeQualifiedNameParserRuleCall_0_1(), semanticObject.eGet(ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE, false));
 		feeder.finish();
 	}
 	
@@ -150,8 +158,8 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 * Constraint:
 	 *     (
 	 *         abstract?='abstract'? 
-	 *         name=ID 
-	 *         (superTypes+=[ClassDeclaration|QualifiedName] superTypes+=[ClassDeclaration|QualifiedName]*)? 
+	 *         name=Identifier 
+	 *         (superTypes+=[Relation|QualifiedName] superTypes+=[Relation|QualifiedName]*)? 
 	 *         referenceDeclarations+=ReferenceDeclaration*
 	 *     )
 	 */
@@ -169,6 +177,37 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 */
 	protected void sequence_Conjunction(ISerializationContext context, Conjunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Statement returns EnumDeclaration
+	 *     EnumDeclaration returns EnumDeclaration
+	 *
+	 * Constraint:
+	 *     (name=Identifier (literals+=EnumLiteral literals+=EnumLiteral*)?)
+	 */
+	protected void sequence_EnumDeclaration(ISerializationContext context, EnumDeclaration semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     EnumLiteral returns Node
+	 *
+	 * Constraint:
+	 *     name=QuotedOrUnquotedId
+	 */
+	protected void sequence_EnumLiteral(ISerializationContext context, Node semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ProblemPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.NAMED_ELEMENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEnumLiteralAccess().getNameQuotedOrUnquotedIdParserRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -216,19 +255,10 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
-	 *     (parameterType=[ClassDeclaration|ID] name=ID)
+	 *     (parameterType=[Relation|QualifiedName]? name=Identifier)
 	 */
 	protected void sequence_Parameter(ISerializationContext context, org.eclipse.viatra.solver.language.model.problem.Parameter semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, ProblemPackage.Literals.PARAMETER__PARAMETER_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.PARAMETER__PARAMETER_TYPE));
-			if (transientValues.isValueTransient(semanticObject, ProblemPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.NAMED_ELEMENT__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParameterAccess().getParameterTypeClassDeclarationIDTerminalRuleCall_0_0_1(), semanticObject.eGet(ProblemPackage.Literals.PARAMETER__PARAMETER_TYPE, false));
-		feeder.accept(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -238,7 +268,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     PredicateDefinition returns PredicateDefinition
 	 *
 	 * Constraint:
-	 *     (error?='error'? name=ID (parameters+=Parameter parameters+=Parameter*)? (bodies+=Conjunction bodies+=Conjunction*)?)
+	 *     (error?='error'? name=Identifier (parameters+=Parameter parameters+=Parameter*)? (bodies+=Conjunction bodies+=Conjunction*)?)
 	 */
 	protected void sequence_PredicateDefinition(ISerializationContext context, PredicateDefinition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -250,7 +280,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     Problem returns Problem
 	 *
 	 * Constraint:
-	 *     ((name=ID statements+=Statement+) | statements+=Statement+)?
+	 *     ((name=Identifier statements+=Statement+) | statements+=Statement+)?
 	 */
 	protected void sequence_Problem(ISerializationContext context, Problem semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -287,9 +317,9 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 * Constraint:
 	 *     (
 	 *         containment?='contains'? 
-	 *         referenceType=[ClassDeclaration|QualifiedName] 
+	 *         referenceType=[Relation|QualifiedName] 
 	 *         multiplicity=Multiplicity? 
-	 *         name=ID 
+	 *         name=Identifier 
 	 *         opposite=[ReferenceDeclaration|QualifiedName]?
 	 *     )
 	 */

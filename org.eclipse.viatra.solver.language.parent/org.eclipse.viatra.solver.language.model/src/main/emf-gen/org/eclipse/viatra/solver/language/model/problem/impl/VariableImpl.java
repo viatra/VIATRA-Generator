@@ -14,7 +14,7 @@ import org.eclipse.viatra.solver.language.model.problem.Variable;
  *
  * @generated
  */
-public abstract class VariableImpl extends NamedElementImpl implements Variable {
+public abstract class VariableImpl extends VariableOrNodeImpl implements Variable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

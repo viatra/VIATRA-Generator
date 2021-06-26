@@ -14,6 +14,7 @@ import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
+import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
 import org.eclipse.viatra.solver.language.scoping.ProblemGlobalScopeProvider;
 
@@ -40,9 +41,15 @@ public final class ProblemUtil {
 		return variable.eContainingFeature() == ProblemPackage.Literals.ARGUMENT__SINGLETON_VARIABLE;
 	}
 
+	public static boolean isEnumLiteral(Node node) {
+		return node.eContainingFeature() == ProblemPackage.Literals.ENUM_DECLARATION__LITERALS;
+	}
+	
 	public static boolean isEnumNode(Node node) {
 		String name = node.getName();
-		return name != null && name.startsWith(ENUM_NODE_NAME_QUOTE) && name.endsWith(ENUM_NODE_NAME_QUOTE);
+		boolean isNameQuoted = name != null && name.startsWith(ENUM_NODE_NAME_QUOTE)
+				&& name.endsWith(ENUM_NODE_NAME_QUOTE);
+		return isNameQuoted || isEnumLiteral(node);
 	}
 
 	public static boolean isNewNode(Node node) {
@@ -71,7 +78,11 @@ public final class ProblemUtil {
 			ClassDeclaration current = queue.removeFirst();
 			if (!found.contains(current)) {
 				found.add(current);
-				queue.addAll(current.getSuperTypes());
+				for (Relation superType : current.getSuperTypes()) {
+					if (superType instanceof ClassDeclaration) {
+						queue.addLast((ClassDeclaration) superType);
+					}
+				}
 			}
 		}
 		return found;

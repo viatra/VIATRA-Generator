@@ -21,14 +21,17 @@
 }
 
 class Person {
-    refers Person[] children opposite parent
-    refers Person parent opposite children
+    Person[] children opposite parent
+    Person parent opposite children
+    TaxStatus[1] taxStatus
 }
 
-error loop(Person p) :- children+(p, p).
+enum TaxStatus {
+	child, student, adult, retired
+}
 
-error multipleRoots(Person p, Person q) :-
-    !equals(p, q), !parent(p, _), !parent(q, _).
+error invalidTaxStatus(Person p) :-
+	taxStatus(p, child), children(p, _q).
 
 Family('family').
 members('family', anne).
@@ -36,6 +39,7 @@ members('family', bob).
 members('family', ciri).
 children(anne, ciri).
 ?children(bob, ciri).
+taxStatus(anne, adult).
 
 scope Family = 1, Person += 5..10.</pre></div>
         </div>

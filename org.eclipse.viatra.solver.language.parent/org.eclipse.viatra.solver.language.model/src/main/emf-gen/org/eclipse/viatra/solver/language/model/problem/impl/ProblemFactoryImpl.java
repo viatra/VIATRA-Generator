@@ -91,6 +91,8 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 			return createUnboundedMultiplicity();
 		case ProblemPackage.ARGUMENT:
 			return createArgument();
+		case ProblemPackage.ENUM_DECLARATION:
+			return createEnumDeclaration();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -294,6 +296,16 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 	public Argument createArgument() {
 		ArgumentImpl argument = new ArgumentImpl();
 		return argument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumDeclaration createEnumDeclaration() {
+		EnumDeclarationImpl enumDeclaration = new EnumDeclarationImpl();
+		return enumDeclaration;
 	}
 
 	/**

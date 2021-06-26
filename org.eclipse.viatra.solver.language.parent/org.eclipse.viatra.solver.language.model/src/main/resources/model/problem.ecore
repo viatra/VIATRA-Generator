@@ -12,14 +12,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="ClassDeclaration" eSuperTypes="#//Relation #//Statement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
-        eType="#//ClassDeclaration"/>
+        eType="#//Relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenceDeclarations"
         upperBound="-1" eType="#//ReferenceDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="newNode" eType="#//Node"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferenceDeclaration" eSuperTypes="#//Relation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceType" eType="#//ClassDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceType" eType="#//Relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//ReferenceDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//Multiplicity"
@@ -36,9 +36,9 @@
         eType="#//Conjunction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//Variable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" eType="#//ClassDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" eType="#//Relation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//VariableOrNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="Conjunction" eSuperTypes="#//ExistentialQuantifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
         eType="#//Literal" containment="true"/>
@@ -65,7 +65,7 @@
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//LogicValue"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//VariableOrNode"/>
   <eClassifiers xsi:type="ecore:EEnum" name="LogicValue">
     <eLiterals name="TRUE" literal="TRUE"/>
     <eLiterals name="FALSE" value="1"/>
@@ -95,8 +95,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnboundedMultiplicity" eSuperTypes="#//Multiplicity"/>
   <eClassifiers xsi:type="ecore:EClass" name="Argument">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableOrNode" eType="#//VariableOrNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="singletonVariable" eType="#//ImplicitVariable"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumDeclaration" eSuperTypes="#//Relation #//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//Node" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableOrNode" abstract="true" eSuperTypes="#//NamedElement"/>
 </ecore:EPackage>

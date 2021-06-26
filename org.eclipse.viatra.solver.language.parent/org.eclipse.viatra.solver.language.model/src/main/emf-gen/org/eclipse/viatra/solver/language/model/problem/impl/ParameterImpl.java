@@ -8,10 +8,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Parameter;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
+import org.eclipse.viatra.solver.language.model.problem.Relation;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +34,7 @@ public class ParameterImpl extends VariableImpl implements Parameter {
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassDeclaration parameterType;
+	protected Relation parameterType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,10 +60,10 @@ public class ParameterImpl extends VariableImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDeclaration getParameterType() {
+	public Relation getParameterType() {
 		if (parameterType != null && parameterType.eIsProxy()) {
 			InternalEObject oldParameterType = (InternalEObject) parameterType;
-			parameterType = (ClassDeclaration) eResolveProxy(oldParameterType);
+			parameterType = (Relation) eResolveProxy(oldParameterType);
 			if (parameterType != oldParameterType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ProblemPackage.PARAMETER__PARAMETER_TYPE,
@@ -79,7 +78,7 @@ public class ParameterImpl extends VariableImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDeclaration basicGetParameterType() {
+	public Relation basicGetParameterType() {
 		return parameterType;
 	}
 
@@ -88,8 +87,8 @@ public class ParameterImpl extends VariableImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParameterType(ClassDeclaration newParameterType) {
-		ClassDeclaration oldParameterType = parameterType;
+	public void setParameterType(Relation newParameterType) {
+		Relation oldParameterType = parameterType;
 		parameterType = newParameterType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ProblemPackage.PARAMETER__PARAMETER_TYPE,
@@ -121,7 +120,7 @@ public class ParameterImpl extends VariableImpl implements Parameter {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case ProblemPackage.PARAMETER__PARAMETER_TYPE:
-			setParameterType((ClassDeclaration) newValue);
+			setParameterType((Relation) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +135,7 @@ public class ParameterImpl extends VariableImpl implements Parameter {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case ProblemPackage.PARAMETER__PARAMETER_TYPE:
-			setParameterType((ClassDeclaration) null);
+			setParameterType((Relation) null);
 			return;
 		}
 		super.eUnset(featureID);

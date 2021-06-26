@@ -397,6 +397,43 @@ public interface ProblemPackage extends EPackage {
 	int PREDICATE_DEFINITION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeImpl <em>Variable Or Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getVariableOrNode()
+	 * @generated
+	 */
+	int VARIABLE_OR_NODE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Variable Or Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Variable Or Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.VariableImpl <em>Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -413,7 +450,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE__NAME = NAMED_ELEMENT__NAME;
+	int VARIABLE__NAME = VARIABLE_OR_NODE__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Variable</em>' class.
@@ -422,7 +459,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int VARIABLE_FEATURE_COUNT = VARIABLE_OR_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Variable</em>' class.
@@ -431,7 +468,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+	int VARIABLE_OPERATION_COUNT = VARIABLE_OR_NODE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -828,7 +865,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__NAME = NAMED_ELEMENT__NAME;
+	int NODE__NAME = VARIABLE_OR_NODE__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -837,7 +874,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int NODE_FEATURE_COUNT = VARIABLE_OR_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Node</em>' class.
@@ -846,7 +883,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+	int NODE_OPERATION_COUNT = VARIABLE_OR_NODE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ScopeDeclarationImpl <em>Scope Declaration</em>}' class.
@@ -1090,13 +1127,13 @@ public interface ProblemPackage extends EPackage {
 	int ARGUMENT = 23;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Variable Or Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARGUMENT__VARIABLE = 0;
+	int ARGUMENT__VARIABLE_OR_NODE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Singleton Variable</b></em>' containment reference.
@@ -1126,6 +1163,52 @@ public interface ProblemPackage extends EPackage {
 	int ARGUMENT_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.EnumDeclarationImpl <em>Enum Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.EnumDeclarationImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getEnumDeclaration()
+	 * @generated
+	 */
+	int ENUM_DECLARATION = 24;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DECLARATION__NAME = RELATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DECLARATION__LITERALS = RELATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Enum Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DECLARATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Enum Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_DECLARATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1133,7 +1216,7 @@ public interface ProblemPackage extends EPackage {
 	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getLogicValue()
 	 * @generated
 	 */
-	int LOGIC_VALUE = 24;
+	int LOGIC_VALUE = 26;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.Problem <em>Problem</em>}'.
@@ -1717,15 +1800,15 @@ public interface ProblemPackage extends EPackage {
 	EClass getArgument();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariableOrNode <em>Variable Or Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Variable</em>'.
-	 * @see org.eclipse.viatra.solver.language.model.problem.Argument#getVariable()
+	 * @return the meta object for the reference '<em>Variable Or Node</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.Argument#getVariableOrNode()
 	 * @see #getArgument()
 	 * @generated
 	 */
-	EReference getArgument_Variable();
+	EReference getArgument_VariableOrNode();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getSingletonVariable <em>Singleton Variable</em>}'.
@@ -1737,6 +1820,37 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArgument_SingletonVariable();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.EnumDeclaration <em>Enum Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enum Declaration</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.EnumDeclaration
+	 * @generated
+	 */
+	EClass getEnumDeclaration();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.viatra.solver.language.model.problem.EnumDeclaration#getLiterals <em>Literals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Literals</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.EnumDeclaration#getLiterals()
+	 * @see #getEnumDeclaration()
+	 * @generated
+	 */
+	EReference getEnumDeclaration_Literals();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.VariableOrNode <em>Variable Or Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Or Node</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.VariableOrNode
+	 * @generated
+	 */
+	EClass getVariableOrNode();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}'.
@@ -2260,12 +2374,12 @@ public interface ProblemPackage extends EPackage {
 		EClass ARGUMENT = eINSTANCE.getArgument();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Variable Or Node</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARGUMENT__VARIABLE = eINSTANCE.getArgument_Variable();
+		EReference ARGUMENT__VARIABLE_OR_NODE = eINSTANCE.getArgument_VariableOrNode();
 
 		/**
 		 * The meta object literal for the '<em><b>Singleton Variable</b></em>' containment reference feature.
@@ -2274,6 +2388,34 @@ public interface ProblemPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARGUMENT__SINGLETON_VARIABLE = eINSTANCE.getArgument_SingletonVariable();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.EnumDeclarationImpl <em>Enum Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.EnumDeclarationImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getEnumDeclaration()
+		 * @generated
+		 */
+		EClass ENUM_DECLARATION = eINSTANCE.getEnumDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUM_DECLARATION__LITERALS = eINSTANCE.getEnumDeclaration_Literals();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeImpl <em>Variable Or Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getVariableOrNode()
+		 * @generated
+		 */
+		EClass VARIABLE_OR_NODE = eINSTANCE.getVariableOrNode();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}' enum.

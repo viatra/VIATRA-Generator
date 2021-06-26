@@ -86,8 +86,12 @@
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//UnboundedMultiplicity"/>
     <genClasses ecoreClass="problem.ecore#//Argument">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/variableOrNode"/>
       <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/singletonVariable"/>
     </genClasses>
+    <genClasses ecoreClass="problem.ecore#//EnumDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//EnumDeclaration/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//VariableOrNode"/>
   </genPackages>
 </genmodel:GenModel>

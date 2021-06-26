@@ -1,7 +1,9 @@
 package org.eclipse.viatra.solver.language.resource;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.NamedElement;
+import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
 import org.eclipse.xtext.EcoreUtil2;
@@ -73,6 +75,9 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 	}
 
 	protected boolean shouldExportSimpleName(EObject eObject) {
+		if (eObject instanceof Node) {
+			return !ProblemUtil.isNewNode((Node) eObject);
+		}
 		return true;
 	}
 

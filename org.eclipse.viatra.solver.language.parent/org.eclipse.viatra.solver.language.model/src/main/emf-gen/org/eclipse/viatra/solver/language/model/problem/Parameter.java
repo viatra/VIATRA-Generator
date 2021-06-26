@@ -24,12 +24,12 @@ public interface Parameter extends Variable {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Type</em>' reference.
-	 * @see #setParameterType(ClassDeclaration)
+	 * @see #setParameterType(Relation)
 	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getParameter_ParameterType()
 	 * @model
 	 * @generated
 	 */
-	ClassDeclaration getParameterType();
+	Relation getParameterType();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.viatra.solver.language.model.problem.Parameter#getParameterType <em>Parameter Type</em>}' reference.
@@ -39,6 +39,6 @@ public interface Parameter extends Variable {
 	 * @see #getParameterType()
 	 * @generated
 	 */
-	void setParameterType(ClassDeclaration value);
+	void setParameterType(Relation value);
 
 } // Parameter

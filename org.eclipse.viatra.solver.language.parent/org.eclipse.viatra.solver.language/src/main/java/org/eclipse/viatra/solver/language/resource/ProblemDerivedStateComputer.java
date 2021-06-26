@@ -3,9 +3,11 @@ package org.eclipse.viatra.solver.language.resource;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
@@ -30,18 +32,21 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
-import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 @Singleton
 public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	public static final String NEW_NODE = "new";
 
-	private static final Pattern ID_REGEX = Pattern.compile("[_a-zA-Z][_0-9a-zA-Z]*|'(\\\\.|[^\\'])*'");
+	private static final Pattern ID_REGEX = Pattern.compile("[_a-zA-Z][_0-9a-zA-Z]*");
+
+	private static final Pattern QUOTED_ID_REGEX = Pattern.compile("'(\\\\.|[^\\'])*'");
 
 	@Inject
 	private LinkingHelper linkingHelper;
@@ -50,7 +55,8 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Inject
-	private IGlobalScopeProvider scopeProvider;
+	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
+	private IScopeProvider scopeProvider;
 
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
@@ -65,11 +71,11 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		installNewNodes(problem);
 		if (!preLinkingPhase) {
 			installDerivedNodes(problem);
-		}
-		for (Statement statement : problem.getStatements()) {
-			if (statement instanceof PredicateDefinition) {
-				PredicateDefinition definition = (PredicateDefinition) statement;
-				installDerivedPredicateDefinitionState(definition);
+			for (Statement statement : problem.getStatements()) {
+				if (statement instanceof PredicateDefinition) {
+					PredicateDefinition definition = (PredicateDefinition) statement;
+					installDerivedPredicateDefinitionState(definition);
+				}
 			}
 		}
 	}
@@ -87,20 +93,30 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	}
 
 	protected void installDerivedNodes(Problem problem) {
-		IScope nodeScope = scopeProvider.getScope(problem.eResource(), ProblemPackage.Literals.ASSERTION__ARGUMENTS,
-				Predicates.alwaysTrue());
+		IScope nodeScope = scopeProvider.getScope(problem, ProblemPackage.Literals.ASSERTION__ARGUMENTS);
 		Set<String> nodeNames = new HashSet<>();
 		for (Statement statement : problem.getStatements()) {
 			if (statement instanceof Assertion) {
-				Assertion assertion = (Assertion) statement;
-				List<INode> nodes = NodeModelUtils.findNodesForFeature(assertion,
-						ProblemPackage.Literals.ASSERTION__ARGUMENTS);
-				for (INode node : nodes) {
-					String nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
-					if (validId(nodeName)) {
-						QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
-						if (!nodeNames.contains(nodeName) && nodeScope.getSingleElement(qualifiedName) == null) {
-							nodeNames.add(nodeName);
+				addNodeNames(nodeNames, nodeScope, statement, ProblemPackage.Literals.ASSERTION__ARGUMENTS,
+						ProblemDerivedStateComputer::validNodeName);
+			} else if (statement instanceof PredicateDefinition) {
+				PredicateDefinition predicateDefinition = (PredicateDefinition) statement;
+				for (Conjunction body : predicateDefinition.getBodies()) {
+					for (Literal literal : body.getLiterals()) {
+						Atom atom = null;
+						if (literal instanceof Atom) {
+							atom = (Atom) literal;
+						} else if (literal instanceof NegativeLiteral) {
+							NegativeLiteral negativeLiteral = (NegativeLiteral) literal;
+							atom = negativeLiteral.getAtom();
+						}
+						if (atom == null) {
+							continue;
+						}
+						for (Argument argument : atom.getArguments()) {
+							addNodeNames(nodeNames, nodeScope, argument,
+									ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE,
+									ProblemDerivedStateComputer::validQuotedId);
 						}
 					}
 				}
@@ -110,6 +126,21 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		for (String nodeName : nodeNames) {
 			Node graphNode = createNode(nodeName);
 			grapNodes.add(graphNode);
+		}
+	}
+
+	private void addNodeNames(Set<String> nodeNames, IScope nodeScope, EObject eObject, EStructuralFeature feature,
+			Predicate<String> condition) {
+		List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, feature);
+		for (INode node : nodes) {
+			String nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
+			if (!condition.test(nodeName)) {
+				continue;
+			}
+			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
+			if (!nodeNames.contains(nodeName) && nodeScope.getSingleElement(qualifiedName) == null) {
+				nodeNames.add(nodeName);
+			}
 		}
 	}
 
@@ -158,6 +189,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected void createSigletonVariablesAndCollectVariables(Atom atom, Set<String> knownVariables,
 			Set<String> newVariables) {
+		IScope scope = scopeProvider.getScope(atom, ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE);
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(atom, ProblemPackage.Literals.ATOM__ARGUMENTS);
 		int nodesSize = nodes.size();
 		List<Argument> arguments = atom.getArguments();
@@ -165,6 +197,13 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		for (int i = 0; i < nodesSize; i++) {
 			INode node = nodes.get(i);
 			String variableName = linkingHelper.getCrossRefNodeAsString(node, true);
+			if (!validId(variableName)) {
+				continue;
+			}
+			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(variableName);
+			if (scope.getSingleElement(qualifiedName) != null) {
+				continue;
+			}
 			if (ProblemUtil.isSingletonVariableName(variableName)) {
 				if (i < argumentsSize) {
 					createSingletonVariable(arguments.get(i), variableName);
@@ -223,9 +262,13 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 				for (Conjunction body : definition.getBodies()) {
 					body.getImplicitVariables().clear();
 					for (Literal literal : body.getLiterals()) {
+						if (literal instanceof Atom) {
+							discardDerivedAtomState((Atom) literal);
+						}
 						if (literal instanceof NegativeLiteral) {
 							NegativeLiteral negativeLiteral = (NegativeLiteral) literal;
 							negativeLiteral.getImplicitVariables().clear();
+							discardDerivedAtomState(negativeLiteral.getAtom());
 						}
 					}
 				}
@@ -233,7 +276,24 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 
+	protected void discardDerivedAtomState(Atom atom) {
+		if (atom == null) {
+			return;
+		}
+		for (Argument argument : atom.getArguments()) {
+			argument.setSingletonVariable(null);
+		}
+	}
+
 	protected static boolean validId(String name) {
 		return name != null && ID_REGEX.matcher(name).matches();
+	}
+
+	protected static boolean validQuotedId(String name) {
+		return name != null && QUOTED_ID_REGEX.matcher(name).matches();
+	}
+
+	protected static boolean validNodeName(String name) {
+		return validId(name) || validQuotedId(name);
 	}
 }

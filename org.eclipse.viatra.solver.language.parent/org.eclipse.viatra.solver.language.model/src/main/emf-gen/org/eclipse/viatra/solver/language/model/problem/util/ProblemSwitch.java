@@ -134,6 +134,8 @@ public class ProblemSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseVariable(parameter);
 			if (result == null)
+				result = caseVariableOrNode(parameter);
+			if (result == null)
 				result = caseNamedElement(parameter);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -142,6 +144,8 @@ public class ProblemSwitch<T> extends Switch<T> {
 		case ProblemPackage.VARIABLE: {
 			Variable variable = (Variable) theEObject;
 			T result = caseVariable(variable);
+			if (result == null)
+				result = caseVariableOrNode(variable);
 			if (result == null)
 				result = caseNamedElement(variable);
 			if (result == null)
@@ -179,6 +183,8 @@ public class ProblemSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseVariable(implicitVariable);
 			if (result == null)
+				result = caseVariableOrNode(implicitVariable);
+			if (result == null)
 				result = caseNamedElement(implicitVariable);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -214,6 +220,8 @@ public class ProblemSwitch<T> extends Switch<T> {
 		case ProblemPackage.NODE: {
 			Node node = (Node) theEObject;
 			T result = caseNode(node);
+			if (result == null)
+				result = caseVariableOrNode(node);
 			if (result == null)
 				result = caseNamedElement(node);
 			if (result == null)
@@ -280,6 +288,28 @@ public class ProblemSwitch<T> extends Switch<T> {
 		case ProblemPackage.ARGUMENT: {
 			Argument argument = (Argument) theEObject;
 			T result = caseArgument(argument);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.ENUM_DECLARATION: {
+			EnumDeclaration enumDeclaration = (EnumDeclaration) theEObject;
+			T result = caseEnumDeclaration(enumDeclaration);
+			if (result == null)
+				result = caseRelation(enumDeclaration);
+			if (result == null)
+				result = caseStatement(enumDeclaration);
+			if (result == null)
+				result = caseNamedElement(enumDeclaration);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.VARIABLE_OR_NODE: {
+			VariableOrNode variableOrNode = (VariableOrNode) theEObject;
+			T result = caseVariableOrNode(variableOrNode);
+			if (result == null)
+				result = caseNamedElement(variableOrNode);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -646,6 +676,36 @@ public class ProblemSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArgument(Argument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumDeclaration(EnumDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Or Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Or Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableOrNode(VariableOrNode object) {
 		return null;
 	}
 

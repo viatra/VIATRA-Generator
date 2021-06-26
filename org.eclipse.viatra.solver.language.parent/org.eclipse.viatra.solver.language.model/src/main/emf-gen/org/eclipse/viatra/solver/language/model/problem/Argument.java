@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariableOrNode <em>Variable Or Node</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Argument#getSingletonVariable <em>Singleton Variable</em>}</li>
  * </ul>
  *
@@ -23,26 +23,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Argument extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>Variable Or Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable</em>' reference.
-	 * @see #setVariable(Variable)
-	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getArgument_Variable()
+	 * @return the value of the '<em>Variable Or Node</em>' reference.
+	 * @see #setVariableOrNode(VariableOrNode)
+	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getArgument_VariableOrNode()
 	 * @model
 	 * @generated
 	 */
-	Variable getVariable();
+	VariableOrNode getVariableOrNode();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariable <em>Variable</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariableOrNode <em>Variable Or Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable</em>' reference.
-	 * @see #getVariable()
+	 * @param value the new value of the '<em>Variable Or Node</em>' reference.
+	 * @see #getVariableOrNode()
 	 * @generated
 	 */
-	void setVariable(Variable value);
+	void setVariableOrNode(VariableOrNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Singleton Variable</b></em>' containment reference.

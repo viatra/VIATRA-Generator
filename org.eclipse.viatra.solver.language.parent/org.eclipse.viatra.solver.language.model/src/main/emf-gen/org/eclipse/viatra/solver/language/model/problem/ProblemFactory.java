@@ -175,6 +175,15 @@ public interface ProblemFactory extends EFactory {
 	Argument createArgument();
 
 	/**
+	 * Returns a new object of class '<em>Enum Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Declaration</em>'.
+	 * @generated
+	 */
+	EnumDeclaration createEnumDeclaration();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -12,5 +12,5 @@ package org.eclipse.viatra.solver.language.model.problem;
  * @model
  * @generated
  */
-public interface Node extends NamedElement {
+public interface Node extends VariableOrNode {
 } // Node

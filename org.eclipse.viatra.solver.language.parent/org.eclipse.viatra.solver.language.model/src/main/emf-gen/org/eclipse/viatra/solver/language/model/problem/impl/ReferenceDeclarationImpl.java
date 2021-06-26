@@ -9,11 +9,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Multiplicity;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
+import org.eclipse.viatra.solver.language.model.problem.Relation;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +39,7 @@ public class ReferenceDeclarationImpl extends RelationImpl implements ReferenceD
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassDeclaration referenceType;
+	protected Relation referenceType;
 
 	/**
 	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
@@ -106,10 +105,10 @@ public class ReferenceDeclarationImpl extends RelationImpl implements ReferenceD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDeclaration getReferenceType() {
+	public Relation getReferenceType() {
 		if (referenceType != null && referenceType.eIsProxy()) {
 			InternalEObject oldReferenceType = (InternalEObject) referenceType;
-			referenceType = (ClassDeclaration) eResolveProxy(oldReferenceType);
+			referenceType = (Relation) eResolveProxy(oldReferenceType);
 			if (referenceType != oldReferenceType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
@@ -124,7 +123,7 @@ public class ReferenceDeclarationImpl extends RelationImpl implements ReferenceD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDeclaration basicGetReferenceType() {
+	public Relation basicGetReferenceType() {
 		return referenceType;
 	}
 
@@ -133,8 +132,8 @@ public class ReferenceDeclarationImpl extends RelationImpl implements ReferenceD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferenceType(ClassDeclaration newReferenceType) {
-		ClassDeclaration oldReferenceType = referenceType;
+	public void setReferenceType(Relation newReferenceType) {
+		Relation oldReferenceType = referenceType;
 		referenceType = newReferenceType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ProblemPackage.REFERENCE_DECLARATION__REFERENCE_TYPE,
@@ -300,7 +299,7 @@ public class ReferenceDeclarationImpl extends RelationImpl implements ReferenceD
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case ProblemPackage.REFERENCE_DECLARATION__REFERENCE_TYPE:
-			setReferenceType((ClassDeclaration) newValue);
+			setReferenceType((Relation) newValue);
 			return;
 		case ProblemPackage.REFERENCE_DECLARATION__OPPOSITE:
 			setOpposite((ReferenceDeclaration) newValue);
@@ -324,7 +323,7 @@ public class ReferenceDeclarationImpl extends RelationImpl implements ReferenceD
 	public void eUnset(int featureID) {
 		switch (featureID) {
 		case ProblemPackage.REFERENCE_DECLARATION__REFERENCE_TYPE:
-			setReferenceType((ClassDeclaration) null);
+			setReferenceType((Relation) null);
 			return;
 		case ProblemPackage.REFERENCE_DECLARATION__OPPOSITE:
 			setOpposite((ReferenceDeclaration) null);
