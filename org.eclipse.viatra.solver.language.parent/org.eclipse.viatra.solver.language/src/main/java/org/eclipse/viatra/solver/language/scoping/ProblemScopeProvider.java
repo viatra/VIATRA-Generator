@@ -4,15 +4,20 @@
 package org.eclipse.viatra.solver.language.scoping;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.Argument;
+import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ExistentialQuantifier;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
+import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 
@@ -30,6 +35,8 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 		IScope scope = super.getScope(context, reference);
 		if (reference == ProblemPackage.Literals.ARGUMENT__VARIABLE) {
 			return getVariableScope(context, scope);
+		} else if (reference == ProblemPackage.Literals.REFERENCE_DECLARATION__OPPOSITE) {
+			return getOppositeScope(context, scope);
 		}
 		return scope;
 	}
@@ -56,5 +63,19 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 			variables.addAll(definition.getParameters());
 		}
 		return Scopes.scopeFor(variables);
+	}
+
+	protected IScope getOppositeScope(EObject context, IScope delegateScope) {
+		ReferenceDeclaration referenceDeclaration = EcoreUtil2.getContainerOfType(context, ReferenceDeclaration.class);
+		if (referenceDeclaration == null) {
+			return delegateScope;
+		}
+		ClassDeclaration classDeclaration = referenceDeclaration.getReferenceType();
+		if (classDeclaration == null) {
+			return delegateScope;
+		}
+		Collection<ReferenceDeclaration> referenceDeclarations = ProblemUtil
+				.getAllReferenceDeclarations(classDeclaration);
+		return Scopes.scopeFor(referenceDeclarations, delegateScope);
 	}
 }
