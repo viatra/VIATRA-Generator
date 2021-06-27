@@ -3,6 +3,8 @@ module org.eclipse.viatra.solver.language.GenerateProblem
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
 
+import org.eclipse.viatra.solver.language.mwe2.*
+
 var rootPath = ".."
 
 Workflow {
@@ -14,12 +16,12 @@ Workflow {
 				runtimeTest = {
 					enabled = true
 				}
-                genericIde = {
-                    name = "language-ide"
-                }
+				genericIde = {
+					name = "language-ide"
+				}
 				web = {
 					enabled = true
-                    name = "language-web"
+					name = "language-web"
 				}
 				mavenLayout = true
 			}
@@ -30,18 +32,15 @@ Workflow {
 				preferXtendStubs = false
 			}
 		}
-		
+
 		language = StandardLanguage {
 			name = "org.eclipse.viatra.solver.language.Problem"
 			fileExtensions = "problem"
 			referencedResource = "platform:/resource/language-model/model/problem.genmodel"
-
 			serializer = {
 				generateStub = false
 			}
 			validator = {
-				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				// Generates checks for @Deprecated grammar annotations, an IssueProvider and a corresponding PropertyPage
 				generateDeprecationValidation = true
 			}
 			generator = {
@@ -50,10 +49,7 @@ Workflow {
 			junitSupport = {
 				junitVersion = "5"
 			}
-			webSupport = {
-				framework = "CodeMirror"
-				suppressPattern = "string_singleQuote"
-			}
+			webSupport = ProblemWebIntegrationFragment {}
 		}
 	}
 }

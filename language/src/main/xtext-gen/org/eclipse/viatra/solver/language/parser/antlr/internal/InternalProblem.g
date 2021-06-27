@@ -1758,10 +1758,10 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 				afterParserOrEnumRuleCall();
 			}
 			(
-				kw=':'
+				kw='::'
 				{
 					$current.merge(kw);
-					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonKeyword_1_1_0());
+					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_1_0());
 				}
 				{
 					newCompositeNode(grammarAccess.getQualifiedNameAccess().getIdentifierParserRuleCall_1_1_1());
@@ -1775,10 +1775,10 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 				}
 			)*
 			(
-				kw=':'
+				kw='::'
 				{
 					$current.merge(kw);
-					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonKeyword_1_2_0());
+					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0());
 				}
 				this_QUOTED_ID_5=RULE_QUOTED_ID
 				{
@@ -1896,13 +1896,13 @@ RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 
 RULE_QUOTED_ID : '\'' ('\\' .|~(('\\'|'\'')))* '\'';
 
+RULE_SL_COMMENT : ('%'|'//') ~(('\n'|'\r'))* ('\r'? '\n')?;
+
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
-
-RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 

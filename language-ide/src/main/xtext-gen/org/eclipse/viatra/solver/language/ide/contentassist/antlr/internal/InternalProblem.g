@@ -4135,9 +4135,9 @@ rule__QualifiedName__Group_1_1__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_1_0()); }
-	':'
-	{ after(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_1_0()); }
+	{ before(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_1_0()); }
+	'::'
+	{ after(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_1_0()); }
 )
 ;
 finally {
@@ -4189,9 +4189,9 @@ rule__QualifiedName__Group_1_2__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_2_0()); }
-	':'
-	{ after(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_2_0()); }
+	{ before(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0()); }
+	'::'
+	{ after(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0()); }
 )
 ;
 finally {
@@ -5025,13 +5025,13 @@ RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 
 RULE_QUOTED_ID : '\'' ('\\' .|~(('\\'|'\'')))* '\'';
 
+RULE_SL_COMMENT : ('%'|'//') ~(('\n'|'\r'))* ('\r'? '\n')?;
+
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
-
-RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 

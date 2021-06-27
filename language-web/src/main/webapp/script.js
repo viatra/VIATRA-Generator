@@ -16,5 +16,5 @@ require.config({
     }]
 });
 require(["xtext-resources/generated/mode-problem", "xtext/xtext-codemirror"], function(mode, xtext) {
-	window.xtextEditor = xtext.createEditor({baseUrl: baseUrl,});
+	xtext.createEditor({baseUrl: baseUrl, indentUnit: 4,});
 });

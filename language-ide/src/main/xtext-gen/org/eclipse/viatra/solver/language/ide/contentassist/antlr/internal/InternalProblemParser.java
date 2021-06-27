@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalProblemParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "','", "';'", "'refers'", "'pred'", "'='", "'*'", "'true'", "'false'", "'unknown'", "'!'", "'?'", "'problem'", "'class'", "'extends'", "'{'", "'}'", "'enum'", "'['", "']'", "'opposite'", "'('", "')'", "':-'", "':'", "'scope'", "'..'", "'abstract'", "'contains'", "'error'", "'+'", "'+='"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_QUOTED_ID", "RULE_ID", "RULE_STRING", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'.'", "','", "';'", "'refers'", "'pred'", "'='", "'*'", "'true'", "'false'", "'unknown'", "'!'", "'?'", "'problem'", "'class'", "'extends'", "'{'", "'}'", "'enum'", "'['", "']'", "'opposite'", "'('", "')'", "':-'", "':'", "'scope'", "'..'", "'::'", "'abstract'", "'contains'", "'error'", "'+'", "'+='"
     };
     public static final int T__19=19;
     public static final int T__15=15;
@@ -40,14 +40,14 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
     public static final int RULE_INT=4;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=9;
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
     public static final int T__20=20;
     public static final int T__21=21;
     public static final int RULE_STRING=7;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
@@ -61,6 +61,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
     public static final int T__32=32;
     public static final int RULE_WS=10;
     public static final int RULE_ANY_OTHER=11;
+    public static final int T__44=44;
     public static final int T__40=40;
     public static final int T__41=41;
     public static final int T__42=42;
@@ -2121,7 +2122,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt1=5;
             switch ( input.LA(1) ) {
             case 25:
-            case 39:
+            case 40:
                 {
                 alt1=1;
                 }
@@ -2132,7 +2133,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                 }
                 break;
             case 16:
-            case 41:
+            case 42:
                 {
                 alt1=3;
                 }
@@ -2516,7 +2517,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==40) ) {
+            if ( (LA5_0==41) ) {
                 alt5=1;
             }
             else if ( (LA5_0==15) ) {
@@ -2597,7 +2598,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==41) ) {
+            if ( (LA6_0==42) ) {
                 alt6=1;
             }
             else if ( (LA6_0==16) ) {
@@ -2835,7 +2836,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==43) ) {
+            if ( (LA9_0==44) ) {
                 alt9=1;
             }
             else if ( (LA9_0==17) ) {
@@ -3740,7 +3741,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                 int alt19=2;
                 int LA19_0 = input.LA(1);
 
-                if ( ((LA19_0>=RULE_QUOTED_ID && LA19_0<=RULE_ID)||LA19_0==16||(LA19_0>=19 && LA19_0<=20)||(LA19_0>=22 && LA19_0<=23)||LA19_0==25||LA19_0==29||LA19_0==37||LA19_0==39||LA19_0==41) ) {
+                if ( ((LA19_0>=RULE_QUOTED_ID && LA19_0<=RULE_ID)||LA19_0==16||(LA19_0>=19 && LA19_0<=20)||(LA19_0>=22 && LA19_0<=23)||LA19_0==25||LA19_0==29||LA19_0==37||LA19_0==40||LA19_0==42) ) {
                     alt19=1;
                 }
 
@@ -4071,7 +4072,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt20=2;
             int LA20_0 = input.LA(1);
 
-            if ( (LA20_0==39) ) {
+            if ( (LA20_0==40) ) {
                 alt20=1;
             }
             switch (alt20) {
@@ -4993,7 +4994,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                 int alt23=2;
                 int LA23_0 = input.LA(1);
 
-                if ( ((LA23_0>=RULE_QUOTED_ID && LA23_0<=RULE_ID)||LA23_0==15||(LA23_0>=19 && LA23_0<=20)||LA23_0==40) ) {
+                if ( ((LA23_0>=RULE_QUOTED_ID && LA23_0<=RULE_ID)||LA23_0==15||(LA23_0>=19 && LA23_0<=20)||LA23_0==41) ) {
                     alt23=1;
                 }
 
@@ -6257,7 +6258,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt28=2;
             int LA28_0 = input.LA(1);
 
-            if ( (LA28_0==15||LA28_0==40) ) {
+            if ( (LA28_0==15||LA28_0==41) ) {
                 alt28=1;
             }
             switch (alt28) {
@@ -8608,7 +8609,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                     {
                     int LA36_2 = input.LA(2);
 
-                    if ( (LA36_2==RULE_ID||(LA36_2>=19 && LA36_2<=20)||LA36_2==36) ) {
+                    if ( (LA36_2==RULE_ID||(LA36_2>=19 && LA36_2<=20)||LA36_2==39) ) {
                         alt36=1;
                     }
                     }
@@ -8617,7 +8618,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                     {
                     int LA36_3 = input.LA(2);
 
-                    if ( (LA36_3==RULE_ID||(LA36_3>=19 && LA36_3<=20)||LA36_3==36) ) {
+                    if ( (LA36_3==RULE_ID||(LA36_3>=19 && LA36_3<=20)||LA36_3==39) ) {
                         alt36=1;
                     }
                     }
@@ -8626,7 +8627,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                     {
                     int LA36_4 = input.LA(2);
 
-                    if ( (LA36_4==RULE_ID||(LA36_4>=19 && LA36_4<=20)||LA36_4==36) ) {
+                    if ( (LA36_4==RULE_ID||(LA36_4>=19 && LA36_4<=20)||LA36_4==39) ) {
                         alt36=1;
                     }
                     }
@@ -9384,7 +9385,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt38=2;
             int LA38_0 = input.LA(1);
 
-            if ( (LA38_0==42) ) {
+            if ( (LA38_0==43) ) {
                 alt38=1;
             }
             switch (alt38) {
@@ -12730,7 +12731,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4043:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
             // InternalProblem.g:4044:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_37);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
@@ -12809,7 +12810,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4070:1: ( rule__QualifiedName__Group_1__1__Impl rule__QualifiedName__Group_1__2 )
             // InternalProblem.g:4071:2: rule__QualifiedName__Group_1__1__Impl rule__QualifiedName__Group_1__2
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_37);
             rule__QualifiedName__Group_1__1__Impl();
 
             state._fsp--;
@@ -12857,7 +12858,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
                 int alt47=2;
                 int LA47_0 = input.LA(1);
 
-                if ( (LA47_0==36) ) {
+                if ( (LA47_0==39) ) {
                     int LA47_1 = input.LA(2);
 
                     if ( (LA47_1==RULE_ID||(LA47_1>=19 && LA47_1<=20)) ) {
@@ -12872,7 +12873,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalProblem.g:4085:3: rule__QualifiedName__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_37);
+            	    pushFollow(FOLLOW_38);
             	    rule__QualifiedName__Group_1_1__0();
 
             	    state._fsp--;
@@ -12959,7 +12960,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             int alt48=2;
             int LA48_0 = input.LA(1);
 
-            if ( (LA48_0==36) ) {
+            if ( (LA48_0==39) ) {
                 alt48=1;
             }
             switch (alt48) {
@@ -13038,21 +13039,21 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1_1__0__Impl"
-    // InternalProblem.g:4132:1: rule__QualifiedName__Group_1_1__0__Impl : ( ':' ) ;
+    // InternalProblem.g:4132:1: rule__QualifiedName__Group_1_1__0__Impl : ( '::' ) ;
     public final void rule__QualifiedName__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalProblem.g:4136:1: ( ( ':' ) )
-            // InternalProblem.g:4137:1: ( ':' )
+            // InternalProblem.g:4136:1: ( ( '::' ) )
+            // InternalProblem.g:4137:1: ( '::' )
             {
-            // InternalProblem.g:4137:1: ( ':' )
-            // InternalProblem.g:4138:2: ':'
+            // InternalProblem.g:4137:1: ( '::' )
+            // InternalProblem.g:4138:2: '::'
             {
-             before(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_1_0()); 
-            match(input,36,FOLLOW_2); 
-             after(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_1_0()); 
+             before(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_1_0()); 
+            match(input,39,FOLLOW_2); 
+             after(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_1_0()); 
 
             }
 
@@ -13158,7 +13159,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4178:1: ( rule__QualifiedName__Group_1_2__0__Impl rule__QualifiedName__Group_1_2__1 )
             // InternalProblem.g:4179:2: rule__QualifiedName__Group_1_2__0__Impl rule__QualifiedName__Group_1_2__1
             {
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_39);
             rule__QualifiedName__Group_1_2__0__Impl();
 
             state._fsp--;
@@ -13187,21 +13188,21 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1_2__0__Impl"
-    // InternalProblem.g:4186:1: rule__QualifiedName__Group_1_2__0__Impl : ( ':' ) ;
+    // InternalProblem.g:4186:1: rule__QualifiedName__Group_1_2__0__Impl : ( '::' ) ;
     public final void rule__QualifiedName__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalProblem.g:4190:1: ( ( ':' ) )
-            // InternalProblem.g:4191:1: ( ':' )
+            // InternalProblem.g:4190:1: ( ( '::' ) )
+            // InternalProblem.g:4191:1: ( '::' )
             {
-            // InternalProblem.g:4191:1: ( ':' )
-            // InternalProblem.g:4192:2: ':'
+            // InternalProblem.g:4191:1: ( '::' )
+            // InternalProblem.g:4192:2: '::'
             {
-             before(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_2_0()); 
-            match(input,36,FOLLOW_2); 
-             after(grammarAccess.getQualifiedNameAccess().getColonKeyword_1_2_0()); 
+             before(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0()); 
+            match(input,39,FOLLOW_2); 
+             after(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0()); 
 
             }
 
@@ -13393,7 +13394,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4266:4: 'abstract'
             {
              before(grammarAccess.getClassDeclarationAccess().getAbstractAbstractKeyword_0_0()); 
-            match(input,39,FOLLOW_2); 
+            match(input,40,FOLLOW_2); 
              after(grammarAccess.getClassDeclarationAccess().getAbstractAbstractKeyword_0_0()); 
 
             }
@@ -13782,7 +13783,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4413:4: 'contains'
             {
              before(grammarAccess.getReferenceDeclarationAccess().getContainmentContainsKeyword_0_0_0()); 
-            match(input,40,FOLLOW_2); 
+            match(input,41,FOLLOW_2); 
              after(grammarAccess.getReferenceDeclarationAccess().getContainmentContainsKeyword_0_0_0()); 
 
             }
@@ -14007,7 +14008,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4500:4: 'error'
             {
              before(grammarAccess.getPredicateDefinitionAccess().getErrorErrorKeyword_0_0_0_0()); 
-            match(input,41,FOLLOW_2); 
+            match(input,42,FOLLOW_2); 
              after(grammarAccess.getPredicateDefinitionAccess().getErrorErrorKeyword_0_0_0_0()); 
 
             }
@@ -14519,7 +14520,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4692:4: '+'
             {
              before(grammarAccess.getAtomAccess().getTransitiveClosurePlusSignKeyword_1_0()); 
-            match(input,42,FOLLOW_2); 
+            match(input,43,FOLLOW_2); 
              after(grammarAccess.getAtomAccess().getTransitiveClosurePlusSignKeyword_1_0()); 
 
             }
@@ -15198,7 +15199,7 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
             // InternalProblem.g:4953:4: '+='
             {
              before(grammarAccess.getTypeScopeAccess().getIncrementPlusSignEqualsSignKeyword_1_0_0()); 
-            match(input,43,FOLLOW_2); 
+            match(input,44,FOLLOW_2); 
              after(grammarAccess.getTypeScopeAccess().getIncrementPlusSignEqualsSignKeyword_1_0_0()); 
 
             }
@@ -15386,43 +15387,43 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
     protected DFA8 dfa8 = new DFA8(this);
     static final String dfa_1s = "\41\uffff";
     static final String dfa_2s = "\1\5\4\41\1\uffff\2\5\4\15\1\14\4\41\2\5\1\uffff\10\15\1\5\4\15";
-    static final String dfa_3s = "\1\27\1\41\3\44\1\uffff\1\42\1\24\1\42\4\44\1\41\3\44\2\24\1\uffff\1\42\6\44\1\42\1\24\1\42\3\44";
+    static final String dfa_3s = "\1\27\1\41\3\47\1\uffff\1\42\1\24\1\42\3\47\1\44\1\41\3\47\2\24\1\uffff\1\42\6\47\1\42\1\24\1\42\3\47";
     static final String dfa_4s = "\5\uffff\1\2\15\uffff\1\1\15\uffff";
     static final String dfa_5s = "\41\uffff}>";
     static final String[] dfa_6s = {
             "\1\1\1\2\14\uffff\1\3\1\4\1\uffff\2\5",
             "\1\6",
-            "\1\6\2\uffff\1\7",
-            "\1\6\2\uffff\1\7",
-            "\1\6\2\uffff\1\7",
+            "\1\6\5\uffff\1\7",
+            "\1\6\5\uffff\1\7",
+            "\1\6\5\uffff\1\7",
             "",
             "\1\10\1\11\14\uffff\1\12\1\13\15\uffff\1\14",
             "\1\15\1\16\14\uffff\1\17\1\20",
             "\1\21\24\uffff\1\14",
-            "\1\21\24\uffff\1\14\1\uffff\1\22",
-            "\1\21\24\uffff\1\14\1\uffff\1\22",
-            "\1\21\24\uffff\1\14\1\uffff\1\22",
+            "\1\21\24\uffff\1\14\4\uffff\1\22",
+            "\1\21\24\uffff\1\14\4\uffff\1\22",
+            "\1\21\24\uffff\1\14\4\uffff\1\22",
             "\1\5\27\uffff\1\23",
             "\1\6",
-            "\1\6\2\uffff\1\7",
-            "\1\6\2\uffff\1\7",
-            "\1\6\2\uffff\1\7",
+            "\1\6\5\uffff\1\7",
+            "\1\6\5\uffff\1\7",
+            "\1\6\5\uffff\1\7",
             "\1\24\1\25\14\uffff\1\26\1\27",
             "\1\33\1\30\14\uffff\1\31\1\32",
             "",
             "\1\21\24\uffff\1\14",
-            "\1\21\24\uffff\1\14\1\uffff\1\34",
-            "\1\21\24\uffff\1\14\1\uffff\1\34",
-            "\1\21\24\uffff\1\14\1\uffff\1\34",
-            "\1\21\24\uffff\1\14\1\uffff\1\22",
-            "\1\21\24\uffff\1\14\1\uffff\1\22",
-            "\1\21\24\uffff\1\14\1\uffff\1\22",
+            "\1\21\24\uffff\1\14\4\uffff\1\34",
+            "\1\21\24\uffff\1\14\4\uffff\1\34",
+            "\1\21\24\uffff\1\14\4\uffff\1\34",
+            "\1\21\24\uffff\1\14\4\uffff\1\22",
+            "\1\21\24\uffff\1\14\4\uffff\1\22",
+            "\1\21\24\uffff\1\14\4\uffff\1\22",
             "\1\21\24\uffff\1\14",
             "\1\35\1\36\14\uffff\1\37\1\40",
             "\1\21\24\uffff\1\14",
-            "\1\21\24\uffff\1\14\1\uffff\1\34",
-            "\1\21\24\uffff\1\14\1\uffff\1\34",
-            "\1\21\24\uffff\1\14\1\uffff\1\34"
+            "\1\21\24\uffff\1\14\4\uffff\1\34",
+            "\1\21\24\uffff\1\14\4\uffff\1\34",
+            "\1\21\24\uffff\1\14\4\uffff\1\34"
     };
 
     static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
@@ -15453,21 +15454,21 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x000002A022D90060L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x000002A022D90062L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000052022D90060L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000052022D90062L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000180060L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000008002000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000010002000000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x000000000C001000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000010010188060L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000010000188062L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000020010188060L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000020000188062L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000008001000L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000010180060L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000010000188060L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000020000188060L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000040180060L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000000010L});
@@ -15478,16 +15479,17 @@ public class InternalProblemParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000580060L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000040200000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000080200000000L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000001000000000L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000380000L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000D80060L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000000003000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000080000020000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000100000020000L});
     public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000004000000000L});
     public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000040010L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000001000000002L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000008000000002L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000000000000020L});
 
 }

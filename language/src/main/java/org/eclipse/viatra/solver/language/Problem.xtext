@@ -103,7 +103,7 @@ QuotedOrUnquotedId:
 	QUOTED_ID | Identifier;
 
 QualifiedName:
-	QUOTED_ID | Identifier (":" Identifier)* (":" QUOTED_ID)?;
+	QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
 
 Identifier:
 	ID | "true" | "false";
@@ -114,3 +114,7 @@ terminal STRING:
 
 terminal QUOTED_ID:
 	"'" ('\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\' | "'"))* "'";
+
+@Override
+terminal SL_COMMENT:
+	('%' | '//') !('\n'|'\r')* ('\r'? '\n')?;

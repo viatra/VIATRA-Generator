@@ -59,7 +59,7 @@ a:hover {
 	bottom: 16px;
 	left: 16px;
 	right: 16px;
-	border: 1px solid #aaa;
+	border: 1px solid #999;
 }
 
 .problem-class {
@@ -82,12 +82,7 @@ a:hover {
 	font-weight: bold;
 }
 
-
-.CodeMirror .problem-node {
-	color: inherit;
-}
-
-.problem-enum-node {
+.CodeMirror .cm-quoted-name, .problem-enum-node {
 	color: #1a1a1a !important;
 	font-weight: bold;
 }
@@ -101,5 +96,5 @@ a:hover {
 }
 
 .problem-singleton-variable {
-	opacity: 0.7;
+	color: #a1706f;
 }

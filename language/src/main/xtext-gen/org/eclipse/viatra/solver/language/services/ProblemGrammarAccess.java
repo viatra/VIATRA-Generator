@@ -1143,42 +1143,42 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
 		private final RuleCall cIdentifierParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Keyword cColonKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Keyword cColonColonKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final RuleCall cIdentifierParserRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
 		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
-		private final Keyword cColonKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Keyword cColonColonKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
 		private final RuleCall cQUOTED_IDTerminalRuleCall_1_2_1 = (RuleCall)cGroup_1_2.eContents().get(1);
 		
 		//QualifiedName:
-		//    QUOTED_ID | Identifier (":" Identifier)* (":" QUOTED_ID)?;
+		//    QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//QUOTED_ID | Identifier (":" Identifier)* (":" QUOTED_ID)?
+		//QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//QUOTED_ID
 		public RuleCall getQUOTED_IDTerminalRuleCall_0() { return cQUOTED_IDTerminalRuleCall_0; }
 		
-		//Identifier (":" Identifier)* (":" QUOTED_ID)?
+		//Identifier ("::" Identifier)* ("::" QUOTED_ID)?
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//Identifier
 		public RuleCall getIdentifierParserRuleCall_1_0() { return cIdentifierParserRuleCall_1_0; }
 		
-		//(":" Identifier)*
+		//("::" Identifier)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 		
-		//":"
-		public Keyword getColonKeyword_1_1_0() { return cColonKeyword_1_1_0; }
+		//"::"
+		public Keyword getColonColonKeyword_1_1_0() { return cColonColonKeyword_1_1_0; }
 		
 		//Identifier
 		public RuleCall getIdentifierParserRuleCall_1_1_1() { return cIdentifierParserRuleCall_1_1_1; }
 		
-		//(":" QUOTED_ID)?
+		//("::" QUOTED_ID)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 		
-		//":"
-		public Keyword getColonKeyword_1_2_0() { return cColonKeyword_1_2_0; }
+		//"::"
+		public Keyword getColonColonKeyword_1_2_0() { return cColonColonKeyword_1_2_0; }
 		
 		//QUOTED_ID
 		public RuleCall getQUOTED_IDTerminalRuleCall_1_2_1() { return cQUOTED_IDTerminalRuleCall_1_2_1; }
@@ -1299,6 +1299,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	private final IdentifierElements pIdentifier;
 	private final TerminalRule tSTRING;
 	private final TerminalRule tQUOTED_ID;
+	private final TerminalRule tSL_COMMENT;
 	
 	private final Grammar grammar;
 	
@@ -1338,6 +1339,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		this.pIdentifier = new IdentifierElements();
 		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.STRING");
 		this.tQUOTED_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.QUOTED_ID");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.SL_COMMENT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1642,7 +1644,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//QualifiedName:
-	//    QUOTED_ID | Identifier (":" Identifier)* (":" QUOTED_ID)?;
+	//    QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -1674,6 +1676,13 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		return tQUOTED_ID;
 	}
 	
+	//@Override
+	//terminal SL_COMMENT:
+	//    ('%' | '//') !('\n'|'\r')* ('\r'? '\n')?;
+	public TerminalRule getSL_COMMENTRule() {
+		return tSL_COMMENT;
+	}
+	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
@@ -1687,11 +1696,6 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	//terminal ML_COMMENT : '/*' -> '*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	}
-	
-	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
-	public TerminalRule getSL_COMMENTRule() {
-		return gaTerminals.getSL_COMMENTRule();
 	}
 	
 	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
