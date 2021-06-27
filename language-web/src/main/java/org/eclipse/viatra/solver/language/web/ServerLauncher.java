@@ -14,24 +14,19 @@ import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 /**
- * This program starts an HTTP server for testing the web integration of your DSL.
- * Just execute it and point a web browser to http://localhost:8080/
+ * This program starts an HTTP server for testing the web integration of your
+ * DSL. Just execute it and point a web browser to http://localhost:8080/
  */
 public class ServerLauncher {
 	public static void main(String[] args) {
 		Server server = new Server(new InetSocketAddress("localhost", 1313));
 		WebAppContext ctx = new WebAppContext();
 		ctx.setResourceBase("src/main/webapp");
-		ctx.setWelcomeFiles(new String[] {"index.html"});
+		ctx.setWelcomeFiles(new String[] { "index.html" });
 		ctx.setContextPath("/");
-		ctx.setConfigurations(new Configuration[] {
-			new AnnotationConfiguration(),
-			new WebXmlConfiguration(),
-			new WebInfConfiguration(),
-			new MetaInfConfiguration()
-		});
-		ctx.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN,
-			".*/org\\.eclipse\\.viatra\\.solver\\.language\\.web/.*,.*\\.jar");
+		ctx.setConfigurations(new Configuration[] { new AnnotationConfiguration(), new WebXmlConfiguration(),
+				new WebInfConfiguration(), new MetaInfConfiguration() });
+		ctx.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*/language-web/.*,.*\\.jar");
 		ctx.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 		server.setHandler(ctx);
 		Slf4jLog log = new Slf4jLog(ServerLauncher.class.getName());
@@ -39,7 +34,6 @@ public class ServerLauncher {
 			server.start();
 			log.info("Server started " + server.getURI() + "...");
 			new Thread() {
-
 				public void run() {
 					try {
 						log.info("Press enter to stop the server...");
@@ -54,7 +48,6 @@ public class ServerLauncher {
 						log.warn(e);
 					}
 				}
-
 			}.start();
 			server.join();
 		} catch (Exception exception) {

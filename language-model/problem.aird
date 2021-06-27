@@ -3,6 +3,8 @@
   <viewpoint:DAnalysis uid="_CqOewKA4EeuqkpDnuik1sg" selectedViews="_CsAAYKA4EeuqkpDnuik1sg" version="14.3.1.202003261200">
     <semanticResources>src/main/resources/model/problem.ecore</semanticResources>
     <semanticResources>src/main/resources/model/problem.genmodel</semanticResources>
+    <semanticResources>build/resources/main/model/problem.ecore</semanticResources>
+    <semanticResources>build/resources/main/model/problem.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_CsAAYKA4EeuqkpDnuik1sg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_CsYa4KA4EeuqkpDnuik1sg" name="problem" repPath="#_CsUwgKA4EeuqkpDnuik1sg" changeId="c29543bd-4d24-42d3-8f5b-82d41af742bd">

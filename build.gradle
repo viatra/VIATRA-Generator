@@ -31,4 +31,12 @@ subprojects {
 	configurations.all {
 		exclude group: 'asm'
 	}
+	
+	eclipse.classpath.file.whenMerged {
+		for (entry in entries) {
+			if (entry.path.endsWith('xtext-gen')) {
+				entry.entryAttributes['ignore_optional_problems'] = true
+			}
+		}
+	}
 }

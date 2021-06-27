@@ -26,15 +26,3 @@ jar {
 plugins.withId('war') {
 	webAppDirName = "src/main/webapp"
 }
-
-eclipse {
-	classpath {
-		file.whenMerged {
-			for (entry in entries) {
-				if (entry.path.endsWith('-gen')) {
-					entry.entryAttributes['ignore_optional_problems'] = true
-				}
-			}
-		}
-	}
-}
