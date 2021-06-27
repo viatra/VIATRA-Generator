@@ -7,3 +7,9 @@ sourceSets {
 		java.srcDirs += ['src/main/emf-gen']
 	}
 }
+
+eclipse {
+	project {
+		natures += ['org.eclipse.sirius.nature.modelingproject', 'org.eclipse.pde.PluginNature']
+	}
+}

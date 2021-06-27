@@ -4,4 +4,7 @@ xtend-gen/
 build/
 *._trace
 *.xtendbin
-org.eclipse.buildship.core.prefs
+.classpath
+.launch
+.project
+.settings
