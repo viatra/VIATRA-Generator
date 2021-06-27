@@ -8,7 +8,7 @@ Problem:
 	statements+=Statement*;
 
 Statement:
-	ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | ScopeDeclaration;
+	ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | NodeValueAssertion | ScopeDeclaration;
 
 ClassDeclaration:
 	abstract?="abstract"? "class"
@@ -56,22 +56,52 @@ Atom:
 	"(" (arguments+=Argument ("," arguments+=Argument)*)? ")";
 
 Argument:
+	VariableOrNodeArgument | ConstantArgument;
+
+VariableOrNodeArgument:
 	variableOrNode=[VariableOrNode|QualifiedName];
+
+ConstantArgument:
+	constant=Constant;
 
 Assertion:
 	(relation=[Relation|QualifiedName]
-	"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+	"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 	":" value=LogicValue |
 	value=ShortLogicValue?
 	relation=[Relation|QualifiedName]
-	"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")")
+	"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")")
 	".";
+
+AssertionArgument:
+	NodeAssertionArgument | ConstantAssertionArgument;
+
+NodeAssertionArgument:
+	node=[Node|QualifiedName];
+
+ConstantAssertionArgument:
+	constant=Constant;
 
 enum LogicValue:
 	TRUE="true" | FALSE="false" | UNKNOWN="unknown";
 
 enum ShortLogicValue returns LogicValue:
 	FALSE="!" | UNKNOWN="?";
+
+NodeValueAssertion:
+	node=[Node|QualifiedName] ":" value=Constant ".";
+
+Constant:
+	IntConstant | RealConstant | StringConstant;
+
+IntConstant:
+	intValue=Integer;
+
+RealConstant:
+	realValue=Real;
+
+StringConstant:
+	stringValue=STRING;
 
 ScopeDeclaration:
 	"scope" typeScopes+=TypeScope ("," typeScopes+=TypeScope)* ".";
@@ -102,11 +132,21 @@ UpperBound returns ecore::EInt:
 QuotedOrUnquotedId:
 	QUOTED_ID | Identifier;
 
-QualifiedName:
+QualifiedName hidden():
 	QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
 
 Identifier:
-	ID | "true" | "false";
+	ID | "true" | "false" | "e" | "E";
+
+Integer returns ecore::EInt hidden():
+	"-"? INT;
+
+Real returns ecore::EDouble hidden():
+	"-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT);
+
+@Override
+terminal ID:
+	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 @Override
 terminal STRING:
@@ -117,4 +157,4 @@ terminal QUOTED_ID:
 
 @Override
 terminal SL_COMMENT:
-	('%' | '//') !('\n'|'\r')* ('\r'? '\n')?;
+	('%' | '//') !('\n' | '\r')* ('\r'? '\n')?;

@@ -62,8 +62,8 @@
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//Assertion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Assertion/relation"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Assertion/arguments"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//Assertion/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//Assertion/arguments"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//Node"/>
     <genClasses ecoreClass="problem.ecore#//ScopeDeclaration">
@@ -84,13 +84,38 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//ExactMultiplicity/exactValue"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//UnboundedMultiplicity"/>
-    <genClasses ecoreClass="problem.ecore#//Argument">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/variableOrNode"/>
-      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Argument/singletonVariable"/>
+    <genClasses ecoreClass="problem.ecore#//VariableOrNodeArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//VariableOrNodeArgument/variableOrNode"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//VariableOrNodeArgument/singletonVariable"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//EnumDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//EnumDeclaration/literals"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//VariableOrNode"/>
+    <genClasses ecoreClass="problem.ecore#//Constant"/>
+    <genClasses ecoreClass="problem.ecore#//IntConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//IntConstant/intValue"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//RealConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//RealConstant/realValue"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//StringConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//StringConstant/stringValue"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//ConstantArgument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//ConstantArgument/constant"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//Argument"/>
+    <genClasses ecoreClass="problem.ecore#//NodeAssertionArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//NodeAssertionArgument/node"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//AssertionArgument"/>
+    <genClasses ecoreClass="problem.ecore#//ConstantAssertionArgument">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//ConstantAssertionArgument/constant"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//NodeValueAssertion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//NodeValueAssertion/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//NodeValueAssertion/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

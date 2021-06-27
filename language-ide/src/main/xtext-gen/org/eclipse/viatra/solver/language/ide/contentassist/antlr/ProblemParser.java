@@ -38,7 +38,10 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getReferenceDeclarationAccess().getAlternatives_0(), "rule__ReferenceDeclaration__Alternatives_0");
 			builder.put(grammarAccess.getPredicateDefinitionAccess().getAlternatives_0(), "rule__PredicateDefinition__Alternatives_0");
 			builder.put(grammarAccess.getLiteralAccess().getAlternatives(), "rule__Literal__Alternatives");
+			builder.put(grammarAccess.getArgumentAccess().getAlternatives(), "rule__Argument__Alternatives");
 			builder.put(grammarAccess.getAssertionAccess().getAlternatives_0(), "rule__Assertion__Alternatives_0");
+			builder.put(grammarAccess.getAssertionArgumentAccess().getAlternatives(), "rule__AssertionArgument__Alternatives");
+			builder.put(grammarAccess.getConstantAccess().getAlternatives(), "rule__Constant__Alternatives");
 			builder.put(grammarAccess.getTypeScopeAccess().getAlternatives_1(), "rule__TypeScope__Alternatives_1");
 			builder.put(grammarAccess.getMultiplicityAccess().getAlternatives(), "rule__Multiplicity__Alternatives");
 			builder.put(grammarAccess.getDefiniteMultiplicityAccess().getAlternatives(), "rule__DefiniteMultiplicity__Alternatives");
@@ -46,6 +49,9 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getQuotedOrUnquotedIdAccess().getAlternatives(), "rule__QuotedOrUnquotedId__Alternatives");
 			builder.put(grammarAccess.getQualifiedNameAccess().getAlternatives(), "rule__QualifiedName__Alternatives");
 			builder.put(grammarAccess.getIdentifierAccess().getAlternatives(), "rule__Identifier__Alternatives");
+			builder.put(grammarAccess.getRealAccess().getAlternatives_2(), "rule__Real__Alternatives_2");
+			builder.put(grammarAccess.getRealAccess().getAlternatives_2_1_1(), "rule__Real__Alternatives_2_1_1");
+			builder.put(grammarAccess.getRealAccess().getAlternatives_2_1_2(), "rule__Real__Alternatives_2_1_2");
 			builder.put(grammarAccess.getLogicValueAccess().getAlternatives(), "rule__LogicValue__Alternatives");
 			builder.put(grammarAccess.getShortLogicValueAccess().getAlternatives(), "rule__ShortLogicValue__Alternatives");
 			builder.put(grammarAccess.getProblemAccess().getGroup(), "rule__Problem__Group__0");
@@ -82,6 +88,7 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAssertionAccess().getGroup_0_1(), "rule__Assertion__Group_0_1__0");
 			builder.put(grammarAccess.getAssertionAccess().getGroup_0_1_3(), "rule__Assertion__Group_0_1_3__0");
 			builder.put(grammarAccess.getAssertionAccess().getGroup_0_1_3_1(), "rule__Assertion__Group_0_1_3_1__0");
+			builder.put(grammarAccess.getNodeValueAssertionAccess().getGroup(), "rule__NodeValueAssertion__Group__0");
 			builder.put(grammarAccess.getScopeDeclarationAccess().getGroup(), "rule__ScopeDeclaration__Group__0");
 			builder.put(grammarAccess.getScopeDeclarationAccess().getGroup_2(), "rule__ScopeDeclaration__Group_2__0");
 			builder.put(grammarAccess.getTypeScopeAccess().getGroup(), "rule__TypeScope__Group__0");
@@ -89,6 +96,11 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1_1(), "rule__QualifiedName__Group_1_1__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1_2(), "rule__QualifiedName__Group_1_2__0");
+			builder.put(grammarAccess.getIntegerAccess().getGroup(), "rule__Integer__Group__0");
+			builder.put(grammarAccess.getRealAccess().getGroup(), "rule__Real__Group__0");
+			builder.put(grammarAccess.getRealAccess().getGroup_2_0(), "rule__Real__Group_2_0__0");
+			builder.put(grammarAccess.getRealAccess().getGroup_2_1(), "rule__Real__Group_2_1__0");
+			builder.put(grammarAccess.getRealAccess().getGroup_2_1_0(), "rule__Real__Group_2_1_0__0");
 			builder.put(grammarAccess.getProblemAccess().getNameAssignment_0_1(), "rule__Problem__NameAssignment_0_1");
 			builder.put(grammarAccess.getProblemAccess().getStatementsAssignment_1(), "rule__Problem__StatementsAssignment_1");
 			builder.put(grammarAccess.getClassDeclarationAccess().getAbstractAssignment_0(), "rule__ClassDeclaration__AbstractAssignment_0");
@@ -120,7 +132,8 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAtomAccess().getTransitiveClosureAssignment_1(), "rule__Atom__TransitiveClosureAssignment_1");
 			builder.put(grammarAccess.getAtomAccess().getArgumentsAssignment_3_0(), "rule__Atom__ArgumentsAssignment_3_0");
 			builder.put(grammarAccess.getAtomAccess().getArgumentsAssignment_3_1_1(), "rule__Atom__ArgumentsAssignment_3_1_1");
-			builder.put(grammarAccess.getArgumentAccess().getVariableOrNodeAssignment(), "rule__Argument__VariableOrNodeAssignment");
+			builder.put(grammarAccess.getVariableOrNodeArgumentAccess().getVariableOrNodeAssignment(), "rule__VariableOrNodeArgument__VariableOrNodeAssignment");
+			builder.put(grammarAccess.getConstantArgumentAccess().getConstantAssignment(), "rule__ConstantArgument__ConstantAssignment");
 			builder.put(grammarAccess.getAssertionAccess().getRelationAssignment_0_0_0(), "rule__Assertion__RelationAssignment_0_0_0");
 			builder.put(grammarAccess.getAssertionAccess().getArgumentsAssignment_0_0_2_0(), "rule__Assertion__ArgumentsAssignment_0_0_2_0");
 			builder.put(grammarAccess.getAssertionAccess().getArgumentsAssignment_0_0_2_1_1(), "rule__Assertion__ArgumentsAssignment_0_0_2_1_1");
@@ -129,6 +142,13 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAssertionAccess().getRelationAssignment_0_1_1(), "rule__Assertion__RelationAssignment_0_1_1");
 			builder.put(grammarAccess.getAssertionAccess().getArgumentsAssignment_0_1_3_0(), "rule__Assertion__ArgumentsAssignment_0_1_3_0");
 			builder.put(grammarAccess.getAssertionAccess().getArgumentsAssignment_0_1_3_1_1(), "rule__Assertion__ArgumentsAssignment_0_1_3_1_1");
+			builder.put(grammarAccess.getNodeAssertionArgumentAccess().getNodeAssignment(), "rule__NodeAssertionArgument__NodeAssignment");
+			builder.put(grammarAccess.getConstantAssertionArgumentAccess().getConstantAssignment(), "rule__ConstantAssertionArgument__ConstantAssignment");
+			builder.put(grammarAccess.getNodeValueAssertionAccess().getNodeAssignment_0(), "rule__NodeValueAssertion__NodeAssignment_0");
+			builder.put(grammarAccess.getNodeValueAssertionAccess().getValueAssignment_2(), "rule__NodeValueAssertion__ValueAssignment_2");
+			builder.put(grammarAccess.getIntConstantAccess().getIntValueAssignment(), "rule__IntConstant__IntValueAssignment");
+			builder.put(grammarAccess.getRealConstantAccess().getRealValueAssignment(), "rule__RealConstant__RealValueAssignment");
+			builder.put(grammarAccess.getStringConstantAccess().getStringValueAssignment(), "rule__StringConstant__StringValueAssignment");
 			builder.put(grammarAccess.getScopeDeclarationAccess().getTypeScopesAssignment_1(), "rule__ScopeDeclaration__TypeScopesAssignment_1");
 			builder.put(grammarAccess.getScopeDeclarationAccess().getTypeScopesAssignment_2_1(), "rule__ScopeDeclaration__TypeScopesAssignment_2_1");
 			builder.put(grammarAccess.getTypeScopeAccess().getTargetTypeAssignment_0(), "rule__TypeScope__TargetTypeAssignment_0");

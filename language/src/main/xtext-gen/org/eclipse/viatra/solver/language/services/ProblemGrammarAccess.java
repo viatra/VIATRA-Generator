@@ -74,13 +74,14 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final RuleCall cEnumDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cPredicateDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cAssertionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cScopeDeclarationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cNodeValueAssertionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cScopeDeclarationParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//Statement:
-		//    ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | ScopeDeclaration;
+		//    ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | NodeValueAssertion | ScopeDeclaration;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | ScopeDeclaration
+		//ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | NodeValueAssertion | ScopeDeclaration
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ClassDeclaration
@@ -95,8 +96,11 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		//Assertion
 		public RuleCall getAssertionParserRuleCall_3() { return cAssertionParserRuleCall_3; }
 		
+		//NodeValueAssertion
+		public RuleCall getNodeValueAssertionParserRuleCall_4() { return cNodeValueAssertionParserRuleCall_4; }
+		
 		//ScopeDeclaration
-		public RuleCall getScopeDeclarationParserRuleCall_4() { return cScopeDeclarationParserRuleCall_4; }
+		public RuleCall getScopeDeclarationParserRuleCall_5() { return cScopeDeclarationParserRuleCall_5; }
 	}
 	public class ClassDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ClassDeclaration");
@@ -712,11 +716,30 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	public class ArgumentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Argument");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cVariableOrNodeArgumentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cConstantArgumentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Argument:
+		//    VariableOrNodeArgument | ConstantArgument;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//VariableOrNodeArgument | ConstantArgument
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//VariableOrNodeArgument
+		public RuleCall getVariableOrNodeArgumentParserRuleCall_0() { return cVariableOrNodeArgumentParserRuleCall_0; }
+		
+		//ConstantArgument
+		public RuleCall getConstantArgumentParserRuleCall_1() { return cConstantArgumentParserRuleCall_1; }
+	}
+	public class VariableOrNodeArgumentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.VariableOrNodeArgument");
 		private final Assignment cVariableOrNodeAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cVariableOrNodeVariableOrNodeCrossReference_0 = (CrossReference)cVariableOrNodeAssignment.eContents().get(0);
 		private final RuleCall cVariableOrNodeVariableOrNodeQualifiedNameParserRuleCall_0_1 = (RuleCall)cVariableOrNodeVariableOrNodeCrossReference_0.eContents().get(1);
 		
-		//Argument:
+		//VariableOrNodeArgument:
 		//    variableOrNode=[VariableOrNode|QualifiedName];
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -729,6 +752,21 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		//QualifiedName
 		public RuleCall getVariableOrNodeVariableOrNodeQualifiedNameParserRuleCall_0_1() { return cVariableOrNodeVariableOrNodeQualifiedNameParserRuleCall_0_1; }
 	}
+	public class ConstantArgumentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ConstantArgument");
+		private final Assignment cConstantAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cConstantConstantParserRuleCall_0 = (RuleCall)cConstantAssignment.eContents().get(0);
+		
+		//ConstantArgument:
+		//    constant=Constant;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//constant=Constant
+		public Assignment getConstantAssignment() { return cConstantAssignment; }
+		
+		//Constant
+		public RuleCall getConstantConstantParserRuleCall_0() { return cConstantConstantParserRuleCall_0; }
+	}
 	public class AssertionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Assertion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -740,13 +778,11 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final Keyword cLeftParenthesisKeyword_0_0_1 = (Keyword)cGroup_0_0.eContents().get(1);
 		private final Group cGroup_0_0_2 = (Group)cGroup_0_0.eContents().get(2);
 		private final Assignment cArgumentsAssignment_0_0_2_0 = (Assignment)cGroup_0_0_2.eContents().get(0);
-		private final CrossReference cArgumentsNodeCrossReference_0_0_2_0_0 = (CrossReference)cArgumentsAssignment_0_0_2_0.eContents().get(0);
-		private final RuleCall cArgumentsNodeQualifiedNameParserRuleCall_0_0_2_0_0_1 = (RuleCall)cArgumentsNodeCrossReference_0_0_2_0_0.eContents().get(1);
+		private final RuleCall cArgumentsAssertionArgumentParserRuleCall_0_0_2_0_0 = (RuleCall)cArgumentsAssignment_0_0_2_0.eContents().get(0);
 		private final Group cGroup_0_0_2_1 = (Group)cGroup_0_0_2.eContents().get(1);
 		private final Keyword cCommaKeyword_0_0_2_1_0 = (Keyword)cGroup_0_0_2_1.eContents().get(0);
 		private final Assignment cArgumentsAssignment_0_0_2_1_1 = (Assignment)cGroup_0_0_2_1.eContents().get(1);
-		private final CrossReference cArgumentsNodeCrossReference_0_0_2_1_1_0 = (CrossReference)cArgumentsAssignment_0_0_2_1_1.eContents().get(0);
-		private final RuleCall cArgumentsNodeQualifiedNameParserRuleCall_0_0_2_1_1_0_1 = (RuleCall)cArgumentsNodeCrossReference_0_0_2_1_1_0.eContents().get(1);
+		private final RuleCall cArgumentsAssertionArgumentParserRuleCall_0_0_2_1_1_0 = (RuleCall)cArgumentsAssignment_0_0_2_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_0_0_3 = (Keyword)cGroup_0_0.eContents().get(3);
 		private final Keyword cColonKeyword_0_0_4 = (Keyword)cGroup_0_0.eContents().get(4);
 		private final Assignment cValueAssignment_0_0_5 = (Assignment)cGroup_0_0.eContents().get(5);
@@ -760,45 +796,43 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final Keyword cLeftParenthesisKeyword_0_1_2 = (Keyword)cGroup_0_1.eContents().get(2);
 		private final Group cGroup_0_1_3 = (Group)cGroup_0_1.eContents().get(3);
 		private final Assignment cArgumentsAssignment_0_1_3_0 = (Assignment)cGroup_0_1_3.eContents().get(0);
-		private final CrossReference cArgumentsNodeCrossReference_0_1_3_0_0 = (CrossReference)cArgumentsAssignment_0_1_3_0.eContents().get(0);
-		private final RuleCall cArgumentsNodeQualifiedNameParserRuleCall_0_1_3_0_0_1 = (RuleCall)cArgumentsNodeCrossReference_0_1_3_0_0.eContents().get(1);
+		private final RuleCall cArgumentsAssertionArgumentParserRuleCall_0_1_3_0_0 = (RuleCall)cArgumentsAssignment_0_1_3_0.eContents().get(0);
 		private final Group cGroup_0_1_3_1 = (Group)cGroup_0_1_3.eContents().get(1);
 		private final Keyword cCommaKeyword_0_1_3_1_0 = (Keyword)cGroup_0_1_3_1.eContents().get(0);
 		private final Assignment cArgumentsAssignment_0_1_3_1_1 = (Assignment)cGroup_0_1_3_1.eContents().get(1);
-		private final CrossReference cArgumentsNodeCrossReference_0_1_3_1_1_0 = (CrossReference)cArgumentsAssignment_0_1_3_1_1.eContents().get(0);
-		private final RuleCall cArgumentsNodeQualifiedNameParserRuleCall_0_1_3_1_1_0_1 = (RuleCall)cArgumentsNodeCrossReference_0_1_3_1_1_0.eContents().get(1);
+		private final RuleCall cArgumentsAssertionArgumentParserRuleCall_0_1_3_1_1_0 = (RuleCall)cArgumentsAssignment_0_1_3_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_0_1_4 = (Keyword)cGroup_0_1.eContents().get(4);
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Assertion:
 		//    (relation=[Relation|QualifiedName]
-		//    "(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+		//    "(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 		//    ":" value=LogicValue |
 		//    value=ShortLogicValue?
 		//    relation=[Relation|QualifiedName]
-		//    "(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")")
+		//    "(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")")
 		//    ".";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(relation=[Relation|QualifiedName]
-		//"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+		//"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 		//":" value=LogicValue |
 		//value=ShortLogicValue?
 		//relation=[Relation|QualifiedName]
-		//"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")")
+		//"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")")
 		//"."
 		public Group getGroup() { return cGroup; }
 		
 		//(relation=[Relation|QualifiedName]
-		//"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+		//"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 		//":" value=LogicValue |
 		//value=ShortLogicValue?
 		//relation=[Relation|QualifiedName]
-		//"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")")
+		//"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")")
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//relation=[Relation|QualifiedName]
-		//    "(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+		//    "(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 		//    ":" value=LogicValue
 		public Group getGroup_0_0() { return cGroup_0_0; }
 		
@@ -814,32 +848,26 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		//"("
 		public Keyword getLeftParenthesisKeyword_0_0_1() { return cLeftParenthesisKeyword_0_0_1; }
 		
-		//(arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)?
+		//(arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)?
 		public Group getGroup_0_0_2() { return cGroup_0_0_2; }
 		
-		//arguments+=[Node|QualifiedName]
+		//arguments+=AssertionArgument
 		public Assignment getArgumentsAssignment_0_0_2_0() { return cArgumentsAssignment_0_0_2_0; }
 		
-		//[Node|QualifiedName]
-		public CrossReference getArgumentsNodeCrossReference_0_0_2_0_0() { return cArgumentsNodeCrossReference_0_0_2_0_0; }
+		//AssertionArgument
+		public RuleCall getArgumentsAssertionArgumentParserRuleCall_0_0_2_0_0() { return cArgumentsAssertionArgumentParserRuleCall_0_0_2_0_0; }
 		
-		//QualifiedName
-		public RuleCall getArgumentsNodeQualifiedNameParserRuleCall_0_0_2_0_0_1() { return cArgumentsNodeQualifiedNameParserRuleCall_0_0_2_0_0_1; }
-		
-		//("," arguments+=[Node|QualifiedName])*
+		//("," arguments+=AssertionArgument)*
 		public Group getGroup_0_0_2_1() { return cGroup_0_0_2_1; }
 		
 		//","
 		public Keyword getCommaKeyword_0_0_2_1_0() { return cCommaKeyword_0_0_2_1_0; }
 		
-		//arguments+=[Node|QualifiedName]
+		//arguments+=AssertionArgument
 		public Assignment getArgumentsAssignment_0_0_2_1_1() { return cArgumentsAssignment_0_0_2_1_1; }
 		
-		//[Node|QualifiedName]
-		public CrossReference getArgumentsNodeCrossReference_0_0_2_1_1_0() { return cArgumentsNodeCrossReference_0_0_2_1_1_0; }
-		
-		//QualifiedName
-		public RuleCall getArgumentsNodeQualifiedNameParserRuleCall_0_0_2_1_1_0_1() { return cArgumentsNodeQualifiedNameParserRuleCall_0_0_2_1_1_0_1; }
+		//AssertionArgument
+		public RuleCall getArgumentsAssertionArgumentParserRuleCall_0_0_2_1_1_0() { return cArgumentsAssertionArgumentParserRuleCall_0_0_2_1_1_0; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_0_0_3() { return cRightParenthesisKeyword_0_0_3; }
@@ -855,7 +883,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		
 		//value=ShortLogicValue?
 		//relation=[Relation|QualifiedName]
-		//"(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+		//"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 		public Group getGroup_0_1() { return cGroup_0_1; }
 		
 		//value=ShortLogicValue?
@@ -876,38 +904,192 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		//"("
 		public Keyword getLeftParenthesisKeyword_0_1_2() { return cLeftParenthesisKeyword_0_1_2; }
 		
-		//(arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)?
+		//(arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)?
 		public Group getGroup_0_1_3() { return cGroup_0_1_3; }
 		
-		//arguments+=[Node|QualifiedName]
+		//arguments+=AssertionArgument
 		public Assignment getArgumentsAssignment_0_1_3_0() { return cArgumentsAssignment_0_1_3_0; }
 		
-		//[Node|QualifiedName]
-		public CrossReference getArgumentsNodeCrossReference_0_1_3_0_0() { return cArgumentsNodeCrossReference_0_1_3_0_0; }
+		//AssertionArgument
+		public RuleCall getArgumentsAssertionArgumentParserRuleCall_0_1_3_0_0() { return cArgumentsAssertionArgumentParserRuleCall_0_1_3_0_0; }
 		
-		//QualifiedName
-		public RuleCall getArgumentsNodeQualifiedNameParserRuleCall_0_1_3_0_0_1() { return cArgumentsNodeQualifiedNameParserRuleCall_0_1_3_0_0_1; }
-		
-		//("," arguments+=[Node|QualifiedName])*
+		//("," arguments+=AssertionArgument)*
 		public Group getGroup_0_1_3_1() { return cGroup_0_1_3_1; }
 		
 		//","
 		public Keyword getCommaKeyword_0_1_3_1_0() { return cCommaKeyword_0_1_3_1_0; }
 		
-		//arguments+=[Node|QualifiedName]
+		//arguments+=AssertionArgument
 		public Assignment getArgumentsAssignment_0_1_3_1_1() { return cArgumentsAssignment_0_1_3_1_1; }
 		
-		//[Node|QualifiedName]
-		public CrossReference getArgumentsNodeCrossReference_0_1_3_1_1_0() { return cArgumentsNodeCrossReference_0_1_3_1_1_0; }
-		
-		//QualifiedName
-		public RuleCall getArgumentsNodeQualifiedNameParserRuleCall_0_1_3_1_1_0_1() { return cArgumentsNodeQualifiedNameParserRuleCall_0_1_3_1_1_0_1; }
+		//AssertionArgument
+		public RuleCall getArgumentsAssertionArgumentParserRuleCall_0_1_3_1_1_0() { return cArgumentsAssertionArgumentParserRuleCall_0_1_3_1_1_0; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_0_1_4() { return cRightParenthesisKeyword_0_1_4; }
 		
 		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
+	}
+	public class AssertionArgumentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.AssertionArgument");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cNodeAssertionArgumentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cConstantAssertionArgumentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//AssertionArgument:
+		//    NodeAssertionArgument | ConstantAssertionArgument;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//NodeAssertionArgument | ConstantAssertionArgument
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//NodeAssertionArgument
+		public RuleCall getNodeAssertionArgumentParserRuleCall_0() { return cNodeAssertionArgumentParserRuleCall_0; }
+		
+		//ConstantAssertionArgument
+		public RuleCall getConstantAssertionArgumentParserRuleCall_1() { return cConstantAssertionArgumentParserRuleCall_1; }
+	}
+	public class NodeAssertionArgumentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.NodeAssertionArgument");
+		private final Assignment cNodeAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cNodeNodeCrossReference_0 = (CrossReference)cNodeAssignment.eContents().get(0);
+		private final RuleCall cNodeNodeQualifiedNameParserRuleCall_0_1 = (RuleCall)cNodeNodeCrossReference_0.eContents().get(1);
+		
+		//NodeAssertionArgument:
+		//    node=[Node|QualifiedName];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//node=[Node|QualifiedName]
+		public Assignment getNodeAssignment() { return cNodeAssignment; }
+		
+		//[Node|QualifiedName]
+		public CrossReference getNodeNodeCrossReference_0() { return cNodeNodeCrossReference_0; }
+		
+		//QualifiedName
+		public RuleCall getNodeNodeQualifiedNameParserRuleCall_0_1() { return cNodeNodeQualifiedNameParserRuleCall_0_1; }
+	}
+	public class ConstantAssertionArgumentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ConstantAssertionArgument");
+		private final Assignment cConstantAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cConstantConstantParserRuleCall_0 = (RuleCall)cConstantAssignment.eContents().get(0);
+		
+		//ConstantAssertionArgument:
+		//    constant=Constant;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//constant=Constant
+		public Assignment getConstantAssignment() { return cConstantAssignment; }
+		
+		//Constant
+		public RuleCall getConstantConstantParserRuleCall_0() { return cConstantConstantParserRuleCall_0; }
+	}
+	public class NodeValueAssertionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.NodeValueAssertion");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNodeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cNodeNodeCrossReference_0_0 = (CrossReference)cNodeAssignment_0.eContents().get(0);
+		private final RuleCall cNodeNodeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cNodeNodeCrossReference_0_0.eContents().get(1);
+		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValueConstantParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final Keyword cFullStopKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//NodeValueAssertion:
+		//    node=[Node|QualifiedName] ":" value=Constant ".";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//node=[Node|QualifiedName] ":" value=Constant "."
+		public Group getGroup() { return cGroup; }
+		
+		//node=[Node|QualifiedName]
+		public Assignment getNodeAssignment_0() { return cNodeAssignment_0; }
+		
+		//[Node|QualifiedName]
+		public CrossReference getNodeNodeCrossReference_0_0() { return cNodeNodeCrossReference_0_0; }
+		
+		//QualifiedName
+		public RuleCall getNodeNodeQualifiedNameParserRuleCall_0_0_1() { return cNodeNodeQualifiedNameParserRuleCall_0_0_1; }
+		
+		//":"
+		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		
+		//value=Constant
+		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		
+		//Constant
+		public RuleCall getValueConstantParserRuleCall_2_0() { return cValueConstantParserRuleCall_2_0; }
+		
+		//"."
+		public Keyword getFullStopKeyword_3() { return cFullStopKeyword_3; }
+	}
+	public class ConstantElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Constant");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cIntConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRealConstantParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cStringConstantParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//Constant:
+		//    IntConstant | RealConstant | StringConstant;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//IntConstant | RealConstant | StringConstant
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//IntConstant
+		public RuleCall getIntConstantParserRuleCall_0() { return cIntConstantParserRuleCall_0; }
+		
+		//RealConstant
+		public RuleCall getRealConstantParserRuleCall_1() { return cRealConstantParserRuleCall_1; }
+		
+		//StringConstant
+		public RuleCall getStringConstantParserRuleCall_2() { return cStringConstantParserRuleCall_2; }
+	}
+	public class IntConstantElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.IntConstant");
+		private final Assignment cIntValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cIntValueIntegerParserRuleCall_0 = (RuleCall)cIntValueAssignment.eContents().get(0);
+		
+		//IntConstant:
+		//    intValue=Integer;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//intValue=Integer
+		public Assignment getIntValueAssignment() { return cIntValueAssignment; }
+		
+		//Integer
+		public RuleCall getIntValueIntegerParserRuleCall_0() { return cIntValueIntegerParserRuleCall_0; }
+	}
+	public class RealConstantElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.RealConstant");
+		private final Assignment cRealValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cRealValueRealParserRuleCall_0 = (RuleCall)cRealValueAssignment.eContents().get(0);
+		
+		//RealConstant:
+		//    realValue=Real;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//realValue=Real
+		public Assignment getRealValueAssignment() { return cRealValueAssignment; }
+		
+		//Real
+		public RuleCall getRealValueRealParserRuleCall_0() { return cRealValueRealParserRuleCall_0; }
+	}
+	public class StringConstantElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.StringConstant");
+		private final Assignment cStringValueAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cStringValueSTRINGTerminalRuleCall_0 = (RuleCall)cStringValueAssignment.eContents().get(0);
+		
+		//StringConstant:
+		//    stringValue=STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//stringValue=STRING
+		public Assignment getStringValueAssignment() { return cStringValueAssignment; }
+		
+		//STRING
+		public RuleCall getStringValueSTRINGTerminalRuleCall_0() { return cStringValueSTRINGTerminalRuleCall_0; }
 	}
 	public class ScopeDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ScopeDeclaration");
@@ -1149,7 +1331,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final Keyword cColonColonKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
 		private final RuleCall cQUOTED_IDTerminalRuleCall_1_2_1 = (RuleCall)cGroup_1_2.eContents().get(1);
 		
-		//QualifiedName:
+		//QualifiedName hidden():
 		//    QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1189,12 +1371,14 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Keyword cTrueKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cFalseKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cEKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cEKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//Identifier:
-		//    ID | "true" | "false";
+		//    ID | "true" | "false" | "e" | "E";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID | "true" | "false"
+		//ID | "true" | "false" | "e" | "E"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ID
@@ -1205,6 +1389,110 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		
 		//"false"
 		public Keyword getFalseKeyword_2() { return cFalseKeyword_2; }
+		
+		//"e"
+		public Keyword getEKeyword_3() { return cEKeyword_3; }
+		
+		//"E"
+		public Keyword getEKeyword_4() { return cEKeyword_4; }
+	}
+	public class IntegerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Integer");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//Integer returns ecore::EInt hidden():
+		//    "-"? INT;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"-"? INT
+		public Group getGroup() { return cGroup; }
+		
+		//"-"?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+	}
+	public class RealElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Real");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Keyword cFullStopKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_2_0_1 = (RuleCall)cGroup_2_0.eContents().get(1);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Group cGroup_2_1_0 = (Group)cGroup_2_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_2_1_0_0 = (Keyword)cGroup_2_1_0.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_2_1_0_1 = (RuleCall)cGroup_2_1_0.eContents().get(1);
+		private final Alternatives cAlternatives_2_1_1 = (Alternatives)cGroup_2_1.eContents().get(1);
+		private final Keyword cEKeyword_2_1_1_0 = (Keyword)cAlternatives_2_1_1.eContents().get(0);
+		private final Keyword cEKeyword_2_1_1_1 = (Keyword)cAlternatives_2_1_1.eContents().get(1);
+		private final Alternatives cAlternatives_2_1_2 = (Alternatives)cGroup_2_1.eContents().get(2);
+		private final Keyword cHyphenMinusKeyword_2_1_2_0 = (Keyword)cAlternatives_2_1_2.eContents().get(0);
+		private final Keyword cPlusSignKeyword_2_1_2_1 = (Keyword)cAlternatives_2_1_2.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_2_1_3 = (RuleCall)cGroup_2_1.eContents().get(3);
+		
+		//Real returns ecore::EDouble hidden():
+		//    "-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT);
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT)
+		public Group getGroup() { return cGroup; }
+		
+		//"-"?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+		
+		//("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT)
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//"." INT
+		public Group getGroup_2_0() { return cGroup_2_0; }
+		
+		//"."
+		public Keyword getFullStopKeyword_2_0_0() { return cFullStopKeyword_2_0_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_2_0_1() { return cINTTerminalRuleCall_2_0_1; }
+		
+		//("." INT)? ("e" | "E") ("-" | "+")? INT
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//("." INT)?
+		public Group getGroup_2_1_0() { return cGroup_2_1_0; }
+		
+		//"."
+		public Keyword getFullStopKeyword_2_1_0_0() { return cFullStopKeyword_2_1_0_0; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_2_1_0_1() { return cINTTerminalRuleCall_2_1_0_1; }
+		
+		//("e" | "E")
+		public Alternatives getAlternatives_2_1_1() { return cAlternatives_2_1_1; }
+		
+		//"e"
+		public Keyword getEKeyword_2_1_1_0() { return cEKeyword_2_1_1_0; }
+		
+		//"E"
+		public Keyword getEKeyword_2_1_1_1() { return cEKeyword_2_1_1_1; }
+		
+		//("-" | "+")?
+		public Alternatives getAlternatives_2_1_2() { return cAlternatives_2_1_2; }
+		
+		//"-"
+		public Keyword getHyphenMinusKeyword_2_1_2_0() { return cHyphenMinusKeyword_2_1_2_0; }
+		
+		//"+"
+		public Keyword getPlusSignKeyword_2_1_2_1() { return cPlusSignKeyword_2_1_2_1; }
+		
+		//INT
+		public RuleCall getINTTerminalRuleCall_2_1_3() { return cINTTerminalRuleCall_2_1_3; }
 	}
 	
 	public class LogicValueElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -1283,9 +1571,19 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	private final NegativeLiteralElements pNegativeLiteral;
 	private final AtomElements pAtom;
 	private final ArgumentElements pArgument;
+	private final VariableOrNodeArgumentElements pVariableOrNodeArgument;
+	private final ConstantArgumentElements pConstantArgument;
 	private final AssertionElements pAssertion;
+	private final AssertionArgumentElements pAssertionArgument;
+	private final NodeAssertionArgumentElements pNodeAssertionArgument;
+	private final ConstantAssertionArgumentElements pConstantAssertionArgument;
 	private final LogicValueElements eLogicValue;
 	private final ShortLogicValueElements eShortLogicValue;
+	private final NodeValueAssertionElements pNodeValueAssertion;
+	private final ConstantElements pConstant;
+	private final IntConstantElements pIntConstant;
+	private final RealConstantElements pRealConstant;
+	private final StringConstantElements pStringConstant;
 	private final ScopeDeclarationElements pScopeDeclaration;
 	private final TypeScopeElements pTypeScope;
 	private final MultiplicityElements pMultiplicity;
@@ -1297,6 +1595,9 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	private final QuotedOrUnquotedIdElements pQuotedOrUnquotedId;
 	private final QualifiedNameElements pQualifiedName;
 	private final IdentifierElements pIdentifier;
+	private final IntegerElements pInteger;
+	private final RealElements pReal;
+	private final TerminalRule tID;
 	private final TerminalRule tSTRING;
 	private final TerminalRule tQUOTED_ID;
 	private final TerminalRule tSL_COMMENT;
@@ -1323,9 +1624,19 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		this.pNegativeLiteral = new NegativeLiteralElements();
 		this.pAtom = new AtomElements();
 		this.pArgument = new ArgumentElements();
+		this.pVariableOrNodeArgument = new VariableOrNodeArgumentElements();
+		this.pConstantArgument = new ConstantArgumentElements();
 		this.pAssertion = new AssertionElements();
+		this.pAssertionArgument = new AssertionArgumentElements();
+		this.pNodeAssertionArgument = new NodeAssertionArgumentElements();
+		this.pConstantAssertionArgument = new ConstantAssertionArgumentElements();
 		this.eLogicValue = new LogicValueElements();
 		this.eShortLogicValue = new ShortLogicValueElements();
+		this.pNodeValueAssertion = new NodeValueAssertionElements();
+		this.pConstant = new ConstantElements();
+		this.pIntConstant = new IntConstantElements();
+		this.pRealConstant = new RealConstantElements();
+		this.pStringConstant = new StringConstantElements();
 		this.pScopeDeclaration = new ScopeDeclarationElements();
 		this.pTypeScope = new TypeScopeElements();
 		this.pMultiplicity = new MultiplicityElements();
@@ -1337,6 +1648,9 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		this.pQuotedOrUnquotedId = new QuotedOrUnquotedIdElements();
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pIdentifier = new IdentifierElements();
+		this.pInteger = new IntegerElements();
+		this.pReal = new RealElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ID");
 		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.STRING");
 		this.tQUOTED_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.QUOTED_ID");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.SL_COMMENT");
@@ -1381,7 +1695,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//Statement:
-	//    ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | ScopeDeclaration;
+	//    ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | NodeValueAssertion | ScopeDeclaration;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -1506,7 +1820,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//Argument:
-	//    variableOrNode=[VariableOrNode|QualifiedName];
+	//    VariableOrNodeArgument | ConstantArgument;
 	public ArgumentElements getArgumentAccess() {
 		return pArgument;
 	}
@@ -1515,13 +1829,33 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		return getArgumentAccess().getRule();
 	}
 	
+	//VariableOrNodeArgument:
+	//    variableOrNode=[VariableOrNode|QualifiedName];
+	public VariableOrNodeArgumentElements getVariableOrNodeArgumentAccess() {
+		return pVariableOrNodeArgument;
+	}
+	
+	public ParserRule getVariableOrNodeArgumentRule() {
+		return getVariableOrNodeArgumentAccess().getRule();
+	}
+	
+	//ConstantArgument:
+	//    constant=Constant;
+	public ConstantArgumentElements getConstantArgumentAccess() {
+		return pConstantArgument;
+	}
+	
+	public ParserRule getConstantArgumentRule() {
+		return getConstantArgumentAccess().getRule();
+	}
+	
 	//Assertion:
 	//    (relation=[Relation|QualifiedName]
-	//    "(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")"
+	//    "(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 	//    ":" value=LogicValue |
 	//    value=ShortLogicValue?
 	//    relation=[Relation|QualifiedName]
-	//    "(" (arguments+=[Node|QualifiedName] ("," arguments+=[Node|QualifiedName])*)? ")")
+	//    "(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")")
 	//    ".";
 	public AssertionElements getAssertionAccess() {
 		return pAssertion;
@@ -1529,6 +1863,36 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	
 	public ParserRule getAssertionRule() {
 		return getAssertionAccess().getRule();
+	}
+	
+	//AssertionArgument:
+	//    NodeAssertionArgument | ConstantAssertionArgument;
+	public AssertionArgumentElements getAssertionArgumentAccess() {
+		return pAssertionArgument;
+	}
+	
+	public ParserRule getAssertionArgumentRule() {
+		return getAssertionArgumentAccess().getRule();
+	}
+	
+	//NodeAssertionArgument:
+	//    node=[Node|QualifiedName];
+	public NodeAssertionArgumentElements getNodeAssertionArgumentAccess() {
+		return pNodeAssertionArgument;
+	}
+	
+	public ParserRule getNodeAssertionArgumentRule() {
+		return getNodeAssertionArgumentAccess().getRule();
+	}
+	
+	//ConstantAssertionArgument:
+	//    constant=Constant;
+	public ConstantAssertionArgumentElements getConstantAssertionArgumentAccess() {
+		return pConstantAssertionArgument;
+	}
+	
+	public ParserRule getConstantAssertionArgumentRule() {
+		return getConstantAssertionArgumentAccess().getRule();
 	}
 	
 	//enum LogicValue:
@@ -1549,6 +1913,56 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	
 	public EnumRule getShortLogicValueRule() {
 		return getShortLogicValueAccess().getRule();
+	}
+	
+	//NodeValueAssertion:
+	//    node=[Node|QualifiedName] ":" value=Constant ".";
+	public NodeValueAssertionElements getNodeValueAssertionAccess() {
+		return pNodeValueAssertion;
+	}
+	
+	public ParserRule getNodeValueAssertionRule() {
+		return getNodeValueAssertionAccess().getRule();
+	}
+	
+	//Constant:
+	//    IntConstant | RealConstant | StringConstant;
+	public ConstantElements getConstantAccess() {
+		return pConstant;
+	}
+	
+	public ParserRule getConstantRule() {
+		return getConstantAccess().getRule();
+	}
+	
+	//IntConstant:
+	//    intValue=Integer;
+	public IntConstantElements getIntConstantAccess() {
+		return pIntConstant;
+	}
+	
+	public ParserRule getIntConstantRule() {
+		return getIntConstantAccess().getRule();
+	}
+	
+	//RealConstant:
+	//    realValue=Real;
+	public RealConstantElements getRealConstantAccess() {
+		return pRealConstant;
+	}
+	
+	public ParserRule getRealConstantRule() {
+		return getRealConstantAccess().getRule();
+	}
+	
+	//StringConstant:
+	//    stringValue=STRING;
+	public StringConstantElements getStringConstantAccess() {
+		return pStringConstant;
+	}
+	
+	public ParserRule getStringConstantRule() {
+		return getStringConstantAccess().getRule();
 	}
 	
 	//ScopeDeclaration:
@@ -1643,7 +2057,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		return getQuotedOrUnquotedIdAccess().getRule();
 	}
 	
-	//QualifiedName:
+	//QualifiedName hidden():
 	//    QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
@@ -1654,13 +2068,40 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//Identifier:
-	//    ID | "true" | "false";
+	//    ID | "true" | "false" | "e" | "E";
 	public IdentifierElements getIdentifierAccess() {
 		return pIdentifier;
 	}
 	
 	public ParserRule getIdentifierRule() {
 		return getIdentifierAccess().getRule();
+	}
+	
+	//Integer returns ecore::EInt hidden():
+	//    "-"? INT;
+	public IntegerElements getIntegerAccess() {
+		return pInteger;
+	}
+	
+	public ParserRule getIntegerRule() {
+		return getIntegerAccess().getRule();
+	}
+	
+	//Real returns ecore::EDouble hidden():
+	//    "-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT);
+	public RealElements getRealAccess() {
+		return pReal;
+	}
+	
+	public ParserRule getRealRule() {
+		return getRealAccess().getRule();
+	}
+	
+	//@Override
+	//terminal ID:
+	//    ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+	public TerminalRule getIDRule() {
+		return tID;
 	}
 	
 	//@Override
@@ -1678,14 +2119,9 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	
 	//@Override
 	//terminal SL_COMMENT:
-	//    ('%' | '//') !('\n'|'\r')* ('\r'? '\n')?;
+	//    ('%' | '//') !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
-	}
-	
-	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
 	}
 	
 	//terminal INT returns ecore::EInt: ('0'..'9')+;

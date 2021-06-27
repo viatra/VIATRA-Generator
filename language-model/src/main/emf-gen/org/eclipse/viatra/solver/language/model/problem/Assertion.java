@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Assertion#getRelation <em>Relation</em>}</li>
- *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Assertion#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Assertion#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.Assertion#getArguments <em>Arguments</em>}</li>
  * </ul>
  *
  * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getAssertion()
@@ -46,16 +46,16 @@ public interface Assertion extends Statement {
 	void setRelation(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>Arguments</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.Node}.
+	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.viatra.solver.language.model.problem.AssertionArgument}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arguments</em>' reference list.
+	 * @return the value of the '<em>Arguments</em>' containment reference list.
 	 * @see org.eclipse.viatra.solver.language.model.problem.ProblemPackage#getAssertion_Arguments()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Node> getArguments();
+	EList<AssertionArgument> getArguments();
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

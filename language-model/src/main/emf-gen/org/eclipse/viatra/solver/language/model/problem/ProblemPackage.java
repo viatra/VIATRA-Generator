@@ -813,22 +813,22 @@ public interface ProblemPackage extends EPackage {
 	int ASSERTION__RELATION = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION__ARGUMENTS = STATEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERTION__VALUE = STATEMENT_FEATURE_COUNT + 2;
+	int ASSERTION__VALUE = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION__ARGUMENTS = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Assertion</em>' class.
@@ -1124,25 +1124,7 @@ public interface ProblemPackage extends EPackage {
 	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getArgument()
 	 * @generated
 	 */
-	int ARGUMENT = 23;
-
-	/**
-	 * The feature id for the '<em><b>Variable Or Node</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT__VARIABLE_OR_NODE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Singleton Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT__SINGLETON_VARIABLE = 1;
+	int ARGUMENT = 31;
 
 	/**
 	 * The number of structural features of the '<em>Argument</em>' class.
@@ -1151,7 +1133,7 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARGUMENT_FEATURE_COUNT = 2;
+	int ARGUMENT_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of operations of the '<em>Argument</em>' class.
@@ -1161,6 +1143,52 @@ public interface ProblemPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARGUMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeArgumentImpl <em>Variable Or Node Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeArgumentImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getVariableOrNodeArgument()
+	 * @generated
+	 */
+	int VARIABLE_OR_NODE_ARGUMENT = 23;
+
+	/**
+	 * The feature id for the '<em><b>Variable Or Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE = ARGUMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Singleton Variable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE_ARGUMENT__SINGLETON_VARIABLE = ARGUMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Variable Or Node Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE_ARGUMENT_FEATURE_COUNT = ARGUMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Variable Or Node Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_OR_NODE_ARGUMENT_OPERATION_COUNT = ARGUMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.EnumDeclarationImpl <em>Enum Declaration</em>}' class.
@@ -1209,6 +1237,330 @@ public interface ProblemPackage extends EPackage {
 	int ENUM_DECLARATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ConstantImpl <em>Constant</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ConstantImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getConstant()
+	 * @generated
+	 */
+	int CONSTANT = 26;
+
+	/**
+	 * The number of structural features of the '<em>Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.IntConstantImpl <em>Int Constant</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.IntConstantImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getIntConstant()
+	 * @generated
+	 */
+	int INT_CONSTANT = 27;
+
+	/**
+	 * The feature id for the '<em><b>Int Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INT_CONSTANT__INT_VALUE = CONSTANT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Int Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INT_CONSTANT_FEATURE_COUNT = CONSTANT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Int Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INT_CONSTANT_OPERATION_COUNT = CONSTANT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.RealConstantImpl <em>Real Constant</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.RealConstantImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getRealConstant()
+	 * @generated
+	 */
+	int REAL_CONSTANT = 28;
+
+	/**
+	 * The feature id for the '<em><b>Real Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_CONSTANT__REAL_VALUE = CONSTANT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Real Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_CONSTANT_FEATURE_COUNT = CONSTANT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Real Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_CONSTANT_OPERATION_COUNT = CONSTANT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.StringConstantImpl <em>String Constant</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.StringConstantImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getStringConstant()
+	 * @generated
+	 */
+	int STRING_CONSTANT = 29;
+
+	/**
+	 * The feature id for the '<em><b>String Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_CONSTANT__STRING_VALUE = CONSTANT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>String Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_CONSTANT_FEATURE_COUNT = CONSTANT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>String Constant</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_CONSTANT_OPERATION_COUNT = CONSTANT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ConstantArgumentImpl <em>Constant Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ConstantArgumentImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getConstantArgument()
+	 * @generated
+	 */
+	int CONSTANT_ARGUMENT = 30;
+
+	/**
+	 * The feature id for the '<em><b>Constant</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_ARGUMENT__CONSTANT = ARGUMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constant Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_ARGUMENT_FEATURE_COUNT = ARGUMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Constant Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_ARGUMENT_OPERATION_COUNT = ARGUMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.AssertionArgumentImpl <em>Assertion Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.AssertionArgumentImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getAssertionArgument()
+	 * @generated
+	 */
+	int ASSERTION_ARGUMENT = 33;
+
+	/**
+	 * The number of structural features of the '<em>Assertion Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION_ARGUMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Assertion Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION_ARGUMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.NodeAssertionArgumentImpl <em>Node Assertion Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.NodeAssertionArgumentImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getNodeAssertionArgument()
+	 * @generated
+	 */
+	int NODE_ASSERTION_ARGUMENT = 32;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_ASSERTION_ARGUMENT__NODE = ASSERTION_ARGUMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Node Assertion Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_ASSERTION_ARGUMENT_FEATURE_COUNT = ASSERTION_ARGUMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Node Assertion Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_ASSERTION_ARGUMENT_OPERATION_COUNT = ASSERTION_ARGUMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ConstantAssertionArgumentImpl <em>Constant Assertion Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ConstantAssertionArgumentImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getConstantAssertionArgument()
+	 * @generated
+	 */
+	int CONSTANT_ASSERTION_ARGUMENT = 34;
+
+	/**
+	 * The feature id for the '<em><b>Constant</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_ASSERTION_ARGUMENT__CONSTANT = ASSERTION_ARGUMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Constant Assertion Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_ASSERTION_ARGUMENT_FEATURE_COUNT = ASSERTION_ARGUMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Constant Assertion Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_ASSERTION_ARGUMENT_OPERATION_COUNT = ASSERTION_ARGUMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.NodeValueAssertionImpl <em>Node Value Assertion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.NodeValueAssertionImpl
+	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getNodeValueAssertion()
+	 * @generated
+	 */
+	int NODE_VALUE_ASSERTION = 35;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_VALUE_ASSERTION__NODE = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_VALUE_ASSERTION__VALUE = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Node Value Assertion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_VALUE_ASSERTION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Node Value Assertion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_VALUE_ASSERTION_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1216,7 +1568,7 @@ public interface ProblemPackage extends EPackage {
 	 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getLogicValue()
 	 * @generated
 	 */
-	int LOGIC_VALUE = 26;
+	int LOGIC_VALUE = 36;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.Problem <em>Problem</em>}'.
@@ -1611,10 +1963,10 @@ public interface ProblemPackage extends EPackage {
 	EReference getAssertion_Relation();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.viatra.solver.language.model.problem.Assertion#getArguments <em>Arguments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.viatra.solver.language.model.problem.Assertion#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Arguments</em>'.
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
 	 * @see org.eclipse.viatra.solver.language.model.problem.Assertion#getArguments()
 	 * @see #getAssertion()
 	 * @generated
@@ -1790,6 +2142,38 @@ public interface ProblemPackage extends EPackage {
 	EClass getUnboundedMultiplicity();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument <em>Variable Or Node Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Or Node Argument</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument
+	 * @generated
+	 */
+	EClass getVariableOrNodeArgument();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument#getVariableOrNode <em>Variable Or Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable Or Node</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument#getVariableOrNode()
+	 * @see #getVariableOrNodeArgument()
+	 * @generated
+	 */
+	EReference getVariableOrNodeArgument_VariableOrNode();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument#getSingletonVariable <em>Singleton Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Singleton Variable</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument#getSingletonVariable()
+	 * @see #getVariableOrNodeArgument()
+	 * @generated
+	 */
+	EReference getVariableOrNodeArgument_SingletonVariable();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.Argument <em>Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1800,26 +2184,88 @@ public interface ProblemPackage extends EPackage {
 	EClass getArgument();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getVariableOrNode <em>Variable Or Node</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument <em>Node Assertion Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Variable Or Node</em>'.
-	 * @see org.eclipse.viatra.solver.language.model.problem.Argument#getVariableOrNode()
-	 * @see #getArgument()
+	 * @return the meta object for class '<em>Node Assertion Argument</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument
 	 * @generated
 	 */
-	EReference getArgument_VariableOrNode();
+	EClass getNodeAssertionArgument();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.Argument#getSingletonVariable <em>Singleton Variable</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Singleton Variable</em>'.
-	 * @see org.eclipse.viatra.solver.language.model.problem.Argument#getSingletonVariable()
-	 * @see #getArgument()
+	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument#getNode()
+	 * @see #getNodeAssertionArgument()
 	 * @generated
 	 */
-	EReference getArgument_SingletonVariable();
+	EReference getNodeAssertionArgument_Node();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.AssertionArgument <em>Assertion Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Assertion Argument</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.AssertionArgument
+	 * @generated
+	 */
+	EClass getAssertionArgument();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument <em>Constant Assertion Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Assertion Argument</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument
+	 * @generated
+	 */
+	EClass getConstantAssertionArgument();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument#getConstant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Constant</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument#getConstant()
+	 * @see #getConstantAssertionArgument()
+	 * @generated
+	 */
+	EReference getConstantAssertionArgument_Constant();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion <em>Node Value Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Node Value Assertion</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion
+	 * @generated
+	 */
+	EClass getNodeValueAssertion();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion#getNode()
+	 * @see #getNodeValueAssertion()
+	 * @generated
+	 */
+	EReference getNodeValueAssertion_Node();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion#getValue()
+	 * @see #getNodeValueAssertion()
+	 * @generated
+	 */
+	EReference getNodeValueAssertion_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.EnumDeclaration <em>Enum Declaration</em>}'.
@@ -1851,6 +2297,100 @@ public interface ProblemPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getVariableOrNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.Constant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.Constant
+	 * @generated
+	 */
+	EClass getConstant();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.IntConstant <em>Int Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Int Constant</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.IntConstant
+	 * @generated
+	 */
+	EClass getIntConstant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.model.problem.IntConstant#getIntValue <em>Int Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Int Value</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.IntConstant#getIntValue()
+	 * @see #getIntConstant()
+	 * @generated
+	 */
+	EAttribute getIntConstant_IntValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.RealConstant <em>Real Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Real Constant</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.RealConstant
+	 * @generated
+	 */
+	EClass getRealConstant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.model.problem.RealConstant#getRealValue <em>Real Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Real Value</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.RealConstant#getRealValue()
+	 * @see #getRealConstant()
+	 * @generated
+	 */
+	EAttribute getRealConstant_RealValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.StringConstant <em>String Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String Constant</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.StringConstant
+	 * @generated
+	 */
+	EClass getStringConstant();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.viatra.solver.language.model.problem.StringConstant#getStringValue <em>String Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>String Value</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.StringConstant#getStringValue()
+	 * @see #getStringConstant()
+	 * @generated
+	 */
+	EAttribute getStringConstant_StringValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.viatra.solver.language.model.problem.ConstantArgument <em>Constant Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Constant Argument</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ConstantArgument
+	 * @generated
+	 */
+	EClass getConstantArgument();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.viatra.solver.language.model.problem.ConstantArgument#getConstant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Constant</em>'.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ConstantArgument#getConstant()
+	 * @see #getConstantArgument()
+	 * @generated
+	 */
+	EReference getConstantArgument_Constant();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}'.
@@ -2212,7 +2752,7 @@ public interface ProblemPackage extends EPackage {
 		EReference ASSERTION__RELATION = eINSTANCE.getAssertion_Relation();
 
 		/**
-		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2364,6 +2904,33 @@ public interface ProblemPackage extends EPackage {
 		EClass UNBOUNDED_MULTIPLICITY = eINSTANCE.getUnboundedMultiplicity();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeArgumentImpl <em>Variable Or Node Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.VariableOrNodeArgumentImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getVariableOrNodeArgument()
+		 * @generated
+		 */
+		EClass VARIABLE_OR_NODE_ARGUMENT = eINSTANCE.getVariableOrNodeArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable Or Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE = eINSTANCE.getVariableOrNodeArgument_VariableOrNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Singleton Variable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_OR_NODE_ARGUMENT__SINGLETON_VARIABLE = eINSTANCE
+				.getVariableOrNodeArgument_SingletonVariable();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ArgumentImpl <em>Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2374,20 +2941,76 @@ public interface ProblemPackage extends EPackage {
 		EClass ARGUMENT = eINSTANCE.getArgument();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable Or Node</b></em>' reference feature.
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.NodeAssertionArgumentImpl <em>Node Assertion Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.NodeAssertionArgumentImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getNodeAssertionArgument()
 		 * @generated
 		 */
-		EReference ARGUMENT__VARIABLE_OR_NODE = eINSTANCE.getArgument_VariableOrNode();
+		EClass NODE_ASSERTION_ARGUMENT = eINSTANCE.getNodeAssertionArgument();
 
 		/**
-		 * The meta object literal for the '<em><b>Singleton Variable</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARGUMENT__SINGLETON_VARIABLE = eINSTANCE.getArgument_SingletonVariable();
+		EReference NODE_ASSERTION_ARGUMENT__NODE = eINSTANCE.getNodeAssertionArgument_Node();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.AssertionArgumentImpl <em>Assertion Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.AssertionArgumentImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getAssertionArgument()
+		 * @generated
+		 */
+		EClass ASSERTION_ARGUMENT = eINSTANCE.getAssertionArgument();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ConstantAssertionArgumentImpl <em>Constant Assertion Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ConstantAssertionArgumentImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getConstantAssertionArgument()
+		 * @generated
+		 */
+		EClass CONSTANT_ASSERTION_ARGUMENT = eINSTANCE.getConstantAssertionArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTANT_ASSERTION_ARGUMENT__CONSTANT = eINSTANCE.getConstantAssertionArgument_Constant();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.NodeValueAssertionImpl <em>Node Value Assertion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.NodeValueAssertionImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getNodeValueAssertion()
+		 * @generated
+		 */
+		EClass NODE_VALUE_ASSERTION = eINSTANCE.getNodeValueAssertion();
+
+		/**
+		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE_VALUE_ASSERTION__NODE = eINSTANCE.getNodeValueAssertion_Node();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE_VALUE_ASSERTION__VALUE = eINSTANCE.getNodeValueAssertion_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.EnumDeclarationImpl <em>Enum Declaration</em>}' class.
@@ -2416,6 +3039,88 @@ public interface ProblemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE_OR_NODE = eINSTANCE.getVariableOrNode();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ConstantImpl <em>Constant</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ConstantImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getConstant()
+		 * @generated
+		 */
+		EClass CONSTANT = eINSTANCE.getConstant();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.IntConstantImpl <em>Int Constant</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.IntConstantImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getIntConstant()
+		 * @generated
+		 */
+		EClass INT_CONSTANT = eINSTANCE.getIntConstant();
+
+		/**
+		 * The meta object literal for the '<em><b>Int Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INT_CONSTANT__INT_VALUE = eINSTANCE.getIntConstant_IntValue();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.RealConstantImpl <em>Real Constant</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.RealConstantImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getRealConstant()
+		 * @generated
+		 */
+		EClass REAL_CONSTANT = eINSTANCE.getRealConstant();
+
+		/**
+		 * The meta object literal for the '<em><b>Real Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REAL_CONSTANT__REAL_VALUE = eINSTANCE.getRealConstant_RealValue();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.StringConstantImpl <em>String Constant</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.StringConstantImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getStringConstant()
+		 * @generated
+		 */
+		EClass STRING_CONSTANT = eINSTANCE.getStringConstant();
+
+		/**
+		 * The meta object literal for the '<em><b>String Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_CONSTANT__STRING_VALUE = eINSTANCE.getStringConstant_StringValue();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.impl.ConstantArgumentImpl <em>Constant Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ConstantArgumentImpl
+		 * @see org.eclipse.viatra.solver.language.model.problem.impl.ProblemPackageImpl#getConstantArgument()
+		 * @generated
+		 */
+		EClass CONSTANT_ARGUMENT = eINSTANCE.getConstantArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTANT_ARGUMENT__CONSTANT = eINSTANCE.getConstantArgument_Constant();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.viatra.solver.language.model.problem.LogicValue <em>Logic Value</em>}' enum.

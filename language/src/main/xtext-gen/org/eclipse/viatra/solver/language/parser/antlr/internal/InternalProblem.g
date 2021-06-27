@@ -181,11 +181,20 @@ ruleStatement returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getStatementAccess().getScopeDeclarationParserRuleCall_4());
+			newCompositeNode(grammarAccess.getStatementAccess().getNodeValueAssertionParserRuleCall_4());
 		}
-		this_ScopeDeclaration_4=ruleScopeDeclaration
+		this_NodeValueAssertion_4=ruleNodeValueAssertion
 		{
-			$current = $this_ScopeDeclaration_4.current;
+			$current = $this_NodeValueAssertion_4.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getStatementAccess().getScopeDeclarationParserRuleCall_5());
+		}
+		this_ScopeDeclaration_5=ruleScopeDeclaration
+		{
+			$current = $this_ScopeDeclaration_5.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -1102,17 +1111,89 @@ ruleArgument returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		{
+			newCompositeNode(grammarAccess.getArgumentAccess().getVariableOrNodeArgumentParserRuleCall_0());
+		}
+		this_VariableOrNodeArgument_0=ruleVariableOrNodeArgument
+		{
+			$current = $this_VariableOrNodeArgument_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getArgumentAccess().getConstantArgumentParserRuleCall_1());
+		}
+		this_ConstantArgument_1=ruleConstantArgument
+		{
+			$current = $this_ConstantArgument_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleVariableOrNodeArgument
+entryRuleVariableOrNodeArgument returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getVariableOrNodeArgumentRule()); }
+	iv_ruleVariableOrNodeArgument=ruleVariableOrNodeArgument
+	{ $current=$iv_ruleVariableOrNodeArgument.current; }
+	EOF;
+
+// Rule VariableOrNodeArgument
+ruleVariableOrNodeArgument returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
 		(
 			{
 				if ($current==null) {
-					$current = createModelElement(grammarAccess.getArgumentRule());
+					$current = createModelElement(grammarAccess.getVariableOrNodeArgumentRule());
 				}
 			}
 			{
-				newCompositeNode(grammarAccess.getArgumentAccess().getVariableOrNodeVariableOrNodeCrossReference_0());
+				newCompositeNode(grammarAccess.getVariableOrNodeArgumentAccess().getVariableOrNodeVariableOrNodeCrossReference_0());
 			}
 			ruleQualifiedName
 			{
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleConstantArgument
+entryRuleConstantArgument returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConstantArgumentRule()); }
+	iv_ruleConstantArgument=ruleConstantArgument
+	{ $current=$iv_ruleConstantArgument.current; }
+	EOF;
+
+// Rule ConstantArgument
+ruleConstantArgument returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getConstantArgumentAccess().getConstantConstantParserRuleCall_0());
+			}
+			lv_constant_0_0=ruleConstant
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getConstantArgumentRule());
+				}
+				set(
+					$current,
+					"constant",
+					lv_constant_0_0,
+					"org.eclipse.viatra.solver.language.Problem.Constant");
 				afterParserOrEnumRuleCall();
 			}
 		)
@@ -1161,15 +1242,18 @@ ruleAssertion returns [EObject current=null]
 					(
 						(
 							{
+								newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsAssertionArgumentParserRuleCall_0_0_2_0_0());
+							}
+							lv_arguments_2_0=ruleAssertionArgument
+							{
 								if ($current==null) {
-									$current = createModelElement(grammarAccess.getAssertionRule());
+									$current = createModelElementForParent(grammarAccess.getAssertionRule());
 								}
-							}
-							{
-								newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsNodeCrossReference_0_0_2_0_0());
-							}
-							ruleQualifiedName
-							{
+								add(
+									$current,
+									"arguments",
+									lv_arguments_2_0,
+									"org.eclipse.viatra.solver.language.Problem.AssertionArgument");
 								afterParserOrEnumRuleCall();
 							}
 						)
@@ -1182,15 +1266,18 @@ ruleAssertion returns [EObject current=null]
 						(
 							(
 								{
+									newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsAssertionArgumentParserRuleCall_0_0_2_1_1_0());
+								}
+								lv_arguments_4_0=ruleAssertionArgument
+								{
 									if ($current==null) {
-										$current = createModelElement(grammarAccess.getAssertionRule());
+										$current = createModelElementForParent(grammarAccess.getAssertionRule());
 									}
-								}
-								{
-									newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsNodeCrossReference_0_0_2_1_1_0());
-								}
-								ruleQualifiedName
-								{
+									add(
+										$current,
+										"arguments",
+										lv_arguments_4_0,
+										"org.eclipse.viatra.solver.language.Problem.AssertionArgument");
 									afterParserOrEnumRuleCall();
 								}
 							)
@@ -1270,15 +1357,18 @@ ruleAssertion returns [EObject current=null]
 					(
 						(
 							{
+								newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsAssertionArgumentParserRuleCall_0_1_3_0_0());
+							}
+							lv_arguments_11_0=ruleAssertionArgument
+							{
 								if ($current==null) {
-									$current = createModelElement(grammarAccess.getAssertionRule());
+									$current = createModelElementForParent(grammarAccess.getAssertionRule());
 								}
-							}
-							{
-								newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsNodeCrossReference_0_1_3_0_0());
-							}
-							ruleQualifiedName
-							{
+								add(
+									$current,
+									"arguments",
+									lv_arguments_11_0,
+									"org.eclipse.viatra.solver.language.Problem.AssertionArgument");
 								afterParserOrEnumRuleCall();
 							}
 						)
@@ -1291,15 +1381,18 @@ ruleAssertion returns [EObject current=null]
 						(
 							(
 								{
+									newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsAssertionArgumentParserRuleCall_0_1_3_1_1_0());
+								}
+								lv_arguments_13_0=ruleAssertionArgument
+								{
 									if ($current==null) {
-										$current = createModelElement(grammarAccess.getAssertionRule());
+										$current = createModelElementForParent(grammarAccess.getAssertionRule());
 									}
-								}
-								{
-									newCompositeNode(grammarAccess.getAssertionAccess().getArgumentsNodeCrossReference_0_1_3_1_1_0());
-								}
-								ruleQualifiedName
-								{
+									add(
+										$current,
+										"arguments",
+										lv_arguments_13_0,
+										"org.eclipse.viatra.solver.language.Problem.AssertionArgument");
 									afterParserOrEnumRuleCall();
 								}
 							)
@@ -1316,6 +1409,325 @@ ruleAssertion returns [EObject current=null]
 		{
 			newLeafNode(otherlv_15, grammarAccess.getAssertionAccess().getFullStopKeyword_1());
 		}
+	)
+;
+
+// Entry rule entryRuleAssertionArgument
+entryRuleAssertionArgument returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAssertionArgumentRule()); }
+	iv_ruleAssertionArgument=ruleAssertionArgument
+	{ $current=$iv_ruleAssertionArgument.current; }
+	EOF;
+
+// Rule AssertionArgument
+ruleAssertionArgument returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getAssertionArgumentAccess().getNodeAssertionArgumentParserRuleCall_0());
+		}
+		this_NodeAssertionArgument_0=ruleNodeAssertionArgument
+		{
+			$current = $this_NodeAssertionArgument_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAssertionArgumentAccess().getConstantAssertionArgumentParserRuleCall_1());
+		}
+		this_ConstantAssertionArgument_1=ruleConstantAssertionArgument
+		{
+			$current = $this_ConstantAssertionArgument_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleNodeAssertionArgument
+entryRuleNodeAssertionArgument returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNodeAssertionArgumentRule()); }
+	iv_ruleNodeAssertionArgument=ruleNodeAssertionArgument
+	{ $current=$iv_ruleNodeAssertionArgument.current; }
+	EOF;
+
+// Rule NodeAssertionArgument
+ruleNodeAssertionArgument returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getNodeAssertionArgumentRule());
+				}
+			}
+			{
+				newCompositeNode(grammarAccess.getNodeAssertionArgumentAccess().getNodeNodeCrossReference_0());
+			}
+			ruleQualifiedName
+			{
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleConstantAssertionArgument
+entryRuleConstantAssertionArgument returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConstantAssertionArgumentRule()); }
+	iv_ruleConstantAssertionArgument=ruleConstantAssertionArgument
+	{ $current=$iv_ruleConstantAssertionArgument.current; }
+	EOF;
+
+// Rule ConstantAssertionArgument
+ruleConstantAssertionArgument returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getConstantAssertionArgumentAccess().getConstantConstantParserRuleCall_0());
+			}
+			lv_constant_0_0=ruleConstant
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getConstantAssertionArgumentRule());
+				}
+				set(
+					$current,
+					"constant",
+					lv_constant_0_0,
+					"org.eclipse.viatra.solver.language.Problem.Constant");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleNodeValueAssertion
+entryRuleNodeValueAssertion returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getNodeValueAssertionRule()); }
+	iv_ruleNodeValueAssertion=ruleNodeValueAssertion
+	{ $current=$iv_ruleNodeValueAssertion.current; }
+	EOF;
+
+// Rule NodeValueAssertion
+ruleNodeValueAssertion returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getNodeValueAssertionRule());
+					}
+				}
+				{
+					newCompositeNode(grammarAccess.getNodeValueAssertionAccess().getNodeNodeCrossReference_0_0());
+				}
+				ruleQualifiedName
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_1=':'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getNodeValueAssertionAccess().getColonKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getNodeValueAssertionAccess().getValueConstantParserRuleCall_2_0());
+				}
+				lv_value_2_0=ruleConstant
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getNodeValueAssertionRule());
+					}
+					set(
+						$current,
+						"value",
+						lv_value_2_0,
+						"org.eclipse.viatra.solver.language.Problem.Constant");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_3='.'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getNodeValueAssertionAccess().getFullStopKeyword_3());
+		}
+	)
+;
+
+// Entry rule entryRuleConstant
+entryRuleConstant returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getConstantRule()); }
+	iv_ruleConstant=ruleConstant
+	{ $current=$iv_ruleConstant.current; }
+	EOF;
+
+// Rule Constant
+ruleConstant returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getConstantAccess().getIntConstantParserRuleCall_0());
+		}
+		this_IntConstant_0=ruleIntConstant
+		{
+			$current = $this_IntConstant_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getConstantAccess().getRealConstantParserRuleCall_1());
+		}
+		this_RealConstant_1=ruleRealConstant
+		{
+			$current = $this_RealConstant_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getConstantAccess().getStringConstantParserRuleCall_2());
+		}
+		this_StringConstant_2=ruleStringConstant
+		{
+			$current = $this_StringConstant_2.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleIntConstant
+entryRuleIntConstant returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getIntConstantRule()); }
+	iv_ruleIntConstant=ruleIntConstant
+	{ $current=$iv_ruleIntConstant.current; }
+	EOF;
+
+// Rule IntConstant
+ruleIntConstant returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getIntConstantAccess().getIntValueIntegerParserRuleCall_0());
+			}
+			lv_intValue_0_0=ruleInteger
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getIntConstantRule());
+				}
+				set(
+					$current,
+					"intValue",
+					lv_intValue_0_0,
+					"org.eclipse.viatra.solver.language.Problem.Integer");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleRealConstant
+entryRuleRealConstant returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRealConstantRule()); }
+	iv_ruleRealConstant=ruleRealConstant
+	{ $current=$iv_ruleRealConstant.current; }
+	EOF;
+
+// Rule RealConstant
+ruleRealConstant returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getRealConstantAccess().getRealValueRealParserRuleCall_0());
+			}
+			lv_realValue_0_0=ruleReal
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getRealConstantRule());
+				}
+				set(
+					$current,
+					"realValue",
+					lv_realValue_0_0,
+					"org.eclipse.viatra.solver.language.Problem.Real");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
+;
+
+// Entry rule entryRuleStringConstant
+entryRuleStringConstant returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStringConstantRule()); }
+	iv_ruleStringConstant=ruleStringConstant
+	{ $current=$iv_ruleStringConstant.current; }
+	EOF;
+
+// Rule StringConstant
+ruleStringConstant returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_stringValue_0_0=RULE_STRING
+			{
+				newLeafNode(lv_stringValue_0_0, grammarAccess.getStringConstantAccess().getStringValueSTRINGTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getStringConstantRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"stringValue",
+					lv_stringValue_0_0,
+					"org.eclipse.viatra.solver.language.Problem.STRING");
+			}
+		)
 	)
 ;
 
@@ -1723,16 +2135,22 @@ ruleQuotedOrUnquotedId returns [AntlrDatatypeRuleToken current=new AntlrDatatype
 ;
 
 // Entry rule entryRuleQualifiedName
-entryRuleQualifiedName returns [String current=null]:
+entryRuleQualifiedName returns [String current=null]@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
 	{ newCompositeNode(grammarAccess.getQualifiedNameRule()); }
 	iv_ruleQualifiedName=ruleQualifiedName
 	{ $current=$iv_ruleQualifiedName.current.getText(); }
 	EOF;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule QualifiedName
 ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }
 @after {
 	leaveRule();
@@ -1791,6 +2209,9 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 		)
 	)
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Entry rule entryRuleIdentifier
 entryRuleIdentifier returns [String current=null]:
@@ -1827,8 +2248,170 @@ ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getIdentifierAccess().getFalseKeyword_2());
 		}
+		    |
+		kw='e'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getIdentifierAccess().getEKeyword_3());
+		}
+		    |
+		kw='E'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getIdentifierAccess().getEKeyword_4());
+		}
 	)
 ;
+
+// Entry rule entryRuleInteger
+entryRuleInteger returns [String current=null]@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
+	{ newCompositeNode(grammarAccess.getIntegerRule()); }
+	iv_ruleInteger=ruleInteger
+	{ $current=$iv_ruleInteger.current.getText(); }
+	EOF;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Rule Integer
+ruleInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw='-'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0());
+			}
+		)?
+		this_INT_1=RULE_INT
+		{
+			$current.merge(this_INT_1);
+		}
+		{
+			newLeafNode(this_INT_1, grammarAccess.getIntegerAccess().getINTTerminalRuleCall_1());
+		}
+	)
+;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Entry rule entryRuleReal
+entryRuleReal returns [String current=null]@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}:
+	{ newCompositeNode(grammarAccess.getRealRule()); }
+	iv_ruleReal=ruleReal
+	{ $current=$iv_ruleReal.current.getText(); }
+	EOF;
+finally {
+	myHiddenTokenState.restore();
+}
+
+// Rule Real
+ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			kw='-'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getRealAccess().getHyphenMinusKeyword_0());
+			}
+		)?
+		this_INT_1=RULE_INT
+		{
+			$current.merge(this_INT_1);
+		}
+		{
+			newLeafNode(this_INT_1, grammarAccess.getRealAccess().getINTTerminalRuleCall_1());
+		}
+		(
+			(
+				kw='.'
+				{
+					$current.merge(kw);
+					newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_2_0_0());
+				}
+				this_INT_3=RULE_INT
+				{
+					$current.merge(this_INT_3);
+				}
+				{
+					newLeafNode(this_INT_3, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_0_1());
+				}
+			)
+			    |
+			(
+				(
+					kw='.'
+					{
+						$current.merge(kw);
+						newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_2_1_0_0());
+					}
+					this_INT_5=RULE_INT
+					{
+						$current.merge(this_INT_5);
+					}
+					{
+						newLeafNode(this_INT_5, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1_0_1());
+					}
+				)?
+				(
+					kw='e'
+					{
+						$current.merge(kw);
+						newLeafNode(kw, grammarAccess.getRealAccess().getEKeyword_2_1_1_0());
+					}
+					    |
+					kw='E'
+					{
+						$current.merge(kw);
+						newLeafNode(kw, grammarAccess.getRealAccess().getEKeyword_2_1_1_1());
+					}
+				)
+				(
+					kw='-'
+					{
+						$current.merge(kw);
+						newLeafNode(kw, grammarAccess.getRealAccess().getHyphenMinusKeyword_2_1_2_0());
+					}
+					    |
+					kw='+'
+					{
+						$current.merge(kw);
+						newLeafNode(kw, grammarAccess.getRealAccess().getPlusSignKeyword_2_1_2_1());
+					}
+				)?
+				this_INT_10=RULE_INT
+				{
+					$current.merge(this_INT_10);
+				}
+				{
+					newLeafNode(this_INT_10, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1_3());
+				}
+			)
+		)
+	)
+;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule LogicValue
 ruleLogicValue returns [Enumerator current=null]
@@ -1892,13 +2475,13 @@ ruleShortLogicValue returns [Enumerator current=null]
 	)
 ;
 
+RULE_ID : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 
 RULE_QUOTED_ID : '\'' ('\\' .|~(('\\'|'\'')))* '\'';
 
 RULE_SL_COMMENT : ('%'|'//') ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

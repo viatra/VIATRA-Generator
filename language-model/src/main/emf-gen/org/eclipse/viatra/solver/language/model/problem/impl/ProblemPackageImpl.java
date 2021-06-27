@@ -12,33 +12,43 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
+import org.eclipse.viatra.solver.language.model.problem.AssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
+import org.eclipse.viatra.solver.language.model.problem.Constant;
+import org.eclipse.viatra.solver.language.model.problem.ConstantArgument;
+import org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.EnumDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ExactMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.ExistentialQuantifier;
 import org.eclipse.viatra.solver.language.model.problem.ImplicitVariable;
+import org.eclipse.viatra.solver.language.model.problem.IntConstant;
 import org.eclipse.viatra.solver.language.model.problem.Literal;
 import org.eclipse.viatra.solver.language.model.problem.LogicValue;
 import org.eclipse.viatra.solver.language.model.problem.Multiplicity;
 import org.eclipse.viatra.solver.language.model.problem.NamedElement;
 import org.eclipse.viatra.solver.language.model.problem.NegativeLiteral;
 import org.eclipse.viatra.solver.language.model.problem.Node;
+import org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument;
+import org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion;
 import org.eclipse.viatra.solver.language.model.problem.Parameter;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemFactory;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.RangeMultiplicity;
+import org.eclipse.viatra.solver.language.model.problem.RealConstant;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.ScopeDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Statement;
+import org.eclipse.viatra.solver.language.model.problem.StringConstant;
 import org.eclipse.viatra.solver.language.model.problem.TypeScope;
 import org.eclipse.viatra.solver.language.model.problem.UnboundedMultiplicity;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
 import org.eclipse.viatra.solver.language.model.problem.VariableOrNode;
+import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -213,7 +223,42 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass variableOrNodeArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass argumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nodeAssertionArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass assertionArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantAssertionArgumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nodeValueAssertionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -228,6 +273,41 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * @generated
 	 */
 	private EClass variableOrNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intConstantEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass realConstantEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringConstantEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constantArgumentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -639,7 +719,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * @generated
 	 */
 	public EReference getAssertion_Arguments() {
-		return (EReference) assertionEClass.getEStructuralFeatures().get(1);
+		return (EReference) assertionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -648,7 +728,7 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * @generated
 	 */
 	public EAttribute getAssertion_Value() {
-		return (EAttribute) assertionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute) assertionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -791,6 +871,33 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getVariableOrNodeArgument() {
+		return variableOrNodeArgumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableOrNodeArgument_VariableOrNode() {
+		return (EReference) variableOrNodeArgumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableOrNodeArgument_SingletonVariable() {
+		return (EReference) variableOrNodeArgumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getArgument() {
 		return argumentEClass;
 	}
@@ -800,8 +907,8 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArgument_VariableOrNode() {
-		return (EReference) argumentEClass.getEStructuralFeatures().get(0);
+	public EClass getNodeAssertionArgument() {
+		return nodeAssertionArgumentEClass;
 	}
 
 	/**
@@ -809,8 +916,62 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArgument_SingletonVariable() {
-		return (EReference) argumentEClass.getEStructuralFeatures().get(1);
+	public EReference getNodeAssertionArgument_Node() {
+		return (EReference) nodeAssertionArgumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAssertionArgument() {
+		return assertionArgumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstantAssertionArgument() {
+		return constantAssertionArgumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstantAssertionArgument_Constant() {
+		return (EReference) constantAssertionArgumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNodeValueAssertion() {
+		return nodeValueAssertionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNodeValueAssertion_Node() {
+		return (EReference) nodeValueAssertionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNodeValueAssertion_Value() {
+		return (EReference) nodeValueAssertionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -838,6 +999,87 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 	 */
 	public EClass getVariableOrNode() {
 		return variableOrNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstant() {
+		return constantEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntConstant() {
+		return intConstantEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntConstant_IntValue() {
+		return (EAttribute) intConstantEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRealConstant() {
+		return realConstantEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRealConstant_RealValue() {
+		return (EAttribute) realConstantEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringConstant() {
+		return stringConstantEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringConstant_StringValue() {
+		return (EAttribute) stringConstantEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstantArgument() {
+		return constantArgumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstantArgument_Constant() {
+		return (EReference) constantArgumentEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -929,8 +1171,8 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		assertionEClass = createEClass(ASSERTION);
 		createEReference(assertionEClass, ASSERTION__RELATION);
-		createEReference(assertionEClass, ASSERTION__ARGUMENTS);
 		createEAttribute(assertionEClass, ASSERTION__VALUE);
+		createEReference(assertionEClass, ASSERTION__ARGUMENTS);
 
 		nodeEClass = createEClass(NODE);
 
@@ -955,14 +1197,42 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		unboundedMultiplicityEClass = createEClass(UNBOUNDED_MULTIPLICITY);
 
-		argumentEClass = createEClass(ARGUMENT);
-		createEReference(argumentEClass, ARGUMENT__VARIABLE_OR_NODE);
-		createEReference(argumentEClass, ARGUMENT__SINGLETON_VARIABLE);
+		variableOrNodeArgumentEClass = createEClass(VARIABLE_OR_NODE_ARGUMENT);
+		createEReference(variableOrNodeArgumentEClass, VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE);
+		createEReference(variableOrNodeArgumentEClass, VARIABLE_OR_NODE_ARGUMENT__SINGLETON_VARIABLE);
 
 		enumDeclarationEClass = createEClass(ENUM_DECLARATION);
 		createEReference(enumDeclarationEClass, ENUM_DECLARATION__LITERALS);
 
 		variableOrNodeEClass = createEClass(VARIABLE_OR_NODE);
+
+		constantEClass = createEClass(CONSTANT);
+
+		intConstantEClass = createEClass(INT_CONSTANT);
+		createEAttribute(intConstantEClass, INT_CONSTANT__INT_VALUE);
+
+		realConstantEClass = createEClass(REAL_CONSTANT);
+		createEAttribute(realConstantEClass, REAL_CONSTANT__REAL_VALUE);
+
+		stringConstantEClass = createEClass(STRING_CONSTANT);
+		createEAttribute(stringConstantEClass, STRING_CONSTANT__STRING_VALUE);
+
+		constantArgumentEClass = createEClass(CONSTANT_ARGUMENT);
+		createEReference(constantArgumentEClass, CONSTANT_ARGUMENT__CONSTANT);
+
+		argumentEClass = createEClass(ARGUMENT);
+
+		nodeAssertionArgumentEClass = createEClass(NODE_ASSERTION_ARGUMENT);
+		createEReference(nodeAssertionArgumentEClass, NODE_ASSERTION_ARGUMENT__NODE);
+
+		assertionArgumentEClass = createEClass(ASSERTION_ARGUMENT);
+
+		constantAssertionArgumentEClass = createEClass(CONSTANT_ASSERTION_ARGUMENT);
+		createEReference(constantAssertionArgumentEClass, CONSTANT_ASSERTION_ARGUMENT__CONSTANT);
+
+		nodeValueAssertionEClass = createEClass(NODE_VALUE_ASSERTION);
+		createEReference(nodeValueAssertionEClass, NODE_VALUE_ASSERTION__NODE);
+		createEReference(nodeValueAssertionEClass, NODE_VALUE_ASSERTION__VALUE);
 
 		// Create enums
 		logicValueEEnum = createEEnum(LOGIC_VALUE);
@@ -1017,9 +1287,17 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		rangeMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
 		exactMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
 		unboundedMultiplicityEClass.getESuperTypes().add(this.getMultiplicity());
+		variableOrNodeArgumentEClass.getESuperTypes().add(this.getArgument());
 		enumDeclarationEClass.getESuperTypes().add(this.getRelation());
 		enumDeclarationEClass.getESuperTypes().add(this.getStatement());
 		variableOrNodeEClass.getESuperTypes().add(this.getNamedElement());
+		intConstantEClass.getESuperTypes().add(this.getConstant());
+		realConstantEClass.getESuperTypes().add(this.getConstant());
+		stringConstantEClass.getESuperTypes().add(this.getConstant());
+		constantArgumentEClass.getESuperTypes().add(this.getArgument());
+		nodeAssertionArgumentEClass.getESuperTypes().add(this.getAssertionArgument());
+		constantAssertionArgumentEClass.getESuperTypes().add(this.getAssertionArgument());
+		nodeValueAssertionEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1126,11 +1404,11 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		initEReference(getAssertion_Relation(), this.getRelation(), null, "relation", null, 0, 1, Assertion.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssertion_Arguments(), this.getNode(), null, "arguments", null, 0, -1, Assertion.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssertion_Value(), this.getLogicValue(), "value", null, 0, 1, Assertion.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssertion_Arguments(), this.getAssertionArgument(), null, "arguments", null, 0, -1,
+				Assertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1175,14 +1453,14 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 		initEClass(unboundedMultiplicityEClass, UnboundedMultiplicity.class, "UnboundedMultiplicity", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArgument_VariableOrNode(), this.getVariableOrNode(), null, "variableOrNode", null, 0, 1,
-				Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getArgument_SingletonVariable(), this.getImplicitVariable(), null, "singletonVariable", null, 0,
-				1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(variableOrNodeArgumentEClass, VariableOrNodeArgument.class, "VariableOrNodeArgument", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableOrNodeArgument_VariableOrNode(), this.getVariableOrNode(), null, "variableOrNode",
+				null, 0, 1, VariableOrNodeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableOrNodeArgument_SingletonVariable(), this.getImplicitVariable(), null,
+				"singletonVariable", null, 0, 1, VariableOrNodeArgument.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumDeclarationEClass, EnumDeclaration.class, "EnumDeclaration", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1192,6 +1470,57 @@ public class ProblemPackageImpl extends EPackageImpl implements ProblemPackage {
 
 		initEClass(variableOrNodeEClass, VariableOrNode.class, "VariableOrNode", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constantEClass, Constant.class, "Constant", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(intConstantEClass, IntConstant.class, "IntConstant", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIntConstant_IntValue(), ecorePackage.getEInt(), "intValue", "0", 0, 1, IntConstant.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(realConstantEClass, RealConstant.class, "RealConstant", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRealConstant_RealValue(), ecorePackage.getEDouble(), "realValue", "0.0", 0, 1,
+				RealConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringConstantEClass, StringConstant.class, "StringConstant", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringConstant_StringValue(), ecorePackage.getEString(), "stringValue", null, 0, 1,
+				StringConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
+
+		initEClass(constantArgumentEClass, ConstantArgument.class, "ConstantArgument", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstantArgument_Constant(), this.getConstant(), null, "constant", null, 0, 1,
+				ConstantArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(argumentEClass, Argument.class, "Argument", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(nodeAssertionArgumentEClass, NodeAssertionArgument.class, "NodeAssertionArgument", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNodeAssertionArgument_Node(), this.getNode(), null, "node", null, 0, 1,
+				NodeAssertionArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+				IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(assertionArgumentEClass, AssertionArgument.class, "AssertionArgument", IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(constantAssertionArgumentEClass, ConstantAssertionArgument.class, "ConstantAssertionArgument",
+				!IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstantAssertionArgument_Constant(), this.getConstant(), null, "constant", null, 0, 1,
+				ConstantAssertionArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(nodeValueAssertionEClass, NodeValueAssertion.class, "NodeValueAssertion", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNodeValueAssertion_Node(), this.getNode(), null, "node", null, 0, 1, NodeValueAssertion.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNodeValueAssertion_Value(), this.getConstant(), null, "value", null, 0, 1,
+				NodeValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(logicValueEEnum, LogicValue.class, "LogicValue");

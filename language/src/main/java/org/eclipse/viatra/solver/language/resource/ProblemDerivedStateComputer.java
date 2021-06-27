@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
+import org.eclipse.viatra.solver.language.model.problem.AssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
@@ -19,12 +20,15 @@ import org.eclipse.viatra.solver.language.model.problem.ImplicitVariable;
 import org.eclipse.viatra.solver.language.model.problem.Literal;
 import org.eclipse.viatra.solver.language.model.problem.NegativeLiteral;
 import org.eclipse.viatra.solver.language.model.problem.Node;
+import org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument;
+import org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion;
 import org.eclipse.viatra.solver.language.model.problem.Parameter;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemFactory;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.Statement;
+import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -97,7 +101,16 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		Set<String> nodeNames = new HashSet<>();
 		for (Statement statement : problem.getStatements()) {
 			if (statement instanceof Assertion) {
-				addNodeNames(nodeNames, nodeScope, statement, ProblemPackage.Literals.ASSERTION__ARGUMENTS,
+				Assertion assertion = (Assertion) statement;
+				for (AssertionArgument argument : assertion.getArguments()) {
+					if (argument instanceof NodeAssertionArgument) {
+						addNodeNames(nodeNames, nodeScope, argument,
+								ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE,
+								ProblemDerivedStateComputer::validNodeName);
+					}
+				}
+			} else if (statement instanceof NodeValueAssertion) {
+				addNodeNames(nodeNames, nodeScope, statement, ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE,
 						ProblemDerivedStateComputer::validNodeName);
 			} else if (statement instanceof PredicateDefinition) {
 				PredicateDefinition predicateDefinition = (PredicateDefinition) statement;
@@ -114,9 +127,11 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 							continue;
 						}
 						for (Argument argument : atom.getArguments()) {
-							addNodeNames(nodeNames, nodeScope, argument,
-									ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE,
-									ProblemDerivedStateComputer::validQuotedId);
+							if (argument instanceof VariableOrNodeArgument) {
+								addNodeNames(nodeNames, nodeScope, argument,
+										ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE,
+										ProblemDerivedStateComputer::validQuotedId);
+							}
 						}
 					}
 				}
@@ -189,29 +204,31 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected void createSigletonVariablesAndCollectVariables(Atom atom, Set<String> knownVariables,
 			Set<String> newVariables) {
-		IScope scope = scopeProvider.getScope(atom, ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE);
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(atom, ProblemPackage.Literals.ATOM__ARGUMENTS);
-		int nodesSize = nodes.size();
-		List<Argument> arguments = atom.getArguments();
-		int argumentsSize = arguments.size();
-		for (int i = 0; i < nodesSize; i++) {
-			INode node = nodes.get(i);
-			String variableName = linkingHelper.getCrossRefNodeAsString(node, true);
-			if (!validId(variableName)) {
-				continue;
-			}
-			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(variableName);
-			if (scope.getSingleElement(qualifiedName) != null) {
-				continue;
-			}
-			if (ProblemUtil.isSingletonVariableName(variableName)) {
-				if (i < argumentsSize) {
-					createSingletonVariable(arguments.get(i), variableName);
+		for (Argument argument : atom.getArguments()) {
+			if (argument instanceof VariableOrNodeArgument) {
+				VariableOrNodeArgument variableOrNodeArgument = (VariableOrNodeArgument) argument;
+				IScope scope = scopeProvider.getScope(variableOrNodeArgument,
+						ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE);
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(variableOrNodeArgument,
+						ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE);
+				for (INode node : nodes) {
+					String variableName = linkingHelper.getCrossRefNodeAsString(node, true);
+					if (!validId(variableName)) {
+						continue;
+					}
+					QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(variableName);
+					if (scope.getSingleElement(qualifiedName) != null) {
+						continue;
+					}
+					if (ProblemUtil.isSingletonVariableName(variableName)) {
+						createSingletonVariable(variableOrNodeArgument, variableName);
+						break;
+					}
+					if (!knownVariables.contains(variableName)) {
+						newVariables.add(variableName);
+						break;
+					}
 				}
-				continue;
-			}
-			if (!knownVariables.contains(variableName)) {
-				newVariables.add(variableName);
 			}
 		}
 	}
@@ -229,7 +246,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 
-	protected void createSingletonVariable(Argument argument, String variableName) {
+	protected void createSingletonVariable(VariableOrNodeArgument argument, String variableName) {
 		if (validId(variableName)) {
 			ImplicitVariable variable = createNamedVariable(variableName);
 			argument.setSingletonVariable(variable);
@@ -281,7 +298,10 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 			return;
 		}
 		for (Argument argument : atom.getArguments()) {
-			argument.setSingletonVariable(null);
+			if (argument instanceof VariableOrNodeArgument) {
+				VariableOrNodeArgument variableOrNodeArgument = (VariableOrNodeArgument) argument;
+				variableOrNodeArgument.setSingletonVariable(null);
+			}
 		}
 	}
 

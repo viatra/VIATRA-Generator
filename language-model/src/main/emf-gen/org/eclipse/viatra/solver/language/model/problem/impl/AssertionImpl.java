@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -14,11 +15,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
+import org.eclipse.viatra.solver.language.model.problem.AssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.LogicValue;
-import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
 
@@ -31,8 +32,8 @@ import org.eclipse.viatra.solver.language.model.problem.Relation;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AssertionImpl#getRelation <em>Relation</em>}</li>
- *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AssertionImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AssertionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.viatra.solver.language.model.problem.impl.AssertionImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,16 +48,6 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * @ordered
 	 */
 	protected Relation relation;
-
-	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getArguments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Node> arguments;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -77,6 +68,16 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * @ordered
 	 */
 	protected LogicValue value = VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AssertionArgument> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -142,11 +143,26 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Node> getArguments() {
+	public EList<AssertionArgument> getArguments() {
 		if (arguments == null) {
-			arguments = new EObjectResolvingEList<Node>(Node.class, this, ProblemPackage.ASSERTION__ARGUMENTS);
+			arguments = new EObjectContainmentEList<AssertionArgument>(AssertionArgument.class, this,
+					ProblemPackage.ASSERTION__ARGUMENTS);
 		}
 		return arguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case ProblemPackage.ASSERTION__ARGUMENTS:
+			return ((InternalEList<?>) getArguments()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -182,10 +198,10 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 			if (resolve)
 				return getRelation();
 			return basicGetRelation();
-		case ProblemPackage.ASSERTION__ARGUMENTS:
-			return getArguments();
 		case ProblemPackage.ASSERTION__VALUE:
 			return getValue();
+		case ProblemPackage.ASSERTION__ARGUMENTS:
+			return getArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,12 +218,12 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 		case ProblemPackage.ASSERTION__RELATION:
 			setRelation((Relation) newValue);
 			return;
-		case ProblemPackage.ASSERTION__ARGUMENTS:
-			getArguments().clear();
-			getArguments().addAll((Collection<? extends Node>) newValue);
-			return;
 		case ProblemPackage.ASSERTION__VALUE:
 			setValue((LogicValue) newValue);
+			return;
+		case ProblemPackage.ASSERTION__ARGUMENTS:
+			getArguments().clear();
+			getArguments().addAll((Collection<? extends AssertionArgument>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -224,11 +240,11 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 		case ProblemPackage.ASSERTION__RELATION:
 			setRelation((Relation) null);
 			return;
-		case ProblemPackage.ASSERTION__ARGUMENTS:
-			getArguments().clear();
-			return;
 		case ProblemPackage.ASSERTION__VALUE:
 			setValue(VALUE_EDEFAULT);
+			return;
+		case ProblemPackage.ASSERTION__ARGUMENTS:
+			getArguments().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -244,10 +260,10 @@ public class AssertionImpl extends MinimalEObjectImpl.Container implements Asser
 		switch (featureID) {
 		case ProblemPackage.ASSERTION__RELATION:
 			return relation != null;
-		case ProblemPackage.ASSERTION__ARGUMENTS:
-			return arguments != null && !arguments.isEmpty();
 		case ProblemPackage.ASSERTION__VALUE:
 			return value != VALUE_EDEFAULT;
+		case ProblemPackage.ASSERTION__ARGUMENTS:
+			return arguments != null && !arguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

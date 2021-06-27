@@ -38,13 +38,13 @@ public final class ProblemUtil {
 	}
 
 	public static boolean isSingletonVariable(Variable variable) {
-		return variable.eContainingFeature() == ProblemPackage.Literals.ARGUMENT__SINGLETON_VARIABLE;
+		return variable.eContainingFeature() == ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__SINGLETON_VARIABLE;
 	}
 
 	public static boolean isEnumLiteral(Node node) {
 		return node.eContainingFeature() == ProblemPackage.Literals.ENUM_DECLARATION__LITERALS;
 	}
-	
+
 	public static boolean isEnumNode(Node node) {
 		String name = node.getName();
 		boolean isNameQuoted = name != null && name.startsWith(ENUM_NODE_NAME_QUOTE)

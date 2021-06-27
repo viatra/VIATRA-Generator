@@ -285,9 +285,11 @@ public class ProblemSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case ProblemPackage.ARGUMENT: {
-			Argument argument = (Argument) theEObject;
-			T result = caseArgument(argument);
+		case ProblemPackage.VARIABLE_OR_NODE_ARGUMENT: {
+			VariableOrNodeArgument variableOrNodeArgument = (VariableOrNodeArgument) theEObject;
+			T result = caseVariableOrNodeArgument(variableOrNodeArgument);
+			if (result == null)
+				result = caseArgument(variableOrNodeArgument);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -310,6 +312,90 @@ public class ProblemSwitch<T> extends Switch<T> {
 			T result = caseVariableOrNode(variableOrNode);
 			if (result == null)
 				result = caseNamedElement(variableOrNode);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.CONSTANT: {
+			Constant constant = (Constant) theEObject;
+			T result = caseConstant(constant);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.INT_CONSTANT: {
+			IntConstant intConstant = (IntConstant) theEObject;
+			T result = caseIntConstant(intConstant);
+			if (result == null)
+				result = caseConstant(intConstant);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.REAL_CONSTANT: {
+			RealConstant realConstant = (RealConstant) theEObject;
+			T result = caseRealConstant(realConstant);
+			if (result == null)
+				result = caseConstant(realConstant);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.STRING_CONSTANT: {
+			StringConstant stringConstant = (StringConstant) theEObject;
+			T result = caseStringConstant(stringConstant);
+			if (result == null)
+				result = caseConstant(stringConstant);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.CONSTANT_ARGUMENT: {
+			ConstantArgument constantArgument = (ConstantArgument) theEObject;
+			T result = caseConstantArgument(constantArgument);
+			if (result == null)
+				result = caseArgument(constantArgument);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.ARGUMENT: {
+			Argument argument = (Argument) theEObject;
+			T result = caseArgument(argument);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.NODE_ASSERTION_ARGUMENT: {
+			NodeAssertionArgument nodeAssertionArgument = (NodeAssertionArgument) theEObject;
+			T result = caseNodeAssertionArgument(nodeAssertionArgument);
+			if (result == null)
+				result = caseAssertionArgument(nodeAssertionArgument);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.ASSERTION_ARGUMENT: {
+			AssertionArgument assertionArgument = (AssertionArgument) theEObject;
+			T result = caseAssertionArgument(assertionArgument);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.CONSTANT_ASSERTION_ARGUMENT: {
+			ConstantAssertionArgument constantAssertionArgument = (ConstantAssertionArgument) theEObject;
+			T result = caseConstantAssertionArgument(constantAssertionArgument);
+			if (result == null)
+				result = caseAssertionArgument(constantAssertionArgument);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ProblemPackage.NODE_VALUE_ASSERTION: {
+			NodeValueAssertion nodeValueAssertion = (NodeValueAssertion) theEObject;
+			T result = caseNodeValueAssertion(nodeValueAssertion);
+			if (result == null)
+				result = caseStatement(nodeValueAssertion);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -665,6 +751,21 @@ public class ProblemSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Or Node Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Or Node Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableOrNodeArgument(VariableOrNodeArgument object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -676,6 +777,66 @@ public class ProblemSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArgument(Argument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Node Assertion Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Node Assertion Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNodeAssertionArgument(NodeAssertionArgument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assertion Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assertion Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssertionArgument(AssertionArgument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Assertion Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Assertion Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantAssertionArgument(ConstantAssertionArgument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Node Value Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Node Value Assertion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNodeValueAssertion(NodeValueAssertion object) {
 		return null;
 	}
 
@@ -706,6 +867,81 @@ public class ProblemSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariableOrNode(VariableOrNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstant(Constant object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Int Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Int Constant</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntConstant(IntConstant object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Real Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Real Constant</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealConstant(RealConstant object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Constant</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringConstant(StringConstant object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantArgument(ConstantArgument object) {
 		return null;
 	}
 

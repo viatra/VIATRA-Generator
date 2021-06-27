@@ -10,7 +10,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.viatra.solver.language.ProblemUtil;
-import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ExistentialQuantifier;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
@@ -18,6 +17,7 @@ import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
+import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
@@ -34,7 +34,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope scope = super.getScope(context, reference);
-		if (reference == ProblemPackage.Literals.ARGUMENT__VARIABLE_OR_NODE) {
+		if (reference == ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE) {
 			return getVariableScope(context, scope);
 		} else if (reference == ProblemPackage.Literals.REFERENCE_DECLARATION__OPPOSITE) {
 			return getOppositeScope(context, scope);
@@ -45,8 +45,8 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	protected IScope getVariableScope(EObject context, IScope delegateScope) {
 		List<Variable> variables = new ArrayList<>();
 		EObject currentContext = context;
-		if (context instanceof Argument) {
-			Argument argument = (Argument) context;
+		if (context instanceof VariableOrNodeArgument) {
+			VariableOrNodeArgument argument = (VariableOrNodeArgument) context;
 			Variable singletonVariable = argument.getSingletonVariable();
 			if (singletonVariable != null) {
 				variables.add(singletonVariable);

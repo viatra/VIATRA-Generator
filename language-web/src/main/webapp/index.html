@@ -22,8 +22,9 @@
 
 class Person {
   Person[] children opposite parent
-  Person parent opposite children
-  TaxStatus[1] taxStatus
+  Person[0..1] parent opposite children
+  int age
+  TaxStatus taxStatus
 }
 
 enum TaxStatus {
@@ -41,6 +42,10 @@ members('family', ciri).
 children(anne, ciri).
 ?children(bob, ciri).
 taxStatus(anne, adult).
+age(anne, 35).
+bobAge: 27.
+age(bob, bobAge).
+!age(ciri, bobAge).
 
 scope Family = 1, Person += 5..10.
 </pre></div>

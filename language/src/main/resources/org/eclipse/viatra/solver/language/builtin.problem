@@ -6,12 +6,16 @@ abstract class node {
 
 pred exists(node node).
 
+abstract class domain extends node.
+
+abstract class data extends node.
+
 enum bool {
 	true, false
 }
 
-class double.
+class real extends data.
 
-class int extends double.
+class int extends real.
 
-class string.
+class string extends data.

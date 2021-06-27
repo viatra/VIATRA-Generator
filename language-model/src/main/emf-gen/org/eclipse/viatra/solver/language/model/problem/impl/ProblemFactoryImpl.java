@@ -89,10 +89,24 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 			return createExactMultiplicity();
 		case ProblemPackage.UNBOUNDED_MULTIPLICITY:
 			return createUnboundedMultiplicity();
-		case ProblemPackage.ARGUMENT:
-			return createArgument();
+		case ProblemPackage.VARIABLE_OR_NODE_ARGUMENT:
+			return createVariableOrNodeArgument();
 		case ProblemPackage.ENUM_DECLARATION:
 			return createEnumDeclaration();
+		case ProblemPackage.INT_CONSTANT:
+			return createIntConstant();
+		case ProblemPackage.REAL_CONSTANT:
+			return createRealConstant();
+		case ProblemPackage.STRING_CONSTANT:
+			return createStringConstant();
+		case ProblemPackage.CONSTANT_ARGUMENT:
+			return createConstantArgument();
+		case ProblemPackage.NODE_ASSERTION_ARGUMENT:
+			return createNodeAssertionArgument();
+		case ProblemPackage.CONSTANT_ASSERTION_ARGUMENT:
+			return createConstantAssertionArgument();
+		case ProblemPackage.NODE_VALUE_ASSERTION:
+			return createNodeValueAssertion();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -293,9 +307,9 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Argument createArgument() {
-		ArgumentImpl argument = new ArgumentImpl();
-		return argument;
+	public VariableOrNodeArgument createVariableOrNodeArgument() {
+		VariableOrNodeArgumentImpl variableOrNodeArgument = new VariableOrNodeArgumentImpl();
+		return variableOrNodeArgument;
 	}
 
 	/**
@@ -306,6 +320,76 @@ public class ProblemFactoryImpl extends EFactoryImpl implements ProblemFactory {
 	public EnumDeclaration createEnumDeclaration() {
 		EnumDeclarationImpl enumDeclaration = new EnumDeclarationImpl();
 		return enumDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntConstant createIntConstant() {
+		IntConstantImpl intConstant = new IntConstantImpl();
+		return intConstant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RealConstant createRealConstant() {
+		RealConstantImpl realConstant = new RealConstantImpl();
+		return realConstant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringConstant createStringConstant() {
+		StringConstantImpl stringConstant = new StringConstantImpl();
+		return stringConstant;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstantArgument createConstantArgument() {
+		ConstantArgumentImpl constantArgument = new ConstantArgumentImpl();
+		return constantArgument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NodeAssertionArgument createNodeAssertionArgument() {
+		NodeAssertionArgumentImpl nodeAssertionArgument = new NodeAssertionArgumentImpl();
+		return nodeAssertionArgument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstantAssertionArgument createConstantAssertionArgument() {
+		ConstantAssertionArgumentImpl constantAssertionArgument = new ConstantAssertionArgumentImpl();
+		return constantAssertionArgument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NodeValueAssertion createNodeValueAssertion() {
+		NodeValueAssertionImpl nodeValueAssertion = new NodeValueAssertionImpl();
+		return nodeValueAssertion;
 	}
 
 	/**

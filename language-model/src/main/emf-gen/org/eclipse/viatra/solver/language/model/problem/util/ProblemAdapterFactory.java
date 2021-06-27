@@ -182,8 +182,8 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseArgument(Argument object) {
-			return createArgumentAdapter();
+		public Adapter caseVariableOrNodeArgument(VariableOrNodeArgument object) {
+			return createVariableOrNodeArgumentAdapter();
 		}
 
 		@Override
@@ -194,6 +194,56 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseVariableOrNode(VariableOrNode object) {
 			return createVariableOrNodeAdapter();
+		}
+
+		@Override
+		public Adapter caseConstant(Constant object) {
+			return createConstantAdapter();
+		}
+
+		@Override
+		public Adapter caseIntConstant(IntConstant object) {
+			return createIntConstantAdapter();
+		}
+
+		@Override
+		public Adapter caseRealConstant(RealConstant object) {
+			return createRealConstantAdapter();
+		}
+
+		@Override
+		public Adapter caseStringConstant(StringConstant object) {
+			return createStringConstantAdapter();
+		}
+
+		@Override
+		public Adapter caseConstantArgument(ConstantArgument object) {
+			return createConstantArgumentAdapter();
+		}
+
+		@Override
+		public Adapter caseArgument(Argument object) {
+			return createArgumentAdapter();
+		}
+
+		@Override
+		public Adapter caseNodeAssertionArgument(NodeAssertionArgument object) {
+			return createNodeAssertionArgumentAdapter();
+		}
+
+		@Override
+		public Adapter caseAssertionArgument(AssertionArgument object) {
+			return createAssertionArgumentAdapter();
+		}
+
+		@Override
+		public Adapter caseConstantAssertionArgument(ConstantAssertionArgument object) {
+			return createConstantAssertionArgumentAdapter();
+		}
+
+		@Override
+		public Adapter caseNodeValueAssertion(NodeValueAssertion object) {
+			return createNodeValueAssertionAdapter();
 		}
 
 		@Override
@@ -538,6 +588,20 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument <em>Variable Or Node Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument
+	 * @generated
+	 */
+	public Adapter createVariableOrNodeArgumentAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.Argument <em>Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -548,6 +612,62 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument <em>Node Assertion Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument
+	 * @generated
+	 */
+	public Adapter createNodeAssertionArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.AssertionArgument <em>Assertion Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.AssertionArgument
+	 * @generated
+	 */
+	public Adapter createAssertionArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument <em>Constant Assertion Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ConstantAssertionArgument
+	 * @generated
+	 */
+	public Adapter createConstantAssertionArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion <em>Node Value Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion
+	 * @generated
+	 */
+	public Adapter createNodeValueAssertionAdapter() {
 		return null;
 	}
 
@@ -576,6 +696,76 @@ public class ProblemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableOrNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.Constant <em>Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.Constant
+	 * @generated
+	 */
+	public Adapter createConstantAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.IntConstant <em>Int Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.IntConstant
+	 * @generated
+	 */
+	public Adapter createIntConstantAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.RealConstant <em>Real Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.RealConstant
+	 * @generated
+	 */
+	public Adapter createRealConstantAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.StringConstant <em>String Constant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.StringConstant
+	 * @generated
+	 */
+	public Adapter createStringConstantAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.viatra.solver.language.model.problem.ConstantArgument <em>Constant Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.viatra.solver.language.model.problem.ConstantArgument
+	 * @generated
+	 */
+	public Adapter createConstantArgumentAdapter() {
 		return null;
 	}
 

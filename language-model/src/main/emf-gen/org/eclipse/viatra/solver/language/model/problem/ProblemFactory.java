@@ -166,13 +166,13 @@ public interface ProblemFactory extends EFactory {
 	UnboundedMultiplicity createUnboundedMultiplicity();
 
 	/**
-	 * Returns a new object of class '<em>Argument</em>'.
+	 * Returns a new object of class '<em>Variable Or Node Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Argument</em>'.
+	 * @return a new object of class '<em>Variable Or Node Argument</em>'.
 	 * @generated
 	 */
-	Argument createArgument();
+	VariableOrNodeArgument createVariableOrNodeArgument();
 
 	/**
 	 * Returns a new object of class '<em>Enum Declaration</em>'.
@@ -182,6 +182,69 @@ public interface ProblemFactory extends EFactory {
 	 * @generated
 	 */
 	EnumDeclaration createEnumDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Int Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Int Constant</em>'.
+	 * @generated
+	 */
+	IntConstant createIntConstant();
+
+	/**
+	 * Returns a new object of class '<em>Real Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Real Constant</em>'.
+	 * @generated
+	 */
+	RealConstant createRealConstant();
+
+	/**
+	 * Returns a new object of class '<em>String Constant</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Constant</em>'.
+	 * @generated
+	 */
+	StringConstant createStringConstant();
+
+	/**
+	 * Returns a new object of class '<em>Constant Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Argument</em>'.
+	 * @generated
+	 */
+	ConstantArgument createConstantArgument();
+
+	/**
+	 * Returns a new object of class '<em>Node Assertion Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Node Assertion Argument</em>'.
+	 * @generated
+	 */
+	NodeAssertionArgument createNodeAssertionArgument();
+
+	/**
+	 * Returns a new object of class '<em>Constant Assertion Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Assertion Argument</em>'.
+	 * @generated
+	 */
+	ConstantAssertionArgument createConstantAssertionArgument();
+
+	/**
+	 * Returns a new object of class '<em>Node Value Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Node Value Assertion</em>'.
+	 * @generated
+	 */
+	NodeValueAssertion createNodeValueAssertion();
 
 	/**
 	 * Returns the package supported by this factory.
