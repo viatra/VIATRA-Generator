@@ -21,7 +21,7 @@ define(["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, Simp
 		meta: {
 			dontIndentStates: ["comment"],
 			lineComment: "%",
-			electricChars: "])]"
+			electricChars: "])];"
 		},
 		predicateBody: [
 			{token: "comment", regex: "\\/\\*", next : "comment"},
@@ -34,6 +34,7 @@ define(["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, Simp
 			{token: "lparen", indent: true, regex: "[[({]"},
 			{token: "rparen", dedent: true, dedentIfLineStart: true, regex: "[\\])}]"},
 			{dedent: true, dedentIfLineStart: false, pop: true, regex: "\\.\\s*$"},
+			{indent: true, dedent: true, regex: "[;]"},
 			{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}
 		]
 	});
