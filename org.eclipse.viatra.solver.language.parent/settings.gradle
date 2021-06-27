@@ -1,4 +1,0 @@
-include 'org.eclipse.viatra.solver.language'
-include 'org.eclipse.viatra.solver.language.ide'
-include 'org.eclipse.viatra.solver.language.model'
-include 'org.eclipse.viatra.solver.language.web'

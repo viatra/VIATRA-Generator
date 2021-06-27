@@ -1,0 +1,17 @@
+problem builtin.
+
+abstract class node {
+	node[] equals opposite equals
+}
+
+pred exists(node node).
+
+enum bool {
+	true, false
+}
+
+class double.
+
+class int extends double.
+
+class string.
