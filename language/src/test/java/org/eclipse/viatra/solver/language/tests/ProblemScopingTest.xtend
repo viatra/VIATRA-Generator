@@ -109,7 +109,6 @@ class ProblemScopingTest {
 		assertThat(assertion(0).arg(0).node, equalTo(findClass('Foo').newNode))
 	}
 	
-	
 	@Test
 	def void qualifiedClassNewNodeTest() {
 		val it = parseHelper.parse('''

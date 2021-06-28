@@ -1,13 +1,18 @@
 package org.eclipse.viatra.solver.language.resource;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.Argument;
 import org.eclipse.viatra.solver.language.model.problem.Assertion;
@@ -29,6 +34,7 @@ import org.eclipse.viatra.solver.language.model.problem.ProblemFactory;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.Statement;
 import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -36,6 +42,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
@@ -53,6 +60,10 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	private static final Pattern QUOTED_ID_REGEX = Pattern.compile("'(\\\\.|[^\\'])*'");
 
 	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
+
+	@Inject
 	private LinkingHelper linkingHelper;
 
 	@Inject
@@ -64,15 +75,27 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
-		for (EObject object : resource.getContents()) {
-			if (object instanceof Problem) {
-				installDerivedProblemState((Problem) object, preLinkingPhase);
-			}
+		Problem problem = getProblem(resource);
+		if (problem != null) {
+			Adapter adapter = getOrInstallAdapter(resource);
+			installDerivedProblemState(problem, adapter, preLinkingPhase);
 		}
 	}
 
-	protected void installDerivedProblemState(Problem problem, boolean preLinkingPhase) {
-		installNewNodes(problem);
+	protected Problem getProblem(Resource resource) {
+		List<EObject> contents = resource.getContents();
+		if (contents.isEmpty()) {
+			return null;
+		}
+		EObject object = contents.get(0);
+		if (object instanceof Problem) {
+			return (Problem) object;
+		}
+		return null;
+	}
+
+	protected void installDerivedProblemState(Problem problem, Adapter adapter, boolean preLinkingPhase) {
+		installNewNodes(problem, adapter);
 		if (preLinkingPhase) {
 			return;
 		}
@@ -85,12 +108,12 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 
-	protected void installNewNodes(Problem problem) {
+	protected void installNewNodes(Problem problem, Adapter adapter) {
 		for (Statement statement : problem.getStatements()) {
 			if (statement instanceof ClassDeclaration) {
 				ClassDeclaration declaration = (ClassDeclaration) statement;
 				if (!declaration.isAbstract() && declaration.getNewNode() == null) {
-					Node newNode = createNode(NEW_NODE);
+					Node newNode = adapter.newNodes.computeIfAbsent(declaration, key -> createNode(NEW_NODE));
 					declaration.setNewNode(newNode);
 				}
 			}
@@ -264,18 +287,22 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	@Override
 	public void discardDerivedState(DerivedStateAwareResource resource) {
-		for (EObject object : resource.getContents()) {
-			if (object instanceof Problem) {
-				discardDerivedProblemState((Problem) object);
-			}
+		Problem problem = getProblem(resource);
+		if (problem != null) {
+			Adapter adapter = getOrInstallAdapter(resource);
+			discardDerivedProblemState(problem, adapter);
 		}
 	}
 
-	protected void discardDerivedProblemState(Problem problem) {
+	protected void discardDerivedProblemState(Problem problem, Adapter adapter) {
+		Set<ClassDeclaration> classDeclarations = new HashSet<>();
 		problem.getNodes().clear();
 		for (Statement statement : problem.getStatements()) {
-			// We deliberately don't clean up {@link ClassDeclaration#getNewNode()} nodes,
-			// because they have already been exported to the Xtext index.
+			if (statement instanceof ClassDeclaration) {
+				ClassDeclaration classDeclaration = (ClassDeclaration) statement;
+				classDeclaration.setNewNode(null);
+				classDeclarations.add(classDeclaration);
+			}
 			if (statement instanceof PredicateDefinition) {
 				PredicateDefinition definition = (PredicateDefinition) statement;
 				for (Conjunction body : definition.getBodies()) {
@@ -293,6 +320,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 				}
 			}
 		}
+		adapter.newNodes.keySet().retainAll(classDeclarations);
 	}
 
 	protected void discardDerivedAtomState(Atom atom) {
@@ -317,5 +345,30 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected static boolean validNodeName(String name) {
 		return validId(name) || validQuotedId(name);
+	}
+
+	public Adapter getOrInstallAdapter(Resource resource) {
+		if (!(resource instanceof XtextResource)) {
+			return new Adapter();
+		}
+		String resourceLanguageName = ((XtextResource) resource).getLanguageName();
+		if (!languageName.equals(resourceLanguageName)) {
+			return new Adapter();
+		}
+		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resource.eAdapters(), Adapter.class);
+		if (adapter == null) {
+			adapter = new Adapter();
+			resource.eAdapters().add(adapter);
+		}
+		return adapter;
+	}
+
+	private static class Adapter extends AdapterImpl {
+		public Map<ClassDeclaration, Node> newNodes = new HashMap<>();
+
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return Adapter.class == type;
+		}
 	}
 }

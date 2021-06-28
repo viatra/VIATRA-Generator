@@ -87,7 +87,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 		}
 		return true;
 	}
-	
+
 	protected boolean shouldExportSimpleName(EObject eObject) {
 		if (eObject instanceof Node) {
 			return !ProblemUtil.isNewNode((Node) eObject);
