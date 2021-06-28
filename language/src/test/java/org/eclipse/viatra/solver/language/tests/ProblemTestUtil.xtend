@@ -1,6 +1,5 @@
 package org.eclipse.viatra.solver.language.tests
 
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.viatra.solver.language.ProblemUtil
 import org.eclipse.viatra.solver.language.model.problem.Argument
 import org.eclipse.viatra.solver.language.model.problem.Assertion
@@ -17,19 +16,14 @@ import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition
 import org.eclipse.viatra.solver.language.model.problem.Problem
 import org.eclipse.viatra.solver.language.model.problem.Variable
 import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument
-import org.junit.jupiter.api.Assertions
 
 class ProblemTestUtil {
 	def builtin(Problem it) {
 		ProblemUtil.getBuiltInLibrary(it).get
 	}
 	
-	def assertNoErrors(Problem it) {
-		Assertions.assertNotNull(it)
-		EcoreUtil.resolveAll(it)
-		val errors = eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
-		it
+	def errors(Problem it) {
+		eResource.errors
 	}
 	
 	def nodeNames(Problem it) {

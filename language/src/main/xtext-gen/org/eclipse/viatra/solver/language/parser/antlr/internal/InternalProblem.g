@@ -1596,20 +1596,20 @@ ruleConstant returns [EObject current=null]
 }:
 	(
 		{
-			newCompositeNode(grammarAccess.getConstantAccess().getIntConstantParserRuleCall_0());
+			newCompositeNode(grammarAccess.getConstantAccess().getRealConstantParserRuleCall_0());
 		}
-		this_IntConstant_0=ruleIntConstant
+		this_RealConstant_0=ruleRealConstant
 		{
-			$current = $this_IntConstant_0.current;
+			$current = $this_RealConstant_0.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getConstantAccess().getRealConstantParserRuleCall_1());
+			newCompositeNode(grammarAccess.getConstantAccess().getIntConstantParserRuleCall_1());
 		}
-		this_RealConstant_1=ruleRealConstant
+		this_IntConstant_1=ruleIntConstant
 		{
-			$current = $this_RealConstant_1.current;
+			$current = $this_IntConstant_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -2197,18 +2197,6 @@ ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getIdentifierAccess().getFalseKeyword_2());
 		}
-		    |
-		kw='e'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getIdentifierAccess().getEKeyword_3());
-		}
-		    |
-		kw='E'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getIdentifierAccess().getEKeyword_4());
-		}
 	)
 ;
 
@@ -2255,22 +2243,16 @@ finally {
 }
 
 // Entry rule entryRuleReal
-entryRuleReal returns [String current=null]@init {
-	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-}:
+entryRuleReal returns [String current=null]:
 	{ newCompositeNode(grammarAccess.getRealRule()); }
 	iv_ruleReal=ruleReal
 	{ $current=$iv_ruleReal.current.getText(); }
 	EOF;
-finally {
-	myHiddenTokenState.restore();
-}
 
 // Rule Real
 ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
-	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 }
 @after {
 	leaveRule();
@@ -2283,84 +2265,49 @@ ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 				newLeafNode(kw, grammarAccess.getRealAccess().getHyphenMinusKeyword_0());
 			}
 		)?
-		this_INT_1=RULE_INT
-		{
-			$current.merge(this_INT_1);
-		}
-		{
-			newLeafNode(this_INT_1, grammarAccess.getRealAccess().getINTTerminalRuleCall_1());
-		}
 		(
+			this_EXPONENTIAL_1=RULE_EXPONENTIAL
+			{
+				$current.merge(this_EXPONENTIAL_1);
+			}
+			{
+				newLeafNode(this_EXPONENTIAL_1, grammarAccess.getRealAccess().getEXPONENTIALTerminalRuleCall_1_0());
+			}
+			    |
 			(
+				this_INT_2=RULE_INT
+				{
+					$current.merge(this_INT_2);
+				}
+				{
+					newLeafNode(this_INT_2, grammarAccess.getRealAccess().getINTTerminalRuleCall_1_1_0());
+				}
 				kw='.'
 				{
 					$current.merge(kw);
-					newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_2_0_0());
+					newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_1_1_1());
 				}
-				this_INT_3=RULE_INT
-				{
-					$current.merge(this_INT_3);
-				}
-				{
-					newLeafNode(this_INT_3, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_0_1());
-				}
-			)
-			    |
-			(
 				(
-					kw='.'
+					this_INT_4=RULE_INT
 					{
-						$current.merge(kw);
-						newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_2_1_0_0());
-					}
-					this_INT_5=RULE_INT
-					{
-						$current.merge(this_INT_5);
+						$current.merge(this_INT_4);
 					}
 					{
-						newLeafNode(this_INT_5, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1_0_1());
-					}
-				)?
-				(
-					kw='e'
-					{
-						$current.merge(kw);
-						newLeafNode(kw, grammarAccess.getRealAccess().getEKeyword_2_1_1_0());
+						newLeafNode(this_INT_4, grammarAccess.getRealAccess().getINTTerminalRuleCall_1_1_2_0());
 					}
 					    |
-					kw='E'
+					this_EXPONENTIAL_5=RULE_EXPONENTIAL
 					{
-						$current.merge(kw);
-						newLeafNode(kw, grammarAccess.getRealAccess().getEKeyword_2_1_1_1());
+						$current.merge(this_EXPONENTIAL_5);
+					}
+					{
+						newLeafNode(this_EXPONENTIAL_5, grammarAccess.getRealAccess().getEXPONENTIALTerminalRuleCall_1_1_2_1());
 					}
 				)
-				(
-					kw='-'
-					{
-						$current.merge(kw);
-						newLeafNode(kw, grammarAccess.getRealAccess().getHyphenMinusKeyword_2_1_2_0());
-					}
-					    |
-					kw='+'
-					{
-						$current.merge(kw);
-						newLeafNode(kw, grammarAccess.getRealAccess().getPlusSignKeyword_2_1_2_1());
-					}
-				)?
-				this_INT_10=RULE_INT
-				{
-					$current.merge(this_INT_10);
-				}
-				{
-					newLeafNode(this_INT_10, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1_3());
-				}
 			)
 		)
 	)
 ;
-finally {
-	myHiddenTokenState.restore();
-}
 
 // Rule LogicValue
 ruleLogicValue returns [Enumerator current=null]
@@ -2425,6 +2372,8 @@ ruleShortLogicValue returns [Enumerator current=null]
 ;
 
 RULE_ID : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_EXPONENTIAL : RULE_INT ('e'|'E') ('+'|'-')? RULE_INT;
 
 RULE_STRING : '"' ('\\' .|~(('\\'|'"')))* '"';
 

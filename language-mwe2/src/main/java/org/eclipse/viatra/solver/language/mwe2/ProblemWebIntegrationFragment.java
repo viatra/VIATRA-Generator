@@ -9,8 +9,6 @@ import com.google.common.collect.Multimap;
 public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
 	public ProblemWebIntegrationFragment() {
 		setFramework(Framework.CODEMIRROR.name());
-		// The exponential operators e and E are not keywords
-		setKeywordsFilter("[^eE]|\\w\\w+");
 		// We use our custom token style for single-quoted names
 		addSuppressPattern("string_singleQuote");
 		// Use the CodeMirror default .cm-number instead of .cm-constant.cm-numeric

@@ -1,6 +1,5 @@
 define(["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
 	var keywords = "abstract|class|contains|enum|error|extends|false|opposite|pred|problem|refers|scope|true|unknown";
-	var extraKeywords = "!|\\(|\\)|\\*|\\+|,|-|\\.|:|;|=|\\?|\\[|\\]|\\{|\\}";
 	CodeMirror.defineSimpleMode("xtext/problem", {
 		start: [
 			{token: "comment", regex: "\\/\\*", next : "comment"},
@@ -13,8 +12,7 @@ define(["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, Simp
 			{token: "lparen", indent: true, regex: "[[({]"},
 			{token: "rparen", dedent: true, regex: "[\\])}]"},
 			{indent: true, push: "predicateBody", regex: ":-"},
-			{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"},
-			{token: "keyword", regex: "(?:^|\\s)(?:" + extraKeywords + ")(?=[\\s.:;,!?+\\-*/&|<>()[\\]{}]|$)"}
+			{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}
 		],
 		comment: [
 			{token: "comment", regex: ".*?\\*\\/", next : "start"},

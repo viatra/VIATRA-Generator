@@ -92,7 +92,7 @@ NodeValueAssertion:
 	node=[Node|QualifiedName] ":" value=Constant ".";
 
 Constant:
-	IntConstant | RealConstant | StringConstant;
+	RealConstant | IntConstant | StringConstant;
 
 IntConstant:
 	intValue=Integer;
@@ -133,17 +133,20 @@ QualifiedName hidden():
 	QUOTED_ID | Identifier ("::" Identifier)*;
 
 Identifier:
-	ID | "true" | "false" | "e" | "E";
+	ID | "true" | "false";
 
 Integer returns ecore::EInt hidden():
 	"-"? INT;
 
-Real returns ecore::EDouble hidden():
-	"-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT);
+Real returns ecore::EDouble:
+	"-"? (EXPONENTIAL | INT "." (INT | EXPONENTIAL));
 
 @Override
 terminal ID:
 	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+terminal EXPONENTIAL:
+	INT ("e" | "E") ("+" | "-")? INT;
 
 @Override
 terminal STRING:

@@ -8,9 +8,11 @@ import org.eclipse.viatra.solver.language.model.problem.Problem
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
+
+import static org.hamcrest.MatcherAssert.assertThat
+import static org.hamcrest.Matchers.*
 
 @ExtendWith(InjectionExtension)
 @InjectWith(ProblemInjectorProvider)
@@ -18,13 +20,43 @@ class ProblemParsingTest {
 	@Inject
 	ParseHelper<Problem> parseHelper
 	
+	@Inject
+	extension ProblemTestUtil
+	
 	@Test
-	def void loadModel() {
-		val result = parseHelper.parse('''
-			Hello Xtext!
+	def void exampleTest() {
+		val it = parseHelper.parse('''
+			class Family {
+				contains Person[] members
+			}
+			
+			class Person {
+				Person[0..*] children opposite parent
+				Person[0..1] parent opposite children
+				int age
+				TaxStatus taxStatus
+			}
+			
+			enum TaxStatus {
+				child, student, adult, retired
+			}
+			
+			% A child cannot have any dependents.
+			error invalidTaxStatus(Person p) :-
+				taxStatus(p, child), children(p, _q).
+			
+			Family('family').
+			members('family', anne): true.
+			members('family', bob).
+			members('family', ciri).
+			children(anne, ciri).
+			?children(bob, ciri).
+			taxStatus(anne, adult).
+			age(anne, 35).
+			bobAge: 27.
+			age(bob, bobAge).
+			!age(ciri, bobAge).
 		''')
-		Assertions.assertNotNull(result)
-		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+		assertThat(errors, empty)
 	}
 }

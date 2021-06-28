@@ -27,7 +27,8 @@ class ProblemScopingTest {
 	def void builtInArgumentTypeTest() {
 		val it = parseHelper.parse('''
 			pred predicate(node a, data b, int c).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(pred('predicate').param(0).parameterType, equalTo(builtin.findClass('node')))
 		assertThat(pred('predicate').param(1).parameterType, equalTo(builtin.findClass('data')))
 		assertThat(pred('predicate').param(2).parameterType, equalTo(builtin.findClass('int')))
@@ -37,7 +38,8 @@ class ProblemScopingTest {
 	def void builtiQualifiedArgumentTypeTest() {
 		val it = parseHelper.parse('''
 			pred predicate(builtin::node a, builtin::data b, builtin::int c).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(pred('predicate').param(0).parameterType, equalTo(builtin.findClass('node')))
 		assertThat(pred('predicate').param(1).parameterType, equalTo(builtin.findClass('data')))
 		assertThat(pred('predicate').param(2).parameterType, equalTo(builtin.findClass('int')))
@@ -49,7 +51,8 @@ class ProblemScopingTest {
 			pred predicate(node a, node b).
 			predicate(a, a).
 			?predicate(a, b).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodeNames, hasItems('a', 'b'))
 		assertThat(assertion(0).arg(0).node, equalTo(node('a')))
 		assertThat(assertion(0).arg(1).node, equalTo(node('a')))
@@ -63,7 +66,8 @@ class ProblemScopingTest {
 			pred predicate(node a, node b).
 			predicate('a', 'a').
 			?predicate('a', 'b').
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodeNames, hasItems("'a'", "'b'"))
 		assertThat(assertion(0).arg(0).node, equalTo(node("'a'")))
 		assertThat(assertion(0).arg(1).node, equalTo(node("'a'")))
@@ -76,7 +80,8 @@ class ProblemScopingTest {
 		val it = parseHelper.parse('''
 			pred predicate(node a).
 			predicate(int::new).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodes, empty)
 		assertThat(assertion(0).arg(0).node, equalTo(builtin.findClass('int').newNode))
 	}
@@ -86,7 +91,8 @@ class ProblemScopingTest {
 		val it = parseHelper.parse('''
 			pred predicate(node a).
 			predicate(builtin::int::new).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodes, empty)
 		assertThat(assertion(0).arg(0).node, equalTo(builtin.findClass('int').newNode))
 	}
@@ -97,7 +103,8 @@ class ProblemScopingTest {
 			class Foo.
 			pred predicate(node a).
 			predicate(Foo::new).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodes, empty)
 		assertThat(assertion(0).arg(0).node, equalTo(findClass('Foo').newNode))
 	}
@@ -110,7 +117,8 @@ class ProblemScopingTest {
 			class Foo.
 			pred predicate(node a).
 			predicate(test::Foo::new).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodes, empty)
 		assertThat(assertion(0).arg(0).node, equalTo(findClass('Foo').newNode))
 	}
@@ -121,7 +129,8 @@ class ProblemScopingTest {
 			class Foo.
 			pred predicate(node a).
 			predicate(new).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodeNames, hasItem('new'))
 		assertThat(assertion(0).arg(0).node, not(equalTo(findClass('Foo').newNode)))
 	}
@@ -131,7 +140,8 @@ class ProblemScopingTest {
 		val it = parseHelper.parse('''
 			pred predicate(node a) :- node(b).
 			predicate(b).
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodeNames, hasItem("b"))
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(node("b")))
 		assertThat(assertion(0).arg(0).node, equalTo(node("b")))
@@ -141,7 +151,8 @@ class ProblemScopingTest {
 	def void quotedNodeInPredicateTest() {
 		val it = parseHelper.parse('''
 			pred predicate(node a) :- node('b').
-		''').assertNoErrors
+		''')
+		assertThat(errors, empty)
 		assertThat(nodeNames, hasItem("'b'"))
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(node("'b'")))
 	}

@@ -48,9 +48,8 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getUpperBoundAccess().getAlternatives(), "rule__UpperBound__Alternatives");
 			builder.put(grammarAccess.getQualifiedNameAccess().getAlternatives(), "rule__QualifiedName__Alternatives");
 			builder.put(grammarAccess.getIdentifierAccess().getAlternatives(), "rule__Identifier__Alternatives");
-			builder.put(grammarAccess.getRealAccess().getAlternatives_2(), "rule__Real__Alternatives_2");
-			builder.put(grammarAccess.getRealAccess().getAlternatives_2_1_1(), "rule__Real__Alternatives_2_1_1");
-			builder.put(grammarAccess.getRealAccess().getAlternatives_2_1_2(), "rule__Real__Alternatives_2_1_2");
+			builder.put(grammarAccess.getRealAccess().getAlternatives_1(), "rule__Real__Alternatives_1");
+			builder.put(grammarAccess.getRealAccess().getAlternatives_1_1_2(), "rule__Real__Alternatives_1_1_2");
 			builder.put(grammarAccess.getLogicValueAccess().getAlternatives(), "rule__LogicValue__Alternatives");
 			builder.put(grammarAccess.getShortLogicValueAccess().getAlternatives(), "rule__ShortLogicValue__Alternatives");
 			builder.put(grammarAccess.getProblemAccess().getGroup(), "rule__Problem__Group__0");
@@ -96,9 +95,7 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1_1(), "rule__QualifiedName__Group_1_1__0");
 			builder.put(grammarAccess.getIntegerAccess().getGroup(), "rule__Integer__Group__0");
 			builder.put(grammarAccess.getRealAccess().getGroup(), "rule__Real__Group__0");
-			builder.put(grammarAccess.getRealAccess().getGroup_2_0(), "rule__Real__Group_2_0__0");
-			builder.put(grammarAccess.getRealAccess().getGroup_2_1(), "rule__Real__Group_2_1__0");
-			builder.put(grammarAccess.getRealAccess().getGroup_2_1_0(), "rule__Real__Group_2_1_0__0");
+			builder.put(grammarAccess.getRealAccess().getGroup_1_1(), "rule__Real__Group_1_1__0");
 			builder.put(grammarAccess.getProblemAccess().getNameAssignment_0_1(), "rule__Problem__NameAssignment_0_1");
 			builder.put(grammarAccess.getProblemAccess().getStatementsAssignment_1(), "rule__Problem__StatementsAssignment_1");
 			builder.put(grammarAccess.getClassDeclarationAccess().getAbstractAssignment_0(), "rule__ClassDeclaration__AbstractAssignment_0");

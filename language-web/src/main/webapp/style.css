@@ -47,7 +47,7 @@ a:hover {
 	top: 108px;
 	bottom: 0;
 	left: 0;
-	width: 50%;
+	width: 100%;
 	box-shadow: 0 0 8px rgba(80, 10, 98, .25), 0 10px 24px rgba(80, 10, 98, .35);
 	border-radius: 16px;
 }

@@ -1026,22 +1026,22 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	public class ConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Constant");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cIntConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cRealConstantParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cRealConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIntConstantParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cStringConstantParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Constant:
-		//    IntConstant | RealConstant | StringConstant;
+		//    RealConstant | IntConstant | StringConstant;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//IntConstant | RealConstant | StringConstant
+		//RealConstant | IntConstant | StringConstant
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//IntConstant
-		public RuleCall getIntConstantParserRuleCall_0() { return cIntConstantParserRuleCall_0; }
-		
 		//RealConstant
-		public RuleCall getRealConstantParserRuleCall_1() { return cRealConstantParserRuleCall_1; }
+		public RuleCall getRealConstantParserRuleCall_0() { return cRealConstantParserRuleCall_0; }
+		
+		//IntConstant
+		public RuleCall getIntConstantParserRuleCall_1() { return cIntConstantParserRuleCall_1; }
 		
 		//StringConstant
 		public RuleCall getStringConstantParserRuleCall_2() { return cStringConstantParserRuleCall_2; }
@@ -1340,14 +1340,12 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Keyword cTrueKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cFalseKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cEKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cEKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//Identifier:
-		//    ID | "true" | "false" | "e" | "E";
+		//    ID | "true" | "false";
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID | "true" | "false" | "e" | "E"
+		//ID | "true" | "false"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ID
@@ -1358,12 +1356,6 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		
 		//"false"
 		public Keyword getFalseKeyword_2() { return cFalseKeyword_2; }
-		
-		//"e"
-		public Keyword getEKeyword_3() { return cEKeyword_3; }
-		
-		//"E"
-		public Keyword getEKeyword_4() { return cEKeyword_4; }
 	}
 	public class IntegerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Integer");
@@ -1388,80 +1380,48 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Real");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
-		private final Keyword cFullStopKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_2_0_1 = (RuleCall)cGroup_2_0.eContents().get(1);
-		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
-		private final Group cGroup_2_1_0 = (Group)cGroup_2_1.eContents().get(0);
-		private final Keyword cFullStopKeyword_2_1_0_0 = (Keyword)cGroup_2_1_0.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_2_1_0_1 = (RuleCall)cGroup_2_1_0.eContents().get(1);
-		private final Alternatives cAlternatives_2_1_1 = (Alternatives)cGroup_2_1.eContents().get(1);
-		private final Keyword cEKeyword_2_1_1_0 = (Keyword)cAlternatives_2_1_1.eContents().get(0);
-		private final Keyword cEKeyword_2_1_1_1 = (Keyword)cAlternatives_2_1_1.eContents().get(1);
-		private final Alternatives cAlternatives_2_1_2 = (Alternatives)cGroup_2_1.eContents().get(2);
-		private final Keyword cHyphenMinusKeyword_2_1_2_0 = (Keyword)cAlternatives_2_1_2.eContents().get(0);
-		private final Keyword cPlusSignKeyword_2_1_2_1 = (Keyword)cAlternatives_2_1_2.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_2_1_3 = (RuleCall)cGroup_2_1.eContents().get(3);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final RuleCall cEXPONENTIALTerminalRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_1_1_0 = (RuleCall)cGroup_1_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
+		private final Alternatives cAlternatives_1_1_2 = (Alternatives)cGroup_1_1.eContents().get(2);
+		private final RuleCall cINTTerminalRuleCall_1_1_2_0 = (RuleCall)cAlternatives_1_1_2.eContents().get(0);
+		private final RuleCall cEXPONENTIALTerminalRuleCall_1_1_2_1 = (RuleCall)cAlternatives_1_1_2.eContents().get(1);
 		
-		//Real returns ecore::EDouble hidden():
-		//    "-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT);
+		//Real returns ecore::EDouble:
+		//    "-"? (EXPONENTIAL | INT "." (INT | EXPONENTIAL));
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT)
+		//"-"? (EXPONENTIAL | INT "." (INT | EXPONENTIAL))
 		public Group getGroup() { return cGroup; }
 		
 		//"-"?
 		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 		
+		//(EXPONENTIAL | INT "." (INT | EXPONENTIAL))
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//EXPONENTIAL
+		public RuleCall getEXPONENTIALTerminalRuleCall_1_0() { return cEXPONENTIALTerminalRuleCall_1_0; }
+		
+		//INT "." (INT | EXPONENTIAL)
+		public Group getGroup_1_1() { return cGroup_1_1; }
+		
 		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-		
-		//("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT)
-		public Alternatives getAlternatives_2() { return cAlternatives_2; }
-		
-		//"." INT
-		public Group getGroup_2_0() { return cGroup_2_0; }
+		public RuleCall getINTTerminalRuleCall_1_1_0() { return cINTTerminalRuleCall_1_1_0; }
 		
 		//"."
-		public Keyword getFullStopKeyword_2_0_0() { return cFullStopKeyword_2_0_0; }
+		public Keyword getFullStopKeyword_1_1_1() { return cFullStopKeyword_1_1_1; }
+		
+		//(INT | EXPONENTIAL)
+		public Alternatives getAlternatives_1_1_2() { return cAlternatives_1_1_2; }
 		
 		//INT
-		public RuleCall getINTTerminalRuleCall_2_0_1() { return cINTTerminalRuleCall_2_0_1; }
+		public RuleCall getINTTerminalRuleCall_1_1_2_0() { return cINTTerminalRuleCall_1_1_2_0; }
 		
-		//("." INT)? ("e" | "E") ("-" | "+")? INT
-		public Group getGroup_2_1() { return cGroup_2_1; }
-		
-		//("." INT)?
-		public Group getGroup_2_1_0() { return cGroup_2_1_0; }
-		
-		//"."
-		public Keyword getFullStopKeyword_2_1_0_0() { return cFullStopKeyword_2_1_0_0; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_2_1_0_1() { return cINTTerminalRuleCall_2_1_0_1; }
-		
-		//("e" | "E")
-		public Alternatives getAlternatives_2_1_1() { return cAlternatives_2_1_1; }
-		
-		//"e"
-		public Keyword getEKeyword_2_1_1_0() { return cEKeyword_2_1_1_0; }
-		
-		//"E"
-		public Keyword getEKeyword_2_1_1_1() { return cEKeyword_2_1_1_1; }
-		
-		//("-" | "+")?
-		public Alternatives getAlternatives_2_1_2() { return cAlternatives_2_1_2; }
-		
-		//"-"
-		public Keyword getHyphenMinusKeyword_2_1_2_0() { return cHyphenMinusKeyword_2_1_2_0; }
-		
-		//"+"
-		public Keyword getPlusSignKeyword_2_1_2_1() { return cPlusSignKeyword_2_1_2_1; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_2_1_3() { return cINTTerminalRuleCall_2_1_3; }
+		//EXPONENTIAL
+		public RuleCall getEXPONENTIALTerminalRuleCall_1_1_2_1() { return cEXPONENTIALTerminalRuleCall_1_1_2_1; }
 	}
 	
 	public class LogicValueElements extends AbstractElementFinder.AbstractEnumRuleElementFinder {
@@ -1566,6 +1526,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	private final IntegerElements pInteger;
 	private final RealElements pReal;
 	private final TerminalRule tID;
+	private final TerminalRule tEXPONENTIAL;
 	private final TerminalRule tSTRING;
 	private final TerminalRule tQUOTED_ID;
 	private final TerminalRule tSL_COMMENT;
@@ -1618,6 +1579,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		this.pInteger = new IntegerElements();
 		this.pReal = new RealElements();
 		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ID");
+		this.tEXPONENTIAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.EXPONENTIAL");
 		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.STRING");
 		this.tQUOTED_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.QUOTED_ID");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.SL_COMMENT");
@@ -1893,7 +1855,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//Constant:
-	//    IntConstant | RealConstant | StringConstant;
+	//    RealConstant | IntConstant | StringConstant;
 	public ConstantElements getConstantAccess() {
 		return pConstant;
 	}
@@ -2025,7 +1987,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//Identifier:
-	//    ID | "true" | "false" | "e" | "E";
+	//    ID | "true" | "false";
 	public IdentifierElements getIdentifierAccess() {
 		return pIdentifier;
 	}
@@ -2044,8 +2006,8 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		return getIntegerAccess().getRule();
 	}
 	
-	//Real returns ecore::EDouble hidden():
-	//    "-"? INT ("." INT | ("." INT)? ("e" | "E") ("-" | "+")? INT);
+	//Real returns ecore::EDouble:
+	//    "-"? (EXPONENTIAL | INT "." (INT | EXPONENTIAL));
 	public RealElements getRealAccess() {
 		return pReal;
 	}
@@ -2059,6 +2021,12 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	//    ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
+	}
+	
+	//terminal EXPONENTIAL:
+	//    INT ("e" | "E") ("+" | "-")? INT;
+	public TerminalRule getEXPONENTIALRule() {
+		return tEXPONENTIAL;
 	}
 	
 	//@Override
