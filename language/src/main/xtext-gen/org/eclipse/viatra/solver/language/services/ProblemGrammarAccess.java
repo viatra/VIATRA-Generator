@@ -305,17 +305,17 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	public class EnumLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.EnumLiteral");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameQuotedOrUnquotedIdParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		private final RuleCall cNameIdentifierParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//EnumLiteral returns Node:
-		//    name=QuotedOrUnquotedId;
+		//    name=Identifier;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=QuotedOrUnquotedId
+		//name=Identifier
 		public Assignment getNameAssignment() { return cNameAssignment; }
 		
-		//QuotedOrUnquotedId
-		public RuleCall getNameQuotedOrUnquotedIdParserRuleCall_0() { return cNameQuotedOrUnquotedIdParserRuleCall_0; }
+		//Identifier
+		public RuleCall getNameIdentifierParserRuleCall_0() { return cNameIdentifierParserRuleCall_0; }
 	}
 	public class ReferenceDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.ReferenceDeclaration");
@@ -1299,25 +1299,6 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		//"*"
 		public Keyword getAsteriskKeyword_1() { return cAsteriskKeyword_1; }
 	}
-	public class QuotedOrUnquotedIdElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.QuotedOrUnquotedId");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cQUOTED_IDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cIdentifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//QuotedOrUnquotedId:
-		//    QUOTED_ID | Identifier;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//QUOTED_ID | Identifier
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//QUOTED_ID
-		public RuleCall getQUOTED_IDTerminalRuleCall_0() { return cQUOTED_IDTerminalRuleCall_0; }
-		
-		//Identifier
-		public RuleCall getIdentifierParserRuleCall_1() { return cIdentifierParserRuleCall_1; }
-	}
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.QualifiedName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1327,21 +1308,18 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cColonColonKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final RuleCall cIdentifierParserRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
-		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
-		private final Keyword cColonColonKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
-		private final RuleCall cQUOTED_IDTerminalRuleCall_1_2_1 = (RuleCall)cGroup_1_2.eContents().get(1);
 		
 		//QualifiedName hidden():
-		//    QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
+		//    QUOTED_ID | Identifier ("::" Identifier)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?
+		//QUOTED_ID | Identifier ("::" Identifier)*
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//QUOTED_ID
 		public RuleCall getQUOTED_IDTerminalRuleCall_0() { return cQUOTED_IDTerminalRuleCall_0; }
 		
-		//Identifier ("::" Identifier)* ("::" QUOTED_ID)?
+		//Identifier ("::" Identifier)*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//Identifier
@@ -1355,15 +1333,6 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		
 		//Identifier
 		public RuleCall getIdentifierParserRuleCall_1_1_1() { return cIdentifierParserRuleCall_1_1_1; }
-		
-		//("::" QUOTED_ID)?
-		public Group getGroup_1_2() { return cGroup_1_2; }
-		
-		//"::"
-		public Keyword getColonColonKeyword_1_2_0() { return cColonColonKeyword_1_2_0; }
-		
-		//QUOTED_ID
-		public RuleCall getQUOTED_IDTerminalRuleCall_1_2_1() { return cQUOTED_IDTerminalRuleCall_1_2_1; }
 	}
 	public class IdentifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.viatra.solver.language.Problem.Identifier");
@@ -1592,7 +1561,6 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	private final RangeMultiplicityElements pRangeMultiplicity;
 	private final ExactMultiplicityElements pExactMultiplicity;
 	private final UpperBoundElements pUpperBound;
-	private final QuotedOrUnquotedIdElements pQuotedOrUnquotedId;
 	private final QualifiedNameElements pQualifiedName;
 	private final IdentifierElements pIdentifier;
 	private final IntegerElements pInteger;
@@ -1645,7 +1613,6 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		this.pRangeMultiplicity = new RangeMultiplicityElements();
 		this.pExactMultiplicity = new ExactMultiplicityElements();
 		this.pUpperBound = new UpperBoundElements();
-		this.pQuotedOrUnquotedId = new QuotedOrUnquotedIdElements();
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pIdentifier = new IdentifierElements();
 		this.pInteger = new IntegerElements();
@@ -1730,7 +1697,7 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 	}
 	
 	//EnumLiteral returns Node:
-	//    name=QuotedOrUnquotedId;
+	//    name=Identifier;
 	public EnumLiteralElements getEnumLiteralAccess() {
 		return pEnumLiteral;
 	}
@@ -2047,18 +2014,8 @@ public class ProblemGrammarAccess extends AbstractElementFinder.AbstractGrammarE
 		return getUpperBoundAccess().getRule();
 	}
 	
-	//QuotedOrUnquotedId:
-	//    QUOTED_ID | Identifier;
-	public QuotedOrUnquotedIdElements getQuotedOrUnquotedIdAccess() {
-		return pQuotedOrUnquotedId;
-	}
-	
-	public ParserRule getQuotedOrUnquotedIdRule() {
-		return getQuotedOrUnquotedIdAccess().getRule();
-	}
-	
 	//QualifiedName hidden():
-	//    QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
+	//    QUOTED_ID | Identifier ("::" Identifier)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}

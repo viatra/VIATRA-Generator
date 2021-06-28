@@ -13,6 +13,7 @@ import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.ExistentialQuantifier;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
+import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
@@ -34,12 +35,25 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope scope = super.getScope(context, reference);
+		if (reference == ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE
+				|| reference == ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE) {
+			return getNodesScope(context, scope);
+		}
 		if (reference == ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE) {
 			return getVariableScope(context, scope);
-		} else if (reference == ProblemPackage.Literals.REFERENCE_DECLARATION__OPPOSITE) {
+		}
+		if (reference == ProblemPackage.Literals.REFERENCE_DECLARATION__OPPOSITE) {
 			return getOppositeScope(context, scope);
 		}
 		return scope;
+	}
+
+	protected IScope getNodesScope(EObject context, IScope delegateScope) {
+		Problem problem = EcoreUtil2.getContainerOfType(context, Problem.class);
+		if (problem == null) {
+			return delegateScope;
+		}
+		return Scopes.scopeFor(problem.getNodes(), delegateScope);
 	}
 
 	protected IScope getVariableScope(EObject context, IScope delegateScope) {
@@ -63,7 +77,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 			PredicateDefinition definition = (PredicateDefinition) currentContext;
 			variables.addAll(definition.getParameters());
 		}
-		return Scopes.scopeFor(variables, delegateScope);
+		return Scopes.scopeFor(variables, getNodesScope(context, delegateScope));
 	}
 
 	protected IScope getOppositeScope(EObject context, IScope delegateScope) {

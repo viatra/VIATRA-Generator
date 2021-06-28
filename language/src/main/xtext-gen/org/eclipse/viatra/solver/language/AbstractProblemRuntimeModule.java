@@ -7,7 +7,6 @@ import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
 import java.util.Properties;
-import org.eclipse.viatra.solver.language.generator.ProblemGenerator;
 import org.eclipse.viatra.solver.language.parser.antlr.ProblemAntlrTokenFileProvider;
 import org.eclipse.viatra.solver.language.parser.antlr.ProblemParser;
 import org.eclipse.viatra.solver.language.parser.antlr.internal.InternalProblemLexer;
@@ -19,7 +18,6 @@ import org.eclipse.viatra.solver.language.validation.ProblemConfigurableIssueCod
 import org.eclipse.viatra.solver.language.validation.ProblemValidator;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
@@ -191,11 +189,6 @@ public abstract class AbstractProblemRuntimeModule extends DefaultRuntimeModule 
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
 	public void configureIResourceDescriptionsPersisted(Binder binder) {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
-	public Class<? extends IGenerator2> bindIGenerator2() {
-		return ProblemGenerator.class;
 	}
 	
 }

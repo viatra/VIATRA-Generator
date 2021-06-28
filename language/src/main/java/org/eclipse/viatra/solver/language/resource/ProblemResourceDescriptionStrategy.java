@@ -24,56 +24,70 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 
 	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if (eObject instanceof Variable) {
+		if (!shouldExport(eObject)) {
 			return false;
 		}
-		if (eObject instanceof NamedElement) {
-			NamedElement namedElement = (NamedElement) eObject;
-			String name = namedElement.getName();
-			if (name == null || name.isEmpty()) {
-				return true;
+		if (!(eObject instanceof NamedElement)) {
+			return true;
+		}
+		NamedElement namedElement = (NamedElement) eObject;
+		String name = namedElement.getName();
+		if (name == null || name.isEmpty()) {
+			return true;
+		}
+		Problem problem = EcoreUtil2.getContainerOfType(namedElement, Problem.class);
+		QualifiedName problemQualifiedName = null;
+		if (problem != null) {
+			String problemName = problem.getName();
+			if (problemName != null && !problemName.isEmpty()) {
+				problemQualifiedName = qualifiedNameConverter.toQualifiedName(problemName);
 			}
-			Problem problem = EcoreUtil2.getContainerOfType(namedElement, Problem.class);
-			QualifiedName problemQualifiedName = null;
-			if (problem != null) {
-				String problemName = problem.getName();
-				if (problemName != null && !problemName.isEmpty()) {
-					problemQualifiedName = qualifiedNameConverter.toQualifiedName(problemName);
-				}
-			}
-			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(namedElement.getName());
-			boolean nameExported;
-			if (shouldExportSimpleName(namedElement)) {
-				acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
-				nameExported = true;
-			} else {
-				nameExported = false;
-			}
-			EObject parent = namedElement.eContainer();
-			while (parent != null && parent != problem) {
-				if (parent instanceof NamedElement) {
-					NamedElement namedParent = (NamedElement) parent;
-					String parentName = namedParent.getName();
-					if (parentName != null || !name.isEmpty()) {
-						QualifiedName parentQualifiedName = qualifiedNameConverter.toQualifiedName(parentName);
-						qualifiedName = parentQualifiedName.append(qualifiedName);
-						if (shouldExportSimpleName(parent)) {
-							acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
-							nameExported = true;
-						} else {
-							nameExported = false;
-						}
+		}
+		QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(namedElement.getName());
+		boolean nameExported;
+		if (shouldExportSimpleName(namedElement)) {
+			acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
+			nameExported = true;
+		} else {
+			nameExported = false;
+		}
+		EObject parent = namedElement.eContainer();
+		while (parent != null && parent != problem) {
+			if (parent instanceof NamedElement) {
+				NamedElement namedParent = (NamedElement) parent;
+				String parentName = namedParent.getName();
+				if (parentName != null || !name.isEmpty()) {
+					QualifiedName parentQualifiedName = qualifiedNameConverter.toQualifiedName(parentName);
+					qualifiedName = parentQualifiedName.append(qualifiedName);
+					if (shouldExportSimpleName(namedParent)) {
+						acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
+						nameExported = true;
+					} else {
+						nameExported = false;
 					}
 				}
-				parent = parent.eContainer();
 			}
-			if (!nameExported) {
-				acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
-			}
+			parent = parent.eContainer();
+		}
+		if (!nameExported) {
+			acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
 		}
 		return true;
 	}
 
+	protected boolean shouldExport(EObject eObject) {
+		if (eObject instanceof Variable) {
+			// Variables are always private to the containing predicate definition.
+			return false;
+		}
+		if (eObject instanceof Node) {
+			Node node = (Node) eObject;
+			// Only enum literals and new nodes are visible across problem files.
+			return ProblemUtil.isEnumLiteral(node) || ProblemUtil.isNewNode(node);
+		}
+		return true;
+	}
+	
 	protected boolean shouldExportSimpleName(EObject eObject) {
 		if (eObject instanceof Node) {
 			return !ProblemUtil.isNewNode((Node) eObject);

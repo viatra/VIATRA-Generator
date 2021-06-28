@@ -22,7 +22,7 @@ EnumDeclaration:
 	("{" (literals+=EnumLiteral ("," literals+=EnumLiteral)* ("," | ";")?)? "}" | ".");
 
 EnumLiteral returns Node:
-	name=QuotedOrUnquotedId;
+	name=Identifier;
 
 ReferenceDeclaration:
 	(containment?="contains" | "refers")?
@@ -129,11 +129,8 @@ ExactMultiplicity:
 UpperBound returns ecore::EInt:
 	INT | "*";
 
-QuotedOrUnquotedId:
-	QUOTED_ID | Identifier;
-
 QualifiedName hidden():
-	QUOTED_ID | Identifier ("::" Identifier)* ("::" QUOTED_ID)?;
+	QUOTED_ID | Identifier ("::" Identifier)*;
 
 Identifier:
 	ID | "true" | "false" | "e" | "E";

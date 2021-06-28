@@ -849,31 +849,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-// Entry rule entryRuleQuotedOrUnquotedId
-entryRuleQuotedOrUnquotedId
-:
-{ before(grammarAccess.getQuotedOrUnquotedIdRule()); }
-	 ruleQuotedOrUnquotedId
-{ after(grammarAccess.getQuotedOrUnquotedIdRule()); } 
-	 EOF 
-;
-
-// Rule QuotedOrUnquotedId
-ruleQuotedOrUnquotedId 
-	@init {
-		int stackSize = keepStackSize();
-	}
-	:
-	(
-		{ before(grammarAccess.getQuotedOrUnquotedIdAccess().getAlternatives()); }
-		(rule__QuotedOrUnquotedId__Alternatives)
-		{ after(grammarAccess.getQuotedOrUnquotedIdAccess().getAlternatives()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 // Entry rule entryRuleQualifiedName
 entryRuleQualifiedName
 @init { 
@@ -1369,27 +1344,6 @@ rule__UpperBound__Alternatives
 		{ before(grammarAccess.getUpperBoundAccess().getAsteriskKeyword_1()); }
 		'*'
 		{ after(grammarAccess.getUpperBoundAccess().getAsteriskKeyword_1()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__QuotedOrUnquotedId__Alternatives
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getQuotedOrUnquotedIdAccess().getQUOTED_IDTerminalRuleCall_0()); }
-		RULE_QUOTED_ID
-		{ after(grammarAccess.getQuotedOrUnquotedIdAccess().getQUOTED_IDTerminalRuleCall_0()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getQuotedOrUnquotedIdAccess().getIdentifierParserRuleCall_1()); }
-		ruleIdentifier
-		{ after(grammarAccess.getQuotedOrUnquotedIdAccess().getIdentifierParserRuleCall_1()); }
 	)
 ;
 finally {
@@ -4651,7 +4605,6 @@ rule__QualifiedName__Group_1__1
 	}
 :
 	rule__QualifiedName__Group_1__1__Impl
-	rule__QualifiedName__Group_1__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -4666,32 +4619,6 @@ rule__QualifiedName__Group_1__1__Impl
 	{ before(grammarAccess.getQualifiedNameAccess().getGroup_1_1()); }
 	(rule__QualifiedName__Group_1_1__0)*
 	{ after(grammarAccess.getQualifiedNameAccess().getGroup_1_1()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__QualifiedName__Group_1__2
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__QualifiedName__Group_1__2__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__QualifiedName__Group_1__2__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getQualifiedNameAccess().getGroup_1_2()); }
-	(rule__QualifiedName__Group_1_2__0)?
-	{ after(grammarAccess.getQualifiedNameAccess().getGroup_1_2()); }
 )
 ;
 finally {
@@ -4746,60 +4673,6 @@ rule__QualifiedName__Group_1_1__1__Impl
 	{ before(grammarAccess.getQualifiedNameAccess().getIdentifierParserRuleCall_1_1_1()); }
 	ruleIdentifier
 	{ after(grammarAccess.getQualifiedNameAccess().getIdentifierParserRuleCall_1_1_1()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__QualifiedName__Group_1_2__0
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__QualifiedName__Group_1_2__0__Impl
-	rule__QualifiedName__Group_1_2__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__QualifiedName__Group_1_2__0__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0()); }
-	'::'
-	{ after(grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0()); }
-)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__QualifiedName__Group_1_2__1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	rule__QualifiedName__Group_1_2__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__QualifiedName__Group_1_2__1__Impl
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-(
-	{ before(grammarAccess.getQualifiedNameAccess().getQUOTED_IDTerminalRuleCall_1_2_1()); }
-	RULE_QUOTED_ID
-	{ after(grammarAccess.getQualifiedNameAccess().getQUOTED_IDTerminalRuleCall_1_2_1()); }
 )
 ;
 finally {
@@ -5326,9 +5199,9 @@ rule__EnumLiteral__NameAssignment
 	}
 :
 	(
-		{ before(grammarAccess.getEnumLiteralAccess().getNameQuotedOrUnquotedIdParserRuleCall_0()); }
-		ruleQuotedOrUnquotedId
-		{ after(grammarAccess.getEnumLiteralAccess().getNameQuotedOrUnquotedIdParserRuleCall_0()); }
+		{ before(grammarAccess.getEnumLiteralAccess().getNameIdentifierParserRuleCall_0()); }
+		ruleIdentifier
+		{ after(grammarAccess.getEnumLiteralAccess().getNameIdentifierParserRuleCall_0()); }
 	)
 ;
 finally {

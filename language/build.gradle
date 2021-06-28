@@ -3,6 +3,7 @@ dependencies {
 	testRuntime 'org.junit.jupiter:junit-jupiter-engine'
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
+	testCompile "org.hamcrest:hamcrest:${hamcrestVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 	compile 'org.eclipse.emf:org.eclipse.emf.ecore'

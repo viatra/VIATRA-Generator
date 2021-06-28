@@ -9,6 +9,8 @@ buildscript {
 
 subprojects {
 	ext.xtextVersion = '2.26.0.M1'
+	ext.hamcrestVersion = '2.2'
+
 	repositories {
 		mavenCentral()
 	}

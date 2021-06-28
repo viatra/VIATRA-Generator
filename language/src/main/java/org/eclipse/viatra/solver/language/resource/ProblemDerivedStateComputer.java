@@ -73,13 +73,14 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 
 	protected void installDerivedProblemState(Problem problem, boolean preLinkingPhase) {
 		installNewNodes(problem);
-		if (!preLinkingPhase) {
-			installDerivedNodes(problem);
-			for (Statement statement : problem.getStatements()) {
-				if (statement instanceof PredicateDefinition) {
-					PredicateDefinition definition = (PredicateDefinition) statement;
-					installDerivedPredicateDefinitionState(definition);
-				}
+		if (preLinkingPhase) {
+			return;
+		}
+		Set<String> nodeNames = installDerivedNodes(problem);
+		for (Statement statement : problem.getStatements()) {
+			if (statement instanceof PredicateDefinition) {
+				PredicateDefinition definition = (PredicateDefinition) statement;
+				installDerivedPredicateDefinitionState(definition, nodeNames);
 			}
 		}
 	}
@@ -88,7 +89,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		for (Statement statement : problem.getStatements()) {
 			if (statement instanceof ClassDeclaration) {
 				ClassDeclaration declaration = (ClassDeclaration) statement;
-				if (!declaration.isAbstract()) {
+				if (!declaration.isAbstract() && declaration.getNewNode() == null) {
 					Node newNode = createNode(NEW_NODE);
 					declaration.setNewNode(newNode);
 				}
@@ -96,7 +97,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 
-	protected void installDerivedNodes(Problem problem) {
+	protected Set<String> installDerivedNodes(Problem problem) {
 		IScope nodeScope = scopeProvider.getScope(problem, ProblemPackage.Literals.ASSERTION__ARGUMENTS);
 		Set<String> nodeNames = new HashSet<>();
 		for (Statement statement : problem.getStatements()) {
@@ -142,6 +143,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 			Node graphNode = createNode(nodeName);
 			grapNodes.add(graphNode);
 		}
+		return nodeNames;
 	}
 
 	private void addNodeNames(Set<String> nodeNames, IScope nodeScope, EObject eObject, EStructuralFeature feature,
@@ -165,16 +167,17 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		return node;
 	}
 
-	protected void installDerivedPredicateDefinitionState(PredicateDefinition definition) {
-		Set<String> parameterNames = new HashSet<>();
+	protected void installDerivedPredicateDefinitionState(PredicateDefinition definition, Set<String> nodeNames) {
+		Set<String> knownVariables = new HashSet<>();
+		knownVariables.addAll(nodeNames);
 		for (Parameter parameter : definition.getParameters()) {
 			String name = parameter.getName();
 			if (name != null) {
-				parameterNames.add(name);
+				knownVariables.add(name);
 			}
 		}
 		for (Conjunction body : definition.getBodies()) {
-			installDeriveConjunctionState(body, parameterNames);
+			installDeriveConjunctionState(body, knownVariables);
 		}
 	}
 
@@ -271,10 +274,9 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	protected void discardDerivedProblemState(Problem problem) {
 		problem.getNodes().clear();
 		for (Statement statement : problem.getStatements()) {
-			if (statement instanceof ClassDeclaration) {
-				ClassDeclaration classDeclaration = (ClassDeclaration) statement;
-				classDeclaration.setNewNode(null);
-			} else if (statement instanceof PredicateDefinition) {
+			// We deliberately don't clean up {@link ClassDeclaration#getNewNode()} nodes,
+			// because they have already been exported to the Xtext index.
+			if (statement instanceof PredicateDefinition) {
 				PredicateDefinition definition = (PredicateDefinition) statement;
 				for (Conjunction body : definition.getBodies()) {
 					body.getImplicitVariables().clear();

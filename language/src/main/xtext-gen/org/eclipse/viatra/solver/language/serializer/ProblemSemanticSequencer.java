@@ -246,7 +246,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 	 *     EnumLiteral returns Node
 	 *
 	 * Constraint:
-	 *     name=QuotedOrUnquotedId
+	 *     name=Identifier
 	 */
 	protected void sequence_EnumLiteral(ISerializationContext context, Node semanticObject) {
 		if (errorAcceptor != null) {
@@ -254,7 +254,7 @@ public class ProblemSemanticSequencer extends AbstractDelegatingSemanticSequence
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ProblemPackage.Literals.NAMED_ELEMENT__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEnumLiteralAccess().getNameQuotedOrUnquotedIdParserRuleCall_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEnumLiteralAccess().getNameIdentifierParserRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

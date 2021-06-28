@@ -478,9 +478,9 @@ ruleEnumLiteral returns [EObject current=null]
 	(
 		(
 			{
-				newCompositeNode(grammarAccess.getEnumLiteralAccess().getNameQuotedOrUnquotedIdParserRuleCall_0());
+				newCompositeNode(grammarAccess.getEnumLiteralAccess().getNameIdentifierParserRuleCall_0());
 			}
-			lv_name_0_0=ruleQuotedOrUnquotedId
+			lv_name_0_0=ruleIdentifier
 			{
 				if ($current==null) {
 					$current = createModelElementForParent(grammarAccess.getEnumLiteralRule());
@@ -489,7 +489,7 @@ ruleEnumLiteral returns [EObject current=null]
 					$current,
 					"name",
 					lv_name_0_0,
-					"org.eclipse.viatra.solver.language.Problem.QuotedOrUnquotedId");
+					"org.eclipse.viatra.solver.language.Problem.Identifier");
 				afterParserOrEnumRuleCall();
 			}
 		)
@@ -2097,43 +2097,6 @@ ruleUpperBound returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 	)
 ;
 
-// Entry rule entryRuleQuotedOrUnquotedId
-entryRuleQuotedOrUnquotedId returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getQuotedOrUnquotedIdRule()); }
-	iv_ruleQuotedOrUnquotedId=ruleQuotedOrUnquotedId
-	{ $current=$iv_ruleQuotedOrUnquotedId.current.getText(); }
-	EOF;
-
-// Rule QuotedOrUnquotedId
-ruleQuotedOrUnquotedId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		this_QUOTED_ID_0=RULE_QUOTED_ID
-		{
-			$current.merge(this_QUOTED_ID_0);
-		}
-		{
-			newLeafNode(this_QUOTED_ID_0, grammarAccess.getQuotedOrUnquotedIdAccess().getQUOTED_IDTerminalRuleCall_0());
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getQuotedOrUnquotedIdAccess().getIdentifierParserRuleCall_1());
-		}
-		this_Identifier_1=ruleIdentifier
-		{
-			$current.merge(this_Identifier_1);
-		}
-		{
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
 // Entry rule entryRuleQualifiedName
 entryRuleQualifiedName returns [String current=null]@init {
 	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
@@ -2192,20 +2155,6 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 					afterParserOrEnumRuleCall();
 				}
 			)*
-			(
-				kw='::'
-				{
-					$current.merge(kw);
-					newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getColonColonKeyword_1_2_0());
-				}
-				this_QUOTED_ID_5=RULE_QUOTED_ID
-				{
-					$current.merge(this_QUOTED_ID_5);
-				}
-				{
-					newLeafNode(this_QUOTED_ID_5, grammarAccess.getQualifiedNameAccess().getQUOTED_IDTerminalRuleCall_1_2_1());
-				}
-			)?
 		)
 	)
 ;

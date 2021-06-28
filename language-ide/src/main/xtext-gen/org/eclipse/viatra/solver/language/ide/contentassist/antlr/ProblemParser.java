@@ -46,7 +46,6 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMultiplicityAccess().getAlternatives(), "rule__Multiplicity__Alternatives");
 			builder.put(grammarAccess.getDefiniteMultiplicityAccess().getAlternatives(), "rule__DefiniteMultiplicity__Alternatives");
 			builder.put(grammarAccess.getUpperBoundAccess().getAlternatives(), "rule__UpperBound__Alternatives");
-			builder.put(grammarAccess.getQuotedOrUnquotedIdAccess().getAlternatives(), "rule__QuotedOrUnquotedId__Alternatives");
 			builder.put(grammarAccess.getQualifiedNameAccess().getAlternatives(), "rule__QualifiedName__Alternatives");
 			builder.put(grammarAccess.getIdentifierAccess().getAlternatives(), "rule__Identifier__Alternatives");
 			builder.put(grammarAccess.getRealAccess().getAlternatives_2(), "rule__Real__Alternatives_2");
@@ -95,7 +94,6 @@ public class ProblemParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getRangeMultiplicityAccess().getGroup(), "rule__RangeMultiplicity__Group__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1_1(), "rule__QualifiedName__Group_1_1__0");
-			builder.put(grammarAccess.getQualifiedNameAccess().getGroup_1_2(), "rule__QualifiedName__Group_1_2__0");
 			builder.put(grammarAccess.getIntegerAccess().getGroup(), "rule__Integer__Group__0");
 			builder.put(grammarAccess.getRealAccess().getGroup(), "rule__Real__Group__0");
 			builder.put(grammarAccess.getRealAccess().getGroup_2_0(), "rule__Real__Group_2_0__0");
