@@ -17,10 +17,17 @@ def currentNodeEnv =  devMode ? 'development' : 'production'
 
 apply plugin: 'com.moowork.node'
 
+node {
+	version = nodeVersion
+	npmVersion = project.ext.npmVersion
+	download = true
+}
+
 for (environment in ['production', 'development']) {
 	def taskName = 'webpack' + environment.substring(0, 1).toUpperCase() + environment.substring(1);
 	task(taskName, type: NpmTask) {
 		dependsOn ':language:generateXtext'
+		dependsOn npmInstall
 		inputs.dir 'src/main/css'
 		inputs.dir 'src/main/html'
 		inputs.dir 'src/main/js'
@@ -34,6 +41,7 @@ for (environment in ['production', 'development']) {
 
 apply plugin: 'application'
 mainClassName = mainClass
+distTar.enabled = false
 distZip.enabled = false
 
 jar {
@@ -44,6 +52,7 @@ jar {
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'
+shadowDistTar.enabled = false
 shadowDistZip.enabled = false
 
 shadowJar {
@@ -76,6 +85,7 @@ task jettyRun(type: JavaExec) {
 
 task webpackServe(type: NpmTask) {
 	dependsOn ':language:generateXtext'
+	dependsOn npmInstall
 	outputs.dir "${webpackOutputDir}/hmr"
 	args = ['run', 'serve']
 	setEnvironment NODE_ENV: 'hmr'
