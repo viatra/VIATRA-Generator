@@ -4,9 +4,9 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.web:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
-	compile "org.eclipse.jetty:jetty-server:9.4.42.v20210604"
-	compile "org.eclipse.jetty:jetty-annotations:9.4.42.v20210604"
-	compile "org.slf4j:slf4j-simple:1.7.31"
+	compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
+	compile "org.eclipse.jetty:jetty-annotations:${jettyVersion}"
+	compile "org.slf4j:slf4j-simple:${slf4JVersion}"
 }
 
 def webpackOutputDir = "${buildDir}/webpack"

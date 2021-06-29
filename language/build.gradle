@@ -5,19 +5,19 @@ configurations {
 }
 
 dependencies {
-	testCompile 'org.junit.jupiter:junit-jupiter-api'
-	testRuntime 'org.junit.jupiter:junit-jupiter-engine'
+	testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 	testCompile "org.hamcrest:hamcrest:${hamcrestVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
-	compile 'org.eclipse.emf:org.eclipse.emf.ecore'
+	compile "org.eclipse.emf:org.eclipse.emf.ecore:${ecoreVersion}"
 	compile project(':language-model')
-	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${mwe2Version}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
-	mwe2 'org.eclipse.xtext:xtext-antlr-generator'
+	mwe2 "org.eclipse.xtext:xtext-antlr-generator:${xtextAntlrGeneratorVersion}"
 	mwe2 project(':language-mwe2')
 }
 

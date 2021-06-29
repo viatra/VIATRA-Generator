@@ -5,12 +5,11 @@ configurations {
 }
 
 dependencies {
-	compile 'org.eclipse.emf:org.eclipse.emf.ecore'
-	mwe2 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
-	mwe2 'org.eclipse.emf:org.eclipse.emf.ecore'
-	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
-	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
-	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
+	compile "org.eclipse.emf:org.eclipse.emf.ecore:${ecoreVersion}"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${ecoreCodegenVersion}"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe.utils:${mweVersion}"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${mwe2Version}"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.lib:${mwe2Version}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 }

@@ -13,13 +13,10 @@ plugins {
 }
 
 subprojects {
-	ext.xtextVersion = '2.26.0.M1'
-	ext.hamcrestVersion = '2.2'
-
 	repositories {
 		mavenCentral()
 	}
-	
+
 	apply plugin: 'java'
 	dependencies {
 		compile platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
@@ -31,14 +28,14 @@ subprojects {
 	
 	group = 'org.eclipse.viatra.solver'
 	version = '1.0.0-SNAPSHOT'
-	
+
 	sourceCompatibility = '11'
 	targetCompatibility = '11'
-	
+
 	configurations.all {
 		exclude group: 'asm'
 	}
-	
+
 	eclipse.classpath.file.whenMerged {
 		for (entry in entries) {
 			if (entry.path.endsWith('xtext-gen')) {
