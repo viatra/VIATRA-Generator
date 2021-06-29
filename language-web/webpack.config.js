@@ -3,7 +3,8 @@ const path = require('path');
 
 const WebpackBeforeBuildPlugin = require('before-build-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { SubresourceIntegrityPlugin } = require('webpack-subresource-integrity');
 
 const currentNodeEnv = process.env.NODE_ENV || 'development';
 const devMode = currentNodeEnv !== 'production';
@@ -28,6 +29,7 @@ module.exports = {
     publicPath: '/',
     filename: devMode ? '[name].js' : '[contenthash].js',
     chunkFilename: devMode ? '[id].js' : '[contenthash].js',
+    crossOriginLoading: 'anonymous',
   },
   module: {
     rules: [
@@ -103,6 +105,7 @@ module.exports = {
       filename: '[contenthash].css',
       chunkFilename: '[contenthash].css',
     }),
+    new SubresourceIntegrityPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/main/html/index.html',
       minify: devMode ? false : {

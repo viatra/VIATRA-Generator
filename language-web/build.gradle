@@ -12,7 +12,8 @@ dependencies {
 def webpackOutputDir = "${buildDir}/webpack"
 def productionResources = "${webpackOutputDir}/production"
 def mainClass = 'org.eclipse.viatra.solver.language.web.ServerLauncher'
-def currentNodeEnv = System.getenv('NODE_ENV') ?: 'development'
+def devMode = System.getenv('NODE_ENV') != 'production'
+def currentNodeEnv =  devMode ? 'development' : 'production'
 
 apply plugin: 'com.moowork.node'
 
@@ -59,7 +60,11 @@ shadowJar {
 }
 
 task jettyRun(type: JavaExec) {
-	dependsOn webpackDevelopment
+	if (devMode) {
+		dependsOn webpackDevelopment
+	} else {
+		dependsOn webpackProduction
+	}
 	dependsOn sourceSets.main.runtimeClasspath
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 	main = mainClass
