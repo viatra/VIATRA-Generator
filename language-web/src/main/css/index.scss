@@ -1,0 +1,105 @@
+@import 'codemirror/lib/codemirror';
+@import 'codemirror/addon/hint/show-hint';
+
+@import 'xtext/xtext-codemirror';
+
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	font: 16px Helvetica,sans-serif;
+}
+
+a {
+	color: #22a;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.container {
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 24px 24px 36px 24px;
+}
+
+.header {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 16px;
+	background: #dbdbdb;
+	border-radius: 16px;
+	color: #383838;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.content {
+	display: block;
+	position: absolute;
+	top: 108px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	box-shadow: 0 0 8px rgba(80, 10, 98, .25), 0 10px 24px rgba(80, 10, 98, .35);
+	border-radius: 16px;
+}
+
+.xtext-editor {
+	display: block;
+	position: absolute;
+	top: 16px;
+	bottom: 16px;
+	left: 16px;
+	right: 16px;
+	border: 1px solid #999;
+}
+
+.problem-class {
+	color: #005032;
+}
+
+.problem-abstract {
+	color: #8b8816;
+}
+
+.problem-enum {
+	color: #644632;
+}
+
+.problem-reference {
+	color: #0000c0;
+}
+
+.problem-containment {
+	font-weight: bold;
+}
+
+.CodeMirror .cm-quoted-name, .problem-enum-node {
+	color: #1a1a1a !important;
+	font-weight: bold;
+}
+
+.problem-new-node {
+	font-style: italic;
+}
+
+.problem-variable {
+	color: #6a3e3e;
+}
+
+.problem-singleton-variable {
+	color: #a1706f;
+}

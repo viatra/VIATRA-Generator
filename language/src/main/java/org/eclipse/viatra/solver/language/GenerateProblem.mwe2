@@ -22,6 +22,7 @@ Workflow {
 				web = {
 					enabled = true
 					name = "language-web"
+					assets = "../language-web/src/main/js-gen"
 				}
 				mavenLayout = true
 			}
@@ -47,7 +48,10 @@ Workflow {
 			junitSupport = {
 				junitVersion = "5"
 			}
-			webSupport = ProblemWebIntegrationFragment {}
+			webSupport = ProblemWebIntegrationFragment {
+				highlightingPath = "mode-problem.js"
+				generateHtmlExample = false
+			}
 		}
 	}
 }
