@@ -17,11 +17,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        include: {
-          and: [path.resolve(__dirname, 'src/main/js')],
-          not: [path.resolve(__dirname, 'src/main/js/xtext')],
-        },
+        test: /\.jsx?$/i,
+        include: [path.resolve(__dirname, 'src/main/js')],
+        exclude: [path.resolve(__dirname, 'src/main/js/xtext')],
         loader: 'babel-loader',
         options: {
           presets: [
@@ -30,7 +28,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.scss$/i,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -43,7 +41,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/,
+        test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           'file-loader',
           {
@@ -60,7 +58,7 @@ module.exports = {
     modules: [
       'node_modules',
       path.resolve(__dirname, 'src/main/js'),
-      path.resolve(__dirname, 'src/main/js-gen'),
+      path.resolve(__dirname, 'build/generated/sources/xtext/js'),
     ],
     extensions: ['.js', '.jsx'],
     alias: {
