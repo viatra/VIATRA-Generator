@@ -4,12 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const devMode = process.env.NODE_ENV !== 'production';
+const outputPath = path.resolve(__dirname, 'build/webpack', devMode ? 'development' : 'production');
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
   entry: './src/main/js',
   output: {
-    path: path.resolve(__dirname, 'src/main/webapp'),
+    path: outputPath,
     publicPath: '/',
     filename: devMode ? '[name].js' : '[contenthash].js',
     chunkFilename: devMode ? '[id].js' : '[contenthash].js',

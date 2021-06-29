@@ -3,55 +3,106 @@
  */
 package org.eclipse.viatra.solver.language.web;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.log.Slf4jLog;
+import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.MetaInfConfiguration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
-/**
- * This program starts an HTTP server for testing the web integration of your
- * DSL. Just execute it and point a web browser to http://localhost:8080/
- */
 public class ServerLauncher {
-	public static void main(String[] args) {
-		Server server = new Server(new InetSocketAddress("localhost", 1313));
+	private static final Slf4jLog LOG = new Slf4jLog(ServerLauncher.class.getName());
+
+	private final Server server;
+
+	public ServerLauncher(InetSocketAddress bindAddress, Resource baseResource) throws IOException, URISyntaxException {
+		server = new Server(bindAddress);
 		WebAppContext ctx = new WebAppContext();
-		ctx.setResourceBase("src/main/webapp");
+		ctx.setBaseResource(baseResource);
 		ctx.setWelcomeFiles(new String[] { "index.html" });
 		ctx.setContextPath("/");
 		ctx.setConfigurations(new Configuration[] { new AnnotationConfiguration(), new WebXmlConfiguration(),
 				new WebInfConfiguration(), new MetaInfConfiguration() });
-		ctx.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*/language-web/.*,.*\\.jar");
+		ctx.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*/build/classes/.*,.*\\.jar");
 		ctx.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 		server.setHandler(ctx);
-		Slf4jLog log = new Slf4jLog(ServerLauncher.class.getName());
-		try {
-			server.start();
-			log.info("Server started " + server.getURI() + "...");
-			new Thread() {
-				public void run() {
-					try {
-						log.info("Press enter to stop the server...");
-						int key = System.in.read();
-						if (key != -1) {
-							server.stop();
-						} else {
-							log.warn(
-									"Console input is not available. In order to stop the server, you need to cancel process manually.");
-						}
-					} catch (Exception e) {
-						log.warn(e);
+	}
+
+	public void start() throws Exception {
+		server.start();
+		LOG.info("Server started " + server.getURI() + "...");
+		new Thread() {
+			public void run() {
+				try {
+					LOG.info("Press enter to stop the server...");
+					int key = System.in.read();
+					if (key != -1) {
+						server.stop();
+					} else {
+						LOG.warn(
+								"Console input is not available. In order to stop the server, you need to cancel process manually.");
 					}
+				} catch (Exception e) {
+					LOG.warn(e);
+					System.exit(-1);
 				}
-			}.start();
+			}
+		}.start();
+		try {
 			server.join();
+		} catch (InterruptedException e) {
+			LOG.info(e);
+		}
+	}
+
+	private static InetSocketAddress getBindAddress(String listenAddress, int port) {
+		if (listenAddress == null) {
+			return new InetSocketAddress(port);
+		}
+		return new InetSocketAddress(listenAddress, port);
+	}
+
+	private static Resource getBaseResource(String baseResourceOverride) throws IOException, URISyntaxException {
+		if (baseResourceOverride != null) {
+			return Resource.newResource(baseResourceOverride);
+		}
+		URL indexUrlInJar = ServerLauncher.class.getResource("/webapp/index.html");
+		if (indexUrlInJar == null) {
+			throw new RuntimeException("Cannot find pacakged web assets");
+		}
+		URI webRootUri = URI.create(indexUrlInJar.toURI().toASCIIString().replaceFirst("/index.html$", "/"));
+		return Resource.newResource(webRootUri);
+	}
+
+	public static void main(String[] args) {
+		String listenAddress = System.getenv("LiSTEN_ADDRESS");
+		int port = 8080;
+		String portStr = System.getenv("LISTEN_PORT");
+		if (portStr != null) {
+			try {
+				port = Integer.parseInt(portStr);
+			} catch (NumberFormatException e) {
+				LOG.warn(e);
+				System.exit(-1);
+			}
+		}
+		String baseResourceOverride = System.getenv("BASE_RESOURCE");
+		try {
+			InetSocketAddress bindAddress = getBindAddress(listenAddress, port);
+			Resource baseResource = getBaseResource(baseResourceOverride);
+			ServerLauncher serverLauncher = new ServerLauncher(bindAddress, baseResource);
+			serverLauncher.start();
 		} catch (Exception exception) {
-			log.warn(exception.getMessage());
+			LOG.warn(exception);
 			System.exit(1);
 		}
 	}

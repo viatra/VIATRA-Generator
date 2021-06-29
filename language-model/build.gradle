@@ -1,5 +1,18 @@
+configurations {
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
 dependencies {
 	compile 'org.eclipse.emf:org.eclipse.emf.ecore'
+	mwe2 'org.eclipse.emf:org.eclipse.emf.codegen.ecore'
+	mwe2 'org.eclipse.emf:org.eclipse.emf.ecore'
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe.utils'
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.launch'
+	mwe2 'org.eclipse.emf:org.eclipse.emf.mwe2.lib'
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 }
 
 sourceSets {
@@ -8,8 +21,27 @@ sourceSets {
 	}
 }
 
+task generateEPackage(type: JavaExec) {
+	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+	classpath = configurations.mwe2
+	inputs.file "src/main/java/org/eclipse/viatra/solver/language/model/GenerateProblemModel.mwe2"
+	inputs.file "src/main/resources/model/problem.ecore"
+	inputs.file "src/main/resources/model/problem.genmodel"
+	outputs.dir "src/main/emf-gen"
+	args += "src/main/java/org/eclipse/viatra/solver/language/model/GenerateProblemModel.mwe2"
+	args += "-p"
+	args += "rootPath=/${projectDir}"
+}
+
+compileJava.dependsOn(generateEPackage)
+clean.dependsOn(cleanGenerateEPackage)
+
 eclipse {
 	project {
 		natures += ['org.eclipse.sirius.nature.modelingproject', 'org.eclipse.pde.PluginNature']
+	}
+	
+	classpath {
+		plusConfigurations += [configurations.mwe2]
 	}
 }

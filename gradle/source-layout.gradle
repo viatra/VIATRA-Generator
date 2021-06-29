@@ -12,9 +12,6 @@ sourceSets {
 }
 
 jar {
-	from('model') {
-		into('model')
-	}
 	from(sourceSets.main.allSource) {
 		include '**/*.xtext'
 	}
@@ -23,6 +20,9 @@ jar {
 	}
 }
 
-plugins.withId('war') {
-	webAppDirName = "src/main/webapp"
+clean.doLast {
+	delete 'src/main/xtend-gen'
+	delete 'src/main/xtext-gen'
+	delete 'src/test/xtend-gen'
+	delete 'src/test/xtext-gen'
 }

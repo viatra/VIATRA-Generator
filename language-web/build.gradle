@@ -1,31 +1,76 @@
-plugins {
-	id 'war'
-}
-
 dependencies {
 	compile project(':language')
 	compile project(':language-ide')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.web:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
-	compile "org.webjars:requirejs:2.3.6"
-	compile "org.webjars:requirejs-text:2.0.15"
-	compile "org.webjars:jquery:3.6.0"
-	// CodeMirror 5.53.0 and later is incompatible with Xtext due to
-	// https://github.com/codemirror/CodeMirror/commit/b2d26b4ccb1d0994ae84d18ad8b84018de176da9#commitcomment-41525744
-	compile "org.webjars.npm:codemirror:5.52.2"
-	providedCompile "org.eclipse.jetty:jetty-annotations:9.4.42.v20210604"
-	providedCompile "org.eclipse.jetty:jetty-rewrite:9.4.42.v20210604"
-	providedCompile "org.slf4j:slf4j-simple:1.7.31"
+	compile "org.eclipse.jetty:jetty-server:9.4.42.v20210604"
+	compile "org.eclipse.jetty:jetty-annotations:9.4.42.v20210604"
+	compile "org.slf4j:slf4j-simple:1.7.31"
 }
 
-task jettyRun(type:JavaExec) {
-	dependsOn(sourceSets.main.runtimeClasspath)
+def webpackOutputDir = "${buildDir}/webpack"
+def productionResources = "${webpackOutputDir}/production"
+def mainClass = 'org.eclipse.viatra.solver.language.web.ServerLauncher'
+
+apply plugin: 'com.moowork.node'
+
+for (environment in ['production', 'development']) {
+	def taskName = 'webpack' + environment.substring(0, 1).toUpperCase() + environment.substring(1);
+	task(taskName, type: NpmTask) {
+		dependsOn ':language:generateXtext'
+		inputs.dir 'src/main/css'
+		inputs.dir 'src/main/html'
+		inputs.dir 'src/main/js'
+		inputs.dir "${buildDir}/generated/sources/xtext/js"
+		inputs.file 'webpack.config.js'
+		outputs.dir "${webpackOutputDir}/${environment}"
+		args = ['run', 'build']
+		setEnvironment NODE_ENV: environment
+	}
+}
+
+apply plugin: 'application'
+mainClassName = mainClass
+distZip.enabled = false
+
+jar {
+	dependsOn webpackProduction
+	from(productionResources) {
+		into 'webapp'
+	}
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+shadowDistZip.enabled = false
+
+shadowJar {
+	dependsOn webpackProduction
+	from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output)
+	configurations = [project.configurations.runtime]
+	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA','schema/*',
+		'.options', '.api_description', '*.profile', 'about.*', 'about_*.html', 'about_files/*',
+		'plugin.xml', 'systembundle.properties', 'profile.list', 'META-INF/resources/xtext/**')
+	append('plugin.properties')
+	from(productionResources) {
+		into 'webapp'
+	}
+}
+
+task jettyRun(type: JavaExec) {
+	dependsOn webpackDevelopment
+	dependsOn sourceSets.main.runtimeClasspath
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
-	main = 'org.eclipse.viatra.solver.language.web.ServerLauncher'
+	main = mainClass
 	standardInput = System.in
 	group = 'run'
 	description = 'Starts an example Jetty server with your language'
+	environment(
+		DEV_MODE: 'true',
+		LISTEN_ADDRESS: 'localhost',
+		LISTEN_PORT: '1313',
+		BASE_RESOURCE: "${webpackOutputDir}/development"
+	)
 }
 
 eclipse {

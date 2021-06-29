@@ -1,0 +1,17 @@
+module org.eclipse.viatra.solver.language.model.GenerateProblemModel
+
+Workflow {
+	bean = org.eclipse.emf.mwe.utils.StandaloneSetup {
+		platformUri = ".."
+	}
+
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+		directory = "src/main/emf-gen"
+	}
+
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		generateCustomClasses = false
+		genModel = "platform:/resource/language-model/src/main/resources/model/problem.genmodel"
+		srcPath = "platform:/resource/language-model/src/main/emf-gen"
+	}
+}
