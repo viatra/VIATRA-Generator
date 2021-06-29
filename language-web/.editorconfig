@@ -1,13 +1,3 @@
-root = true
-
-[*]
-charset = utf-8
-insert_final_newline = true
-
-[*.{html,js,json,scss}]
-indent_style = space
-indent_size = 2
-
 [src/main/css/xtext/**.css]
 indent_style = tab
 
