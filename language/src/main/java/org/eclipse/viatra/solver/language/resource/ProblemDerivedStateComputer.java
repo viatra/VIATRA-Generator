@@ -5,18 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.viatra.solver.language.ProblemUtil;
 import org.eclipse.viatra.solver.language.model.problem.Argument;
-import org.eclipse.viatra.solver.language.model.problem.Assertion;
-import org.eclipse.viatra.solver.language.model.problem.AssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.ClassDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
@@ -25,8 +21,6 @@ import org.eclipse.viatra.solver.language.model.problem.ImplicitVariable;
 import org.eclipse.viatra.solver.language.model.problem.Literal;
 import org.eclipse.viatra.solver.language.model.problem.NegativeLiteral;
 import org.eclipse.viatra.solver.language.model.problem.Node;
-import org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument;
-import org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion;
 import org.eclipse.viatra.solver.language.model.problem.Parameter;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
@@ -48,6 +42,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
@@ -73,6 +68,9 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider scopeProvider;
 
+	@Inject
+	private Provider<NodeNameCollector> nodeNameCollectorProvider;
+	
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
 		Problem problem = getProblem(resource);
@@ -121,67 +119,15 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 	}
 
 	protected Set<String> installDerivedNodes(Problem problem) {
-		IScope nodeScope = scopeProvider.getScope(problem, ProblemPackage.Literals.ASSERTION__ARGUMENTS);
-		Set<String> nodeNames = new HashSet<>();
-		for (Statement statement : problem.getStatements()) {
-			if (statement instanceof Assertion) {
-				Assertion assertion = (Assertion) statement;
-				for (AssertionArgument argument : assertion.getArguments()) {
-					if (argument instanceof NodeAssertionArgument) {
-						addNodeNames(nodeNames, nodeScope, argument,
-								ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE,
-								ProblemDerivedStateComputer::validNodeName);
-					}
-				}
-			} else if (statement instanceof NodeValueAssertion) {
-				addNodeNames(nodeNames, nodeScope, statement, ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE,
-						ProblemDerivedStateComputer::validNodeName);
-			} else if (statement instanceof PredicateDefinition) {
-				PredicateDefinition predicateDefinition = (PredicateDefinition) statement;
-				for (Conjunction body : predicateDefinition.getBodies()) {
-					for (Literal literal : body.getLiterals()) {
-						Atom atom = null;
-						if (literal instanceof Atom) {
-							atom = (Atom) literal;
-						} else if (literal instanceof NegativeLiteral) {
-							NegativeLiteral negativeLiteral = (NegativeLiteral) literal;
-							atom = negativeLiteral.getAtom();
-						}
-						if (atom == null) {
-							continue;
-						}
-						for (Argument argument : atom.getArguments()) {
-							if (argument instanceof VariableOrNodeArgument) {
-								addNodeNames(nodeNames, nodeScope, argument,
-										ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE,
-										ProblemDerivedStateComputer::validQuotedId);
-							}
-						}
-					}
-				}
-			}
-		}
+		NodeNameCollector collector = nodeNameCollectorProvider.get();
+		collector.collectNodeNames(problem);
+		Set<String> nodeNames = collector.getNodeNames();
 		List<Node> grapNodes = problem.getNodes();
 		for (String nodeName : nodeNames) {
 			Node graphNode = createNode(nodeName);
 			grapNodes.add(graphNode);
 		}
 		return nodeNames;
-	}
-
-	private void addNodeNames(Set<String> nodeNames, IScope nodeScope, EObject eObject, EStructuralFeature feature,
-			Predicate<String> condition) {
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, feature);
-		for (INode node : nodes) {
-			String nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
-			if (!condition.test(nodeName)) {
-				continue;
-			}
-			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
-			if (!nodeNames.contains(nodeName) && nodeScope.getSingleElement(qualifiedName) == null) {
-				nodeNames.add(nodeName);
-			}
-		}
 	}
 
 	protected Node createNode(String name) {
@@ -347,7 +293,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		return validId(name) || validQuotedId(name);
 	}
 
-	public Adapter getOrInstallAdapter(Resource resource) {
+	protected Adapter getOrInstallAdapter(Resource resource) {
 		if (!(resource instanceof XtextResource)) {
 			return new Adapter();
 		}
@@ -363,7 +309,7 @@ public class ProblemDerivedStateComputer implements IDerivedStateComputer {
 		return adapter;
 	}
 
-	private static class Adapter extends AdapterImpl {
+	protected static class Adapter extends AdapterImpl {
 		public Map<ClassDeclaration, Node> newNodes = new HashMap<>();
 
 		@Override

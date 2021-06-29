@@ -12,6 +12,7 @@ import org.eclipse.viatra.solver.language.model.problem.Literal
 import org.eclipse.viatra.solver.language.model.problem.NegativeLiteral
 import org.eclipse.viatra.solver.language.model.problem.Node
 import org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument
+import org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition
 import org.eclipse.viatra.solver.language.model.problem.Problem
 import org.eclipse.viatra.solver.language.model.problem.Variable
@@ -72,6 +73,10 @@ class ProblemTestUtil {
 	
 	def assertion(Problem it, int i) {
 		statements.filter(Assertion).get(i)
+	}
+	
+	def nodeValueAssertion(Problem it, int i) {
+		statements.filter(NodeValueAssertion).get(i)
 	}
 	
 	def arg(Assertion it, int i) {

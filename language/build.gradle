@@ -7,6 +7,7 @@ configurations {
 dependencies {
 	testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
 	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+	testCompile "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 	testCompile "org.hamcrest:hamcrest:${hamcrestVersion}"
