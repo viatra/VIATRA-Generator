@@ -1,10 +1,24 @@
+const fs = require('fs');
 const path = require('path');
 
+const WebpackBeforeBuildPlugin = require('before-build-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const devMode = process.env.NODE_ENV !== 'production';
-const outputPath = path.resolve(__dirname, 'build/webpack', devMode ? 'development' : 'production');
+const currentNodeEnv = process.env.NODE_ENV || 'development';
+const devMode = currentNodeEnv !== 'production';
+const outputPath = path.resolve(__dirname, 'build/webpack', currentNodeEnv);
+
+const portNumberOrElse = (envName, fallback) => {
+  const value = process.env[envName];
+  return value ? parseInt(value) : fallback;
+}
+const listenHost = process.env['LISTEN_HOST'] || 'localhost';
+const listenPort = portNumberOrElse('LISTEN_PORT', 1313);
+const apiHost = process.env['API_HOST'] || listenHost;
+const apiPort = portNumberOrElse('API_PORT', 1312);
+const publicHost = process.env['PUBLIC_HOST'] || listenHost;
+const publicPort = portNumberOrElse('PUBLIC_PORT', listenPort);
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
@@ -66,11 +80,23 @@ module.exports = {
       images: path.resolve(__dirname, 'src/main/images'),
     },
   },
-  devtool: devMode ? 'eval' : 'source-map',
+  devtool: devMode ? 'inline-source-map' : 'source-map',
   optimization: {
     splitChunks: {
       chunks: 'all',
     },
+  },
+  devServer: {
+    contentBase: outputPath,
+    compress: true,
+    host: listenHost,
+    port: listenPort,
+    proxy: {
+      '/xtext-service': `${apiPort === 443 ? 'https' : 'http'}://${apiHost}:${apiPort}`,
+    },
+    public: `${publicHost}:${publicPort}`,
+    sockHost: publicHost,
+    sockPort: publicPort,
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -89,5 +115,22 @@ module.exports = {
         useShortDoctype: true,
       },
     }),
+    new WebpackBeforeBuildPlugin((stats, callback) => {
+      // https://stackoverflow.com/a/40370750
+      const newlyCreatedAssets = stats.compilation.assets;
+      const unlinked = [];
+      fs.readdir(outputPath, (err, files) => {
+        files.forEach(file => {
+          if (!newlyCreatedAssets[file]) {
+            fs.unlinkSync(path.resolve(outputPath, file));
+            unlinked.push(file);
+          }
+        });
+        if (unlinked.length > 0) {
+          console.log('Removed old assets: ', unlinked);
+        }
+      });
+      callback();
+    }, ['done']),
   ],
 };

@@ -85,7 +85,10 @@ public class ServerLauncher {
 
 	public static void main(String[] args) {
 		String listenAddress = System.getenv("LiSTEN_ADDRESS");
-		int port = 8080;
+		if (listenAddress == null) {
+			listenAddress = "localhost";
+		}
+		int port = 1312;
 		String portStr = System.getenv("LISTEN_PORT");
 		if (portStr != null) {
 			try {
