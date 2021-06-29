@@ -1,5 +1,6 @@
 bin/
 xtend-gen/
+xtext-gen/
 .gradle/
 build/
 *._trace
