@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
     "before-build-webpack": "^0.2.11",
     "css-loader": "^5.2.6",
@@ -38,6 +39,9 @@
   },
   "dependencies": {
     "codemirror": "^5.62.0",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "react": "^16.14.0",
+    "react-codemirror2": "^7.2.1",
+    "react-dom": "^16.14.0"
   }
 }
