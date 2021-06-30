@@ -219,7 +219,7 @@ class NodeScopingTest {
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
-		assertThat(nodeNames, empty)
+		assertThat(nodes, empty)
 		assertThat(assertion(0).arg(0).node, equalTo(findEnum("Foo").literal("alpha")))
 	}
 
@@ -232,7 +232,7 @@ class NodeScopingTest {
 			«qualifiedName»: 16.
 		''')
 		assertThat(errors, empty)
-		assertThat(nodeNames, empty)
+		assertThat(nodes, empty)
 		assertThat(nodeValueAssertion(0).node, equalTo(findEnum("Foo").literal("alpha")))
 	}
 
@@ -245,7 +245,7 @@ class NodeScopingTest {
 			pred predicate(Foo a) :- node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
-		assertThat(nodeNames, empty)
+		assertThat(nodes, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(findEnum("Foo").literal("alpha")))
 	}
 
@@ -257,6 +257,48 @@ class NodeScopingTest {
 			Arguments.of("Foo::alpha", true),
 			Arguments.of("test::alpha", true),
 			Arguments.of("test::Foo::alpha", true)
+		)
+	}
+
+	@ParameterizedTest
+	@MethodSource("builtInEnumLiteralReferencesSource")
+	def void builtInEnumLiteralTest(String qualifiedName) {
+		val it = parseHelper.parse('''
+			pred predicate(node a) :- node(a).
+			predicate(«qualifiedName»).
+		''')
+		assertThat(errors, empty)
+		assertThat(nodes, empty)
+		assertThat(assertion(0).arg(0).node, equalTo(builtin.findEnum("bool").literal("true")))
+	}
+
+	@ParameterizedTest
+	@MethodSource("builtInEnumLiteralReferencesSource")
+	def void builtInEnumLiteralInNodeValueAssertionTest(String qualifiedName) {
+		val it = parseHelper.parse('''
+			«qualifiedName»: 16.
+		''')
+		assertThat(errors, empty)
+		assertThat(nodes, empty)
+		assertThat(nodeValueAssertion(0).node, equalTo(builtin.findEnum("bool").literal("true")))
+	}
+
+	@ParameterizedTest
+	@MethodSource("builtInEnumLiteralReferencesSource")
+	def void bultInEnumLiteralInPredicateTest(String qualifiedName) {
+		val it = parseHelper.parse('''
+			pred predicate() :- node(«qualifiedName»).
+		''')
+		assertThat(errors, empty)
+		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(builtin.findEnum("bool").literal("true")))
+	}
+
+	static def builtInEnumLiteralReferencesSource() {
+		Stream.of(
+			Arguments.of("true"),
+			Arguments.of("bool::true"),
+			Arguments.of("builtin::true"),
+			Arguments.of("builtin::bool::true")
 		)
 	}
 }

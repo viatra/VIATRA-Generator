@@ -12,10 +12,8 @@ import org.eclipse.viatra.solver.language.model.problem.Assertion;
 import org.eclipse.viatra.solver.language.model.problem.AssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.Atom;
 import org.eclipse.viatra.solver.language.model.problem.Conjunction;
-import org.eclipse.viatra.solver.language.model.problem.EnumDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Literal;
 import org.eclipse.viatra.solver.language.model.problem.NegativeLiteral;
-import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.NodeAssertionArgument;
 import org.eclipse.viatra.solver.language.model.problem.NodeValueAssertion;
 import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
@@ -47,7 +45,6 @@ public class NodeNameCollector {
 	private IScopeProvider scopeProvider;
 
 	private final Set<String> nodeNames = new HashSet<>();
-	private final Set<String> existingNodeNames = new HashSet<>();
 
 	private IScope nodeScope;
 
@@ -56,24 +53,9 @@ public class NodeNameCollector {
 	}
 
 	public void collectNodeNames(Problem problem) {
-		nodeScope = scopeProvider.getScope(problem, ProblemPackage.Literals.ASSERTION__ARGUMENTS);
-		collectEnumLiteralNames(problem);
+		nodeScope = scopeProvider.getScope(problem, ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE);
 		for (Statement statement : problem.getStatements()) {
 			collectStatementNodeNames(statement);
-		}
-	}
-
-	protected void collectEnumLiteralNames(Problem problem) {
-		for (Statement statement : problem.getStatements()) {
-			if (statement instanceof EnumDeclaration) {
-				EnumDeclaration enumDeclaration = (EnumDeclaration) statement;
-				for (Node literal : enumDeclaration.getLiterals()) {
-					String name = literal.getName();
-					if (ProblemDerivedStateComputer.validId(name)) {
-						existingNodeNames.add(name);
-					}
-				}
-			}
 		}
 	}
 
@@ -90,14 +72,14 @@ public class NodeNameCollector {
 	protected void collectAssertionNodeNames(Assertion assertion) {
 		for (AssertionArgument argument : assertion.getArguments()) {
 			if (argument instanceof NodeAssertionArgument) {
-				addNodeNames(argument, ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE,
+				collectNodeNames(argument, ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE,
 						ProblemDerivedStateComputer::validNodeName);
 			}
 		}
 	}
 
 	protected void collectNodeValueAssertionNodeNames(NodeValueAssertion nodeValueAssertion) {
-		addNodeNames(nodeValueAssertion, ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE,
+		collectNodeNames(nodeValueAssertion, ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE,
 				ProblemDerivedStateComputer::validNodeName);
 	}
 
@@ -116,7 +98,7 @@ public class NodeNameCollector {
 				}
 				for (Argument argument : atom.getArguments()) {
 					if (argument instanceof VariableOrNodeArgument) {
-						addNodeNames(argument, ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE,
+						collectNodeNames(argument, ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE,
 								ProblemDerivedStateComputer::validQuotedId);
 					}
 				}
@@ -124,7 +106,7 @@ public class NodeNameCollector {
 		}
 	}
 
-	private void addNodeNames(EObject eObject, EStructuralFeature feature, Predicate<String> condition) {
+	private void collectNodeNames(EObject eObject, EStructuralFeature feature, Predicate<String> condition) {
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, feature);
 		for (INode node : nodes) {
 			String nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
@@ -132,7 +114,7 @@ public class NodeNameCollector {
 				continue;
 			}
 			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
-			if (!existingNodeNames.contains(nodeName) && nodeScope.getSingleElement(qualifiedName) == null) {
+			if (nodeScope.getSingleElement(qualifiedName) == null) {
 				nodeNames.add(nodeName);
 			}
 		}
