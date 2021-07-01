@@ -1,31 +1,84 @@
 @import 'codemirror/lib/codemirror';
 @import 'codemirror/addon/hint/show-hint';
+@import 'codemirror/theme/material-darker';
 
-@import 'xtext/xtext-codemirror';
+.CodeMirror {
+  font-size: 16px;
+  height: 100%;
+}
 
-.problem-class {
-	color: #005032;
+.annotations-gutter {
+	width: 12px;
+}
+
+.xtext-annotation_error {
+	width: 12px;
+	height: 12px;
+	background-image: url('images/error_an.gif');
+	background-repeat: no-repeat;
+}
+
+.xtext-annotation_warning {
+	width: 12px;
+	height: 12px;
+	background-image: url('images/warning_an.gif');
+	background-repeat: no-repeat;
+}
+
+.xtext-annotation_info {
+	width: 12px;
+	height: 12px;
+	background-image: url('images/info_an.gif');
+	background-repeat: no-repeat;
+}
+
+.xtext-marker_error {
+	z-index: 30;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAABmJLR0QA/wD/AP+gvaeTAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg==");
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+
+.xtext-marker_warning {
+	z-index: 20;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAABmJLR0QA/wD/AP+gvaeTAAAAMklEQVQI12NkgIIvJ3QXMjAwdDN+OaEbysDA4MPAwNDNwMCwiOHLCd1zX07o6kBVGQEAKBANtobskNMAAAAASUVORK5CYII=");
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+
+.xtext-marker_info {
+	z-index: 10;
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAABmJLR0QA/wD/AP+gvaeTAAAANklEQVQI12NkgIIVRx8tZGBg6GZccfRRKAMDgw8DA0M3AwPDIiYGBoZKBgaG7ghruSsMDAwpABH5CoqwzCoTAAAAAElFTkSuQmCC");
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+
+.xtext-marker_read {
+  background: rgba(128, 203, 196, 0.2);
+}
+
+.xtext-marker_write {
+  background: rgba(255, 229, 100, 0.2);
+}
+
+.problem-class, .problem-enum {
+  @extend .cm-type;
 }
 
 .problem-abstract {
-	color: #8b8816;
-}
-
-.problem-enum {
-	color: #644632;
+	font-style: italic;
 }
 
 .problem-reference {
-	color: #0000c0;
+  @extend .cm-def;
 }
 
 .problem-containment {
 	font-weight: bold;
 }
 
-.CodeMirror .cm-quoted-name, .problem-enum-node {
-	color: #1a1a1a !important;
-	font-weight: bold;
+.cm-quoted-name, .problem-enum-node {
+  @extend .cm-atom;
 }
 
 .problem-new-node {
@@ -33,9 +86,9 @@
 }
 
 .problem-variable {
-	color: #6a3e3e;
+  @extend .cm-variable;
 }
 
 .problem-singleton-variable {
-	color: #a1706f;
+  opacity: 0.7;
 }

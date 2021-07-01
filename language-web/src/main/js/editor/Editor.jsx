@@ -12,6 +12,8 @@ export default observer(() => {
   const codeMirrorOptions = {
     mode: 'xtext/problem',
     indentUnit: 2,
+    theme: 'material-darker',
+    lineNumbers: editorStore.showLineNumbers,
   };
 
   const xtextOptions = {

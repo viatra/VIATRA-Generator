@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -13,30 +13,32 @@ import Editor from './editor/Editor';
 import EditorButtons from './editor/EditorButtons';
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    maxHeight: '100vh',
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
   },
-  fab: {
-    position: 'fixed',
-    right: theme.spacing(3),
-    bottom: theme.spacing(3),
-    zIndex: 1000,
+  editorBox: {
+    overflow: 'auto',
   },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  }
 }));
 
 export default () => {
   const classes = useStyles();
 
   return (
-    <>
+    <Box
+      display='flex'
+      flexDirection='column'
+      className={classes.container}
+    >
       <AppBar
         position='static'
+        color='inherit'
       >
         <Toolbar>
           <IconButton
@@ -56,18 +58,35 @@ export default () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Box>
-        <EditorButtons/>
-      </Box>
-      <Editor/>
-      <Fab
-        variant='extended'
-        color='secondary'
-        className={classes.fab}
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        p={1}
       >
-        <PlayArrowIcon className={classes.extendedIcon}/>
-        Generate
-      </Fab>
-    </>
+        <Box
+          display='flex'
+          alignItems='center'
+        >
+          <EditorButtons/>
+        </Box>
+        <Box>
+          <Button
+            variant='outlined'
+            color='primary'
+            startIcon={<PlayArrowIcon/>}
+          >
+            Generate
+          </Button>
+        </Box>
+      </Box>
+      <Box
+        flexGrow={1}
+        flexShrink={1}
+        className={classes.editorBox}
+      >
+        <Editor/>
+      </Box>
+    </Box>
   );
 };

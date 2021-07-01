@@ -46,7 +46,21 @@ scope Family = 1, Person += 5..10.
 const rootStore = new RootStore();
 rootStore.editorStore.updateValue(initialValue);
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    background: {
+      default: '#212121',
+      paper: '#333333',
+    },
+    primary: {
+      main: '#82aaff',
+    },
+    secondary: {
+      main: '#ff5370',
+    },
+  },
+});
 
 const app = (
   <ThemeProvider theme={theme}>

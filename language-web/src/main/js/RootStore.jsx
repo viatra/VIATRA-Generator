@@ -1,4 +1,3 @@
-import { makeAutoObservable } from 'mobx';
 import React, { createContext, useContext } from 'react';
 
 import EditorStore from './editor/EditorStore';
@@ -8,7 +7,6 @@ export default class RootStore {
 
   constructor() {
     this.editorStore = new EditorStore();
-    makeAutoObservable(this);
   }
 }
 

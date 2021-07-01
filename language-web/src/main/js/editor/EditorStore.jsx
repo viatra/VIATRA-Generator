@@ -7,6 +7,8 @@ export default class EditorStore {
   editor = null;
   /** @type {string} */
   value = '';
+  /** @type {boolean} */
+  showLineNumbers = false;
 
   constructor() {
     this.atom = createAtom('EditorStore');
@@ -71,5 +73,9 @@ export default class EditorStore {
 
   redo() {
     this.editor.redo();
+  }
+
+  toggleLineNumbers() {
+    this.showLineNumbers = !this.showLineNumbers;
   }
 }
