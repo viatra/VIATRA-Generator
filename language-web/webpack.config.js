@@ -40,9 +40,25 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['@babel/preset-env', { targets: 'defaults' }],
+            [
+              '@babel/preset-env',
+              {
+                targets: 'defaults',
+              },
+            ],
             '@babel/preset-react',
           ],
+          plugins: [
+            [
+              '@babel/plugin-proposal-class-properties',
+              {
+                loose: false,
+              },
+            ],
+          ],
+          assumptions: {
+            'setPublicClassFields': false,
+          },
         },
       },
       {
@@ -59,14 +75,19 @@ module.exports = {
         ]
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(gif|png|jpe?g|svg?)$/i,
         use: [
-          'file-loader',
           {
             loader: 'image-webpack-loader',
             options: {
               disable: true,
             }
+          },
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 256,
+            },
           },
         ],
       },

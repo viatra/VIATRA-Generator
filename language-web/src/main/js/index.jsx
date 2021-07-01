@@ -1,7 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
-import XtextCodeMirror from "./components/XtextCodeMirror";
+import App from './App';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import RootStore, { RootStoreProvider } from './RootStore';
 
 import '../css/index.scss';
 
@@ -38,6 +42,19 @@ age(bob, bobAge).
 
 scope Family = 1, Person += 5..10.
 `;
-const app = <XtextCodeMirror initialValue={initialValue}/>;
+
+const rootStore = new RootStore();
+rootStore.editorStore.updateValue(initialValue);
+
+const theme = createMuiTheme();
+
+const app = (
+  <ThemeProvider theme={theme}>
+    <CssBaseline/>
+    <RootStoreProvider rootStore={rootStore}>
+      <App/>
+    </RootStoreProvider>
+  </ThemeProvider>
+)
 
 render(app, document.getElementById('app'));
