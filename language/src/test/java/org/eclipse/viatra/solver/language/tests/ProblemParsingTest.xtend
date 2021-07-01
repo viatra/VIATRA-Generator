@@ -42,7 +42,7 @@ class ProblemParsingTest {
 			}
 			
 			% A child cannot have any dependents.
-			error invalidTaxStatus(Person p) :-
+			error invalidTaxStatus(Person p) <=>
 				taxStatus(p, child), children(p, _q).
 			
 			Family('family').

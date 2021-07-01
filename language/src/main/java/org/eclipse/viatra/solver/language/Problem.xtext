@@ -35,7 +35,7 @@ PredicateDefinition:
 	(error?="error" "pred"? | "pred")
 	name=Identifier
 	"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")"
-	(":-" bodies+=Conjunction (";" bodies+=Conjunction)*)?
+	("<=>" bodies+=Conjunction (";" bodies+=Conjunction)*)?
 	".";
 
 Parameter:

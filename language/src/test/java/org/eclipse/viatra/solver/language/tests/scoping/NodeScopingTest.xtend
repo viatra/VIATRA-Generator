@@ -42,7 +42,7 @@ class NodeScopingTest {
 	@Test
 	def void implicitNodeInAssertionTest() {
 		val it = parseHelper.parse('''
-			pred predicate(node x, node y) :- node(x).
+			pred predicate(node x, node y) <=> node(x).
 			predicate(a, a).
 			?predicate(a, b).
 		''')
@@ -66,7 +66,7 @@ class NodeScopingTest {
 
 	def void implicitNodeInPredicateTest() {
 		val it = parseHelper.parse('''
-			pred predicate(node a) :- node(b).
+			pred predicate(node a) <=> node(b).
 			predicate(b).
 		''')
 		assertThat(errors, empty)
@@ -78,7 +78,7 @@ class NodeScopingTest {
 	@Test
 	def void quotedNodeInAssertionTest() {
 		val it = parseHelper.parse('''
-			pred predicate(node x, node y) :- node(x).
+			pred predicate(node x, node y) <=> node(x).
 			predicate('a', 'a').
 			?predicate('a', 'b').
 		''')
@@ -103,7 +103,7 @@ class NodeScopingTest {
 	@Test
 	def void quotedNodeInPredicateTest() {
 		val it = parseHelper.parse('''
-			pred predicate(node a) :- node('b').
+			pred predicate(node a) <=> node('b').
 		''')
 		assertThat(errors, empty)
 		assertThat(nodeNames, hasItem("'b'"))
@@ -114,7 +114,7 @@ class NodeScopingTest {
 	@MethodSource("builtInNodeReferencesSource")
 	def void builtInNodeTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate(node x) :- node(x).
+			pred predicate(node x) <=> node(x).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -137,7 +137,7 @@ class NodeScopingTest {
 	@MethodSource("builtInNodeReferencesSource")
 	def void builtInNodeInPredicateTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate(node x) :- node(«qualifiedName»).
+			pred predicate(node x) <=> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(builtin.findClass('int').newNode))
@@ -156,7 +156,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			class Foo.
-			pred predicate(node x) :- node(x).
+			pred predicate(node x) <=> node(x).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -183,7 +183,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			class Foo.
-			pred predicate(node x) :- node(«qualifiedName»).
+			pred predicate(node x) <=> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(findClass('Foo').newNode))
@@ -201,7 +201,7 @@ class NodeScopingTest {
 	def void newNodeIsNotSpecial() {
 		val it = parseHelper.parse('''
 			class Foo.
-			pred predicate(node x) :- node(x).
+			pred predicate(node x) <=> node(x).
 			predicate(new).
 		''')
 		assertThat(errors, empty)
@@ -215,7 +215,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			enum Foo { alpha, beta }
-			pred predicate(Foo a) :- node(a).
+			pred predicate(Foo a) <=> node(a).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -242,7 +242,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			enum Foo { alpha, beta }
-			pred predicate(Foo a) :- node(«qualifiedName»).
+			pred predicate(Foo a) <=> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(nodes, empty)
@@ -264,7 +264,7 @@ class NodeScopingTest {
 	@MethodSource("builtInEnumLiteralReferencesSource")
 	def void builtInEnumLiteralTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate(node a) :- node(a).
+			pred predicate(node a) <=> node(a).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -287,7 +287,7 @@ class NodeScopingTest {
 	@MethodSource("builtInEnumLiteralReferencesSource")
 	def void bultInEnumLiteralInPredicateTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate() :- node(«qualifiedName»).
+			pred predicate() <=> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(builtin.findEnum("bool").literal("true")))
