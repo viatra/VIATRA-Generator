@@ -91,6 +91,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.woff2?$/i,
+        loader: 'file-loader',
+      },
     ],
   },
   resolve: {
