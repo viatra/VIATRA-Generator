@@ -7,23 +7,26 @@
 
 $robotoWeights: 300, 400, 500, 700;
 @each $weight in $robotoWeights {
-  @include Roboto.fontFace($weight: $weight);
+  @include Roboto.fontFace($fontName: 'Roboto', $weight: $weight);
+  @include Roboto.fontFace($fontName: 'Roboto', $weight: $weight, $style: italic);
 }
 
 $firaCodeWeights: 400, 600;
 @each $weight in $firaCodeWeights {
-  @include FiraCode.fontFace($weight: $weight);
+  @include FiraCode.fontFace($fontName: 'Fira Code', $weight: $weight);
 }
+@include FiraCode.fontFaceVariable($fontName: 'Fira CodeVariable');
 
 body {
-  font-family: Roboto.$fontName;
+  font-family: 'Roboto';
 }
 
 .CodeMirror {
   font-size: 16px;
   height: 100%;
-  font-family: FiraCode.$fontName, monospace;
-  font-feature-settings: 'liga', 'calt', 'ss01', 'ss02', 'ss03', 'ss05', 'zero';
+  font-family: 'Fira CodeVariable', 'Fira Code', monospace;
+  font-feature-settings: 'liga', 'calt';
+  font-weight: 400;
   text-rendering: optimizeLegibility;
 }
 
@@ -33,23 +36,26 @@ body {
 
 .xtext-annotation_error {
 	width: 12px;
-	height: 12px;
+	height: 1em;
 	background-image: url('images/error_an.gif');
 	background-repeat: no-repeat;
+  background-position: bottom;
 }
 
 .xtext-annotation_warning {
 	width: 12px;
-	height: 12px;
+	height: 1em;
 	background-image: url('images/warning_an.gif');
 	background-repeat: no-repeat;
+  background-position: bottom;
 }
 
 .xtext-annotation_info {
 	width: 12px;
-	height: 12px;
+	height: 1em;
 	background-image: url('images/info_an.gif');
 	background-repeat: no-repeat;
+  background-position: bottom;
 }
 
 .xtext-marker_error {
