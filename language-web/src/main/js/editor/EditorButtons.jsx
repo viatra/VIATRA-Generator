@@ -8,6 +8,7 @@ import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import RedoIcon from '@material-ui/icons/Redo';
 import UndoIcon from '@material-ui/icons/Undo';
 import ToggleButton from '@material-ui/lab/ToggleButton';
+
 import { useRootStore } from '../RootStore';
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +41,7 @@ export default observer(() => {
           disabled={!editorStore.canUndo}
           onClick={() => editorStore.undo()}
           className={classes.iconButton}
+          aria-label='Undo'
         >
           <UndoIcon fontSize='small'/>
         </Button>
@@ -47,6 +49,7 @@ export default observer(() => {
           disabled={!editorStore.canRedo}
           onClick={() => editorStore.redo()}
           className={classes.iconButton}
+          aria-label='REdo'
         >
           <RedoIcon fontSize='small'/>
         </Button>
@@ -57,11 +60,11 @@ export default observer(() => {
         className={classes.divider}
       />
       <ToggleButton
-        value='Show line numbers'
         selected={editorStore.showLineNumbers}
         onChange={() => editorStore.toggleLineNumbers()}
         size='small'
         className={classes.flatToggleButton}
+        aria-label='Show line numbers'
       >
         <FormatListNumberedIcon fontSize='small'/>
       </ToggleButton>

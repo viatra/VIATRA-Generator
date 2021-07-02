@@ -1,5 +1,5 @@
 @use '@fontsource/roboto/scss/mixins' as Roboto;
-@use '@fontsource/fira-code/scss/mixins' as FiraCode;
+@use '@fontsource/jetbrains-mono/scss/mixins' as JetbrainsMono;
 
 @import 'codemirror/lib/codemirror';
 @import 'codemirror/addon/hint/show-hint';
@@ -11,20 +11,22 @@ $robotoWeights: 300, 400, 500, 700;
   @include Roboto.fontFace($fontName: 'Roboto', $weight: $weight, $style: italic);
 }
 
-$firaCodeWeights: 400, 600;
-@each $weight in $firaCodeWeights {
-  @include FiraCode.fontFace($fontName: 'Fira Code', $weight: $weight);
+$jetbrainsMonoWeights: 400, 700;
+@each $weight in $jetbrainsMonoWeights {
+  @include JetbrainsMono.fontFace($fontName: 'JetBrains Mono', $weight: $weight);
+  @include JetbrainsMono.fontFace($fontName: 'JetBrains Mono', $weight: $weight, $style: italic);
 }
-@include FiraCode.fontFaceVariable($fontName: 'Fira CodeVariable');
+@include JetbrainsMono.fontFaceVariable($fontName: 'JetBrains MonoVariable');
+@include JetbrainsMono.fontFaceVariable($fontName: 'JetBrains MonoVariable', $style: italic);
 
 body {
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
 }
 
-.CodeMirror {
+.CodeMirror, .CodeMirror-hints {
   font-size: 16px;
   height: 100%;
-  font-family: 'Fira CodeVariable', 'Fira Code', monospace;
+  font-family: 'JetBrains MonoVariable', 'JetBrains Mono', monospace;
   font-feature-settings: 'liga', 'calt';
   font-weight: 400;
   text-rendering: optimizeLegibility;
@@ -92,6 +94,7 @@ body {
 }
 
 .problem-abstract {
+  font-style: italic;
 }
 
 .problem-reference {
@@ -99,7 +102,7 @@ body {
 }
 
 .problem-containment {
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .cm-quoted-name, .problem-enum-node {
@@ -107,6 +110,7 @@ body {
 }
 
 .problem-new-node {
+  font-style: italic;
 }
 
 .problem-variable {

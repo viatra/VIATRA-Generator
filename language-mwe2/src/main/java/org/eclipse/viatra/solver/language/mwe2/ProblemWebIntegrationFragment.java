@@ -49,7 +49,7 @@ public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
 		patterns.put("start", "{token: \"lparen\", indent: true, regex: \"[[({]\"}");
 		patterns.put("start", "{token: \"rparen\", dedent: true, regex: \"[\\\\])}]\"}");
 		patterns.putAll("predicateBody", patterns.get("start"));
-		patterns.put("start", "{indent: true, push: \"predicateBody\", regex: \":-\"}");
+		patterns.put("start", "{indent: true, push: \"predicateBody\", regex: \"<=>\"}");
 		patterns.put("predicateBody", "{dedent: true, dedentIfLineStart: false, pop: true, regex: \"\\\\.\\\\s*$\"}");
 		patterns.put("predicateBody", "{indent: true, dedent: true, regex: \"[;]\"}");
 		// We must repeat the keyword rule here, because Xtext only adds it to "main" later.
