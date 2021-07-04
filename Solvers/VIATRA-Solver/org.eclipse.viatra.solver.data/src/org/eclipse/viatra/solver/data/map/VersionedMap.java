@@ -3,9 +3,10 @@ package org.eclipse.viatra.solver.data.map;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.viatra.solver.data.map.internal.MapCursor;
+import org.eclipse.viatra.solver.data.map.internal.MapEntryIterator;
 import org.eclipse.viatra.solver.data.map.internal.MutableNode;
 import org.eclipse.viatra.solver.data.map.internal.Node;
-import org.eclipse.viatra.solver.data.map.internal.NodeIterator;
 
 public class VersionedMap<KEY,VALUE> implements Versioned{
 
@@ -47,7 +48,7 @@ public class VersionedMap<KEY,VALUE> implements Versioned{
 		}
 	}
 	Iterator<Map.Entry<KEY,VALUE>> getIterator() {
-		return new NodeIterator<KEY, VALUE>(this.root);
+		return new MapEntryIterator<>(this.root);
 	}
 
 	@Override

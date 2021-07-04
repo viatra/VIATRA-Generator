@@ -203,6 +203,48 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		return new ImmutableNode<KEY,VALUE>(this);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	boolean moveToNext(MapCursor<KEY, VALUE> cursor) {
+		// 1. try to move to data
+		if(cursor.dataIndex != MapCursor.IndexFinish) {
+			for(int index = cursor.dataIndex+1; index < factor; index++) {
+				if(this.content[index*2]!=null) {
+					// 1.1 found next data
+					cursor.dataIndex = index;
+					cursor.key = (KEY) this.content[index*2];
+					cursor.value = (VALUE) this.content[index*2+1];
+					return true;
+				}
+			}
+		}
+		cursor.dataIndex = MapCursor.IndexFinish;
+		// 2. look inside the subnodes
+		for(int index = cursor.nodeIndexStack.peek()+1; index < factor; index++) {
+			if(this.content[index*2]==null && this.content[index*2+1] !=null) {
+				// 2.1 found next subnode, move down to the subnode
+				Node<KEY, VALUE> subnode = (Node<KEY, VALUE>) this.content[index*2+1];
+				
+				cursor.dataIndex = MapCursor.IndexStart;
+				cursor.nodeStack.add(subnode);
+				cursor.nodeIndexStack.add(index);
+				
+				return subnode.moveToNext(cursor);
+			}
+		}
+		// 3. no subnode found, move up
+		cursor.nodeStack.pop();
+		cursor.nodeIndexStack.pop();
+		if(!cursor.nodeStack.empty()) {
+			Node<KEY, VALUE> supernode = cursor.nodeStack.peek();
+			return supernode.moveToNext(cursor);
+		} else {
+			cursor.key = null;
+			cursor.value = null;
+			return false;
+		}
+	}
+	
 	@Override
 	protected void prettyPrint(StringBuilder builder, int depth, int code) {
 		for(int i = 0; i<depth; i++) {

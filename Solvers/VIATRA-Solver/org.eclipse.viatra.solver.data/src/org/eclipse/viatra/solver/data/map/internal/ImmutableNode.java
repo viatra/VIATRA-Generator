@@ -158,9 +158,15 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getSize() {
-		throw new UnsupportedOperationException();
+		int result = Integer.bitCount(this.dataMap);
+		for(int subnodeIndex = 0; subnodeIndex < Integer.bitCount(this.nodeMap); subnodeIndex++) {
+			ImmutableNode<KEY,VALUE> subnode = (ImmutableNode<KEY, VALUE>) this.content[this.content.length-1-subnodeIndex];
+			result += subnode.getSize();
+		}
+		return result;
 	}
 	
 	@Override
@@ -171,6 +177,48 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	@Override
 	protected ImmutableNode<KEY,VALUE> toImmutable() {
 		return this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	boolean moveToNext(MapCursor<KEY, VALUE> cursor) {
+		// 1. try to move to data
+		int datas = Integer.bitCount(this.dataMap);
+		if(cursor.dataIndex != MapCursor.IndexFinish) {
+			int newDataIndex = cursor.dataIndex + 1;
+			if(newDataIndex < datas) {
+				cursor.dataIndex = newDataIndex;
+				cursor.key = (KEY) this.content[newDataIndex*2];
+				cursor.value = (VALUE) this.content[newDataIndex*2+1];
+				return true;
+			} else {
+				cursor.dataIndex = MapCursor.IndexFinish;
+			}
+		}
+		
+		// 2. look inside the subnodes
+		int nodes = Integer.bitCount(this.nodeMap);
+		int newNodeIndex = cursor.nodeIndexStack.peek() + 1;
+		if(newNodeIndex < nodes) {
+			// 2.1 found next subnode, move down to the subnode
+			Node<KEY, VALUE> subnode = (Node<KEY, VALUE>) this.content[this.content.length-1-newNodeIndex];
+			cursor.dataIndex = MapCursor.IndexStart;
+			cursor.nodeStack.add(subnode);
+			cursor.nodeIndexStack.add(newNodeIndex);
+			return subnode.moveToNext(cursor);
+		} else {
+			// 3. no subnode found, move up
+			cursor.nodeStack.pop();
+			cursor.nodeIndexStack.pop();
+			if(!cursor.nodeStack.empty()) {
+				Node<KEY, VALUE> supernode = cursor.nodeStack.peek();
+				return supernode.moveToNext(cursor);
+			} else {
+				cursor.key = null;
+				cursor.value = null;
+				return false;
+			}
+		}
 	}
 	
 	@Override

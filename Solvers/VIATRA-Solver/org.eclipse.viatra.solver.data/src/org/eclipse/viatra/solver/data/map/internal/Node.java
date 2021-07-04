@@ -55,6 +55,13 @@ public abstract class Node<KEY,VALUE>{
 	abstract protected MutableNode<KEY, VALUE> toMutable();
 	abstract protected ImmutableNode<KEY, VALUE> toImmutable();
 	
+	/**
+	 * Moves a {@link MapCursor} to its next position.
+	 * @param cursor the cursor
+	 * @return Whether there was a next value to move on.
+	 */
+	abstract boolean moveToNext(MapCursor<KEY,VALUE> cursor);
+	
 	///////// For iterators
 	//abstract boolean moveIteratorToNextData(NodeIterator<KEY,VALUE> iterator, int currentIndex);
 	//abstract boolean moveIteratorToNextNode(NodeIterator<KEY,VALUE> iterator, int currentIndex);
