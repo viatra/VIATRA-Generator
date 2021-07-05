@@ -49,24 +49,6 @@ public class MapSmokeTest {
 		};
 		return chp;
 	}
-
-//	void recursiveCall(
-//		int steps,
-//		int maxKey,
-//		int maxValue,
-//		String[] values,
-//		MapTestEnvironment<Integer, String> e,
-//		Random r)
-//	{
-//		if(steps<=0) {
-//			return;
-//		} else {
-//			e.put(r.nextInt(maxKey), values[r.nextInt(maxValue)]);
-//			e.checkEquivalence();
-//			
-//			recursiveCall(steps-1, maxKey, maxValue, values, e, r);
-//		}
-//	}
 	
 	void iterativeRandomPuts(
 		String scenario,
