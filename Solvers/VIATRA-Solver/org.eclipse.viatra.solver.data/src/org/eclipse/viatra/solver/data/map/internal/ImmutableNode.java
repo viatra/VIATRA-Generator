@@ -203,8 +203,8 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			// 2.1 found next subnode, move down to the subnode
 			Node<KEY, VALUE> subnode = (Node<KEY, VALUE>) this.content[this.content.length-1-newNodeIndex];
 			cursor.dataIndex = MapCursor.IndexStart;
-			cursor.nodeStack.add(subnode);
-			cursor.nodeIndexStack.add(newNodeIndex);
+			cursor.nodeStack.push(subnode);
+			cursor.nodeIndexStack.push(newNodeIndex);
 			return subnode.moveToNext(cursor);
 		} else {
 			// 3. no subnode found, move up
@@ -222,7 +222,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	}
 	
 	@Override
-	protected void prettyPrint(StringBuilder builder, int depth, int code) {
+	public void prettyPrint(StringBuilder builder, int depth, int code) {
 		for(int i = 0; i<depth; i++) {
 			builder.append("\t");
 		}

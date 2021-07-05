@@ -1,5 +1,5 @@
 package org.eclipse.viatra.solver.data.map;
 
-public class MapTests {
+public class MapUnitTests {
 
 }

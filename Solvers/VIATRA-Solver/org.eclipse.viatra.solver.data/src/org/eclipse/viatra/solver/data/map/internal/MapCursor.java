@@ -20,14 +20,19 @@ public class MapCursor<KEY,VALUE> {
 		// Initializing tree stack
 		super();
 		this.nodeStack = new Stack<>();
-		this.nodeStack.add(root);
+		if(root != null) {
+			this.nodeStack.add(root);
+		}
 		this.nodeIndexStack = new Stack<>();
-		this.nodeIndexStack.add(IndexStart);
+		this.nodeIndexStack.push(IndexStart);
 		this.dataIndex = IndexStart;
 		
 		// Initializing cache
 		this.key = null;
 		this.value = null;
+		
+		// move to first
+		move();
 	}
 	
 	public KEY getKey() {
@@ -43,10 +48,10 @@ public class MapCursor<KEY,VALUE> {
 	}
 	
 	public boolean move() {
-		if(this.isTerminated()) {
-			return false;
+		if(!isTerminated()) {
+			return this.nodeStack.peek().moveToNext(this);
 		} else {
-			return true;
+			return false;
 		}
 	}
 }

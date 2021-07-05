@@ -112,7 +112,8 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				if(value == defaultValue) {
 					return removeEntry(selectedHashFragment);
 				} else {
-					return updateValue(value, selectedHashFragment);
+					content[2*selectedHashFragment+1] = value;
+					return this;
 				}
 			} else {
 				if(value == defaultValue) {
@@ -129,10 +130,22 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				Node<KEY, VALUE> newNode = nodeCandidate.putValue(key, value, hashProvider, defaultValue, newHash(hashProvider, key, hash, depth+1), depth+1);
 				return updateSubNode(selectedHashFragment,newNode);
 			} else {
-				content[2*selectedHashFragment] = key;
-				return updateValue(value, selectedHashFragment);
+				if(value == defaultValue) {
+					// dont need to add new key-value pair
+					return this;
+				} else {
+					content[2*selectedHashFragment] = key;
+					content[2*selectedHashFragment+1] = value;
+					return this;
+				}
+				
 			}
 		}
+	}
+	
+	Node<KEY, VALUE> updateValue(VALUE value, int selectedHashFragment) {
+		content[2*selectedHashFragment+1] = value;
+		return this;
 	}
 	
 	Node<KEY, VALUE> updateSubNode(int selectedHashFragment, Node<KEY, VALUE> newNode) {
@@ -162,10 +175,6 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		return this;
 	}
 	
-	Node<KEY, VALUE> updateValue(VALUE value, int selectedHashFragment) {
-		content[2*selectedHashFragment+1] = value;
-		return this;
-	}
 	Node<KEY, VALUE> removeEntry(int selectedHashFragment) {
 		content[2*selectedHashFragment] = null;
 		content[2*selectedHashFragment+1] = null;
@@ -217,8 +226,9 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 					return true;
 				}
 			}
+			cursor.dataIndex = MapCursor.IndexFinish;
 		}
-		cursor.dataIndex = MapCursor.IndexFinish;
+		
 		// 2. look inside the subnodes
 		for(int index = cursor.nodeIndexStack.peek()+1; index < factor; index++) {
 			if(this.content[index*2]==null && this.content[index*2+1] !=null) {
@@ -226,8 +236,9 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				Node<KEY, VALUE> subnode = (Node<KEY, VALUE>) this.content[index*2+1];
 				
 				cursor.dataIndex = MapCursor.IndexStart;
-				cursor.nodeStack.add(subnode);
-				cursor.nodeIndexStack.add(index);
+				cursor.nodeIndexStack.set(0,index);
+				cursor.nodeStack.push(subnode);
+				cursor.nodeIndexStack.push(MapCursor.IndexStart);
 				
 				return subnode.moveToNext(cursor);
 			}
@@ -246,7 +257,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 	}
 	
 	@Override
-	protected void prettyPrint(StringBuilder builder, int depth, int code) {
+	public void prettyPrint(StringBuilder builder, int depth, int code) {
 		for(int i = 0; i<depth; i++) {
 			builder.append("\t");
 		}
@@ -255,6 +266,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 			builder.append(":");
 		}
 		builder.append("Mutable(");
+		// print content
 		boolean hadContent = false;
 		for(int i = 0; i<factor; i++) {
 			if(content[2*i] != null) {
@@ -271,8 +283,9 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 			}
 		}
 		builder.append(")");
+		// print subnodes
 		for(int i = 0; i<factor; i++) {
-			if(content[2*i] == null || content[2*i+1]!=null) {
+			if(content[2*i] == null && content[2*i+1]!=null) {
 				@SuppressWarnings("unchecked")
 				Node<KEY,VALUE> subNode = (Node<KEY, VALUE>) content[2*i+1];
 				builder.append("\n");

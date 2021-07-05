@@ -66,7 +66,7 @@ public abstract class Node<KEY,VALUE>{
 	//abstract boolean moveIteratorToNextData(NodeIterator<KEY,VALUE> iterator, int currentIndex);
 	//abstract boolean moveIteratorToNextNode(NodeIterator<KEY,VALUE> iterator, int currentIndex);
 	///////// FOR printing
-	abstract protected void prettyPrint(StringBuilder builder, int depth, int code);
+	abstract public void prettyPrint(StringBuilder builder, int depth, int code);
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();

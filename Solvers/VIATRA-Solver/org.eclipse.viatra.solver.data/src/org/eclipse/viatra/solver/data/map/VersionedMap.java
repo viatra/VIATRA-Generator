@@ -9,10 +9,10 @@ import org.eclipse.viatra.solver.data.map.internal.MutableNode;
 import org.eclipse.viatra.solver.data.map.internal.Node;
 
 public class VersionedMap<KEY,VALUE> implements Versioned{
-
 	protected final ContinousHashProvider<? super KEY> hashProvider;
 	protected final VALUE defaultValue;
 	protected Node<KEY,VALUE> root = null;
+	//TODO: protected final iterators
 	
 	protected VersionedMap(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue) {
 		this.hashProvider = hashProvider;
@@ -60,5 +60,15 @@ public class VersionedMap<KEY,VALUE> implements Versioned{
 	@Override
 	public void restore(long state) {
 		// TODO Auto-generated method stub
+	}
+	
+	public void prettyPrint() {
+		StringBuilder s = new StringBuilder();
+		if(this.root != null) {
+			this.root.prettyPrint(s, 0, -1);
+			System.out.println(s.toString());
+		} else {
+			System.out.println("empty tree");
+		}
 	}
 }
