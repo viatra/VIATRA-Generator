@@ -13,16 +13,13 @@ import { useRootStore } from '../RootStore';
 
 const useStyles = makeStyles(theme => ({
   iconButton: {
-    padding: 8,
+    padding: 7,
     minWidth: 36,
+    border: 0,
+    color: theme.palette.text.primary,
     '&.MuiButtonGroup-groupedTextHorizontal': {
       borderRight: 0,
     },
-  },
-  flatToggleButton: {
-    padding: 8,
-    border: 0,
-    color: theme.palette.text.primary,
   },
   divider: {
     margin: theme.spacing(0.5),
@@ -49,7 +46,7 @@ export default observer(() => {
           disabled={!editorStore.canRedo}
           onClick={() => editorStore.redo()}
           className={classes.iconButton}
-          aria-label='REdo'
+          aria-label='Redo'
         >
           <RedoIcon fontSize='small'/>
         </Button>
@@ -63,7 +60,7 @@ export default observer(() => {
         selected={editorStore.showLineNumbers}
         onChange={() => editorStore.toggleLineNumbers()}
         size='small'
-        className={classes.flatToggleButton}
+        className={classes.iconButton}
         aria-label='Show line numbers'
       >
         <FormatListNumberedIcon fontSize='small'/>

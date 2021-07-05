@@ -23,13 +23,35 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.CodeMirror {
+  height: 100%;
+}
+
 .CodeMirror, .CodeMirror-hints {
   font-size: 16px;
-  height: 100%;
   font-family: 'JetBrains MonoVariable', 'JetBrains Mono', monospace;
   font-feature-settings: 'liga', 'calt';
   font-weight: 400;
   text-rendering: optimizeLegibility;
+}
+
+.CodeMirror-hints {
+  background: #333333;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+              0 5px 8px 0 rgba(0, 0, 0, 0.14),
+              0 1px 8px 0 rgba(0, 0, 0, 0.12);
+  padding: 0;
+}
+
+.CodeMirror-hint {
+  color: #fff;
+  border-radius: 0;
+}
+
+li.CodeMirror-hint-active {
+  background: rgba(128, 203, 196, 0.2);
 }
 
 .annotations-gutter {
@@ -118,5 +140,5 @@ body {
 }
 
 .problem-singleton-variable {
-  opacity: 0.7;
+  opacity: 0.6;
 }

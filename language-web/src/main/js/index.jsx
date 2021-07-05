@@ -51,7 +51,6 @@ const theme = createMuiTheme({
     type: 'dark',
     background: {
       default: '#212121',
-      paper: '#333333',
     },
     primary: {
       main: '#82aaff',

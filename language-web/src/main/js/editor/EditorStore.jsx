@@ -9,6 +9,8 @@ export default class EditorStore {
   value = '';
   /** @type {boolean} */
   showLineNumbers = false;
+  /** @type {boolean} */
+  showLigatures = true;
 
   constructor() {
     this.atom = createAtom('EditorStore');
@@ -77,5 +79,9 @@ export default class EditorStore {
 
   toggleLineNumbers() {
     this.showLineNumbers = !this.showLineNumbers;
+  }
+
+  toggleLigatures() {
+    this.showLigatures = !this.showLigatures;
   }
 }
