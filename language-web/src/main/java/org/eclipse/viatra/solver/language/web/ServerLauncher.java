@@ -84,7 +84,7 @@ public class ServerLauncher {
 	}
 
 	public static void main(String[] args) {
-		String listenAddress = System.getenv("LiSTEN_ADDRESS");
+		String listenAddress = System.getenv("LISTEN_ADDRESS");
 		if (listenAddress == null) {
 			listenAddress = "localhost";
 		}
