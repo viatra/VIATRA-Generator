@@ -6,7 +6,6 @@ import java.util.Map;
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
-import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 
 /**
