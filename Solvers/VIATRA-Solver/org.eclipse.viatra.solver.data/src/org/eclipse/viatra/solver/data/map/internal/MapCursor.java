@@ -1,6 +1,7 @@
 package org.eclipse.viatra.solver.data.map.internal;
 
 import java.util.ArrayDeque;
+import java.util.ConcurrentModificationException;
 import java.util.Deque;
 
 import org.eclipse.viatra.solver.data.map.Cursor;
@@ -19,6 +20,12 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	KEY key;
 	VALUE value;
 	
+	// State
+	/**
+	 * Dirty bit for Conc
+	 */
+	boolean dirty; 
+	
 	public MapCursor(Node<KEY, VALUE> root) {
 		// Initializing tree stack
 		super();
@@ -33,6 +40,9 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		// Initializing cache
 		this.key = null;
 		this.value = null;
+		
+		// Initializing state
+		this.dirty = false;
 		
 		// move to first
 		move();
@@ -51,10 +61,17 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	}
 	
 	public boolean move() {
+		if(dirty) {
+			throw new ConcurrentModificationException();
+		}
 		if(!isTerminated()) {
 			return this.nodeStack.peek().moveToNext(this);
 		} else {
 			return false;
 		}
+	}
+	
+	public void setDirty() {
+		this.dirty = true;
 	}
 }

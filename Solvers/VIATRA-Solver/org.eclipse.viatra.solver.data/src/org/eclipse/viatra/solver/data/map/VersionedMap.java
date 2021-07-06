@@ -6,7 +6,7 @@ import java.util.Map;
 public interface VersionedMap<KEY,VALUE> extends Versioned{
 	public void put(KEY key, VALUE value);
 	public VALUE get(KEY key);
-	public int getSize();
+	public long getSize();
 	public Iterator<Map.Entry<KEY,VALUE>> getIterator();
 	public Cursor<KEY,VALUE> getCursor();
 }

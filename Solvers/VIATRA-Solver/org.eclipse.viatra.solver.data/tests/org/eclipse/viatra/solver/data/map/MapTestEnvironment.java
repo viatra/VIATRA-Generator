@@ -61,7 +61,7 @@ public class MapTestEnvironment<KEY,VALUE> {
 		// 3. Checking sizes
 		// Counting of non-default value pairs.
 		int oracleSize = oracle.entrySet().size();
-		int sutSize = sut.getSize();
+		long sutSize = sut.getSize();
 		if(oracleSize != sutSize || oracleSize != elementsInSutEntrySet) {
 			printComparison();
 			fail(title + ": Non-eqivalent size() result: SUT.getSize()="+sutSize+", SUT.entryset.size="+elementsInSutEntrySet+", Oracle="+oracleSize+"!" );

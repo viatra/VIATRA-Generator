@@ -7,9 +7,8 @@ import java.util.Random;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 import org.junit.jupiter.api.Test;
 
-public class MapSmokeTest {
-	
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue) {
+public class SmokeTest2Commit {
+	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency) {
 		String[] values = prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = prepareHashProvider();
 		
@@ -19,7 +18,7 @@ public class MapSmokeTest {
 		
 		Random r = new Random(seed);
 		
-		iterativeRandomPuts(scenario, steps, maxKey, values, e, r);
+		iterativeRandomPutsAndCommits(scenario, steps, maxKey, values, e, r, commitFrequency);
 	}
 
 
@@ -52,13 +51,14 @@ public class MapSmokeTest {
 		return chp;
 	}
 	
-	void iterativeRandomPuts(
+	void iterativeRandomPutsAndCommits(
 		String scenario,
 		int steps,
 		int maxKey,
 		String[] values,
 		MapTestEnvironment<Integer, String> e,
-		Random r)
+		Random r,
+		int commitFrequency)
 	{
 		int stopAt = -1;
 		for(int i=0; i<steps; i++) {
@@ -83,35 +83,51 @@ public class MapSmokeTest {
 				fail(scenario+":"+index+": exception happened: "+exception);
 			}
 			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
+			if(index%commitFrequency == 0) {
+				long version = e.sut.commit();
+				System.out.println(scenario+":"+index+": Commit! " + version);
+			}
 		}
 	}
 	
 	@Test
 	void MiniSmokeK3V2v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2);
+		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2, 10);
 	}
 	@Test
 	void MiniSmokeK3V2v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2);
+		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2, 10);
 	}
 	@Test
 	void MiniSmokeK3V2v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2);
+		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2, 10);
+	}
+	@Test
+	void MiniSmokeK3V3v1() {
+		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 3, 10);
+	}
+	@Test
+	void MiniSmokeK3V3v2() {
+		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 3, 10);
+	}
+	@Test
+	void MiniSmokeK3V3v3() {
+		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 3, 10);
 	}
 	@Test
 	void MediumSmokeK3V2v1() {
-		runSmokeTest("MediumSmokeK3V2v1",1, 1000, 32, 2);
+		runSmokeTest("MediumSmokeK3V2v1",1, 1000, 32, 2, 10);
 	}
 	@Test
 	void MediumSmokeK3V2v2() {
-		runSmokeTest("MediumSmokeK3V2v2",2, 1000, 32, 2);
+		runSmokeTest("MediumSmokeK3V2v2",2, 1000, 32, 2, 10);
 	}
 	@Test
 	void MediumSmokeK3V2v3() {
-		runSmokeTest("MediumSmokeK3V2v3",3, 1000, 32, 2);
+		runSmokeTest("MediumSmokeK3V2v3",3, 1000, 32, 2, 10);
 	}
-	@Test
-	void SmokeLarge() {
-		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2);
-	}
+//	@Test
+//	void SmokeLarge() {
+//		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2);
+//	}
 }

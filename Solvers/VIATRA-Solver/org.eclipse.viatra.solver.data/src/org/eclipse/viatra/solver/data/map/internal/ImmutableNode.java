@@ -32,7 +32,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	@SuppressWarnings("unchecked")
 	protected ImmutableNode(MutableNode<KEY,VALUE> node) {
 		int size = 0;
-		for(int i = 0; i<factor; i++) {
+		for(int i = 0; i<node.content.length; i++) {
 			if(node.content[i]!=null) {
 				size++;
 			}
@@ -160,7 +160,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public int getSize() {
+	public long getSize() {
 		int result = Integer.bitCount(this.dataMap);
 		for(int subnodeIndex = 0; subnodeIndex < Integer.bitCount(this.nodeMap); subnodeIndex++) {
 			ImmutableNode<KEY,VALUE> subnode = (ImmutableNode<KEY, VALUE>) this.content[this.content.length-1-subnodeIndex];

@@ -187,7 +187,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public int getSize() {
+	public long getSize() {
 		int size = 0;
 		for(int i=0; i<factor; i++) {
 			if(content[i*2]!=null) {

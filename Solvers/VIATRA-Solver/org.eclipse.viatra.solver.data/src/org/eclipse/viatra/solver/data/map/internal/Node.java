@@ -50,7 +50,7 @@ public abstract class Node<KEY,VALUE>{
 	
 	abstract public VALUE getValue(KEY key, ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue,  int hash, int depth);
 	abstract public Node<KEY,VALUE> putValue(KEY key, VALUE value, ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, int hash, int depth);
-	abstract public int getSize();
+	abstract public long getSize();
 	
 	abstract MutableNode<KEY, VALUE> toMutable();
 	public abstract ImmutableNode<KEY, VALUE> toImmutable();

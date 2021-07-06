@@ -2,6 +2,7 @@ package org.eclipse.viatra.solver.data.map.internal;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
@@ -21,6 +22,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	protected final ContinousHashProvider<? super KEY> hashProvider;
 	protected final VALUE defaultValue;
 	protected Node<KEY,VALUE> root;
+	WeakHashMap<MapCursor<KEY, VALUE>, Boolean> iterators;
 	//TODO: protected final iterators
 	
 	public VersionedMapImpl(
@@ -32,6 +34,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.root = null;
+		iterators = new WeakHashMap<>();
 	}
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<KEY,VALUE> store,
@@ -42,6 +45,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.root = data;
+		iterators = new WeakHashMap<>();
 	}
 		
 	public VALUE getDefaultValue() {
@@ -52,6 +56,9 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	}
 	@Override
 	public void put(KEY key, VALUE value) {
+		for(MapCursor<KEY, VALUE> iterator : iterators.keySet()) {
+			iterator.setDirty();
+		}
 		if(root!=null) {
 			root = root.putValue(key, value, hashProvider, defaultValue, hashProvider.getHash(key, 0), 0);
 		} else {
@@ -67,7 +74,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		}
 	}
 	@Override
-	public int getSize() {
+	public long getSize() {
 		if(root == null) {
 			return 0;
 		} else {
@@ -77,11 +84,15 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	@Override
 	public
 	Iterator<Map.Entry<KEY,VALUE>> getIterator() {
-		return new MapEntryIterator<>(this.root);
+		MapEntryIterator<KEY,VALUE> iterator = new MapEntryIterator<>(this.root);
+		iterators.put(iterator, null);
+		return iterator;
 	}
 	@Override
 	public Cursor<KEY, VALUE> getCursor() {
-		return new MapEntryIterator<>(this.root);
+		MapEntryIterator<KEY,VALUE> cursor = new MapEntryIterator<>(this.root);
+		iterators.put(cursor, null);
+		return cursor;
 	}
 
 	@Override

@@ -43,15 +43,9 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 	}
 
 	public long addState(ImmutableNode<KEY,VALUE> data) {
-		if(data != null) {
-			ImmutableNode<KEY, VALUE> immutable = data.toImmutable();
-			long id = nextID++;
-			states.put(id,immutable);
-			return id;
-		} else {
-			throw new NullPointerException("data is null!");
-		}
-		
+		long id = nextID++;
+		states.put(id,data);
+		return id;
 	}
 //	public void removeState(long state) {
 //		if(states.containsKey(state)) {
