@@ -5,21 +5,22 @@ import static org.junit.Assert.fail;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
-import java.util.TreeSet;
+import java.util.TreeMap;
+
+import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
 public class MapTestEnvironment<KEY,VALUE> {
-	VersionedMap<KEY, VALUE> sut;
+	VersionedMapImpl<KEY, VALUE> sut;
 	Map<KEY,VALUE> oracle = new HashMap<KEY, VALUE>();
 	
-	public MapTestEnvironment(VersionedMap<KEY, VALUE> sut) {
+	public MapTestEnvironment(VersionedMapImpl<KEY, VALUE> sut) {
 		this.sut = sut;
 	}
 	
 	public void put(KEY key, VALUE value) {
 		sut.put(key, value);
-		if(value != sut.defaultValue) {
+		if(value != sut.getDefaultValue()) {
 			oracle.put(key, value);
 		} else {
 			oracle.remove(key);

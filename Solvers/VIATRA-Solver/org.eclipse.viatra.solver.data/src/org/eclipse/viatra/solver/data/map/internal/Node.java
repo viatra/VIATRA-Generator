@@ -52,8 +52,8 @@ public abstract class Node<KEY,VALUE>{
 	abstract public Node<KEY,VALUE> putValue(KEY key, VALUE value, ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, int hash, int depth);
 	abstract public int getSize();
 	
-	abstract protected MutableNode<KEY, VALUE> toMutable();
-	abstract protected ImmutableNode<KEY, VALUE> toImmutable();
+	abstract MutableNode<KEY, VALUE> toMutable();
+	public abstract ImmutableNode<KEY, VALUE> toImmutable();
 	
 	/**
 	 * Moves a {@link MapCursor} to its next position.

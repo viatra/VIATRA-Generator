@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Random;
 
+import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 import org.junit.jupiter.api.Test;
 
 public class MapSmokeTest {
@@ -12,7 +13,8 @@ public class MapSmokeTest {
 		String[] values = prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = prepareHashProvider();
 		
-		VersionedMap<Integer, String> sut = new VersionedMap<Integer, String>(chp, values[0]);
+		VersionedMapStore<Integer, String> store = new VersionedMapStoreImpl<Integer, String>(chp, values[0]);
+		VersionedMapImpl<Integer, String> sut = (VersionedMapImpl<Integer, String>) store.createMap();
 		MapTestEnvironment<Integer, String> e = new MapTestEnvironment<Integer, String>(sut);
 		
 		Random r = new Random(seed);

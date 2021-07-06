@@ -208,7 +208,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 	}
 	
 	@Override
-	protected ImmutableNode<KEY,VALUE> toImmutable() {
+	public ImmutableNode<KEY,VALUE> toImmutable() {
 		return new ImmutableNode<KEY,VALUE>(this);
 	}
 	
@@ -236,9 +236,11 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				Node<KEY, VALUE> subnode = (Node<KEY, VALUE>) this.content[index*2+1];
 				
 				cursor.dataIndex = MapCursor.IndexStart;
-				cursor.nodeIndexStack.set(0,index);
-				cursor.nodeStack.push(subnode);
+				cursor.nodeIndexStack.pop();
+				cursor.nodeIndexStack.push(index);
 				cursor.nodeIndexStack.push(MapCursor.IndexStart);
+				cursor.nodeStack.push(subnode);
+				
 				
 				return subnode.moveToNext(cursor);
 			}
@@ -246,7 +248,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		// 3. no subnode found, move up
 		cursor.nodeStack.pop();
 		cursor.nodeIndexStack.pop();
-		if(!cursor.nodeStack.empty()) {
+		if(!cursor.nodeStack.isEmpty()) {
 			Node<KEY, VALUE> supernode = cursor.nodeStack.peek();
 			return supernode.moveToNext(cursor);
 		} else {

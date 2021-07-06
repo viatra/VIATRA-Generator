@@ -175,7 +175,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	}
 
 	@Override
-	protected ImmutableNode<KEY,VALUE> toImmutable() {
+	public ImmutableNode<KEY,VALUE> toImmutable() {
 		return this;
 	}
 	
@@ -210,7 +210,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			// 3. no subnode found, move up
 			cursor.nodeStack.pop();
 			cursor.nodeIndexStack.pop();
-			if(!cursor.nodeStack.empty()) {
+			if(!cursor.nodeStack.isEmpty()) {
 				Node<KEY, VALUE> supernode = cursor.nodeStack.peek();
 				return supernode.moveToNext(cursor);
 			} else {

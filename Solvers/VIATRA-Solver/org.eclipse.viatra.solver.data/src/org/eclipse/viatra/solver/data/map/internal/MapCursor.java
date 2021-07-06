@@ -1,15 +1,18 @@
 package org.eclipse.viatra.solver.data.map.internal;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-public class MapCursor<KEY,VALUE> {
+import org.eclipse.viatra.solver.data.map.Cursor;
+
+public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	// Constants
 	static int IndexStart = -1;
 	static int IndexFinish = -2;
 	
 	// Tree stack
-	Stack<Node<KEY,VALUE>> nodeStack;
-	Stack<Integer> nodeIndexStack;
+	Deque<Node<KEY,VALUE>> nodeStack;
+	Deque<Integer> nodeIndexStack;
 	int dataIndex;
 	
 	// Values
@@ -19,11 +22,11 @@ public class MapCursor<KEY,VALUE> {
 	public MapCursor(Node<KEY, VALUE> root) {
 		// Initializing tree stack
 		super();
-		this.nodeStack = new Stack<>();
+		this.nodeStack = new ArrayDeque<>();
 		if(root != null) {
 			this.nodeStack.add(root);
 		}
-		this.nodeIndexStack = new Stack<>();
+		this.nodeIndexStack = new ArrayDeque<>();
 		this.nodeIndexStack.push(IndexStart);
 		this.dataIndex = IndexStart;
 		
@@ -44,7 +47,7 @@ public class MapCursor<KEY,VALUE> {
 	}
 	
 	public boolean isTerminated() {
-		return this.nodeStack.empty();
+		return this.nodeStack.isEmpty();
 	}
 	
 	public boolean move() {
