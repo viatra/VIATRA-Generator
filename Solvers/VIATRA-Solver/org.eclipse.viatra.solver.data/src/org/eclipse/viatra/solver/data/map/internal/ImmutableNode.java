@@ -39,10 +39,12 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	@SuppressWarnings("unchecked")
 	static <KEY,VALUE> ImmutableNode<KEY,VALUE> constructImmutable(MutableNode<KEY,VALUE> node, Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache) {
 		// 1. try to return from cache
-		ImmutableNode<KEY, VALUE> cachedResult = cache.get(node);
-		if(cachedResult != null) {
-			// 1.1 Already cached, return from cache.
-			return cachedResult;
+		if(cache != null) {
+			ImmutableNode<KEY, VALUE> cachedResult = cache.get(node);
+			if(cachedResult != null) {
+				// 1.1 Already cached, return from cache.
+				return cachedResult;
+			}
 		}
 		
 		// 2. otherwise construct a new ImmutableNode
