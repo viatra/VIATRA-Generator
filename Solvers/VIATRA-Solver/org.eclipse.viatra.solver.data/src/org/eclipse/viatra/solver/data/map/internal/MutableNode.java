@@ -1,11 +1,17 @@
 package org.eclipse.viatra.solver.data.map.internal;
 
+import java.util.Arrays;
+import java.util.Map;
+
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
 public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
-	Object[] content;
+	int cachedHash;
+	protected Object[] content;
+	
 	protected MutableNode() {
 		this.content = new Object[2*factor];
+		updateHash();
 	}
 	public static <KEY,VALUE> MutableNode<KEY,VALUE> initialize(
 			KEY key, VALUE value,
@@ -24,6 +30,10 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		}
 	}
 	
+	/**
+	 * Constructs a {@link MutableNode} as a copy of an {@link ImmutableNode}
+	 * @param node
+	 */
 	protected MutableNode(ImmutableNode<KEY,VALUE> node) {
 		this.content = new Object[2*factor]; 
 		int dataUsed=0;
@@ -39,6 +49,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				nodeUsed++;
 			}
 		}
+		updateHash();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -57,7 +68,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 			if(nodeCandidate != null) {
 				int newHash = newHash(hashProvider, key, hash, depth);
 				int newDepth = depth+1;
-				return (VALUE) nodeCandidate.getValue(key, hashProvider, defaultValue, newHash, newDepth);
+				return nodeCandidate.getValue(key, hashProvider, defaultValue, newHash, newDepth);
 			} else {
 				return defaultValue;
 			}
@@ -89,6 +100,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 			
 			subNode.content[newFragment2*2]=key2;
 			subNode.content[newFragment2*2+1]=value2;
+			subNode.updateHash();
 			return subNode;
 		} else {
 			MutableNode<KEY,VALUE> subSubNode = createNewNode(
@@ -97,6 +109,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 					key2, value2, newHash2,
 					newdepth+1);
 			subNode.content[newFragment1*2+1] = subSubNode;
+			subNode.updateHash();
 			return subNode;
 		}
 	}
@@ -112,8 +125,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				if(value == defaultValue) {
 					return removeEntry(selectedHashFragment);
 				} else {
-					content[2*selectedHashFragment+1] = value;
-					return this;
+					return updateValue(value,selectedHashFragment);
 				}
 			} else {
 				if(value == defaultValue) {
@@ -134,30 +146,50 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 					// dont need to add new key-value pair
 					return this;
 				} else {
-					content[2*selectedHashFragment] = key;
-					content[2*selectedHashFragment+1] = value;
-					return this;
+					return addEntry(key, value, selectedHashFragment);
 				}
 				
 			}
 		}
 	}
-	
+
+	private Node<KEY, VALUE> addEntry(KEY key, VALUE value, int selectedHashFragment) {
+		content[2*selectedHashFragment] = key;
+		content[2*selectedHashFragment+1] = value;
+		updateHash();
+		return this;
+	}
+	/**
+	 * Updates an entry in a selected hash-fragment to a non-default value.
+	 * @param value
+	 * @param selectedHashFragment
+	 * @return
+	 */
 	Node<KEY, VALUE> updateValue(VALUE value, int selectedHashFragment) {
 		content[2*selectedHashFragment+1] = value;
+		updateHash();
 		return this;
 	}
 	
+	/**
+	 * 
+	 * @param selectedHashFragment
+	 * @param newNode
+	 * @return
+	 */
 	Node<KEY, VALUE> updateSubNode(int selectedHashFragment, Node<KEY, VALUE> newNode) {
 		content[2*selectedHashFragment+1] = newNode;
 		for(int i = 0; i<this.content.length; i++) {
-			if(content[i]!=null) return this;
+			if(content[i]!=null) {
+				updateHash();
+				return this;
+			}
 		}
 		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
-	Node<KEY, VALUE> moveDown(
+	private Node<KEY, VALUE> moveDown(
 			KEY key, VALUE value,
 			ContinousHashProvider<? super KEY> hashProvider, int hash,
 			int depth, int selectedHashFragment, KEY keyCandidate) {
@@ -172,6 +204,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		
 		content[2*selectedHashFragment] = null;
 		content[2*selectedHashFragment+1] = subNode;
+		updateHash();
 		return this;
 	}
 	
@@ -179,6 +212,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		content[2*selectedHashFragment] = null;
 		content[2*selectedHashFragment+1] = null;
 		if(hasContent()) {
+			updateHash();
 			return this;
 		} else {
 			return null;
@@ -209,7 +243,12 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 	
 	@Override
 	public ImmutableNode<KEY,VALUE> toImmutable() {
-		return new ImmutableNode<KEY,VALUE>(this);
+		return ImmutableNode.constructImmutable(this,null);
+	}
+	
+	@Override
+	public ImmutableNode<KEY, VALUE> toImmutable(Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache) {
+		return ImmutableNode.constructImmutable(this,cache);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -293,6 +332,44 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 				builder.append("\n");
 				subNode.prettyPrint(builder, depth+1, i);
 			}
+		}
+	}
+	
+	protected void updateHash() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.deepHashCode(content);
+		this.cachedHash = result;
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.cachedHash;
+	}
+	
+	public void checkHashCodeConsistency() {
+		int oldHash = this.hashCode();
+		updateHash();
+		int newHash = this.hashCode();
+		if(oldHash != newHash) {
+			throw new IllegalStateException("Inconsistent hash code!");
+		}
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (obj instanceof MutableNode<?, ?>) {
+			MutableNode<?,?> other = (MutableNode<?,?>) obj;
+			return Arrays.deepEquals(this.content, other.content);
+		} else if(obj instanceof ImmutableNode<?,?>) {
+			ImmutableNode<?,?> other = (ImmutableNode<?,?>) obj;
+			return ImmutableNode.compareImmutableMutable(other, this);
+		} else {
+			return false;
 		}
 	}
 }

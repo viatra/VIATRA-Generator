@@ -1,36 +1,54 @@
 package org.eclipse.viatra.solver.data.map.internal;
 
+import java.util.Arrays;
+import java.util.Map;
+
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
 public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	/**
 	 * Bitmap defining the stored key and values.
 	 */
-	int dataMap;
+	final int dataMap;
 	/**
 	 * Bitmap defining the positions of further nodes.
 	 */
-	int nodeMap;
+	final int nodeMap;
 	/**
 	 * Stores Keys, Values, and subnodes. Structure: (KEY,VALUE)*,NODE; NODES are stored backwards. 
 	 */
-	Object[] content;
+	final Object[] content;
 	
 	/**
-	 * Constructor with given content
+	 * Hash code derived from immutable hash code
 	 */
-	protected ImmutableNode(int dataMap, int nodeMap, Object[] content) {
+	final int precalculatedHash;
+		
+	private ImmutableNode(int dataMap, int nodeMap, Object[] content, int precalculatedHash) {
+		super();
 		this.dataMap = dataMap;
 		this.nodeMap = nodeMap;
 		this.content = content;
+		this.precalculatedHash = precalculatedHash;
 	}
-	
+
 	/**
 	 * Constructor that copies a mutable node to an immutable.
 	 * @param node
 	 */
 	@SuppressWarnings("unchecked")
-	protected ImmutableNode(MutableNode<KEY,VALUE> node) {
+	static <KEY,VALUE> ImmutableNode<KEY,VALUE> constructImmutable(MutableNode<KEY,VALUE> node, Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache) {
+		// 1. try to return from cache
+		ImmutableNode<KEY, VALUE> cachedResult = cache.get(node);
+		if(cachedResult != null) {
+			// 1.1 Already cached, return from cache.
+			return cachedResult;
+		}
+		
+		// 2. otherwise construct a new ImmutableNode
+		
+		final int resultHash = node.hashCode();
+		
 		int size = 0;
 		for(int i = 0; i<node.content.length; i++) {
 			if(node.content[i]!=null) {
@@ -40,28 +58,30 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		
 		int datas = 0;
 		int nodes = 0;
-		this.dataMap = 0;
-		this.nodeMap = 0;
-		this.content = new Object[size];
+		int resultDataMap = 0;
+		int resultNodeMap = 0;
+		final Object[] resultContent = new Object[size];
 		int bitposition = 1;
 		for(int i = 0; i<factor; i++) {
 			Object key = node.content[i*2];
 			if(key != null) {
-				dataMap |= bitposition;
-				content[datas*2] = key;
-				content[datas*2+1] = node.content[i*2+1];
+				resultDataMap |= bitposition;
+				resultContent[datas*2] = key;
+				resultContent[datas*2+1] = node.content[i*2+1];
 				datas++;
 			} else {
 				Node<KEY,VALUE> subnode = (Node<KEY, VALUE>) node.content[i*2+1];
 				if(subnode != null) {
-					ImmutableNode<KEY, VALUE> immutableSubnode = subnode.toImmutable();
-					nodeMap |=bitposition;
-					content[size-1-nodes] = immutableSubnode;
+					ImmutableNode<KEY, VALUE> immutableSubnode = subnode.toImmutable(cache);
+					resultNodeMap |=bitposition;
+					resultContent[size-1-nodes] = immutableSubnode;
 					nodes++;
 				}
 			}
 			bitposition<<=1;
 		}
+		
+		return new ImmutableNode<>(resultDataMap, resultNodeMap, resultContent, resultHash);
 	}
 	
 	private int index(int bitmap, int bitpos) {
@@ -179,6 +199,12 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		return this;
 	}
 	
+	@Override
+	public ImmutableNode<KEY, VALUE> toImmutable(
+			Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache) {
+		return this;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	boolean moveToNext(MapCursor<KEY, VALUE> cursor) {
@@ -260,4 +286,67 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			nodeMask<<=1;
 		}
 	}
+	
+	@Override
+	public int hashCode() {
+		return this.precalculatedHash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (obj instanceof ImmutableNode<?,?>) {
+			ImmutableNode<?,?> other = (ImmutableNode<?,?>) obj;
+			if (precalculatedHash != other.precalculatedHash)
+				return false;
+			if (dataMap != other.dataMap)
+				return false;
+			if (nodeMap != other.nodeMap)
+				return false;
+			if (!Arrays.deepEquals(content, other.content))
+				return false;
+			return true;
+		} else if(obj instanceof MutableNode<?,?>) {
+			return ImmutableNode.compareImmutableMutable(this, (MutableNode<?, ?>) obj);
+		} else {
+			return false;
+		}
+	}
+	public static boolean compareImmutableMutable(
+			ImmutableNode<?, ?> immutable,
+			MutableNode<?, ?> mutable)
+	{
+		int datas = 0;
+		int nodes = 0;
+		final int immutableLength = immutable.content.length;
+		for(int i = 0; i<factor; i++) {
+			Object key = immutable.content[i*2];
+			if(key != null) {
+				if(datas*2+nodes+2 <= immutableLength) {
+					if(	mutable.content[datas*2]	!= key ||
+						mutable.content[datas*2+1]	!= immutable.content[i*2+1])
+					{
+						return false;
+					}
+				} else return false;
+				datas++;
+			} else {
+				Node<?,?> mutableSubnode = (Node<?, ?>) mutable.content[i*2+1];
+				if(mutableSubnode != null) {
+					if(datas*2+nodes+1 <= immutableLength) {
+						Node<?,?> immutableSubnode = (Node<?, ?>) immutable.content[immutableLength-1-nodes];
+						if(!mutableSubnode.equals(immutableSubnode)) {
+							return false;
+						}
+						nodes++;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
 }

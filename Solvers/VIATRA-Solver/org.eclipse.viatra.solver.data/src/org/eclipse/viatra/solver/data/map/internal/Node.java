@@ -1,5 +1,7 @@
 package org.eclipse.viatra.solver.data.map.internal;
 
+import java.util.Map;
+
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
 public abstract class Node<KEY,VALUE>{
@@ -54,6 +56,8 @@ public abstract class Node<KEY,VALUE>{
 	
 	abstract MutableNode<KEY, VALUE> toMutable();
 	public abstract ImmutableNode<KEY, VALUE> toImmutable();
+	public abstract ImmutableNode<KEY, VALUE> toImmutable(
+			Map<Node<KEY, VALUE>,ImmutableNode<KEY, VALUE>> cache);
 	
 	/**
 	 * Moves a {@link MapCursor} to its next position.
@@ -62,9 +66,6 @@ public abstract class Node<KEY,VALUE>{
 	 */
 	abstract boolean moveToNext(MapCursor<KEY,VALUE> cursor);
 	
-	///////// For iterators
-	//abstract boolean moveIteratorToNextData(NodeIterator<KEY,VALUE> iterator, int currentIndex);
-	//abstract boolean moveIteratorToNextNode(NodeIterator<KEY,VALUE> iterator, int currentIndex);
 	///////// FOR printing
 	abstract public void prettyPrint(StringBuilder builder, int depth, int code);
 	@Override
@@ -73,4 +74,5 @@ public abstract class Node<KEY,VALUE>{
 		prettyPrint(stringBuilder, 0, -1);
 		return stringBuilder.toString();
 	}
+	
 }

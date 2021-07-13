@@ -23,7 +23,6 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	protected final VALUE defaultValue;
 	protected Node<KEY,VALUE> root;
 	WeakHashMap<MapCursor<KEY, VALUE>, Boolean> iterators;
-	//TODO: protected final iterators
 	
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<KEY,VALUE> store,
