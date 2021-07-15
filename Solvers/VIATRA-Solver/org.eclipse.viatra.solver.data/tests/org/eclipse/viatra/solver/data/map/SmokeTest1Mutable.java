@@ -112,6 +112,8 @@ public class SmokeTest1Mutable {
 	}
 	@Test
 	void SmokeLarge() {
+		var milis = System.currentTimeMillis();
 		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2);
+		System.out.println(System.currentTimeMillis()-milis);
 	}
 }

@@ -22,7 +22,6 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	protected final ContinousHashProvider<? super KEY> hashProvider;
 	protected final VALUE defaultValue;
 	protected Node<KEY,VALUE> root;
-	WeakHashMap<MapCursor<KEY, VALUE>, Boolean> iterators;
 	
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<KEY,VALUE> store,
@@ -33,7 +32,6 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.root = null;
-		iterators = new WeakHashMap<>();
 	}
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<KEY,VALUE> store,
@@ -44,7 +42,6 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.root = data;
-		iterators = new WeakHashMap<>();
 	}
 		
 	public VALUE getDefaultValue() {
@@ -55,9 +52,6 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	}
 	@Override
 	public void put(KEY key, VALUE value) {
-		for(MapCursor<KEY, VALUE> iterator : iterators.keySet()) {
-			iterator.setDirty();
-		}
 		if(root!=null) {
 			root = root.putValue(key, value, hashProvider, defaultValue, hashProvider.getHash(key, 0), 0);
 		} else {
@@ -83,14 +77,12 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	@Override
 	public
 	Iterator<Map.Entry<KEY,VALUE>> getIterator() {
-		MapEntryIterator<KEY,VALUE> iterator = new MapEntryIterator<>(this.root);
-		iterators.put(iterator, null);
+		MapEntryIterator<KEY,VALUE> iterator = new MapEntryIterator<>(this.root,this);
 		return iterator;
 	}
 	@Override
 	public Cursor<KEY, VALUE> getCursor() {
-		MapEntryIterator<KEY,VALUE> cursor = new MapEntryIterator<>(this.root);
-		iterators.put(cursor, null);
+		MapEntryIterator<KEY,VALUE> cursor = new MapEntryIterator<>(this.root,this);
 		return cursor;
 	}
 
@@ -98,7 +90,13 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	public long commit() {
 		ImmutableNode<KEY,VALUE> immutable;
 		if(this.root != null) {
-			immutable = root.toImmutable();
+			Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache = this.store.getStore();
+			if(cache != null) {
+				immutable = root.toImmutable(cache);
+			} else {
+				immutable = root.toImmutable();
+			}
+			
 		} else {
 			immutable = null;
 		}
@@ -108,9 +106,33 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 
 	@Override
 	public void restore(long state) {
-		// TODO Auto-generated method stub
+		root = this.store.getStateData(state);
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((root == null) ? 0 : root.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VersionedMapImpl<?,?> other = (VersionedMapImpl<?,?>) obj;
+		if (root == null) {
+			if (other.root != null)
+				return false;
+		} else if (!root.equals(other.root))
+			return false;
+		return true;
+	}
 	public void prettyPrint() {
 		StringBuilder s = new StringBuilder();
 		if(this.root != null) {

@@ -90,30 +90,58 @@ public class SmokeTest2Commit {
 		}
 	}
 	
+	// Mini smoke frequent commints
 	@Test
-	void MiniSmokeK3V2v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2, 10);
+	void MiniSmokeFrequentK3V2v1() {
+		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2, 1);
 	}
 	@Test
-	void MiniSmokeK3V2v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2, 10);
+	void MiniSmokeFrequentK3V2v2() {
+		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2, 1);
 	}
 	@Test
-	void MiniSmokeK3V2v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2, 10);
+	void MiniSmokeFrequentK3V2v3() {
+		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2, 1);
 	}
 	@Test
-	void MiniSmokeK3V3v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 3, 10);
+	void MiniSmokeFrequentK3V3v1() {
+		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 3, 1);
 	}
 	@Test
-	void MiniSmokeK3V3v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 3, 10);
+	void MiniSmokeFrequentK3V3v2() {
+		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 3, 1);
 	}
 	@Test
-	void MiniSmokeK3V3v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 3, 10);
+	void MiniSmokeFrequentK3V3v3() {
+		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 3, 1);
 	}
+	// Mini smoke rare commits
+	@Test
+	void MiniSmokeRareK3V2v1() {
+		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2, 100);
+	}
+	@Test
+	void MiniSmokeRareK3V2v2() {
+		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2, 100);
+	}
+	@Test
+	void MiniSmokeKRare3V2v3() {
+		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2, 100);
+	}
+	@Test
+	void MiniSmokeRareK3V3v1() {
+		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 3, 100);
+	}
+	@Test
+	void MiniSmokeRareK3V3v2() {
+		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 3, 100);
+	}
+	@Test
+	void MiniSmokeRareK3V3v3() {
+		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 3, 100);
+	}
+	
+	// Medium smoke
 	@Test
 	void MediumSmokeK3V2v1() {
 		runSmokeTest("MediumSmokeK3V2v1",1, 1000, 32, 2, 10);
@@ -126,8 +154,18 @@ public class SmokeTest2Commit {
 	void MediumSmokeK3V2v3() {
 		runSmokeTest("MediumSmokeK3V2v3",3, 1000, 32, 2, 10);
 	}
-//	@Test
-//	void SmokeLarge() {
-//		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2);
-//	}
+	
+	//Large Smoke
+	@Test
+	void SmokeLargeRareCommit() {
+		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2, 100);
+	}
+	@Test
+	void SmokeLargeNormalCommit() {
+		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2, 10);
+	}
+	@Test
+	void SmokeLargeFrequentCommit() {
+		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2, 1);
+	}
 }

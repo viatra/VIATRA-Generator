@@ -5,6 +5,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Deque;
 
 import org.eclipse.viatra.solver.data.map.Cursor;
+import org.eclipse.viatra.solver.data.map.VersionedMap;
 
 public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	// Constants
@@ -20,13 +21,11 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	KEY key;
 	VALUE value;
 	
-	// State
-	/**
-	 * Dirty bit for Conc
-	 */
-	boolean dirty; 
+	// Hash code for checking concurrent modifications
+	final VersionedMap<KEY,VALUE> map;
+	final int creationHash; 
 	
-	public MapCursor(Node<KEY, VALUE> root) {
+	public MapCursor(Node<KEY, VALUE> root, VersionedMap<KEY,VALUE> map) {
 		// Initializing tree stack
 		super();
 		this.nodeStack = new ArrayDeque<>();
@@ -42,7 +41,8 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		this.value = null;
 		
 		// Initializing state
-		this.dirty = false;
+		this.map=map;
+		this.creationHash = map.hashCode();
 		
 		// move to first
 		move();
@@ -61,7 +61,7 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	}
 	
 	public boolean move() {
-		if(dirty) {
+		if(isDirty()) {
 			throw new ConcurrentModificationException();
 		}
 		if(!isTerminated()) {
@@ -71,7 +71,7 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		}
 	}
 	
-	public void setDirty() {
-		this.dirty = true;
+	public boolean isDirty() {
+		return this.map.hashCode() != this.creationHash;
 	}
 }

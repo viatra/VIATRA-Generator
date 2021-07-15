@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
+import org.eclipse.viatra.solver.data.map.VersionedMap;
+
 /**
  * Preorder iterator for map {@link #Node}s. 
  * 
@@ -16,9 +18,8 @@ import java.util.NoSuchElementException;
  */
 public class MapEntryIterator<KEY,VALUE> extends MapCursor<KEY, VALUE> implements Iterator<Map.Entry<KEY,VALUE>>{
 
-	
-	public MapEntryIterator(Node<KEY, VALUE> root) {
-		super(root);
+	public MapEntryIterator(Node<KEY, VALUE> root, VersionedMap<KEY,VALUE> map) {
+		super(root,map);
 
 	}
 	
