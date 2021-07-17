@@ -3,9 +3,12 @@ package org.eclipse.viatra.solver.data.map;
 import static org.junit.Assert.fail;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class SmokeTest1Mutable {
 	
@@ -86,34 +89,51 @@ public class SmokeTest1Mutable {
 		}
 	}
 	
-	@Test
-	void MiniSmokeK3V2v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2);
+	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4}")
+	@MethodSource
+	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed) {
+		runSmokeTest("Smoke"+test+"S"+steps+"K"+noKeys+"V"+noValues+"s"+seed,seed,steps,noKeys,noValues);
 	}
-	@Test
-	void MiniSmokeK3V2v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2);
+	
+	private static Stream<Arguments> parametrizedSmoke(){
+		return TestPermuter.permutationWithSize(
+			new Object[] {1000,32*32*32*32},
+			new Object[] {3,32, 32*32, 32*32*32*32},
+			new Object[] {2,3},
+			new Object[] {1,2,3}
+		);
 	}
-	@Test
-	void MiniSmokeK3V2v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2);
-	}
-	@Test
-	void MediumSmokeK3V2v1() {
-		runSmokeTest("MediumSmokeK3V2v1",1, 1000, 32, 2);
-	}
-	@Test
-	void MediumSmokeK3V2v2() {
-		runSmokeTest("MediumSmokeK3V2v2",2, 1000, 32, 2);
-	}
-	@Test
-	void MediumSmokeK3V2v3() {
-		runSmokeTest("MediumSmokeK3V2v3",3, 1000, 32, 2);
-	}
-	@Test
-	void SmokeLarge() {
-		var milis = System.currentTimeMillis();
-		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2);
-		System.out.println(System.currentTimeMillis()-milis);
-	}
+
+
+	
+//	@Test
+//	void MiniSmokeK3V2v1() {
+//		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2);
+//	}
+//	@Test
+//	void MiniSmokeK3V2v2() {
+//		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2);
+//	}
+//	@Test
+//	void MiniSmokeK3V2v3() {
+//		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2);
+//	}
+//	@Test
+//	void MediumSmokeK3V2v1() {
+//		runSmokeTest("MediumSmokeK3V2v1",1, 1000, 32, 2);
+//	}
+//	@Test
+//	void MediumSmokeK3V2v2() {
+//		runSmokeTest("MediumSmokeK3V2v2",2, 1000, 32, 2);
+//	}
+//	@Test
+//	void MediumSmokeK3V2v3() {
+//		runSmokeTest("MediumSmokeK3V2v3",3, 1000, 32, 2);
+//	}
+//	@Test
+//	void SmokeLarge() {
+//		var milis = System.currentTimeMillis();
+//		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2);
+//		System.out.println(System.currentTimeMillis()-milis);
+//	}
 }
