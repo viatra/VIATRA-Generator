@@ -48,9 +48,6 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		}
 		
 		// 2. otherwise construct a new ImmutableNode
-		
-		final int resultHash = node.hashCode();
-		
 		int size = 0;
 		for(int i = 0; i<node.content.length; i++) {
 			if(node.content[i]!=null) {
@@ -82,8 +79,12 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			}
 			bitposition<<=1;
 		}
+		final int resultHash = node.hashCode();
+		ImmutableNode<KEY,VALUE> newImmutable = new ImmutableNode<>(resultDataMap, resultNodeMap, resultContent, resultHash);
 		
-		return new ImmutableNode<>(resultDataMap, resultNodeMap, resultContent, resultHash);
+		// 3. save new immutable.
+		cache.put(newImmutable, newImmutable);
+		return newImmutable;
 	}
 	
 	private int index(int bitmap, int bitpos) {
@@ -185,7 +186,8 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	public long getSize() {
 		int result = Integer.bitCount(this.dataMap);
 		for(int subnodeIndex = 0; subnodeIndex < Integer.bitCount(this.nodeMap); subnodeIndex++) {
-			ImmutableNode<KEY,VALUE> subnode = (ImmutableNode<KEY, VALUE>) this.content[this.content.length-1-subnodeIndex];
+			ImmutableNode<KEY,VALUE> subnode =
+				(ImmutableNode<KEY, VALUE>) this.content[this.content.length-1-subnodeIndex];
 			result += subnode.getSize();
 		}
 		return result;
@@ -325,8 +327,10 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		int nodes = 0;
 		final int immutableLength = immutable.content.length;
 		for(int i = 0; i<factor; i++) {
-			Object key = immutable.content[i*2];
+			Object key = mutable.content[i*2];
+			// For each key candidate
 			if(key != null) {
+				// Check whether a new Key-Value pair can fit into the immutable container 
 				if(datas*2+nodes+2 <= immutableLength) {
 					if(	mutable.content[datas*2]	!= key ||
 						mutable.content[datas*2+1]	!= immutable.content[i*2+1])
@@ -339,16 +343,17 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 				Node<?,?> mutableSubnode = (Node<?, ?>) mutable.content[i*2+1];
 				if(mutableSubnode != null) {
 					if(datas*2+nodes+1 <= immutableLength) {
-						Node<?,?> immutableSubnode = (Node<?, ?>) immutable.content[immutableLength-1-nodes];
+						Object immutableSubnode = immutable.content[immutableLength-1-nodes];
 						if(!mutableSubnode.equals(immutableSubnode)) {
 							return false;
 						}
 						nodes++;
+					} else {
+						return false;
 					}
 				}
 			}
 		}
 		return true;
 	}
-	
 }
