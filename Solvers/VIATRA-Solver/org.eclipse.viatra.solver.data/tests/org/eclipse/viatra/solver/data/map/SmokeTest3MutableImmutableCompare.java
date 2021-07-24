@@ -10,64 +10,55 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class SmokeTest2Commit {
+public class SmokeTest3MutableImmutableCompare {
 	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency, boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 		
 		VersionedMapStore<Integer, String> store = new VersionedMapStoreImpl<Integer, String>(chp, values[0]);
-		VersionedMapImpl<Integer, String> sut = (VersionedMapImpl<Integer, String>) store.createMap();
-		MapTestEnvironment<Integer, String> e = new MapTestEnvironment<Integer, String>(sut);
+		VersionedMapImpl<Integer, String> immutable = (VersionedMapImpl<Integer, String>) store.createMap();
+		VersionedMapImpl<Integer, String> mutable = (VersionedMapImpl<Integer, String>) store.createMap();
+		//MapTestEnvironment<Integer, String> e = new MapTestEnvironment<Integer, String>(sut);
 		
 		Random r = new Random(seed);
 		
-		iterativeRandomPutsAndCommits(scenario, steps, maxKey, values, e, r, commitFrequency);
+		iterativeRandomPutsAndCommits(scenario,immutable,mutable, steps, maxKey, values,  r, commitFrequency);
 	}
 	
 	void iterativeRandomPutsAndCommits(
 		String scenario,
+		VersionedMapImpl<Integer, String> immutable,
+		VersionedMapImpl<Integer, String> mutable,
 		int steps,
 		int maxKey,
 		String[] values,
-		MapTestEnvironment<Integer, String> e,
 		Random r,
 		int commitFrequency)
 	{
-		int stopAt = -1;
 		for(int i=0; i<steps; i++) {
 			int index = i+1;
 			int nextKey = r.nextInt(maxKey);
 			String nextValue = values[r.nextInt(values.length)];
-			if(index == stopAt) {
-				System.out.println("issue!");
-				System.out.println("State before:");
-				e.printComparison();
-				e.sut.prettyPrint();
-				System.out.println("Next: put("+nextKey+","+nextValue+")");
-			}
 			try {
-				e.put(nextKey, nextValue);
-				if(index == stopAt) {
-					e.sut.prettyPrint();
-				}
-				e.checkEquivalence(scenario+":"+index);
+				immutable.put(nextKey, nextValue);
+				mutable.put(nextKey,nextValue);
 			} catch (Exception exception) {
 				exception.printStackTrace();
 				fail(scenario+":"+index+": exception happened: "+exception);
 			}
-			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
 			if(index%commitFrequency == 0) {
-				e.sut.commit();
-				//System.out.println(scenario+":"+index+": Commit! version=" + version);
+				immutable.commit();
 			}
+			MapTestEnvironment.compareTwoMaps(immutable, mutable);
+			
+			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
 		}
 	}
 	
-	
-	@ParameterizedTest(name = "Immutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@ParameterizedTest(name = "Mutable-Immutable Compare Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
 	void parametrizedSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed, boolean evilHash) {
-		runSmokeTest("SmokeCommitS"+steps+"K"+noKeys+"V"+noValues+"s"+seed,seed,steps,noKeys,noValues,commitFrequency,evilHash);
+		runSmokeTest("SmokeMutableImmutableCompareS"+steps+"K"+noKeys+"V"+noValues+"s"+seed,seed,steps,noKeys,noValues,commitFrequency,evilHash);
 	}
 	
 	private static Stream<Arguments> parametrizedSmoke(){

@@ -59,7 +59,7 @@ public class SmokeTest1Mutable {
 		}
 	}
 	
-	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4}, evil-hash={5}")
+	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4} evil-hash={5}")
 	@MethodSource
 	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
 		runSmokeTest("SmokeS"+steps+"K"+noKeys+"V"+noValues+"s"+seed+"H"+(evilHash?"Evil":"Normal"),seed,steps,noKeys,noValues,evilHash);

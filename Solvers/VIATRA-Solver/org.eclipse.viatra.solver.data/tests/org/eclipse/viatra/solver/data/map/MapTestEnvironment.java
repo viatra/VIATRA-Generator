@@ -1,6 +1,8 @@
 package org.eclipse.viatra.solver.data.map;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,6 +46,27 @@ public class MapTestEnvironment<KEY,VALUE> {
 			}
 		};
 		return chp;
+	}
+	
+	public static <KEY, VALUE> void compareTwoMaps(VersionedMapImpl<KEY, VALUE> map1, VersionedMapImpl<KEY, VALUE> map2) {
+		//1. Comparing cursors.
+		Cursor<KEY, VALUE> cursor1 = map1.getCursor();
+		Cursor<KEY, VALUE> cursor2 = map2.getCursor();
+		while(!cursor1.isTerminated()) {
+			if(cursor2.isTerminated()) {
+				fail("cursor 2 terminated before cursor1");
+			}
+			assertEquals(cursor1.getKey(), cursor2.getKey());
+			assertEquals(cursor2.getValue(), cursor2.getValue());
+			cursor1.move();
+			cursor2.move();
+		}
+		if(!cursor2.isTerminated()) fail("cursor 1 terminated before cursor 2");
+		
+		// 2.1. comparing hash codes
+		assertEquals(map1.hashCode(), map2.hashCode());
+		assertTrue(map1.equals(map2));
+		assertTrue(map2.equals(map1));
 	}
 	
 	VersionedMapImpl<KEY, VALUE> sut;
