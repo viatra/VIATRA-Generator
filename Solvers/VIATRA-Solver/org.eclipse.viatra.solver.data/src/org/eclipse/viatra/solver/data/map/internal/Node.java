@@ -74,5 +74,6 @@ public abstract class Node<KEY,VALUE>{
 		prettyPrint(stringBuilder, 0, -1);
 		return stringBuilder.toString();
 	}
+	public void checkIntegrity(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, int depth) {}
 	
 }

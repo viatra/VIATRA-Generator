@@ -110,10 +110,8 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		else if((nodeMap & bitposition) != 0) {
 			int keyIndex = content.length-1-index(nodeMap, bitposition);
 			ImmutableNode<KEY,VALUE> subNode = (ImmutableNode<KEY,VALUE>) content[keyIndex];
-			int newHash = depth%numberOfFactors == 0?
-					hashProvider.getHash(key, hashDepth(depth)) :
-					hash;
 			int newDepth = depth+1;
+			int newHash = newHash(hashProvider, key, hash, newDepth);
 			return subNode.getValue(key, hashProvider, defaultValue, newHash, newDepth);
 		}
 		// the key is not stored at all
@@ -160,8 +158,8 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			
 			int keyIndex = content.length-1-index(dataMap, bitposition);
 			ImmutableNode<KEY,VALUE> subNode = (ImmutableNode<KEY,VALUE>) content[keyIndex];
-			int newHash = newHash(hashProvider, key, selectedHashFragment, depth);
 			int newDepth = depth+1;
+			int newHash = newHash(hashProvider, key, hash, newDepth);
 			Node<KEY,VALUE> newsubNode = subNode.putValue(key, value, hashProvider, defaultValue, newHash, newDepth);
 			
 			if(subNode == newsubNode) {

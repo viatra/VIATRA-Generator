@@ -2,7 +2,6 @@ package org.eclipse.viatra.solver.data.map.internal;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
@@ -140,6 +139,11 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 			System.out.println(s.toString());
 		} else {
 			System.out.println("empty tree");
+		}
+	}
+	public void checkIntegrity() {
+		if(this.root != null) {
+			this.root.checkIntegrity(hashProvider, defaultValue, 0);
 		}
 	}
 }

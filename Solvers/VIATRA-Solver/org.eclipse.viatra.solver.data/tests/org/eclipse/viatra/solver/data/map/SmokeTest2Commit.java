@@ -3,14 +3,17 @@ package org.eclipse.viatra.solver.data.map;
 import static org.junit.Assert.fail;
 
 import java.util.Random;
+import java.util.stream.Stream;
 
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class SmokeTest2Commit {
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency) {
-		String[] values = prepareValues(maxValue);
-		ContinousHashProvider<Integer> chp = prepareHashProvider();
+	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency, boolean evilHash) {
+		String[] values = MapTestEnvironment.prepareValues(maxValue);
+		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 		
 		VersionedMapStore<Integer, String> store = new VersionedMapStoreImpl<Integer, String>(chp, values[0]);
 		VersionedMapImpl<Integer, String> sut = (VersionedMapImpl<Integer, String>) store.createMap();
@@ -19,36 +22,6 @@ public class SmokeTest2Commit {
 		Random r = new Random(seed);
 		
 		iterativeRandomPutsAndCommits(scenario, steps, maxKey, values, e, r, commitFrequency);
-	}
-
-
-
-	private String[] prepareValues(int maxValue) {
-		String[] values = new String[maxValue];
-		values[0] = "DEFAULT";
-		for(int i = 1; i<values.length; i++) {
-			values[i] = "VAL"+i;
-		}
-		return values;
-	}
-	private ContinousHashProvider<Integer> prepareHashProvider() {
-		ContinousHashProvider<Integer> chp = new ContinousHashProvider<Integer>() {
-			
-			@Override
-			public int getHash(Integer key, int index) {
-				int result = 1;
-				final int prime = 31;
-				result = prime*result + key;
-				result = prime*result + index;
-				return result;
-			}
-			
-			@Override
-			public boolean equals(Integer key1, Integer key2) {
-				return key1.equals(key2);
-			}
-		};
-		return chp;
 	}
 	
 	void iterativeRandomPutsAndCommits(
@@ -84,88 +57,27 @@ public class SmokeTest2Commit {
 			}
 			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
 			if(index%commitFrequency == 0) {
-				long version = e.sut.commit();
-				System.out.println(scenario+":"+index+": Commit! " + version);
+				e.sut.commit();
+				//System.out.println(scenario+":"+index+": Commit! version=" + version);
 			}
 		}
 	}
 	
-	// Mini smoke frequent commints
-	@Test
-	void MiniSmokeFrequentK3V2v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2, 1);
-	}
-	@Test
-	void MiniSmokeFrequentK3V2v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2, 1);
-	}
-	@Test
-	void MiniSmokeFrequentK3V2v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2, 1);
-	}
-	@Test
-	void MiniSmokeFrequentK3V3v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 3, 1);
-	}
-	@Test
-	void MiniSmokeFrequentK3V3v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 3, 1);
-	}
-	@Test
-	void MiniSmokeFrequentK3V3v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 3, 1);
-	}
-	// Mini smoke rare commits
-	@Test
-	void MiniSmokeRareK3V2v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 2, 100);
-	}
-	@Test
-	void MiniSmokeRareK3V2v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 2, 100);
-	}
-	@Test
-	void MiniSmokeKRare3V2v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 2, 100);
-	}
-	@Test
-	void MiniSmokeRareK3V3v1() {
-		runSmokeTest("MiniSmokeK3V2v1",0, 1000, 3, 3, 100);
-	}
-	@Test
-	void MiniSmokeRareK3V3v2() {
-		runSmokeTest("MiniSmokeK3V2v2",1, 1000, 3, 3, 100);
-	}
-	@Test
-	void MiniSmokeRareK3V3v3() {
-		runSmokeTest("MiniSmokeK3V2v3",3, 1000, 3, 3, 100);
+	
+	@ParameterizedTest(name = "Immutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5}")
+	@MethodSource
+	void parametrizedSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed, boolean evilHash) {
+		runSmokeTest("SmokeCommitS"+steps+"K"+noKeys+"V"+noValues+"s"+seed,seed,steps,noKeys,noValues,commitFrequency,evilHash);
 	}
 	
-	// Medium smoke
-	@Test
-	void MediumSmokeK3V2v1() {
-		runSmokeTest("MediumSmokeK3V2v1",1, 1000, 32, 2, 10);
-	}
-	@Test
-	void MediumSmokeK3V2v2() {
-		runSmokeTest("MediumSmokeK3V2v2",2, 1000, 32, 2, 10);
-	}
-	@Test
-	void MediumSmokeK3V2v3() {
-		runSmokeTest("MediumSmokeK3V2v3",3, 1000, 32, 2, 10);
-	}
-	
-	//Large Smoke
-	@Test
-	void SmokeLargeRareCommit() {
-		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2, 100);
-	}
-	@Test
-	void SmokeLargeNormalCommit() {
-		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2, 10);
-	}
-	@Test
-	void SmokeLargeFrequentCommit() {
-		runSmokeTest("SmokeLarge",0, 32*32*32*32, 32*32-1, 2, 1);
+	private static Stream<Arguments> parametrizedSmoke(){
+		return TestPermuter.permutationWithSize(
+			new Object[] {1000,32*32*32*32},
+			new Object[] {3,32, 32*32},
+			new Object[] {2,3},
+			new Object[] {1,10,100},
+			new Object[] {1,2,3},
+			new Object[] {false,true}
+		);
 	}
 }

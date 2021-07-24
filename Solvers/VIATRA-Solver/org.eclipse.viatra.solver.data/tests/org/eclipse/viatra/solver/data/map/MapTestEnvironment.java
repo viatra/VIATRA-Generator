@@ -11,6 +11,41 @@ import java.util.TreeMap;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
 public class MapTestEnvironment<KEY,VALUE> {
+	public static String[] prepareValues(int maxValue) {
+		String[] values = new String[maxValue];
+		values[0] = "DEFAULT";
+		for(int i = 1; i<values.length; i++) {
+			values[i] = "VAL"+i;
+		}
+		return values;
+	}
+	
+	//private static final int maxPrime = 2147483629;
+	public static ContinousHashProvider<Integer> prepareHashProvider(final boolean evil) {
+		ContinousHashProvider<Integer> chp = new ContinousHashProvider<Integer>() {
+			
+			@Override
+			public int getHash(Integer key, int index) {
+				if(evil && index < 100 && index < key/3) {
+					return 7;
+				}
+				int result = 1;
+				final int prime = 31;
+				
+				result = prime*result + key;
+				result = prime*result + index;
+				
+				return result;
+			}
+			
+			@Override
+			public boolean equals(Integer key1, Integer key2) {
+				return key1.equals(key2);
+			}
+		};
+		return chp;
+	}
+	
 	VersionedMapImpl<KEY, VALUE> sut;
 	Map<KEY,VALUE> oracle = new HashMap<KEY, VALUE>();
 	
@@ -28,6 +63,14 @@ public class MapTestEnvironment<KEY,VALUE> {
 	}
 	
 	public void checkEquivalence(String title) {
+		// 0. Checking integrity
+		try {
+			sut.checkIntegrity();
+		} catch(IllegalStateException e) {
+			fail(title + ":  " + e.getMessage());
+		}
+		
+		
 		// 1. Checking: if Reference contains <key,value> pair, then SUT contains <key,value> pair.
 		// Tests get functions
 		for(Entry<KEY, VALUE> entry : oracle.entrySet()) {

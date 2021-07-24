@@ -12,9 +12,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class SmokeTest1Mutable {
 	
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue) {
-		String[] values = prepareValues(maxValue);
-		ContinousHashProvider<Integer> chp = prepareHashProvider();
+	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
+		String[] values = MapTestEnvironment.prepareValues(maxValue);
+		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 		
 		VersionedMapStore<Integer, String> store = new VersionedMapStoreImpl<Integer, String>(chp, values[0]);
 		VersionedMapImpl<Integer, String> sut = (VersionedMapImpl<Integer, String>) store.createMap();
@@ -25,36 +25,6 @@ public class SmokeTest1Mutable {
 		iterativeRandomPuts(scenario, steps, maxKey, values, e, r);
 	}
 
-
-
-	private String[] prepareValues(int maxValue) {
-		String[] values = new String[maxValue];
-		values[0] = "DEFAULT";
-		for(int i = 1; i<values.length; i++) {
-			values[i] = "VAL"+i;
-		}
-		return values;
-	}
-	private ContinousHashProvider<Integer> prepareHashProvider() {
-		ContinousHashProvider<Integer> chp = new ContinousHashProvider<Integer>() {
-			
-			@Override
-			public int getHash(Integer key, int index) {
-				int result = 1;
-				final int prime = 31;
-				result = prime*result + key;
-				result = prime*result + index;
-				return result;
-			}
-			
-			@Override
-			public boolean equals(Integer key1, Integer key2) {
-				return key1.equals(key2);
-			}
-		};
-		return chp;
-	}
-	
 	void iterativeRandomPuts(
 		String scenario,
 		int steps,
@@ -89,10 +59,10 @@ public class SmokeTest1Mutable {
 		}
 	}
 	
-	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4}")
+	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4}, evil-hash={5}")
 	@MethodSource
-	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed) {
-		runSmokeTest("Smoke"+test+"S"+steps+"K"+noKeys+"V"+noValues+"s"+seed,seed,steps,noKeys,noValues);
+	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
+		runSmokeTest("SmokeS"+steps+"K"+noKeys+"V"+noValues+"s"+seed+"H"+(evilHash?"Evil":"Normal"),seed,steps,noKeys,noValues,evilHash);
 	}
 	
 	private static Stream<Arguments> parametrizedSmoke(){
@@ -100,7 +70,8 @@ public class SmokeTest1Mutable {
 			new Object[] {1000,32*32*32*32},
 			new Object[] {3,32, 32*32, 32*32*32*32},
 			new Object[] {2,3},
-			new Object[] {1,2,3}
+			new Object[] {1,2,3},
+			new Object[] {false,true}
 		);
 	}
 
