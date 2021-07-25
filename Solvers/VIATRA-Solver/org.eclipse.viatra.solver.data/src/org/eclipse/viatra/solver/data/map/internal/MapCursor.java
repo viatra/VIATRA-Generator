@@ -3,6 +3,7 @@ package org.eclipse.viatra.solver.data.map.internal;
 import java.util.ArrayDeque;
 import java.util.ConcurrentModificationException;
 import java.util.Deque;
+import java.util.Iterator;
 
 import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
@@ -13,8 +14,8 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	static int IndexFinish = -2;
 	
 	// Tree stack
-	Deque<Node<KEY,VALUE>> nodeStack;
-	Deque<Integer> nodeIndexStack;
+	ArrayDeque<Node<KEY,VALUE>> nodeStack;
+	ArrayDeque<Integer> nodeIndexStack;
 	int dataIndex;
 	
 	// Values
@@ -73,5 +74,40 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	
 	public boolean isDirty() {
 		return this.map.hashCode() != this.creationHash;
+	}
+	
+	/**
+	 * 
+	 * @param <KEY>
+	 * @param <VALUE>
+	 * @param cursor1
+	 * @param cursor2
+	 * @returnv Positive number if cursor 1 is behind, negative number if cursor 2 is behind, and 0 if they are at the same position.
+	 */
+	public static <KEY,VALUE> int compare(MapCursor<KEY,VALUE> cursor1, MapCursor<KEY,VALUE> cursor2) {
+		// two cursors are equally deep
+		Iterator<Integer> stack1 = cursor1.nodeIndexStack.descendingIterator();
+		Iterator<Integer> stack2 = cursor2.nodeIndexStack.descendingIterator();
+		if(stack1.hasNext()) {
+			if(!stack2.hasNext()) {
+				// stack 2 has no more element, thus stack 1 is deeper
+				return 1;
+			}
+			int val1 = stack1.next();
+			int val2 = stack2.next();
+			if(val1 < val2) {
+				return -1;
+			} else if(val2 < val1) {
+				return 1;
+			}
+		}
+		if(stack2.hasNext()) {
+			// stack 2 has more element, thus stack 2 is deeper
+			return 1;
+		}
+		return Integer.compare(cursor1.dataIndex, cursor2.dataIndex);
+		
+			
+			
 	}
 }
