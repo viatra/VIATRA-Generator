@@ -9,4 +9,5 @@ public interface VersionedMap<KEY,VALUE> extends Versioned{
 	public long getSize();
 	public Iterator<Map.Entry<KEY,VALUE>> getIterator();
 	public Cursor<KEY,VALUE> getCursor();
+	public DiffCursor<KEY,VALUE> getDiffCursor(long state);
 }

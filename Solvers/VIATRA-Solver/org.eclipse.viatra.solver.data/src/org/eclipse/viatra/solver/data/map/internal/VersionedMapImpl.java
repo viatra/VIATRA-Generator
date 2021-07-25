@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
+import org.eclipse.viatra.solver.data.map.DiffCursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 
@@ -84,28 +85,27 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		MapEntryIterator<KEY,VALUE> cursor = new MapEntryIterator<>(this.root,this);
 		return cursor;
 	}
+	@Override
+	public DiffCursor<KEY, VALUE> getDiffCursor(long to) {
+		Cursor<KEY, VALUE> fromCursor = this.getCursor();
+		VersionedMap<KEY, VALUE> toMap = this.store.createMap(to);
+		Cursor<KEY, VALUE> toCursor = toMap.getCursor();
+		return new MapDiffCursor<KEY, VALUE>(defaultValue, fromCursor, toCursor);
+		
+	}
+	
 
 	@Override
 	public long commit() {
-		ImmutableNode<KEY,VALUE> immutable;
-		if(this.root != null) {
-			Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache = this.store.getStore();
-			if(cache != null) {
-				immutable = root.toImmutable(cache);
-			} else {
-				immutable = root.toImmutable();
-			}
-			
-		} else {
-			immutable = null;
-		}
-		long result = this.store.addState(immutable);
-		return result;
+		return this.store.commit(root,this);
+	}
+	public void setRoot(Node<KEY, VALUE> root) {
+		this.root = root;
 	}
 
 	@Override
 	public void restore(long state) {
-		root = this.store.getStateData(state);
+		root = this.store.revert(state);
 	}
 	
 	@Override
@@ -146,4 +146,5 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 			this.root.checkIntegrity(hashProvider, defaultValue, 0);
 		}
 	}
+
 }
