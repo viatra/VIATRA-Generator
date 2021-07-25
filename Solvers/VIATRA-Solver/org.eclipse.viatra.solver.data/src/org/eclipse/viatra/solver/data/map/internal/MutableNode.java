@@ -59,7 +59,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		int selectedHashFragment = hashFragment(hash,shiftDepth(depth));
 		KEY keyCandidate = (KEY) this.content[2*selectedHashFragment];
 		if(keyCandidate != null) {
-			if(hashProvider.equals(keyCandidate, key)) {
+			if(keyCandidate.equals(key)) {
 				return (VALUE) this.content[2*selectedHashFragment+1];
 			} else {
 				return defaultValue;
@@ -90,7 +90,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		KEY keyCandidate = (KEY) content[2*selectedHashFragment];
 		if(keyCandidate != null) {
 			// If has key
-			if(hashProvider.equals(keyCandidate,key)) {
+			if(keyCandidate.equals(key)) {
 				// The key is equals to an existing key -> update entry
 				if(value == defaultValue) {
 					return removeEntry(selectedHashFragment);

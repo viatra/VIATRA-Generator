@@ -19,16 +19,17 @@ public interface ContinousHashProvider<KEY> {
 	 * @return A hash code.
 	 */
 	public int getHash(KEY key, int index);
-	/**
-	 * Compares the equivalnce of two objects {@code key1} and {@code key2}. It has the contracts of a equivalence relation:
-	 * <ul>
-	 * <li> Reflexive: {@code equals(key,key) == true}.</li>
-	 * <li> Symmetric: {@code equals(key1,key2) == equals(key2,key1)}.</li>
-	 * <li> Transitive: {@code equals(key1,key2) == true} and {@code equals(key2,key3) == true} then {@code equals(key1,key3) == true}.</li>
-	 * </ul>
-	 * @param key1 First data object.
-	 * @param key2 Second data object.
-	 * @return whether {@code key1} and {@code key2} are equivalent with respect to an equivalence relation represented by the given .
-	 */
-	public boolean equals(KEY key1, KEY key2);
+//	/**
+//	 * Compares the equivalence of two objects {@code key1} and {@code key2}. It has the contracts of a equivalence relation:
+//	 * <ul>
+//	 * <li> Reflexive: {@code equals(key,key) == true}.</li>
+//	 * <li> Symmetric: {@code equals(key1,key2) == equals(key2,key1)}.</li>
+//	 * <li> Transitive: {@code equals(key1,key2) == true} and {@code equals(key2,key3) == true} then {@code equals(key1,key3) == true}.</li>
+//	 * </ul>
+//	 * TODO: clarify relation to Object.equals() on keys
+//	 * @param key1 First data object.
+//	 * @param key2 Second data object.
+//	 * @return whether {@code key1} and {@code key2} are equivalent with respect to an equivalence relation represented by the given .
+//	 */
+//	public boolean equals(KEY key1, KEY key2);
 }

@@ -100,7 +100,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		if((dataMap & bitposition) != 0) {
 			int keyIndex = 2*index(dataMap, bitposition);
 			KEY keyCandidate = (KEY) content[keyIndex];
-			if(hashProvider.equals(keyCandidate, key)) {
+			if(keyCandidate.equals(key)) {
 				return (VALUE) content[keyIndex+1];
 			} else {
 				return defaultValue;
@@ -128,7 +128,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		if((dataMap & bitposition) != 0) {
 			int keyIndex = 2*index(dataMap, bitposition);
 			KEY keyCandidate = (KEY) content[keyIndex];
-			if(hashProvider.equals(keyCandidate, key)) {
+			if(keyCandidate.equals(key)) {
 				if(value == defaultValue) {
 					// delete
 					MutableNode<KEY, VALUE> mutable = this.toMutable();
@@ -231,8 +231,10 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			// 2.1 found next subnode, move down to the subnode
 			Node<KEY, VALUE> subnode = (Node<KEY, VALUE>) this.content[this.content.length-1-newNodeIndex];
 			cursor.dataIndex = MapCursor.IndexStart;
-			cursor.nodeStack.push(subnode);
+			cursor.nodeIndexStack.pop();
 			cursor.nodeIndexStack.push(newNodeIndex);
+			cursor.nodeIndexStack.push(MapCursor.IndexStart);
+			cursor.nodeStack.push(subnode);
 			return subnode.moveToNext(cursor);
 		} else {
 			// 3. no subnode found, move up
@@ -330,8 +332,8 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 			if(key != null) {
 				// Check whether a new Key-Value pair can fit into the immutable container 
 				if(datas*2+nodes+2 <= immutableLength) {
-					if(	mutable.content[datas*2]	!= key ||
-						mutable.content[datas*2+1]	!= immutable.content[i*2+1])
+					if(	!immutable.content[datas*2].equals(key) ||
+						!immutable.content[datas*2+1].equals(mutable.content[i*2+1]))
 					{
 						return false;
 					}
