@@ -49,7 +49,7 @@ public class SmokeTest3MutableImmutableCompare {
 			if(index%commitFrequency == 0) {
 				immutable.commit();
 			}
-			MapTestEnvironment.compareTwoMaps(immutable, mutable);
+			MapTestEnvironment.compareTwoMaps(scenario+":"+index,immutable, mutable);
 			
 			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
 		}
