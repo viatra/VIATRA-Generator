@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map;
+package org.eclipse.viatra.solver.data.map.test.support;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
+import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
 public class MapTestEnvironment<KEY,VALUE> {
@@ -39,16 +41,11 @@ public class MapTestEnvironment<KEY,VALUE> {
 				
 				return result;
 			}
-			
-			@Override
-			public boolean equals(Integer key1, Integer key2) {
-				return key1.equals(key2);
-			}
 		};
 		return chp;
 	}
 	
-	public static <KEY, VALUE> void compareTwoMaps(VersionedMapImpl<KEY, VALUE> map1, VersionedMapImpl<KEY, VALUE> map2) {
+	public static <KEY, VALUE> void compareTwoMaps(String title, VersionedMapImpl<KEY, VALUE> map1, VersionedMapImpl<KEY, VALUE> map2) {
 		//1. Comparing cursors.
 		Cursor<KEY, VALUE> cursor1 = map1.getCursor();
 		Cursor<KEY, VALUE> cursor2 = map2.getCursor();
@@ -64,12 +61,12 @@ public class MapTestEnvironment<KEY,VALUE> {
 		if(!cursor2.isTerminated()) fail("cursor 1 terminated before cursor 2");
 		
 		// 2.1. comparing hash codes
-		assertEquals(map1.hashCode(), map2.hashCode());
-		assertTrue(map1.equals(map2));
-		assertTrue(map2.equals(map1));
+		assertEquals(map1.hashCode(), map2.hashCode(), title+": hash code check");
+		assertTrue(title+": 1.equals(2)", map1.equals(map2));
+		assertTrue(title+": 2.equals(1)", map2.equals(map1));
 	}
 	
-	VersionedMapImpl<KEY, VALUE> sut;
+	public VersionedMapImpl<KEY, VALUE> sut;
 	Map<KEY,VALUE> oracle = new HashMap<KEY, VALUE>();
 	
 	public MapTestEnvironment(VersionedMapImpl<KEY, VALUE> sut) {

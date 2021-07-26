@@ -1,18 +1,23 @@
-package org.eclipse.viatra.solver.data.map;
+package org.eclipse.viatra.solver.data.map.test.smoke.fast;
 
 import static org.junit.Assert.fail;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
+import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
+import org.eclipse.viatra.solver.data.map.VersionedMapStore;
+import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
+import org.eclipse.viatra.solver.data.map.test.smoke.TestPermuter;
+import org.eclipse.viatra.solver.data.map.test.support.MapTestEnvironment;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class SmokeTest1Mutable {
 	
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
+	public void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 		
@@ -65,9 +70,9 @@ public class SmokeTest1Mutable {
 		runSmokeTest("SmokeS"+steps+"K"+noKeys+"V"+noValues+"s"+seed+"H"+(evilHash?"Evil":"Normal"),seed,steps,noKeys,noValues,evilHash);
 	}
 	
-	private static Stream<Arguments> parametrizedSmoke(){
+	public static Stream<Arguments> parametrizedSmoke(){
 		return TestPermuter.permutationWithSize(
-			new Object[] {1000,32*32*32*32},
+			new Object[] {1000},
 			new Object[] {3,32, 32*32, 32*32*32*32},
 			new Object[] {2,3},
 			new Object[] {1,2,3},
