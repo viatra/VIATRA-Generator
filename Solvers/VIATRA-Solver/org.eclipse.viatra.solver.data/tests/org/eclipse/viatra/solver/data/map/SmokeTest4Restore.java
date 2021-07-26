@@ -53,7 +53,7 @@ public class SmokeTest4Restore {
 				long version = versioned.commit();
 				index2Version.put(i,version);
 			}
-			if(index%10000==0) System.out.println(scenario+":"+index+" building finished");
+			if(index%10000==0) System.out.println(scenario+":"+index+"/"+steps+" building finished");
 		}
 		// 2. create a non-versioned and 
 		VersionedMapImpl<Integer, String> reference = (VersionedMapImpl<Integer, String>) store.createMap();
@@ -73,7 +73,7 @@ public class SmokeTest4Restore {
 				versioned.restore(index2Version.get(i));
 				MapTestEnvironment.compareTwoMaps(scenario+":"+index,reference, versioned);
 			}
-			if(index%10000==0) System.out.println(scenario+":"+index+" comparison finished");
+			if(index%10000==0) System.out.println(scenario+":"+index+"/"+steps+" comparison finished");
 		}
 		
 		

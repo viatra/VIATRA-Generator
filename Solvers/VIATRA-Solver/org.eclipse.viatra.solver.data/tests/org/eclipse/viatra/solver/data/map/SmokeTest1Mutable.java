@@ -55,7 +55,7 @@ public class SmokeTest1Mutable {
 				exception.printStackTrace();
 				fail(scenario+":"+index+": exception happened: "+exception);
 			}
-			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
+			if(index%10000==0) System.out.println(scenario+":"+index+"/"+steps+" finished");
 		}
 	}
 	

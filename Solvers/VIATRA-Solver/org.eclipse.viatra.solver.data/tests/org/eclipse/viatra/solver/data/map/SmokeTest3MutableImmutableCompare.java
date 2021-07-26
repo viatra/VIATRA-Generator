@@ -51,7 +51,7 @@ public class SmokeTest3MutableImmutableCompare {
 			}
 			MapTestEnvironment.compareTwoMaps(scenario+":"+index,immutable, mutable);
 			
-			if(index%10000==0) System.out.println(scenario+":"+index+" finished");
+			if(index%10000==0) System.out.println(scenario+":"+index+"/"+steps+" finished");
 		}
 	}
 	
