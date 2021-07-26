@@ -27,10 +27,10 @@ public class SmokeTest3MutableImmutableCompare {
 		
 		Random r = new Random(seed);
 		
-		iterativeRandomPutsAndCommits(scenario,immutable,mutable, steps, maxKey, values,  r, commitFrequency);
+		iterativeRandomPutsAndCommitsAndCompare(scenario,immutable,mutable, steps, maxKey, values,  r, commitFrequency);
 	}
 	
-	void iterativeRandomPutsAndCommits(
+	void iterativeRandomPutsAndCommitsAndCompare(
 		String scenario,
 		VersionedMapImpl<Integer, String> immutable,
 		VersionedMapImpl<Integer, String> mutable,
@@ -56,7 +56,7 @@ public class SmokeTest3MutableImmutableCompare {
 			}
 			MapTestEnvironment.compareTwoMaps(scenario+":"+index,immutable, mutable);
 			
-			if(index%10000==0) System.out.println(scenario+":"+index+"/"+steps+" finished");
+			MapTestEnvironment.printStatus(scenario, index, steps, null);
 		}
 	}
 	

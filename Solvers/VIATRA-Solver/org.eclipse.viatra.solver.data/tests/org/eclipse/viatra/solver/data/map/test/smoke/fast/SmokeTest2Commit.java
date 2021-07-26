@@ -60,7 +60,7 @@ public class SmokeTest2Commit {
 				exception.printStackTrace();
 				fail(scenario+":"+index+": exception happened: "+exception);
 			}
-			if(index%10000==0) System.out.println(scenario+":"+index+"/"+steps+" finished");
+			MapTestEnvironment.printStatus(scenario, index, steps, null);
 			if(index%commitFrequency == 0) {
 				e.sut.commit();
 				//System.out.println(scenario+":"+index+": Commit! version=" + version);

@@ -30,7 +30,7 @@ public class MapTestEnvironment<KEY,VALUE> {
 			
 			@Override
 			public int getHash(Integer key, int index) {
-				if(evil && index < 100 && index < key/3) {
+				if(evil && index < 15 && index < key/3) {
 					return 7;
 				}
 				int result = 1;
@@ -43,6 +43,14 @@ public class MapTestEnvironment<KEY,VALUE> {
 			}
 		};
 		return chp;
+	}
+	
+	public static void printStatus(String scenario, int actual, int max, String stepName) {
+		if(actual%10000==0) {
+			String printStepName = stepName==null?"":stepName;
+			System.out.format(scenario+":%d/%d (%d%%) "+printStepName+ "%n",actual,max,actual*100/max);
+		}
+				
 	}
 	
 	public static <KEY, VALUE> void compareTwoMaps(String title, VersionedMapImpl<KEY, VALUE> map1, VersionedMapImpl<KEY, VALUE> map2) {
