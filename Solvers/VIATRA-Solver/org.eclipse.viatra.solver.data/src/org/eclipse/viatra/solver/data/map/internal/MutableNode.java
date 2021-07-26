@@ -383,10 +383,7 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 	
 	
 	protected void updateHash() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.deepHashCode(content);
-		this.cachedHash = result;
+		this.cachedHash = Arrays.hashCode(content);
 	}
 	
 	@Override
