@@ -34,6 +34,7 @@ public abstract class Node<KEY,VALUE>{
 	 * @return The segment as an integer.
 	 */
 	protected static int hashFragment(int hash, int shiftDepth) {
+		if(shiftDepth<0 && 5<shiftDepth) throw new IllegalArgumentException("Invalid shift depth! valid intervall=[0;5], input="+shiftDepth);
 		return (hash >>> shiftDepth*branchingFactorBit) & factorMask;
 	}
 	/**
