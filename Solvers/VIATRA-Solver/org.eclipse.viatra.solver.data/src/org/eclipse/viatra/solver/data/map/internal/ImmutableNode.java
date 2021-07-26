@@ -34,7 +34,12 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 
 	/**
 	 * Constructor that copies a mutable node to an immutable.
-	 * @param node
+	 * 
+	 * @param node  A mutable node.
+	 * @param cache A cache of existing immutable nodes. It can be used to search
+	 *              and place reference immutable nodes. It can be null, if no cache
+	 *              available.
+	 * @return an immutable version of the input node.
 	 */
 	@SuppressWarnings("unchecked")
 	static <KEY,VALUE> ImmutableNode<KEY,VALUE> constructImmutable(MutableNode<KEY,VALUE> node, Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache) {
@@ -83,7 +88,9 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 		ImmutableNode<KEY,VALUE> newImmutable = new ImmutableNode<>(resultDataMap, resultNodeMap, resultContent, resultHash);
 		
 		// 3. save new immutable.
-		cache.put(newImmutable, newImmutable);
+		if(cache != null) {
+			cache.put(newImmutable, newImmutable);
+		}
 		return newImmutable;
 	}
 	
@@ -132,16 +139,16 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 				if(value == defaultValue) {
 					// delete
 					MutableNode<KEY, VALUE> mutable = this.toMutable();
-					mutable.removeEntry(selectedHashFragment);
-					return mutable;
+					Node<KEY, VALUE> result = mutable.removeEntry(selectedHashFragment);
+					return result;
 				} else if(value == content[keyIndex+1]) {
 					// dont change
 					return this;
 				} else {
 					// update existing value
 					MutableNode<KEY, VALUE> mutable = this.toMutable();
-					mutable.updateValue(value, selectedHashFragment);
-					return mutable;
+					Node<KEY, VALUE> result = mutable.updateValue(value, selectedHashFragment);
+					return result;
 				}
 			} else {
 				if(value == defaultValue) {
@@ -150,13 +157,13 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 				} else {
 					// add new key + value
 					MutableNode<KEY, VALUE> mutable = this.toMutable();
-					mutable.putValue(key, value, hashProvider, defaultValue, selectedHashFragment, depth);
-					return mutable;
+					Node<KEY, VALUE> result = mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
+					return result;
 				}
 			}
 		} else if((nodeMap & bitposition)!=0) {
 			
-			int keyIndex = content.length-1-index(dataMap, bitposition);
+			int keyIndex = content.length-1-index(nodeMap, bitposition);
 			ImmutableNode<KEY,VALUE> subNode = (ImmutableNode<KEY,VALUE>) content[keyIndex];
 			int newDepth = depth+1;
 			int newHash = newHash(hashProvider, key, hash, newDepth);
@@ -166,15 +173,15 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 				// nothing changed
 				return this;
 			} else {
-				MutableNode<KEY, VALUE> result = toMutable();
-				result.updateSubNode(selectedHashFragment, newsubNode);
+				MutableNode<KEY, VALUE> mutable  = toMutable();
+				Node<KEY, VALUE> result = mutable.updateSubNode(selectedHashFragment, newsubNode);
 				return result;
 			}
 		} else {
 			// add new key + value
 			MutableNode<KEY, VALUE> mutable = this.toMutable();
-			mutable.putValue(key, value, hashProvider, defaultValue, selectedHashFragment, depth);
-			return mutable;
+			Node<KEY, VALUE> result = mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
+			return result;
 		}
 	}
 	

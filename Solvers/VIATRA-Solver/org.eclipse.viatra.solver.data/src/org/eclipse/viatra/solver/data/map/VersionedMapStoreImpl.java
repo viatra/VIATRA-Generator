@@ -10,20 +10,35 @@ import org.eclipse.viatra.solver.data.map.internal.Node;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
 public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, VALUE> {
+	// Configuration
+	final private boolean immutableWhenCommiting;
+	
+	// Static data
 	protected final ContinousHashProvider<? super KEY> hashProvider;
 	protected final VALUE defaultValue;
 	
+	// Dynamic data
 	final protected Map<Long, ImmutableNode<KEY,VALUE>> states;
 	final protected Map<Node<KEY,VALUE>, ImmutableNode<KEY,VALUE>> nodeCache;
 	protected long nextID;
 	
-	public VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue) {
+	public VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, VersionedMapStoreConfiguration config) {
+		this.immutableWhenCommiting = config.immutableWhenCommiting;
+		
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		
 		states = new HashMap<>();
 		nextID = 0;
-		nodeCache = new HashMap<>();
+		if(config.sharedNodeCache) {
+			nodeCache = new HashMap<>();
+		} else {
+			nodeCache = null;
+		}
+	}
+	
+	public VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue) {
+		this(hashProvider,defaultValue,new VersionedMapStoreConfiguration());
 	}
 	
 	synchronized Set<Long> getStates() {
@@ -64,7 +79,9 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 			"Map store run out of Id-s");
 		long id = nextID++;
 		this.states.put(id, immutable);
-		//mapToUpdateRoot.setRoot(immutable);
+		if(this.immutableWhenCommiting) {
+			mapToUpdateRoot.setRoot(immutable);
+		}
 		return id;
 	}
 	

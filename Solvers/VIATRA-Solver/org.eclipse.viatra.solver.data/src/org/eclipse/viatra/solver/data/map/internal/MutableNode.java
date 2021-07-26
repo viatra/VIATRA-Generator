@@ -42,11 +42,11 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		for(int i=0; i<factor; i++) {
 			int bitposition = 1 << i;
 			if((node.dataMap & bitposition) != 0) {
-				content[2*i] = this.content[dataUsed*2];
-				content[2*i+1] = this.content[dataUsed*2+1];
+				content[2*i] = node.content[dataUsed*2];
+				content[2*i+1] = node.content[dataUsed*2+1];
 				dataUsed++;
 			} else if((node.nodeMap & bitposition) != 0) {
-				content[2*i+1] = this.content[this.content.length-1-nodeUsed];
+				content[2*i+1] = node.content[node.content.length-1-nodeUsed];
 				nodeUsed++;
 			}
 		}
@@ -394,14 +394,6 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 		return this.cachedHash;
 	}
 	
-	public void checkHashCodeConsistency() {
-		int oldHash = this.hashCode();
-		updateHash();
-		int newHash = this.hashCode();
-		if(oldHash != newHash) {
-			throw new IllegalStateException("Inconsistent hash code!");
-		}
-	}
 	
 	@Override
 	public boolean equals(Object obj) {
