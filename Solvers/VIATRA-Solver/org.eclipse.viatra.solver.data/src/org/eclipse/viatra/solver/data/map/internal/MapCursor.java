@@ -30,11 +30,12 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		// Initializing tree stack
 		super();
 		this.nodeStack = new ArrayDeque<>();
+		this.nodeIndexStack = new ArrayDeque<>();
 		if(root != null) {
 			this.nodeStack.add(root);
+			this.nodeIndexStack.push(IndexStart);
 		}
-		this.nodeIndexStack = new ArrayDeque<>();
-		this.nodeIndexStack.push(IndexStart);
+		
 		this.dataIndex = IndexStart;
 		
 		// Initializing cache
@@ -63,7 +64,11 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 			throw new ConcurrentModificationException();
 		}
 		if(!isTerminated()) {
-			return this.nodeStack.peek().moveToNext(this);
+			boolean result = this.nodeStack.peek().moveToNext(this);
+			if(this.nodeIndexStack.size() != this.nodeStack.size()) {
+				throw new IllegalArgumentException("Node stack is corrupted by illegal moves!");
+			}
+			return result;
 		}
 		return false;
 	}
@@ -85,7 +90,11 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	public static <KEY,VALUE> boolean sameSubnode(MapCursor<KEY,VALUE> cursor1, MapCursor<KEY,VALUE> cursor2) {
 		Node<KEY, VALUE> nodeOfCursor1 = cursor1.nodeStack.peek();
 		Node<KEY, VALUE> nodeOfCursor2 = cursor2.nodeStack.peek();
-		return nodeOfCursor1.equals(nodeOfCursor2);
+		if(nodeOfCursor1 != null && nodeOfCursor2 != null) {
+			return nodeOfCursor1.equals(nodeOfCursor2);
+		} else {
+			return false;
+		}
 	}
 	
 	/**

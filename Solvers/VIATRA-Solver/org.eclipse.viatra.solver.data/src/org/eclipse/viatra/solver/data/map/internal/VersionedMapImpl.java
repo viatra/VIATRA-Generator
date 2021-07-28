@@ -108,7 +108,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		Cursor<KEY, VALUE> fromCursor = this.getCursor();
 		VersionedMap<KEY, VALUE> toMap = this.store.createMap(toVersion);
 		Cursor<KEY, VALUE> toCursor = toMap.getCursor();
-		return new MapDiffCursor<KEY, VALUE>(defaultValue, fromCursor, toCursor);
+		return new MapDiffCursor<KEY, VALUE>(this.hashProvider,this.defaultValue, fromCursor, toCursor);
 		
 	}
 	

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.DiffCursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
@@ -17,43 +18,52 @@ public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<
 	/**
 	 * Default value representing missing elements.
 	 */
-	VALUE defaultValue;
-	MapCursor<KEY,VALUE> cursor1;
-	MapCursor<KEY,VALUE> cursor2;
+	private VALUE defaultValue;
+	private MapCursor<KEY,VALUE> cursor1;
+	private MapCursor<KEY,VALUE> cursor2;
+	private ContinousHashProvider<? super KEY> hashProvider;
 	
 	// Values
-	KEY key;
-	VALUE value1;
-	VALUE value2;
+	private KEY key;
+	private VALUE fromValue;
+	private VALUE toValue;
 	
 	// State
 	/**
 	 * Positive number if cursor 1 is behind, negative number if cursor 2 is behind, and 0 if they are at the same position.
 	 */
-	int cursorRelation;
+	private int cursorRelation;
+	/**
+	 * Denotes a state when two cursors are in the same position, but they contain different keys.
+	 * Possible values:
+	 * <ul>
+	 * <li>0: not stuck</li>
+	 * <li>1: hashClash, next it should return the key of cursor 1.</li>
+	 * <li>2: hashClash, next it should return the key of cursor 2.</li>
+	 * </ul>
+	 */
+	private int hashClash=0;
 	
-	public MapDiffCursor(VALUE defaultValue, Cursor<KEY, VALUE> cursor1, Cursor<KEY, VALUE> cursor2) {
+	public MapDiffCursor(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, Cursor<KEY, VALUE> cursor1, Cursor<KEY, VALUE> cursor2) {
 		super();
+		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.cursor1 = (MapCursor<KEY, VALUE>) cursor1;
 		this.cursor2 = (MapCursor<KEY, VALUE>) cursor2;
-		
-		this.updateState();
-		this.moveToConsistentState();
 	}
 
 	public KEY getKey() {
 		return key;
 	}
-	public VALUE getValue1() {
-		return value1;
+	public VALUE getFromValue() {
+		return fromValue;
 	}
-	public VALUE getValue2() {
-		return value2;
+	public VALUE getToValue() {
+		return toValue;
 	}
 	@Override
 	public VALUE getValue() {
-		return this.value2;
+		return getToValue();
 	}
 	public boolean isTerminated() {
 		return cursor1.isTerminated() && cursor2.isTerminated();
@@ -71,33 +81,72 @@ public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<
 	}
 	
 	protected void updateState() {
-		this.cursorRelation = MapCursor.compare(cursor1, cursor2);
-		if(cursorRelation > 0 || cursor2.isTerminated()) {
-			this.key = cursor1.getKey();
-			this.value1 = cursor1.getValue();
-			this.value2 = defaultValue;
-		} else if(cursorRelation < 0|| cursor1.isTerminated()){
-			this.key = cursor2.getKey();
-			this.value1 = defaultValue;
-			this.value2 = cursor1.getValue();
-		} else {
-			// cursor1 = cursor2
-			if(!cursor1.getKey().equals(cursor2.getKey())) {
-				throw new IllegalStateException(
-					"Cursor comarison tells that they are in the same state, but keys are different. " + cursor1.getKey() + " - " + cursor2.getKey());
+		if(!isTerminated()) {
+			this.cursorRelation = MapCursor.compare(cursor1, cursor2);
+			if(cursorRelation > 0 || cursor2.isTerminated()) {
+				this.key = cursor1.getKey();
+				this.fromValue = cursor1.getValue();
+				this.toValue = defaultValue;
+			} else if(cursorRelation < 0 || cursor1.isTerminated()){
+				this.key = cursor2.getKey();
+				this.fromValue = defaultValue;
+				this.toValue = cursor1.getValue();
+			} else {
+				// cursor1 = cursor2
+				if(cursor1.getKey().equals(cursor2.getKey())) {
+					this.key = cursor1.getKey();
+					this.fromValue = cursor1.getValue();
+					this.toValue = defaultValue;
+				} else {
+					resolveHashClash1();
+				}
 			}
-			this.key = cursor1.getKey();
-			this.value1 = cursor1.getValue();
-			this.value2 = defaultValue;
 		}
 	}
+	protected void resolveHashClash1() {
+		int compareResult = this.hashProvider.compare(cursor1.key, cursor2.key);
+		if(compareResult<0) {
+			this.hashClash = 2;
+			this.cursorRelation = 0;
+			this.key = cursor1.key;
+			this.fromValue = cursor1.value;
+			this.toValue = defaultValue;
+		} else if(compareResult>0) {
+			this.hashClash = 1;
+			this.cursorRelation = 0;
+			this.key = cursor2.key;
+			this.fromValue = defaultValue;
+			this.toValue = cursor2.value;
+		} else {
+			throw new IllegalArgumentException("Inconsistent compare result for diffcursor");
+		}
+	}
+	protected boolean isInHashClash() {
+		return this.hashClash != 0;
+	}
+	protected void resolveHashClash2() {
+		if(hashClash == 1) {
+			this.hashClash = 0;
+			this.cursorRelation = 0;
+			this.key = cursor1.key;
+			this.fromValue = cursor1.value;
+			this.toValue = defaultValue;
+		} else if(hashClash == 2) {
+			this.hashClash = 0;
+			this.cursorRelation = 0;
+			this.key = cursor2.key;
+			this.fromValue = defaultValue;
+			this.toValue = cursor2.value;
+		} else throw new IllegalArgumentException("Inconsistent compare result for diffcursor");
+	}
+
 	
-	protected boolean differentValues() {
-		return this.value1 != this.value2;
+	protected boolean sameValues() {
+		return this.fromValue == this.toValue;
 	}
 	protected boolean moveOne() {
 		if(isTerminated()) {
-			throw new IllegalStateException("DiffCursor tries to move when terminated!");
+			return false;
 		}
 		if(this.cursorRelation > 0 || cursor2.isTerminated()) {
 			return cursor1.move();
@@ -129,10 +178,11 @@ public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<
 					lastResult = skipNode();
 					changed = true;
 				}
-				if(differentValues()) {
+				if(sameValues()) {
 					lastResult = moveOne();
 					changed = true;
 				}
+				updateState();
 			} while(changed && !isTerminated());
 			return lastResult;
 		} else {
@@ -142,11 +192,17 @@ public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<
 	
 	public boolean move() {
 		if(!isTerminated()) {
-			if(moveOne()) {
-				return moveToConsistentState();
+			if(isInHashClash()) {
+				this.resolveHashClash2();
+				return true;
 			} else {
-				return false;
+				if(moveOne()) {
+					return moveToConsistentState();
+				} else {
+					return false;
+				}
 			}
+			
 		} else return false;
 	}
 }

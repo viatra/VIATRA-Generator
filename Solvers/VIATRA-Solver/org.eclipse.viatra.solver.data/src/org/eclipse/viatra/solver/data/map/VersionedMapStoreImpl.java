@@ -1,5 +1,7 @@
 package org.eclipse.viatra.solver.data.map;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +39,7 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 		}
 	}
 	
-	public VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue) {
+	public VersionedMapStoreImpl(ContinousHashProvider<KEY> hashProvider, VALUE defaultValue) {
 		this(hashProvider,defaultValue,new VersionedMapStoreConfiguration());
 	}
 	
@@ -52,15 +54,18 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 	@Override
 	public VersionedMap<KEY,VALUE> createMap(long state) {
 		ImmutableNode<KEY, VALUE> data = revert(state);
-		if(data != null) {
-			return new VersionedMapImpl<KEY,VALUE>(this,hashProvider,defaultValue,data); 
-		} else {
-			throw new IllegalArgumentException("Store does not contain state " + state + "!");
-		}
+		return new VersionedMapImpl<KEY,VALUE>(this,hashProvider,defaultValue,data); 
 	}
 	
 	synchronized public ImmutableNode<KEY,VALUE> revert(long state) {
-		return states.get(state);
+		if(states.containsKey(state)) {
+			return states.get(state);
+		} else {
+			ArrayList<Long> existingKeys = new ArrayList<Long>(states.keySet());
+			Collections.sort(existingKeys);
+			throw new IllegalArgumentException(
+				"Store does not contain state "+state+"! Avaliable states: "+existingKeys.toArray().toString());
+		}
 	}
 	synchronized public long commit(Node<KEY,VALUE> data, VersionedMapImpl<KEY, VALUE> mapToUpdateRoot) {
 		ImmutableNode<KEY,VALUE> immutable;
@@ -100,6 +105,6 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 		VersionedMap<KEY, VALUE> map2 = createMap(toState);
 		Cursor<KEY, VALUE> cursor1 = map1.getCursor();
 		Cursor<KEY, VALUE> cursor2 = map2.getCursor();
-		return new MapDiffCursor<KEY, VALUE>(this.defaultValue,cursor1,cursor2);
+		return new MapDiffCursor<KEY, VALUE>(this.hashProvider,this.defaultValue,cursor1,cursor2);
 	}
 }

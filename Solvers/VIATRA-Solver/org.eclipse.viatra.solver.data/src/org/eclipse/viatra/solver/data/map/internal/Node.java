@@ -9,6 +9,7 @@ public abstract class Node<KEY,VALUE>{
 	protected static final int factor = 1<<branchingFactorBit;
 	protected static final int numberOfFactors = Integer.SIZE / branchingFactorBit;
 	protected static final int factorMask = factor-1;
+	public static final int effectiveBits = branchingFactorBit * numberOfFactors;
 	
 	/**
 	 * Calculates the index for the continuous hash.
@@ -37,6 +38,7 @@ public abstract class Node<KEY,VALUE>{
 		if(shiftDepth<0 && 5<shiftDepth) throw new IllegalArgumentException("Invalid shift depth! valid intervall=[0;5], input="+shiftDepth);
 		return (hash >>> shiftDepth*branchingFactorBit) & factorMask;
 	}
+	
 	/**
 	 * Returns the hash code for a given depth. It may calculate new hash code, or reuse a hash code calculated for depth-1.
 	 * @param key The key.
@@ -45,8 +47,12 @@ public abstract class Node<KEY,VALUE>{
 	 * @return The new hash code.
 	 */
 	protected int newHash(final ContinousHashProvider<? super KEY> hashProvider, KEY key, int hash, int depth) {
+		final int hashDepth = hashDepth(depth);
+		if(hashDepth>=ContinousHashProvider.maxPracticalDepth) {
+			throw new IllegalArgumentException("Key "+key+" have the clashing hashcode over the practical depth limitation ("+ContinousHashProvider.maxPracticalDepth+")!");
+		}
 		return depth%numberOfFactors == 0?
-				hashProvider.getHash(key, hashDepth(depth)) :
+				hashProvider.getHash(key, hashDepth) :
 				hash;
 	}
 	
