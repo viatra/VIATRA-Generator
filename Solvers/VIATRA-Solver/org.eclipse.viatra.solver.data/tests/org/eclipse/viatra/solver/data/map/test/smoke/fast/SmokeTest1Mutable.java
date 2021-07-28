@@ -11,6 +11,7 @@ import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 import org.eclipse.viatra.solver.data.map.test.smoke.TestPermuter;
 import org.eclipse.viatra.solver.data.map.test.support.MapTestEnvironment;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -66,6 +67,7 @@ public class SmokeTest1Mutable {
 	
 	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4} evil-hash={5}")
 	@MethodSource
+	@Timeout(value = 10)
 	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
 		runSmokeTest("SmokeS"+steps+"K"+noKeys+"V"+noValues+"s"+seed+"H"+(evilHash?"Evil":"Normal"),seed,steps,noKeys,noValues,evilHash);
 	}

@@ -12,6 +12,7 @@ import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 import org.eclipse.viatra.solver.data.map.test.smoke.TestPermuter;
 import org.eclipse.viatra.solver.data.map.test.support.MapTestEnvironment;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -91,6 +92,7 @@ public class SmokeTest5DiffCursor {
 	
 	@ParameterizedTest(name = "Mutable-Immutable Compare Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
+	@Timeout(value = 10)
 	void parametrizedSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed, boolean evilHash) {
 		runSmokeTest("SmokeMutableImmutableCompareS"+steps+"K"+noKeys+"V"+noValues+"s"+seed,seed,steps,noKeys,noValues,commitFrequency,evilHash);
 	}
