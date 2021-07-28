@@ -1,7 +1,8 @@
 package org.eclipse.viatra.solver.data.map.internal;
 
 import java.util.Iterator;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
@@ -58,6 +59,28 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 			root = MutableNode.initialize(key, value, hashProvider, defaultValue);
 		}
 	}
+	
+	@Override
+	public void putAll(Cursor<KEY, VALUE> cursor) {
+		if(cursor.getDependingMaps().contains(this)) {
+			List<KEY> keys = new LinkedList<>();
+			List<VALUE> values = new LinkedList<>();
+			while(cursor.move()) {
+				keys.add(cursor.getKey());
+				values.add(cursor.getValue());
+			}
+			Iterator<KEY> keyIterator = keys.iterator();
+			Iterator<VALUE> valueIterator = values.iterator();
+			while(keyIterator.hasNext()) {
+				this.put(keyIterator.next(), valueIterator.next());
+			}
+		} else {
+			while(cursor.move()) {
+				this.put(cursor.getKey(), cursor.getValue());
+			}
+		}
+	}
+	
 	@Override
 	public VALUE get(KEY key) {
 		if(root!=null) {
@@ -74,21 +97,16 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 			return root.getSize();
 		}
 	}
-	@Override
-	public
-	Iterator<Map.Entry<KEY,VALUE>> getIterator() {
-		MapEntryIterator<KEY,VALUE> iterator = new MapEntryIterator<>(this.root,this);
-		return iterator;
-	}
+
 	@Override
 	public Cursor<KEY, VALUE> getCursor() {
-		MapEntryIterator<KEY,VALUE> cursor = new MapEntryIterator<>(this.root,this);
+		MapCursor<KEY,VALUE> cursor = new MapCursor<>(this.root,this);
 		return cursor;
 	}
 	@Override
-	public DiffCursor<KEY, VALUE> getDiffCursor(long to) {
+	public DiffCursor<KEY, VALUE> getDiffCursor(long toVersion) {
 		Cursor<KEY, VALUE> fromCursor = this.getCursor();
-		VersionedMap<KEY, VALUE> toMap = this.store.createMap(to);
+		VersionedMap<KEY, VALUE> toMap = this.store.createMap(toVersion);
 		Cursor<KEY, VALUE> toCursor = toMap.getCursor();
 		return new MapDiffCursor<KEY, VALUE>(defaultValue, fromCursor, toCursor);
 		

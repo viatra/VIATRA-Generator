@@ -2,8 +2,8 @@ package org.eclipse.viatra.solver.data.map.internal;
 
 import java.util.ArrayDeque;
 import java.util.ConcurrentModificationException;
-import java.util.Deque;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
@@ -44,9 +44,6 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		// Initializing state
 		this.map=map;
 		this.creationHash = map.hashCode();
-		
-		// move to first
-		move();
 	}
 	
 	public KEY getKey() {
@@ -67,13 +64,28 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		}
 		if(!isTerminated()) {
 			return this.nodeStack.peek().moveToNext(this);
-		} else {
-			return false;
 		}
+		return false;
 	}
-	
+	public boolean skipCurrentNode() {
+		nodeStack.pop();
+		nodeIndexStack.pop();
+		dataIndex = IndexFinish;
+		return move();
+	}
+	@Override
 	public boolean isDirty() {
 		return this.map.hashCode() != this.creationHash;
+	}
+	@Override
+	public List<VersionedMap<KEY, VALUE>> getDependingMaps() {
+		return List.of(this.map);
+	}
+	
+	public static <KEY,VALUE> boolean sameSubnode(MapCursor<KEY,VALUE> cursor1, MapCursor<KEY,VALUE> cursor2) {
+		Node<KEY, VALUE> nodeOfCursor1 = cursor1.nodeStack.peek();
+		Node<KEY, VALUE> nodeOfCursor2 = cursor2.nodeStack.peek();
+		return nodeOfCursor1.equals(nodeOfCursor2);
 	}
 	
 	/**
@@ -106,8 +118,5 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 			return 1;
 		}
 		return Integer.compare(cursor1.dataIndex, cursor2.dataIndex);
-		
-			
-			
 	}
 }

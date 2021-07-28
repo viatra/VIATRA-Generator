@@ -114,12 +114,11 @@ public class MapTestEnvironment<KEY,VALUE> {
 		// Tests iterators
 		// TODO: Counts the number of elements in the entryset
 		int elementsInSutEntrySet = 0;
-		Iterator<Entry<KEY, VALUE>> iterator = sut.getIterator();
-		while(iterator.hasNext()) {
+		Cursor<KEY, VALUE> cursor = sut.getCursor();
+		while(cursor.move()) {
 			elementsInSutEntrySet++;
-			Entry<KEY, VALUE> entry = iterator.next();
-			KEY key = entry.getKey();
-			VALUE sutValue = entry.getValue();
+			KEY key = cursor.getKey();
+			VALUE sutValue = cursor.getValue();
 			//System.out.println(key + " -> " + sutValue);
 			VALUE oracleValue = oracle.get(key);
 			if(sutValue != oracleValue) {
@@ -142,7 +141,7 @@ public class MapTestEnvironment<KEY,VALUE> {
 	}
 	public void printComparison() {
 		System.out.println("SUT:");
-		printEntrySet(sut.getIterator());
+		printEntrySet(sut.getCursor());
 		System.out.println("Oracle:");
 		printEntrySet(oracle.entrySet().iterator());
 	}
@@ -151,6 +150,15 @@ public class MapTestEnvironment<KEY,VALUE> {
 		while(iterator.hasNext()) {
 			Entry<KEY, VALUE> entry = iterator.next();
 			treemap.put(entry.getKey(),entry.getValue());
+		}
+		for(Entry<KEY, VALUE> e : treemap.entrySet()) {
+			System.out.println("\t" + e.getKey() + " -> " + e.getValue());
+		}
+	}
+	private void printEntrySet(Cursor<KEY, VALUE> cursor) {
+		TreeMap<KEY, VALUE> treemap= new TreeMap<>();
+		while(cursor.move()) {
+			treemap.put(cursor.getKey(),cursor.getValue());
 		}
 		for(Entry<KEY, VALUE> e : treemap.entrySet()) {
 			System.out.println("\t" + e.getKey() + " -> " + e.getValue());
