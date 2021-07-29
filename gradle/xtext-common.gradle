@@ -1,0 +1,21 @@
+apply from: "${rootDir}/gradle/java-common.gradle"
+
+dependencies {
+	compile platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+}
+
+sourceSets {
+	main {
+		java.srcDirs += ['src/main/xtext-gen']
+		resources.srcDirs += ['src/main/xtext-gen']
+	}
+	test {
+		java.srcDirs = ['src/test/xtext-gen']
+		resources.srcDirs = ['src/test/xtext-gen']
+	}
+}
+
+clean.doLast {
+	delete 'src/main/xtext-gen'
+	delete 'src/test/xtext-gen'
+}

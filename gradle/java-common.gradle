@@ -1,0 +1,50 @@
+repositories {
+	mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'org.xtext.xtend'
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+sourceSets {
+	main {
+		xtendOutputDir = 'src/main/xtend-gen'
+	}
+	test {
+		xtendOutputDir = 'src/test/xtend-gen'
+	}
+}
+
+configurations.all {
+	exclude group: 'asm'
+}
+
+jar {
+	manifest {
+		attributes 'Bundle-SymbolicName': project.name
+	}
+}
+
+clean.doLast {
+	delete 'src/main/xtend-gen'
+	delete 'src/test/xtend-gen'
+}
+
+apply plugin: 'eclipse'
+
+eclipse {
+	classpath.file.whenMerged {
+		for (entry in entries) {
+			if (entry.path.endsWith('-gen')) {
+				entry.entryAttributes['ignore_optional_problems'] = true
+			}
+		}
+	}
+	
+	jdt.file.whenMerged { properties ->
+		// Allow @SupperessWarnings to suppress SonalLint warnings
+		properties['org.eclipse.jdt.core.compiler.problem.unhandledWarningToken'] = 'ignore'
+	}
+}

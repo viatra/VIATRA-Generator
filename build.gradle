@@ -12,35 +12,7 @@ plugins {
 	id 'com.moowork.node' version "1.3.1" apply false
 }
 
-subprojects {
-	repositories {
-		mavenCentral()
-	}
-
-	apply plugin: 'java'
-	dependencies {
-		compile platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
-	}
-
-	apply plugin: 'org.xtext.xtend'
-	apply from: "${rootDir}/gradle/source-layout.gradle"
-	apply plugin: 'eclipse'
-	
+allprojects {
 	group = 'org.eclipse.viatra.solver'
 	version = '1.0.0-SNAPSHOT'
-
-	sourceCompatibility = '11'
-	targetCompatibility = '11'
-
-	configurations.all {
-		exclude group: 'asm'
-	}
-
-	eclipse.classpath.file.whenMerged {
-		for (entry in entries) {
-			if (entry.path.endsWith('xtext-gen')) {
-				entry.entryAttributes['ignore_optional_problems'] = true
-			}
-		}
-	}
 }

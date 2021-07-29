@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/xtext-common.gradle"
+
 dependencies {
 	compile project(':language')
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"

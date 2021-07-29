@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/java-common.gradle"
+
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 }

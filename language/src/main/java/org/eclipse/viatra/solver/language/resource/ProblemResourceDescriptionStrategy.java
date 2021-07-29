@@ -6,6 +6,7 @@ import org.eclipse.viatra.solver.language.model.problem.NamedElement;
 import org.eclipse.viatra.solver.language.model.problem.Node;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
+import org.eclipse.viatra.solver.language.naming.NamingUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -27,52 +28,50 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 		if (!shouldExport(eObject)) {
 			return false;
 		}
-		if (!(eObject instanceof NamedElement)) {
+		var qualifiedName = getNameAsQualifiedName(eObject);
+		if (qualifiedName == null) {
 			return true;
 		}
-		NamedElement namedElement = (NamedElement) eObject;
-		String name = namedElement.getName();
-		if (name == null || name.isEmpty()) {
-			return true;
-		}
-		Problem problem = EcoreUtil2.getContainerOfType(namedElement, Problem.class);
-		QualifiedName problemQualifiedName = null;
-		if (problem != null) {
-			String problemName = problem.getName();
-			if (problemName != null && !problemName.isEmpty()) {
-				problemQualifiedName = qualifiedNameConverter.toQualifiedName(problemName);
-			}
-		}
-		QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(namedElement.getName());
+		var problem = EcoreUtil2.getContainerOfType(eObject, Problem.class);
+		var problemQualifiedName = getNameAsQualifiedName(problem);
 		boolean nameExported;
-		if (shouldExportSimpleName(namedElement)) {
-			acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
+		if (shouldExportSimpleName(eObject)) {
+			acceptEObjectDescription(eObject, problemQualifiedName, qualifiedName, acceptor);
 			nameExported = true;
 		} else {
 			nameExported = false;
 		}
-		EObject parent = namedElement.eContainer();
+		var parent = eObject.eContainer();
 		while (parent != null && parent != problem) {
-			if (parent instanceof NamedElement) {
-				NamedElement namedParent = (NamedElement) parent;
-				String parentName = namedParent.getName();
-				if (parentName != null || !name.isEmpty()) {
-					QualifiedName parentQualifiedName = qualifiedNameConverter.toQualifiedName(parentName);
-					qualifiedName = parentQualifiedName.append(qualifiedName);
-					if (shouldExportSimpleName(namedParent)) {
-						acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
-						nameExported = true;
-					} else {
-						nameExported = false;
-					}
-				}
+			var parentQualifiedName = getNameAsQualifiedName(parent);
+			if (parentQualifiedName == null) {
+				continue;
+			}
+			qualifiedName = parentQualifiedName.append(qualifiedName);
+			if (shouldExportSimpleName(parent)) {
+				acceptEObjectDescription(eObject, problemQualifiedName, qualifiedName, acceptor);
+				nameExported = true;
+			} else {
+				nameExported = false;
 			}
 			parent = parent.eContainer();
 		}
 		if (!nameExported) {
-			acceptEObjectDescription(namedElement, problemQualifiedName, qualifiedName, acceptor);
+			acceptEObjectDescription(eObject, problemQualifiedName, qualifiedName, acceptor);
 		}
 		return true;
+	}
+
+	protected QualifiedName getNameAsQualifiedName(EObject eObject) {
+		if (!(eObject instanceof NamedElement)) {
+			return null;
+		}
+		var namedElement = (NamedElement) eObject;
+		var name = namedElement.getName();
+		if (NamingUtil.isNullOrEmpty(name)) {
+			return null;
+		}
+		return qualifiedNameConverter.toQualifiedName(name);
 	}
 
 	protected boolean shouldExport(EObject eObject) {
@@ -81,7 +80,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 			return false;
 		}
 		if (eObject instanceof Node) {
-			Node node = (Node) eObject;
+			var node = (Node) eObject;
 			// Only enum literals and new nodes are visible across problem files.
 			return ProblemUtil.isEnumLiteral(node) || ProblemUtil.isNewNode(node);
 		}
@@ -97,7 +96,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 
 	private void acceptEObjectDescription(EObject eObject, QualifiedName prefix, QualifiedName qualifiedName,
 			IAcceptor<IEObjectDescription> acceptor) {
-		QualifiedName qualifiedNameWithPrefix = prefix == null ? qualifiedName : prefix.append(qualifiedName);
+		var qualifiedNameWithPrefix = prefix == null ? qualifiedName : prefix.append(qualifiedName);
 		acceptor.accept(EObjectDescription.create(qualifiedNameWithPrefix, eObject));
 	}
 }

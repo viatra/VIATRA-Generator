@@ -1,8 +1,5 @@
-configurations {
-	mwe2 {
-		extendsFrom compile
-	}
-}
+apply from: "${rootDir}/gradle/xtext-common.gradle"
+apply from: "${rootDir}/gradle/mwe2.gradle"
 
 dependencies {
 	testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
@@ -15,11 +12,16 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore:${ecoreVersion}"
 	compile project(':language-model')
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${mwe2Version}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:xtext-antlr-generator:${xtextAntlrGeneratorVersion}"
 	mwe2 project(':language-mwe2')
+}
+
+jar {
+	from(sourceSets.main.allSource) {
+		include '**/*.xtext'
+	}
 }
 
 task generateXtextLanguage(type: JavaExec) {
@@ -43,5 +45,3 @@ test {
 
 generateXtext.dependsOn(generateXtextLanguage)
 clean.dependsOn(cleanGenerateXtextLanguage)
-
-eclipse.classpath.plusConfigurations += [configurations.mwe2]

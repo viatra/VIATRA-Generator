@@ -1,6 +1,5 @@
 package org.eclipse.viatra.solver.language.resource;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -21,15 +20,16 @@ import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.Statement;
 import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument;
+import org.eclipse.viatra.solver.language.naming.NamingUtil;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -44,12 +44,12 @@ public class NodeNameCollector {
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider scopeProvider;
 
-	private final Set<String> nodeNames = new HashSet<>();
+	private final ImmutableSet.Builder<String> nodeNames = ImmutableSet.builder();
 
 	private IScope nodeScope;
 
 	public Set<String> getNodeNames() {
-		return nodeNames;
+		return nodeNames.build();
 	}
 
 	public void collectNodeNames(Problem problem) {
@@ -73,35 +73,39 @@ public class NodeNameCollector {
 		for (AssertionArgument argument : assertion.getArguments()) {
 			if (argument instanceof NodeAssertionArgument) {
 				collectNodeNames(argument, ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE,
-						ProblemDerivedStateComputer::validNodeName);
+						NamingUtil::isValidNodeName);
 			}
 		}
 	}
 
 	protected void collectNodeValueAssertionNodeNames(NodeValueAssertion nodeValueAssertion) {
 		collectNodeNames(nodeValueAssertion, ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE,
-				ProblemDerivedStateComputer::validNodeName);
+				NamingUtil::isValidNodeName);
 	}
 
 	protected void collectPredicateDefinitionNodeNames(PredicateDefinition predicateDefinition) {
 		for (Conjunction body : predicateDefinition.getBodies()) {
 			for (Literal literal : body.getLiterals()) {
-				Atom atom = null;
-				if (literal instanceof Atom) {
-					atom = (Atom) literal;
-				} else if (literal instanceof NegativeLiteral) {
-					NegativeLiteral negativeLiteral = (NegativeLiteral) literal;
-					atom = negativeLiteral.getAtom();
-				}
-				if (atom == null) {
-					continue;
-				}
-				for (Argument argument : atom.getArguments()) {
-					if (argument instanceof VariableOrNodeArgument) {
-						collectNodeNames(argument, ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE,
-								ProblemDerivedStateComputer::validQuotedId);
-					}
-				}
+				collectLiteralNodeNames(literal);
+			}
+		}
+	}
+
+	protected void collectLiteralNodeNames(Literal literal) {
+		Atom atom = null;
+		if (literal instanceof Atom) {
+			atom = (Atom) literal;
+		} else if (literal instanceof NegativeLiteral) {
+			var negativeLiteral = (NegativeLiteral) literal;
+			atom = negativeLiteral.getAtom();
+		}
+		if (atom == null) {
+			return;
+		}
+		for (Argument argument : atom.getArguments()) {
+			if (argument instanceof VariableOrNodeArgument) {
+				collectNodeNames(argument, ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__VARIABLE_OR_NODE,
+						NamingUtil::isQuotedName);
 			}
 		}
 	}
@@ -109,11 +113,11 @@ public class NodeNameCollector {
 	private void collectNodeNames(EObject eObject, EStructuralFeature feature, Predicate<String> condition) {
 		List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, feature);
 		for (INode node : nodes) {
-			String nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
+			var nodeName = linkingHelper.getCrossRefNodeAsString(node, true);
 			if (!condition.test(nodeName)) {
 				continue;
 			}
-			QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
+			var qualifiedName = qualifiedNameConverter.toQualifiedName(nodeName);
 			if (nodeScope.getSingleElement(qualifiedName) == null) {
 				nodeNames.add(nodeName);
 			}

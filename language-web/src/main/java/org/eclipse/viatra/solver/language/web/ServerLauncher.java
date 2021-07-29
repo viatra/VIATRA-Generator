@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Server;
@@ -24,9 +23,9 @@ public class ServerLauncher {
 
 	private final Server server;
 
-	public ServerLauncher(InetSocketAddress bindAddress, Resource baseResource) throws IOException, URISyntaxException {
+	public ServerLauncher(InetSocketAddress bindAddress, Resource baseResource) {
 		server = new Server(bindAddress);
-		WebAppContext ctx = new WebAppContext();
+		var ctx = new WebAppContext();
 		ctx.setBaseResource(baseResource);
 		ctx.setWelcomeFiles(new String[] { "index.html" });
 		ctx.setContextPath("/");
@@ -40,27 +39,13 @@ public class ServerLauncher {
 	public void start() throws Exception {
 		server.start();
 		LOG.info("Server started " + server.getURI() + "...");
-		new Thread() {
-			public void run() {
-				try {
-					LOG.info("Press enter to stop the server...");
-					int key = System.in.read();
-					if (key != -1) {
-						server.stop();
-					} else {
-						LOG.warn(
-								"Console input is not available. In order to stop the server, you need to cancel process manually.");
-					}
-				} catch (Exception e) {
-					LOG.warn(e);
-					System.exit(-1);
-				}
-			}
-		}.start();
-		try {
-			server.join();
-		} catch (InterruptedException e) {
-			LOG.info(e);
+		LOG.info("Press enter to stop the server...");
+		int key = System.in.read();
+		if (key != -1) {
+			server.stop();
+		} else {
+			LOG.warn(
+					"Console input is not available. In order to stop the server, you need to cancel process manually.");
 		}
 	}
 
@@ -75,34 +60,34 @@ public class ServerLauncher {
 		if (baseResourceOverride != null) {
 			return Resource.newResource(baseResourceOverride);
 		}
-		URL indexUrlInJar = ServerLauncher.class.getResource("/webapp/index.html");
+		var indexUrlInJar = ServerLauncher.class.getResource("/webapp/index.html");
 		if (indexUrlInJar == null) {
-			throw new RuntimeException("Cannot find pacakged web assets");
+			throw new IOException("Cannot find pacakged web assets");
 		}
-		URI webRootUri = URI.create(indexUrlInJar.toURI().toASCIIString().replaceFirst("/index.html$", "/"));
+		var webRootUri = URI.create(indexUrlInJar.toURI().toASCIIString().replaceFirst("/index.html$", "/"));
 		return Resource.newResource(webRootUri);
 	}
 
 	public static void main(String[] args) {
-		String listenAddress = System.getenv("LISTEN_ADDRESS");
+		var listenAddress = System.getenv("LISTEN_ADDRESS");
 		if (listenAddress == null) {
 			listenAddress = "localhost";
 		}
-		int port = 1312;
-		String portStr = System.getenv("LISTEN_PORT");
+		var port = 1312;
+		var portStr = System.getenv("LISTEN_PORT");
 		if (portStr != null) {
 			try {
 				port = Integer.parseInt(portStr);
 			} catch (NumberFormatException e) {
 				LOG.warn(e);
-				System.exit(-1);
+				System.exit(1);
 			}
 		}
-		String baseResourceOverride = System.getenv("BASE_RESOURCE");
+		var baseResourceOverride = System.getenv("BASE_RESOURCE");
 		try {
-			InetSocketAddress bindAddress = getBindAddress(listenAddress, port);
-			Resource baseResource = getBaseResource(baseResourceOverride);
-			ServerLauncher serverLauncher = new ServerLauncher(bindAddress, baseResource);
+			var bindAddress = getBindAddress(listenAddress, port);
+			var baseResource = getBaseResource(baseResourceOverride);
+			var serverLauncher = new ServerLauncher(bindAddress, baseResource);
 			serverLauncher.start();
 		} catch (Exception exception) {
 			LOG.warn(exception);

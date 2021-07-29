@@ -16,26 +16,17 @@ import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
+import org.eclipse.viatra.solver.language.naming.NamingUtil;
 import org.eclipse.viatra.solver.language.scoping.ProblemGlobalScopeProvider;
 
 import com.google.common.collect.ImmutableList;
-import com.google.inject.Singleton;
 
-@Singleton
 public final class ProblemUtil {
 	private ProblemUtil() {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 
-	public static final String SINGLETON_VARIABLE_PREFIX = "_";
-
-	public static final String ENUM_NODE_NAME_QUOTE = "'";
-
 	public static final String NODE_CLASS_NAME = "node";
-
-	public static boolean isSingletonVariableName(String name) {
-		return name != null && name.startsWith(SINGLETON_VARIABLE_PREFIX);
-	}
 
 	public static boolean isSingletonVariable(Variable variable) {
 		return variable.eContainingFeature() == ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__SINGLETON_VARIABLE;
@@ -46,10 +37,7 @@ public final class ProblemUtil {
 	}
 
 	public static boolean isEnumNode(Node node) {
-		String name = node.getName();
-		boolean isNameQuoted = name != null && name.startsWith(ENUM_NODE_NAME_QUOTE)
-				&& name.endsWith(ENUM_NODE_NAME_QUOTE);
-		return isNameQuoted || isEnumLiteral(node);
+		return NamingUtil.isQuotedName(node.getName()) || isEnumLiteral(node);
 	}
 
 	public static boolean isNewNode(Node node) {
@@ -61,6 +49,16 @@ public final class ProblemUtil {
 				.map(resourceSet -> resourceSet.getResource(ProblemGlobalScopeProvider.BULTIN_LIBRARY_URI, true))
 				.map(Resource::getContents).filter(contents -> !contents.isEmpty()).map(contents -> contents.get(0))
 				.filter(Problem.class::isInstance).map(Problem.class::cast);
+	}
+
+	public static boolean isBuiltIn(EObject eObject) {
+		if (eObject != null) {
+			var eResource = eObject.eResource();
+			if (eResource != null) {
+				return ProblemGlobalScopeProvider.BULTIN_LIBRARY_URI.equals(eResource.getURI());
+			}
+		}
+		return false;
 	}
 
 	public static Optional<ClassDeclaration> getNodeClassDeclaration(EObject context) {

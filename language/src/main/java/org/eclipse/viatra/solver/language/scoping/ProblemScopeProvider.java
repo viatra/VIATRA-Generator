@@ -4,7 +4,6 @@
 package org.eclipse.viatra.solver.language.scoping;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -16,7 +15,6 @@ import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition;
 import org.eclipse.viatra.solver.language.model.problem.Problem;
 import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
-import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
 import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument;
 import org.eclipse.xtext.EcoreUtil2;
@@ -34,7 +32,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		IScope scope = super.getScope(context, reference);
+		var scope = super.getScope(context, reference);
 		if (reference == ProblemPackage.Literals.NODE_ASSERTION_ARGUMENT__NODE
 				|| reference == ProblemPackage.Literals.NODE_VALUE_ASSERTION__NODE) {
 			return getNodesScope(context, scope);
@@ -49,7 +47,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	}
 
 	protected IScope getNodesScope(EObject context, IScope delegateScope) {
-		Problem problem = EcoreUtil2.getContainerOfType(context, Problem.class);
+		var problem = EcoreUtil2.getContainerOfType(context, Problem.class);
 		if (problem == null) {
 			return delegateScope;
 		}
@@ -73,7 +71,7 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 			}
 			currentContext = currentContext.eContainer();
 		}
-		if (currentContext instanceof PredicateDefinition) {
+		if (currentContext != null) {
 			PredicateDefinition definition = (PredicateDefinition) currentContext;
 			variables.addAll(definition.getParameters());
 		}
@@ -81,17 +79,16 @@ public class ProblemScopeProvider extends AbstractProblemScopeProvider {
 	}
 
 	protected IScope getOppositeScope(EObject context, IScope delegateScope) {
-		ReferenceDeclaration referenceDeclaration = EcoreUtil2.getContainerOfType(context, ReferenceDeclaration.class);
+		var referenceDeclaration = EcoreUtil2.getContainerOfType(context, ReferenceDeclaration.class);
 		if (referenceDeclaration == null) {
 			return delegateScope;
 		}
-		Relation relation = referenceDeclaration.getReferenceType();
+		var relation = referenceDeclaration.getReferenceType();
 		if (!(relation instanceof ClassDeclaration)) {
 			return delegateScope;
 		}
-		ClassDeclaration classDeclaration = (ClassDeclaration) relation;
-		Collection<ReferenceDeclaration> referenceDeclarations = ProblemUtil
-				.getAllReferenceDeclarations(classDeclaration);
+		var classDeclaration = (ClassDeclaration) relation;
+		var referenceDeclarations = ProblemUtil.getAllReferenceDeclarations(classDeclaration);
 		return Scopes.scopeFor(referenceDeclarations, delegateScope);
 	}
 }

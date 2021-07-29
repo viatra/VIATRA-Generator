@@ -1,0 +1,11 @@
+configurations {
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
+dependencies {
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${mwe2Version}"
+}
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]

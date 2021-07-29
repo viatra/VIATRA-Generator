@@ -3,9 +3,9 @@
  */
 package org.eclipse.viatra.solver.language.web;
 
-import com.google.inject.Injector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
 import org.eclipse.xtext.util.DisposableRegistry;
 import org.eclipse.xtext.web.servlet.XtextServlet;
 
@@ -17,14 +17,18 @@ public class ProblemServlet extends XtextServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	DisposableRegistry disposableRegistry;
+	// Xtext requires a mutable servlet instance field.
+	@SuppressWarnings("squid:S2226")
+	private DisposableRegistry disposableRegistry;
 	
+	@Override
 	public void init() throws ServletException {
 		super.init();
-		Injector injector = new ProblemWebSetup().createInjectorAndDoEMFRegistration();
+		var injector = new ProblemWebSetup().createInjectorAndDoEMFRegistration();
 		this.disposableRegistry = injector.getInstance(DisposableRegistry.class);
 	}
 	
+	@Override
 	public void destroy() {
 		if (disposableRegistry != null) {
 			disposableRegistry.dispose();

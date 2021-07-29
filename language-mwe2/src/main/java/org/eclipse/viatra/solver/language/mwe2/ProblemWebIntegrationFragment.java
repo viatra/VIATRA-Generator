@@ -7,6 +7,10 @@ import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment;
 import com.google.common.collect.Multimap;
 
 public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
+	private static final String START_STATE = "start";
+	private static final String PREDICATE_BODY_STATE = "predicateBody";
+	private static final String CM_MODE_META = "meta";
+
 	public ProblemWebIntegrationFragment() {
 		setFramework(Framework.CODEMIRROR.name());
 		// We use our custom token style for single-quoted names
@@ -36,25 +40,27 @@ public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
 	protected Multimap<String, String> createCodeMirrorPatterns(String langId, Set<String> keywords) {
 		Multimap<String, String> patterns = super.createCodeMirrorPatterns(langId, keywords);
 		// We use our custom token style for single-quoted names
-		patterns.put("start", "{token: \"quoted-name\", regex: \"['](?:(?:\\\\\\\\.)|(?:[^'\\\\\\\\]))*?[']\"}");
+		patterns.put(START_STATE, "{token: \"quoted-name\", regex: \"['](?:(?:\\\\\\\\.)|(?:[^'\\\\\\\\]))*?[']\"}");
 		// Use the CodeMirror default .cm-number instead of .cm-constant.cm-numeric
-		patterns.put("start",
+		patterns.put(START_STATE,
 				"{token: \"number\", regex: \"[+-]?\\\\d+(?:(?:\\\\.\\\\d*)?(?:[eE][+-]?\\\\d+)?)?\\\\b\"}");
-		patterns.put("start", "{token: \"number\", regex: \"[*]\"}");
+		patterns.put(START_STATE, "{token: \"number\", regex: \"[*]\"}");
 		// We use our own custom single-line comments
-		patterns.put("start", "{token: \"comment\", regex: \"%.*$\"}");
-		patterns.put("start", "{token: \"comment\", regex: \"\\\\/\\\\/.*$\"}");
-		patterns.put("meta", "lineComment: \"%\"");
+		patterns.put(START_STATE, "{token: \"comment\", regex: \"%.*$\"}");
+		patterns.put(START_STATE, "{token: \"comment\", regex: \"\\\\/\\\\/.*$\"}");
+		patterns.put(CM_MODE_META, "lineComment: \"%\"");
 		// Override indentation behavior
-		patterns.put("start", "{token: \"lparen\", indent: true, regex: \"[[({]\"}");
-		patterns.put("start", "{token: \"rparen\", dedent: true, regex: \"[\\\\])}]\"}");
-		patterns.putAll("predicateBody", patterns.get("start"));
-		patterns.put("start", "{indent: true, push: \"predicateBody\", regex: \"<=>\"}");
-		patterns.put("predicateBody", "{dedent: true, dedentIfLineStart: false, pop: true, regex: \"\\\\.\\\\s*$\"}");
-		patterns.put("predicateBody", "{indent: true, dedent: true, regex: \"[;]\"}");
-		// We must repeat the keyword rule here, because Xtext only adds it to "main" later.
-		patterns.put("predicateBody", "{token: \"keyword\", regex: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
-		patterns.put("meta", "electricChars: \"])];\"");
+		patterns.put(START_STATE, "{token: \"lparen\", indent: true, regex: \"[[({]\"}");
+		patterns.put(START_STATE, "{token: \"rparen\", dedent: true, regex: \"[\\\\])}]\"}");
+		patterns.putAll(PREDICATE_BODY_STATE, patterns.get(START_STATE));
+		patterns.put(START_STATE, "{indent: true, push: \"" + PREDICATE_BODY_STATE + "\", regex: \"<=>\"}");
+		patterns.put(PREDICATE_BODY_STATE,
+				"{dedent: true, dedentIfLineStart: false, pop: true, regex: \"\\\\.\\\\s*$\"}");
+		patterns.put(PREDICATE_BODY_STATE, "{indent: true, dedent: true, regex: \"[;]\"}");
+		// We must repeat the keyword rule here, because Xtext only adds it to "main"
+		// later
+		patterns.put(PREDICATE_BODY_STATE, "{token: \"keyword\", regex: \"\\\\b(?:\" + keywords + \")\\\\b\"}");
+		patterns.put(CM_MODE_META, "electricChars: \"])];\"");
 		return patterns;
 	}
 }

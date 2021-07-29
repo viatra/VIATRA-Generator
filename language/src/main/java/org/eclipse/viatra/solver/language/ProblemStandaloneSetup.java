@@ -9,18 +9,25 @@ import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import com.google.inject.Injector;
 
 /**
- * Initialization support for running Xtext languages without Equinox extension registry.
+ * Initialization support for running Xtext languages without Equinox extension
+ * registry.
  */
 public class ProblemStandaloneSetup extends ProblemStandaloneSetupGenerated {
 
 	public static void doSetup() {
 		new ProblemStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
-	
+
 	@Override
+	// Here we can't rely on java.util.HashMap#computeIfAbsent, because
+	// org.eclipse.emf.ecore.impl.EPackageRegistryImpl#containsKey is overridden
+	// without also overriding computeIfAbsent. We must make sure to call the
+	// overridden containsKey implementation.
+	@SuppressWarnings("squid:S3824")
 	public Injector createInjectorAndDoEMFRegistration() {
-		if (!EPackage.Registry.INSTANCE.containsKey(ProblemPackage.eNS_URI))
+		if (!EPackage.Registry.INSTANCE.containsKey(ProblemPackage.eNS_URI)) {
 			EPackage.Registry.INSTANCE.put(ProblemPackage.eNS_URI, ProblemPackage.eINSTANCE);
+		}
 		return super.createInjectorAndDoEMFRegistration();
 	}
 }

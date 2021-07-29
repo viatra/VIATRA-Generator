@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/xtext-common.gradle"
+
 dependencies {
 	compile project(':language')
 	compile project(':language-ide')
@@ -94,9 +96,7 @@ task webpackServe(type: NpmTask) {
 }
 
 eclipse {
-	project {
-		file.whenMerged {
-			natures.remove('org.eclipse.wst.common.modulecore.ModuleCoreNature')
-		}
+	project.file.whenMerged {
+		natures.remove('org.eclipse.wst.common.modulecore.ModuleCoreNature')
 	}
 }

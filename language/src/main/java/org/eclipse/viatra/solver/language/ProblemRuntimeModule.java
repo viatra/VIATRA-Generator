@@ -62,6 +62,8 @@ public class ProblemRuntimeModule extends AbstractProblemRuntimeModule {
 		return DerivedStateAwareResource.class;
 	}
 
+	// Method name follows Xtext convention.
+	@SuppressWarnings("squid:S100")
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescription$Manager() {
 		return DerivedStateAwareResourceDescriptionManager.class;
 	}
@@ -74,6 +76,7 @@ public class ProblemRuntimeModule extends AbstractProblemRuntimeModule {
 		return ProblemDerivedStateComputer.class;
 	}
 
+	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return ProblemLocationInFileProvider.class;
 	}

@@ -1,14 +1,10 @@
-configurations {
-	mwe2 {
-		extendsFrom compile
-	}
-}
+apply from: "${rootDir}/gradle/java-common.gradle"
+apply from: "${rootDir}/gradle/mwe2.gradle"
 
 dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.ecore:${ecoreVersion}"
 	mwe2 "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${ecoreCodegenVersion}"
 	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe.utils:${mweVersion}"
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${mwe2Version}"
 	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.lib:${mwe2Version}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
@@ -35,12 +31,4 @@ task generateEPackage(type: JavaExec) {
 compileJava.dependsOn(generateEPackage)
 clean.dependsOn(cleanGenerateEPackage)
 
-eclipse {
-	project {
-		natures += ['org.eclipse.sirius.nature.modelingproject', 'org.eclipse.pde.PluginNature']
-	}
-	
-	classpath {
-		plusConfigurations += [configurations.mwe2]
-	}
-}
+eclipse.project.natures += ['org.eclipse.sirius.nature.modelingproject', 'org.eclipse.pde.PluginNature']
