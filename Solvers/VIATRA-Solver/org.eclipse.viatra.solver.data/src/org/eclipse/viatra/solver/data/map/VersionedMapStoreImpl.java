@@ -3,6 +3,7 @@ package org.eclipse.viatra.solver.data.map;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +25,11 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 	final protected Map<Node<KEY,VALUE>, ImmutableNode<KEY,VALUE>> nodeCache;
 	protected long nextID;
 	
-	public VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, VersionedMapStoreConfiguration config) {
+	public VersionedMapStoreImpl(
+		ContinousHashProvider<? super KEY> hashProvider,
+		VALUE defaultValue,
+		VersionedMapStoreConfiguration config)
+	{
 		this.immutableWhenCommiting = config.immutableWhenCommiting;
 		
 		this.hashProvider = hashProvider;
@@ -32,15 +37,62 @@ public class VersionedMapStoreImpl<KEY,VALUE> implements VersionedMapStore<KEY, 
 		
 		states = new HashMap<>();
 		nextID = 0;
-		if(config.sharedNodeCache) {
+		if(config.sharedNodeCacheInStore) {
 			nodeCache = new HashMap<>();
 		} else {
 			nodeCache = null;
 		}
 	}
+	private VersionedMapStoreImpl(
+		ContinousHashProvider<? super KEY> hashProvider,
+		VALUE defaultValue,
+		Map<Node<KEY,VALUE>, ImmutableNode<KEY,VALUE>> nodeCache,
+		VersionedMapStoreConfiguration config)
+	{
+		this.immutableWhenCommiting = config.immutableWhenCommiting;
+		
+		this.hashProvider = hashProvider;
+		this.defaultValue = defaultValue;
+		
+		states = new HashMap<>();
+		nextID = 0;
+		this.nodeCache = nodeCache;
+	}
 	
 	public VersionedMapStoreImpl(ContinousHashProvider<KEY> hashProvider, VALUE defaultValue) {
 		this(hashProvider,defaultValue,new VersionedMapStoreConfiguration());
+	}
+	
+	public static <MAP,KEY,VALUE> List<VersionedMapStore<KEY,VALUE>> createSharedVersionedMapStores(
+		int amount,
+		ContinousHashProvider<? super KEY> hashProvider,
+		VALUE defaultValue,
+		VersionedMapStoreConfiguration config)
+	{
+		List<VersionedMapStore<KEY,VALUE>> result = new ArrayList<>(amount);
+		if(config.sharedNodeCacheInStoreGroups) {
+			Map<Node<KEY,VALUE>, ImmutableNode<KEY,VALUE>> nodeCache;
+			if(config.sharedNodeCacheInStore) {
+				nodeCache = new HashMap<>();
+			} else {
+				nodeCache = null;
+			}
+			for (int i = 0; i < amount; i++) {
+				result.add(new VersionedMapStoreImpl<KEY, VALUE>(hashProvider, defaultValue, nodeCache, config));
+			}
+		} else {
+			for (int i = 0; i < amount; i++) {
+				result.add(new VersionedMapStoreImpl<KEY, VALUE>(hashProvider, defaultValue, config));
+			}
+		}
+		return result;
+	}
+	public static <MAP,KEY,VALUE> List<VersionedMapStore<KEY,VALUE>> createSharedVersionedMapStores(
+		int amount,
+		ContinousHashProvider<? super KEY> hashProvider,
+		VALUE defaultValue)
+	{
+		return createSharedVersionedMapStores(amount,hashProvider,defaultValue,new VersionedMapStoreConfiguration());
 	}
 	
 	synchronized Set<Long> getStates() {
