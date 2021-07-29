@@ -10,8 +10,8 @@ sourceSets {
 		resources.srcDirs += ['src/main/xtext-gen']
 	}
 	test {
-		java.srcDirs = ['src/test/xtext-gen']
-		resources.srcDirs = ['src/test/xtext-gen']
+		java.srcDirs += ['src/test/xtext-gen']
+		resources.srcDirs += ['src/test/xtext-gen']
 	}
 }
 
