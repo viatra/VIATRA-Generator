@@ -127,8 +127,6 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 			}
 		}
 	}
-	
-
 
 	private Node<KEY, VALUE> addEntry(KEY key, VALUE value, int selectedHashFragment) {
 		content[2*selectedHashFragment] = key;
@@ -252,11 +250,6 @@ public class MutableNode<KEY,VALUE> extends Node<KEY,VALUE> {
 	@Override
 	protected MutableNode<KEY,VALUE> toMutable() {
 		return this;
-	}
-	
-	@Override
-	public ImmutableNode<KEY,VALUE> toImmutable() {
-		return ImmutableNode.constructImmutable(this,null);
 	}
 	
 	@Override

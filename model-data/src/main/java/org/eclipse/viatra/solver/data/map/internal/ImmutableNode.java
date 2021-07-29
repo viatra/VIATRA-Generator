@@ -202,11 +202,6 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	protected MutableNode<KEY,VALUE> toMutable() {
 		return new MutableNode<KEY,VALUE>(this);
 	}
-
-	@Override
-	public ImmutableNode<KEY,VALUE> toImmutable() {
-		return this;
-	}
 	
 	@Override
 	public ImmutableNode<KEY, VALUE> toImmutable(

@@ -28,6 +28,12 @@ jar {
 }
 
 test {
+	useJUnitPlatform {
+		excludeTags 'slow'
+	}
+}
+
+task slowTest(type: Test) {
 	useJUnitPlatform()
 }
 

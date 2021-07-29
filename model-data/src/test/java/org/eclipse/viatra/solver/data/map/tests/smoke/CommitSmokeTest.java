@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke.fast;
+package org.eclipse.viatra.solver.data.map.tests.smoke;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -9,15 +9,16 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.eclipse.viatra.solver.data.map.tests.smoke.utils.TestPermuter;
-import org.eclipse.viatra.solver.data.map.tests.support.MapTestEnvironment;
+import org.eclipse.viatra.solver.data.map.tests.smoke.utils.SmokeTestUtils;
+import org.eclipse.viatra.solver.data.map.tests.utils.MapTestEnvironment;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class CommitSmokeTest {
-	public void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
+class CommitSmokeTest {
+	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
 			boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
@@ -65,15 +66,30 @@ public class CommitSmokeTest {
 	@ParameterizedTest(name = "Immutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
 	@Timeout(value = 10)
-	public void parametrizedSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+	@Tag("smoke")
+	void parametrizedFastSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
 			boolean evilHash) {
 		runSmokeTest("SmokeCommitS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				commitFrequency, evilHash);
 	}
 
-	public static Stream<Arguments> parametrizedSmoke() {
-		return TestPermuter.permutationWithSize(new Object[] { 1000 }, new Object[] { 3, 32, 32 * 32 },
+	static Stream<Arguments> parametrizedFastSmoke() {
+		return SmokeTestUtils.permutationWithSize(new Object[] { 1000 }, new Object[] { 3, 32, 32 * 32 },
 				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
+	}
+
+	@ParameterizedTest(name = "Immutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@MethodSource
+	@Tag("smoke")
+	@Tag("slow")
+	void parametrizedSlowSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+			boolean evilHash) {
+		runSmokeTest("SmokeCommitS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
+				commitFrequency, evilHash);
+	}
+
+	static Stream<Arguments> parametrizedSlowSmoke() {
+		return SmokeTestUtils.changeStepCount(parametrizedFastSmoke(), 1);
 	}
 }

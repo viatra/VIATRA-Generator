@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke.fast;
+package org.eclipse.viatra.solver.data.map.tests.smoke;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -9,16 +9,16 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.eclipse.viatra.solver.data.map.tests.smoke.utils.TestPermuter;
-import org.eclipse.viatra.solver.data.map.tests.support.MapTestEnvironment;
+import org.eclipse.viatra.solver.data.map.tests.smoke.utils.SmokeTestUtils;
+import org.eclipse.viatra.solver.data.map.tests.utils.MapTestEnvironment;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class MutableSmokeTest {
-
-	public void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
+class MutableSmokeTest {
+	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 
@@ -31,7 +31,7 @@ public class MutableSmokeTest {
 		iterativeRandomPuts(scenario, steps, maxKey, values, e, r);
 	}
 
-	void iterativeRandomPuts(String scenario, int steps, int maxKey, String[] values,
+	private void iterativeRandomPuts(String scenario, int steps, int maxKey, String[] values,
 			MapTestEnvironment<Integer, String> e, Random r) {
 		int stopAt = -1;
 		for (int i = 0; i < steps; i++) {
@@ -62,14 +62,15 @@ public class MutableSmokeTest {
 	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4} evil-hash={5}")
 	@MethodSource
 	@Timeout(value = 10)
+	@Tag("smoke")
 	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
 		runSmokeTest(
 				"SmokeS" + steps + "K" + noKeys + "V" + noValues + "s" + seed + "H" + (evilHash ? "Evil" : "Normal"),
 				seed, steps, noKeys, noValues, evilHash);
 	}
 
-	public static Stream<Arguments> parametrizedSmoke() {
-		return TestPermuter.permutationWithSize(new Object[] { 1000 },
+	static Stream<Arguments> parametrizedSmoke() {
+		return SmokeTestUtils.permutationWithSize(new Object[] { 1000 },
 				new Object[] { 3, 32, 32 * 32, 32 * 32 * 32 * 32 }, new Object[] { 2, 3 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}

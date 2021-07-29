@@ -62,7 +62,6 @@ public abstract class Node<KEY,VALUE>{
 	abstract public long getSize();
 	
 	abstract MutableNode<KEY, VALUE> toMutable();
-	public abstract ImmutableNode<KEY, VALUE> toImmutable();
 	public abstract ImmutableNode<KEY, VALUE> toImmutable(
 			Map<Node<KEY, VALUE>,ImmutableNode<KEY, VALUE>> cache);
 	

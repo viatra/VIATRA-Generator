@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.support;
+package org.eclipse.viatra.solver.data.map.tests.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
