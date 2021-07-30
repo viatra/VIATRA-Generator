@@ -1,0 +1,40 @@
+configurations {
+	jmh {
+		extendsFrom compile
+	}
+}
+
+sourceSets {
+	jmh {
+		java.srcDirs = ['src/jmh/java']
+        resources.srcDirs = ['src/jmh/resources']
+        compileClasspath += sourceSets.main.runtimeClasspath
+        compileClasspath += sourceSets.test.runtimeClasspath
+        xtendOutputDir = 'src/jmh/xtend-gen'
+	}
+}
+
+dependencies {
+	jmhRuntime "org.openjdk.jmh:jmh-core:${jmhVersion}"
+	jmhCompile "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+	jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+}
+
+clean.doLast {
+	delete 'src/jmh/xtend-gen'
+}
+
+task jmh(type: JavaExec, dependsOn: jmhClasses) {
+    main = 'org.openjdk.jmh.Main'
+    classpath = sourceSets.jmh.compileClasspath + sourceSets.jmh.runtimeClasspath
+}
+
+eclipse.classpath {
+	plusConfigurations += [configurations.jmh]
+
+	// Allow test helper classes to be used in benchmarks from Eclipse.
+	file.whenMerged { classpath ->
+		def jmhClasspathEntry = classpath.entries.find { entry -> entry.path == 'src/jmh/java' }
+		jmhClasspathEntry.entryAttributes['test'] = true
+	}
+}
