@@ -84,8 +84,9 @@ class ViatraReasonerConfiguration extends LogicSolverConfiguration {
 	public var unfinishedWFWeight = 1
 	public var calculateObjectCreationCosts = false
 	public NumericSolverSelection numericSolverSelection = NumericSolverSelection.Z3 //currently defaulted to Z3
+	public var NumericSolverPath = "<path-to-numeric-solver>"
 	public var drealLocalPath = "<path-to-dreal>";
-	public var drealTimeout = 10000;
+	public var numericSolverTimeout = 10000;
 	public var Map<String, Map<String, String>> ignoredAttributesMap = null;
 	public var ExplorationStrategy strategy = ExplorationStrategy.None
 	

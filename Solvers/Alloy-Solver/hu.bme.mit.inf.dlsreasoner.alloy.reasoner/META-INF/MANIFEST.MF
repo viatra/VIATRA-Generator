@@ -22,6 +22,6 @@ Require-Bundle: com.google.guava,
  org.eclipse.viatra.query.runtime;bundle-version="2.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-NativeCode: libminisat.so;osname=Linux;processor=x86_64
+Bundle-NativeCode: libminisat.so;osname=Linux;processor=x86_64,*
 Automatic-Module-Name: hu.bme.mit.inf.dlsreasoner.alloy.reasoner
 Import-Package: org.apache.log4j;version="1.2.15"

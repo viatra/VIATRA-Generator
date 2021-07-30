@@ -28,7 +28,7 @@ class CopiedSolution {
 class SolutionCopier {
 	val copiedSolutions = new LinkedHashMap<Object, CopiedSolution>
 
-	@Accessors NumericSolver numericSolver
+	@Accessors NumericRefinementUnit numericSolver
 	long startTime = System.nanoTime
 	@Accessors(PUBLIC_GETTER) long totalCopierRuntime = 0
 

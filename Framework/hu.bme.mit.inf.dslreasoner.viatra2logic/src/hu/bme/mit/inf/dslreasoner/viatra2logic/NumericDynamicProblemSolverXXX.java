@@ -9,13 +9,13 @@ import org.eclipse.xtext.xbase.XExpression;
 
 import hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage.partialinterpretation.PrimitiveElement;
 
-public class NumericDynamicProblemSolver extends NumericProblemSolver{
+public class NumericDynamicProblemSolverXXX extends NumericProblemSolver{
 	
 //	private NumericZ3ProblemSolver z3Solver;
 	private NumericDrealProblemSolver drealSolver;
 	private int timeout;
 	
-	public NumericDynamicProblemSolver(String drealLocalPath, int drealTimeout) throws IOException, InterruptedException {
+	public NumericDynamicProblemSolverXXX(String drealLocalPath, int drealTimeout) throws IOException, InterruptedException {
 //		this.z3Solver = new NumericZ3ProblemSolver();
 		this.drealSolver = new NumericDrealProblemSolver(false, drealLocalPath, drealTimeout);
 		this.timeout = drealTimeout;
@@ -40,4 +40,24 @@ public class NumericDynamicProblemSolver extends NumericProblemSolver{
 	public Map<PrimitiveElement, Number> getOneSolution(List<PrimitiveElement> objs,
 			Map<XExpression, Iterable<Map<JvmIdentifiableElement, PrimitiveElement>>> matches) throws Exception {
 		throw new Exception("Should not reach here - getOneSolution");
+	}
+
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected boolean internalIsSatisfiable(
+			Map<XExpression, Iterable<Map<JvmIdentifiableElement, PrimitiveElement>>> matches) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected Map<PrimitiveElement, Number> internalGetOneSolution(List<PrimitiveElement> objs,
+			Map<XExpression, Iterable<Map<JvmIdentifiableElement, PrimitiveElement>>> matches) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}}

@@ -21,7 +21,7 @@ Require-Bundle: com.google.guava,
  org.eclipse.xtext,
  org.eclipse.xtext.xbase;bundle-version="2.18.0",
  hu.bme.mit.inf.dslreasoner.viatrasolver.partialinterpretationlanguage;bundle-version="1.0.0",
- com.microsoft.z3
+ com.microsoft.z3;bundle-version="4.8.8"
 Bundle-ActivationPolicy: lazy
 Export-Package: 
  hu.bme.mit.inf.dslreasoner.viatra2logic,

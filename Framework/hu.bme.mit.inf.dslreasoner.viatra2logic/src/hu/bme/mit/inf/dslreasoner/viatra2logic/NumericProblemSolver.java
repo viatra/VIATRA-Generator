@@ -35,6 +35,24 @@ public abstract class NumericProblemSolver {
 	public long getEndSolvingProblem() {return endSolvingProblem;}
 	public long getEndFormingSolution() {return endFormingSolution;}
 	
-	public abstract  boolean isSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception;
-	public abstract Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception;
+	public boolean isSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
+		if(!initialized) {
+			this.initialize();
+			this.initialized=true;
+		}
+		return this.internalIsSatisfiable(matches);
+	}
+	public Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception{
+		if(!initialized) {
+			this.initialize();
+			this.initialized=true;
+		}
+		return this.internalGetOneSolution(objs, matches);
+	}
+	
+	boolean initialized = false;
+	protected abstract void initialize();
+	
+	protected abstract boolean internalIsSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception;
+	protected abstract Map<PrimitiveElement,Number> internalGetOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception;
 }

@@ -35,16 +35,10 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 	private Context ctx;
 	private Solver s;
 	private Map<Object, Expr> varMap;
+	private int timeout;
 
 	public NumericZ3ProblemSolver(int timeout) {
-		//FOR LINUX VM
-		//Not Elegant, but this is working for now
-//		String root = "/home/models/VIATRA-Generator";
-//		String root = (new File(System.getProperty("user.dir"))).getParentFile().getParent();
-//        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3.so");
-//        System.load(root + "/Solvers/SMT-Solver/com.microsoft.z3/lib/libz3java.so");
-        //End non-elegance
-        
+        this.timeout=timeout;
 		HashMap<String, String> cfg = new HashMap<String, String>();
 		cfg.put("model", "true");
 		ctx = new Context(cfg);	
@@ -62,7 +56,7 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 		return ctx;
 	}
 
-	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(XExpression expression) {
+	private ArrayList<JvmIdentifiableElement> getJvmIdentifiableElements(final XExpression expression) {
 		ArrayList<JvmIdentifiableElement> allElem = new ArrayList<JvmIdentifiableElement>();
 		XExpression left = ((XBinaryOperation) expression).getLeftOperand();
 		XExpression right = ((XBinaryOperation) expression).getRightOperand();
@@ -80,8 +74,36 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 			getJvmIdentifiableElementsHelper(((XBinaryOperation) e).getRightOperand(), allElem);
 		}
 	}
-
-	public boolean isSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
+	
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void start() {
+		HashMap<String, String> cfg = new HashMap<String, String>();
+		cfg.put("model", "true");
+		ctx = new Context(cfg);	
+		ctx.setPrintMode(Z3_ast_print_mode.Z3_PRINT_SMTLIB_FULL);
+		s = ctx.mkSolver();
+		if (timeout != -1) {
+			Params p = ctx.mkParams();
+		    p.add("timeout", timeout);
+		    s.setParameters(p);
+		}
+		varMap = new HashMap<Object, Expr>();
+	}
+	private void stop() {
+		ctx=null;
+		s=null;
+		varMap=null;
+	}
+	
+	@Override
+	protected boolean internalIsSatisfiable(Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {
+		start();
+		
 		long startformingProblem = System.nanoTime();
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
 		s.add(problemInstance);
@@ -94,10 +116,15 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 //		System.out.println("end");
 		endSolvingProblem = System.nanoTime()-startSolvingProblem;
 		this.ctx.close();
+		
+		stop();
 		return result;
 	}
 
-	public Map<PrimitiveElement,Number> getOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {		
+	@Override
+	protected Map<PrimitiveElement,Number> internalGetOneSolution(List<PrimitiveElement> objs, Map<XExpression, Iterable<Map<JvmIdentifiableElement,PrimitiveElement>>> matches) throws Exception {		
+		start();
+		
 		Map<PrimitiveElement,Number> sol = new HashMap<PrimitiveElement, Number>();
 		long startformingProblem = System.nanoTime();
 		BoolExpr problemInstance = formNumericProblemInstance(matches);
@@ -147,6 +174,9 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 			System.out.println("Unsatisfiable numerical problem");
 		}
 		this.ctx.close();
+		
+		stop();
+		
 		return sol;
 	}
 
@@ -269,6 +299,8 @@ public class NumericZ3ProblemSolver extends NumericProblemSolver{
 		}
 		return constraintInstances;
 	}
+
+
 
 
 	/*

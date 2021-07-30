@@ -33,7 +33,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver, IObjectiveBoundsPro
 	val ObjectiveComparatorHelper comparatorHelper
 	val Map<SolutionTrajectory, Fitness> trajectories = new HashMap
 
-	@Accessors var NumericSolver numericSolver
+	@Accessors var NumericRefinementUnit numericSolver
 	@Accessors var Map<Object, Solution> solutionsCollection
 
 	new(IObjective[][] leveledExtremalObjectives, int numberOfRequiredSolutions, DiversityChecker diversityChecker) {
@@ -45,7 +45,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver, IObjectiveBoundsPro
 		this.solutionCopier = new SolutionCopier
 	}
 	
-	def setNumericSolver(NumericSolver numericSolver) {
+	def setNumericSolver(NumericRefinementUnit numericSolver) {
 		this.numericSolver = numericSolver
 		solutionCopier.numericSolver = numericSolver
 	}
@@ -63,7 +63,7 @@ class ViatraReasonerSolutionSaver implements ISolutionSaver, IObjectiveBoundsPro
 		if (!shouldSaveSolution(fitness, context)) {
 			return false
 		}
-		println("Found: " + fitness)
+		//println("Found: " + fitness)
 		val dominatedTrajectories = newArrayList
 		for (entry : trajectories.entrySet) {
 			val isLastFitnessBetter = comparatorHelper.compare(fitness, entry.value)

@@ -575,4 +575,24 @@ public class NumericDrealProblemSolver extends NumericProblemSolver{
 		//TODO Check if above went well?
 	}
 
+	@Override
+	protected void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected boolean internalIsSatisfiable(
+			Map<XExpression, Iterable<Map<JvmIdentifiableElement, PrimitiveElement>>> matches) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected Map<PrimitiveElement, Number> internalGetOneSolution(List<PrimitiveElement> objs,
+			Map<XExpression, Iterable<Map<JvmIdentifiableElement, PrimitiveElement>>> matches) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

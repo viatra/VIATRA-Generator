@@ -22,7 +22,6 @@ import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.BestFirstStrategyFor
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.InconsistentScopeGlobalConstraint
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.LoggerSolutionFoundHandler
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ModelGenerationCompositeObjective
-import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.NumericSolver
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PartialModelAsLogicInterpretation
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.PunishSizeObjective
 import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.ScopeObjective
@@ -39,6 +38,7 @@ import org.eclipse.viatra.dse.api.DesignSpaceExplorer.DseLoggingLevel
 import org.eclipse.viatra.dse.solutionstore.SolutionStore
 import org.eclipse.viatra.dse.statecode.IStateCoderFactory
 import hu.bme.mit.inf.dslreasoner.viatra2logic.NumericDrealProblemSolver
+import hu.bme.mit.inf.dslreasoner.viatrasolver.reasoner.dse.NumericRefinementUnit
 
 class ViatraReasoner extends LogicReasoner {
 	val PartialInterpretationInitialiser initialiser = new PartialInterpretationInitialiser()
@@ -110,7 +110,7 @@ class ViatraReasoner extends LogicReasoner {
 				new SolutionStore(numberOfRequiredSolutions)
 			}
 		solutionStore.registerSolutionFoundHandler(new LoggerSolutionFoundHandler(viatraConfig))
-		val numericSolver = new NumericSolver(method, viatraConfig, false)//was formerly hard-coded to false for caching
+		val numericSolver = new NumericRefinementUnit(method, viatraConfig, false)//was formerly hard-coded to false for caching
 		val solutionSaver = method.solutionSaver
 		solutionSaver.numericSolver = numericSolver
 		val solutionCopier = solutionSaver.solutionCopier
@@ -156,7 +156,7 @@ class ViatraReasoner extends LogicReasoner {
 		val transformationTime = transformationFinished - transformationStartTime
 		val solverStartTime = System.nanoTime
 
-		println(">>begin exploration")
+		//println(">>begin exploration")
 		var boolean stoppedByTimeout
 		try {
 			stoppedByTimeout = dse.startExplorationWithTimeout(strategy, configuration.runtimeLimit * 1000);

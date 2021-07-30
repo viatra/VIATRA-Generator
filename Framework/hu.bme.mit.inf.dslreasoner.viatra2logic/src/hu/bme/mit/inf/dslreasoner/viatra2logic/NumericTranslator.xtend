@@ -58,31 +58,18 @@ class NumericTranslator {
 		return res
 	}
 	
-	def NumericProblemSolver selectProblemSolver(String selection) {
-//		return new NumericProblemSolver
-// 		add numeric solver decision procedure here
-		if (numericSolver instanceof NumericDynamicProblemSolver) {
-			val NumericDynamicProblemSolver dynamicSolver = numericSolver as NumericDynamicProblemSolver
-			return dynamicSolver.selectSolver(selection);
-		} else{
-			if (numericSolver instanceof NumericZ3ProblemSolver) return new NumericZ3ProblemSolver(this.timeout)
-			return numericSolver;
-		}
-	}
 	
 	def delegateIsSatisfiable(Map<PConstraint, Iterable<Object[]>> matches, String select) {
 		val input = formNumericProblemInstance(matches)
-		val solver = selectProblemSolver(select)
-		val satisfiability = solver.isSatisfiable(input)
-		solver.updateTimes
+		val satisfiability = numericSolver.isSatisfiable(input)
+		numericSolver.updateTimes
 		return satisfiability
 	}
 	
 	def delegateGetSolution(List<PrimitiveElement> primitiveElements, Map<PConstraint, Iterable<Object[]>> matches, String select) {
 		val input = formNumericProblemInstance(matches)
-		val solver = selectProblemSolver(select)
-		val solution = solver.getOneSolution(primitiveElements,input)
-		solver.updateTimes
+		val solution = numericSolver.getOneSolution(primitiveElements,input)
+		numericSolver.updateTimes
 		return solution
 	}
 	

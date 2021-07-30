@@ -158,7 +158,7 @@ class SolverLoader {
 				}
 				if (config.containsKey("dreal-timeout")) {
 					val stringValue = config.get("dreal-timeout")
-						c.drealTimeout = Integer.parseInt(stringValue)
+						c.numericSolverTimeout = Integer.parseInt(stringValue)
 				}
 				if (config.containsKey("scopePropagator")) {
 					val stringValue = config.get("scopePropagator")

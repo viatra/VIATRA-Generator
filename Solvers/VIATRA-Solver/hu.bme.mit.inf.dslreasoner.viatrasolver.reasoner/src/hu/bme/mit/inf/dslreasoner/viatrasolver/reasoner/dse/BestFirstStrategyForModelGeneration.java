@@ -79,7 +79,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 //	private Collection<ViatraQueryMatcher<? extends IPatternMatch>> matchers;
 	public ActivationSelector activationSelector = new EvenActivationSelector(random);
 	public ViatraReasonerSolutionSaver solutionSaver;
-	public NumericSolver numericSolver;
+	public NumericRefinementUnit numericSolver;
 	// Statistics
 	private int numberOfStatecoderFail = 0;
 	private int numberOfPrintedModel = 0;
@@ -94,7 +94,7 @@ public class BestFirstStrategyForModelGeneration implements IStrategy {
 			ViatraReasonerConfiguration configuration,
 			ModelGenerationMethod method,
 			ViatraReasonerSolutionSaver solutionSaver,
-			NumericSolver numericSolver) {
+			NumericRefinementUnit numericSolver) {
 		this.workspace = workspace;
 		this.configuration = configuration;
 		this.method = method;

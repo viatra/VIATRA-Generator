@@ -212,7 +212,7 @@ public class SolutionStore {
             unsavedSolutionCallbacks(context, solutionTrajectory);
             return;
         }
-        System.out.println("SAVING SOLUTION");
+//        System.out.println("SAVING SOLUTION");
         boolean solutionSaved = solutionSaver.saveSolution(context, id, solutionTrajectory);
 
         if (solutionSaved) {
