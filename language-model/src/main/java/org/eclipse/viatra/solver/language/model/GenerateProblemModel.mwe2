@@ -2,7 +2,10 @@ module org.eclipse.viatra.solver.language.model.GenerateProblemModel
 
 Workflow {
 	bean = org.eclipse.emf.mwe.utils.StandaloneSetup {
-		platformUri = ".."
+		projectMapping = {
+			projectName = "language-model"
+			path = "."
+		}
 	}
 
 	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
