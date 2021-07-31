@@ -1,17 +1,15 @@
 apply from: "${rootDir}/gradle/xtext-common.gradle"
+apply from: "${rootDir}/gradle/junit.gradle"
 apply from: "${rootDir}/gradle/mwe2.gradle"
+apply from: "${rootDir}/gradle/xtend.gradle"
 
 dependencies {
-	testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-	testCompile "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
-	testCompile "org.hamcrest:hamcrest:${hamcrestVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore:${ecoreVersion}"
 	compile project(':language-model')
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 	mwe2 "org.eclipse.xtext:xtext-antlr-generator:${xtextAntlrGeneratorVersion}"

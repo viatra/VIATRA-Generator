@@ -3,19 +3,9 @@ repositories {
 }
 
 apply plugin: 'java'
-apply plugin: 'org.xtext.xtend'
 
 sourceCompatibility = '11'
 targetCompatibility = '11'
-
-sourceSets {
-	main {
-		xtendOutputDir = 'src/main/xtend-gen'
-	}
-	test {
-		xtendOutputDir = 'src/test/xtend-gen'
-	}
-}
 
 configurations.all {
 	exclude group: 'asm'
@@ -25,21 +15,6 @@ jar {
 	manifest {
 		attributes 'Bundle-SymbolicName': project.name
 	}
-}
-
-test {
-	useJUnitPlatform {
-		excludeTags 'slow'
-	}
-}
-
-task slowTest(type: Test) {
-	useJUnitPlatform()
-}
-
-clean.doLast {
-	delete 'src/main/xtend-gen'
-	delete 'src/test/xtend-gen'
 }
 
 apply plugin: 'eclipse'

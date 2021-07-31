@@ -10,18 +10,12 @@ sourceSets {
         resources.srcDirs = ['src/jmh/resources']
         compileClasspath += sourceSets.main.runtimeClasspath
         compileClasspath += sourceSets.test.runtimeClasspath
-        xtendOutputDir = 'src/jmh/xtend-gen'
 	}
 }
 
 dependencies {
-	jmhRuntime "org.openjdk.jmh:jmh-core:${jmhVersion}"
-	jmhCompile "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+	jmhCompile "org.openjdk.jmh:jmh-core:${jmhVersion}"
 	jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
-}
-
-clean.doLast {
-	delete 'src/jmh/xtend-gen'
 }
 
 task jmh(type: JavaExec, dependsOn: jmhClasses) {
@@ -30,11 +24,23 @@ task jmh(type: JavaExec, dependsOn: jmhClasses) {
 }
 
 eclipse.classpath {
-	plusConfigurations += [configurations.jmh]
+	plusConfigurations += [configurations.jmhCompile, configurations.jmhRuntime]
 
-	// Allow test helper classes to be used in benchmarks from Eclipse.
 	file.whenMerged { classpath ->
-		def jmhClasspathEntry = classpath.entries.find { entry -> entry.path == 'src/jmh/java' }
-		jmhClasspathEntry.entryAttributes['test'] = true
+		for (entry in classpath.entries) {
+			// Workaround from https://github.com/gradle/gradle/issues/4802#issuecomment-407902081
+			if (entry in org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry) {
+				def usedBy = (entry.entryAttributes['gradle_used_by_scope'] ?: '').split(',')
+				if (usedBy == ['jmh']) {
+					// Allow test helper classes to be used in benchmarks from Eclipse
+					// and do not expose JMH dependencies to the main source code.
+					entry.entryAttributes['test'] = true
+				} else if ((usedBy.contains('main') || usedBy.contains('test')) && !usedBy.contains('jmh')) {
+					// main and test sources are also used by jmh sources.
+					usedBy += 'jmh'
+					entry.entryAttributes['gradle_used_by_scope'] = usedBy.join(',')
+				}
+			}
+		}
 	}
 }
