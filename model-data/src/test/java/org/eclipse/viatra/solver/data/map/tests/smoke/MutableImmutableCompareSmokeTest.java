@@ -83,6 +83,6 @@ class MutableImmutableCompareSmokeTest {
 	}
 
 	static Stream<Arguments> parametrizedSlowSmoke() {
-		return SmokeTestUtils.changeStepCount(MutableImmutableCompareSmokeTest.parametrizedSlowSmoke(), 1);
+		return SmokeTestUtils.changeStepCount(MutableImmutableCompareSmokeTest.parametrizedFastSmoke(), 1);
 	}
 }
