@@ -116,7 +116,6 @@ public class MapTestEnvironment<KEY, VALUE> {
 		// 2. Checking: if SUT contains <key,value> pair, then Reference contains
 		// <key,value> pair.
 		// Tests iterators
-		// TODO: Counts the number of elements in the entryset
 		int elementsInSutEntrySet = 0;
 		Cursor<KEY, VALUE> cursor = sut.getCursor();
 		while (cursor.move()) {
