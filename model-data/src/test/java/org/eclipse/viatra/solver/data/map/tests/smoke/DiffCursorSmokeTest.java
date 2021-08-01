@@ -100,4 +100,17 @@ class DiffCursorSmokeTest {
 				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}
+	@ParameterizedTest(name = "Mutable-Immutable Compare Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@MethodSource
+	@Tag("smoke")
+	@Tag("slow")
+	void parametrizedSlowSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+			boolean evilHash) {
+		runSmokeTest("SmokeCommitS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
+				commitFrequency, evilHash);
+	}
+
+	static Stream<Arguments> parametrizedSlowSmoke() {
+		return SmokeTestUtils.changeStepCount(parametrizedSmoke(), 1);
+	}
 }
