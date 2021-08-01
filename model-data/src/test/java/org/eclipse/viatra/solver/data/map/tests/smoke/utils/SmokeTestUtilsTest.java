@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-class SmoteTestUtilsTest {
+class SmokeTestUtilsTest {
 	@Test
 	void permutationInternalTest() {
 		List<List<Object>> res = SmokeTestUtils.permutationInternal(0, new Object[] { 1, 2, 3 },

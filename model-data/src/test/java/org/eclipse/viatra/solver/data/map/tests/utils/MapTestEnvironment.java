@@ -1,6 +1,7 @@
 package org.eclipse.viatra.solver.data.map.tests.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.TreeMap;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.Cursor;
+import org.eclipse.viatra.solver.data.map.VersionedMap;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
 public class MapTestEnvironment<KEY, VALUE> {
@@ -141,6 +143,20 @@ public class MapTestEnvironment<KEY, VALUE> {
 			fail(title + ": Non-eqivalent size() result: SUT.getSize()=" + sutSize + ", SUT.entryset.size="
 					+ elementsInSutEntrySet + ", Oracle=" + oracleSize + "!");
 		}
+	}
+
+	public static <K,V> void checkOrder(String scenario, VersionedMap<K,V> versionedMap) {
+		K previous = null;
+		Cursor<K, V> cursor = versionedMap.getCursor();
+		while(cursor.move()) {
+			System.out.println(cursor.getKey() + " " + ((VersionedMapImpl<K, V>) versionedMap).getHashProvider().getHash(cursor.getKey(), 0));
+			if(previous != null) {
+				int comparisonResult = ((VersionedMapImpl<K, V>) versionedMap).getHashProvider().compare(previous, cursor.getKey());
+				assertTrue(comparisonResult<0,scenario+" Cursor order is not incremental!");
+			}
+			previous = cursor.getKey();
+		}
+		System.out.println();
 	}
 
 	public void printComparison() {
