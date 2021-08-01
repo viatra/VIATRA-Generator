@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
 
 public final class SmokeTestUtils {
-	public static final int FAST_STEP_COUNT = 1000;
+	public static final int FAST_STEP_COUNT = 500;
 	public static final int SLOW_STEP_COUNT = 32 * 32 * 32 * 32;
 
 	private SmokeTestUtils() {
