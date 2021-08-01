@@ -11,7 +11,7 @@ import org.eclipse.viatra.solver.data.map.internal.Node;
  * @param <K> Target java type.
  */
 public interface ContinousHashProvider<K> {
-	public static final int EFFECTIVE_BITS = Node.effectiveBits;
+	public static final int EFFECTIVE_BITS = Node.EFFECTIVE_BITS;
 	public static final int EFFECTIVE_BIT_MASK = (1 << (EFFECTIVE_BITS)) - 1;
 
 	/**
@@ -51,10 +51,10 @@ public interface ContinousHashProvider<K> {
 			for (int i = 0; i < ContinousHashProvider.MAX_PRACTICAL_DEPTH; i++) {
 				int hash1 = getEffectiveHash(key1, i);
 				int hash2 = getEffectiveHash(key2, i);
-				for(int j = 0; j<Integer.SIZE/Node.branchingFactorBit; j++) {
-					final int factorMask = (1<<Node.branchingFactorBit)-1;
-					int hashFragment1 = (hash1>>>j*Node.branchingFactorBit) & factorMask;
-					int hashFragment2 = (hash2>>>j*Node.branchingFactorBit) & factorMask;
+				for(int j = 0; j<Integer.SIZE/Node.BRANCHING_FACTOR_BITS; j++) {
+					final int factorMask = (1<<Node.BRANCHING_FACTOR_BITS)-1;
+					int hashFragment1 = (hash1>>>j*Node.BRANCHING_FACTOR_BITS) & factorMask;
+					int hashFragment2 = (hash2>>>j*Node.BRANCHING_FACTOR_BITS) & factorMask;
 					var result = Integer.compare(hashFragment1, hashFragment2);
 					if (result != 0) {
 						return result;

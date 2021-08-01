@@ -70,7 +70,7 @@ class MutableSmokeTest {
 	}
 
 	static Stream<Arguments> parametrizedSmoke() {
-		return SmokeTestUtils.permutationWithSize(new Object[] { 1000 },
+		return SmokeTestUtils.permutationWithSize(new Object[] { SmokeTestUtils.FAST_STEP_COUNT },
 				new Object[] { 3, 32, 32 * 32, 32 * 32 * 32 * 32 }, new Object[] { 2, 3 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}

@@ -5,11 +5,11 @@ import java.util.Map;
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
 public abstract class Node<K,V>{
-	public static final int branchingFactorBit = 5;
-	public static final int factor = 1<<branchingFactorBit;
-	protected static final int numberOfFactors = Integer.SIZE / branchingFactorBit;
-	protected static final int factorMask = factor-1;
-	public static final int effectiveBits = branchingFactorBit * numberOfFactors;
+	public static final int BRANCHING_FACTOR_BITS = 5;
+	public static final int FACTOR = 1<<BRANCHING_FACTOR_BITS;
+	protected static final int NUMBER_OF_FACTORS = Integer.SIZE / BRANCHING_FACTOR_BITS;
+	protected static final int FACTOR_MASK = FACTOR-1;
+	public static final int EFFECTIVE_BITS = BRANCHING_FACTOR_BITS * NUMBER_OF_FACTORS;
 	
 	/**
 	 * Calculates the index for the continuous hash.
@@ -17,7 +17,7 @@ public abstract class Node<K,V>{
 	 * @return The index of the continuous hash.
 	 */
 	protected static int hashDepth(int depth) {
-		return depth/numberOfFactors;
+		return depth/NUMBER_OF_FACTORS;
 	}
 	
 	/**
@@ -26,7 +26,7 @@ public abstract class Node<K,V>{
 	 * @return The segment of a hash code.
 	 */
 	protected static int shiftDepth(int depth) {
-		return depth%numberOfFactors;
+		return depth%NUMBER_OF_FACTORS;
 	}
 	/**
 	 * Selects a segments from a complete hash for a given depth.
@@ -35,8 +35,8 @@ public abstract class Node<K,V>{
 	 * @return The segment as an integer.
 	 */
 	protected static int hashFragment(int hash, int shiftDepth) {
-		if(shiftDepth<0 || Node.numberOfFactors<shiftDepth) throw new IllegalArgumentException("Invalid shift depth! valid intervall=[0;5], input="+shiftDepth);
-		return (hash >>> shiftDepth*branchingFactorBit) & factorMask;
+		if(shiftDepth<0 || Node.NUMBER_OF_FACTORS<shiftDepth) throw new IllegalArgumentException("Invalid shift depth! valid intervall=[0;5], input="+shiftDepth);
+		return (hash >>> shiftDepth*BRANCHING_FACTOR_BITS) & FACTOR_MASK;
 	}
 	
 	/**
@@ -51,15 +51,15 @@ public abstract class Node<K,V>{
 		if(hashDepth>=ContinousHashProvider.MAX_PRACTICAL_DEPTH) {
 			throw new IllegalArgumentException("Key "+key+" have the clashing hashcode over the practical depth limitation ("+ContinousHashProvider.MAX_PRACTICAL_DEPTH+")!");
 		}
-		return depth%numberOfFactors == 0?
+		return depth%NUMBER_OF_FACTORS == 0?
 				hashProvider.getHash(key, hashDepth) :
 				hash;
 	}
 	
 	
-	abstract public V getValue(K key, ContinousHashProvider<? super K> hashProvider, V defaultValue,  int hash, int depth);
-	abstract public Node<K,V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth);
-	abstract public long getSize();
+	public abstract V getValue(K key, ContinousHashProvider<? super K> hashProvider, V defaultValue,  int hash, int depth);
+	public abstract Node<K,V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth);
+	public abstract long getSize();
 	
 	abstract MutableNode<K, V> toMutable();
 	public abstract ImmutableNode<K, V> toImmutable(
@@ -73,7 +73,7 @@ public abstract class Node<K,V>{
 	abstract boolean moveToNext(MapCursor<K,V> cursor);
 	
 	///////// FOR printing
-	abstract public void prettyPrint(StringBuilder builder, int depth, int code);
+	public abstract void prettyPrint(StringBuilder builder, int depth, int code);
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();

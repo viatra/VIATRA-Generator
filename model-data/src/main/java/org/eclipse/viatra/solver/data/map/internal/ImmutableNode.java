@@ -66,7 +66,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 		int resultNodeMap = 0;
 		final Object[] resultContent = new Object[size];
 		int bitposition = 1;
-		for(int i = 0; i<factor; i++) {
+		for(int i = 0; i<FACTOR; i++) {
 			Object key = node.content[i*2];
 			if(key != null) {
 				resultDataMap |= bitposition;
@@ -139,16 +139,14 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 				if(value == defaultValue) {
 					// delete
 					MutableNode<K, V> mutable = this.toMutable();
-					Node<K, V> result = mutable.removeEntry(selectedHashFragment);
-					return result;
+					return mutable.removeEntry(selectedHashFragment);
 				} else if(value == content[keyIndex+1]) {
 					// dont change
 					return this;
 				} else {
 					// update existing value
 					MutableNode<K, V> mutable = this.toMutable();
-					Node<K, V> result = mutable.updateValue(value, selectedHashFragment);
-					return result;
+					return mutable.updateValue(value, selectedHashFragment);
 				}
 			} else {
 				if(value == defaultValue) {
@@ -157,8 +155,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 				} else {
 					// add new key + value
 					MutableNode<K, V> mutable = this.toMutable();
-					Node<K, V> result = mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
-					return result;
+					return mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
 				}
 			}
 		} else if((nodeMap & bitposition)!=0) {
@@ -174,14 +171,12 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 				return this;
 			} else {
 				MutableNode<K, V> mutable  = toMutable();
-				Node<K, V> result = mutable.updateWithSubNode(selectedHashFragment, newsubNode, value.equals(defaultValue));
-				return result;
+				return mutable.updateWithSubNode(selectedHashFragment, newsubNode, value.equals(defaultValue));
 			}
 		} else {
 			// add new key + value
 			MutableNode<K, V> mutable = this.toMutable();
-			Node<K, V> result = mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
-			return result;
+			return mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
 		}
 	}
 	
@@ -200,7 +195,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 	
 	@Override
 	protected MutableNode<K,V> toMutable() {
-		return new MutableNode<K,V>(this);
+		return new MutableNode<>(this);
 	}
 	
 	@Override
@@ -219,7 +214,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 	boolean moveToNext(MapCursor<K, V> cursor) {
 		// 1. try to move to data
 		int datas = Integer.bitCount(this.dataMap);
-		if(cursor.dataIndex != MapCursor.IndexFinish) {
+		if(cursor.dataIndex != MapCursor.INDEX_FINISH) {
 			int newDataIndex = cursor.dataIndex + 1;
 			if(newDataIndex < datas) {
 				cursor.dataIndex = newDataIndex;
@@ -227,7 +222,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 				cursor.value = (V) this.content[newDataIndex*2+1];
 				return true;
 			} else {
-				cursor.dataIndex = MapCursor.IndexFinish;
+				cursor.dataIndex = MapCursor.INDEX_FINISH;
 			}
 		}
 		
@@ -237,10 +232,10 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 		if(newNodeIndex < nodes) {
 			// 2.1 found next subnode, move down to the subnode
 			Node<K, V> subnode = (Node<K, V>) this.content[this.content.length-1-newNodeIndex];
-			cursor.dataIndex = MapCursor.IndexStart;
+			cursor.dataIndex = MapCursor.INDEX_START;
 			cursor.nodeIndexStack.pop();
 			cursor.nodeIndexStack.push(newNodeIndex);
-			cursor.nodeIndexStack.push(MapCursor.IndexStart);
+			cursor.nodeIndexStack.push(MapCursor.INDEX_START);
 			cursor.nodeStack.push(subnode);
 			return subnode.moveToNext(cursor);
 		} else {
@@ -270,7 +265,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 		builder.append("Immutable(");
 		boolean hadContent = false;
 		int dataMask = 1;
-		for(int i = 0; i<factor; i++) {
+		for(int i = 0; i<FACTOR; i++) {
 			if((dataMask & dataMap) != 0) {
 				if(hadContent) {
 					builder.append(",");
@@ -287,7 +282,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 		}
 		builder.append(")");
 		int nodeMask = 1;
-		for(int i = 0; i<factor; i++) {
+		for(int i = 0; i<FACTOR; i++) {
 			if((nodeMask & nodeMap)!=0) {
 				@SuppressWarnings("unchecked")
 				Node<K,V> subNode = (Node<K, V>) content[content.length-1-index(nodeMap, nodeMask)];
@@ -333,15 +328,9 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 			return false;
 		if (obj instanceof ImmutableNode<?,?>) {
 			ImmutableNode<?,?> other = (ImmutableNode<?,?>) obj;
-			if (precalculatedHash != other.precalculatedHash)
+			if (precalculatedHash != other.precalculatedHash || dataMap != other.dataMap || nodeMap != other.nodeMap || !Arrays.deepEquals(content, other.content))
 				return false;
-			if (dataMap != other.dataMap)
-				return false;
-			if (nodeMap != other.nodeMap)
-				return false;
-			if (!Arrays.deepEquals(content, other.content))
-				return false;
-			return true;
+			else return true;
 		} else if(obj instanceof MutableNode<?,?>) {
 			return ImmutableNode.compareImmutableMutable(this, (MutableNode<?, ?>) obj);
 		} else {
@@ -355,7 +344,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 		int datas = 0;
 		int nodes = 0;
 		final int immutableLength = immutable.content.length;
-		for(int i = 0; i<factor; i++) {
+		for(int i = 0; i<FACTOR; i++) {
 			Object key = mutable.content[i*2];
 			// For each key candidate
 			if(key != null) {

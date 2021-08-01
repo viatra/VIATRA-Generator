@@ -1,7 +1,6 @@
 package org.eclipse.viatra.solver.data.map.tests.smoke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -122,7 +121,7 @@ class ContentEqualsSmokeTest {
 	}
 
 	static Stream<Arguments> parametrizedFastSmoke() {
-		return SmokeTestUtils.permutationWithSize(new Object[] { 1000 }, new Object[] { 3, 32, 32 * 32 },
+		return SmokeTestUtils.permutationWithSize(new Object[] { SmokeTestUtils.FAST_STEP_COUNT }, new Object[] { 3, 32, 32 * 32 },
 				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}

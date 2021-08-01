@@ -1,6 +1,7 @@
 package org.eclipse.viatra.solver.data.map;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,7 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 	private final boolean immutableWhenCommiting;
 
 	// Static data
-	protected final ContinousHashProvider<? super K> hashProvider;
+	protected final ContinousHashProvider<K> hashProvider;
 	protected final V defaultValue;
 
 	// Dynamic data
@@ -25,12 +26,12 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 	protected final Map<Node<K, V>, ImmutableNode<K, V>> nodeCache;
 	protected long nextID = 0;
 
-	public VersionedMapStoreImpl(ContinousHashProvider<? super K> hashProvider, V defaultValue,
+	public VersionedMapStoreImpl(ContinousHashProvider<K> hashProvider, V defaultValue,
 			VersionedMapStoreConfiguration config) {
-		this.immutableWhenCommiting = config.immutableWhenCommiting;
+		this.immutableWhenCommiting = config.isImmutableWhenCommiting();
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
-		if (config.sharedNodeCacheInStore) {
+		if (config.isSharedNodeCacheInStore()) {
 			nodeCache = new HashMap<>();
 		} else {
 			nodeCache = null;
@@ -39,7 +40,7 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 
 	private VersionedMapStoreImpl(ContinousHashProvider<K> hashProvider, V defaultValue,
 			Map<Node<K, V>, ImmutableNode<K, V>> nodeCache, VersionedMapStoreConfiguration config) {
-		this.immutableWhenCommiting = config.immutableWhenCommiting;
+		this.immutableWhenCommiting = config.isImmutableWhenCommiting();
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.nodeCache = nodeCache;
@@ -53,19 +54,19 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 			ContinousHashProvider<K> hashProvider, V defaultValue,
 			VersionedMapStoreConfiguration config) {
 		List<VersionedMapStore<K, V>> result = new ArrayList<>(amount);
-		if (config.sharedNodeCacheInStoreGroups) {
+		if (config.isSharedNodeCacheInStoreGroups()) {
 			Map<Node<K, V>, ImmutableNode<K, V>> nodeCache;
-			if (config.sharedNodeCacheInStore) {
+			if (config.isSharedNodeCacheInStore()) {
 				nodeCache = new HashMap<>();
 			} else {
 				nodeCache = null;
 			}
 			for (int i = 0; i < amount; i++) {
-				result.add(new VersionedMapStoreImpl<K, V>(hashProvider, defaultValue, nodeCache, config));
+				result.add(new VersionedMapStoreImpl<>(hashProvider, defaultValue, nodeCache, config));
 			}
 		} else {
 			for (int i = 0; i < amount; i++) {
-				result.add(new VersionedMapStoreImpl<K, V>(hashProvider, defaultValue, config));
+				result.add(new VersionedMapStoreImpl<>(hashProvider, defaultValue, config));
 			}
 		}
 		return result;
@@ -82,23 +83,23 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 
 	@Override
 	public VersionedMap<K, V> createMap() {
-		return new VersionedMapImpl<K, V>(this, hashProvider, defaultValue);
+		return new VersionedMapImpl<>(this, hashProvider, defaultValue);
 	}
 
 	@Override
 	public VersionedMap<K, V> createMap(long state) {
 		ImmutableNode<K, V> data = revert(state);
-		return new VersionedMapImpl<K, V>(this, hashProvider, defaultValue, data);
+		return new VersionedMapImpl<>(this, hashProvider, defaultValue, data);
 	}
 
 	public synchronized ImmutableNode<K, V> revert(long state) {
 		if (states.containsKey(state)) {
 			return states.get(state);
 		} else {
-			ArrayList<Long> existingKeys = new ArrayList<Long>(states.keySet());
+			ArrayList<Long> existingKeys = new ArrayList<>(states.keySet());
 			Collections.sort(existingKeys);
 			throw new IllegalArgumentException("Store does not contain state " + state + "! Avaliable states: "
-					+ existingKeys.toArray().toString());
+					+ Arrays.toString(existingKeys.toArray()));
 		}
 	}
 
@@ -126,6 +127,6 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 		VersionedMap<K, V> map2 = createMap(toState);
 		Cursor<K, V> cursor1 = map1.getCursor();
 		Cursor<K, V> cursor2 = map2.getCursor();
-		return new MapDiffCursor<K, V>(this.hashProvider, this.defaultValue, cursor1, cursor2);
+		return new MapDiffCursor<>(this.hashProvider, this.defaultValue, cursor1, cursor2);
 	}
 }

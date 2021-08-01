@@ -8,7 +8,8 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
 
 public final class SmokeTestUtils {
-	private static final int SLOW_STEP_COUNT = 32 * 32 * 32 * 32;
+	public static final int FAST_STEP_COUNT = 1000;
+	public static final int SLOW_STEP_COUNT = 32 * 32 * 32 * 32;
 
 	private SmokeTestUtils() {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");

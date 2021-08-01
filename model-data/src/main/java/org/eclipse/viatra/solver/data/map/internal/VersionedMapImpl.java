@@ -20,13 +20,13 @@ import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 	protected final VersionedMapStoreImpl<K,V> store;
 	
-	protected final ContinousHashProvider<? super K> hashProvider;
+	protected final ContinousHashProvider<K> hashProvider;
 	protected final V defaultValue;
 	protected Node<K,V> root;
 	
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<K,V> store,
-			ContinousHashProvider<? super K> hashProvider,
+			ContinousHashProvider<K> hashProvider,
 			V defaultValue)
 	{
 		this.store = store;
@@ -36,7 +36,7 @@ public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 	}
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<K,V> store,
-			ContinousHashProvider<? super K> hashProvider,
+			ContinousHashProvider<K> hashProvider,
 			V defaultValue, Node<K,V> data)
 	{
 		this.store = store;
@@ -48,7 +48,7 @@ public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 	public V getDefaultValue() {
 		return defaultValue;
 	}
-	public ContinousHashProvider<? super K> getHashProvider() {
+	public ContinousHashProvider<K> getHashProvider() {
 		return hashProvider;
 	}
 	@Override
@@ -100,15 +100,14 @@ public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 
 	@Override
 	public Cursor<K, V> getCursor() {
-		MapCursor<K,V> cursor = new MapCursor<>(this.root,this);
-		return cursor;
+		return new MapCursor<>(this.root,this);
 	}
 	@Override
 	public DiffCursor<K, V> getDiffCursor(long toVersion) {
 		Cursor<K, V> fromCursor = this.getCursor();
 		VersionedMap<K, V> toMap = this.store.createMap(toVersion);
 		Cursor<K, V> toCursor = toMap.getCursor();
-		return new MapDiffCursor<K, V>(this.hashProvider,this.defaultValue, fromCursor, toCursor);
+		return new MapDiffCursor<>(this.hashProvider,this.defaultValue, fromCursor, toCursor);
 		
 	}
 	

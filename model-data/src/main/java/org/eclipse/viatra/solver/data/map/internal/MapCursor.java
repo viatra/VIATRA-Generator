@@ -10,8 +10,8 @@ import org.eclipse.viatra.solver.data.map.VersionedMap;
 
 public class MapCursor<K,V> implements Cursor<K,V> {
 	// Constants
-	static int IndexStart = -1;
-	static int IndexFinish = -2;
+	static final int INDEX_START = -1;
+	static final int INDEX_FINISH = -2;
 	
 	// Tree stack
 	ArrayDeque<Node<K,V>> nodeStack;
@@ -33,10 +33,10 @@ public class MapCursor<K,V> implements Cursor<K,V> {
 		this.nodeIndexStack = new ArrayDeque<>();
 		if(root != null) {
 			this.nodeStack.add(root);
-			this.nodeIndexStack.push(IndexStart);
+			this.nodeIndexStack.push(INDEX_START);
 		}
 		
-		this.dataIndex = IndexStart;
+		this.dataIndex = INDEX_START;
 		
 		// Initializing cache
 		this.key = null;
@@ -75,7 +75,7 @@ public class MapCursor<K,V> implements Cursor<K,V> {
 	public boolean skipCurrentNode() {
 		nodeStack.pop();
 		nodeIndexStack.pop();
-		dataIndex = IndexFinish;
+		dataIndex = INDEX_FINISH;
 		return move();
 	}
 	@Override

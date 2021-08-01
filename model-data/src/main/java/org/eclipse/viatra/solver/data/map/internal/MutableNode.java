@@ -10,18 +10,18 @@ public class MutableNode<K, V> extends Node<K, V> {
 	protected Object[] content;
 
 	protected MutableNode() {
-		this.content = new Object[2 * factor];
+		this.content = new Object[2 * FACTOR];
 		updateHash();
 	}
 
-	public static <K, V> MutableNode<K, V> initialize(K key, V value,
-			ContinousHashProvider<? super K> hashProvider, V defaultValue) {
+	public static <K, V> MutableNode<K, V> initialize(K key, V value, ContinousHashProvider<? super K> hashProvider,
+			V defaultValue) {
 		if (value == defaultValue) {
 			return null;
 		} else {
 			int hash = hashProvider.getHash(key, 0);
 			int fragment = hashFragment(hash, 0);
-			MutableNode<K, V> res = new MutableNode<K, V>();
+			MutableNode<K, V> res = new MutableNode<>();
 			res.content[2 * fragment] = key;
 			res.content[2 * fragment + 1] = value;
 			res.updateHash();
@@ -35,10 +35,10 @@ public class MutableNode<K, V> extends Node<K, V> {
 	 * @param node
 	 */
 	protected MutableNode(ImmutableNode<K, V> node) {
-		this.content = new Object[2 * factor];
+		this.content = new Object[2 * FACTOR];
 		int dataUsed = 0;
 		int nodeUsed = 0;
-		for (int i = 0; i < factor; i++) {
+		for (int i = 0; i < FACTOR; i++) {
 			int bitposition = 1 << i;
 			if ((node.dataMap & bitposition) != 0) {
 				content[2 * i] = node.content[dataUsed * 2];
@@ -54,8 +54,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public V getValue(K key, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash,
-			int depth) {
+	public V getValue(K key, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth) {
 		int selectedHashFragment = hashFragment(hash, shiftDepth(depth));
 		K keyCandidate = (K) this.content[2 * selectedHashFragment];
 		if (keyCandidate != null) {
@@ -78,8 +77,8 @@ public class MutableNode<K, V> extends Node<K, V> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Node<K, V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider,
-			V defaultValue, int hash, int depth) {
+	public Node<K, V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash,
+			int depth) {
 		int selectedHashFragment = hashFragment(hash, shiftDepth(depth));
 		K keyCandidate = (K) content[2 * selectedHashFragment];
 		if (keyCandidate != null) {
@@ -161,7 +160,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 					return null;
 				}
 			} else {
-				// check whether newNode is orphan;
+				// check whether newNode is orphan
 				MutableNode<K, V> immutableNewNode = newNode.isMutable();
 				if (immutableNewNode != null) {
 					int orphaned = immutableNewNode.isOrphaned();
@@ -197,7 +196,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 
 	protected int isOrphaned() {
 		int dataFound = -2;
-		for (int i = 0; i < factor; i++) {
+		for (int i = 0; i < FACTOR; i++) {
 			if (content[i * 2] != null) {
 				if (dataFound >= 0) {
 					return -1;
@@ -212,11 +211,10 @@ public class MutableNode<K, V> extends Node<K, V> {
 	}
 
 	@SuppressWarnings("unchecked")
-	private Node<K, V> moveDownAndSplit(ContinousHashProvider<? super K> hashProvider, K newKey,
-			V newValue, K previousKey, int hashOfNewKey, int depth, int selectedHashFragmentOfCurrentDepth) {
+	private Node<K, V> moveDownAndSplit(ContinousHashProvider<? super K> hashProvider, K newKey, V newValue,
+			K previousKey, int hashOfNewKey, int depth, int selectedHashFragmentOfCurrentDepth) {
 		V previousValue = (V) content[2 * selectedHashFragmentOfCurrentDepth + 1];
 
-		// final int newHash = newHash(hashProvider, newKey, hashOfNewKey, newDepth);
 		MutableNode<K, V> newSubNode = newNodeWithTwoEntries(hashProvider, previousKey, previousValue,
 				hashProvider.getHash(previousKey, hashDepth(depth)), newKey, newValue, hashOfNewKey, depth + 1);
 
@@ -226,20 +224,14 @@ public class MutableNode<K, V> extends Node<K, V> {
 		return this;
 	}
 
-	private MutableNode<K, V> newNodeWithTwoEntries(ContinousHashProvider<? super K> hashProvider, K key1,
-			V value1, int oldHash1, K key2, V value2, int oldHash2, int newdepth) {
-//		final int depthLimit = 4000;
-//		if(newdepth>depthLimit) {
-//			final int newHashes = 4000/numberOfFactors;
-//			throw new IllegalArgumentException(
-//				"Continuous hash was same " + newHashes + " times for non-equivalent objects " + key1 + " and " + key2 +".");
-//		}
+	private MutableNode<K, V> newNodeWithTwoEntries(ContinousHashProvider<? super K> hashProvider, K key1, V value1,
+			int oldHash1, K key2, V value2, int oldHash2, int newdepth) {
 		int newHash1 = newHash(hashProvider, key1, oldHash1, newdepth);
 		int newHash2 = newHash(hashProvider, key2, oldHash2, newdepth);
 		int newFragment1 = hashFragment(newHash1, shiftDepth(newdepth));
 		int newFragment2 = hashFragment(newHash2, shiftDepth(newdepth));
 
-		MutableNode<K, V> subNode = new MutableNode<K, V>();
+		MutableNode<K, V> subNode = new MutableNode<>();
 		if (newFragment1 != newFragment2) {
 			subNode.content[newFragment1 * 2] = key1;
 			subNode.content[newFragment1 * 2 + 1] = value1;
@@ -247,8 +239,8 @@ public class MutableNode<K, V> extends Node<K, V> {
 			subNode.content[newFragment2 * 2] = key2;
 			subNode.content[newFragment2 * 2 + 1] = value2;
 		} else {
-			MutableNode<K, V> subSubNode = newNodeWithTwoEntries(hashProvider, key1, value1, newHash1, key2,
-					value2, newHash2, newdepth + 1);
+			MutableNode<K, V> subSubNode = newNodeWithTwoEntries(hashProvider, key1, value1, newHash1, key2, value2,
+					newHash2, newdepth + 1);
 			subNode.content[newFragment1 * 2 + 1] = subSubNode;
 		}
 		subNode.updateHash();
@@ -270,7 +262,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 	@Override
 	public long getSize() {
 		int size = 0;
-		for (int i = 0; i < factor; i++) {
+		for (int i = 0; i < FACTOR; i++) {
 			if (content[i * 2] != null) {
 				size++;
 			} else {
@@ -297,8 +289,8 @@ public class MutableNode<K, V> extends Node<K, V> {
 	@Override
 	boolean moveToNext(MapCursor<K, V> cursor) {
 		// 1. try to move to data
-		if (cursor.dataIndex != MapCursor.IndexFinish) {
-			for (int index = cursor.dataIndex + 1; index < factor; index++) {
+		if (cursor.dataIndex != MapCursor.INDEX_FINISH) {
+			for (int index = cursor.dataIndex + 1; index < FACTOR; index++) {
 				if (this.content[index * 2] != null) {
 					// 1.1 found next data
 					cursor.dataIndex = index;
@@ -307,19 +299,19 @@ public class MutableNode<K, V> extends Node<K, V> {
 					return true;
 				}
 			}
-			cursor.dataIndex = MapCursor.IndexFinish;
+			cursor.dataIndex = MapCursor.INDEX_FINISH;
 		}
 
 		// 2. look inside the subnodes
-		for (int index = cursor.nodeIndexStack.peek() + 1; index < factor; index++) {
+		for (int index = cursor.nodeIndexStack.peek() + 1; index < FACTOR; index++) {
 			if (this.content[index * 2] == null && this.content[index * 2 + 1] != null) {
 				// 2.1 found next subnode, move down to the subnode
 				Node<K, V> subnode = (Node<K, V>) this.content[index * 2 + 1];
 
-				cursor.dataIndex = MapCursor.IndexStart;
+				cursor.dataIndex = MapCursor.INDEX_START;
 				cursor.nodeIndexStack.pop();
 				cursor.nodeIndexStack.push(index);
-				cursor.nodeIndexStack.push(MapCursor.IndexStart);
+				cursor.nodeIndexStack.push(MapCursor.INDEX_START);
 				cursor.nodeStack.push(subnode);
 
 				return subnode.moveToNext(cursor);
@@ -350,7 +342,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 		builder.append("Mutable(");
 		// print content
 		boolean hadContent = false;
-		for (int i = 0; i < factor; i++) {
+		for (int i = 0; i < FACTOR; i++) {
 			if (content[2 * i] != null) {
 				if (hadContent) {
 					builder.append(",");
@@ -366,7 +358,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 		}
 		builder.append(")");
 		// print subnodes
-		for (int i = 0; i < factor; i++) {
+		for (int i = 0; i < FACTOR; i++) {
 			if (content[2 * i] == null && content[2 * i + 1] != null) {
 				@SuppressWarnings("unchecked")
 				Node<K, V> subNode = (Node<K, V>) content[2 * i + 1];
@@ -380,14 +372,14 @@ public class MutableNode<K, V> extends Node<K, V> {
 	@Override
 	public void checkIntegrity(ContinousHashProvider<? super K> hashProvider, V defaultValue, int depth) {
 		// check for orphan nodes
-		if(depth>0) {
+		if (depth > 0) {
 			int orphaned = isOrphaned();
-			if(orphaned>=0) {
-				throw new IllegalStateException("Orphaned node! " + orphaned + ": " +  content[2 * orphaned]);
+			if (orphaned >= 0) {
+				throw new IllegalStateException("Orphaned node! " + orphaned + ": " + content[2 * orphaned]);
 			}
 		}
-		// check the place of data 
-		for (int i = 0; i < factor; i++) {
+		// check the place of data
+		for (int i = 0; i < FACTOR; i++) {
 			if (this.content[2 * i] != null) {
 				K key = (K) this.content[2 * i];
 				V value = (V) this.content[2 * i + 1];
@@ -405,7 +397,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 			}
 		}
 		// check subnodes
-		for (int i = 0; i < factor; i++) {
+		for (int i = 0; i < FACTOR; i++) {
 			if (this.content[2 * i + 1] != null && this.content[2 * i] == null) {
 				Node<K, V> subNode = (Node<K, V>) this.content[2 * i + 1];
 				subNode.checkIntegrity(hashProvider, defaultValue, depth + 1);
