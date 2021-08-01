@@ -5,8 +5,8 @@ import java.util.Map;
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
 public abstract class Node<KEY,VALUE>{
-	protected static final int branchingFactorBit = 5;
-	protected static final int factor = 1<<branchingFactorBit;
+	public static final int branchingFactorBit = 5;
+	public static final int factor = 1<<branchingFactorBit;
 	protected static final int numberOfFactors = Integer.SIZE / branchingFactorBit;
 	protected static final int factorMask = factor-1;
 	public static final int effectiveBits = branchingFactorBit * numberOfFactors;
@@ -35,7 +35,7 @@ public abstract class Node<KEY,VALUE>{
 	 * @return The segment as an integer.
 	 */
 	protected static int hashFragment(int hash, int shiftDepth) {
-		if(shiftDepth<0 && 5<shiftDepth) throw new IllegalArgumentException("Invalid shift depth! valid intervall=[0;5], input="+shiftDepth);
+		if(shiftDepth<0 || Node.numberOfFactors<shiftDepth) throw new IllegalArgumentException("Invalid shift depth! valid intervall=[0;5], input="+shiftDepth);
 		return (hash >>> shiftDepth*branchingFactorBit) & factorMask;
 	}
 	
@@ -64,7 +64,7 @@ public abstract class Node<KEY,VALUE>{
 	abstract MutableNode<KEY, VALUE> toMutable();
 	public abstract ImmutableNode<KEY, VALUE> toImmutable(
 			Map<Node<KEY, VALUE>,ImmutableNode<KEY, VALUE>> cache);
-	
+	protected abstract MutableNode<KEY, VALUE> isMutable();
 	/**
 	 * Moves a {@link MapCursor} to its next position.
 	 * @param cursor the cursor

@@ -174,7 +174,7 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 				return this;
 			} else {
 				MutableNode<KEY, VALUE> mutable  = toMutable();
-				Node<KEY, VALUE> result = mutable.updateSubNode(selectedHashFragment, newsubNode);
+				Node<KEY, VALUE> result = mutable.updateWithSubNode(selectedHashFragment, newsubNode, value.equals(defaultValue));
 				return result;
 			}
 		} else {
@@ -207,6 +207,11 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 	public ImmutableNode<KEY, VALUE> toImmutable(
 			Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> cache) {
 		return this;
+	}
+	
+	@Override
+	protected MutableNode<KEY, VALUE> isMutable() {
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -290,6 +295,28 @@ public class ImmutableNode<KEY, VALUE> extends Node<KEY, VALUE> {
 				subNode.prettyPrint(builder, depth+1, i);
 			}
 			nodeMask<<=1;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void checkIntegrity(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, int depth) {
+		if(depth>0) {
+			boolean orphaned = Integer.bitCount(dataMap) == 1 && nodeMap == 0;
+			if(orphaned) {
+				throw new IllegalStateException("Orphaned node! " + dataMap + ": " +  content[0]);
+			}
+		}
+		// check the place of data
+		
+		// check subnodes
+		for(int i = 0; i<Integer.bitCount(nodeMap); i++) {
+			Node<KEY,VALUE> subnode = (Node<KEY, VALUE>) this.content[this.content.length-1-i];
+			if(! (subnode instanceof ImmutableNode<?,?>)) {
+				throw new IllegalStateException("Immutable node contains mutable subnodes!");
+			} else {
+				subnode.checkIntegrity(hashProvider, defaultValue, depth+1);
+			}
 		}
 	}
 	

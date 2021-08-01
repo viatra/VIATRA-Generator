@@ -48,12 +48,17 @@ public interface ContinousHashProvider<K> {
 		if (key1.equals(key2)) {
 			return 0;
 		} else {
-			for (var i = 0; i < ContinousHashProvider.MAX_PRACTICAL_DEPTH; i++) {
+			for (int i = 0; i < ContinousHashProvider.MAX_PRACTICAL_DEPTH; i++) {
 				int hash1 = getEffectiveHash(key1, i);
 				int hash2 = getEffectiveHash(key2, i);
-				var result = Integer.compare(hash1, hash2);
-				if (result != 0) {
-					return result;
+				for(int j = 0; j<Integer.SIZE/Node.branchingFactorBit; j++) {
+					final int factorMask = (1<<Node.branchingFactorBit)-1;
+					int hashFragment1 = (hash1>>>j*Node.branchingFactorBit) & factorMask;
+					int hashFragment2 = (hash2>>>j*Node.branchingFactorBit) & factorMask;
+					var result = Integer.compare(hashFragment1, hashFragment2);
+					if (result != 0) {
+						return result;
+					}
 				}
 			}
 			throw new IllegalArgumentException("Two different keys (" + key1 + " and " + key2
