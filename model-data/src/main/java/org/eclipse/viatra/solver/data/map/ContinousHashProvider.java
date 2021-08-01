@@ -3,7 +3,7 @@ package org.eclipse.viatra.solver.data.map;
 import org.eclipse.viatra.solver.data.map.internal.Node;
 
 /**
- * A class representing an equivalence relation for a type {@code KEY} with a
+ * A class representing an equivalence relation for a type {@code K} with a
  * continuous hash function.
  * 
  * @author Oszkar Semerath

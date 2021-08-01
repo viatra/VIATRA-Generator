@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
-public abstract class Node<KEY,VALUE>{
+public abstract class Node<K,V>{
 	public static final int branchingFactorBit = 5;
 	public static final int factor = 1<<branchingFactorBit;
 	protected static final int numberOfFactors = Integer.SIZE / branchingFactorBit;
@@ -46,7 +46,7 @@ public abstract class Node<KEY,VALUE>{
 	 * @param depth The depth.
 	 * @return The new hash code.
 	 */
-	protected int newHash(final ContinousHashProvider<? super KEY> hashProvider, KEY key, int hash, int depth) {
+	protected int newHash(final ContinousHashProvider<? super K> hashProvider, K key, int hash, int depth) {
 		final int hashDepth = hashDepth(depth);
 		if(hashDepth>=ContinousHashProvider.MAX_PRACTICAL_DEPTH) {
 			throw new IllegalArgumentException("Key "+key+" have the clashing hashcode over the practical depth limitation ("+ContinousHashProvider.MAX_PRACTICAL_DEPTH+")!");
@@ -57,20 +57,20 @@ public abstract class Node<KEY,VALUE>{
 	}
 	
 	
-	abstract public VALUE getValue(KEY key, ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue,  int hash, int depth);
-	abstract public Node<KEY,VALUE> putValue(KEY key, VALUE value, ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, int hash, int depth);
+	abstract public V getValue(K key, ContinousHashProvider<? super K> hashProvider, V defaultValue,  int hash, int depth);
+	abstract public Node<K,V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth);
 	abstract public long getSize();
 	
-	abstract MutableNode<KEY, VALUE> toMutable();
-	public abstract ImmutableNode<KEY, VALUE> toImmutable(
-			Map<Node<KEY, VALUE>,ImmutableNode<KEY, VALUE>> cache);
-	protected abstract MutableNode<KEY, VALUE> isMutable();
+	abstract MutableNode<K, V> toMutable();
+	public abstract ImmutableNode<K, V> toImmutable(
+			Map<Node<K, V>,ImmutableNode<K, V>> cache);
+	protected abstract MutableNode<K, V> isMutable();
 	/**
 	 * Moves a {@link MapCursor} to its next position.
 	 * @param cursor the cursor
 	 * @return Whether there was a next value to move on.
 	 */
-	abstract boolean moveToNext(MapCursor<KEY,VALUE> cursor);
+	abstract boolean moveToNext(MapCursor<K,V> cursor);
 	
 	///////// FOR printing
 	abstract public void prettyPrint(StringBuilder builder, int depth, int code);
@@ -80,6 +80,6 @@ public abstract class Node<KEY,VALUE>{
 		prettyPrint(stringBuilder, 0, -1);
 		return stringBuilder.toString();
 	}
-	public void checkIntegrity(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, int depth) {}
+	public void checkIntegrity(ContinousHashProvider<? super K> hashProvider, V defaultValue, int depth) {}
 	
 }

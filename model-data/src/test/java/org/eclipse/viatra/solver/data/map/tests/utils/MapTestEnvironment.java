@@ -15,7 +15,7 @@ import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
-public class MapTestEnvironment<KEY, VALUE> {
+public class MapTestEnvironment<K, V> {
 	public static String[] prepareValues(int maxValue) {
 		String[] values = new String[maxValue];
 		values[0] = "DEFAULT";
@@ -55,11 +55,11 @@ public class MapTestEnvironment<KEY, VALUE> {
 
 	}
 
-	public static <KEY, VALUE> void compareTwoMaps(String title, VersionedMapImpl<KEY, VALUE> map1,
-			VersionedMapImpl<KEY, VALUE> map2) {
+	public static <K, V> void compareTwoMaps(String title, VersionedMapImpl<K, V> map1,
+			VersionedMapImpl<K, V> map2) {
 		// 1. Comparing cursors.
-		Cursor<KEY, VALUE> cursor1 = map1.getCursor();
-		Cursor<KEY, VALUE> cursor2 = map2.getCursor();
+		Cursor<K, V> cursor1 = map1.getCursor();
+		Cursor<K, V> cursor2 = map2.getCursor();
 		while (!cursor1.isTerminated()) {
 			if (cursor2.isTerminated()) {
 				fail("cursor 2 terminated before cursor1");
@@ -78,14 +78,14 @@ public class MapTestEnvironment<KEY, VALUE> {
 		assertEquals(map2, map1, title + ": 2.equals(1)");
 	}
 
-	public VersionedMapImpl<KEY, VALUE> sut;
-	Map<KEY, VALUE> oracle = new HashMap<KEY, VALUE>();
+	public VersionedMapImpl<K, V> sut;
+	Map<K, V> oracle = new HashMap<K, V>();
 
-	public MapTestEnvironment(VersionedMapImpl<KEY, VALUE> sut) {
+	public MapTestEnvironment(VersionedMapImpl<K, V> sut) {
 		this.sut = sut;
 	}
 
-	public void put(KEY key, VALUE value) {
+	public void put(K key, V value) {
 		sut.put(key, value);
 		if (value != sut.getDefaultValue()) {
 			oracle.put(key, value);
@@ -105,9 +105,9 @@ public class MapTestEnvironment<KEY, VALUE> {
 		// 1. Checking: if Reference contains <key,value> pair, then SUT contains
 		// <key,value> pair.
 		// Tests get functions
-		for (Entry<KEY, VALUE> entry : oracle.entrySet()) {
-			VALUE sutValue = sut.get(entry.getKey());
-			VALUE oracleValue = entry.getValue();
+		for (Entry<K, V> entry : oracle.entrySet()) {
+			V sutValue = sut.get(entry.getKey());
+			V oracleValue = entry.getValue();
 			if (sutValue != oracleValue) {
 				printComparison();
 				fail(title + ": Non-equivalent get(" + entry.getKey() + ") results: SUT=" + sutValue + ", Oracle="
@@ -119,13 +119,13 @@ public class MapTestEnvironment<KEY, VALUE> {
 		// <key,value> pair.
 		// Tests iterators
 		int elementsInSutEntrySet = 0;
-		Cursor<KEY, VALUE> cursor = sut.getCursor();
+		Cursor<K, V> cursor = sut.getCursor();
 		while (cursor.move()) {
 			elementsInSutEntrySet++;
-			KEY key = cursor.getKey();
-			VALUE sutValue = cursor.getValue();
+			K key = cursor.getKey();
+			V sutValue = cursor.getValue();
 			// System.out.println(key + " -> " + sutValue);
-			VALUE oracleValue = oracle.get(key);
+			V oracleValue = oracle.get(key);
 			if (sutValue != oracleValue) {
 				printComparison();
 				fail(title + ": Non-equivalent entry in iterator: SUT=<" + key + "," + sutValue + ">, Oracle=<" + key
@@ -166,23 +166,23 @@ public class MapTestEnvironment<KEY, VALUE> {
 		printEntrySet(oracle.entrySet().iterator());
 	}
 
-	private void printEntrySet(Iterator<Entry<KEY, VALUE>> iterator) {
-		TreeMap<KEY, VALUE> treemap = new TreeMap<>();
+	private void printEntrySet(Iterator<Entry<K, V>> iterator) {
+		TreeMap<K, V> treemap = new TreeMap<>();
 		while (iterator.hasNext()) {
-			Entry<KEY, VALUE> entry = iterator.next();
+			Entry<K, V> entry = iterator.next();
 			treemap.put(entry.getKey(), entry.getValue());
 		}
-		for (Entry<KEY, VALUE> e : treemap.entrySet()) {
+		for (Entry<K, V> e : treemap.entrySet()) {
 			System.out.println("\t" + e.getKey() + " -> " + e.getValue());
 		}
 	}
 
-	private void printEntrySet(Cursor<KEY, VALUE> cursor) {
-		TreeMap<KEY, VALUE> treemap = new TreeMap<>();
+	private void printEntrySet(Cursor<K, V> cursor) {
+		TreeMap<K, V> treemap = new TreeMap<>();
 		while (cursor.move()) {
 			treemap.put(cursor.getKey(), cursor.getValue());
 		}
-		for (Entry<KEY, VALUE> e : treemap.entrySet()) {
+		for (Entry<K, V> e : treemap.entrySet()) {
 			System.out.println("\t" + e.getKey() + " -> " + e.getValue());
 		}
 	}

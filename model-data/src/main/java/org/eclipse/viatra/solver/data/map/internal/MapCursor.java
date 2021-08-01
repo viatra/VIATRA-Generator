@@ -8,25 +8,25 @@ import java.util.List;
 import org.eclipse.viatra.solver.data.map.Cursor;
 import org.eclipse.viatra.solver.data.map.VersionedMap;
 
-public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
+public class MapCursor<K,V> implements Cursor<K,V> {
 	// Constants
 	static int IndexStart = -1;
 	static int IndexFinish = -2;
 	
 	// Tree stack
-	ArrayDeque<Node<KEY,VALUE>> nodeStack;
+	ArrayDeque<Node<K,V>> nodeStack;
 	ArrayDeque<Integer> nodeIndexStack;
 	int dataIndex;
 	
 	// Values
-	KEY key;
-	VALUE value;
+	K key;
+	V value;
 	
 	// Hash code for checking concurrent modifications
-	final VersionedMap<KEY,VALUE> map;
+	final VersionedMap<K,V> map;
 	final int creationHash; 
 	
-	public MapCursor(Node<KEY, VALUE> root, VersionedMap<KEY,VALUE> map) {
+	public MapCursor(Node<K, V> root, VersionedMap<K,V> map) {
 		// Initializing tree stack
 		super();
 		this.nodeStack = new ArrayDeque<>();
@@ -47,11 +47,11 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		this.creationHash = map.hashCode();
 	}
 	
-	public KEY getKey() {
+	public K getKey() {
 		return key;
 	}
 	
-	public VALUE getValue() {
+	public V getValue() {
 		return value;
 	}
 	
@@ -83,13 +83,13 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 		return this.map.hashCode() != this.creationHash;
 	}
 	@Override
-	public List<VersionedMap<KEY, VALUE>> getDependingMaps() {
+	public List<VersionedMap<K, V>> getDependingMaps() {
 		return List.of(this.map);
 	}
 	
-	public static <KEY,VALUE> boolean sameSubnode(MapCursor<KEY,VALUE> cursor1, MapCursor<KEY,VALUE> cursor2) {
-		Node<KEY, VALUE> nodeOfCursor1 = cursor1.nodeStack.peek();
-		Node<KEY, VALUE> nodeOfCursor2 = cursor2.nodeStack.peek();
+	public static <K,V> boolean sameSubnode(MapCursor<K,V> cursor1, MapCursor<K,V> cursor2) {
+		Node<K, V> nodeOfCursor1 = cursor1.nodeStack.peek();
+		Node<K, V> nodeOfCursor2 = cursor2.nodeStack.peek();
 		if(nodeOfCursor1 != null && nodeOfCursor2 != null) {
 			return nodeOfCursor1.equals(nodeOfCursor2);
 		} else {
@@ -99,13 +99,13 @@ public class MapCursor<KEY,VALUE> implements Cursor<KEY,VALUE> {
 	
 	/**
 	 * 
-	 * @param <KEY>
-	 * @param <VALUE>
+	 * @param <K>
+	 * @param <V>
 	 * @param cursor1
 	 * @param cursor2
 	 * @returnv Positive number if cursor 1 is behind, negative number if cursor 2 is behind, and 0 if they are at the same position.
 	 */
-	public static <KEY,VALUE> int compare(MapCursor<KEY,VALUE> cursor1, MapCursor<KEY,VALUE> cursor2) {
+	public static <K,V> int compare(MapCursor<K,V> cursor1, MapCursor<K,V> cursor2) {
 		// two cursors are equally deep
 		Iterator<Integer> stack1 = cursor1.nodeIndexStack.descendingIterator();
 		Iterator<Integer> stack2 = cursor2.nodeIndexStack.descendingIterator();

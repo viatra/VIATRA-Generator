@@ -1,5 +1,5 @@
 package org.eclipse.viatra.solver.data.map;
 
-public interface DiffCursor<KEY, VALUE> extends Cursor<KEY,VALUE> {
+public interface DiffCursor<K, V> extends Cursor<K,V> {
 
 }

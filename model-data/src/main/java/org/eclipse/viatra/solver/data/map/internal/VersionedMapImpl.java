@@ -14,20 +14,20 @@ import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
  * Not threadSafe in itself
  * @author Oszkar Semerath
  *
- * @param <KEY>
- * @param <VALUE>
+ * @param <K>
+ * @param <V>
  */
-public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
-	protected final VersionedMapStoreImpl<KEY,VALUE> store;
+public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
+	protected final VersionedMapStoreImpl<K,V> store;
 	
-	protected final ContinousHashProvider<? super KEY> hashProvider;
-	protected final VALUE defaultValue;
-	protected Node<KEY,VALUE> root;
+	protected final ContinousHashProvider<? super K> hashProvider;
+	protected final V defaultValue;
+	protected Node<K,V> root;
 	
 	public VersionedMapImpl(
-			VersionedMapStoreImpl<KEY,VALUE> store,
-			ContinousHashProvider<? super KEY> hashProvider,
-			VALUE defaultValue)
+			VersionedMapStoreImpl<K,V> store,
+			ContinousHashProvider<? super K> hashProvider,
+			V defaultValue)
 	{
 		this.store = store;
 		this.hashProvider = hashProvider;
@@ -35,9 +35,9 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		this.root = null;
 	}
 	public VersionedMapImpl(
-			VersionedMapStoreImpl<KEY,VALUE> store,
-			ContinousHashProvider<? super KEY> hashProvider,
-			VALUE defaultValue, Node<KEY,VALUE> data)
+			VersionedMapStoreImpl<K,V> store,
+			ContinousHashProvider<? super K> hashProvider,
+			V defaultValue, Node<K,V> data)
 	{
 		this.store = store;
 		this.hashProvider = hashProvider;
@@ -45,14 +45,14 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 		this.root = data;
 	}
 		
-	public VALUE getDefaultValue() {
+	public V getDefaultValue() {
 		return defaultValue;
 	}
-	public ContinousHashProvider<? super KEY> getHashProvider() {
+	public ContinousHashProvider<? super K> getHashProvider() {
 		return hashProvider;
 	}
 	@Override
-	public void put(KEY key, VALUE value) {
+	public void put(K key, V value) {
 		if(root!=null) {
 			root = root.putValue(key, value, hashProvider, defaultValue, hashProvider.getHash(key, 0), 0);
 		} else {
@@ -61,16 +61,16 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	}
 	
 	@Override
-	public void putAll(Cursor<KEY, VALUE> cursor) {
+	public void putAll(Cursor<K, V> cursor) {
 		if(cursor.getDependingMaps().contains(this)) {
-			List<KEY> keys = new LinkedList<>();
-			List<VALUE> values = new LinkedList<>();
+			List<K> keys = new LinkedList<>();
+			List<V> values = new LinkedList<>();
 			while(cursor.move()) {
 				keys.add(cursor.getKey());
 				values.add(cursor.getValue());
 			}
-			Iterator<KEY> keyIterator = keys.iterator();
-			Iterator<VALUE> valueIterator = values.iterator();
+			Iterator<K> keyIterator = keys.iterator();
+			Iterator<V> valueIterator = values.iterator();
 			while(keyIterator.hasNext()) {
 				this.put(keyIterator.next(), valueIterator.next());
 			}
@@ -82,7 +82,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	}
 	
 	@Override
-	public VALUE get(KEY key) {
+	public V get(K key) {
 		if(root!=null) {
 			return root.getValue(key, hashProvider, defaultValue, hashProvider.getHash(key, 0), 0);
 		} else {
@@ -99,16 +99,16 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	}
 
 	@Override
-	public Cursor<KEY, VALUE> getCursor() {
-		MapCursor<KEY,VALUE> cursor = new MapCursor<>(this.root,this);
+	public Cursor<K, V> getCursor() {
+		MapCursor<K,V> cursor = new MapCursor<>(this.root,this);
 		return cursor;
 	}
 	@Override
-	public DiffCursor<KEY, VALUE> getDiffCursor(long toVersion) {
-		Cursor<KEY, VALUE> fromCursor = this.getCursor();
-		VersionedMap<KEY, VALUE> toMap = this.store.createMap(toVersion);
-		Cursor<KEY, VALUE> toCursor = toMap.getCursor();
-		return new MapDiffCursor<KEY, VALUE>(this.hashProvider,this.defaultValue, fromCursor, toCursor);
+	public DiffCursor<K, V> getDiffCursor(long toVersion) {
+		Cursor<K, V> fromCursor = this.getCursor();
+		VersionedMap<K, V> toMap = this.store.createMap(toVersion);
+		Cursor<K, V> toCursor = toMap.getCursor();
+		return new MapDiffCursor<K, V>(this.hashProvider,this.defaultValue, fromCursor, toCursor);
 		
 	}
 	
@@ -117,7 +117,7 @@ public class VersionedMapImpl<KEY,VALUE> implements VersionedMap<KEY,VALUE>{
 	public long commit() {
 		return this.store.commit(root,this);
 	}
-	public void setRoot(Node<KEY, VALUE> root) {
+	public void setRoot(Node<K, V> root) {
 		this.root = root;
 	}
 

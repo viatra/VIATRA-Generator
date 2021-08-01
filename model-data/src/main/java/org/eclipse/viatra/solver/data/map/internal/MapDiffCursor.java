@@ -14,19 +14,19 @@ import org.eclipse.viatra.solver.data.map.VersionedMap;
  * @author Oszkar Semerath
  *
  */
-public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<KEY,VALUE>{
+public class MapDiffCursor<K,V> implements DiffCursor<K, V>, Cursor<K,V>{
 	/**
 	 * Default value representing missing elements.
 	 */
-	private VALUE defaultValue;
-	private MapCursor<KEY,VALUE> cursor1;
-	private MapCursor<KEY,VALUE> cursor2;
-	private ContinousHashProvider<? super KEY> hashProvider;
+	private V defaultValue;
+	private MapCursor<K,V> cursor1;
+	private MapCursor<K,V> cursor2;
+	private ContinousHashProvider<? super K> hashProvider;
 	
 	// Values
-	private KEY key;
-	private VALUE fromValue;
-	private VALUE toValue;
+	private K key;
+	private V fromValue;
+	private V toValue;
 	
 	// State
 	/**
@@ -44,25 +44,25 @@ public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<
 	 */
 	private int hashClash=0;
 	
-	public MapDiffCursor(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue, Cursor<KEY, VALUE> cursor1, Cursor<KEY, VALUE> cursor2) {
+	public MapDiffCursor(ContinousHashProvider<? super K> hashProvider, V defaultValue, Cursor<K, V> cursor1, Cursor<K, V> cursor2) {
 		super();
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
-		this.cursor1 = (MapCursor<KEY, VALUE>) cursor1;
-		this.cursor2 = (MapCursor<KEY, VALUE>) cursor2;
+		this.cursor1 = (MapCursor<K, V>) cursor1;
+		this.cursor2 = (MapCursor<K, V>) cursor2;
 	}
 
-	public KEY getKey() {
+	public K getKey() {
 		return key;
 	}
-	public VALUE getFromValue() {
+	public V getFromValue() {
 		return fromValue;
 	}
-	public VALUE getToValue() {
+	public V getToValue() {
 		return toValue;
 	}
 	@Override
-	public VALUE getValue() {
+	public V getValue() {
 		return getToValue();
 	}
 	public boolean isTerminated() {
@@ -73,7 +73,7 @@ public class MapDiffCursor<KEY,VALUE> implements DiffCursor<KEY, VALUE>, Cursor<
 		return this.cursor1.isDirty() || this.cursor2.isDirty();
 	}
 	@Override
-	public List<VersionedMap<KEY, VALUE>> getDependingMaps() {
+	public List<VersionedMap<K, V>> getDependingMaps() {
 		return Stream.concat(
 				cursor1.getDependingMaps().stream(),
 				cursor2.getDependingMaps().stream()

@@ -12,20 +12,20 @@ import org.eclipse.viatra.solver.data.map.internal.MapDiffCursor;
 import org.eclipse.viatra.solver.data.map.internal.Node;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
 
-public class VersionedMapStoreImpl<KEY, VALUE> implements VersionedMapStore<KEY, VALUE> {
+public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 	// Configuration
 	private final boolean immutableWhenCommiting;
 
 	// Static data
-	protected final ContinousHashProvider<? super KEY> hashProvider;
-	protected final VALUE defaultValue;
+	protected final ContinousHashProvider<? super K> hashProvider;
+	protected final V defaultValue;
 
 	// Dynamic data
-	protected final Map<Long, ImmutableNode<KEY, VALUE>> states = new HashMap<>();
-	protected final Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> nodeCache;
+	protected final Map<Long, ImmutableNode<K, V>> states = new HashMap<>();
+	protected final Map<Node<K, V>, ImmutableNode<K, V>> nodeCache;
 	protected long nextID = 0;
 
-	public VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue,
+	public VersionedMapStoreImpl(ContinousHashProvider<? super K> hashProvider, V defaultValue,
 			VersionedMapStoreConfiguration config) {
 		this.immutableWhenCommiting = config.immutableWhenCommiting;
 		this.hashProvider = hashProvider;
@@ -37,42 +37,42 @@ public class VersionedMapStoreImpl<KEY, VALUE> implements VersionedMapStore<KEY,
 		}
 	}
 
-	private VersionedMapStoreImpl(ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue,
-			Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> nodeCache, VersionedMapStoreConfiguration config) {
+	private VersionedMapStoreImpl(ContinousHashProvider<K> hashProvider, V defaultValue,
+			Map<Node<K, V>, ImmutableNode<K, V>> nodeCache, VersionedMapStoreConfiguration config) {
 		this.immutableWhenCommiting = config.immutableWhenCommiting;
 		this.hashProvider = hashProvider;
 		this.defaultValue = defaultValue;
 		this.nodeCache = nodeCache;
 	}
 
-	public VersionedMapStoreImpl(ContinousHashProvider<KEY> hashProvider, VALUE defaultValue) {
+	public VersionedMapStoreImpl(ContinousHashProvider<K> hashProvider, V defaultValue) {
 		this(hashProvider, defaultValue, new VersionedMapStoreConfiguration());
 	}
 
-	public static <KEY, VALUE> List<VersionedMapStore<KEY, VALUE>> createSharedVersionedMapStores(int amount,
-			ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue,
+	public static <K, V> List<VersionedMapStore<K, V>> createSharedVersionedMapStores(int amount,
+			ContinousHashProvider<K> hashProvider, V defaultValue,
 			VersionedMapStoreConfiguration config) {
-		List<VersionedMapStore<KEY, VALUE>> result = new ArrayList<>(amount);
+		List<VersionedMapStore<K, V>> result = new ArrayList<>(amount);
 		if (config.sharedNodeCacheInStoreGroups) {
-			Map<Node<KEY, VALUE>, ImmutableNode<KEY, VALUE>> nodeCache;
+			Map<Node<K, V>, ImmutableNode<K, V>> nodeCache;
 			if (config.sharedNodeCacheInStore) {
 				nodeCache = new HashMap<>();
 			} else {
 				nodeCache = null;
 			}
 			for (int i = 0; i < amount; i++) {
-				result.add(new VersionedMapStoreImpl<KEY, VALUE>(hashProvider, defaultValue, nodeCache, config));
+				result.add(new VersionedMapStoreImpl<K, V>(hashProvider, defaultValue, nodeCache, config));
 			}
 		} else {
 			for (int i = 0; i < amount; i++) {
-				result.add(new VersionedMapStoreImpl<KEY, VALUE>(hashProvider, defaultValue, config));
+				result.add(new VersionedMapStoreImpl<K, V>(hashProvider, defaultValue, config));
 			}
 		}
 		return result;
 	}
 
-	public static <KEY, VALUE> List<VersionedMapStore<KEY, VALUE>> createSharedVersionedMapStores(int amount,
-			ContinousHashProvider<? super KEY> hashProvider, VALUE defaultValue) {
+	public static <K, V> List<VersionedMapStore<K, V>> createSharedVersionedMapStores(int amount,
+			ContinousHashProvider<K> hashProvider, V defaultValue) {
 		return createSharedVersionedMapStores(amount, hashProvider, defaultValue, new VersionedMapStoreConfiguration());
 	}
 
@@ -81,17 +81,17 @@ public class VersionedMapStoreImpl<KEY, VALUE> implements VersionedMapStore<KEY,
 	}
 
 	@Override
-	public VersionedMap<KEY, VALUE> createMap() {
-		return new VersionedMapImpl<KEY, VALUE>(this, hashProvider, defaultValue);
+	public VersionedMap<K, V> createMap() {
+		return new VersionedMapImpl<K, V>(this, hashProvider, defaultValue);
 	}
 
 	@Override
-	public VersionedMap<KEY, VALUE> createMap(long state) {
-		ImmutableNode<KEY, VALUE> data = revert(state);
-		return new VersionedMapImpl<KEY, VALUE>(this, hashProvider, defaultValue, data);
+	public VersionedMap<K, V> createMap(long state) {
+		ImmutableNode<K, V> data = revert(state);
+		return new VersionedMapImpl<K, V>(this, hashProvider, defaultValue, data);
 	}
 
-	public synchronized ImmutableNode<KEY, VALUE> revert(long state) {
+	public synchronized ImmutableNode<K, V> revert(long state) {
 		if (states.containsKey(state)) {
 			return states.get(state);
 		} else {
@@ -102,8 +102,8 @@ public class VersionedMapStoreImpl<KEY, VALUE> implements VersionedMapStore<KEY,
 		}
 	}
 
-	public synchronized long commit(Node<KEY, VALUE> data, VersionedMapImpl<KEY, VALUE> mapToUpdateRoot) {
-		ImmutableNode<KEY, VALUE> immutable;
+	public synchronized long commit(Node<K, V> data, VersionedMapImpl<K, V> mapToUpdateRoot) {
+		ImmutableNode<K, V> immutable;
 		if (data != null) {
 			immutable = data.toImmutable(this.nodeCache);
 		} else {
@@ -121,11 +121,11 @@ public class VersionedMapStoreImpl<KEY, VALUE> implements VersionedMapStore<KEY,
 	}
 
 	@Override
-	public DiffCursor<KEY, VALUE> getDiffCursor(long fromState, long toState) {
-		VersionedMap<KEY, VALUE> map1 = createMap(fromState);
-		VersionedMap<KEY, VALUE> map2 = createMap(toState);
-		Cursor<KEY, VALUE> cursor1 = map1.getCursor();
-		Cursor<KEY, VALUE> cursor2 = map2.getCursor();
-		return new MapDiffCursor<KEY, VALUE>(this.hashProvider, this.defaultValue, cursor1, cursor2);
+	public DiffCursor<K, V> getDiffCursor(long fromState, long toState) {
+		VersionedMap<K, V> map1 = createMap(fromState);
+		VersionedMap<K, V> map2 = createMap(toState);
+		Cursor<K, V> cursor1 = map1.getCursor();
+		Cursor<K, V> cursor2 = map2.getCursor();
+		return new MapDiffCursor<K, V>(this.hashProvider, this.defaultValue, cursor1, cursor2);
 	}
 }

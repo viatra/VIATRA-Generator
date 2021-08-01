@@ -1,10 +1,10 @@
 package org.eclipse.viatra.solver.data.map;
 
-public interface VersionedMapStore<KEY, VALUE> {
+public interface VersionedMapStore<K, V> {
 	
-	public VersionedMap<KEY, VALUE> createMap();
+	public VersionedMap<K, V> createMap();
 
-	public VersionedMap<KEY, VALUE> createMap(long state) throws IllegalAccessException;
+	public VersionedMap<K, V> createMap(long state) throws IllegalAccessException;
 
-	public DiffCursor<KEY,VALUE> getDiffCursor(long fromState, long toState);
+	public DiffCursor<K,V> getDiffCursor(long fromState, long toState);
 }
