@@ -40,7 +40,7 @@ public class SharedStoreTest {
 		}
 				
 		List<Map<Integer, Long>> index2Version = new LinkedList<>();
-		for(VersionedMapStore<Integer, String> store : stores) {
+		for(int i = 0; i<stores.size(); i++) {
 			index2Version.add(new HashMap<>());
 		}
 
