@@ -76,8 +76,9 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 			ContinousHashProvider<K> hashProvider, V defaultValue) {
 		return createSharedVersionedMapStores(amount, hashProvider, defaultValue, new VersionedMapStoreConfiguration());
 	}
-
-	synchronized Set<Long> getStates() {
+	
+	@Override
+	public synchronized Set<Long> getStates() {
 		return states.keySet();
 	}
 
@@ -91,6 +92,7 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 		ImmutableNode<K, V> data = revert(state);
 		return new VersionedMapImpl<>(this, hashProvider, defaultValue, data);
 	}
+	
 
 	public synchronized ImmutableNode<K, V> revert(long state) {
 		if (states.containsKey(state)) {
