@@ -9,7 +9,7 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.eclipse.viatra.solver.data.map.tests.smoke.utils.SmokeTestUtils;
+import org.eclipse.viatra.solver.data.map.tests.smoke.utils.FuzzTestUtils;
 import org.eclipse.viatra.solver.data.map.tests.utils.MapTestEnvironment;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Timeout;
@@ -17,7 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class MutableImmutableCompareSmokeTest {
+class MutableImmutableCompareFuzzTest {
 	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
 			boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
@@ -67,7 +67,7 @@ class MutableImmutableCompareSmokeTest {
 	}
 
 	static Stream<Arguments> parametrizedFastSmoke() {
-		return SmokeTestUtils.permutationWithSize(new Object[] { SmokeTestUtils.FAST_STEP_COUNT }, new Object[] { 3, 32, 32 * 32 },
+		return FuzzTestUtils.permutationWithSize(new Object[] { FuzzTestUtils.FAST_STEP_COUNT }, new Object[] { 3, 32, 32 * 32 },
 				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}
@@ -83,6 +83,6 @@ class MutableImmutableCompareSmokeTest {
 	}
 
 	static Stream<Arguments> parametrizedSlowSmoke() {
-		return SmokeTestUtils.changeStepCount(MutableImmutableCompareSmokeTest.parametrizedFastSmoke(), 1);
+		return FuzzTestUtils.changeStepCount(MutableImmutableCompareFuzzTest.parametrizedFastSmoke(), 1);
 	}
 }

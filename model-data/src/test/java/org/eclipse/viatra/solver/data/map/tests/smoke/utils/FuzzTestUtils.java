@@ -7,11 +7,11 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.params.provider.Arguments;
 
-public final class SmokeTestUtils {
+public final class FuzzTestUtils {
 	public static final int FAST_STEP_COUNT = 500;
 	public static final int SLOW_STEP_COUNT = 32 * 32 * 32 * 32;
 
-	private SmokeTestUtils() {
+	private FuzzTestUtils() {
 		throw new IllegalStateException("This is a static utility class and should not be instantiated directly");
 	}
 

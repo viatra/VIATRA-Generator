@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -54,9 +55,13 @@ public class MapTestEnvironment<K, V> {
 		}
 
 	}
-
+	
 	public static <K, V> void compareTwoMaps(String title, VersionedMapImpl<K, V> map1,
 			VersionedMapImpl<K, V> map2) {
+		compareTwoMaps(title, map1, map2, null);
+	}
+	public static <K, V> void compareTwoMaps(String title, VersionedMapImpl<K, V> map1,
+			VersionedMapImpl<K, V> map2, List<Throwable> errors) {
 		// 1. Comparing cursors.
 		Cursor<K, V> cursor1 = map1.getCursor();
 		Cursor<K, V> cursor2 = map2.getCursor();
@@ -64,8 +69,8 @@ public class MapTestEnvironment<K, V> {
 			if (cursor2.isTerminated()) {
 				fail("cursor 2 terminated before cursor1");
 			}
-			assertEquals(cursor1.getKey(), cursor2.getKey());
-			assertEquals(cursor2.getValue(), cursor2.getValue());
+			assertEqualsList(cursor1.getKey(), cursor2.getKey(),"Keys not equal", errors);
+			assertEqualsList(cursor2.getValue(), cursor2.getValue(), "Values not equal", errors);
 			cursor1.move();
 			cursor2.move();
 		}
@@ -73,9 +78,21 @@ public class MapTestEnvironment<K, V> {
 			fail("cursor 1 terminated before cursor 2");
 
 		// 2.1. comparing hash codes
-		assertEquals(map1.hashCode(), map2.hashCode(), title + ": hash code check");
-		assertEquals(map1, map2, title + ": 1.equals(2)");
-		assertEquals(map2, map1, title + ": 2.equals(1)");
+		assertEqualsList(map1.hashCode(), map2.hashCode(), title + ": hash code check",errors);
+		assertEqualsList(map1, map2, title + ": 1.equals(2)",errors);
+		assertEqualsList(map2, map1, title + ": 2.equals(1)",errors);
+	}
+	private static void assertEqualsList(Object o1, Object o2, String message, List<Throwable> errors) {
+		if(errors == null) {
+			assertEquals(o1, o2, message);
+		} else {
+			if(o1 != null) {
+				if(!(o1.equals(o2))) {
+					AssertionError error = new AssertionError((message != null ? message+" " : "") + "expected: " + o1 + " but was : " + o2);
+					errors.add(error);
+				}
+			}
+		}
 	}
 
 	public VersionedMapImpl<K, V> sut;
