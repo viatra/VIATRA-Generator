@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke;
+package org.eclipse.viatra.solver.data.map.tests.fuzz;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.eclipse.viatra.solver.data.map.tests.smoke.utils.FuzzTestUtils;
+import org.eclipse.viatra.solver.data.map.tests.fuzz.utils.FuzzTestUtils;
 import org.eclipse.viatra.solver.data.map.tests.utils.MapTestEnvironment;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Timeout;
@@ -20,7 +20,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class SharedStoreFuzzTest {
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
+	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
 			boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
@@ -80,33 +80,33 @@ class SharedStoreFuzzTest {
 
 	}
 
-	@ParameterizedTest(name = "Shared Store Test {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@ParameterizedTest(name = "Shared Store {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
 	@Timeout(value = 10)
 	@Tag("smoke")
-	void parametrizedFastSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+	void parametrizedFastFuzz(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
 			boolean evilHash) {
-		runSmokeTest("RestoreS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
+		runFuzzTest("SharedS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				commitFrequency, evilHash);
 	}
 
-	static Stream<Arguments> parametrizedFastSmoke() {
+	static Stream<Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(new Object[] { FuzzTestUtils.FAST_STEP_COUNT }, new Object[] { 3, 32, 32 * 32 },
 				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}
 
-	@ParameterizedTest(name = "Shared Store Test {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@ParameterizedTest(name = "Shared Store {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
 	@Tag("smoke")
 	@Tag("slow")
-	void parametrizedSlowSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+	void parametrizedSlowFuzz(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
 			boolean evilHash) {
-		runSmokeTest("RestoreS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
+		runFuzzTest("SharedS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				commitFrequency, evilHash);
 	}
 
-	static Stream<Arguments> parametrizedSlowSmoke() {
-		return FuzzTestUtils.changeStepCount(RestoreFuzzTest.parametrizedFastSmoke(), 1);
+	static Stream<Arguments> parametrizedSlowFuzz() {
+		return FuzzTestUtils.changeStepCount(RestoreFuzzTest.parametrizedFastFuzz(), 1);
 	}
 }

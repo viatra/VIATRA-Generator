@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke.utils;
+package org.eclipse.viatra.solver.data.map.tests.fuzz.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

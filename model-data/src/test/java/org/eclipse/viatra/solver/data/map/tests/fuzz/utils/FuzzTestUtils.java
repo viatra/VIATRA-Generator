@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke.utils;
+package org.eclipse.viatra.solver.data.map.tests.fuzz.utils;
 
 import java.util.Arrays;
 import java.util.LinkedList;

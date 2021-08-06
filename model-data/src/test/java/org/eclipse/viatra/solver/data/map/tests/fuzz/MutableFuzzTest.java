@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke;
+package org.eclipse.viatra.solver.data.map.tests.fuzz;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -9,7 +9,7 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.eclipse.viatra.solver.data.map.tests.smoke.utils.FuzzTestUtils;
+import org.eclipse.viatra.solver.data.map.tests.fuzz.utils.FuzzTestUtils;
 import org.eclipse.viatra.solver.data.map.tests.utils.MapTestEnvironment;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Timeout;
@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class MutableFuzzTest {
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
+	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue, boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
 
@@ -59,19 +59,33 @@ class MutableFuzzTest {
 		}
 	}
 
-	@ParameterizedTest(name = "Mutable Smoke {index}/{0} Steps={1} Keys={2} Values={3} seed={4} evil-hash={5}")
+	@ParameterizedTest(name = "Mutable {index}/{0} Steps={1} Keys={2} Values={3} seed={4} evil-hash={5}")
 	@MethodSource
 	@Timeout(value = 10)
-	@Tag("smoke")
-	void parametrizedSmoke(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
-		runSmokeTest(
-				"SmokeS" + steps + "K" + noKeys + "V" + noValues + "s" + seed + "H" + (evilHash ? "Evil" : "Normal"),
+	@Tag("fuzz")
+	void parametrizedFuzz(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
+		runFuzzTest(
+				"MutableS" + steps + "K" + noKeys + "V" + noValues + "s" + seed + "H" + (evilHash ? "Evil" : "Normal"),
 				seed, steps, noKeys, noValues, evilHash);
 	}
 
-	static Stream<Arguments> parametrizedSmoke() {
+	static Stream<Arguments> parametrizedFuzz() {
 		return FuzzTestUtils.permutationWithSize(new Object[] { FuzzTestUtils.FAST_STEP_COUNT },
 				new Object[] { 3, 32, 32 * 32, 32 * 32 * 32 * 32 }, new Object[] { 2, 3 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
+	}
+	
+	@ParameterizedTest(name = "Mutable {index}/{0} Steps={1} Keys={2} Values={3} seed={4} evil-hash={5}")
+	@MethodSource
+	@Tag("fuzz")
+	@Tag("slow")
+	void parametrizedSlowFuzz(int test, int steps, int noKeys, int noValues, int seed, boolean evilHash) {
+		runFuzzTest(
+				"MutableS" + steps + "K" + noKeys + "V" + noValues + "s" + seed + "H" + (evilHash ? "Evil" : "Normal"),
+				seed, steps, noKeys, noValues, evilHash);
+	}
+
+	static Stream<Arguments> parametrizedSlowFuzz() {
+		return FuzzTestUtils.changeStepCount(parametrizedFuzz(), 1);
 	}
 }

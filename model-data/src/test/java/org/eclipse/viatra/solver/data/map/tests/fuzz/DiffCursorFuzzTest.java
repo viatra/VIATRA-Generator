@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.map.tests.smoke;
+package org.eclipse.viatra.solver.data.map.tests.fuzz;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -10,7 +10,7 @@ import org.eclipse.viatra.solver.data.map.DiffCursor;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
-import org.eclipse.viatra.solver.data.map.tests.smoke.utils.FuzzTestUtils;
+import org.eclipse.viatra.solver.data.map.tests.fuzz.utils.FuzzTestUtils;
 import org.eclipse.viatra.solver.data.map.tests.utils.MapTestEnvironment;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Timeout;
@@ -19,7 +19,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class DiffCursorFuzzTest {
-	private void runSmokeTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
+	private void runFuzzTest(String scenario, int seed, int steps, int maxKey, int maxValue, int commitFrequency,
 			boolean evilHash) {
 		String[] values = MapTestEnvironment.prepareValues(maxValue);
 		ContinousHashProvider<Integer> chp = MapTestEnvironment.prepareHashProvider(evilHash);
@@ -85,32 +85,32 @@ class DiffCursorFuzzTest {
 
 	}
 
-	@ParameterizedTest(name = "Mutable-Immutable Compare Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@ParameterizedTest(name = "Mutable-Immutable Compare {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
 	@Timeout(value = 10)
-	@Tag("smoke")
-	void parametrizedSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+	@Tag("fuzz")
+	void parametrizedFuzz(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
 			boolean evilHash) {
-		runSmokeTest("SmokeMutableImmutableCompareS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps,
+		runFuzzTest("MutableImmutableCompareS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps,
 				noKeys, noValues, commitFrequency, evilHash);
 	}
 
-	static Stream<Arguments> parametrizedSmoke() {
+	static Stream<Arguments> parametrizedFuzz() {
 		return FuzzTestUtils.permutationWithSize(new Object[] { FuzzTestUtils.FAST_STEP_COUNT }, new Object[] { 3, 32, 32 * 32 },
 				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}
-	@ParameterizedTest(name = "Mutable-Immutable Compare Smoke {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
+	@ParameterizedTest(name = "Mutable-Immutable Compare {index}/{0} Steps={1} Keys={2} Values={3} commit frequency={4} seed={5} evil-hash={6}")
 	@MethodSource
-	@Tag("smoke")
+	@Tag("fuzz")
 	@Tag("slow")
-	void parametrizedSlowSmoke(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
+	void parametrizedSlowFuzz(int tests, int steps, int noKeys, int noValues, int commitFrequency, int seed,
 			boolean evilHash) {
-		runSmokeTest("SmokeCommitS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
+		runFuzzTest("MutableImmutableCompareS" + steps + "K" + noKeys + "V" + noValues + "s" + seed, seed, steps, noKeys, noValues,
 				commitFrequency, evilHash);
 	}
 
-	static Stream<Arguments> parametrizedSlowSmoke() {
-		return FuzzTestUtils.changeStepCount(parametrizedSmoke(), 1);
+	static Stream<Arguments> parametrizedSlowFuzz() {
+		return FuzzTestUtils.changeStepCount(parametrizedFuzz(), 1);
 	}
 }
