@@ -9,5 +9,6 @@ public interface Cursor<K,V> {
 	public boolean move();
 	public boolean isDirty();
 	
-	public List<VersionedMap<K,V>> getDependingMaps();
+	@SuppressWarnings("squid:S1452")
+	public List<VersionedMap<?,?>> getDependingMaps();
 }

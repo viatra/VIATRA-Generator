@@ -83,7 +83,7 @@ public class MapCursor<K,V> implements Cursor<K,V> {
 		return this.map.hashCode() != this.creationHash;
 	}
 	@Override
-	public List<VersionedMap<K, V>> getDependingMaps() {
+	public List<VersionedMap<?, ?>> getDependingMaps() {
 		return List.of(this.map);
 	}
 	
@@ -103,7 +103,7 @@ public class MapCursor<K,V> implements Cursor<K,V> {
 	 * @param <V>
 	 * @param cursor1
 	 * @param cursor2
-	 * @returnv Positive number if cursor 1 is behind, negative number if cursor 2 is behind, and 0 if they are at the same position.
+	 * @return Positive number if cursor 1 is behind, negative number if cursor 2 is behind, and 0 if they are at the same position.
 	 */
 	public static <K,V> int compare(MapCursor<K,V> cursor1, MapCursor<K,V> cursor2) {
 		// two cursors are equally deep

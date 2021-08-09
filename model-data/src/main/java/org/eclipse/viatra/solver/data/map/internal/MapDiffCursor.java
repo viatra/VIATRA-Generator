@@ -51,13 +51,15 @@ public class MapDiffCursor<K,V> implements DiffCursor<K, V>, Cursor<K,V>{
 		this.cursor1 = (MapCursor<K, V>) cursor1;
 		this.cursor2 = (MapCursor<K, V>) cursor2;
 	}
-
+	@Override
 	public K getKey() {
 		return key;
 	}
+	@Override
 	public V getFromValue() {
 		return fromValue;
 	}
+	@Override
 	public V getToValue() {
 		return toValue;
 	}
@@ -73,7 +75,7 @@ public class MapDiffCursor<K,V> implements DiffCursor<K, V>, Cursor<K,V>{
 		return this.cursor1.isDirty() || this.cursor2.isDirty();
 	}
 	@Override
-	public List<VersionedMap<K, V>> getDependingMaps() {
+	public List<VersionedMap<?, ?>> getDependingMaps() {
 		return Stream.concat(
 				cursor1.getDependingMaps().stream(),
 				cursor2.getDependingMaps().stream()
@@ -142,7 +144,11 @@ public class MapDiffCursor<K,V> implements DiffCursor<K, V>, Cursor<K,V>{
 
 	
 	protected boolean sameValues() {
-		return this.fromValue == this.toValue;
+		if(this.fromValue == null) {
+			return this.toValue == null;
+		} else {
+			return this.fromValue.equals(this.toValue);
+		}
 	}
 	protected boolean moveOne() {
 		if(isTerminated()) {
