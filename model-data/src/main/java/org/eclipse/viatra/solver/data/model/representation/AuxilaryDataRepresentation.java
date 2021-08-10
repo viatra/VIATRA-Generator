@@ -8,4 +8,9 @@ public class AuxilaryDataRepresentation<K,V> extends DataRepresentation<K, V> {
 			V defaultValue) {
 		super(keyClass, hashProvider, valueClass, defaultValue);
 	}
+	
+	@Override
+	public boolean isValidKey(K key) {
+		return true;
+	}
 }

@@ -27,6 +27,7 @@ abstract public class DataRepresentation<K, V> {
 	public ContinousHashProvider<K> getHashProvider() {
 		return hashProvider;
 	}
+	public abstract boolean isValidKey(K key);
 
 	public V getDefaultValue() {
 		return defaultValue;

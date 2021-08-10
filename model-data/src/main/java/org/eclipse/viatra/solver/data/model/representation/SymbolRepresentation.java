@@ -15,4 +15,9 @@ public class SymbolRepresentation <D> extends DataRepresentation<Tuple,D> {
 	public Symbol getSymbol() {
 		return symbol;
 	}
+	
+	@Override
+	public boolean isValidKey(Tuple key) {
+		return key.getSize() == symbol.getArity();
+	}
 }
