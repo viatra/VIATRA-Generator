@@ -59,7 +59,7 @@ class ContentEqualsFuzzTest {
 		
 		// Get the content of the first map
 		List<SimpleEntry<Integer, String>> content = new LinkedList<>();
-		Cursor<Integer, String> cursor = sut1.getCursor();
+		Cursor<Integer, String> cursor = sut1.getAll();
 		while (cursor.move()) {
 			content.add(new SimpleEntry<>(cursor.getKey(), cursor.getValue()));
 		}
@@ -88,8 +88,8 @@ class ContentEqualsFuzzTest {
 		
 		
 		// By cursors
-		Cursor<Integer, String> cursor1 = sut1.getCursor();
-		Cursor<Integer, String> cursor2 = sut2.getCursor();
+		Cursor<Integer, String> cursor1 = sut1.getAll();
+		Cursor<Integer, String> cursor2 = sut2.getAll();
 		int index3 = 1;
 		boolean canMove = true;
 		do{

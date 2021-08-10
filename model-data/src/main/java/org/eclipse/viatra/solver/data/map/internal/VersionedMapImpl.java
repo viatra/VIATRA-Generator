@@ -99,14 +99,14 @@ public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 	}
 
 	@Override
-	public Cursor<K, V> getCursor() {
+	public Cursor<K, V> getAll() {
 		return new MapCursor<>(this.root,this);
 	}
 	@Override
 	public DiffCursor<K, V> getDiffCursor(long toVersion) {
-		Cursor<K, V> fromCursor = this.getCursor();
+		Cursor<K, V> fromCursor = this.getAll();
 		VersionedMap<K, V> toMap = this.store.createMap(toVersion);
-		Cursor<K, V> toCursor = toMap.getCursor();
+		Cursor<K, V> toCursor = toMap.getAll();
 		return new MapDiffCursor<>(this.hashProvider,this.defaultValue, fromCursor, toCursor);
 		
 	}

@@ -63,8 +63,8 @@ public class MapTestEnvironment<K, V> {
 	public static <K, V> void compareTwoMaps(String title, VersionedMapImpl<K, V> map1,
 			VersionedMapImpl<K, V> map2, List<Throwable> errors) {
 		// 1. Comparing cursors.
-		Cursor<K, V> cursor1 = map1.getCursor();
-		Cursor<K, V> cursor2 = map2.getCursor();
+		Cursor<K, V> cursor1 = map1.getAll();
+		Cursor<K, V> cursor2 = map2.getAll();
 		while (!cursor1.isTerminated()) {
 			if (cursor2.isTerminated()) {
 				fail("cursor 2 terminated before cursor1");
@@ -136,7 +136,7 @@ public class MapTestEnvironment<K, V> {
 		// <key,value> pair.
 		// Tests iterators
 		int elementsInSutEntrySet = 0;
-		Cursor<K, V> cursor = sut.getCursor();
+		Cursor<K, V> cursor = sut.getAll();
 		while (cursor.move()) {
 			elementsInSutEntrySet++;
 			K key = cursor.getKey();
@@ -164,7 +164,7 @@ public class MapTestEnvironment<K, V> {
 
 	public static <K,V> void checkOrder(String scenario, VersionedMap<K,V> versionedMap) {
 		K previous = null;
-		Cursor<K, V> cursor = versionedMap.getCursor();
+		Cursor<K, V> cursor = versionedMap.getAll();
 		while(cursor.move()) {
 			System.out.println(cursor.getKey() + " " + ((VersionedMapImpl<K, V>) versionedMap).getHashProvider().getHash(cursor.getKey(), 0));
 			if(previous != null) {
@@ -178,7 +178,7 @@ public class MapTestEnvironment<K, V> {
 
 	public void printComparison() {
 		System.out.println("SUT:");
-		printEntrySet(sut.getCursor());
+		printEntrySet(sut.getAll());
 		System.out.println("Oracle:");
 		printEntrySet(oracle.entrySet().iterator());
 	}

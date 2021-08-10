@@ -127,8 +127,8 @@ public class VersionedMapStoreImpl<K, V> implements VersionedMapStore<K, V> {
 	public DiffCursor<K, V> getDiffCursor(long fromState, long toState) {
 		VersionedMap<K, V> map1 = createMap(fromState);
 		VersionedMap<K, V> map2 = createMap(toState);
-		Cursor<K, V> cursor1 = map1.getCursor();
-		Cursor<K, V> cursor2 = map2.getCursor();
+		Cursor<K, V> cursor1 = map1.getAll();
+		Cursor<K, V> cursor2 = map2.getAll();
 		return new MapDiffCursor<>(this.hashProvider, this.defaultValue, cursor1, cursor2);
 	}
 }

@@ -53,7 +53,7 @@ public class ModelImpl implements Model {
 
 	@Override
 	public <K, V> Cursor<K, V> getAll(DataRepresentation<K, V> representation) {
-		return getMap(representation).getCursor();
+		return getMap(representation).getAll();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class ModelImpl implements Model {
 
 	private <K, V> MapDiffCursor<K, V> constructDiffCursor(Model toModel, DataRepresentation<K, V> representation) {
 		@SuppressWarnings("unchecked")
-		Cursor<K, V> fromCursor = (Cursor<K, V>) this.maps.get(representation).getCursor();
+		Cursor<K, V> fromCursor = (Cursor<K, V>) this.maps.get(representation).getAll();
 		Cursor<K, V> toCursor = toModel.getAll(representation);
 
 		ContinousHashProvider<K> hashProvider = representation.getHashProvider();
