@@ -4,12 +4,17 @@ import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.TupleHashProvider;
 import org.eclipse.viatra.solver.data.model.symbols.Symbol;
 
-public class SymbolRepresentation <D> extends DataRepresentation<Tuple,D> {
+public class RelationRepresentation <D> extends DataRepresentation<Tuple,D> {
 	private final Symbol symbol;
 
-	public SymbolRepresentation(Symbol symbol,Class<D> domain, D defaultValue) {
+	public RelationRepresentation(Symbol symbol,Class<D> domain, D defaultValue) {
 		super(Tuple.class,TupleHashProvider.singleton(),domain,defaultValue);
 		this.symbol = symbol;
+	}
+	
+	@Override
+	public String getName() {
+		return symbol.getName();
 	}
 
 	public Symbol getSymbol() {
@@ -20,4 +25,6 @@ public class SymbolRepresentation <D> extends DataRepresentation<Tuple,D> {
 	public boolean isValidKey(Tuple key) {
 		return key.getSize() == symbol.getArity();
 	}
+
+
 }

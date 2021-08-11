@@ -2,7 +2,7 @@ package org.eclipse.viatra.solver.data.model.representation;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 
-abstract public class DataRepresentation<K, V> {
+public abstract class DataRepresentation<K, V> {
 	protected final Class<K> keyClass;
 	protected final Class<V> valueClass;
 	protected final ContinousHashProvider<K> hashProvider;
@@ -15,6 +15,8 @@ abstract public class DataRepresentation<K, V> {
 		this.valueClass = valueClass;
 		this.defaultValue = defaultValue;
 	}
+	
+	public abstract String getName();
 	
 	public Class<K> getKeyClass() {
 		return keyClass;

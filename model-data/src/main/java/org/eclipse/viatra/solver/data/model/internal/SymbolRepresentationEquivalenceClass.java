@@ -4,14 +4,14 @@ import java.util.Objects;
 
 import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.model.Tuple;
-import org.eclipse.viatra.solver.data.model.representation.SymbolRepresentation;
+import org.eclipse.viatra.solver.data.model.representation.RelationRepresentation;
 
 public class SymbolRepresentationEquivalenceClass {
 	final ContinousHashProvider<Tuple> hashProvider;
 	final Class<?> domainClass;
 	final Object defaultValue;
 	final int arity;
-	public SymbolRepresentationEquivalenceClass(SymbolRepresentation<?> representation) {
+	public SymbolRepresentationEquivalenceClass(RelationRepresentation<?> representation) {
 		this.hashProvider = representation.getHashProvider();
 		this.domainClass = representation.getValueClass();
 		this.defaultValue = representation.getDefaultValue();
