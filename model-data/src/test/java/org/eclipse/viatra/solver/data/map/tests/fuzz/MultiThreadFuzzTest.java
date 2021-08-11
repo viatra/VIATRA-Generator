@@ -76,7 +76,7 @@ class MultiThreadFuzzTest {
 
 	static Stream<Arguments> parametrizedFastFuzz() {
 		return FuzzTestUtils.permutationWithSize(new Object[] { FuzzTestUtils.FAST_STEP_COUNT }, new Object[] { 3, 32, 32 * 32 },
-				new Object[] { 2, 3 }, new Object[] { 1, 10, 100 }, new Object[] { 1, 2, 3 },
+				new Object[] { 2, 3 }, new Object[] { 10, 100 }, new Object[] { 1, 2, 3 },
 				new Object[] { false, true });
 	}
 

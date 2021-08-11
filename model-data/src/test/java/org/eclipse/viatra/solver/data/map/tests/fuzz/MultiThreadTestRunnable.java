@@ -1,11 +1,13 @@
 package org.eclipse.viatra.solver.data.map.tests.fuzz;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.internal.VersionedMapImpl;
@@ -68,6 +70,7 @@ public class MultiThreadTestRunnable implements Runnable {
 		// 2. create a non-versioned 
 		VersionedMapImpl<Integer, String> reference = (VersionedMapImpl<Integer, String>) store.createMap();
 		r = new Random(seed);
+		Random r2 = new Random(seed+1);
 
 		for (int i = 0; i < steps; i++) {
 			int index = i + 1;
@@ -80,19 +83,19 @@ public class MultiThreadTestRunnable implements Runnable {
 				logAndThrowError(scenario + ":" + index + ": exception happened: " + exception);
 			}
 			// go back to an existing state and compare to the reference
-			if (index % (commitFrequency*2) == 0) {
+			if (index % (commitFrequency) == 0) {
 				versioned.restore(index2Version.get(i));
 				MapTestEnvironment.compareTwoMaps(scenario + ":" + index, reference, versioned,errors);
 				
 				// go back to a random state (probably created by another thread)
+				List<Long> states = new ArrayList<>(store.getStates());
+				Collections.shuffle(states, r2);
+				for(Long state : states.subList(0, Math.min(states.size(), 100))) {
+					versioned.restore(state);
+				}
+				versioned.restore(index2Version.get(i));
 			}
 
-			else if(index % (commitFrequency*2) == commitFrequency) {
-				ArrayList<Long> states = new ArrayList<Long>(store.getStates());
-				long selectedState = states.get(r.nextInt(states.size()));
-				versioned.restore(selectedState);
-			}
-			
 			MapTestEnvironment.printStatus(scenario, index, steps, "comparison");
 		}
 	}
