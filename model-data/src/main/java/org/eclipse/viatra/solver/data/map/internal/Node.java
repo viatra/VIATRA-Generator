@@ -58,7 +58,7 @@ public abstract class Node<K,V>{
 	
 	
 	public abstract V getValue(K key, ContinousHashProvider<? super K> hashProvider, V defaultValue,  int hash, int depth);
-	public abstract Node<K,V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth);
+	public abstract Node<K,V> putValue(K key, V value, OldValueBox<V> old, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth);
 	public abstract long getSize();
 	
 	abstract MutableNode<K, V> toMutable();

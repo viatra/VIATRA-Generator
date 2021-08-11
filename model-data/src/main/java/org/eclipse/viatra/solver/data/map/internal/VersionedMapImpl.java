@@ -24,6 +24,8 @@ public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 	protected final V defaultValue;
 	protected Node<K,V> root;
 	
+	private OldValueBox<V> oldValueBox = new OldValueBox<>();
+	
 	public VersionedMapImpl(
 			VersionedMapStoreImpl<K,V> store,
 			ContinousHashProvider<K> hashProvider,
@@ -52,11 +54,13 @@ public class VersionedMapImpl<K,V> implements VersionedMap<K,V>{
 		return hashProvider;
 	}
 	@Override
-	public void put(K key, V value) {
+	public V put(K key, V value) {
 		if(root!=null) {
-			root = root.putValue(key, value, hashProvider, defaultValue, hashProvider.getHash(key, 0), 0);
+			root = root.putValue(key, value, oldValueBox, hashProvider, defaultValue, hashProvider.getHash(key, 0), 0);
+			return oldValueBox.getOldValue();
 		} else {
 			root = MutableNode.initialize(key, value, hashProvider, defaultValue);
+			return defaultValue;
 		}
 	}
 	

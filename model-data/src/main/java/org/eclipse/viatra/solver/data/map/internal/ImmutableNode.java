@@ -129,7 +129,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Node<K,V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth) {
+	public Node<K,V> putValue(K key, V value, OldValueBox<V> oldValue, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash, int depth) {
 		int selectedHashFragment = hashFragment(hash,shiftDepth(depth));
 		int bitposition = 1 << selectedHashFragment;
 		if((dataMap & bitposition) != 0) {
@@ -139,23 +139,25 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 				if(value == defaultValue) {
 					// delete
 					MutableNode<K, V> mutable = this.toMutable();
-					return mutable.removeEntry(selectedHashFragment);
+					return mutable.removeEntry(selectedHashFragment,oldValue);
 				} else if(value == content[keyIndex+1]) {
 					// dont change
+					oldValue.setOldValue(value);
 					return this;
 				} else {
 					// update existing value
 					MutableNode<K, V> mutable = this.toMutable();
-					return mutable.updateValue(value, selectedHashFragment);
+					return mutable.updateValue(value, oldValue, selectedHashFragment);
 				}
 			} else {
 				if(value == defaultValue) {
 					// dont change
+					oldValue.setOldValue(defaultValue);
 					return this;
 				} else {
 					// add new key + value
 					MutableNode<K, V> mutable = this.toMutable();
-					return mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
+					return mutable.putValue(key, value, oldValue, hashProvider, defaultValue, hash, depth);
 				}
 			}
 		} else if((nodeMap & bitposition)!=0) {
@@ -164,7 +166,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 			ImmutableNode<K,V> subNode = (ImmutableNode<K,V>) content[keyIndex];
 			int newDepth = depth+1;
 			int newHash = newHash(hashProvider, key, hash, newDepth);
-			Node<K,V> newsubNode = subNode.putValue(key, value, hashProvider, defaultValue, newHash, newDepth);
+			Node<K,V> newsubNode = subNode.putValue(key, value, oldValue, hashProvider, defaultValue, newHash, newDepth);
 			
 			if(subNode == newsubNode) {
 				// nothing changed
@@ -176,7 +178,7 @@ public class ImmutableNode<K, V> extends Node<K, V> {
 		} else {
 			// add new key + value
 			MutableNode<K, V> mutable = this.toMutable();
-			return mutable.putValue(key, value, hashProvider, defaultValue, hash, depth);
+			return mutable.putValue(key, value, oldValue, hashProvider, defaultValue, hash, depth);
 		}
 	}
 	

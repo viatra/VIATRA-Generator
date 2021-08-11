@@ -77,7 +77,7 @@ public class MutableNode<K, V> extends Node<K, V> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Node<K, V> putValue(K key, V value, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash,
+	public Node<K, V> putValue(K key, V value, OldValueBox<V> oldValue, ContinousHashProvider<? super K> hashProvider, V defaultValue, int hash,
 			int depth) {
 		int selectedHashFragment = hashFragment(hash, shiftDepth(depth));
 		K keyCandidate = (K) content[2 * selectedHashFragment];
@@ -86,18 +86,20 @@ public class MutableNode<K, V> extends Node<K, V> {
 			if (keyCandidate.equals(key)) {
 				// The key is equals to an existing key -> update entry
 				if (value == defaultValue) {
-					return removeEntry(selectedHashFragment);
+					return removeEntry(selectedHashFragment, oldValue);
 				} else {
-					return updateValue(value, selectedHashFragment);
+					return updateValue(value, oldValue, selectedHashFragment);
 				}
 			} else {
 				// The key is not equivalent to an existing key on the same hash bin
 				// -> split entry if it is necessary
 				if (value == defaultValue) {
 					// Value is default -> do not need to add new node
+					oldValue.setOldValue(defaultValue);
 					return this;
 				} else {
 					// Value is not default -> Split entry data to a new node
+					oldValue.setOldValue(defaultValue);
 					return moveDownAndSplit(hashProvider, key, value, keyCandidate, hash, depth, selectedHashFragment);
 				}
 			}
@@ -106,24 +108,27 @@ public class MutableNode<K, V> extends Node<K, V> {
 			Node<K, V> nodeCandidate = (Node<K, V>) content[2 * selectedHashFragment + 1];
 			if (nodeCandidate != null) {
 				// If it has value, it is a subnode -> upate that
-				Node<K, V> newNode = nodeCandidate.putValue(key, value, hashProvider, defaultValue,
+				Node<K, V> newNode = nodeCandidate.putValue(key, value, oldValue, hashProvider, defaultValue,
 						newHash(hashProvider, key, hash, depth + 1), depth + 1);
 				return updateWithSubNode(selectedHashFragment, newNode, value.equals(defaultValue));
 			} else {
 				// If it does not have value, put it in the empty place
 				if (value == defaultValue) {
 					// dont need to add new key-value pair
+					oldValue.setOldValue(defaultValue);
 					return this;
 				} else {
-					return addEntry(key, value, selectedHashFragment);
+					return addEntry(key, value, oldValue, selectedHashFragment);
 				}
 
 			}
 		}
 	}
 
-	private Node<K, V> addEntry(K key, V value, int selectedHashFragment) {
+	@SuppressWarnings("unchecked")
+	private Node<K, V> addEntry(K key, V value, OldValueBox<V> oldValue, int selectedHashFragment) {
 		content[2 * selectedHashFragment] = key;
+		oldValue.setOldValue((V) content[2 * selectedHashFragment + 1]);
 		content[2 * selectedHashFragment + 1] = value;
 		updateHash();
 		return this;
@@ -136,7 +141,9 @@ public class MutableNode<K, V> extends Node<K, V> {
 	 * @param selectedHashFragment
 	 * @return
 	 */
-	Node<K, V> updateValue(V value, int selectedHashFragment) {
+	@SuppressWarnings("unchecked")
+	Node<K, V> updateValue(V value, OldValueBox<V> oldValue, int selectedHashFragment) {
+		oldValue.setOldValue((V) content[2 * selectedHashFragment + 1]);
 		content[2 * selectedHashFragment + 1] = value;
 		updateHash();
 		return this;
@@ -247,8 +254,10 @@ public class MutableNode<K, V> extends Node<K, V> {
 		return subNode;
 	}
 
-	Node<K, V> removeEntry(int selectedHashFragment) {
+	@SuppressWarnings("unchecked")
+	Node<K, V> removeEntry(int selectedHashFragment, OldValueBox<V> oldValue) {
 		content[2 * selectedHashFragment] = null;
+		oldValue.setOldValue((V) content[2 * selectedHashFragment + 1]);
 		content[2 * selectedHashFragment + 1] = null;
 		if (hasContent()) {
 			updateHash();
