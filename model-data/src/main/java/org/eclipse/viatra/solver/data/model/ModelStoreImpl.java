@@ -106,7 +106,7 @@ public class ModelStoreImpl implements ModelStore {
 	public synchronized Set<Long> getStates() {
 		// if not empty, return first
 		for(VersionedMapStore<?, ?> store : stores.values()) {
-			return store.getStates();
+			return new HashSet<>(store.getStates());
 		}
 		// if empty
 		Set<Long> result = new HashSet<>();
