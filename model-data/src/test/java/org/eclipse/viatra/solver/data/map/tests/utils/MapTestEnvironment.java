@@ -103,11 +103,18 @@ public class MapTestEnvironment<K, V> {
 	}
 
 	public void put(K key, V value) {
-		sut.put(key, value);
+		V oldSutValue = sut.put(key, value);
+		V oldOracleValue;
 		if (value != sut.getDefaultValue()) {
-			oracle.put(key, value);
+			oldOracleValue = oracle.put(key, value);
 		} else {
-			oracle.remove(key);
+			oldOracleValue = oracle.remove(key);
+		}
+		if(oldSutValue == sut.getDefaultValue() && oldOracleValue != null) {
+			fail("After put, SUT old value was default, but oracle old walue was " + oldOracleValue);
+		}
+		if(oldSutValue != sut.getDefaultValue()) {
+			assertEquals(oldOracleValue, oldSutValue);
 		}
 	}
 
