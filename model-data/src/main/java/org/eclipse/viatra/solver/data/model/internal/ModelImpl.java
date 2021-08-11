@@ -57,8 +57,8 @@ public class ModelImpl implements Model {
 	}
 
 	@Override
-	public <K, V> void put(DataRepresentation<K, V> representation, K key, V value) {
-		getMapValidateKey(representation, key).put(key, value);
+	public <K, V> V put(DataRepresentation<K, V> representation, K key, V value) {
+		return getMapValidateKey(representation, key).put(key, value);
 	}
 
 	@Override

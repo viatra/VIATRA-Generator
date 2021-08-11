@@ -12,7 +12,7 @@ public interface Model extends Versioned{
 	
 	<K,V> V get(DataRepresentation<K,V> representation, K key);
 	<K,V> Cursor<K,V> getAll(DataRepresentation<K,V> representation);
-	<K,V> void put(DataRepresentation<K,V> representation, K key, V value);
+	<K,V> V put(DataRepresentation<K,V> representation, K key, V value);
 	<K,V> void putAll(DataRepresentation<K,V> representation, Cursor<K,V> cursor);
 	<K,V> long getSize(DataRepresentation<K,V> representation);
 	
