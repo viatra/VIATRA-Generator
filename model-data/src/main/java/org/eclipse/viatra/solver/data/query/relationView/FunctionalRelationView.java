@@ -3,11 +3,11 @@ package org.eclipse.viatra.solver.data.query.relationView;
 import org.eclipse.viatra.solver.data.model.Model;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.Tuple.Tuple1;
-import org.eclipse.viatra.solver.data.model.representation.RelationRepresentation;
+import org.eclipse.viatra.solver.data.model.representation.Relation;
 
 public class FunctionalRelationView<D> extends RelationView<D> {
 
-	protected FunctionalRelationView(Model model, RelationRepresentation<D> representation) {
+	protected FunctionalRelationView(Model model, Relation<D> representation) {
 		super(model, representation);
 	}
 

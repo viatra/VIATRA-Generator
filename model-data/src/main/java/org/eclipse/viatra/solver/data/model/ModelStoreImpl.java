@@ -15,9 +15,9 @@ import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.model.internal.ModelImpl;
 import org.eclipse.viatra.solver.data.model.internal.SymbolRepresentationEquivalenceClass;
-import org.eclipse.viatra.solver.data.model.representation.AuxilaryDataRepresentation;
+import org.eclipse.viatra.solver.data.model.representation.AuxilaryData;
 import org.eclipse.viatra.solver.data.model.representation.DataRepresentation;
-import org.eclipse.viatra.solver.data.model.representation.RelationRepresentation;
+import org.eclipse.viatra.solver.data.model.representation.Relation;
 
 public class ModelStoreImpl implements ModelStore {
 
@@ -31,14 +31,14 @@ public class ModelStoreImpl implements ModelStore {
 			Set<DataRepresentation<?, ?>> dataRepresentations) {
 		Map<DataRepresentation<?, ?>, VersionedMapStore<?, ?>> result = new HashMap<>();
 
-		Map<SymbolRepresentationEquivalenceClass, List<RelationRepresentation<?>>> symbolRepresentationsPerHashPerArity = new HashMap<>();
+		Map<SymbolRepresentationEquivalenceClass, List<Relation<?>>> symbolRepresentationsPerHashPerArity = new HashMap<>();
 
 		for (DataRepresentation<?, ?> dataRepresentation : dataRepresentations) {
-			if (dataRepresentation instanceof RelationRepresentation<?>) {
-				RelationRepresentation<?> symbolRepresentation = (RelationRepresentation<?>) dataRepresentation;
+			if (dataRepresentation instanceof Relation<?>) {
+				Relation<?> symbolRepresentation = (Relation<?>) dataRepresentation;
 				addOrCreate(symbolRepresentationsPerHashPerArity,
 						new SymbolRepresentationEquivalenceClass(symbolRepresentation), symbolRepresentation);
-			} else if (dataRepresentation instanceof AuxilaryDataRepresentation<?, ?>) {
+			} else if (dataRepresentation instanceof AuxilaryData<?, ?>) {
 				VersionedMapStoreImpl<?, ?> store = new VersionedMapStoreImpl<>(dataRepresentation.getHashProvider(),
 						dataRepresentation.getDefaultValue());
 				result.put(dataRepresentation, store);
@@ -47,7 +47,7 @@ public class ModelStoreImpl implements ModelStore {
 						"Model store does not have strategy to use " + dataRepresentation.getClass() + "!");
 			}
 		}
-		for (List<RelationRepresentation<?>> symbolGroup : symbolRepresentationsPerHashPerArity.values()) {
+		for (List<Relation<?>> symbolGroup : symbolRepresentationsPerHashPerArity.values()) {
 			initRepresentationGroup(result, symbolGroup);
 		}
 
@@ -55,7 +55,7 @@ public class ModelStoreImpl implements ModelStore {
 	}
 
 	private void initRepresentationGroup(Map<DataRepresentation<?, ?>, VersionedMapStore<?, ?>> result,
-			List<RelationRepresentation<?>> symbolGroup) {
+			List<Relation<?>> symbolGroup) {
 		final ContinousHashProvider<Tuple> hashProvider = symbolGroup.get(0).getHashProvider();
 		final Object defaultValue = symbolGroup.get(0).getDefaultValue();
 		

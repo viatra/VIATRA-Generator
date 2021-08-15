@@ -3,19 +3,19 @@ package org.eclipse.viatra.solver.data.query.relationView;
 import org.eclipse.viatra.solver.data.map.CursorAsIterator;
 import org.eclipse.viatra.solver.data.model.Model;
 import org.eclipse.viatra.solver.data.model.Tuple;
-import org.eclipse.viatra.solver.data.model.representation.RelationRepresentation;
+import org.eclipse.viatra.solver.data.model.representation.Relation;
 
 /**
- * Represents a view of a {@link RelationRepresentation} that can be queried.
+ * Represents a view of a {@link Relation} that can be queried.
  * @author Oszkar Semerath
  *
  * @param <D>
  */
 public abstract class RelationView<D>{
 	protected final Model model;
-	protected final RelationRepresentation<D> representation;
+	protected final Relation<D> representation;
 	
-	protected RelationView(Model model, RelationRepresentation<D> representation) {
+	protected RelationView(Model model, Relation<D> representation) {
 		this.model = model;
 		this.representation = representation;
 	}
@@ -23,7 +23,7 @@ public abstract class RelationView<D>{
 	public Model getModel() {
 		return model;
 	}
-	public RelationRepresentation<D> getRepresentation() {
+	public Relation<D> getRepresentation() {
 		return representation;
 	}
 	

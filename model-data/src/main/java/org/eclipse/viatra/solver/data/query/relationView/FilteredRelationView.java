@@ -3,11 +3,11 @@ package org.eclipse.viatra.solver.data.query.relationView;
 import org.eclipse.viatra.solver.data.model.Model;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.Tuple.Tuple1;
-import org.eclipse.viatra.solver.data.model.representation.RelationRepresentation;
+import org.eclipse.viatra.solver.data.model.representation.Relation;
 
 public abstract class FilteredRelationView<D> extends RelationView<D>{
 
-	protected FilteredRelationView(Model model, RelationRepresentation<D> representation) {
+	protected FilteredRelationView(Model model, Relation<D> representation) {
 		super(model, representation);
 	}
 	@Override

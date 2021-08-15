@@ -3,7 +3,7 @@ package org.eclipse.viatra.solver.data.model;
 import java.util.Arrays;
 
 public abstract class Tuple {
-	private static final int CustomTupleSize = 2;
+	private static final int CUSTOMTUPLESIZE = 2;
 	
 	public abstract int getSize();
 	public abstract int get(int element);
@@ -21,12 +21,15 @@ public abstract class Tuple {
 		b.append("]");
 		return b.toString();
 	}
+	public static Tuple1 of1(int value) {
+		return new Tuple1(value);
+	}
 	
 	public static Tuple of(int... values) {
 		if(values.length == 0) {
 			return new Tuple0();
 		} else if(values.length == 1) {
-			return new Tuple1(values[0]);
+			return of1(values[0]);
 		} else if(values.length == 2) {
 			return new Tuple2(values[0],values[1]);
 		} else return new TupleN(values);
@@ -104,7 +107,7 @@ public abstract class Tuple {
 	public static class TupleN extends Tuple{
 		final int[] values;
 		protected TupleN(int[] values) { 
-			if(values.length<CustomTupleSize)
+			if(values.length<CUSTOMTUPLESIZE)
 				throw new IllegalArgumentException();
 			this.values = Arrays.copyOf(values, values.length);
 		}
