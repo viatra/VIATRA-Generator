@@ -35,6 +35,6 @@ public abstract class FilteredRelationView<D> extends RelationView<D>{
 	
 	@Override
 	public int getArity() {
-		return this.representation.getSymbol().getArity();
+		return this.representation.getArity();
 	}
 }

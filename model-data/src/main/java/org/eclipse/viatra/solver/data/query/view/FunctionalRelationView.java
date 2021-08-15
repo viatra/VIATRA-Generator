@@ -45,6 +45,6 @@ public class FunctionalRelationView<D> extends RelationView<D> {
 	
 	@Override
 	public int getArity() {
-		return this.representation.getSymbol().getArity()+1;
+		return this.representation.getArity()+1;
 	}
 }

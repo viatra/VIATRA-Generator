@@ -2,27 +2,28 @@ package org.eclipse.viatra.solver.data.model.representation;
 
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.TupleHashProvider;
-import org.eclipse.viatra.solver.data.model.symbols.Symbol;
 
 public class Relation<D> extends DataRepresentation<Tuple, D> {
-	private final Symbol symbol;
+	private final String name;
+	private final int arity;
 
-	public Relation(Symbol symbol, Class<D> domain, D defaultValue) {
+	public Relation(String name, int arity, Class<D> domain, D defaultValue) {
 		super(Tuple.class, TupleHashProvider.singleton(), domain, defaultValue);
-		this.symbol = symbol;
+		this.name = name;
+		this.arity = arity;
 	}
 
 	@Override
 	public String getName() {
-		return symbol.getName();
+		return name;
 	}
 
-	public Symbol getSymbol() {
-		return symbol;
+	public int getArity() {
+		return arity;
 	}
 
 	@Override
 	public boolean isValidKey(Tuple key) {
-		return key.getSize() == symbol.getArity();
+		return key.getSize() == getArity();
 	}
 }
