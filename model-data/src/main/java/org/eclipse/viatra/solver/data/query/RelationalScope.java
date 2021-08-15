@@ -10,7 +10,7 @@ import org.eclipse.viatra.query.runtime.api.scope.QueryScope;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.query.internal.RelationUpdateListener;
 import org.eclipse.viatra.solver.data.query.internal.RelationalEngineContext;
-import org.eclipse.viatra.solver.data.query.relationView.RelationView;
+import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 public class RelationalScope extends QueryScope{
 	private final RelationUpdateListener updateListener;

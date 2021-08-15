@@ -8,7 +8,7 @@ import java.util.Set;
 import org.eclipse.viatra.query.runtime.matchers.context.IQueryRuntimeContextListener;
 import org.eclipse.viatra.query.runtime.matchers.tuple.ITuple;
 import org.eclipse.viatra.solver.data.model.Tuple;
-import org.eclipse.viatra.solver.data.query.relationView.RelationView;
+import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 public class RelationUpdateListener {
 	private final Map<RelationView<?>,Set<RelationUpdateListenerEntry<?>>> view2Listeners;

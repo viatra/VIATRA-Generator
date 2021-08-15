@@ -4,15 +4,16 @@ import java.util.Objects;
 import java.util.UUID;
 
 import org.eclipse.viatra.query.runtime.matchers.context.common.BaseInputKeyWrapper;
-import org.eclipse.viatra.solver.data.query.relationView.RelationView;
+import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 public class RelationViewKey<D> extends BaseInputKeyWrapper<RelationView<D>>{
 	private final String uniqueName;
+	private final int arity;
 	
-	
-	public RelationViewKey(RelationView<D> wrappedKey) {
+	public RelationViewKey(RelationView<D> wrappedKey, int arity) {
 		super(wrappedKey);
 		this.uniqueName = wrappedKey.getRepresentation().getName() + "-"+UUID.randomUUID();
+		this.arity = arity;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class RelationViewKey<D> extends BaseInputKeyWrapper<RelationView<D>>{
 
 	@Override
 	public int getArity() {
-		return wrappedKey.getRepresentation().getSymbol().getArity();
+		return arity;
 	}
 
 	@Override
