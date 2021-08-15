@@ -66,7 +66,7 @@ public final class CollectionsUtil {
 		};
 	}
 	
-	static <T> Iterable<T> filter(Iterable<T> source, Predicate<T> condition) {
+	public static <T> Iterable<T> filter(Iterable<T> source, Predicate<T> condition) {
 		return (()->filter(source.iterator(),condition));
 	}
 }
