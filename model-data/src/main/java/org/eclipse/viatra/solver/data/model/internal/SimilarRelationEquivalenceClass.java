@@ -6,16 +6,16 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.representation.Relation;
 
-public class SymbolRepresentationEquivalenceClass {
+public class SimilarRelationEquivalenceClass {
 	final ContinousHashProvider<Tuple> hashProvider;
 	final Class<?> domainClass;
 	final Object defaultValue;
 	final int arity;
-	public SymbolRepresentationEquivalenceClass(Relation<?> representation) {
+	public SimilarRelationEquivalenceClass(Relation<?> representation) {
 		this.hashProvider = representation.getHashProvider();
 		this.domainClass = representation.getValueClass();
 		this.defaultValue = representation.getDefaultValue();
-		this.arity = representation.getSymbol().getArity();
+		this.arity = representation.getArity();
 	}
 	@Override
 	public int hashCode() {
@@ -29,7 +29,7 @@ public class SymbolRepresentationEquivalenceClass {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SymbolRepresentationEquivalenceClass other = (SymbolRepresentationEquivalenceClass) obj;
+		SimilarRelationEquivalenceClass other = (SimilarRelationEquivalenceClass) obj;
 		return arity == other.arity && Objects.equals(defaultValue, other.defaultValue)
 				&& Objects.equals(domainClass, other.domainClass) && Objects.equals(hashProvider, other.hashProvider);
 	}

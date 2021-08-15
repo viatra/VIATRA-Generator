@@ -14,7 +14,7 @@ import org.eclipse.viatra.solver.data.map.VersionedMap;
 import org.eclipse.viatra.solver.data.map.VersionedMapStore;
 import org.eclipse.viatra.solver.data.map.VersionedMapStoreImpl;
 import org.eclipse.viatra.solver.data.model.internal.ModelImpl;
-import org.eclipse.viatra.solver.data.model.internal.SymbolRepresentationEquivalenceClass;
+import org.eclipse.viatra.solver.data.model.internal.SimilarRelationEquivalenceClass;
 import org.eclipse.viatra.solver.data.model.representation.AuxilaryData;
 import org.eclipse.viatra.solver.data.model.representation.DataRepresentation;
 import org.eclipse.viatra.solver.data.model.representation.Relation;
@@ -31,13 +31,13 @@ public class ModelStoreImpl implements ModelStore {
 			Set<DataRepresentation<?, ?>> dataRepresentations) {
 		Map<DataRepresentation<?, ?>, VersionedMapStore<?, ?>> result = new HashMap<>();
 
-		Map<SymbolRepresentationEquivalenceClass, List<Relation<?>>> symbolRepresentationsPerHashPerArity = new HashMap<>();
+		Map<SimilarRelationEquivalenceClass, List<Relation<?>>> symbolRepresentationsPerHashPerArity = new HashMap<>();
 
 		for (DataRepresentation<?, ?> dataRepresentation : dataRepresentations) {
 			if (dataRepresentation instanceof Relation<?>) {
 				Relation<?> symbolRepresentation = (Relation<?>) dataRepresentation;
 				addOrCreate(symbolRepresentationsPerHashPerArity,
-						new SymbolRepresentationEquivalenceClass(symbolRepresentation), symbolRepresentation);
+						new SimilarRelationEquivalenceClass(symbolRepresentation), symbolRepresentation);
 			} else if (dataRepresentation instanceof AuxilaryData<?, ?>) {
 				VersionedMapStoreImpl<?, ?> store = new VersionedMapStoreImpl<>(dataRepresentation.getHashProvider(),
 						dataRepresentation.getDefaultValue());
