@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.query.relationView;
+package org.eclipse.viatra.solver.data.query.view;
 
 import org.eclipse.viatra.solver.data.model.Model;
 import org.eclipse.viatra.solver.data.model.Tuple;
@@ -41,5 +41,10 @@ public class FunctionalRelationView<D> extends RelationView<D> {
 		}
 		result[t.getSize()] = value;
 		return result;
+	}
+	
+	@Override
+	public int getArity() {
+		return this.representation.getSymbol().getArity()+1;
 	}
 }
