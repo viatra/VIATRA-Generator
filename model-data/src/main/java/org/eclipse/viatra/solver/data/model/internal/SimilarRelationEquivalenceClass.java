@@ -8,29 +8,26 @@ import org.eclipse.viatra.solver.data.model.representation.Relation;
 
 public class SimilarRelationEquivalenceClass {
 	final ContinousHashProvider<Tuple> hashProvider;
-	final Class<?> domainClass;
 	final Object defaultValue;
 	final int arity;
 	public SimilarRelationEquivalenceClass(Relation<?> representation) {
 		this.hashProvider = representation.getHashProvider();
-		this.domainClass = representation.getValueClass();
 		this.defaultValue = representation.getDefaultValue();
 		this.arity = representation.getArity();
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(arity, defaultValue, domainClass, hashProvider);
+		return Objects.hash(arity, defaultValue, hashProvider);
 	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof SimilarRelationEquivalenceClass))
 			return false;
 		SimilarRelationEquivalenceClass other = (SimilarRelationEquivalenceClass) obj;
 		return arity == other.arity && Objects.equals(defaultValue, other.defaultValue)
-				&& Objects.equals(domainClass, other.domainClass) && Objects.equals(hashProvider, other.hashProvider);
+				&& Objects.equals(hashProvider, other.hashProvider);
 	}
+	
 }

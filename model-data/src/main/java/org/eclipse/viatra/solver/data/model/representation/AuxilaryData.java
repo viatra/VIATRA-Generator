@@ -5,9 +5,8 @@ import org.eclipse.viatra.solver.data.map.ContinousHashProvider;
 public class AuxilaryData<K,V> extends DataRepresentation<K, V> {
 	private final String name;
 
-	public AuxilaryData(String name, Class<K> keyClass, ContinousHashProvider<K> hashProvider, Class<V> valueClass,
-			V defaultValue) {
-		super(keyClass, hashProvider, valueClass, defaultValue);
+	public AuxilaryData(String name, ContinousHashProvider<K> hashProvider,	V defaultValue) {
+		super(hashProvider, defaultValue);
 		this.name = name;
 	}
 	
