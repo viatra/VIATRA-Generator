@@ -1,13 +1,17 @@
 package org.eclipse.viatra.solver.data.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class Tuple {
 	private static final int CUSTOMTUPLESIZE = 2;
+	protected static final List<Tuple1> tuple1Cash = new ArrayList<>(1024);
 	
 	public abstract int getSize();
 	public abstract int get(int element);
 	public abstract int[] toArray();
+	
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
@@ -21,8 +25,18 @@ public abstract class Tuple {
 		b.append("]");
 		return b.toString();
 	}
+	
 	public static Tuple1 of1(int value) {
-		return new Tuple1(value);
+		if(value < tuple1Cash.size()) {
+			return tuple1Cash.get(value);
+		} else {
+			Tuple1 newlyCreated = null;
+			while(value >= tuple1Cash.size()) {
+				newlyCreated = new Tuple1(tuple1Cash.size());
+				tuple1Cash.add(newlyCreated);
+			}
+			return newlyCreated;
+		}
 	}
 	
 	public static Tuple of(int... values) {
