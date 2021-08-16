@@ -1,3 +1,5 @@
+apply plugin: 'jacoco'
+
 dependencies {
 	testCompile "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
 	testRuntime "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
@@ -14,3 +16,6 @@ test {
 task slowTest(type: Test) {
 	useJUnitPlatform()
 }
+
+test.finalizedBy(jacocoTestReport)
+jacocoTestReport.dependsOn(test)

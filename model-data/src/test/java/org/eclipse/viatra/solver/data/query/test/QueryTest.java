@@ -40,17 +40,16 @@ class QueryTest {
 		RelationView<Boolean> persionView = new TupleRelationView(model, person);
 
 		RelationalScope scope = new RelationalScope(Set.of(persionView));
-		
+
 		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
-			.addParameter("p",persionView)
-			.addConstraint(persionView, "p").build();
-		
+				.addParameter("p", persionView).addConstraint(persionView, "p").build();
+
 		ViatraQueryEngine engine = AdvancedViatraQueryEngine.on(scope);
 		GenericPatternMatcher personMatcher = engine.getMatcher(personQuery);
-		
+
 		assertEquals(2, personMatcher.countMatches());
 	}
-	
+
 	void modelBuildingTest() {
 		Relation<Boolean> person = new Relation<>("Person", 1, false);
 		Relation<Integer> age = new Relation<Integer>("age", 1, null);
@@ -78,15 +77,14 @@ class QueryTest {
 		RelationView<TruthValue> friendMayView = new FilteredRelationView<TruthValue>(model, friend, (k, v) -> v.may());
 
 		RelationalScope scope = new RelationalScope(Set.of(persionView, ageView, friendMustView, friendMayView));
-		
+
 		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
-			.addParameter("p",persionView)
-			.addConstraint(persionView, "p").build();
-		
+				.addParameter("p", persionView).addConstraint(persionView, "p").build();
+
 		ViatraQueryEngine engine = AdvancedViatraQueryEngine.on(scope);
 		GenericPatternMatcher personMatcher = engine.getMatcher(personQuery);
 		Collection<GenericPatternMatch> personMatches = personMatcher.getAllMatches();
-		for(GenericPatternMatch personMatch : personMatches) {
+		for (GenericPatternMatch personMatch : personMatches) {
 			System.out.println(personMatch);
 		}
 	}
