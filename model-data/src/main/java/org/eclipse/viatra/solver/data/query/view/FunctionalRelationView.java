@@ -7,7 +7,7 @@ import org.eclipse.viatra.solver.data.model.representation.Relation;
 
 public class FunctionalRelationView<D> extends RelationView<D> {
 
-	protected FunctionalRelationView(Model model, Relation<D> representation) {
+	public FunctionalRelationView(Model model, Relation<D> representation) {
 		super(model, representation);
 	}
 

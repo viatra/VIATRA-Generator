@@ -1,14 +1,18 @@
 package org.eclipse.viatra.solver.data.query.view;
 
+import java.util.function.BiPredicate;
+
 import org.eclipse.viatra.solver.data.model.Model;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.Tuple.Tuple1;
 import org.eclipse.viatra.solver.data.model.representation.Relation;
 
-public abstract class FilteredRelationView<D> extends RelationView<D>{
+public class FilteredRelationView<D> extends RelationView<D>{
+	private final BiPredicate<Tuple,D> predicate;
 
-	protected FilteredRelationView(Model model, Relation<D> representation) {
+	public FilteredRelationView(Model model, Relation<D> representation, BiPredicate<Tuple,D> predicate) {
 		super(model, representation);
+		this.predicate = predicate;
 	}
 	@Override
 	protected Object[] forwardMap(Tuple key, D value) {
@@ -36,5 +40,9 @@ public abstract class FilteredRelationView<D> extends RelationView<D>{
 	@Override
 	public int getArity() {
 		return this.representation.getArity();
+	}
+	@Override
+	protected boolean filter(Tuple key, D value) {
+		return this.predicate.test(key, value);
 	}
 }

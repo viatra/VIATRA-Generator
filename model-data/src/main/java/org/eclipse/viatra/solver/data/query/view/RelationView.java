@@ -15,11 +15,12 @@ import org.eclipse.viatra.solver.data.query.internal.RelationViewKey;
 public abstract class RelationView<D>{
 	protected final Model model;
 	protected final Relation<D> representation;
-	RelationViewKey<D> key = new RelationViewKey<>(this, getArity());
+	private final RelationViewKey<D> key;
 	
 	protected RelationView(Model model, Relation<D> representation) {
 		this.model = model;
 		this.representation = representation;
+		key = new RelationViewKey<>(this, getArity());
 	}
 	
 	public Model getModel() {
