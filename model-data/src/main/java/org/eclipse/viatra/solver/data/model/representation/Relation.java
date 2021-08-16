@@ -24,6 +24,8 @@ public class Relation<D> extends DataRepresentation<Tuple, D> {
 
 	@Override
 	public boolean isValidKey(Tuple key) {
-		return key.getSize() == getArity();
+		if(key == null) {
+			return false;
+		} else return key.getSize() == getArity();
 	}
 }
