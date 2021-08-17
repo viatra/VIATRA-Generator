@@ -11,7 +11,7 @@ public class FilteredRelationView<D> extends RelationView<D>{
 	private final BiPredicate<Tuple,D> predicate;
 
 	public FilteredRelationView(Model model, Relation<D> representation, BiPredicate<Tuple,D> predicate) {
-		super(model, representation);
+		super(representation);
 		this.predicate = predicate;
 	}
 	@Override
@@ -19,13 +19,13 @@ public class FilteredRelationView<D> extends RelationView<D>{
 		return toTuple1Array(key);
 	}
 	@Override
-	public boolean get(Object[] tuple) {
+	public boolean get(Model model, Object[] tuple) {
 		int[] content = new int[tuple.length];
 		for(int i = 0; i<tuple.length; i++) {
 			content[i] =((Tuple1)tuple[i]).get(0);
 		}
 		Tuple key = Tuple.of(content);
-		D value = this.model.get(representation, key);
+		D value = model.get(representation, key);
 		return filter(key, value);
 	}
 	

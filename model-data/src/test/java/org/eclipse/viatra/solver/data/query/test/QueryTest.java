@@ -39,7 +39,7 @@ class QueryTest {
 
 		RelationView<Boolean> persionView = new TupleRelationView(model, person);
 
-		RelationalScope scope = new RelationalScope(Set.of(persionView));
+		RelationalScope scope = new RelationalScope(model,Set.of(persionView));
 
 		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
 				.addParameter("p", persionView).addConstraint(persionView, "p").build();
@@ -76,7 +76,7 @@ class QueryTest {
 				(k, v) -> v.must());
 		RelationView<TruthValue> friendMayView = new FilteredRelationView<TruthValue>(model, friend, (k, v) -> v.may());
 
-		RelationalScope scope = new RelationalScope(Set.of(persionView, ageView, friendMustView, friendMayView));
+		RelationalScope scope = new RelationalScope(model,Set.of(persionView, ageView, friendMustView, friendMayView));
 
 		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
 				.addParameter("p", persionView).addConstraint(persionView, "p").build();

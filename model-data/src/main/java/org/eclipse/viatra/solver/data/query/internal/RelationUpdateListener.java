@@ -19,18 +19,18 @@ public class RelationUpdateListener {
 			view2Listeners.put(relationView, new HashSet<>());
 		}
 	}
-	public boolean containsRelationalView(RelationViewKey<?> relationalKey) {
+	public boolean containsRelationalView(RelationView<?> relationalKey) {
 		RelationView<?> relationView = relationalKey.getWrappedKey();
 		return view2Listeners.containsKey(relationView);
 	}
-	public void addListener(RelationViewKey<?> relationalKey, ITuple seed, IQueryRuntimeContextListener listener) {
+	public void addListener(RelationView<?> relationalKey, ITuple seed, IQueryRuntimeContextListener listener) {
 		RelationView<?> relationView = relationalKey.getWrappedKey();
 		if(view2Listeners.containsKey(relationView)) {
 			RelationUpdateListenerEntry<?> entry = new RelationUpdateListenerEntry<>(relationalKey, seed, listener);
 			view2Listeners.get(relationView).add(entry);
 		} else throw new IllegalArgumentException();
 	}
-	public void removeListener(RelationViewKey<?> relationalKey, ITuple seed, IQueryRuntimeContextListener listener) {
+	public void removeListener(RelationView<?> relationalKey, ITuple seed, IQueryRuntimeContextListener listener) {
 		RelationView<?> relationView = relationalKey.getWrappedKey();
 		if(view2Listeners.containsKey(relationView)) {
 			RelationUpdateListenerEntry<?> entry = new RelationUpdateListenerEntry<>(relationalKey, seed, listener);

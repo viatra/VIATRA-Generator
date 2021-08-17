@@ -7,15 +7,18 @@ import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.scope.IEngineContext;
 import org.eclipse.viatra.query.runtime.api.scope.IIndexingErrorListener;
 import org.eclipse.viatra.query.runtime.api.scope.QueryScope;
+import org.eclipse.viatra.solver.data.model.Model;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.query.internal.RelationUpdateListener;
 import org.eclipse.viatra.solver.data.query.internal.RelationalEngineContext;
 import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 public class RelationalScope extends QueryScope{
+	private final Model model;
 	private final RelationUpdateListener updateListener;
 	
-	public RelationalScope(Set<RelationView<?>> relationViews) {
+	public RelationalScope(Model model, Set<RelationView<?>> relationViews) {
+		this.model = model;
 		updateListener = new RelationUpdateListener(relationViews);
 	}
 	
@@ -26,6 +29,6 @@ public class RelationalScope extends QueryScope{
 	@Override
 	protected IEngineContext createEngineContext(ViatraQueryEngine engine, IIndexingErrorListener errorListener,
 			Logger logger) {
-		return new RelationalEngineContext(this.updateListener);
+		return new RelationalEngineContext(model, updateListener);
 	}
 }

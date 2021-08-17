@@ -19,12 +19,16 @@ import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.TupleMask;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.matchers.util.Accuracy;
+import org.eclipse.viatra.solver.data.model.Model;
+import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 public class RelationalRuntimeContext implements IQueryRuntimeContext {
 	private final RelationalQueryMetaContext metaContext = new RelationalQueryMetaContext();
 	private final RelationUpdateListener relationUpdateListener;
+	private final Model model;
 	
-	public RelationalRuntimeContext(RelationUpdateListener relationUpdateListener) {
+	public RelationalRuntimeContext(Model model, RelationUpdateListener relationUpdateListener) {
+		this.model = model;
 		this.relationUpdateListener = relationUpdateListener;
 	}
 	
@@ -53,8 +57,8 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 
 	@Override
 	public boolean isIndexed(IInputKey key, IndexingService service) {
-		if(key instanceof RelationViewKey<?>) {
-			RelationViewKey<?> relationalKey = (RelationViewKey<?>) key;
+		if(key instanceof RelationView<?>) {
+			RelationView<?> relationalKey = (RelationView<?>) key;
 			return this.relationUpdateListener.containsRelationalView(relationalKey);
 		} else {
 			return false;
@@ -68,9 +72,9 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 		}
 	}
 	
-	RelationViewKey<?> checkKey(IInputKey key) {
-		if(key instanceof RelationViewKey) {
-			RelationViewKey<?> relationViewKey = (RelationViewKey<?>) key;
+	RelationView<?> checkKey(IInputKey key) {
+		if(key instanceof RelationView) {
+			RelationView<?> relationViewKey = (RelationView<?>) key;
 			if(relationUpdateListener.containsRelationalView(relationViewKey)) {
 				return relationViewKey;
 			} else {
@@ -83,8 +87,8 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 	
 	@Override
 	public int countTuples(IInputKey key, TupleMask seedMask, ITuple seed) {
-		RelationViewKey<?> relationalViewKey = checkKey(key);
-		Iterable<Object[]> allObjects = relationalViewKey.getWrappedKey().getAll();
+		RelationView<?> relationalViewKey = checkKey(key);
+		Iterable<Object[]> allObjects = relationalViewKey.getAll(model);
 		Iterable<Object[]> filteredBySeed = filter(allObjects,objectArray -> isMatching(objectArray,seedMask,seed));
 		Iterator<Object[]> iterator = filteredBySeed.iterator();
 		int result = 0;
@@ -102,8 +106,8 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 
 	@Override
 	public Iterable<Tuple> enumerateTuples(IInputKey key, TupleMask seedMask, ITuple seed) {
-		RelationViewKey<?> relationalViewKey = checkKey(key);
-		Iterable<Object[]> allObjects = relationalViewKey.getWrappedKey().getAll();
+		RelationView<?> relationalViewKey = checkKey(key);
+		Iterable<Object[]> allObjects = relationalViewKey.getAll(model);
 		Iterable<Object[]> filteredBySeed = filter(allObjects,objectArray -> isMatching(objectArray,seedMask,seed));
 		return map(filteredBySeed,Tuples::flatTupleOf);
 	}
@@ -134,20 +138,20 @@ public class RelationalRuntimeContext implements IQueryRuntimeContext {
 
 	@Override
 	public boolean containsTuple(IInputKey key, ITuple seed) {
-		RelationViewKey<?> relationalViewKey = checkKey(key);
-		return relationalViewKey.getWrappedKey().get(seed.getElements());
+		RelationView<?> relationalViewKey = checkKey(key);
+		return relationalViewKey.get(model,seed.getElements());
 	}
 
 	@Override
 	public void addUpdateListener(IInputKey key, Tuple seed, IQueryRuntimeContextListener listener) {
-		RelationViewKey<?> relationalKey = checkKey(key);
+		RelationView<?> relationalKey = checkKey(key);
 		this.relationUpdateListener.addListener(relationalKey, seed, listener);
 		
 	}
 
 	@Override
 	public void removeUpdateListener(IInputKey key, Tuple seed, IQueryRuntimeContextListener listener) {
-		RelationViewKey<?> relationalKey = checkKey(key);
+		RelationView<?> relationalKey = checkKey(key);
 		this.relationUpdateListener.removeListener(relationalKey, seed, listener);
 	}
 

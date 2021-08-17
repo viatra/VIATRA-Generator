@@ -10,6 +10,7 @@ import java.util.Set;
 import org.eclipse.viatra.query.runtime.matchers.context.AbstractQueryMetaContext;
 import org.eclipse.viatra.query.runtime.matchers.context.IInputKey;
 import org.eclipse.viatra.query.runtime.matchers.context.InputKeyImplication;
+import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 /**
  * The meta context information for String scopes.
@@ -25,7 +26,7 @@ public final class RelationalQueryMetaContext extends AbstractQueryMetaContext {
 	@Override
 	public boolean isStateless(IInputKey key) {
         ensureValidKey(key);
-        return key instanceof RelationViewKey<?>;
+        return key instanceof RelationView<?>;
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public final class RelationalQueryMetaContext extends AbstractQueryMetaContext {
 	@Override
     public Map<Set<Integer>, Set<Integer>> getFunctionalDependencies(IInputKey key) {
         ensureValidKey(key);
-        if (key instanceof RelationViewKey) {
+        if (key instanceof RelationView) {
             return new HashMap<Set<Integer>, Set<Integer>>();
         } else {
             return Collections.emptyMap();
@@ -45,7 +46,7 @@ public final class RelationalQueryMetaContext extends AbstractQueryMetaContext {
     }
 
     public void ensureValidKey(IInputKey key) {
-        if (! (key instanceof RelationViewKey<?>))
+        if (! (key instanceof RelationView<?>))
             illegalInputKey(key);
     }
 

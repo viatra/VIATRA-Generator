@@ -7,13 +7,14 @@ import org.eclipse.viatra.query.runtime.matchers.context.IQueryRuntimeContextLis
 import org.eclipse.viatra.query.runtime.matchers.tuple.ITuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.solver.data.model.Tuple;
+import org.eclipse.viatra.solver.data.query.view.RelationView;
 
 public class RelationUpdateListenerEntry<D> {
-	final RelationViewKey<D> key;
+	final RelationView<D> key;
 	final ITuple filter;
 	final IQueryRuntimeContextListener listener;
 	
-	public RelationUpdateListenerEntry(RelationViewKey<D> key, ITuple filter, IQueryRuntimeContextListener listener) {
+	public RelationUpdateListenerEntry(RelationView<D> key, ITuple filter, IQueryRuntimeContextListener listener) {
 		super();
 		this.key = key;
 		this.filter = filter;

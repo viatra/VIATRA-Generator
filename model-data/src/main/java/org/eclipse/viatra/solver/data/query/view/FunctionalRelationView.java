@@ -8,7 +8,7 @@ import org.eclipse.viatra.solver.data.model.representation.Relation;
 public class FunctionalRelationView<D> extends RelationView<D> {
 
 	public FunctionalRelationView(Model model, Relation<D> representation) {
-		super(model, representation);
+		super(representation);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class FunctionalRelationView<D> extends RelationView<D> {
 	}
 
 	@Override
-	public boolean get(Object[] tuple) {
+	public boolean get(Model model, Object[] tuple) {
 		int[] content = new int[tuple.length-1];
 		for(int i = 0; i<tuple.length-1; i++) {
 			content[i] =((Tuple1)tuple[i]).get(0);
@@ -30,7 +30,7 @@ public class FunctionalRelationView<D> extends RelationView<D> {
 		Tuple key = Tuple.of(content);
 		@SuppressWarnings("unchecked")
 		D valueInTuple = (D) tuple[tuple.length-1];
-		D valueInMap = this.model.get(representation, key);
+		D valueInMap = model.get(representation, key);
 		return valueInTuple.equals(valueInMap);
 	}
 	
