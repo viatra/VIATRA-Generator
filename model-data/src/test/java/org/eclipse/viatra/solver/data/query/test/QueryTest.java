@@ -23,7 +23,7 @@ import org.eclipse.viatra.solver.data.query.RelationalScope;
 import org.eclipse.viatra.solver.data.query.view.FilteredRelationView;
 import org.eclipse.viatra.solver.data.query.view.FunctionalRelationView;
 import org.eclipse.viatra.solver.data.query.view.RelationView;
-import org.eclipse.viatra.solver.data.query.view.TupleRelationView;
+import org.eclipse.viatra.solver.data.query.view.KeyOnlyRelationView;
 import org.junit.jupiter.api.Test;
 
 class QueryTest {
@@ -31,7 +31,7 @@ class QueryTest {
 	void minimalTest() {
 		Relation<Boolean> person = new Relation<>("Person", 1, false);
 
-		RelationView<Boolean> persionView = new TupleRelationView(person);
+		RelationView<Boolean> persionView = new KeyOnlyRelationView(person);
 		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
 				.addParameter("p", persionView).addConstraint(persionView, "p").build();
 
@@ -69,7 +69,7 @@ class QueryTest {
 		assertTrue(model.get(person, Tuple.of(1)));
 		assertFalse(model.get(person, Tuple.of(2)));
 
-		RelationView<Boolean> persionView = new TupleRelationView(person);
+		RelationView<Boolean> persionView = new KeyOnlyRelationView(person);
 		RelationView<Integer> ageView = new FunctionalRelationView<>(age);
 		RelationView<TruthValue> friendMustView = new FilteredRelationView<TruthValue>(friend, (k, v) -> v.must());
 		RelationView<TruthValue> friendMayView = new FilteredRelationView<TruthValue>(friend, (k, v) -> v.may());
