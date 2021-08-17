@@ -31,18 +31,17 @@ class QueryTest {
 	void minimalTest() {
 		Relation<Boolean> person = new Relation<>("Person", 1, false);
 
+		RelationView<Boolean> persionView = new TupleRelationView(person);
+		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
+				.addParameter("p", persionView).addConstraint(persionView, "p").build();
+
 		ModelStore store = new ModelStoreImpl(Set.of(person));
 		Model model = store.createModel();
 
 		model.put(person, Tuple.of(0), true);
 		model.put(person, Tuple.of(1), true);
 
-		RelationView<Boolean> persionView = new TupleRelationView(model, person);
-
-		RelationalScope scope = new RelationalScope(model,Set.of(persionView));
-
-		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
-				.addParameter("p", persionView).addConstraint(persionView, "p").build();
+		RelationalScope scope = new RelationalScope(model, Set.of(persionView));
 
 		ViatraQueryEngine engine = AdvancedViatraQueryEngine.on(scope);
 		GenericPatternMatcher personMatcher = engine.getMatcher(personQuery);
@@ -70,13 +69,12 @@ class QueryTest {
 		assertTrue(model.get(person, Tuple.of(1)));
 		assertFalse(model.get(person, Tuple.of(2)));
 
-		RelationView<Boolean> persionView = new TupleRelationView(model, person);
-		RelationView<Integer> ageView = new FunctionalRelationView<>(model, age);
-		RelationView<TruthValue> friendMustView = new FilteredRelationView<TruthValue>(model, friend,
-				(k, v) -> v.must());
-		RelationView<TruthValue> friendMayView = new FilteredRelationView<TruthValue>(model, friend, (k, v) -> v.may());
+		RelationView<Boolean> persionView = new TupleRelationView(person);
+		RelationView<Integer> ageView = new FunctionalRelationView<>(age);
+		RelationView<TruthValue> friendMustView = new FilteredRelationView<TruthValue>(friend, (k, v) -> v.must());
+		RelationView<TruthValue> friendMayView = new FilteredRelationView<TruthValue>(friend, (k, v) -> v.may());
 
-		RelationalScope scope = new RelationalScope(model,Set.of(persionView, ageView, friendMustView, friendMayView));
+		RelationalScope scope = new RelationalScope(model, Set.of(persionView, ageView, friendMustView, friendMayView));
 
 		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
 				.addParameter("p", persionView).addConstraint(persionView, "p").build();
