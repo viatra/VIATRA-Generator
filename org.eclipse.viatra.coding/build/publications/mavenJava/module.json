@@ -1,0 +1,61 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.eclipse.viatra",
+    "module": "org.eclipse.viatra.coding",
+    "version": "0.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.1",
+      "buildId": "glqdqz76vna6nc2pgh6jxpbene"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "org.eclipse.viatra.coding-0.0.1.jar",
+          "url": "org.eclipse.viatra.coding-0.0.1.jar",
+          "size": 15736,
+          "sha512": "0d0481a2a0ad7d13209bb08dab93fcb622263e5aa72a9cfbce692cb40ba1fa52da28dd769581602518ef043dd2478f22ac54e94be49547d7952e96cda76cad1d",
+          "sha256": "d1dab31948bef224a75674a7ed4ced0080a8a59e9c41935ddbcd4556ee97f849",
+          "sha1": "6f9192cf8105539931e5d03579aef3226029a80c",
+          "md5": "784d4b5a60b73a91811a3a56b0b5c6d7"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "org.eclipse.viatra.coding-0.0.1.jar",
+          "url": "org.eclipse.viatra.coding-0.0.1.jar",
+          "size": 15736,
+          "sha512": "0d0481a2a0ad7d13209bb08dab93fcb622263e5aa72a9cfbce692cb40ba1fa52da28dd769581602518ef043dd2478f22ac54e94be49547d7952e96cda76cad1d",
+          "sha256": "d1dab31948bef224a75674a7ed4ced0080a8a59e9c41935ddbcd4556ee97f849",
+          "sha1": "6f9192cf8105539931e5d03579aef3226029a80c",
+          "md5": "784d4b5a60b73a91811a3a56b0b5c6d7"
+        }
+      ]
+    }
+  ]
+}

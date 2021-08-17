@@ -1,0 +1,34 @@
+plugins {
+    id "java"
+    id 'maven-publish'
+}
+
+
+group 'org.eclipse.viatra'
+version '0.0.1'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    minHeapSize = "2048m"
+    maxHeapSize = "4096m"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'org.eclipse.viatra'
+            artifactId = 'org.eclipse.viatra.coding'
+            version = '0.0.1'
+            from components.java
+        }
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
