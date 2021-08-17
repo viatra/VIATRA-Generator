@@ -10,7 +10,7 @@ import org.eclipse.viatra.solver.data.model.representation.Relation;
 public class FilteredRelationView<D> extends RelationView<D>{
 	private final BiPredicate<Tuple,D> predicate;
 
-	public FilteredRelationView(Model model, Relation<D> representation, BiPredicate<Tuple,D> predicate) {
+	public FilteredRelationView(Relation<D> representation, BiPredicate<Tuple,D> predicate) {
 		super(representation);
 		this.predicate = predicate;
 	}
