@@ -16,7 +16,6 @@ import org.eclipse.viatra.solver.language.model.problem.ProblemPackage;
 import org.eclipse.viatra.solver.language.model.problem.ReferenceDeclaration;
 import org.eclipse.viatra.solver.language.model.problem.Relation;
 import org.eclipse.viatra.solver.language.model.problem.Variable;
-import org.eclipse.viatra.solver.language.naming.NamingUtil;
 import org.eclipse.viatra.solver.language.scoping.ProblemGlobalScopeProvider;
 
 import com.google.common.collect.ImmutableList;
@@ -32,12 +31,10 @@ public final class ProblemUtil {
 		return variable.eContainingFeature() == ProblemPackage.Literals.VARIABLE_OR_NODE_ARGUMENT__SINGLETON_VARIABLE;
 	}
 
-	public static boolean isEnumLiteral(Node node) {
-		return node.eContainingFeature() == ProblemPackage.Literals.ENUM_DECLARATION__LITERALS;
-	}
-
-	public static boolean isEnumNode(Node node) {
-		return NamingUtil.isQuotedName(node.getName()) || isEnumLiteral(node);
+	public static boolean isUniqueNode(Node node) {
+		var containingFeature = node.eContainingFeature();
+		return containingFeature == ProblemPackage.Literals.UNIQUE_DECLARATION__NODES
+				|| containingFeature == ProblemPackage.Literals.ENUM_DECLARATION__LITERALS;
 	}
 
 	public static boolean isNewNode(Node node) {

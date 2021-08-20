@@ -64,12 +64,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//LogicValue"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//AssertionArgument" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//VariableOrNode"/>
   <eClassifiers xsi:type="ecore:EEnum" name="LogicValue">
     <eLiterals name="TRUE" literal="TRUE"/>
     <eLiterals name="FALSE" value="1"/>
     <eLiterals name="UNKNOWN" value="2"/>
+    <eLiterals name="ERROR" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopeDeclaration" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeScopes" upperBound="-1"
@@ -134,4 +137,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Constant"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UniqueDeclaration" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//Node" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WildcardAssertionArgument" eSuperTypes="#//AssertionArgument"/>
 </ecore:EPackage>

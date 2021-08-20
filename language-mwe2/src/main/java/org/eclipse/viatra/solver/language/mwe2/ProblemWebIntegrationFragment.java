@@ -13,8 +13,6 @@ public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
 
 	public ProblemWebIntegrationFragment() {
 		setFramework(Framework.CODEMIRROR.name());
-		// We use our custom token style for single-quoted names
-		addSuppressPattern("string_singleQuote");
 		// Use the CodeMirror default .cm-number instead of .cm-constant.cm-numeric
 		addSuppressPattern("number_decimal");
 		// We use our own custom single-line comments
@@ -39,12 +37,9 @@ public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
 	@Override
 	protected Multimap<String, String> createCodeMirrorPatterns(String langId, Set<String> keywords) {
 		Multimap<String, String> patterns = super.createCodeMirrorPatterns(langId, keywords);
-		// We use our custom token style for single-quoted names
-		patterns.put(START_STATE, "{token: \"quoted-name\", regex: \"['](?:(?:\\\\\\\\.)|(?:[^'\\\\\\\\]))*?[']\"}");
 		// Use the CodeMirror default .cm-number instead of .cm-constant.cm-numeric
 		patterns.put(START_STATE,
 				"{token: \"number\", regex: \"[+-]?\\\\d+(?:(?:\\\\.\\\\d*)?(?:[eE][+-]?\\\\d+)?)?\\\\b\"}");
-		patterns.put(START_STATE, "{token: \"number\", regex: \"[*]\"}");
 		// We use our own custom single-line comments
 		patterns.put(START_STATE, "{token: \"comment\", regex: \"%.*$\"}");
 		patterns.put(START_STATE, "{token: \"comment\", regex: \"\\\\/\\\\/.*$\"}");
@@ -53,7 +48,7 @@ public class ProblemWebIntegrationFragment extends WebIntegrationFragment {
 		patterns.put(START_STATE, "{token: \"lparen\", indent: true, regex: \"[[({]\"}");
 		patterns.put(START_STATE, "{token: \"rparen\", dedent: true, regex: \"[\\\\])}]\"}");
 		patterns.putAll(PREDICATE_BODY_STATE, patterns.get(START_STATE));
-		patterns.put(START_STATE, "{indent: true, push: \"" + PREDICATE_BODY_STATE + "\", regex: \"<=>\"}");
+		patterns.put(START_STATE, "{indent: true, push: \"" + PREDICATE_BODY_STATE + "\", regex: \"<->\"}");
 		patterns.put(PREDICATE_BODY_STATE,
 				"{dedent: true, dedentIfLineStart: false, pop: true, regex: \"\\\\.\\\\s*$\"}");
 		patterns.put(PREDICATE_BODY_STATE, "{indent: true, dedent: true, regex: \"[;]\"}");

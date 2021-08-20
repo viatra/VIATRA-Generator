@@ -127,7 +127,7 @@ li.CodeMirror-hint-active {
 	font-weight: 700;
 }
 
-.cm-quoted-name, .problem-enum-node {
+.problem-unique-node {
   @extend .cm-atom;
 }
 

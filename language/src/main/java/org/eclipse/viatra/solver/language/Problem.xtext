@@ -8,7 +8,8 @@ Problem:
 	statements+=Statement*;
 
 Statement:
-	ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | NodeValueAssertion | ScopeDeclaration;
+	ClassDeclaration | EnumDeclaration | PredicateDefinition | Assertion | NodeValueAssertion | ScopeDeclaration |
+	UniqueDeclaration;
 
 ClassDeclaration:
 	abstract?="abstract"? "class"
@@ -25,7 +26,7 @@ EnumLiteral returns Node:
 	name=Identifier;
 
 ReferenceDeclaration:
-	(containment?="contains" | "refers")?
+	(-> (containment?="contains" | "refers"))?
 	referenceType=[Relation|QualifiedName]
 	("[" multiplicity=Multiplicity "]")?
 	name=Identifier
@@ -35,7 +36,7 @@ PredicateDefinition:
 	(error?="error" "pred"? | "pred")
 	name=Identifier
 	"(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")"
-	("<=>" bodies+=Conjunction (";" bodies+=Conjunction)*)?
+	("<->" bodies+=Conjunction (";" bodies+=Conjunction)*)?
 	".";
 
 Parameter:
@@ -65,6 +66,7 @@ ConstantArgument:
 	constant=Constant;
 
 Assertion:
+	default?="default"?
 	(relation=[Relation|QualifiedName]
 	"(" (arguments+=AssertionArgument ("," arguments+=AssertionArgument)*)? ")"
 	":" value=LogicValue |
@@ -74,16 +76,19 @@ Assertion:
 	".";
 
 AssertionArgument:
-	NodeAssertionArgument | ConstantAssertionArgument;
+	NodeAssertionArgument | WildcardAssertionArgument | ConstantAssertionArgument;
 
 NodeAssertionArgument:
 	node=[Node|QualifiedName];
+
+WildcardAssertionArgument:
+	{WildcardAssertionArgument} "*";
 
 ConstantAssertionArgument:
 	constant=Constant;
 
 enum LogicValue:
-	TRUE="true" | FALSE="false" | UNKNOWN="unknown";
+	TRUE="true" | FALSE="false" | UNKNOWN="unknown" | ERROR="error";
 
 enum ShortLogicValue returns LogicValue:
 	FALSE="!" | UNKNOWN="?";
@@ -126,14 +131,18 @@ RangeMultiplicity:
 ExactMultiplicity:
 	exactValue=INT;
 
+UniqueDeclaration:
+	"unique" nodes+=EnumLiteral ("," nodes+=EnumLiteral)* ".";
+
 UpperBound returns ecore::EInt:
 	INT | "*";
 
 QualifiedName hidden():
-	QUOTED_ID | Identifier ("::" Identifier)*;
+	Identifier ("::" Identifier)*;
 
 Identifier:
-	ID | "true" | "false";
+	ID | "true" | "false" | "unknown" | "error" | "class" | "abstract" | "extends" | "enum" | "pred" | "scope" |
+	"unique" | "default" | "problem" | "contains" | "refers";
 
 Integer returns ecore::EInt hidden():
 	"-"? INT;
@@ -143,17 +152,10 @@ Real returns ecore::EDouble:
 
 @Override
 terminal ID:
-	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+	('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 
 terminal EXPONENTIAL:
 	INT ("e" | "E") ("+" | "-")? INT;
-
-@Override
-terminal STRING:
-	'"' ('\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\' | '"'))* '"';
-
-terminal QUOTED_ID:
-	"'" ('\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\' | "'"))* "'";
 
 @Override
 terminal SL_COMMENT:
