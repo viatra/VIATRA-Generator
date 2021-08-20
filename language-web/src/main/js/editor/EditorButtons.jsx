@@ -62,6 +62,7 @@ export default observer(() => {
         size='small'
         className={classes.iconButton}
         aria-label='Show line numbers'
+        value='show-line-numbers'
       >
         <FormatListNumberedIcon fontSize='small'/>
       </ToggleButton>

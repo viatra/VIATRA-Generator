@@ -279,6 +279,7 @@ define([
 			    				}
 			    			};
 						}),
+            from: cursor,
 						to: cursor
 					};
 				}});
@@ -329,10 +330,10 @@ define([
 	
 	CodeMirrorServiceBuilder.prototype._clearAnnotations = function(annotations) {
 		var editor = this.editor;
+    editor.clearGutter('annotations-gutter');
 		for (var i = 0; i < annotations.length; i++) {
 			var annotation = annotations[i];
 			if (annotation) {
-				editor.setGutterMarker(i, 'annotations-gutter', null);
 				annotations[i] = undefined;
 			}
 		}
