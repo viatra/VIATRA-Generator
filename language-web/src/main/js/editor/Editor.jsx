@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import 'mode-problem';
 import React, { useCallback } from 'react';
-import { Controlled as CodeMirror } from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2-react-17';
 import { createServices, removeServices } from 'xtext/xtext-codemirror';
 
 import { useRootStore } from '../RootStore';

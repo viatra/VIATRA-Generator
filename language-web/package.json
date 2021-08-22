@@ -39,17 +39,17 @@
     "webpack-subresource-integrity": "^5.0.0-alpha.5"
   },
   "dependencies": {
-    "@fontsource/jetbrains-mono": "^4.4.5",
-    "@fontsource/roboto": "^4.4.5",
-    "@material-ui/core": "^4.11.4",
+    "@fontsource/jetbrains-mono": "^4.5.0",
+    "@fontsource/roboto": "^4.5.0",
+    "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.58",
-    "codemirror": "^5.62.0",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "codemirror": "^5.62.3",
     "jquery": "^3.6.0",
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",
-    "react": "^16.14.0",
-    "react-codemirror2": "^7.2.1",
-    "react-dom": "^16.14.0"
+    "react": "^17.0.2",
+    "react-codemirror2-react-17": "^1.0.0",
+    "react-dom": "^17.0.2"
   }
 }
