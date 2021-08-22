@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext } from 'react';
 
 import EditorStore from './editor/EditorStore';
@@ -10,15 +11,14 @@ export default class RootStore {
   }
 }
 
-const StoreContext = createContext(undefined);
+const StoreContext = createContext<RootStore | undefined>(undefined);
 
-export const RootStoreProvider = ({ children, rootStore }) => (
+export const RootStoreProvider: React.FC<{ rootStore: RootStore }> = ({ children, rootStore }) => (
   <StoreContext.Provider value={rootStore}>
     {children}
   </StoreContext.Provider>
 );
 
-/** @returns {RootStore} */
 export const useRootStore = () => {
   const rootStore = useContext(StoreContext);
   if (!rootStore) {

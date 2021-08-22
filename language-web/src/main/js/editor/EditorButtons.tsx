@@ -29,7 +29,7 @@ const useStyles = makeStyles()(theme => ({
 }));
 
 export default observer(() => {
-  const editorStore = useRootStore().editorStore;
+  const { editorStore } = useRootStore();
   const { classes, cx } = useStyles();
   return (
     <>

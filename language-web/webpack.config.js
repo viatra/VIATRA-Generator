@@ -13,13 +13,30 @@ const outputPath = path.resolve(__dirname, 'build/webpack', currentNodeEnv);
 const portNumberOrElse = (envName, fallback) => {
   const value = process.env[envName];
   return value ? parseInt(value) : fallback;
-}
+};
 const listenHost = process.env['LISTEN_HOST'] || 'localhost';
 const listenPort = portNumberOrElse('LISTEN_PORT', 1313);
 const apiHost = process.env['API_HOST'] || listenHost;
 const apiPort = portNumberOrElse('API_PORT', 1312);
 const publicHost = process.env['PUBLIC_HOST'] || listenHost;
 const publicPort = portNumberOrElse('PUBLIC_PORT', listenPort);
+
+const resolveSources = sources => path.resolve(__dirname, 'src', sources);
+const resolveGenerated = sources => path.resolve(__dirname, 'build/generated/sources', sources);
+const mainJsSources = resolveSources('main/js');
+const babelLoaderFilters = {
+  include: [mainJsSources],
+  exclude: [resolveSources('main/js/xtext')],
+};
+const babelPresets = [
+  [
+    '@babel/preset-env',
+    {
+      targets: 'defaults',
+    },
+  ],
+  '@babel/preset-react',
+];
 
 module.exports = {
   mode: devMode ? 'development' : 'production',
@@ -35,19 +52,10 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/i,
-        include: [path.resolve(__dirname, 'src/main/js')],
-        exclude: [path.resolve(__dirname, 'src/main/js/xtext')],
+        ...babelLoaderFilters,
         loader: 'babel-loader',
         options: {
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: 'defaults',
-              },
-            ],
-            '@babel/preset-react',
-          ],
+          presets: babelPresets,
           plugins: [
             [
               '@babel/plugin-proposal-class-properties',
@@ -59,6 +67,26 @@ module.exports = {
           assumptions: {
             'setPublicClassFields': false,
           },
+        },
+      },
+      {
+        test: /.tsx?$/i,
+        ...babelLoaderFilters,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            ...babelPresets,
+            [
+              '@babel/preset-typescript',
+              {
+                isTSX: true,
+                allExtensions: true,
+                allowDeclareFields: true,
+                onlyRemoveTypeImports: true,
+                optimizeConstEnums: true,
+              },
+            ]
+          ],
         },
       },
       {
@@ -83,29 +111,24 @@ module.exports = {
               disable: true,
             }
           },
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 256,
-            },
-          },
         ],
+        type: 'asset',
       },
       {
         test: /\.woff2?$/i,
-        loader: 'file-loader',
+        type: 'asset/resource',
       },
     ],
   },
   resolve: {
     modules: [
       'node_modules',
-      path.resolve(__dirname, 'src/main/js'),
-      path.resolve(__dirname, 'build/generated/sources/xtext/js'),
+      mainJsSources,
+      resolveGenerated('xtext/js'),
     ],
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      images: path.resolve(__dirname, 'src/main/images'),
+      images: resolveSources('main/images'),
     },
   },
   devtool: devMode ? 'inline-source-map' : 'source-map',
@@ -115,16 +138,22 @@ module.exports = {
     },
   },
   devServer: {
-    contentBase: outputPath,
+    client: {
+      logging: 'info',
+      overlay: true,
+      progress: true,
+      webSocketURL: {
+        hostname: publicHost,
+        port: publicPort,
+        protocol: publicPort === 443 ? 'wss' : 'ws',
+      },
+    },
     compress: true,
     host: listenHost,
     port: listenPort,
     proxy: {
       '/xtext-service': `${apiPort === 443 ? 'https' : 'http'}://${apiHost}:${apiPort}`,
     },
-    public: `${publicHost}:${publicPort}`,
-    sockHost: publicHost,
-    sockPort: publicPort,
   },
   plugins: [
     new MiniCssExtractPlugin({
