@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -9,10 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
+import { makeStyles } from './makeStyles';
 import Editor from './editor/Editor';
 import EditorButtons from './editor/EditorButtons';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   container: {
     maxHeight: '100vh',
   },
@@ -28,13 +28,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default () => {
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
 
   return (
     <Box
       display='flex'
       flexDirection='column'
-      className={classes.container}
+      className={cx(classes.container)}
     >
       <AppBar
         position='static'
@@ -43,7 +43,7 @@ export default () => {
         <Toolbar>
           <IconButton
             edge='start'
-            className={classes.menuButton}
+            className={cx(classes.menuButton)}
             color='inherit'
             aria-label='menu'
           >
@@ -52,7 +52,7 @@ export default () => {
           <Typography
             variant='h6'
             component='h1'
-            className={classes.title}
+            className={cx(classes.title)}
           >
             GraphSolver
           </Typography>
@@ -83,7 +83,7 @@ export default () => {
       <Box
         flexGrow={1}
         flexShrink={1}
-        className={classes.editorBox}
+        className={cx(classes.editorBox)}
       >
         <Editor/>
       </Box>

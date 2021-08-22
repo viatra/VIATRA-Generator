@@ -1,7 +1,8 @@
+import { CacheProvider } from "@emotion/react";
 import React from 'react';
 import { render } from 'react-dom';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { getCache } from "tss-react/cache";
 
 import App from './App';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -48,11 +49,12 @@ scope Family = 1, Person += 5..10.
 const rootStore = new RootStore();
 rootStore.editorStore.updateValue(initialValue);
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
     background: {
       default: '#212121',
+      paper: '#2f2f2f',
     },
     primary: {
       main: '#82aaff',
@@ -64,12 +66,14 @@ const theme = createMuiTheme({
 });
 
 const app = (
-  <ThemeProvider theme={theme}>
-    <CssBaseline/>
-    <RootStoreProvider rootStore={rootStore}>
-      <App/>
-    </RootStoreProvider>
-  </ThemeProvider>
+  <CacheProvider value={getCache()}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <RootStoreProvider rootStore={rootStore}>
+        <App/>
+      </RootStoreProvider>
+    </ThemeProvider>
+  </CacheProvider>
 )
 
 render(app, document.getElementById('app'));

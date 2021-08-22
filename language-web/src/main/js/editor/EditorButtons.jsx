@@ -1,34 +1,36 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ToggleButton from '@material-ui/core/ToggleButton';
 import Divider from '@material-ui/core/Divider';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import RedoIcon from '@material-ui/icons/Redo';
 import UndoIcon from '@material-ui/icons/Undo';
-import ToggleButton from '@material-ui/lab/ToggleButton';
 
+import { makeStyles } from '../makeStyles';
 import { useRootStore } from '../RootStore';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()(theme => ({
   iconButton: {
     padding: 7,
-    minWidth: 36,
     border: 0,
     color: theme.palette.text.primary,
-    '&.MuiButtonGroup-groupedTextHorizontal': {
+    '&, &.MuiButtonGroup-grouped': {
+      minWidth: 36,
+    },
+    '&.MuiButtonGroup-grouped:not(:last-of-type)': {
       borderRight: 0,
     },
   },
   divider: {
     margin: theme.spacing(0.5),
-  }
+  },
 }));
 
 export default observer(() => {
   const editorStore = useRootStore().editorStore;
-  const classes = useStyles();
+  const { classes, cx } = useStyles();
   return (
     <>
       <ButtonGroup
@@ -37,7 +39,8 @@ export default observer(() => {
         <Button
           disabled={!editorStore.canUndo}
           onClick={() => editorStore.undo()}
-          className={classes.iconButton}
+          className={cx(classes.iconButton)}
+          color='inherit'
           aria-label='Undo'
         >
           <UndoIcon fontSize='small'/>
@@ -45,7 +48,8 @@ export default observer(() => {
         <Button
           disabled={!editorStore.canRedo}
           onClick={() => editorStore.redo()}
-          className={classes.iconButton}
+          className={cx(classes.iconButton)}
+          color='inherit'
           aria-label='Redo'
         >
           <RedoIcon fontSize='small'/>
@@ -60,7 +64,7 @@ export default observer(() => {
         selected={editorStore.showLineNumbers}
         onChange={() => editorStore.toggleLineNumbers()}
         size='small'
-        className={classes.iconButton}
+        className={cx(classes.iconButton)}
         aria-label='Show line numbers'
         value='show-line-numbers'
       >
