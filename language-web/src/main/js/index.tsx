@@ -1,12 +1,12 @@
-import { CacheProvider } from "@emotion/react";
+import { CacheProvider } from '@emotion/react';
 import React from 'react';
 import { render } from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import { getCache } from "tss-react/cache";
+import { getCache } from 'tss-react/cache';
 
-import App from './App';
-import RootStore, { RootStoreProvider } from './RootStore';
+import { App } from './App';
+import { RootStore, RootStoreProvider } from './RootStore';
 
 import '../css/index.scss';
 
@@ -68,9 +68,9 @@ const theme = createTheme({
 const app = (
   <CacheProvider value={getCache()}>
     <ThemeProvider theme={theme}>
-      <CssBaseline/>
+      <CssBaseline />
       <RootStoreProvider rootStore={rootStore}>
-        <App/>
+        <App />
       </RootStoreProvider>
     </ThemeProvider>
   </CacheProvider>

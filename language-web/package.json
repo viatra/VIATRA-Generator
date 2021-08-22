@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "serve": "webpack serve --hot"
+    "serve": "webpack serve --hot",
+    "eslint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,13 @@
     "babel-loader": "^8.2.2",
     "before-build-webpack": "^0.2.11",
     "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^13.0.0",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "html-webpack-plugin": "^5.3.2",
     "image-webpack-loader": "^7.0.1",
     "mini-css-extract-plugin": "^2.2.0",
@@ -34,6 +42,8 @@
     "style-loader": "^3.2.1",
     "@types/codemirror": "^5.60.2",
     "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
     "webpack": "^5.51.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.0.0",

@@ -25,17 +25,21 @@ const codeMirrorGlobalOptions: EditorConfiguration = {
   theme: 'material-darker',
 };
 
-export default class EditorStore {
-  _atom;
+export class EditorStore {
+  atom;
+
   editor?: Editor;
+
   xtextServices?: IXtextServices;
+
   value = '';
+
   showLineNumbers = false;
 
   constructor() {
-    this._atom = createAtom('EditorStore');
+    this.atom = createAtom('EditorStore');
     makeAutoObservable(this, {
-      _atom: false,
+      atom: false,
       editor: observable.ref,
       xtextServices: observable.ref,
     });
@@ -49,7 +53,7 @@ export default class EditorStore {
    *
    * @param newEditor The new CodeMirror instance
    */
-  editorDidMount(newEditor: Editor) {
+  editorDidMount(newEditor: Editor): void {
     if (this.editor) {
       throw new Error('CoreMirror editor mounted before unmounting');
     }
@@ -57,7 +61,7 @@ export default class EditorStore {
     this.xtextServices = createServices(newEditor, xtextOptions);
   }
 
-  editorWillUnmount() {
+  editorWillUnmount(): void {
     if (this.editor) {
       removeServices(this.editor);
     }
@@ -70,16 +74,16 @@ export default class EditorStore {
    *
    * @param newValue The new contents of the editor
    */
-  updateValue(newValue: string) {
+  updateValue(newValue: string): void {
     this.value = newValue;
   }
 
-  reportChanged() {
-    this._atom.reportChanged();
+  reportChanged(): void {
+    this.atom.reportChanged();
   }
 
-  _observeEditorChanges() {
-    this._atom.reportObserved();
+  protected observeEditorChanges(): void {
+    this.atom.reportObserved();
   }
 
   get codeMirrorOptions(): EditorConfiguration {
@@ -92,8 +96,8 @@ export default class EditorStore {
   /**
    * @returns `true` if there is history to undo
    */
-  get canUndo() {
-    this._observeEditorChanges();
+  get canUndo(): boolean {
+    this.observeEditorChanges();
     if (!this.editor) {
       return false;
     }
@@ -101,15 +105,15 @@ export default class EditorStore {
     return undoSize > 0;
   }
 
-  undo() {
+  undo(): void {
     this.editor?.undo();
   }
 
   /**
    * @returns `true` if there is history to redo
    */
-  get canRedo() {
-    this._observeEditorChanges();
+  get canRedo(): boolean {
+    this.observeEditorChanges();
     if (!this.editor) {
       return false;
     }
@@ -117,11 +121,11 @@ export default class EditorStore {
     return redoSize > 0;
   }
 
-  redo() {
+  redo(): void {
     this.editor?.redo();
   }
 
-  toggleLineNumbers() {
+  toggleLineNumbers(): void {
     this.showLineNumbers = !this.showLineNumbers;
   }
 }

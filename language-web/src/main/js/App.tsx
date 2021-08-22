@@ -9,10 +9,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import { makeStyles } from './makeStyles';
-import Editor from './editor/Editor';
-import EditorButtons from './editor/EditorButtons';
+import { Editor } from './editor/Editor';
+import { EditorButtons } from './editor/EditorButtons';
 
-const useStyles = makeStyles()(theme => ({
+const useStyles = makeStyles()((theme) => ({
   container: {
     maxHeight: '100vh',
   },
@@ -27,31 +27,31 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-export default () => {
+export const App = (): JSX.Element => {
   const { classes, cx } = useStyles();
 
   return (
     <Box
-      display='flex'
-      flexDirection='column'
+      display="flex"
+      flexDirection="column"
       className={cx(classes.container)}
     >
       <AppBar
-        position='static'
-        color='inherit'
+        position="static"
+        color="inherit"
       >
         <Toolbar>
           <IconButton
-            edge='start'
+            edge="start"
             className={cx(classes.menuButton)}
-            color='inherit'
-            aria-label='menu'
+            color="inherit"
+            aria-label="menu"
           >
             <MenuIcon />
           </IconButton>
           <Typography
-            variant='h6'
-            component='h1'
+            variant="h6"
+            component="h1"
             className={cx(classes.title)}
           >
             GraphSolver
@@ -59,22 +59,22 @@ export default () => {
         </Toolbar>
       </AppBar>
       <Box
-        display='flex'
-        justifyContent='space-between'
-        alignItems='center'
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
         p={1}
       >
         <Box
-          display='flex'
-          alignItems='center'
+          display="flex"
+          alignItems="center"
         >
-          <EditorButtons/>
+          <EditorButtons />
         </Box>
         <Box>
           <Button
-            variant='outlined'
-            color='primary'
-            startIcon={<PlayArrowIcon/>}
+            variant="outlined"
+            color="primary"
+            startIcon={<PlayArrowIcon />}
           >
             Generate
           </Button>
@@ -85,7 +85,7 @@ export default () => {
         flexShrink={1}
         className={cx(classes.editorBox)}
       >
-        <Editor/>
+        <Editor />
       </Box>
     </Box>
   );

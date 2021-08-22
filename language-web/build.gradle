@@ -82,7 +82,7 @@ task jettyRun(type: JavaExec) {
 	standardInput = System.in
 	environment BASE_RESOURCE: "${webpackOutputDir}/${currentNodeEnv}"
 	group = 'run'
-	description = 'Start a Jetty web server serving the Xtex API and assets'
+	description = 'Start a Jetty web server serving the Xtex API and assets.'
 }
 
 task webpackServe(type: NpmTask) {
@@ -92,8 +92,17 @@ task webpackServe(type: NpmTask) {
 	args = ['run', 'serve']
 	setEnvironment NODE_ENV: 'hmr'
 	group = 'run'
-	description = 'Start a Webpack dev server with hot module replacement'
+	description = 'Start a Webpack dev server with hot module replacement.'
 }
+
+task eslint(type: NpmTask) {
+	dependsOn npmInstall
+	args = ['run', 'eslint']
+	group = 'verification'
+	description = 'Checks for TypeScript errors.' 
+}
+
+check.dependsOn += [eslint]
 
 eclipse {
 	project.file.whenMerged {

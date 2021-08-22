@@ -11,7 +11,7 @@ import UndoIcon from '@material-ui/icons/Undo';
 import { makeStyles } from '../makeStyles';
 import { useRootStore } from '../RootStore';
 
-const useStyles = makeStyles()(theme => ({
+const useStyles = makeStyles()((theme) => ({
   iconButton: {
     padding: 7,
     border: 0,
@@ -28,47 +28,48 @@ const useStyles = makeStyles()(theme => ({
   },
 }));
 
-export default observer(() => {
+export const EditorButtons = observer(() => {
   const { editorStore } = useRootStore();
   const { classes, cx } = useStyles();
+
   return (
     <>
       <ButtonGroup
-        variant='text'
+        variant="text"
       >
         <Button
           disabled={!editorStore.canUndo}
           onClick={() => editorStore.undo()}
           className={cx(classes.iconButton)}
-          color='inherit'
-          aria-label='Undo'
+          color="inherit"
+          aria-label="Undo"
         >
-          <UndoIcon fontSize='small'/>
+          <UndoIcon fontSize="small" />
         </Button>
         <Button
           disabled={!editorStore.canRedo}
           onClick={() => editorStore.redo()}
           className={cx(classes.iconButton)}
-          color='inherit'
-          aria-label='Redo'
+          color="inherit"
+          aria-label="Redo"
         >
-          <RedoIcon fontSize='small'/>
+          <RedoIcon fontSize="small" />
         </Button>
       </ButtonGroup>
       <Divider
         flexItem
-        orientation='vertical'
+        orientation="vertical"
         className={classes.divider}
       />
       <ToggleButton
         selected={editorStore.showLineNumbers}
         onChange={() => editorStore.toggleLineNumbers()}
-        size='small'
+        size="small"
         className={cx(classes.iconButton)}
-        aria-label='Show line numbers'
-        value='show-line-numbers'
+        aria-label="Show line numbers"
+        value="show-line-numbers"
       >
-        <FormatListNumberedIcon fontSize='small'/>
+        <FormatListNumberedIcon fontSize="small" />
       </ToggleButton>
     </>
   );

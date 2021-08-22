@@ -4,7 +4,7 @@ import { Controlled as CodeMirror } from 'react-codemirror2';
 
 import { useRootStore } from '../RootStore';
 
-export default observer(() => {
+export const Editor = observer(() => {
   const { editorStore } = useRootStore();
 
   return (

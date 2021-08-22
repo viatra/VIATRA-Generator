@@ -15,8 +15,5 @@
     "noEmit": true
   },
   "include": ["./src/main/js/**/*"],
-  "exclude": [
-    "./src/main/js/xtext/**/*",
-    "./node_modules/**/*"
-  ]
+  "exclude": ["./src/main/js/xtext/**/*"]
 }
