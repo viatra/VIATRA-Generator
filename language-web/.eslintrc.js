@@ -21,6 +21,9 @@ module.exports = {
     // propTypes are for runtime validation, but we rely on TypeScript for build-time validation:
     // https://github.com/yannickcr/eslint-plugin-react/issues/2275#issuecomment-492003857
     'react/prop-types': 'off',
+    // Make sure switches are exhaustive: https://stackoverflow.com/a/60166264
+    'default-case': 'off',
+    '@typescript-eslint/switch-exhaustiveness-check': 'error',
   },
   ignorePatterns: [
     '*.js',

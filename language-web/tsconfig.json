@@ -12,6 +12,7 @@
     "strict": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
+    "exactOptionalPropertyTypes": false,
     "noEmit": true
   },
   "include": ["./src/main/js/**/*"],

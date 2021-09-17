@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@fontsource/roboto/scss/mixins' as Roboto;
 @use '@fontsource/jetbrains-mono/scss/mixins' as JetbrainsMono;
 
@@ -5,14 +6,16 @@
 @import 'codemirror/addon/hint/show-hint';
 @import 'codemirror/theme/material-darker';
 
-$robotoWeights: 300, 400, 500, 700;
-@each $weight in $robotoWeights {
+@import './themes';
+
+$fontWeights: 300, 400, 500, 700;
+@each $weight in $fontWeights {
   @include Roboto.fontFace($fontName: 'Roboto', $weight: $weight);
   @include Roboto.fontFace($fontName: 'Roboto', $weight: $weight, $style: italic);
 }
 
-$jetbrainsMonoWeights: 400, 700;
-@each $weight in $jetbrainsMonoWeights {
+$monoFontWeights: 400, 700;
+@each $weight in $monoFontWeights {
   @include JetbrainsMono.fontFace($fontName: 'JetBrains Mono', $weight: $weight);
   @include JetbrainsMono.fontFace($fontName: 'JetBrains Mono', $weight: $weight, $style: italic);
 }
@@ -35,8 +38,78 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@each $themeName, $theme in $themes {
+  .cm-s-problem-#{$themeName} {
+    &.CodeMirror {
+      background: map.get($theme, 'background');
+      color: map.get($theme, 'foreground');
+    }
+
+    .CodeMirror-gutters {
+      background: map.get($theme, 'background');
+      border: none;
+    }
+
+    .CodeMirror-cursor {
+      border-left: 1px solid map.get($theme, 'cursor');
+    }
+
+    div.CodeMirror-selected,
+    &.CodeMirror-focused div.CodeMirror-selected,
+    .CodeMirror-line::selection,
+    .CodeMirror-line > span::selection,
+    .CodeMirror-line > span > span::selection {
+      background: map.get($theme, 'selection');
+    }
+
+    .CodeMirror-guttermarker,
+    .CodeMirror-guttermarker-subtle,
+    .CodeMirror-linenumber {
+      color: map.get($theme, 'lineNumber');
+    }
+
+    .CodeMirror-activeline-background {
+      background: map.get($theme, 'currentLine');
+    }
+
+    .CodeMirror-activeline-gutter {
+      background: map.get($theme, 'currentLine');
+
+      .CodeMirror-guttermarker,
+      .CodeMirror-guttermarker-subtle,
+      .CodeMirror-linenumber {
+        color: map.get($theme, 'foreground');
+      }
+    }
+
+    .cm-keyword {
+      color: map.get($theme, 'keyword');
+    }
+
+    .cm-number {
+      color: map.get($theme, 'number');
+    }
+
+    .cm-lparen, .cm-rparen {
+      color: map.get($theme, 'delimiter');
+    }
+
+    .problem-predicate, .problem-class, .problem-reference, .problem-enum {
+      color: map.get($theme, 'predicate');
+    }
+
+    .problem-unique-node {
+      color: map.get($theme, 'uniqueNode');
+    }
+
+    .problem-variable {
+      color: map.get($theme, 'variable');
+    }
+  }
+}
+
 .CodeMirror-hints {
-  background: #333333;
+  background: #333;
   border: 0;
   border-radius: 4px;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -107,38 +180,18 @@ li.CodeMirror-hint-active {
   background: rgba(128, 203, 196, 0.2);
 }
 
+
 .xtext-marker_write {
   background: rgba(255, 229, 100, 0.2);
-}
-
-.problem-class, .problem-enum {
-  @extend .cm-type;
 }
 
 .problem-abstract {
   font-style: italic;
 }
 
-.problem-reference {
-  @extend .cm-def;
-}
-
 .problem-containment {
 	font-weight: 700;
 }
-
-.problem-unique-node {
-  @extend .cm-atom;
-}
-
 .problem-new-node {
   font-style: italic;
-}
-
-.problem-variable {
-  @extend .cm-variable;
-}
-
-.problem-singleton-variable {
-  opacity: 0.6;
 }

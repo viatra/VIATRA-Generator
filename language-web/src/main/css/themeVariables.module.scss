@@ -1,0 +1,9 @@
+@import './themes';
+
+:export {
+  @each $themeName, $theme in $themes {
+    @each $variable, $value in $theme {
+      #{$themeName}--#{$variable}: $value,
+    }
+  }
+}

@@ -1,12 +1,16 @@
 import React, { createContext, useContext } from 'react';
 
 import { EditorStore } from './editor/EditorStore';
+import { ThemeStore } from './theme/ThemeStore';
 
 export class RootStore {
   editorStore;
 
+  themeStore;
+
   constructor() {
-    this.editorStore = new EditorStore();
+    this.themeStore = new ThemeStore();
+    this.editorStore = new EditorStore(this.themeStore);
   }
 }
 

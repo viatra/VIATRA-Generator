@@ -2,11 +2,11 @@ import { CacheProvider } from '@emotion/react';
 import React from 'react';
 import { render } from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { getCache } from 'tss-react/cache';
 
 import { App } from './App';
 import { RootStore, RootStoreProvider } from './RootStore';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 import '../css/index.scss';
 
@@ -49,31 +49,15 @@ scope Family = 1, Person += 5..10.
 const rootStore = new RootStore();
 rootStore.editorStore.updateValue(initialValue);
 
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    background: {
-      default: '#212121',
-      paper: '#2f2f2f',
-    },
-    primary: {
-      main: '#82aaff',
-    },
-    secondary: {
-      main: '#ff5370',
-    },
-  },
-});
-
 const app = (
-  <CacheProvider value={getCache()}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RootStoreProvider rootStore={rootStore}>
+  <RootStoreProvider rootStore={rootStore}>
+    <CacheProvider value={getCache()}>
+      <ThemeProvider>
+        <CssBaseline />
         <App />
-      </RootStoreProvider>
-    </ThemeProvider>
-  </CacheProvider>
+      </ThemeProvider>
+    </CacheProvider>
+  </RootStoreProvider>
 );
 
 render(app, document.getElementById('app'));

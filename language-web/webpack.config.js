@@ -100,7 +100,7 @@ module.exports = {
               implementation: require.resolve('sass'),
             },
           },
-        ]
+        ],
       },
       {
         test: /\.(gif|png|jpe?g|svg?)$/i,

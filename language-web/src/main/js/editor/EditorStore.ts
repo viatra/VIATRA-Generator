@@ -1,4 +1,5 @@
 import { Editor, EditorConfiguration } from 'codemirror';
+import 'codemirror/addon/selection/active-line';
 import {
   createAtom,
   makeAutoObservable,
@@ -12,6 +13,8 @@ import {
   removeServices,
 } from 'xtext/xtext-codemirror';
 
+import { ThemeStore } from '../theme/ThemeStore';
+
 const xtextLang = 'problem';
 
 const xtextOptions: IXtextOptions = {
@@ -22,10 +25,12 @@ const xtextOptions: IXtextOptions = {
 const codeMirrorGlobalOptions: EditorConfiguration = {
   mode: `xtext/${xtextLang}`,
   indentUnit: 2,
-  theme: 'material-darker',
+  styleActiveLine: true,
 };
 
 export class EditorStore {
+  themeStore;
+
   atom;
 
   editor?: Editor;
@@ -36,9 +41,11 @@ export class EditorStore {
 
   showLineNumbers = false;
 
-  constructor() {
+  constructor(themeStore: ThemeStore) {
+    this.themeStore = themeStore;
     this.atom = createAtom('EditorStore');
     makeAutoObservable(this, {
+      themeStore: false,
       atom: false,
       editor: observable.ref,
       xtextServices: observable.ref,
@@ -65,8 +72,8 @@ export class EditorStore {
     if (this.editor) {
       removeServices(this.editor);
     }
-    this.editor = undefined;
-    this.xtextServices = undefined;
+    delete this.editor;
+    delete this.xtextServices;
   }
 
   /**
@@ -89,6 +96,7 @@ export class EditorStore {
   get codeMirrorOptions(): EditorConfiguration {
     return {
       ...codeMirrorGlobalOptions,
+      theme: this.themeStore.codeMirrorTheme,
       lineNumbers: this.showLineNumbers,
     };
   }
