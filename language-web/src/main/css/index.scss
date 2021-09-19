@@ -94,6 +94,11 @@ body {
       color: map.get($theme, 'delimiter');
     }
 
+    .cm-comment {
+      color: map.get($theme, 'comment');
+      font-style: italic;
+    }
+
     .problem-predicate, .problem-class, .problem-reference, .problem-enum {
       color: map.get($theme, 'predicate');
     }
