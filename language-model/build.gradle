@@ -31,4 +31,8 @@ task generateEPackage(type: JavaExec) {
 compileJava.dependsOn(generateEPackage)
 clean.dependsOn(cleanGenerateEPackage)
 
-eclipse.project.natures += ['org.eclipse.sirius.nature.modelingproject', 'org.eclipse.pde.PluginNature']
+eclipse.project.natures += [
+	'org.eclipse.sirius.nature.modelingproject',
+	'org.eclipse.pde.PluginNature',
+	'org.eclipse.xtext.ui.shared.xtextNature'
+]
