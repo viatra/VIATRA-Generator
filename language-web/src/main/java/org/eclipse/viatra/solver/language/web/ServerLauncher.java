@@ -3,6 +3,7 @@
  */
 package org.eclipse.viatra.solver.language.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -62,7 +63,8 @@ public class ServerLauncher {
 		}
 		var indexUrlInJar = ServerLauncher.class.getResource("/webapp/index.html");
 		if (indexUrlInJar == null) {
-			throw new IOException("Cannot find pacakged web assets");
+			var workingPath = new String[] { System.getProperty("user.dir"), "build", "webpack", "development", };
+			return Resource.newResource(new File(String.join(File.separator, workingPath)));
 		}
 		var webRootUri = URI.create(indexUrlInJar.toURI().toASCIIString().replaceFirst("/index.html$", "/"));
 		return Resource.newResource(webRootUri);
