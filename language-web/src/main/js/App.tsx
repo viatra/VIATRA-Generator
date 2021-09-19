@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -9,10 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
-import Editor from './editor/Editor';
-import EditorButtons from './editor/EditorButtons';
+import { makeStyles } from './makeStyles';
+import { Editor } from './editor/Editor';
+import { EditorButtons } from './editor/EditorButtons';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles()((theme) => ({
   container: {
     maxHeight: '100vh',
   },
@@ -27,54 +27,54 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default () => {
-  const classes = useStyles();
+export const App = (): JSX.Element => {
+  const { classes, cx } = useStyles();
 
   return (
     <Box
-      display='flex'
-      flexDirection='column'
-      className={classes.container}
+      display="flex"
+      flexDirection="column"
+      className={cx(classes.container)}
     >
       <AppBar
-        position='static'
-        color='inherit'
+        position="static"
+        color="inherit"
       >
         <Toolbar>
           <IconButton
-            edge='start'
-            className={classes.menuButton}
-            color='inherit'
-            aria-label='menu'
+            edge="start"
+            className={cx(classes.menuButton)}
+            color="inherit"
+            aria-label="menu"
           >
             <MenuIcon />
           </IconButton>
           <Typography
-            variant='h6'
-            component='h1'
-            className={classes.title}
+            variant="h6"
+            component="h1"
+            className={cx(classes.title)}
           >
             GraphSolver
           </Typography>
         </Toolbar>
       </AppBar>
       <Box
-        display='flex'
-        justifyContent='space-between'
-        alignItems='center'
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
         p={1}
       >
         <Box
-          display='flex'
-          alignItems='center'
+          display="flex"
+          alignItems="center"
         >
-          <EditorButtons/>
+          <EditorButtons />
         </Box>
         <Box>
           <Button
-            variant='outlined'
-            color='primary'
-            startIcon={<PlayArrowIcon/>}
+            variant="outlined"
+            color="primary"
+            startIcon={<PlayArrowIcon />}
           >
             Generate
           </Button>
@@ -83,9 +83,9 @@ export default () => {
       <Box
         flexGrow={1}
         flexShrink={1}
-        className={classes.editorBox}
+        className={cx(classes.editorBox)}
       >
-        <Editor/>
+        <Editor />
       </Box>
     </Box>
   );

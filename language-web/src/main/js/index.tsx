@@ -1,11 +1,12 @@
+import { CacheProvider } from '@emotion/react';
 import React from 'react';
 import { render } from 'react-dom';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-
-import App from './App';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import RootStore, { RootStoreProvider } from './RootStore';
+import { getCache } from 'tss-react/cache';
+
+import { App } from './App';
+import { RootStore, RootStoreProvider } from './RootStore';
+import { ThemeProvider } from './theme/ThemeProvider';
 
 import '../css/index.scss';
 
@@ -25,15 +26,17 @@ enum TaxStatus {
 }
 
 % A child cannot have any dependents.
-error invalidTaxStatus(Person p) <=>
+error invalidTaxStatus(Person p) <->
   taxStatus(p, child), children(p, _q).
 
-Family('family').
-members('family', anne).
-members('family', bob).
-members('family', ciri).
+unique family.
+Family(family).
+members(family, anne).
+members(family, bob).
+members(family, ciri).
 children(anne, ciri).
 ?children(bob, ciri).
+default children(ciri, *): false.
 taxStatus(anne, adult).
 age(anne, 35).
 bobAge: 27.
@@ -46,28 +49,15 @@ scope Family = 1, Person += 5..10.
 const rootStore = new RootStore();
 rootStore.editorStore.updateValue(initialValue);
 
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-    background: {
-      default: '#212121',
-    },
-    primary: {
-      main: '#82aaff',
-    },
-    secondary: {
-      main: '#ff5370',
-    },
-  },
-});
-
 const app = (
-  <ThemeProvider theme={theme}>
-    <CssBaseline/>
-    <RootStoreProvider rootStore={rootStore}>
-      <App/>
-    </RootStoreProvider>
-  </ThemeProvider>
-)
+  <RootStoreProvider rootStore={rootStore}>
+    <CacheProvider value={getCache()}>
+      <ThemeProvider>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </CacheProvider>
+  </RootStoreProvider>
+);
 
 render(app, document.getElementById('app'));

@@ -14,6 +14,7 @@
       <genEnumLiterals ecoreEnumLiteral="problem.ecore#//LogicValue/TRUE"/>
       <genEnumLiterals ecoreEnumLiteral="problem.ecore#//LogicValue/FALSE"/>
       <genEnumLiterals ecoreEnumLiteral="problem.ecore#//LogicValue/UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="problem.ecore#//LogicValue/ERROR"/>
     </genEnums>
     <genClasses ecoreClass="problem.ecore#//Problem">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//Problem/nodes"/>
@@ -64,6 +65,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//Assertion/relation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//Assertion/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//Assertion/arguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute problem.ecore#//Assertion/default"/>
     </genClasses>
     <genClasses ecoreClass="problem.ecore#//Node"/>
     <genClasses ecoreClass="problem.ecore#//ScopeDeclaration">
@@ -117,5 +119,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference problem.ecore#//NodeValueAssertion/node"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//NodeValueAssertion/value"/>
     </genClasses>
+    <genClasses ecoreClass="problem.ecore#//UniqueDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference problem.ecore#//UniqueDeclaration/nodes"/>
+    </genClasses>
+    <genClasses ecoreClass="problem.ecore#//WildcardAssertionArgument"/>
   </genPackages>
 </genmodel:GenModel>

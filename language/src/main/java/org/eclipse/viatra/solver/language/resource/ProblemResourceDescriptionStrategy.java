@@ -45,6 +45,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 		while (parent != null && parent != problem) {
 			var parentQualifiedName = getNameAsQualifiedName(parent);
 			if (parentQualifiedName == null) {
+				parent = parent.eContainer();
 				continue;
 			}
 			qualifiedName = parentQualifiedName.append(qualifiedName);
@@ -82,7 +83,7 @@ public class ProblemResourceDescriptionStrategy extends DefaultResourceDescripti
 		if (eObject instanceof Node) {
 			var node = (Node) eObject;
 			// Only enum literals and new nodes are visible across problem files.
-			return ProblemUtil.isEnumLiteral(node) || ProblemUtil.isNewNode(node);
+			return ProblemUtil.isUniqueNode(node) || ProblemUtil.isNewNode(node);
 		}
 		return true;
 	}

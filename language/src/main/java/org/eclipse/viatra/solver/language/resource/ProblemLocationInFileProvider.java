@@ -20,7 +20,7 @@ public class ProblemLocationInFileProvider extends DefaultLocationInFileProvider
 	}
 
 	protected ITextRegion getNodeTextRegion(Node node, RegionDescription query) {
-		if (ProblemUtil.isEnumLiteral(node)) {
+		if (ProblemUtil.isUniqueNode(node)) {
 			return super.doGetTextRegion(node, query);
 		}
 		if (ProblemUtil.isNewNode(node)) {

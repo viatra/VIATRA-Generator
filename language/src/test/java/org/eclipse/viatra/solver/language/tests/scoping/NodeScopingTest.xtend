@@ -42,7 +42,7 @@ class NodeScopingTest {
 	@Test
 	def void implicitNodeInAssertionTest() {
 		val it = parseHelper.parse('''
-			pred predicate(node x, node y) <=> node(x).
+			pred predicate(node x, node y) <-> node(x).
 			predicate(a, a).
 			?predicate(a, b).
 		''')
@@ -64,9 +64,10 @@ class NodeScopingTest {
 		assertThat(nodeValueAssertion(0).node, equalTo(node('a')))
 	}
 
+	@Test
 	def void implicitNodeInPredicateTest() {
 		val it = parseHelper.parse('''
-			pred predicate(node a) <=> node(b).
+			pred predicate(node a) <-> node(b).
 			predicate(b).
 		''')
 		assertThat(errors, empty)
@@ -75,46 +76,63 @@ class NodeScopingTest {
 		assertThat(assertion(0).arg(0).node, equalTo(node("b")))
 	}
 
-	@Test
-	def void quotedNodeInAssertionTest() {
+	@ParameterizedTest
+	@MethodSource("uniqueNodeReferenceSource")
+	def void uniqueNodeInAssertionTest(String qualifiedNamePrefix, boolean namedProblem) {
 		val it = parseHelper.parse('''
-			pred predicate(node x, node y) <=> node(x).
-			predicate('a', 'a').
-			?predicate('a', 'b').
+			«IF namedProblem»problem test.«ENDIF»
+			unique a, b.
+			pred predicate(node x, node y) <-> node(x).
+			predicate(«qualifiedNamePrefix»a, «qualifiedNamePrefix»a).
+			?predicate(«qualifiedNamePrefix»a, «qualifiedNamePrefix»b).
 		''')
 		assertThat(errors, empty)
-		assertThat(nodeNames, hasItems("'a'", "'b'"))
-		assertThat(assertion(0).arg(0).node, equalTo(node("'a'")))
-		assertThat(assertion(0).arg(1).node, equalTo(node("'a'")))
-		assertThat(assertion(1).arg(0).node, equalTo(node("'a'")))
-		assertThat(assertion(1).arg(1).node, equalTo(node("'b'")))
+		assertThat(nodeNames, empty)
+		assertThat(assertion(0).arg(0).node, equalTo(uniqueNode('a')))
+		assertThat(assertion(0).arg(1).node, equalTo(uniqueNode('a')))
+		assertThat(assertion(1).arg(0).node, equalTo(uniqueNode('a')))
+		assertThat(assertion(1).arg(1).node, equalTo(uniqueNode('b')))
 	}
 
-	@Test
-	def void quotedNodeInNodeValueAssertionTest() {
+	@ParameterizedTest
+	@MethodSource("uniqueNodeReferenceSource")
+	def void uniqueNodeInNodeValueAssertionTest(String qualifiedNamePrefix, boolean namedProblem) {
 		val it = parseHelper.parse('''
-			'a': 16.
+			«IF namedProblem»problem test.«ENDIF»
+			unique a.
+			«qualifiedNamePrefix»a: 16.
 		''')
 		assertThat(errors, empty)
-		assertThat(nodeNames, hasItems("'a'"))
-		assertThat(nodeValueAssertion(0).node, equalTo(node("'a'")))
+		assertThat(nodeNames, empty)
+		assertThat(nodeValueAssertion(0).node, equalTo(uniqueNode('a')))
 	}
 
-	@Test
-	def void quotedNodeInPredicateTest() {
+	@ParameterizedTest
+	@MethodSource("uniqueNodeReferenceSource")
+	def void uniqueNodeInPredicateTest(String qualifiedNamePrefix, boolean namedProblem) {
 		val it = parseHelper.parse('''
-			pred predicate(node a) <=> node('b').
+			«IF namedProblem»problem test.«ENDIF»
+			unique b.
+			pred predicate(node a) <-> node(«qualifiedNamePrefix»b).
 		''')
 		assertThat(errors, empty)
-		assertThat(nodeNames, hasItem("'b'"))
-		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(node("'b'")))
+		assertThat(nodeNames, empty)
+		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(uniqueNode("b")))
+	}
+	
+	static def uniqueNodeReferenceSource() {
+		Stream.of(
+			Arguments.of("", false),
+			Arguments.of("", true),
+			Arguments.of("test::", true)
+		)
 	}
 
 	@ParameterizedTest
 	@MethodSource("builtInNodeReferencesSource")
 	def void builtInNodeTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate(node x) <=> node(x).
+			pred predicate(node x) <-> node(x).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -137,7 +155,7 @@ class NodeScopingTest {
 	@MethodSource("builtInNodeReferencesSource")
 	def void builtInNodeInPredicateTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate(node x) <=> node(«qualifiedName»).
+			pred predicate(node x) <-> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(builtin.findClass('int').newNode))
@@ -156,7 +174,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			class Foo.
-			pred predicate(node x) <=> node(x).
+			pred predicate(node x) <-> node(x).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -183,7 +201,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			class Foo.
-			pred predicate(node x) <=> node(«qualifiedName»).
+			pred predicate(node x) <-> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(findClass('Foo').newNode))
@@ -201,7 +219,7 @@ class NodeScopingTest {
 	def void newNodeIsNotSpecial() {
 		val it = parseHelper.parse('''
 			class Foo.
-			pred predicate(node x) <=> node(x).
+			pred predicate(node x) <-> node(x).
 			predicate(new).
 		''')
 		assertThat(errors, empty)
@@ -215,7 +233,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			enum Foo { alpha, beta }
-			pred predicate(Foo a) <=> node(a).
+			pred predicate(Foo a) <-> node(a).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -242,7 +260,7 @@ class NodeScopingTest {
 		val it = parseHelper.parse('''
 			«IF namedProblem»problem test.«ENDIF»
 			enum Foo { alpha, beta }
-			pred predicate(Foo a) <=> node(«qualifiedName»).
+			pred predicate(Foo a) <-> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(nodes, empty)
@@ -264,7 +282,7 @@ class NodeScopingTest {
 	@MethodSource("builtInEnumLiteralReferencesSource")
 	def void builtInEnumLiteralTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate(node a) <=> node(a).
+			pred predicate(node a) <-> node(a).
 			predicate(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
@@ -287,7 +305,7 @@ class NodeScopingTest {
 	@MethodSource("builtInEnumLiteralReferencesSource")
 	def void bultInEnumLiteralInPredicateTest(String qualifiedName) {
 		val it = parseHelper.parse('''
-			pred predicate() <=> node(«qualifiedName»).
+			pred predicate() <-> node(«qualifiedName»).
 		''')
 		assertThat(errors, empty)
 		assertThat(pred("predicate").conj(0).lit(0).arg(0).node, equalTo(builtin.findEnum("bool").literal("true")))

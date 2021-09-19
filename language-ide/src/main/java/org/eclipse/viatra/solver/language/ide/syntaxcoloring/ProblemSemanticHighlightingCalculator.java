@@ -35,7 +35,7 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 	private static final String PREDICATE_CLASS = "problem-predicate";
 	private static final String ERROR_CLASS = "problem-error";
 	private static final String NODE_CLASS = "problem-node";
-	private static final String ENUM_NODE_CLASS = "problem-enum-node";
+	private static final String UNIQUE_NODE_CLASS = "problem-unique-node";
 	private static final String NEW_NODE_CLASS = "problem-new-node";
 	private static final String PARAMETER_CLASS = "problem-parameter";
 	private static final String VARIABLE_CLASS = "problem-variable";
@@ -132,8 +132,8 @@ public class ProblemSemanticHighlightingCalculator extends DefaultSemanticHighli
 		if (eObject instanceof Node) {
 			classesBuilder.add(NODE_CLASS);
 			var node = (Node) eObject;
-			if (ProblemUtil.isEnumNode(node)) {
-				classesBuilder.add(ENUM_NODE_CLASS);
+			if (ProblemUtil.isUniqueNode(node)) {
+				classesBuilder.add(UNIQUE_NODE_CLASS);
 			}
 			if (ProblemUtil.isNewNode(node)) {
 				classesBuilder.add(NEW_NODE_CLASS);

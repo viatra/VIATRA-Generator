@@ -17,6 +17,7 @@ import org.eclipse.viatra.solver.language.model.problem.PredicateDefinition
 import org.eclipse.viatra.solver.language.model.problem.Problem
 import org.eclipse.viatra.solver.language.model.problem.Variable
 import org.eclipse.viatra.solver.language.model.problem.VariableOrNodeArgument
+import org.eclipse.viatra.solver.language.model.problem.UniqueDeclaration
 
 class ProblemTestUtil {
 	def builtin(Problem it) {
@@ -89,6 +90,10 @@ class ProblemTestUtil {
 	
 	def node(Problem it, String name) {
 		nodes.findFirst[it.name == name]
+	}
+	
+	def uniqueNode(Problem it, String name) {
+		statements.filter(UniqueDeclaration).flatMap[nodes].findFirst[it.name == name]
 	}
 	
 	def findClass(Problem it, String name) {
