@@ -9,15 +9,10 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.log.Slf4jLog;
 import org.eclipse.jetty.util.resource.Resource;
-import org.eclipse.jetty.webapp.Configuration;
-import org.eclipse.jetty.webapp.MetaInfConfiguration;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.eclipse.jetty.webapp.WebInfConfiguration;
-import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 public class ServerLauncher {
 	private static final Slf4jLog LOG = new Slf4jLog(ServerLauncher.class.getName());
@@ -30,9 +25,7 @@ public class ServerLauncher {
 		ctx.setBaseResource(baseResource);
 		ctx.setWelcomeFiles(new String[] { "index.html" });
 		ctx.setContextPath("/");
-		ctx.setConfigurations(new Configuration[] { new AnnotationConfiguration(), new WebXmlConfiguration(),
-				new WebInfConfiguration(), new MetaInfConfiguration() });
-		ctx.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*/build/classes/.*,.*\\.jar");
+		ctx.addServlet(ProblemServlet.class, "/xtext-service/*");
 		ctx.setInitParameter("org.eclipse.jetty.servlet.Default.useFileMappedBuffer", "false");
 		server.setHandler(ctx);
 	}
