@@ -3,9 +3,9 @@ package org.eclipse.viatra.solver.data.query.view;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.representation.Relation;
 
-public class TupleRelationView extends FilteredRelationView<Boolean>{
+public class KeyOnlyRelationView extends FilteredRelationView<Boolean>{
 
-	public TupleRelationView(Relation<Boolean> representation) {
+	public KeyOnlyRelationView(Relation<Boolean> representation) {
 		super(representation, (k,v)->true);
 	}
 	@Override

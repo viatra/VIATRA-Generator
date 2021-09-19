@@ -1,4 +1,4 @@
-package org.eclipse.viatra.solver.data.query;
+package org.eclipse.viatra.solver.data.query.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,16 +28,17 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
+import org.eclipse.viatra.solver.data.query.RelationalScope;
 import org.eclipse.viatra.solver.data.query.view.RelationView;
 
-public class RelationalQuery extends BasePQuery {
+public class PredicateTranslator extends BasePQuery {
 
 	private final Map<String, PParameter> parameters = new HashMap<String, PParameter>();
 	private String fullyQualifiedName;
 	private LinkedList<PBody> bodies = new LinkedList<PBody>();
 	private List<ExportedParameter> symbolicParameters;
 
-	public RelationalQuery(String fullyQualifiedName) {
+	public PredicateTranslator(String fullyQualifiedName) {
 		super(PVisibility.PUBLIC);
 		this.fullyQualifiedName = fullyQualifiedName;
 		PBody body = new PBody(this);
@@ -49,7 +50,7 @@ public class RelationalQuery extends BasePQuery {
 		return fullyQualifiedName;
 	}
 
-	public RelationalQuery addParameter(String name, RelationView<?> type) {
+	public PredicateTranslator addParameter(String name, RelationView<?> type) {
 		PParameter parameter = new PParameter(name);
 		parameters.put(name, parameter);
 		
@@ -68,7 +69,7 @@ public class RelationalQuery extends BasePQuery {
 	public List<PParameter> getParameters() {
 		return new ArrayList<PParameter>(parameters.values());
 	}
-	public <D> RelationalQuery addConstraint(RelationView<D> view, String... name) {
+	public <D> PredicateTranslator addConstraint(RelationView<D> view, String... name) {
 		if(name.length != view.getArity()) {
 			throw new IllegalArgumentException("Arity ("+view.getArity()+") does not match parameter numbers ("+name.length+")");
 		}
@@ -100,7 +101,7 @@ public class RelationalQuery extends BasePQuery {
 //	}
 
 	// Create new Body
-	public RelationalQuery or() {
+	public PredicateTranslator or() {
 		PBody body = new PBody(this);
 		List<ExportedParameter> symbolicParameters = new ArrayList<>();
 		parameters.forEach((name, parameter) -> {
@@ -113,7 +114,7 @@ public class RelationalQuery extends BasePQuery {
 	}
 
 	// Equality constraint
-	public RelationalQuery addEquality(String sourceName, String targetName) {
+	public PredicateTranslator addEquality(String sourceName, String targetName) {
 		PBody body = bodies.peekLast();
 		PVariable var_source = body.getOrCreateVariableByName(sourceName);
 		PVariable var_target = body.getOrCreateVariableByName(targetName);
@@ -122,7 +123,7 @@ public class RelationalQuery extends BasePQuery {
 	}
 
 	// Inequality constraint
-	public RelationalQuery addInequality(String sourceName, String targetName) {
+	public PredicateTranslator addInequality(String sourceName, String targetName) {
 		PBody body = bodies.peekLast();
 		PVariable var_source = body.getOrCreateVariableByName(sourceName);
 		PVariable var_target = body.getOrCreateVariableByName(targetName);
@@ -131,7 +132,7 @@ public class RelationalQuery extends BasePQuery {
 	}
 
 	// Positive pattern call
-	public RelationalQuery addPatternCall(PQuery query, String... names) {
+	public PredicateTranslator addPatternCall(PQuery query, String... names) {
 		PBody body = bodies.peekLast();
 		PVariable[] vars = new PVariable[names.length];
 		for (int i = 0; i < names.length; i++) {
@@ -142,7 +143,7 @@ public class RelationalQuery extends BasePQuery {
 	}
 
 	// Negative pattern call
-	public RelationalQuery addNegativePatternCall(PQuery query, String... names) {
+	public PredicateTranslator addNegativePatternCall(PQuery query, String... names) {
 		PBody body = bodies.peekLast();
 		PVariable[] vars = new PVariable[names.length];
 		for (int i = 0; i < names.length; i++) {
@@ -153,7 +154,7 @@ public class RelationalQuery extends BasePQuery {
 	}
 
 	// Binary transitive closure pattern call
-	public RelationalQuery addBinaryTransitiveClosure(PQuery query, String sourceName, String targetName) {
+	public PredicateTranslator addBinaryTransitiveClosure(PQuery query, String sourceName, String targetName) {
 		PBody body = bodies.peekLast();
 		PVariable var_source = body.getOrCreateVariableByName(sourceName);
 		PVariable var_target = body.getOrCreateVariableByName(targetName);
@@ -162,7 +163,7 @@ public class RelationalQuery extends BasePQuery {
 	}
 
 	// Binary reflexive transitive closure pattern call
-	public RelationalQuery addBinaryReflexiveTransitiveClosure(PQuery query, String sourceName, String targetName) {
+	public PredicateTranslator addBinaryReflexiveTransitiveClosure(PQuery query, String sourceName, String targetName) {
 		PBody body = bodies.peekLast();
 		PVariable var_source = body.getOrCreateVariableByName(sourceName);
 		PVariable var_target = body.getOrCreateVariableByName(targetName);

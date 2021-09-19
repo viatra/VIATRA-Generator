@@ -18,8 +18,8 @@ import org.eclipse.viatra.solver.data.model.ModelStoreImpl;
 import org.eclipse.viatra.solver.data.model.Tuple;
 import org.eclipse.viatra.solver.data.model.representation.Relation;
 import org.eclipse.viatra.solver.data.model.representation.TruthValue;
-import org.eclipse.viatra.solver.data.query.RelationalQuery;
 import org.eclipse.viatra.solver.data.query.RelationalScope;
+import org.eclipse.viatra.solver.data.query.internal.PredicateTranslator;
 import org.eclipse.viatra.solver.data.query.view.FilteredRelationView;
 import org.eclipse.viatra.solver.data.query.view.FunctionalRelationView;
 import org.eclipse.viatra.solver.data.query.view.RelationView;
@@ -32,7 +32,7 @@ class QueryTest {
 		Relation<Boolean> person = new Relation<>("Person", 1, false);
 
 		RelationView<Boolean> persionView = new KeyOnlyRelationView(person);
-		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
+		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new PredicateTranslator("PersonQuery"))
 				.addParameter("p", persionView).addConstraint(persionView, "p").build();
 
 		ModelStore store = new ModelStoreImpl(Set.of(person));
@@ -76,7 +76,7 @@ class QueryTest {
 
 		RelationalScope scope = new RelationalScope(model, Set.of(persionView, ageView, friendMustView, friendMayView));
 
-		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new RelationalQuery("PersonQuery"))
+		GenericQuerySpecification<GenericPatternMatcher> personQuery = (new PredicateTranslator("PersonQuery"))
 				.addParameter("p", persionView).addConstraint(persionView, "p").build();
 
 		ViatraQueryEngine engine = AdvancedViatraQueryEngine.on(scope);
