@@ -16,9 +16,9 @@ export class EditorThemeData {
 
   foreground!: string;
 
-  background!: string;
+  foregroundHighlight!: string;
 
-  paper!: string;
+  background!: string;
 
   primary!: string;
 

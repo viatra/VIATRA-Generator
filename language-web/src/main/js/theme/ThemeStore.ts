@@ -34,13 +34,17 @@ export class ThemeStore {
         mode: themeData.paletteMode,
         background: {
           default: themeData.background,
-          paper: themeData.paper,
+          paper: themeData.background,
         },
         primary: {
           main: themeData.primary,
         },
         secondary: {
           main: themeData.secondary,
+        },
+        text: {
+          primary: themeData.foregroundHighlight,
+          secondary: themeData.foreground,
         },
       },
     });
