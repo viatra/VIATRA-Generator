@@ -53,6 +53,9 @@ Workflow {
 			webSupport = ProblemWebIntegrationFragment {
 				highlightingPath = "js/mode-problem.js"
 				generateHtmlExample = false
+				generateJettyLauncher = false
+				generateServlet = false
+				generateWebXml = false
 			}
 		}
 	}

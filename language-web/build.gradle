@@ -7,15 +7,13 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
 	compile "org.eclipse.jetty:jetty-server:${jettyVersion}"
-	compile "org.eclipse.jetty:jetty-annotations:${jettyVersion}"
+	compile "org.eclipse.jetty:jetty-servlet:${jettyVersion}"
 	compile "org.slf4j:slf4j-simple:${slf4JVersion}"
 }
 
 def webpackOutputDir = "${buildDir}/webpack"
 def productionResources = "${webpackOutputDir}/production"
 def mainClass = 'org.eclipse.viatra.solver.language.web.ServerLauncher'
-def devMode = System.getenv('NODE_ENV') != 'production'
-def currentNodeEnv =  devMode ? 'development' : 'production'
 
 apply plugin: 'com.moowork.node'
 
@@ -71,18 +69,21 @@ shadowJar {
 }
 
 task jettyRun(type: JavaExec) {
-	if (devMode) {
-		dependsOn webpackDevelopment
-	} else {
-		dependsOn webpackProduction
-	}
+	shouldRunAfter webpackProduction
 	dependsOn sourceSets.main.runtimeClasspath
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 	main = mainClass
 	standardInput = System.in
-	environment BASE_RESOURCE: "${webpackOutputDir}/${currentNodeEnv}"
+	environment BASE_RESOURCE: productionResources
 	group = 'run'
-	description = 'Start a Jetty web server serving the Xtex API and assets.'
+	description = 'Start a Jetty web server serving the Xtex API and assets (without rebuilding assets).'
+}
+
+task jettyRunAssets {
+	dependsOn webpackProduction
+	dependsOn jettyRun
+	group = 'run'
+	description = 'Rebuild assets and start a Jetty web server serving the Xtex API and assets.'
 }
 
 task webpackServe(type: NpmTask) {
@@ -98,6 +99,9 @@ task webpackServe(type: NpmTask) {
 task eslint(type: NpmTask) {
 	dependsOn npmInstall
 	args = ['run', 'eslint']
+	inputs.dir 'src/main/js'
+	inputs.file 'tsconfig.json'
+	inputs.file '.eslintrc.js'
 	group = 'verification'
 	description = 'Checks for TypeScript errors.' 
 }
