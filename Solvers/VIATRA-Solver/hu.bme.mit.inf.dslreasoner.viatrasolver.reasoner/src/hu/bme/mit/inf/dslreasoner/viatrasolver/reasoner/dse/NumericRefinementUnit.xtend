@@ -35,8 +35,8 @@ class NumericRefinementUnit {
 	var ThreadContext threadContext
 	val constraint2MustUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
 	val constraint2CurrentUnitPropagationPrecondition = new HashMap<PConstraint,ViatraQueryMatcher<? extends IPatternMatch>>
-	var NumericTranslator translator = null;
-	
+	var NumericTranslator _translator = null;
+	val ViatraReasonerConfiguration config
 	
 	val boolean intermediateConsistencyCheck
 	val boolean caching;
@@ -53,7 +53,15 @@ class NumericRefinementUnit {
 		this.intermediateConsistencyCheck = config.runIntermediateNumericalConsistencyChecks
 		this.caching = caching
 		this.strategy = config.strategy
-		this.translator = new NumericTranslator(createNumericTranslator(config),config.numericSolverTimeout)
+		this._translator = null
+		this.config = config
+	}
+	
+	def private getTranslator() {
+		if(_translator === null) {
+			_translator =   new NumericTranslator(createNumericTranslator(config),config.numericSolverTimeout)
+		}
+		return _translator
 	}
 	
 	def createNumericTranslator(ViatraReasonerConfiguration config) {
@@ -115,9 +123,18 @@ class NumericRefinementUnit {
 	def getCachingTime(){cachingTime}
 	def getNumberOfSolverCalls(){numberOfSolverCalls}
 	def getNumberOfCachedSolverCalls(){numberOfCachedSolverCalls}
-	def getSolverFormingProblem(){this.translator.formingProblemTime}
-	def getSolverSolvingProblem(){this.translator.solvingProblemTime}
-	def getSolverSolution(){this.translator.formingSolutionTime}
+	def getSolverFormingProblem(){
+		if(this._translator === null) { return 0; }
+		else return this.translator.formingProblemTime
+	}
+	def getSolverSolvingProblem(){
+		if(this._translator === null) { return 0; }
+		else this.translator.solvingProblemTime
+	}
+	def getSolverSolution(){
+		if(this._translator === null) { return 0; }
+		else this.translator.formingSolutionTime
+	}
 	def getNumericSolverSelection(){this.translator.numericSolver}
 	
 	def boolean maySatisfiable() {
