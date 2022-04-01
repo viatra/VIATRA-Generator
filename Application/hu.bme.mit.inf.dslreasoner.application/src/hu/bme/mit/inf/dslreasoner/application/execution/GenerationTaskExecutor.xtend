@@ -249,7 +249,7 @@ class GenerationTaskExecutor {
 									if(representation.newElements.size + representation.problem.elements.size < 150) {
 										val vis2 = new GraphvizVisualiser
 										val dot = vis2.visualiseConcretization(representation)
-										val dotFileName = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».png'''
+										val dotFileName = '''«IF runs>1»«run»_«ENDIF»«interpretationIndex+1».svg'''
 										dot.writeToFile(outputWorkspaceForRun,dotFileName)
 										dotRepresentations += outputWorkspaceForRun.getFile(dotFileName)
 									}
